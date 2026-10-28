@@ -21,10 +21,10 @@ co-op check should also be done once over Steam with a friend.
 - [ ] Monster Damage 50 %: enemy intents and the HP you actually lose are halved.
 - [ ] A fight with summons (an enemy that spawns minions): the minions are scaled too, once.
 - [ ] Test Subject boss: its second and third forms are scaled too. Ovicopter: hatched eggs are scaled.
-- [ ] Co-op: host and client see identical enemy HP.
+- [x] Co-op: host and client see identical enemy HP.
 - [ ] Save & quit during a run with HP 200 % + Damage 50 %, then continue: the next combat is still scaled, and the top bar still lists both modifiers.
 - [ ] Custom run with both rows unticked: enemy HP and damage are vanilla.
-- [x] Top bar during a run with HP 200 % + Damage 50 %: two entries read `200%` in red and `50%` in blue (no "missing" icon); hovering each names its modifier.
+- [x] Top bar during a run with HP 200 % + Damage 50 %: two entries read `200%` in red and `50%` in blue (no "missing" icon); hovering each names its modifier. The two entries don't overlap.
 
 ## Run modes
 

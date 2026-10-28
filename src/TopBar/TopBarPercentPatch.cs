@@ -20,6 +20,8 @@ public static class TopBarPercentPatch
 	private static readonly AccessTools.FieldRef<NTopBarModifier, TextureRect> Icon =
 		AccessTools.FieldRefAccess<NTopBarModifier, TextureRect>("_icon");
 
+	private const float Padding = 14f;
+
 	public static void Postfix(NTopBarModifier __instance)
 	{
 		if (Modifier(__instance) is not SpoonPercentModifier modifier)
@@ -46,7 +48,12 @@ public static class TopBarPercentPatch
 		});
 		label.AddThemeColorOverride("font_outline_color", Colors.Black);
 		label.AddThemeConstantOverride("outline_size", 8);
-		icon.AddChild(label);
+		__instance.AddChild(label);
 		label.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
+
+		// The text is wider than the icon slot; widen the entry so neighbours don't overlap it.
+		float width = label.GetMinimumSize().X + Padding;
+		__instance.CustomMinimumSize = new Vector2(
+			Mathf.Max(width, __instance.CustomMinimumSize.X), __instance.CustomMinimumSize.Y);
 	}
 }
