@@ -40,4 +40,17 @@ public class ScalingMathTests
 	{
 		Assert.Equal(0.25m, ScalingMath.DamageMultiplier(25));
 	}
+
+	[Fact]
+	public void AllPercents_is_the_25_step_grid()
+	{
+		Assert.Equal(20, ScalingMath.AllPercents.Count);
+		Assert.Equal(25, ScalingMath.AllPercents[0]);
+		Assert.Equal(500, ScalingMath.AllPercents[^1]);
+		Assert.Contains(ScalingMath.DefaultPercent, ScalingMath.AllPercents);
+		for (int i = 1; i < ScalingMath.AllPercents.Count; i++)
+		{
+			Assert.Equal(ScalingMath.StepPercent, ScalingMath.AllPercents[i] - ScalingMath.AllPercents[i - 1]);
+		}
+	}
 }

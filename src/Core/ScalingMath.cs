@@ -11,6 +11,12 @@ public static class ScalingMath
 	public const int StepPercent = 25;
 	public const int DefaultPercent = 100;
 
+	/// <summary>Every selectable percent, ascending: 25, 50, ..., 500.</summary>
+	public static IReadOnlyList<int> AllPercents { get; } =
+		Enumerable.Range(0, (MaxPercent - MinPercent) / StepPercent + 1)
+			.Select(i => MinPercent + i * StepPercent)
+			.ToArray();
+
 	/// <summary>Next grid value in <paramref name="direction"/> (+1 or -1), clamped to [25, 500].</summary>
 	public static int Step(int percent, int direction)
 	{
