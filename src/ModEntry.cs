@@ -12,6 +12,7 @@ public static class ModEntry
 	public static void Initialize()
 	{
 		PercentModifierTable.SelfCheck();
+		LinuxHarmonyFix.Apply();
 		new Harmony("slayspoon").PatchAll(typeof(ModEntry).Assembly);
 		SpoonLog.Info($"Slay the Spoon {Version} loaded");
 	}

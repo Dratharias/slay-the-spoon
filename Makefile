@@ -12,7 +12,7 @@ DOTNET    := podman run --rm \
 	-v slayspoon-nuget:/root/.nuget \
 	-w /repo mcr.microsoft.com/dotnet/sdk:9.0
 
-.PHONY: build test up down restart clean
+.PHONY: build test up down restart clean mp
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -33,6 +33,14 @@ down:
 	rm -rf "$(STS2_DIR)/mods/$(MOD_ID)"
 
 restart: down up
+
+# Local co-op test on this machine (Mega Crit's dev flag --fastmp, ENet on 127.0.0.1:33771):
+# a host window in the Custom Run lobby and a client window that joins it.
+GAME_ARGS := --windowed --resolution 1280x720 -wpos
+mp: up
+	cd "$(STS2_DIR)" && SteamAppId=2868840 ./SlayTheSpire2 --fastmp host_custom $(GAME_ARGS) --position 0,40 >/dev/null 2>&1 </dev/null &
+	sleep 12
+	cd "$(STS2_DIR)" && SteamAppId=2868840 ./SlayTheSpire2 --fastmp join --clientId 1001 $(GAME_ARGS) --position 1290,40 >/dev/null 2>&1 </dev/null &
 
 clean:
 	rm -rf build src/bin src/obj tests/bin tests/obj
