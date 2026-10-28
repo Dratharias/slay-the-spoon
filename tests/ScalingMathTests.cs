@@ -53,4 +53,13 @@ public class ScalingMathTests
 			Assert.Equal(ScalingMath.StepPercent, ScalingMath.AllPercents[i] - ScalingMath.AllPercents[i - 1]);
 		}
 	}
+
+	[Theory]
+	[InlineData(200, 150, 300)]
+	[InlineData(41, 150, 62)]
+	[InlineData(2, 25, 1)]
+	public void ScaleHp_decimal_matches_int_rounding(int hp, int percent, int expected)
+	{
+		Assert.Equal((decimal)expected, ScalingMath.ScaleHp((decimal)hp, percent));
+	}
 }

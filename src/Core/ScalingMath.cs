@@ -29,8 +29,14 @@ public static class ScalingMath
 	/// <summary>Scaled HP, rounded half away from zero, never below 1.</summary>
 	public static int ScaleHp(int baseHp, int percent)
 	{
-		int scaled = (int)Math.Round(baseHp * percent / 100m, MidpointRounding.AwayFromZero);
-		return Math.Max(1, scaled);
+		return (int)ScaleHp((decimal)baseHp, percent);
+	}
+
+	/// <summary>Same rounding for the game's decimal HP values (e.g. Creature.ScaleHpForMultiplayer).</summary>
+	public static decimal ScaleHp(decimal baseHp, int percent)
+	{
+		decimal scaled = Math.Round(baseHp * percent / 100m, MidpointRounding.AwayFromZero);
+		return Math.Max(1m, scaled);
 	}
 
 	public static decimal DamageMultiplier(int percent)

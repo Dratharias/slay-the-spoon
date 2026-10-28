@@ -13,6 +13,7 @@ co-op check should also be done once over Steam with a friend.
 - [ ] Co-op (`make mp`): ticking a row or changing a value on the host shows up on the client.
 - [ ] Co-op: the client's − / + buttons are greyed out and do nothing.
 - [ ] Co-op: set 200 % on the host **before** the client joins; after joining, the client shows 200 %.
+- [ ] Tick HP 200 %, press Back, reopen Custom Run and embark: the log's "Modifiers:" line still lists SPOON_MONSTER_HP200.
 
 ## Combat (task 5)
 
@@ -20,8 +21,9 @@ co-op check should also be done once over Steam with a friend.
 - [ ] Monster HP 25 %: a very low-HP enemy still has at least 1 HP.
 - [ ] Monster Damage 50 %: enemy intents and the HP you actually lose are halved.
 - [ ] A fight with summons (an enemy that spawns minions): the minions are scaled too, once.
+- [ ] Test Subject boss: its second and third forms are scaled too. Ovicopter: hatched eggs are scaled.
 - [ ] Co-op: host and client see identical enemy HP.
-- [ ] Save & quit during a run with HP 200 % + Damage 50 %, then continue: the next combat is still scaled.
+- [ ] Save & quit during a run with HP 200 % + Damage 50 %, then continue: the next combat is still scaled, and the top bar still lists both modifiers.
 - [ ] Mod installed but rows unticked, and a Standard run: enemy HP and damage are vanilla.
 
 ## Progress sync
