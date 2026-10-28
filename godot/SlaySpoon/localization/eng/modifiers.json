@@ -1,0 +1,6 @@
+{
+  "SPOON_MONSTER_HP.title": "Monster HP",
+  "SPOON_MONSTER_HP.description": "Enemies have {Percent}% of their normal HP.",
+  "SPOON_MONSTER_DAMAGE.title": "Monster Damage",
+  "SPOON_MONSTER_DAMAGE.description": "Enemies deal {Percent}% of their normal damage."
+}

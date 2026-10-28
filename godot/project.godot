@@ -1,0 +1,5 @@
+; Minimal Godot project used only to pack the mod's resources into SlaySpoon.pck.
+config_version=5
+
+[application]
+config/name="SlaySpoon"
