@@ -11,6 +11,9 @@ Standard and Daily runs are left untouched.
 > **Vibe coded.** The code in this repository was written by an AI (Claude, by Anthropic) under
 > the direction of the author, who designed the mod and tests it in game.
 
+> **No support.** Bug reports are welcome as information, but bug-fix requests are not taken:
+> the author patches what they feel like patching, when they feel like it. Forks are welcome.
+
 ## Features
 
 Current (0.1.0):
