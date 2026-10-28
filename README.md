@@ -11,8 +11,8 @@ Standard and Daily runs are left untouched.
 > **Vibe coded.** The code in this repository was written by an AI (Claude, by Anthropic) under
 > the direction of the author, who designed the mod and tests it in game.
 
-> **No support.** Bug reports are welcome as information, but bug-fix requests are not taken:
-> the author patches what they feel like patching, when they feel like it. Forks are welcome.
+> **Found a bug?** The code is public. I patch the bugs that annoy me, when I have tokens to spare.
+> You are entirely free to fork the mod and make your own version.
 
 ## Features
 
@@ -31,6 +31,10 @@ Current (0.1.0):
 
 Planned: Slay the Spire 1 cards (Ironclad, Silent, Defect, Colorless) with StS1-only / StS2-only /
 hybrid card sets, StS1 starting decks, and merchant loans between players.
+
+## Languages
+
+English and French. Other game languages show the English text.
 
 ## Install
 

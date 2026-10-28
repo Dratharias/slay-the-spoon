@@ -111,9 +111,10 @@ These were decided in conversation and are not open for the builder to change.
 - Hybrid duplicate choice appears on every **choose-a-card** screen (card rewards, merchant, choose-1
   effects like Discovery, Sealed Deck grid). Where a card is generated **without** a choice (e.g. random
   card added to hand), the version is picked at random with the run's RNG.
-- Localization: ship every language StS1 provides for its cards that StS2 also supports (StS1 has
-  `localization/eng/cards.json`, `localization/fra/cards.json`, and others in the jar). English and
-  French are required; others are best effort.
+- Localization: the mod ships in English and French only (owner decision, 2026-10-28). Every text
+  the mod adds (UI, modifiers, cards) exists in both `eng` and `fra`; StS1 card text comes from the
+  jar's `localization/eng/cards.json` and `localization/fra/cards.json`. Other game languages fall
+  back to English.
 
 ## 5. What the game already gives us (recon on v0.107.1)
 
