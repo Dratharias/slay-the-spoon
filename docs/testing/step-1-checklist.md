@@ -28,6 +28,9 @@ co-op check should also be done once over Steam with a friend.
 
 ## Progress sync
 
+- [ ] First launch with the mod (no `mod_configs/SlaySpoon.cfg`): a popup asks about progress sync; "Keep separate" leaves the modded profile alone, "Use my progress" copies and applies at once.
+- [ ] Deleting `mod_configs/SlaySpoon.cfg` makes the popup come back at the next launch.
+
 - [ ] With the mod active, the log shows `[SlaySpoon] copied regular progress to modded/profile1/saves/progress.save`.
 - [ ] Characters and Neow unlocked in the regular profile are available in modded runs; a Sealed Deck run starts at Neow and offers the 30-card choice.
 - [ ] The regular profile's `progress.save` is byte-identical before and after a modded session.

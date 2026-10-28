@@ -8,8 +8,8 @@ namespace SlaySpoon.Saves;
 /// <summary>
 /// With mods active, StS2 keeps a separate "modded" profile that starts with nothing unlocked
 /// (no characters, no Neow, so Sealed Deck gets no cards). Right before the game loads progress,
-/// copy the regular profile's progress.save over the modded one. One way only: the regular save is
-/// read, never written.
+/// copy the regular profile's progress.save over the modded one, if the player chose to (see
+/// SyncPromptPatch). One way only: the regular save is read, never written.
 /// </summary>
 [HarmonyPatch(typeof(ProgressSaveManager), nameof(ProgressSaveManager.LoadProgress))]
 public static class ProgressSyncPatch
@@ -22,7 +22,7 @@ public static class ProgressSyncPatch
 
 	public static void Prefix(ProgressSaveManager __instance)
 	{
-		if (!UserDataPathProvider.IsRunningModded)
+		if (!UserDataPathProvider.IsRunningModded || SpoonConfigFile.SyncChoice != true)
 		{
 			return;
 		}
