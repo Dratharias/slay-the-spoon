@@ -7,7 +7,8 @@ co-op check should also be done once over Steam with a friend.
 ## Custom Run screen (task 4)
 
 - [ ] Solo Custom Run: "Monster HP" and "Monster Damage" rows are listed at the bottom, with − / + buttons.
-- [ ] − / + step by 25 % between 25 % and 500 %; the row text shows the value. Nothing happens past the ends.
+- [ ] − / + step by 25 % between 25 % and 500 %, tick the row, and the row text shows the value. Nothing happens past the ends.
+- [ ] Starting the run: the log line "Embarking on a CUSTOM ... Modifiers:" lists MODIFIER.SPOON_MONSTER_HP… / SPOON_MONSTER_DAMAGE….
 - [ ] Standard run and Daily run screens: no Slay the Spoon rows.
 - [ ] Co-op (`make mp`): ticking a row or changing a value on the host shows up on the client.
 - [ ] Co-op: the client's − / + buttons are greyed out and do nothing.

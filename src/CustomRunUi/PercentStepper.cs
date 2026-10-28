@@ -115,6 +115,8 @@ public static class PercentStepper
 			return;
 		}
 		ReplaceModifier(tickbox, PercentModifierTable.CanonicalFor(current.FamilyType, next).ToMutable());
+		// Changing the value means the player wants the option: tick the row so it is actually sent.
+		tickbox.IsTicked = true;
 		FindList(tickbox)?.EmitSignal(NCustomRunModifiersList.SignalName.ModifiersChanged);
 	}
 
