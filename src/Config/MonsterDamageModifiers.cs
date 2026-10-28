@@ -1,9 +1,21 @@
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
+using SlaySpoon.Core;
+
 namespace SlaySpoon.Config;
 
 /// <summary>Enemy damage multiplier. One empty sealed subclass per percent, named <Family><Percent>; the value travels as the modifier id.</summary>
 public abstract class SpoonMonsterDamage : SpoonPercentModifier
 {
 	protected override string FamilyKey => "SPOON_MONSTER_DAMAGE";
+
+	/// <summary>Scales all damage dealt by enemies; the game's damage pipeline does the rounding.</summary>
+	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+	{
+		return dealer?.Side == CombatSide.Enemy ? ScalingMath.DamageMultiplier(Percent) : 1m;
+	}
 }
 
 public sealed class SpoonMonsterDamage25 : SpoonMonsterDamage { }
