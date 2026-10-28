@@ -18,6 +18,11 @@ Current (0.1.0):
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps,
   synced to every player in co-op and kept in saves.
 
+- **Progress sync:** with mods active, Slay the Spire 2 uses a separate "modded" profile that starts
+  with nothing unlocked. On every launch the mod copies your regular progress into the modded profile
+  (one way: your regular save is only read, never written), so characters, cards and Neow are
+  available in modded runs. Progress made only in modded runs is overwritten on the next launch.
+
 Planned: Slay the Spire 1 cards (Ironclad, Silent, Defect, Colorless) with StS1-only / StS2-only /
 hybrid card sets, StS1 starting decks, and merchant loans between players.
 

@@ -23,3 +23,9 @@ co-op check should also be done once over Steam with a friend.
 - [ ] Co-op: host and client see identical enemy HP.
 - [ ] Save & quit during a run with HP 200 % + Damage 50 %, then continue: the next combat is still scaled.
 - [ ] Mod installed but rows unticked, and a Standard run: enemy HP and damage are vanilla.
+
+## Progress sync
+
+- [ ] With the mod active, the log shows `[SlaySpoon] copied regular progress to modded/profile1/saves/progress.save`.
+- [ ] Characters and Neow unlocked in the regular profile are available in modded runs; a Sealed Deck run starts at Neow and offers the 30-card choice.
+- [ ] The regular profile's `progress.save` is byte-identical before and after a modded session.
