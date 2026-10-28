@@ -2,5 +2,9 @@
   "SLAY_SPOON_SYNC.title": "Slay the Spoon",
   "SLAY_SPOON_SYNC.body": "Avec des mods actifs, Slay the Spire 2 utilise un profil séparé où rien n'est débloqué.\n\nCopier ta progression normale dans ce profil à chaque lancement ? Ta sauvegarde normale est seulement lue, jamais modifiée. La progression faite uniquement en parties moddées est remplacée au lancement suivant.\n\nPour changer d'avis plus tard, supprime mod_configs/SlaySpoon.cfg dans le dossier utilisateur du jeu.",
   "SLAY_SPOON_SYNC.yes": "Utiliser ma progression",
-  "SLAY_SPOON_SYNC.no": "Garder séparé"
+  "SLAY_SPOON_SYNC.no": "Garder séparé",
+  "STANDARD.LOCKED.description": "Désactivé par Slay the Spoon. Utilise [gold]Partie personnalisée[/gold] pour configurer une partie moddée.",
+  "DAILY.LOCKED.description": "Désactivé par Slay the Spoon. Utilise [gold]Partie personnalisée[/gold] pour configurer une partie moddée.",
+  "STANDARD_MP.LOCKED.description": "Désactivé par Slay the Spoon. Utilise [gold]Partie personnalisée[/gold] pour configurer une partie moddée.",
+  "DAILY_MP.LOCKED.description": "Désactivé par Slay the Spoon. Utilise [gold]Partie personnalisée[/gold] pour configurer une partie moddée."
 }

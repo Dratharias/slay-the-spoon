@@ -62,4 +62,15 @@ public class ScalingMathTests
 	{
 		Assert.Equal((decimal)expected, ScalingMath.ScaleHp((decimal)hp, percent));
 	}
+
+	[Theory]
+	[InlineData(150, 1)]
+	[InlineData(500, 1)]
+	[InlineData(100, 0)]
+	[InlineData(75, -1)]
+	[InlineData(25, -1)]
+	public void Tone_tells_harder_from_easier(int percent, int expected)
+	{
+		Assert.Equal(expected, ScalingMath.Tone(percent));
+	}
 }

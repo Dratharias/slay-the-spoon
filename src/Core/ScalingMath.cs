@@ -43,4 +43,10 @@ public static class ScalingMath
 	{
 		return percent / 100m;
 	}
+
+	/// <summary>1 when the percent makes monsters stronger than vanilla, -1 when weaker, 0 at 100%.</summary>
+	public static int Tone(int percent)
+	{
+		return percent.CompareTo(DefaultPercent);
+	}
 }

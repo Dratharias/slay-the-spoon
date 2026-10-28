@@ -2,5 +2,9 @@
   "SLAY_SPOON_SYNC.title": "Slay the Spoon",
   "SLAY_SPOON_SYNC.body": "With mods active, Slay the Spire 2 uses a separate profile that starts with nothing unlocked.\n\nCopy your regular progress into it on every launch? Your regular save is only read, never changed. Progress made only in modded runs is replaced at the next launch.\n\nTo change your answer later, delete mod_configs/SlaySpoon.cfg in the game's user folder.",
   "SLAY_SPOON_SYNC.yes": "Use my progress",
-  "SLAY_SPOON_SYNC.no": "Keep separate"
+  "SLAY_SPOON_SYNC.no": "Keep separate",
+  "STANDARD.LOCKED.description": "Disabled by Slay the Spoon. Use [gold]Custom[/gold] to set up a modded run.",
+  "DAILY.LOCKED.description": "Disabled by Slay the Spoon. Use [gold]Custom[/gold] to set up a modded run.",
+  "STANDARD_MP.LOCKED.description": "Disabled by Slay the Spoon. Use [gold]Custom[/gold] to set up a modded run.",
+  "DAILY_MP.LOCKED.description": "Disabled by Slay the Spoon. Use [gold]Custom[/gold] to set up a modded run."
 }
