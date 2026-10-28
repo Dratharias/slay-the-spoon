@@ -1,0 +1,34 @@
+namespace SlaySpoon.Core;
+
+/// <summary>
+/// Arithmetic behind the monster HP and damage multipliers.
+/// Game-independent so it can be unit-tested without the game's assemblies.
+/// </summary>
+public static class ScalingMath
+{
+	public const int MinPercent = 25;
+	public const int MaxPercent = 500;
+	public const int StepPercent = 25;
+	public const int DefaultPercent = 100;
+
+	/// <summary>Next grid value in <paramref name="direction"/> (+1 or -1), clamped to [25, 500].</summary>
+	public static int Step(int percent, int direction)
+	{
+		int next = direction > 0
+			? (percent / StepPercent + 1) * StepPercent
+			: (percent + StepPercent - 1) / StepPercent * StepPercent - StepPercent;
+		return Math.Clamp(next, MinPercent, MaxPercent);
+	}
+
+	/// <summary>Scaled HP, rounded half away from zero, never below 1.</summary>
+	public static int ScaleHp(int baseHp, int percent)
+	{
+		int scaled = (int)Math.Round(baseHp * percent / 100m, MidpointRounding.AwayFromZero);
+		return Math.Max(1, scaled);
+	}
+
+	public static decimal DamageMultiplier(int percent)
+	{
+		return percent / 100m;
+	}
+}
