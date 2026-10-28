@@ -19,9 +19,6 @@ Current (0.1.0):
   synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
   red when monsters are stronger than vanilla and blue when weaker.
 
-- **Custom Run only:** while the mod is installed, Standard and Daily runs are locked in the solo
-  and multiplayer host menus, since the mod's options live on the Custom Run screen.
-
 - **Progress sync (optional):** with mods active, Slay the Spire 2 uses a separate "modded" profile
   that starts with nothing unlocked. The first time you launch with the mod, it asks whether to copy
   your regular progress into that profile on every launch. One way only: your regular save is read,
