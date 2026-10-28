@@ -4,7 +4,7 @@
 
 **Goal:** A Slay the Spire 2 mod that loads, adds two Slay the Spoon modifiers (Monster HP %, Monster damage %) to the Custom Run screen with a −/+ value control, syncs them to multiplayer clients, persists them in saves, and applies them in combat.
 
-**Architecture:** One C# assembly `SlaySpoon.dll` plus `SlaySpoon.pck` (localization). Configuration rides on StS2's own `ModifierModel` + `[SavedProperty]` machinery, which already syncs through the lobby and saves with the run. Harmony patches add our modifiers to the Custom Run list only (never to `ModelDb.GoodModifiers`, which Daily runs also use), add the −/+ control, and scale enemy HP at creation. Damage uses the `ModifyDamageMultiplicative` hook. Pure arithmetic lives in game-independent files so it can be unit-tested without the game.
+**Architecture:** One C# assembly `SlaySpoon.dll` plus `SlaySpoon.pck` (localization). Configuration rides on StS2's own `ModifierModel` machinery, which already syncs modifier ids through the lobby and saves them with the run. **The value is encoded in the modifier type itself** (one concrete class per percent, owner's decision "option B"), so no `[SavedProperty]` and no tampering with `SavedPropertiesTypeCache` is needed; each machine computes damage and HP locally from the synced modifier. Harmony patches add our modifiers to the Custom Run list only (never to `ModelDb.GoodModifiers`, which Daily runs also use), add the −/+ control, and scale enemy HP at creation. Damage uses the `ModifyDamageMultiplicative` hook. Pure arithmetic lives in game-independent files so it can be unit-tested without the game.
 
 **Tech Stack:** C# / .NET 9 (game runtime 9.0.7), Godot 4.5.1 (GodotSharp 4.5.1), Harmony (`0Harmony.dll` shipped with the game), xUnit, Podman (`mcr.microsoft.com/dotnet/sdk:9.0`), Godot 4.5.1 headless for the PCK.
 
@@ -26,7 +26,7 @@
 
 1. **Client joins after the host changed a value** → the client's list shows the host's percent, not 100%. (Task 4 checklist item.)
 2. **Save & quit mid-run, then continue** (solo and co-op) → the percent survives and still applies in the next combat. (Task 5 checklist item.)
-3. **Saved-property net id space** → injecting our property name must not overflow `SavedPropertiesTypeCache.NetIdBitSize`; the mod recomputes it and logs `count`/`bits`. (Task 3 log assertion.)
+3. **A percent class missing from the table** → every value in `ScalingMath.AllPercents` must resolve to exactly one HP class and one damage class, or the −/+ control dead-ends. (Task 3 startup self-check, logged.)
 4. **Summoned minions and multi-creature fights** → every enemy is scaled exactly once, including ones spawned mid-combat. (Task 5 checklist item.)
 5. **Mod installed, modifiers unticked, or a Standard/Daily run** → monster HP and damage are exactly vanilla. (Task 2 tests for 100%, Task 5 checklist item.)
 
@@ -146,30 +146,44 @@
   git commit -m "feat: monster scaling arithmetic with tests"
   ```
 
-### Task 3: The two modifiers and saved-property registration
+### Task 3: The modifier families (one class per percent)
 
 **Files:**
 - Create: `src/Config/SpoonPercentModifier.cs`
-- Create: `src/Config/SpoonMonsterHp.cs`
-- Create: `src/Config/SpoonMonsterDamage.cs`
-- Create: `src/Config/SavedPropertyRegistration.cs`
-- Modify: `src/ModEntry.cs` (call `SavedPropertyRegistration.Register()` first in `Initialize()`)
+- Create: `src/Config/MonsterHpModifiers.cs` (abstract `SpoonMonsterHp` + 20 sealed subclasses)
+- Create: `src/Config/MonsterDamageModifiers.cs` (abstract `SpoonMonsterDamage` + 20 sealed subclasses)
+- Create: `src/Config/PercentModifierTable.cs`
+- Modify: `src/Core/ScalingMath.cs` (add `AllPercents`) and `tests/ScalingMathTests.cs`
+- Modify: `src/ModEntry.cs` (call `PercentModifierTable.SelfCheck()` in `Initialize()`)
 - Modify: `godot/SlaySpoon/localization/{eng,fra}/modifiers.json`
 
 **Interfaces:**
 - Consumes: `ScalingMath` (Task 2).
+- Produces in `SlaySpoon.Core.ScalingMath`: `public static IReadOnlyList<int> AllPercents` = 25, 50, …, 500 (20 values, ascending).
 - Produces: `public abstract class SlaySpoon.Config.SpoonPercentModifier : ModifierModel` with
-  - `[SavedProperty] public int Percent { get; set; }` defaulting to `ScalingMath.DefaultPercent`; setter calls `AssertMutable()`.
-  - `public override LocString Description` → base description with variable `Percent` added.
-- Produces: `public sealed class SpoonMonsterHp : SpoonPercentModifier` and `public sealed class SpoonMonsterDamage : SpoonPercentModifier` (ids `SPOON_MONSTER_HP`, `SPOON_MONSTER_DAMAGE`). Damage behaviour is added in Task 5.
-- Produces: `public static class SavedPropertyRegistration` with `public static void Register()`.
+  - `public abstract int Percent { get; }`
+  - `protected abstract string FamilyKey { get; }` — `"SPOON_MONSTER_HP"` or `"SPOON_MONSTER_DAMAGE"`.
+  - `Title` → `new LocString("modifiers", FamilyKey + ".title")`; `Description` → `new LocString("modifiers", FamilyKey + ".description")` with variable `Percent` added. All 20 classes of a family share these two keys.
+  - `IsEquivalent(ModifierModel other)` → true when `other` belongs to the **same family** (same abstract parent) and canonical-ness matches, so the client list ticks the family's row whatever the value.
+- Produces: `public abstract class SpoonMonsterHp : SpoonPercentModifier` and `public abstract class SpoonMonsterDamage : SpoonPercentModifier`, each with sealed subclasses named `SpoonMonsterHp25` … `SpoonMonsterHp500` and `SpoonMonsterDamage25` … `SpoonMonsterDamage500`, one per value in `AllPercents`; each subclass only overrides `Percent`. (The game's reflection skips abstract types, so only the 40 sealed classes become ModelDb entries.) Damage behaviour is added in Task 5.
+- Produces: `public static class PercentModifierTable` with
+  - `public static ModifierModel CanonicalFor(Type familyType, int percent)` — the canonical ModelDb modifier of that family and percent.
+  - `public static void SelfCheck()` — verifies every percent in `AllPercents` maps to exactly one class per family; logs `[SlaySpoon] percent modifiers: hp=20 damage=20` or throws with the missing values.
 
-Why registration is needed: `SavedPropertiesTypeCache` only scans the game's own `AbstractModelSubtypes`, so mod properties are invisible to save/sync unless injected, and it sizes network property ids with `NetIdBitSize = ceil(log2(nameCount))` once in its static constructor.
+- [ ] **Step 1: Add the `AllPercents` test**
+  ```csharp
+  [Fact] public void AllPercents_is_the_25_step_grid() {
+      Assert.Equal(20, ScalingMath.AllPercents.Count);
+      Assert.Equal(25, ScalingMath.AllPercents[0]);
+      Assert.Equal(500, ScalingMath.AllPercents[^1]);
+      Assert.Contains(ScalingMath.DefaultPercent, ScalingMath.AllPercents);
+      for (int i = 1; i < ScalingMath.AllPercents.Count; i++)
+          Assert.Equal(ScalingMath.StepPercent, ScalingMath.AllPercents[i] - ScalingMath.AllPercents[i - 1]);
+  }
+  ```
+  Run: `make test` — Expected: FAIL, `AllPercents` missing. Implement it, run again — Expected: PASS.
 
-- [ ] **Step 1: Implement `SavedPropertyRegistration.Register()`**
-  Call `SavedPropertiesTypeCache.InjectTypeIntoCache(typeof(SpoonMonsterHp))` and `(typeof(SpoonMonsterDamage))`, then recompute `NetIdBitSize` from the private `_netIdToPropertyNameMap.Count` with the same formula (`Mathf.CeilToInt(Math.Log2(count))`) and set it through Harmony `AccessTools` (private setter). Log `[SlaySpoon] saved properties: count=<n> bits=<b>`. Every player runs the same mod version (the game enforces matching mods), so the map and bit size come out identical on all peers.
-
-- [ ] **Step 2: Implement the three modifier classes** (interfaces above).
+- [ ] **Step 2: Write the modifier classes and `PercentModifierTable`** (interfaces above). Build the table by reflection over the mod assembly's sealed subclasses of each family, keyed by `Percent`.
 
 - [ ] **Step 3: Fill localization**
   `eng/modifiers.json`:
@@ -185,12 +199,12 @@ Why registration is needed: `SavedPropertiesTypeCache` only scans the game's own
 
 - [ ] **Step 4: Build, install, verify in the log**
   Run: `make restart`, launch StS2 to the main menu, quit.
-  Expected in `godot.log`: `[SlaySpoon] saved properties: count=<n> bits=<b>` with `2^b >= n`; `Found loc table from mod: eng modifiers`; no exception mentioning `SlaySpoon`.
+  Expected in `godot.log`: `[SlaySpoon] percent modifiers: hp=20 damage=20`; `Found loc table from mod: eng modifiers`; no exception mentioning `SlaySpoon`.
 
 - [ ] **Step 5: Commit**
   ```bash
-  git add src godot
-  git commit -m "feat: monster HP and damage modifiers with saved percent"
+  git add src godot tests
+  git commit -m "feat: monster HP and damage modifier families, one class per percent"
   ```
 
 ### Task 4: Custom Run screen — list entries, −/+ control, client sync
@@ -202,23 +216,23 @@ Why registration is needed: `SavedPropertiesTypeCache` only scans the game's own
 - Create: `docs/testing/step-1-checklist.md`
 
 **Interfaces:**
-- Consumes: `SpoonPercentModifier`, `SpoonMonsterHp`, `SpoonMonsterDamage` (Task 3); `ScalingMath.Step` (Task 2).
+- Consumes: `SpoonPercentModifier`, `SpoonMonsterHp`, `SpoonMonsterDamage`, `PercentModifierTable.CanonicalFor` (Task 3); `ScalingMath.Step` (Task 2).
 - Produces: `public static class PercentStepper` with
   - `public static void Attach(NRunModifierTickbox tickbox)` — adds the −/+ buttons to a tickbox whose `Modifier is SpoonPercentModifier`.
   - `public static void RefreshLabel(NRunModifierTickbox tickbox)` — rebuilds the label text.
 
 Game facts the patches rely on (all in the decompiled `NCustomRunModifiersList.cs`, `NRunModifierTickbox.cs`, `NCustomRunScreen.cs`):
 - `NCustomRunModifiersList.GetAllModifiers()` (private, `IEnumerable<ModifierModel>`) feeds `_Ready`, which creates one `NRunModifierTickbox` per model.
-- Ticked tickboxes' `Modifier` instances are what `GetModifiersTickedOn()` returns and what the host sends with `Lobby.SetModifiers(...)` when the list emits `ModifiersChanged`. Mutating `Percent` on that instance and emitting `ModifiersChanged` re-sends it.
-- Clients receive changes through `SyncModifierList(IReadOnlyList<ModifierModel>)`, which only sets `IsTicked` (matching by `IsEquivalent`, i.e. by type).
+- Ticked tickboxes' `Modifier` instances are what `GetModifiersTickedOn()` returns and what the host sends with `Lobby.SetModifiers(...)` when the list emits `ModifiersChanged`. Replacing the tickbox's `Modifier` (private setter, via `AccessTools`) with another family member and emitting `ModifiersChanged` re-sends the new id.
+- Clients receive changes through `SyncModifierList(IReadOnlyList<ModifierModel>)`, which only sets `IsTicked` (matching by `IsEquivalent`; ours matches by family, Task 3).
 - The tickbox label is the private `_label` (`MegaRichTextLabel`), built from `new LocString("main_menu_ui", "CUSTOM_RUN_SCREEN.MODIFIER_LABEL")` with variables `color`, `modifier_title`, `modifier_description`. Modifiers in neither Good nor Bad lists get `color` = `blue`.
 - In client and load modes, `Initialize(MultiplayerUiMode)` disables every tickbox.
 
-- [ ] **Step 1: `ModifierListPatch`** — Harmony postfix on `NCustomRunModifiersList.GetAllModifiers` that appends `ModelDb.Modifier<SpoonMonsterHp>().ToMutable()` and `ModelDb.Modifier<SpoonMonsterDamage>().ToMutable()` to `__result`.
+- [ ] **Step 1: `ModifierListPatch`** — Harmony postfix on `NCustomRunModifiersList.GetAllModifiers` that appends one row per family: `PercentModifierTable.CanonicalFor(typeof(SpoonMonsterHp), ScalingMath.DefaultPercent).ToMutable()` and the same for `SpoonMonsterDamage`.
 
-- [ ] **Step 2: `PercentStepper`** — Harmony postfix on `NRunModifierTickbox._Ready` calling `Attach`. `Attach` adds two plain Godot `Button` nodes (`−`, `+`; no custom node subclasses, so no Godot script registration is needed) styled to sit at the right end of the row. Pressing one: `Percent = ScalingMath.Step(Percent, ∓1)`, `RefreshLabel`, then emit `NCustomRunModifiersList.SignalName.ModifiersChanged` on the owning list (walk up the parent chain). The buttons are disabled whenever the tickbox is disabled (client and load modes).
+- [ ] **Step 2: `PercentStepper`** — Harmony postfix on `NRunModifierTickbox._Ready` calling `Attach`. `Attach` adds two plain Godot `Button` nodes (`−`, `+`; no custom node subclasses, so no Godot script registration is needed) styled to sit at the right end of the row. Pressing one: replace the tickbox's `Modifier` with `PercentModifierTable.CanonicalFor(family, ScalingMath.Step(current.Percent, ∓1)).ToMutable()` (no change at the 25/500 ends), `RefreshLabel`, then emit `NCustomRunModifiersList.SignalName.ModifiersChanged` on the owning list (walk up the parent chain). The buttons are disabled whenever the tickbox is disabled (client and load modes).
 
-- [ ] **Step 3: `SyncModifierListPatch`** — postfix on `NCustomRunModifiersList.SyncModifierList`: for each of our tickboxes, copy `Percent` from the synced modifier of the same type (if present) into `tickbox.Modifier`, then `RefreshLabel`.
+- [ ] **Step 3: `SyncModifierListPatch`** — postfix on `NCustomRunModifiersList.SyncModifierList`: for each of our tickboxes, if the synced list holds a member of the same family, set the tickbox's `Modifier` to a mutable copy of that member's canonical model, then `RefreshLabel`.
 
 - [ ] **Step 4: Write `docs/testing/step-1-checklist.md`** with the in-game checks of this task and Task 5. This task's items:
   - Solo Custom Run: both Slay the Spoon entries are listed; − / + step by 25 between 25% and 500%; the label shows the value.
@@ -240,17 +254,17 @@ Game facts the patches rely on (all in the decompiled `NCustomRunModifiersList.c
 
 **Files:**
 - Create: `src/Combat/EnemyHpPatch.cs`
-- Modify: `src/Config/SpoonMonsterDamage.cs`
+- Modify: `src/Config/MonsterDamageModifiers.cs`
 - Modify: `docs/testing/step-1-checklist.md`
 
 **Interfaces:**
-- Consumes: `ScalingMath.ScaleHp`, `ScalingMath.DamageMultiplier` (Task 2); `SpoonMonsterHp`, `SpoonMonsterDamage` (Task 3).
+- Consumes: `ScalingMath.ScaleHp`, `ScalingMath.DamageMultiplier` (Task 2); `SpoonMonsterHp`, `SpoonMonsterDamage` and their `Percent` (Task 3).
 
 Game facts: every creature in combat is created by `CombatState.CreateCreature(MonsterModel, CombatSide, string?)`, which for enemies rolls HP (`SetUniqueMonsterHpValue`) and applies co-op scaling (`ScaleMonsterHpForMultiplayer`) before returning. `Creature.SetMaxHpInternal(decimal)` / `SetCurrentHpInternal(decimal)` set HP without VFX. `CombatState.RunState.Modifiers` lists the run's modifiers. Modifiers receive combat hooks; `ModifyDamageMultiplicative` returns a factor (see `WeakPower.cs`).
 
-- [ ] **Step 1: `EnemyHpPatch`** — Harmony postfix on `CombatState.CreateCreature`: if `__result.Side == CombatSide.Enemy` and the run has a `SpoonMonsterHp`, set max HP to `ScalingMath.ScaleHp(__result.MaxHp, percent)` and current HP to the new max. This runs once per creature at creation, after co-op scaling, so mid-combat summons are covered and nothing is scaled twice.
+- [ ] **Step 1: `EnemyHpPatch`** — Harmony postfix on `CombatState.CreateCreature`: if `__result.Side == CombatSide.Enemy` and the run's modifiers include a `SpoonMonsterHp` (any subclass), set max HP to `ScalingMath.ScaleHp(__result.MaxHp, percent)` and current HP to the new max. This runs once per creature at creation, after co-op scaling, so mid-combat summons are covered and nothing is scaled twice.
 
-- [ ] **Step 2: Damage** — `SpoonMonsterDamage` overrides `ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)`: returns `ScalingMath.DamageMultiplier(Percent)` when `dealer?.Side == CombatSide.Enemy`, else `1m`. The game's own damage pipeline does the rounding (as for Weak), so no extra minimum is applied to damage.
+- [ ] **Step 2: Damage** — the abstract `SpoonMonsterDamage` overrides `ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)`: returns `ScalingMath.DamageMultiplier(Percent)` when `dealer?.Side == CombatSide.Enemy`, else `1m`. The game's own damage pipeline does the rounding (as for Weak), so no extra minimum is applied to damage.
 
 - [ ] **Step 3: Add this task's checklist items**
   - Solo, HP 200%: first enemy's HP is double the vanilla range; with HP 25%, a 3-HP enemy has 1 HP.
