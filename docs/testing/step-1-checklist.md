@@ -25,12 +25,12 @@ co-op check should also be done once over Steam with a friend.
 - [ ] Co-op: host and client see identical enemy HP.
 - [ ] Save & quit during a run with HP 200 % + Damage 50 %, then continue: the next combat is still scaled, and the top bar still lists both modifiers.
 - [ ] Custom run with both rows unticked: enemy HP and damage are vanilla.
-- [ ] Top bar during a run with HP 200 % + Damage 50 %: two entries read `200%` in red and `50%` in blue (no "missing" icon); hovering each names its modifier.
+- [x] Top bar during a run with HP 200 % + Damage 50 %: two entries read `200%` in red and `50%` in blue (no "missing" icon); hovering each names its modifier.
 
 ## Run modes
 
-- [ ] Solo menu: Standard and Daily are greyed out with "Disabled by Slay the Spoon…" (French: "Désactivé par Slay the Spoon…"); clicking them does nothing; Custom works.
-- [ ] Multiplayer > Host: same for Standard and Daily; Custom hosts a lobby.
+- [x] Solo menu: Standard and Daily are greyed out with "Disabled by Slay the Spoon…" (French: "Désactivé par Slay the Spoon…"); clicking them does nothing; Custom works.
+- [x] Multiplayer > Host: same for Standard and Daily; Custom hosts a lobby.
 - [ ] With a controller, opening either menu focuses Custom, not the greyed Standard button.
 
 ## Progress sync
