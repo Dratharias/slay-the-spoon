@@ -1,0 +1,571 @@
+[
+ {
+  "sts1": "Anger",
+  "sts2": "Anger",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Armaments",
+  "sts2": "Armaments",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Barricade",
+  "sts2": "Barricade",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Bash",
+  "sts2": "Bash",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "BattleTrance",
+  "sts2": "BattleTrance",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Berserk",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "BloodForBlood",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Bloodletting",
+  "sts2": "Bloodletting",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same numbers (3 HP, 2 energy, +1 energy upgraded).",
+  "checked": true
+ },
+ {
+  "sts1": "Bludgeon",
+  "sts2": "Bludgeon",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "BodySlam",
+  "sts2": "BodySlam",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect; upgrade cost 1 → 0 in both.",
+  "checked": true
+ },
+ {
+  "sts1": "Brutality",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "BurningPact",
+  "sts2": "BurningPact",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Carnage",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Clash",
+  "sts2": "Clash",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Cleave",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Clothesline",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Combust",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Corruption",
+  "sts2": "Corruption",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and upgrade (cost 3 → 2). StS1's magic number is unused.",
+  "checked": true
+ },
+ {
+  "sts1": "DarkEmbrace",
+  "sts2": "DarkEmbrace",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Defend_Red",
+  "sts2": "DefendIronclad",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "DemonForm",
+  "sts2": "DemonForm",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Disarm",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "DoubleTap",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Dropkick",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "DualWield",
+  "sts2": "DualWield",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Entrench",
+  "sts2": "Entrench",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Evolve",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Exhume",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Feed",
+  "sts2": "Feed",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "FeelNoPain",
+  "sts2": "FeelNoPain",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "FiendFire",
+  "sts2": "FiendFire",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "FireBreathing",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "FlameBarrier",
+  "sts2": "FlameBarrier",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Flex",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "GhostlyArmor",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Havoc",
+  "sts2": "Havoc",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Headbutt",
+  "sts2": "Headbutt",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "HeavyBlade",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Hemokinesis",
+  "sts2": "Hemokinesis",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Immolate",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Impervious",
+  "sts2": "Impervious",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "InfernalBlade",
+  "sts2": "InfernalBlade",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect (\"costs 0 this turn\" / \"free to play this turn\"), Exhaust, upgrade cost 1 → 0.",
+  "checked": true
+ },
+ {
+  "sts1": "Inflame",
+  "sts2": "Inflame",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Intimidate",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "IronWave",
+  "sts2": "IronWave",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Juggernaut",
+  "sts2": "Juggernaut",
+  "relation": "same-sts1",
+  "draft": true,
+  "note": "StS1 is weaker: 5 damage (+2) vs 6 (+2).",
+  "checked": true
+ },
+ {
+  "sts1": "LimitBreak",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Metallicize",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Offering",
+  "sts2": "Offering",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same numbers (6 HP, 2 energy, draw 3/5, Exhaust).",
+  "checked": true
+ },
+ {
+  "sts1": "PerfectedStrike",
+  "sts2": "PerfectedStrike",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same numbers (6 + 2 per Strike, +1 upgraded). StS2 counts cards tagged Strike, StS1 counted names containing \"Strike\": our StS1 Strike cards carry the Strike tag.",
+  "checked": true
+ },
+ {
+  "sts1": "PommelStrike",
+  "sts2": "PommelStrike",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "PowerThrough",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Pummel",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Rage",
+  "sts2": "Rage",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Rampage",
+  "sts2": "Rampage",
+  "relation": "same-sts1",
+  "draft": true,
+  "note": "StS1 is weaker: 8 damage, +5 per play (+8 upgraded) vs 9, +5 (+9 upgraded).",
+  "checked": true
+ },
+ {
+  "sts1": "Reaper",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "RecklessCharge",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Rupture",
+  "sts2": "Rupture",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "Different trigger: StS1 gains Strength when you lose HP from a card; StS2 whenever you lose HP on your turn.",
+  "checked": true
+ },
+ {
+  "sts1": "SearingBlow",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "SecondWind",
+  "sts2": "SecondWind",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "SeeingRed",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Sentinel",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "SeverSoul",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Shockwave",
+  "sts2": "Shockwave",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "ShrugItOff",
+  "sts2": "ShrugItOff",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same numbers (8 Block +3, draw 1).",
+  "checked": true
+ },
+ {
+  "sts1": "SpotWeakness",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Strike_Red",
+  "sts2": "StrikeIronclad",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "SwordBoomerang",
+  "sts2": "SwordBoomerang",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect: 3 damage to a random enemy 3 times (4 upgraded).",
+  "checked": true
+ },
+ {
+  "sts1": "ThunderClap",
+  "sts2": "Thunderclap",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same numbers (4 damage +3, 1 Vulnerable to all).",
+  "checked": true
+ },
+ {
+  "sts1": "TrueGrit",
+  "sts2": "TrueGrit",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "TwinStrike",
+  "sts2": "TwinStrike",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Uppercut",
+  "sts2": "Uppercut",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "Warcry",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Whirlwind",
+  "sts2": "Whirlwind",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "Same effect and numbers.",
+  "checked": true
+ },
+ {
+  "sts1": "WildStrike",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ }
+]

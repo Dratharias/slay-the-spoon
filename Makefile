@@ -16,15 +16,17 @@ DOTNET    := podman run --rm \
 STS1_DECOMP ?= $(HOME)/Projects/sts-decomp/sts1
 STS1_JAR    ?= $(HOME)/.local/share/Steam/steamapps/common/SlayTheSpire/desktop-1.0.jar
 STS2_DECOMP ?= $(HOME)/Projects/sts-decomp/sts2
+STS2_LOC    ?= $(HOME)/Projects/sts-decomp/sts2-loc
 TOOLS     := nice -n 19 podman run --rm \
 	--security-opt label=disable \
 	-v "$(CURDIR)":/repo \
 	-v "$(STS1_DECOMP)":/sts1:ro \
 	-v "$(STS1_JAR)":/sts1.jar:ro \
 	-v "$(STS2_DECOMP)":/sts2src:ro \
+	-v "$(STS2_LOC)":/sts2loc:ro \
 	-w /repo localhost/slayspoon-tools
 
-.PHONY: build test up down restart clean mp tools-image sts1-data
+.PHONY: build test up down restart clean mp tools-image sts1-data sts2-loc
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -39,9 +41,19 @@ test:
 tools-image:
 	podman build -q -t localhost/slayspoon-tools -f tools/sts1/Containerfile tools/sts1
 
+# Copy StS2's eng/fra card text out of the game's PCK (needed by sts1-data).
+sts2-loc:
+	tools/build-pck.sh --godot-only
+	cd tools/sts1 && PCK="$(STS2_DIR)/SlayTheSpire2.pck" OUT="$(STS2_LOC)" nice -n 19 \
+		"$${XDG_CACHE_HOME:-$$HOME/.cache}/slay-spoon/godot-4.5.1/Godot_v4.5.1-stable_linux.x86_64" --headless -s dump_sts2_loc.gd
+
 # Regenerate card data, the duplicate table, portraits and card skeletons from StS1.
 sts1-data:
 	$(TOOLS) python tools/sts1/extract.py --decomp /sts1 --color red --out data/sts1/ironclad.json
+	$(TOOLS) python tools/sts1/match.py --sts1 data/sts1/ironclad.json \
+		--sts2-cards /sts2src/MegaCrit.Sts2.Core.Models.Cards --sts2-loc /sts2loc \
+		--table data/duplicates/ironclad.json --review docs/review/ironclad-duplicates.md \
+		--matches src/CardSets/Sts1Matches.g.cs --character Ironclad
 
 # Build and install into the game's mods folder.
 up: build
