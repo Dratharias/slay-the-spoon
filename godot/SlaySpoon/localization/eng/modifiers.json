@@ -14,5 +14,7 @@
   "SPOON_NEOW_BLESSING.short": "Neow",
   "SPOON_MERCHANT_LOANS.title": "Merchant Loans",
   "SPOON_MERCHANT_LOANS.description": "Co-op only. A player short of gold at the merchant can ask the others for it. Each of them can lend it, at up to 300% interest, or give it. Every gold the borrower gains afterwards repays their lenders, in equal shares, until the debt is paid. Debts survive death and resurrection until repaid or the run ends.",
-  "SPOON_MERCHANT_LOANS.short": "Loans"
+  "SPOON_MERCHANT_LOANS.short": "Loans",
+  "SPOON_ACT4.title": "Act 4",
+  "SPOON_ACT4.description": "The way to the Heart is open: find the Ruby, Emerald and Sapphire keys."
 }
