@@ -114,4 +114,18 @@ public class Sts1AssetsTests
 		}
 		Assert.Empty(problems);
 	}
+
+	[Fact]
+	public void RelicTexts_AreComplete()
+	{
+		string id = ModelIds.FromClassName("SpoonSpireSouvenir");
+		foreach (string lang in new[] { "eng", "fra" })
+		{
+			Dictionary<string, string> relics = Table(lang, "relics");
+			foreach (string key in new[] { "title", "description", "flavor" })
+			{
+				Assert.False(string.IsNullOrWhiteSpace(relics.GetValueOrDefault($"{id}.{key}")), $"{lang} {key}");
+			}
+		}
+	}
 }
