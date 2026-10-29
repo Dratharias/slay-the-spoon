@@ -4,7 +4,7 @@
 
 **Goal:** The host can pick a card set (StS2 only / StS1 only / Hybrid) in Custom Run. The Ironclad's 31 StS1 cards that have no StS2 namesake are playable. The 44 namesakes get a drafted duplicate table, which the owner reviews.
 
-**Architecture:** Python tools (run in Podman) read the decompiled StS1 source, StS1's `cards.json` and the jar's art. They produce card data, a draft duplicate table, 250×190 portraits, and C# card skeletons whose `OnPlay` bodies are ported by hand. StS1 cards are `CardModel` subclasses (`Sts1*`) in our own `Sts1IroncladCardPool`, drawn with the vanilla Ironclad frame. Two `ModifierModel`s carry the mode in their class name, the same way step 1 carries the percent. Their hooks swap the card candidates of rewards, shops and transforms for a list built by a pure, tested composer.
+**Architecture:** Python tools (run in Podman) read the decompiled StS1 source, StS1's `cards.json` and the jar's art. They produce card data, a draft duplicate table, 250×190 portraits, and C# card skeletons whose `OnPlay` bodies are ported by hand. StS1 cards are `CardModel` subclasses (`Sts1*`) in our own `Sts1IroncladCardPool`, drawn with the vanilla Ironclad frame. Two `ModifierModel`s carry the mode in their class name, the same way step 1 carries the percent. One Harmony postfix on `CardPoolModel.GetUnlockedCards`, active only in a run with a card-set modifier, returns the character's pool as built by a pure, tested composer. Every vanilla path reads the pool through that method: rewards, shop, transforms, and random generation by cards and powers (Infernal Blade, Creative AI…). So they all follow the mode without patching each one.
 
 **Tech Stack:** C# / .NET 9, Harmony, Godot 4.5.1 (PCK), xUnit; Python 3.12 + Pillow + pytest in a Podman image; CFR 0.152 decompile already in `~/Projects/sts-decomp/sts1/` (local only).
 
@@ -37,7 +37,7 @@ Facts found during recon that shrink step 2:
 - Every option lives in Custom Run. With none of our card-set modifiers ticked, and in Standard/Daily runs, every card pool is exactly vanilla.
 - Card candidate lists must be built in a deterministic order: clients roll the same RNG on them.
 - Characters without StS1 cards yet (Silent, Defect in 2a; Regent, Necrobinder forever) keep their vanilla pool in every mode. Colorless stays vanilla until step 3.
-- Random in-combat generation by *vanilla* StS2 cards (e.g. Infernal Blade) keeps drawing from vanilla pools. This is a known gap: add it to `docs/backlog.md`.
+- Any card the game creates from a character pool follows the mode (spec §6). This covers rewards, shop, transforms, and random generation by vanilla cards and powers.
 - Podman for every tool (Bazzite is immutable). Heavy jobs run under `nice -n 19`.
 - No `make up` / `make mp` while `pgrep -x SlayTheSpire2` finds the game. No in-game testing in this step (owner's call). In-game checks go to `docs/testing/step-2a-checklist.md` for later.
 - Work on branch `step-2`. Commit per task. No push.
@@ -252,7 +252,7 @@ Facts found during recon that shrink step 2:
 ### Task 6: Card set modifiers, Custom Run rows and the hooks
 
 **Files:**
-- Create: `src/Config/CardSetModifiers.cs`, `src/CardSets/CardSetPools.cs`, `src/CardSets/TransformOptionsPatch.cs`, `src/CustomRunUi/MutuallyExclusivePatch.cs`
+- Create: `src/Config/CardSetModifiers.cs`, `src/CardSets/CardSetPools.cs`, `src/CardSets/UnlockedCardsPatch.cs`, `src/CustomRunUi/MutuallyExclusivePatch.cs`
 - Modify:
   - `src/CustomRunUi/ModifierListPatch.cs`: add both canonical card-set modifiers, mutable;
   - `src/TopBar/TopBarPercentPatch.cs`: card-set modifiers show a short label from loc key `<ID>.short` instead of the missing icon;
@@ -266,17 +266,29 @@ Facts found during recon that shrink step 2:
 - Produces:
   - `public abstract class SpoonCardSet : ModifierModel { public abstract CardSetMode Mode { get; } }`;
   - sealed `SpoonCardSetSts1Only` and `SpoonCardSetHybrid`;
-  - `CardSetPools.ModeOf(IRunState) -> CardSetMode` (`Sts2Only` when neither is present);
-  - `CardSetPools.CardsFor(Player player, CardSetMode mode) -> IReadOnlyList<CardModel>`:
-    - it maps `player.Character.CardPool` to its StS1 pool (only `IroncladCardPool` → `Sts1IroncladCardPool` in 2a);
-    - it runs the composer on ids taken from `GetUnlockedCards(player.UnlockState, player.RunState.CardMultiplayerConstraint)` of both pools;
+  - `CardSetPools.ModeOf(IRunState) -> CardSetMode` (`Sts2Only` when neither is present).
+  - `CardSetPools.Compose(CardPoolModel pool, CardSetMode mode, UnlockState unlocks, CardMultiplayerConstraint constraint) -> IReadOnlyList<CardModel>`:
+    - it maps the pool to its character's pair:
+      - `IroncladCardPool` and `Sts1IroncladCardPool` → (Ironclad, Sts1Ironclad) in 2a;
+      - any other pool → `null`, meaning vanilla;
+    - it runs the composer on the ids of the vanilla `GetUnlockedCards` of both pools;
     - it maps the ids back to the canonical models.
-- Hooks on `SpoonCardSet`:
-  - `ModifyCardRewardCreationOptions`:
-    - unchanged when `NoCardPoolModifications` is set, `CustomCardPool` is non-null, or `CardPools` lacks the character pool;
-    - otherwise `options.WithCustomPool(CardsFor(...)` + the cards of the other pools in `options`, filtered by `CardPoolFilter` + `)` and the same `RarityOdds`.
-  - `ModifyMerchantCardPool`: when every option belongs to the character pool (same test as vanilla `CharacterCards`), return `CardsFor(...)`.
-  - `TransformOptionsPatch`: postfix on `CardFactory.GetDefaultTransformationOptions(CardModel, bool)`. When the run has a card-set mode other than `Sts2Only` and the original's `Pool` is the character pool or its StS1 pool, return `CardsFor(original.Owner, mode)` filtered like vanilla (`FilterForCombat` when `isInCombat`).
+- `UnlockedCardsPatch`: postfix on `CardPoolModel.GetUnlockedCards(UnlockState, CardMultiplayerConstraint)`.
+  - It only acts when all of these hold:
+    - a run is in progress (read the run state the same way step 1 does);
+    - `ModeOf(run) != Sts2Only`;
+    - the pool has a pair;
+    - the call is not nested.
+  - When it acts, `__result` = `Compose(...)`.
+  - A `[ThreadStatic]` reentrancy guard lets `Compose` call the vanilla method for both pools.
+  - Callers to keep in mind (grep `GetUnlockedCards` in the decompile):
+    - `CardCreationOptions.GetPossibleCards` (rewards);
+    - `MerchantInventory`;
+    - `CardFactory.GetDefaultTransformationOptions` (the original's `Pool` may be `Sts1IroncladCardPool`, which maps to the same pair);
+    - in-combat generators (`InfernalBlade`, `CreativeAiPower`, `CalamityPower`, `HelloWorldPower`, `CallOfTheVoidPower`);
+    - `BigGameHunter`.
+  - The card library (`NCardLibraryGrid`) must stay vanilla. A prefix/postfix on its loader sets the same guard flag.
+  - Vanilla `CharacterCards` filters merchant cards with `c.Pool != cardPool`. With a StS1 card in the list, that check returns the list unchanged, so its extra pool is skipped. Note this combination in the checklist; don't fix it.
 - `MutuallyExclusivePatch`: postfix on the `ModelDb.MutuallyExclusiveModifiers` getter that appends the set `{SpoonCardSetSts1Only, SpoonCardSetHybrid}`.
 - Loc (`modifiers.json`):
 
@@ -288,10 +300,9 @@ Facts found during recon that shrink step 2:
 
   The descriptions say which characters have StS1 cards so far (the Ironclad) and that the others keep their own.
 
-- [ ] **Step 1:** Implement the modifiers, `CardSetPools`, the hooks and the patches.
+- [ ] **Step 1:** Implement the modifiers, `CardSetPools`, `UnlockedCardsPatch` and the Custom Run patches.
 - [ ] **Step 2:** Run `make build` and `make test`. Expected: both clean. Startup can't be checked in game in this step; instead confirm by grep that no `ModelDb.GoodModifiers` / `BadModifiers` reference was added.
-- [ ] **Step 3:** Add to `docs/backlog.md`: vanilla StS2 cards that generate random cards in combat ignore the card set mode.
-- [ ] **Step 4:** Commit `feat: card set modes in Custom Run`.
+- [ ] **Step 3:** Commit `feat: card set modes in Custom Run`.
 
 ### Tasks 7–10: Port the 31 Ironclad cards
 
@@ -335,7 +346,8 @@ The same steps apply to each batch. For each card in the batch:
   - StS1-only Ironclad rewards show only StS1 namesakes and `Sts1*` cards;
   - Hybrid shows both;
   - Silent and Necrobinder rewards are vanilla in StS1-only;
-  - shop and transform follow the mode;
+  - shop, transform and Infernal Blade (vanilla) follow the mode;
+  - the card library outside and inside a run shows vanilla pools;
   - save, quit and resume with a StS1 card in the deck;
   - Standard run rewards are vanilla.
 - [ ] **Step 2:** Update README, CLAUDE.md, version.
