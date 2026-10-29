@@ -1,3 +1,4 @@
+using System.Reflection;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -9,12 +10,18 @@ using MegaCrit.Sts2.Core.Runs;
 namespace SlaySpoon.Relics;
 
 /// <summary>
-/// Puts the Spire Souvenir in the Ironclad relic pool, so the compendium and pool lookups know it. The pool caches
-/// this list on first read, during ModelDb.Init, which runs after mods are loaded.
+/// Puts the Spire Souvenir in the relic pool of every character with StS1 cards, so the compendium and pool lookups
+/// know it. The pool caches this list on first read, during ModelDb.Init, which runs after mods are loaded.
 /// </summary>
-[HarmonyPatch(typeof(IroncladRelicPool), "GenerateAllRelics")]
+[HarmonyPatch]
 public static class SouvenirPoolPatch
 {
+	/// <summary>The relic pools of the characters with StS1 cards.</summary>
+	internal static readonly Type[] Pools = { typeof(IroncladRelicPool), typeof(SilentRelicPool) };
+
+	public static IEnumerable<MethodBase> TargetMethods() =>
+		Pools.Select(pool => AccessTools.Method(pool, "GenerateAllRelics"));
+
 	public static void Postfix(ref IEnumerable<RelicModel> __result)
 	{
 		__result = __result.Append(ModelDb.Relic<SpoonSpireSouvenir>()).ToList();
@@ -43,11 +50,11 @@ public static class SouvenirGrabBagPatch
 
 	public static void Postfix(RelicGrabBag __instance, Player player)
 	{
-		if (player.Character.RelicPool is not IroncladRelicPool || !SpoonSpireSouvenir.IsOffered(player.RunState))
+		RelicModel souvenir = ModelDb.Relic<SpoonSpireSouvenir>();
+		if (!player.Character.RelicPool.AllRelicIds.Contains(souvenir.Id) || !SpoonSpireSouvenir.IsOffered(player.RunState))
 		{
 			return;
 		}
-		RelicModel souvenir = ModelDb.Relic<SpoonSpireSouvenir>();
 		Dictionary<RelicRarity, List<RelicModel>> deques = Deques(__instance);
 		if (!deques.TryGetValue(RelicRarity.Common, out List<RelicModel>? common))
 		{
@@ -60,9 +67,12 @@ public static class SouvenirGrabBagPatch
 	}
 
 	/// <summary>Keeps the Souvenir out of the list the vanilla shuffle sees.</summary>
-	[HarmonyPatch(typeof(IroncladRelicPool), nameof(IroncladRelicPool.GetUnlockedRelics))]
+	[HarmonyPatch]
 	public static class HideFromShuffle
 	{
+		public static IEnumerable<MethodBase> TargetMethods() =>
+			SouvenirPoolPatch.Pools.Select(pool => AccessTools.Method(pool, nameof(RelicPoolModel.GetUnlockedRelics)));
+
 		public static void Postfix(ref IEnumerable<RelicModel> __result)
 		{
 			if (_populating)

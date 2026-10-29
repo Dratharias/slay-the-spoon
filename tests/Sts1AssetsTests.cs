@@ -20,8 +20,17 @@ public class Sts1AssetsTests
 		return dir ?? throw new InvalidOperationException("repo root not found");
 	}
 
+	/// <summary>One folder per character under src/Cards/Sts1 (Powers holds no cards).</summary>
+	private static IEnumerable<string> Characters() =>
+		Directory.EnumerateDirectories(Path.Combine(Repo, "src/Cards/Sts1"))
+			.Select(dir => Path.GetFileName(dir))
+			.Where(name => name != "Powers")
+			.OrderBy(name => name, StringComparer.Ordinal);
+
 	private static IEnumerable<string> CardFiles(string character) =>
 		Directory.EnumerateFiles(Path.Combine(Repo, "src/Cards/Sts1", character), "Sts1*.cs");
+
+	private static IEnumerable<string> AllCardFiles() => Characters().SelectMany(CardFiles);
 
 	private static Dictionary<string, string> Table(string lang, string table) =>
 		JsonSerializer.Deserialize<Dictionary<string, string>>(
@@ -30,7 +39,7 @@ public class Sts1AssetsTests
 	[Fact]
 	public void Sts1Assets_AreComplete()
 	{
-		string[] files = CardFiles("Ironclad").ToArray();
+		string[] files = AllCardFiles().ToArray();
 		Assert.NotEmpty(files);
 		List<string> problems = new();
 		foreach (string lang in new[] { "eng", "fra" })
@@ -50,7 +59,8 @@ public class Sts1AssetsTests
 		}
 		foreach (string file in files)
 		{
-			string png = Path.Combine(Repo, "godot/SlaySpoon/images/cards/ironclad",
+			string folder = Path.GetFileName(Path.GetDirectoryName(file))!.ToLowerInvariant();
+			string png = Path.Combine(Repo, "godot/SlaySpoon/images/cards", folder,
 				ModelIds.FromClassName(Path.GetFileNameWithoutExtension(file)).ToLowerInvariant() + ".png");
 			if (!File.Exists(png))
 			{
@@ -78,7 +88,7 @@ public class Sts1AssetsTests
 	public void CardTextPlaceholders_MatchCardVars()
 	{
 		var problems = new List<string>();
-		foreach (string file in CardFiles("Ironclad"))
+		foreach (string file in AllCardFiles())
 		{
 			string source = File.ReadAllText(file);
 			var vars = new HashSet<string>(BuiltInPlaceholders);

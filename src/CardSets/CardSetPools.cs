@@ -21,6 +21,7 @@ public static class CardSetPools
 	private static readonly Pair[] Pairs =
 	{
 		new(typeof(IroncladCardPool), typeof(Sts1IroncladCardPool), Sts1Matches.Ironclad),
+		new(typeof(SilentCardPool), typeof(Sts1SilentCardPool), Sts1Matches.Silent),
 	};
 
 	/// <summary>The run's card set mode, as ticked in Custom Run (none = StS2 only).</summary>
