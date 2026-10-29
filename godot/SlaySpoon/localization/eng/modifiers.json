@@ -7,7 +7,7 @@
   "SPOON_CARD_SET_STS1_ONLY.description": "Rewards, shops and card generation offer Slay the Spire 1 cards instead of Slay the Spire 2 ones. So far only the Ironclad has them; other characters keep their own cards.",
   "SPOON_CARD_SET_STS1_ONLY.short": "StS1",
   "SPOON_SPIRE_SOUVENIR_MODIFIER.title": "Spire Souvenir",
-  "SPOON_SPIRE_SOUVENIR_MODIFIER.description": "Every character with Slay the Spire 1 cards starts with the Spire Souvenir: their rewards, shops and card generation mix Slay the Spire 1 and Slay the Spire 2 cards. So far the Ironclad and the Silent have Slay the Spire 1 cards. A card that plays differently in each game comes as either version; card rewards let you switch.",
+  "SPOON_SPIRE_SOUVENIR_MODIFIER.description": "Every character with Slay the Spire 1 cards starts with the Spire Souvenir: their rewards, shops and card generation mix Slay the Spire 1 and Slay the Spire 2 cards. So far the Ironclad, the Silent and the Defect have Slay the Spire 1 cards. A card that plays differently in each game comes as either version; card rewards let you switch.",
   "SPOON_SPIRE_SOUVENIR_MODIFIER.short": "1+2",
   "SPOON_NEOW_BLESSING.title": "Neow's Blessings",
   "SPOON_NEOW_BLESSING.description": "Neow offers its usual blessings, as in a Standard run, even with other modifiers. Modifiers that bring their own Neow option (Draft, Sealed Deck…) offer it first.",

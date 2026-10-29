@@ -22,6 +22,7 @@ public static class CardSetPools
 	{
 		new(typeof(IroncladCardPool), typeof(Sts1IroncladCardPool), Sts1Matches.Ironclad),
 		new(typeof(SilentCardPool), typeof(Sts1SilentCardPool), Sts1Matches.Silent),
+		new(typeof(DefectCardPool), typeof(Sts1DefectCardPool), Sts1Matches.Defect),
 	};
 
 	/// <summary>The run's card set mode, as ticked in Custom Run (none = StS2 only).</summary>

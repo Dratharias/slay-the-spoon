@@ -17,7 +17,7 @@ namespace SlaySpoon.Relics;
 public static class SouvenirPoolPatch
 {
 	/// <summary>The relic pools of the characters with StS1 cards.</summary>
-	internal static readonly Type[] Pools = { typeof(IroncladRelicPool), typeof(SilentRelicPool) };
+	internal static readonly Type[] Pools = { typeof(IroncladRelicPool), typeof(SilentRelicPool), typeof(DefectRelicPool) };
 
 	public static IEnumerable<MethodBase> TargetMethods() =>
 		Pools.Select(pool => AccessTools.Method(pool, "GenerateAllRelics"));
