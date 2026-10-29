@@ -1,15 +1,19 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using SlaySpoon.Cards.Sts1.Powers;
 
 namespace SlaySpoon.Cards.Sts1.Colorless;
 
+/// <summary>StS1 Magnetism: a random colorless card at the start of each turn.</summary>
 public sealed class Sts1Magnetism : Sts1ColorlessCard
 {
+	private const string PowerKey = nameof(Sts1MagnetismPower);
+
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 1m),
+		new PowerVar<Sts1MagnetismPower>(1m),
 	};
 
 	public Sts1Magnetism()
@@ -17,9 +21,10 @@ public sealed class Sts1Magnetism : Sts1ColorlessCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		await CreatureCmd.TriggerAnim(Owner.Creature, "PowerUp", Owner.Character.PowerUpAnimDelay);
+		await PowerCmd.Apply<Sts1MagnetismPower>(choiceContext, Owner.Creature, DynamicVars[PowerKey].BaseValue, Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

@@ -1,15 +1,19 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace SlaySpoon.Cards.Sts1.Colorless;
 
+/// <summary>StS1 Sadistic Nature: vanilla Sleight of Flesh's power has the same rule, temporary debuffs excluded as StS1 excluded Shackled.</summary>
 public sealed class Sts1SadisticNature : Sts1ColorlessCard
 {
+	private const string PowerKey = nameof(SleightOfFleshPower);
+
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 5m),
+		new PowerVar<SleightOfFleshPower>(5m),
 	};
 
 	public Sts1SadisticNature()
@@ -17,13 +21,14 @@ public sealed class Sts1SadisticNature : Sts1ColorlessCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		await CreatureCmd.TriggerAnim(Owner.Creature, "PowerUp", Owner.Character.PowerUpAnimDelay);
+		await PowerCmd.Apply<SleightOfFleshPower>(choiceContext, Owner.Creature, DynamicVars[PowerKey].BaseValue, Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars["Magic"].UpgradeValueBy(2m);
+		DynamicVars[PowerKey].UpgradeValueBy(2m);
 	}
 }

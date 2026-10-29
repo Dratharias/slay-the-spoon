@@ -1,8 +1,7 @@
 # Step 3c — Colorless cards
 
-Target: StS2 v0.107.1. All in-game checks below remain pending. Infrastructure is implemented,
-but the 3 Powers are still skeletons; do not install this intermediate build for play.
-The six attacks and 22 skills are implemented, with their in-game checks still pending.
+Target: StS2 v0.107.1. All in-game checks below remain pending. Every colorless card is
+implemented (6 attacks, 22 skills, 3 Powers); none has been tested in game yet.
 
 ## Infrastructure audit (Task 3)
 
@@ -106,3 +105,10 @@ is unchanged. This fallback was proposed to the owner and used as the default pe
 - [ ] Transmutation (X, Exhaust): X random colorless cards, upgraded when this is, free this turn; X = 0 does nothing; Chemical X adds 2.
 - [ ] Violence (0, Exhaust): 3 / 4 random Attacks from the draw pile to hand; fewer if the pile holds fewer; a full hand sends the rest to the discard pile as vanilla.
 - [ ] Generated cards (Chrysalis, Discovery, Jack, Transmutation) follow the effective mode and stay in sync in co-op.
+
+## Colorless Powers (Task 6)
+
+- [ ] Magnetism (2 / 1): from the next turn on, a random colorless card arrives in hand before the draw (Creative AI icon); two copies give 2 cards per turn.
+- [ ] Panache (0): the Panache card itself doesn't count; every 5th card played in a turn deals 10 / 14 damage to ALL enemies (Strength doesn't add). The icon shows the cards left and resets to 5 at end of turn. A second Panache adds its damage to the same countdown (one icon, damage 20) and counts as a card played.
+- [ ] Sadistic Nature (0): each debuff you apply to an enemy (Weak, Vulnerable, Poison…) deals 5 / 7 damage to it; Artifact blocking the debuff means no damage. It shows vanilla Sleight of Flesh's buff ("Tour de chair" in French).
+- [ ] Co-op: each player's Powers trigger only on their own turn start and their own cards; Sadistic Nature doesn't fire on a teammate's debuffs.
