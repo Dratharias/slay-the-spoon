@@ -18,12 +18,13 @@
 3. **Content:** everything. Her cards, the 8 generated cards (Miracle, Insight, Smite, Safety, Through Violence,
    Expunger, Beta, Omega), the 9 relics (Pure Water as starter, Holy Water, Damaru, Teardrop Locket, Violet Lotus,
    Melange, Golden Eye, Cloak Clasp, Duality) and the 3 potions (Bottled Miracle, Stance Potion, Ambrosia), in her own pools.
+4. **Cut cards:** Discipline and Unraveling, which StS1 never registers, are not ported.
 
 ## Recon
 
 - **Card count:** `cards/purple` holds 77 classes, but StS1's `CardLibrary` registers 75 of them. **Discipline** and
-  **Unraveling** are cut cards: they have text but never appear in StS1. They are left out, as the Defect's Impulse was
-  (open owner question, see the end). The 75 include the four starter cards.
+  **Unraveling** are cut cards: they have text but never appear in StS1. They are left out (owner decision,
+  2026-10-29). The 75 include the four starter cards.
 - **StS1 starter:** 4 Strike, 4 Defend, Eruption, Vigilance; Pure Water; 72 HP, 99 gold, 3 energy.
 - **`ModelDb.AllCharacters` is a fixed array of five.** It drives the Daily character roll (`NDailyRunScreen`), random
   character resolution (`StartRunLobby.BeginRunLocally`), the save count and the Daily/Orobas epoch checks in
@@ -241,6 +242,6 @@ draws from the attack pools of the current card set mode. `make build` 0 warning
 - Potion icons are borrowed vanilla icons (StS1 potions have no single image to cut).
 - Vault in co-op: an extra turn for the player who played it only.
 
-## Open owner question
+## Execution
 
-- Discipline and Unraveling exist in StS1's files but never in its game. Port them, or leave them out (current plan)?
+Owner choice (2026-10-29): subagent-driven (superpowers:subagent-driven-development).
