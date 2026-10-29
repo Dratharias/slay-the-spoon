@@ -4,14 +4,16 @@
   "sts2": "Apotheosis",
   "relation": "duplicate",
   "draft": true,
-  "note": "keywords ['exhaust']→['exhaust'] vs ['exhaust', 'innate']→['exhaust', 'innate']"
+  "note": "Both upgrade all combat cards and Exhaust; cost 2 -> 1. StS2 also has Innate. Native EventCardPool (Ancient). Owner decision: event-only in StS1 and Hybrid too; never add an ordinary colorless slot.",
+  "checked": true
  },
  {
   "sts1": "Apparition",
   "sts2": "Apparition",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['IntangiblePower']"
+  "note": "Identical: cost 1, Intangible 1, Ethereal and Exhaust; upgrade removes Ethereal. Native EventCardPool (Ancient). Retain a StS1 Special class outside ordinary pools for event/console access; no version choice is needed.",
+  "checked": true
  },
  {
   "sts1": "BandageUp",
@@ -46,7 +48,8 @@
   "sts2": "DarkShackles",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 0, Exhaust, remove 9/15 Strength from one enemy until its turn ends. Native temporary Strength power implements restoration. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "DeepBreath",
@@ -58,37 +61,42 @@
  {
   "sts1": "Discovery",
   "sts2": "Discovery",
-  "relation": "same-sts2",
+  "relation": "duplicate",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 1, choose one of three generated character cards, free this turn; upgrade removes Exhaust. StS1 DiscoveryAction requires a choice (cardType is null); StS2 explicitly allows skipping. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "DramaticEntrance",
   "sts2": "DramaticEntrance",
   "relation": "same-sts1",
   "draft": true,
-  "note": "StS1 weaker: damage 8 vs 11, damage+ 12 vs 15"
+  "note": "Both cost 0, Innate, Exhaust, attack all enemies. StS1 weaker: damage 8/12 vs StS2 11/15. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Enlightenment",
   "sts2": "Enlightenment",
   "relation": "duplicate",
   "draft": true,
-  "note": "keywords []→[] vs ['exhaust']→['exhaust']"
+  "note": "Both cost 0 and reduce hand costs to 1, for the turn / combat when upgraded. StS2 adds Exhaust. Native EventCardPool (Event). Owner decision: event-only in StS1 and Hybrid too; never add an ordinary colorless slot.",
+  "checked": true
  },
  {
   "sts1": "Finesse",
   "sts2": "Finesse",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['Block', 'Cards']"
+  "note": "Both cost 0, gain Block and draw exactly 1 (literal in StS1). StS1 weaker: Block 2/4 vs StS2 4/7. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "FlashOfSteel",
   "sts2": "FlashOfSteel",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['Cards', 'Damage']"
+  "note": "Both cost 0, attack one enemy and draw exactly 1 (literal in StS1). StS1 weaker: damage 3/6 vs StS2 5/8. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Forethought",
@@ -109,14 +117,16 @@
   "sts2": "HandOfGreed",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 2, deal 20/25 damage and gain 20/25 gold on a qualifying kill (not Minions or revival). Use native Fatal rules and combat-generation restriction. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Impatience",
   "sts2": "Impatience",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 0 and draw 2/3 only when no Attacks remain in hand. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "JAX",
@@ -128,9 +138,10 @@
  {
   "sts1": "JackOfAllTrades",
   "sts2": "JackOfAllTrades",
-  "relation": "same-sts2",
+  "relation": "duplicate",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 0, Exhaust and generate 1/2 colorless cards. StS1 rolls independently, allowing repeated results when upgraded; StS2 GetDistinctForCombat guarantees distinct results and explicitly excludes itself. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Madness",
@@ -151,28 +162,32 @@
   "sts2": "MasterOfStrategy",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 0, draw 3/4 and Exhaust. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Mayhem",
   "sts2": "Mayhem",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=1 vs StS2 vars []"
+  "note": "Both grant 1 Mayhem (literal in StS2), autoplaying the top draw-pile card each turn; cost 2 -> 1. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Metamorphosis",
   "sts2": "Metamorphosis",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 2, Exhaust and shuffle 3/5 random Attacks costing 0 for combat into the draw pile. Native EventCardPool (Event). Retain a StS1 class for event/console access; owner decision excludes it from ordinary pools even though its StS1 source rarity is Rare. No version choice is needed.",
+  "checked": true
  },
  {
   "sts1": "MindBlast",
   "sts2": "MindBlast",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['CalculatedDamage', 'CalculationBase', 'ExtraDamage']; damage/block presence differs"
+  "note": "Both Innate, damage equal to draw-pile size against one enemy; computed damage is not a different effect. StS1 weaker: cost 2/1 vs StS2 1/0. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Panacea",
@@ -184,23 +199,26 @@
  {
   "sts1": "Panache",
   "sts2": "Panache",
-  "relation": "same-sts2",
+  "relation": "duplicate",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 0 and deal 10/14 damage to all enemies every five cards in a turn. StS1 stacks damage on one shared countdown; StS2 creates independent power instances with separate countdowns. Rarity alone (Rare vs Uncommon) is not the reason. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "PanicButton",
   "sts2": "PanicButton",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 0, Exhaust, gain 30/40 Block then prevent card Block for 2 turns. Compared NoBlockPower: native card-source filtering preserves the intended card-only restriction. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Purity",
   "sts2": "Purity",
   "relation": "duplicate",
   "draft": true,
-  "note": "keywords ['exhaust']→['exhaust'] vs ['exhaust', 'retain']→['exhaust', 'retain']"
+  "note": "Both cost 0, Exhaust up to 3/5 chosen hand cards and Exhaust themselves. StS2 adds Retain. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "RitualDagger",
@@ -219,16 +237,18 @@
  {
   "sts1": "SecretTechnique",
   "sts2": "SecretTechnique",
-  "relation": "same-sts2",
+  "relation": "duplicate",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 0, fetch one Skill from the draw pile; upgrade removes Exhaust. StS1 canUse forbids playing without a Skill in the draw pile; StS2 permits playing with no result. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "SecretWeapon",
   "sts2": "SecretWeapon",
-  "relation": "same-sts2",
+  "relation": "duplicate",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Both cost 0, fetch one Attack from the draw pile; upgrade removes Exhaust. StS1 canUse forbids playing without an Attack in the draw pile; StS2 permits playing with no result. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "SwiftStrike",
@@ -240,16 +260,18 @@
  {
   "sts1": "TheBomb",
   "sts2": "TheBomb",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=40 vs StS2 vars ['BombDamage', 'Turns']"
+  "note": "Both cost 2, deal 40/50 damage to all enemies after 3 player-turn ends; separate bomb instances retain their own damage and countdown. StS2 Uncommon vs StS1 Rare is only a rarity change. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "ThinkingAhead",
   "sts2": "ThinkingAhead",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['Cards']"
+  "note": "Both cost 0, draw exactly 2 then put one hand card on top of the draw pile; upgrade removes Exhaust. StS2 Uncommon vs StS1 Rare is only a rarity change. In ColorlessCardPool.",
+  "checked": true
  },
  {
   "sts1": "Transmutation",

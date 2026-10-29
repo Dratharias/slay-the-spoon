@@ -11,7 +11,10 @@ per-player Hybrid follows the Spire Souvenir amendment.
 
 - StS1 has 39 colorless classes: 35 ordinary cards and four special cards (Apparition, Bite,
   JAX, RitualDagger). Special cards must remain outside ordinary reward and generation pools.
-  Their event sources are outside this port's scope; make the cards accessible through the dev console.
+  New event creation is outside this port's scope; retain dev-console access for testing.
+- Owner amendment: native StS2 event-only cards (Apotheosis, Apparition, Enlightenment and
+  Metamorphosis) remain event-only in StS1-only and Hybrid too. Native event grants must be audited
+  for effective-mode handling; never promote these cards into ordinary offers or generation.
 - The first automatic comparison finds 22 namesakes and 17 unique cards. Classifications are drafts,
   not implementation decisions: literal values, computed damage and pool membership need inspection.
 - Apotheosis, Apparition, Enlightenment and Metamorphosis have StS2 namesakes outside the ordinary
@@ -29,16 +32,56 @@ per-player Hybrid follows the Spire Souvenir amendment.
 - [x] Add `make sts1-colorless-data`, which regenerates only the catalog, not unported skeletons.
 - [x] Verify catalog coverage and special-card boundary with tests; run the existing test suite.
 
-## Task 2 — classify namesakes
+## Task 2 — classify namesakes (complete)
 
-- [ ] Inspect both versions of all 22 namesakes, including upgrades and actual pool membership.
-- [ ] Mark builder-reviewed rows `checked: true`, retaining `draft: true` for owner review.
-- [ ] Regenerate the review page and namesake ids. Record final counts and card batches here.
+- [x] Inspect both versions of all 22 namesakes, including upgrades and actual pool membership.
+- [x] Mark builder-reviewed rows `checked: true`, retaining `draft: true` for owner review.
+- [x] Regenerate the review page and namesake ids. Record final counts and card batches here.
+
+### Reviewed result and implementation batches
+
+All 22 namesakes have `checked: true`; `draft: true` remains for owner review. Local card
+sources, relevant actions/powers and ColorlessCardPool/EventCardPool were compared against
+StS2 v0.107.1. No decompiled source is included in the repository.
+
+- 17 unique, 6 same-sts1, 8 duplicates, 8 same-sts2: **31 classes to implement**, including
+  four source-Special cards. After the owner's event-only amendment, ordinary StS1-only offers
+  comprise 24 custom classes and 8 native cards (32 total). Seven custom classes stay outside
+  ordinary pools: Apotheosis, Apparition, Bite, Enlightenment, JAX, Metamorphosis, RitualDagger.
+- Task 4, attacks (6): Bite (Special), DramaticEntrance, FlashOfSteel, MindBlast,
+  RitualDagger (Special), SwiftStrike.
+- Task 5, skills (22): Apotheosis, Apparition (Special), BandageUp, Blind, Chrysalis,
+  DeepBreath, Discovery, Enlightenment, Finesse, Forethought, GoodInstincts, JAX (Special),
+  JackOfAllTrades, Madness, Metamorphosis, Panacea, Purity, SecretTechnique, SecretWeapon,
+  Transmutation, Trip, Violence.
+- Task 6, Powers (3): Magnetism, Panache, SadisticNature. Panache needs one shared countdown
+  with stacking damage, unlike native independent instances.
+- Reuse native DarkShackles, HandOfGreed, Impatience, MasterOfStrategy, Mayhem, PanicButton,
+  TheBomb and ThinkingAhead. Rarity differences alone do not create duplicates.
+
+`same-sts1` also records availability exceptions: Apparition and Metamorphosis have the same
+core effect as their native versions but retain StS1 classes for event/console access, without
+version swaps. Their source rarities stay intact in the catalog; rarity must not be the sole
+criterion for ordinary pool membership.
+
+Owner amendment: Apotheosis, Apparition, Enlightenment and Metamorphosis belong to native
+EventCardPool and must remain event-only in every mode, including StS1-only. Do not supply
+missing Hybrid slots for them. Task 3 must exclude these classes explicitly from ordinary
+pools and combat generation, along with Bite, JAX and RitualDagger. Audit native event grants
+(which may construct cards directly) so effective-mode handling and duplicate partners work
+without adding EventCardPool to the ordinary colorless pair. Event-only cards are obtained
+through events; console access is a testing facility. No new events are requested here.
+
+Additional differences requiring custom classes: Discovery's mandatory choice vs native skip;
+JackOfAllTrades+'s independent rolls vs native distinct results; SecretTechnique/SecretWeapon's
+playability condition when the draw pile has no matching type. Preserve these behaviors when
+porting, with synced selection and RNG. Native Fatal and card-source Block conventions remain
+the engine adaptation for reused HandOfGreed and PanicButton.
 
 ## Task 3 — infrastructure
 
 - [ ] Add Sts1ColorlessCard and its hidden pool with vanilla colorless frame/energy metadata.
-- [ ] Pair ordinary ColorlessCardPool in CardSetPools; handle special cards outside that pool.
+- [ ] Pair ordinary ColorlessCardPool in CardSetPools; handle all seven event-only classes outside that pool.
 - [ ] Audit player context for merchant, events, transforms and random colorless generation.
 - [ ] Extend the dev console to include special cards without exposing them to ordinary rewards.
 - [ ] Generate portraits and skeletons only for final classifications; integrate regeneration into

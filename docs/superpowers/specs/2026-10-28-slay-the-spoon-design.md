@@ -65,6 +65,11 @@ These were decided in conversation and are not open for the builder to change.
      Defends → Ultimate Defend. StS1 starters must therefore be recognised by
      `ArchaicTooth.TranscendenceUpgrades` and by Amalgamator's `CardTag.Strike` / `CardTag.Defend`
      checks.
+   - **Colorless event-card amendment (2026-10-29):** StS2 event-only cards such as Apotheosis
+     remain outside ordinary StS1-only and Hybrid colorless pools. Apotheosis, Apparition,
+     Enlightenment and Metamorphosis must be obtained through events, not ordinary rewards,
+     merchant stock, transforms or random combat generation. StS1 source rarity does not
+     override this rule. Developer-console access remains available for testing.
 4. **Duplicates (cards that exist in both games):**
    - Same effect, only numbers differ (one version is a nerf of the other) → treat as **one card**,
      keep **the weaker version**. No choice is offered.
