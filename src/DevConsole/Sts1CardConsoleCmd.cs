@@ -20,7 +20,7 @@ public sealed class Sts1CardConsoleCmd : AbstractConsoleCmd
 
 	public override string Args => "<card-id:string> [pileName:string]";
 
-	public override string Description => "Spawns a Slay the Spire 1 card into a pile (hand by default), e.g. 'sts1card STS1_HEAVY_BLADE'.";
+	public override string Description => "Spawns a Slay the Spire 1 card into a pile (hand in combat, deck otherwise), e.g. 'sts1card STS1_HEAVY_BLADE'.";
 
 	public override bool IsNetworked => true;
 
@@ -36,7 +36,8 @@ public sealed class Sts1CardConsoleCmd : AbstractConsoleCmd
 		{
 			return new CmdResult(success: false, "A run is currently not in progress!");
 		}
-		PileType pile = PileType.Hand;
+		// Out of combat there is no hand: default to the deck instead of throwing like the vanilla command.
+		PileType pile = CombatManager.Instance.IsInProgress ? PileType.Hand : PileType.Deck;
 		if (args.Length >= 2 && !TryParseEnum(args[1], out pile))
 		{
 			return new CmdResult(success: false, "Unknown pile '" + args[1] + "'. Valid piles: " + string.Join(", ", Enum.GetNames<PileType>()));
