@@ -1,0 +1,13 @@
+# Step 6 — Act 4 permanent unlock in-game checklist
+
+Build and automated tests pass. All checks below require the owner in game; none is claimed complete.
+Look in `~/.local/share/SlayTheSpire2/mod_configs/SlaySpoon.cfg` for `Act4Unlocked.profile1` and in
+`godot.log` for `[SlaySpoon] act4: unlocked for profile N`. Start from a cfg without the key.
+
+- [ ] Standard run at Ascension 10: reaching Act 3 writes `Act4Unlocked.profile1` and logs the unlock once.
+- [ ] Standard run at Ascension 9 reaching Act 3: nothing recorded.
+- [ ] Standard run at Ascension 10 reaching only Act 2: nothing recorded.
+- [ ] Daily and Custom runs at Ascension 10 reaching Act 3: nothing recorded.
+- [ ] Die in Act 3 (or later) after the unlock: the key stays in the cfg.
+- [ ] Resume a saved Standard A10 run that is already in Act 3 (key removed beforehand): the resume records it.
+- [ ] The regular (unmodded) save folder is untouched: no modified files under `~/.local/share/SlayTheSpire2/profile1`.

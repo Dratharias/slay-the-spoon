@@ -17,9 +17,6 @@ public static class ProgressSyncPatch
 	private static readonly AccessTools.FieldRef<ProgressSaveManager, ISaveStore> SaveStore =
 		AccessTools.FieldRefAccess<ProgressSaveManager, ISaveStore>("_saveStore");
 
-	private static readonly AccessTools.FieldRef<ProgressSaveManager, IProfileIdProvider> ProfileIdProvider =
-		AccessTools.FieldRefAccess<ProgressSaveManager, IProfileIdProvider>("_profileIdProvider");
-
 	public static void Prefix(ProgressSaveManager __instance)
 	{
 		if (!UserDataPathProvider.IsRunningModded || SpoonConfigFile.SyncChoice != true)
@@ -28,7 +25,7 @@ public static class ProgressSyncPatch
 		}
 		try
 		{
-			int profileId = ProfileIdProvider(__instance).CurrentProfileId;
+			int profileId = Act4.Act4UnlockPatch.CurrentProfileId(__instance);
 			string vanillaPath = ProgressPaths.Vanilla(profileId);
 			string moddedPath = ProgressPaths.Modded(profileId);
 			ISaveStore store = SaveStore(__instance);
