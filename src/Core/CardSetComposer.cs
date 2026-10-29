@@ -29,8 +29,9 @@ public static class CardSetComposer
 			{
 				HashSet<string?> replaced = sts1.Where(e => e.Relation == Sts1Relation.SameKeepSts1)
 					.Select(e => e.Sts2Id).ToHashSet();
+				// A duplicate is one slot, held by the StS2 card; the version swap picks the StS1 one.
 				return vanilla.Where(id => !replaced.Contains(id))
-					.Concat(sts1.Select(e => e.Sts1Id))
+					.Concat(sts1.Where(e => e.Relation != Sts1Relation.Duplicate).Select(e => e.Sts1Id))
 					.ToList();
 			}
 			default:

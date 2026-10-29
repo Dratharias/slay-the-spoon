@@ -43,9 +43,10 @@ public class CardSetComposerTests
 	}
 
 	[Fact]
-	public void Compose_Hybrid_DropsOnlySameKeepSts1Claims()
+	public void Compose_Hybrid_DuplicateIsOneSlot()
 	{
-		Assert.Equal(new[] { "AGGRESSION", "ANGER", "BASH", "RUPTURE", "STS1_CLEAVE", "STS1_RUPTURE", "STS1_RAMPAGE" },
+		// RUPTURE stands for both versions; the swap picks STS1_RUPTURE.
+		Assert.Equal(new[] { "AGGRESSION", "ANGER", "BASH", "RUPTURE", "STS1_CLEAVE", "STS1_RAMPAGE" },
 			CardSetComposer.Compose(CardSetMode.Hybrid, Vanilla, Matched, Sts1));
 	}
 
