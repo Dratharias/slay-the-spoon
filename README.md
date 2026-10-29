@@ -16,7 +16,7 @@ Standard and Daily runs are left untouched.
 
 ## Features
 
-Current (0.1.0):
+Current (0.2.0):
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps,
   synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -29,8 +29,19 @@ Current (0.1.0):
   stored in `mod_configs/SlaySpoon.cfg` in the game's user folder (on Linux
   `~/.local/share/SlayTheSpire2/mod_configs/`); delete that file to be asked again.
 
-Planned: Slay the Spire 1 cards (Ironclad, Silent, Defect, Colorless) with StS1-only / StS2-only /
-hybrid card sets, StS1 starting decks, and merchant loans between players.
+- **Card sets:** two Custom Run options, at most one ticked. **Slay the Spire 1 Cards** offers
+  Slay the Spire 1 cards instead of Slay the Spire 2 ones in rewards, shops and card generation;
+  **Cards From Both Games** mixes the two. With neither, cards are vanilla. Cards that exist in
+  both games under the same name are the Slay the Spire 2 version.
+
+- **Ironclad's Slay the Spire 1 cards:** the 31 cards that Slay the Spire 2 dropped (Heavy Blade,
+  Searing Blow, Limit Break, Berserk…), with their Slay the Spire 1 art and numbers. Other
+  characters keep their own cards in both modes for now. The Ironclad's starting deck is the same
+  in both games.
+
+Planned: the Ironclad's three cards that differ between the games (Juggernaut, Rampage, Rupture),
+a way to swap between both versions of a card in the mixed mode, then Silent, Defect and
+Colorless cards, and merchant loans between players.
 
 ## Languages
 
@@ -54,9 +65,11 @@ make test      # unit tests
 make up        # build and install into the game's mods folder
 make down      # uninstall
 make mp        # two local game windows (host + client) to test co-op
+make sts1-data # regenerate card data, art and text from a Slay the Spire 1 install
 ```
 
-Set `STS2_DIR` if the game is not in the default Steam library.
+Set `STS2_DIR` if the game is not in the default Steam library. `make sts1-data` also needs
+Slay the Spire 1 and its decompiled card classes (`STS1_DECOMP`, `STS1_JAR`; see the `Makefile`).
 
 ## License
 

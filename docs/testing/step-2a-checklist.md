@@ -3,6 +3,20 @@
 Tick when checked in game. "Base / +" means the card before and after upgrade.
 Quickest way to get a card: Custom Run with "Slay the Spire 1 Cards" ticked, Ironclad, then card rewards and shops.
 
+## Card set modes
+
+- [ ] Custom Run shows "Slay the Spire 1 Cards" and "Cards From Both Games"; ticking one unticks the other. Their names and descriptions read right in English and French.
+- [ ] In co-op, the client sees the host's tick.
+- [ ] The top bar shows the ticked mode's short label instead of a missing icon.
+- [ ] StS1-only, Ironclad: card rewards offer only `Sts1*` cards and StS2 cards that share a StS1 name (Bash, Inflame, Shrug It Off…). No StS2-only card (e.g. Ashen Strike).
+- [ ] Hybrid, Ironclad: rewards mix both games.
+- [ ] StS1-only with Silent, Defect, Regent or Necrobinder: their rewards stay vanilla.
+- [ ] Shop, card transform, and vanilla generators (Infernal Blade, Distraction-style random cards) follow the mode.
+- [ ] Card library, from the main menu and from inside a run: vanilla pools only, no `Sts1*` cards.
+- [ ] Save, quit and resume with StS1 cards in the deck (upgraded ones too): the cards come back as they were.
+- [ ] Standard and Daily runs: rewards are vanilla even after a StS1-only Custom Run.
+- [ ] Co-op StS1-only: both players are offered the same kinds of cards; no desync when rewards roll.
+
 ## StS1 Ironclad cards
 
 - [ ] Every StS1 card shows its StS1 art, a red Ironclad frame, and its text in English and in French (no raw `STS1_…` keys).

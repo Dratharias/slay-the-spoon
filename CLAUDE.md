@@ -14,16 +14,16 @@ Read `README.md` for the player view and the spec for every decision.
 - **Not yet tested in game** (the owner tests these when they feel like it): the edge cases left
   unticked in `docs/testing/step-1-checklist.md`.
 - **Deferred minors:** listed in `docs/backlog.md`.
-- **Next: step 2.** It is the StS1 card tooling plus the Ironclad (spec §7):
-  - extraction, codegen and art;
-  - card set modes;
-  - StS1 starter deck and the hybrid starting-card choice;
-  - Archaic Tooth / Amalgamator compatibility;
-  - the duplicate table, which the owner reviews;
+- **Step 2a is done on branch `step-2`** (not merged; plan `docs/superpowers/plans/2026-10-28-step-2a-*.md`):
+  - StS1 tooling: extraction, duplicate table, art, codegen (`tools/sts1/`, `make sts1-data`);
+  - card set modes (StS1-only, Hybrid) as Custom Run modifiers;
+  - the 31 Ironclad cards StS2 dropped, ported by hand in `src/Cards/Sts1/Ironclad/`.
+  - Not tested in game: everything in `docs/testing/step-2a-checklist.md`.
+  - The Ironclad StS1 starter deck equals StS2's, so no starter change was needed, and Archaic
+    Tooth / Amalgamator work as in vanilla.
+- **Next: step 2b**, on the same branch:
+  - port Juggernaut and Rampage (same name, StS1 version kept) and Rupture (duplicate);
   - the hybrid version-swap UI.
-
-  It starts with a plan: `superpowers:writing-plans` from the spec, saved to `docs/superpowers/plans/`.
-  After that, a branch `step-2`.
 - **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
   pushed only when the owner says so. The same goes for the Steam Workshop upload.
 
@@ -33,7 +33,9 @@ Read `README.md` for the player view and the spec for every decision.
 |------|------|
 | `docs/superpowers/specs/2026-10-28-slay-the-spoon-design.md` | Approved design: owner decisions (§3), builder calls (§4), game recon (§5), architecture (§6), delivery order (§7) |
 | `docs/superpowers/plans/2026-10-28-step-1-*.md` | Step 1 plan (done) |
-| `docs/testing/step-1-checklist.md` | In-game checklist the owner ticks |
+| `docs/superpowers/plans/2026-10-28-step-2a-*.md` | Step 2a plan (done) |
+| `docs/testing/step-*-checklist.md` | In-game checklists the owner ticks |
+| `docs/review/ironclad-duplicates.md` | Owner review page: every StS1 Ironclad card against StS2 (generated from `data/duplicates/ironclad.json`) |
 | `docs/backlog.md` | Known gaps, fixed when the owner feels like it |
 
 ## Owner rules
@@ -72,7 +74,12 @@ Read `README.md` for the player view and the spec for every decision.
 - **No automated clicks:** synthetic xdotool clicks don't reach the game. Screenshots work
   (`import -window <id>`), but the owner does every click.
 - **Tests:** they are xUnit, and they only cover the game-independent code in `src/Core/`, which
-  `tests/SlaySpoon.Tests.csproj` links in. Put pure logic there so it can be tested.
+  `tests/SlaySpoon.Tests.csproj` links in. Put pure logic there so it can be tested. They also read
+  repo files: every StS1 card has its text in both languages, a portrait, no `NotImplementedException`,
+  and text placeholders that match its vars. `make test` also runs the `tools/sts1` pytest suite.
+- **StS1 sources (local only):** the jar at `~/.local/share/Steam/steamapps/common/SlayTheSpire/desktop-1.0.jar`,
+  CFR output in `~/Projects/sts-decomp/sts1/` (with `localization/{eng,fra}/cards.json`), and the
+  StS2 card text dump in `~/Projects/sts-decomp/sts2-loc/` (`make sts2-loc`).
 
 ## Code map
 
@@ -86,6 +93,10 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/Combat/` | Enemy HP scaling (`Creature.ScaleHpForMultiplayer` postfix + solo `CombatState.CreateCreature`) |
 | `src/Saves/` | Progress sync prefix on `ProgressSaveManager.LoadProgress`, first-launch popup, cfg file |
 | `src/TopBar/` | Percent label instead of the missing modifier icon |
+| `src/Config/CardSetModifiers.cs` | Card set modes: `SpoonCardSetSts1Only`, `SpoonCardSetHybrid` (mutually exclusive) |
+| `src/CardSets/` | One postfix on `CardPoolModel.GetUnlockedCards` makes every card source (rewards, shop, transform, random generation) follow the mode; `Sts1Matches.g.cs` is generated |
+| `src/Cards/` | `Sts1Card` / `Sts1IroncladCard` bases, the hidden `Sts1IroncladCardPool`, one class per StS1 card (`Sts1HeavyBlade`), StS1 powers in `Sts1/Powers/` (icons borrowed from vanilla powers through `IBorrowedIcon`) |
+| `tools/sts1/` | Python (Podman image `slayspoon-tools`): `extract.py` → `data/sts1/`, `match.py` → `data/duplicates/` + review page, `art.py` → portraits, `codegen.py` → card skeletons + text. Codegen never overwrites a ported card |
 | `godot/SlaySpoon/` | Packed into the PCK. Localization tables merge into the game's (`res://SlaySpoon/localization/<lang>/<table>.json`) |
 
 ## Game internals
