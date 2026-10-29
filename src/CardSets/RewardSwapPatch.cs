@@ -1,21 +1,18 @@
 using Godot;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.ControllerInput;
 using MegaCrit.Sts2.Core.Entities.CardRewardAlternatives;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Rewards;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using MegaCrit.Sts2.Core.Rewards;
-using SlaySpoon.Cards;
 
 namespace SlaySpoon.CardSets;
 
 /// <summary>
-/// Hybrid card rewards: a duplicate gets a button that swaps it to its other version.
+/// Hybrid card rewards: a duplicate gets a button under it that swaps it to its other version.
 /// The swap is one of the reward's alternatives (the game's synced mechanism for Skip and Reroll): the chosen index
 /// reaches every co-op client, and each one swaps its own copy of the reward, so decks stay identical.
 /// </summary>
@@ -43,6 +40,9 @@ public static class RewardSwapPatch
 
 	private static readonly AccessTools.FieldRef<NCardRewardSelectionScreen, Control> AlternativesBar =
 		AccessTools.FieldRefAccess<NCardRewardSelectionScreen, Control>("_rewardAlternativesContainer");
+
+	private static readonly AccessTools.FieldRef<NCardRewardSelectionScreen, Control> CardRow =
+		AccessTools.FieldRefAccess<NCardRewardSelectionScreen, Control>("_cardRow");
 
 	private static readonly AccessTools.FieldRef<NCardRewardSelectionScreen, TaskCompletionSource<int?>?> Completion =
 		AccessTools.FieldRefAccess<NCardRewardSelectionScreen, TaskCompletionSource<int?>?>("_completionSource");
@@ -81,10 +81,18 @@ public static class RewardSwapPatch
 		return Task.CompletedTask;
 	}
 
-	/// <summary>Replaces the game's buttons for our alternatives with one button per duplicate on screen.</summary>
+	/// <summary>
+	/// Replaces the game's buttons for our alternatives with one button under each duplicate (a name in the button
+	/// bar next to Skip is too long for its frame). A press picks that card's alternative, like the game's own buttons.
+	/// </summary>
 	[HarmonyPatch(typeof(NCardRewardSelectionScreen), nameof(NCardRewardSelectionScreen.RefreshOptions))]
 	public static class SwapButtons
 	{
+		/// <summary>The screen's card spacing; its card row's origin is the middle card's center.</summary>
+		private const float CardSpacing = 350f;
+
+		private const string HolderMeta = "spoon_reward_swap";
+
 		public static void Postfix(NCardRewardSelectionScreen __instance, IReadOnlyList<CardCreationResult> options,
 			IReadOnlyList<CardRewardAlternative> extraOptions)
 		{
@@ -99,6 +107,12 @@ public static class RewardSwapPatch
 			{
 				button.QueueFreeSafely();
 			}
+			Control row = CardRow(__instance);
+			// The game only clears its own card holders from the row; a swap refreshes the screen with new buttons.
+			foreach (Control old in row.GetChildren().OfType<Control>().Where(c => c.HasMeta(HolderMeta)).ToList())
+			{
+				old.QueueFreeSafely();
+			}
 			for (int slot = 0; slot < Math.Min(options.Count, SwapSlots); slot++)
 			{
 				CardModel card = options[slot].Card;
@@ -107,19 +121,12 @@ public static class RewardSwapPatch
 					continue;
 				}
 				int captured = slot;
-				NCardRewardAlternativeButton button = NCardRewardAlternativeButton.Create(Label(card), MegaInput.viewDrawPile);
-				bar.AddChildSafely(button);
+				var center = new Vector2((slot - (options.Count - 1) / 2f) * CardSpacing, SwapButton.BelowCardY);
 				// TrySetResult: a second press before the screen reacts must not throw.
-				button.Connect(NClickableControl.SignalName.Released, Callable.From<NButton>(_ =>
-					Completion(__instance)?.TrySetResult(ScreenOptions(__instance).Count + captured)));
+				NCardRewardAlternativeButton button = SwapButton.Add(row, center, SwapButton.BelowCardScale, card,
+					() => Completion(__instance)?.TrySetResult(ScreenOptions(__instance).Count + captured));
+				button.GetParent().SetMeta(HolderMeta, true);
 			}
 		}
-	}
-
-	private static string Label(CardModel card)
-	{
-		var label = new LocString("card_reward_ui", card is Sts1Card ? "SPOON_SWAP_TO_STS2.name" : "SPOON_SWAP_TO_STS1.name");
-		label.Add("Card", card.TitleLocString);
-		return label.GetFormattedText();
 	}
 }

@@ -26,11 +26,6 @@ public static class ChooseACardSwapPatch
 	/// <summary>The screen's card spacing; its card row's origin is the middle card's center.</summary>
 	private const float CardSpacing = 340f;
 
-	/// <summary>Between the cards' bottom edge (about 169) and the skip button (262), in card row coordinates.</summary>
-	private const float ButtonY = 215f;
-
-	private const float ButtonScale = 0.85f;
-
 	private static readonly AccessTools.FieldRef<NChooseACardSelectionScreen, Control> CardRow =
 		AccessTools.FieldRefAccess<NChooseACardSelectionScreen, Control>("_cardRow");
 
@@ -99,9 +94,9 @@ public static class ChooseACardSwapPatch
 			}
 			int slot = i;
 			NGridCardHolder holder = holders[i];
-			var center = new Vector2((i - (cards.Count - 1) / 2f) * CardSpacing, ButtonY);
+			var center = new Vector2((i - (cards.Count - 1) / 2f) * CardSpacing, SwapButton.BelowCardY);
 			NCardRewardAlternativeButton? button = null;
-			button = SwapButton.Add(row, center, ButtonScale, cards[i], () =>
+			button = SwapButton.Add(row, center, SwapButton.BelowCardScale, cards[i], () =>
 			{
 				if (holder.CardNode is not { } node)
 				{

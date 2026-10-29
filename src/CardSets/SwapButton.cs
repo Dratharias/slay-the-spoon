@@ -14,6 +14,14 @@ namespace SlaySpoon.CardSets;
 /// <summary>The card reward screen's alternative button, reused as a "switch version" button under one card.</summary>
 public static class SwapButton
 {
+	/// <summary>
+	/// Below a card on the reward and choose-a-card screens, in card row coordinates (the row's origin is the middle
+	/// card's center): between the cards' bottom edge (about 169) and the skip button (262).
+	/// </summary>
+	public const float BelowCardY = 215f;
+
+	public const float BelowCardScale = 0.85f;
+
 	private static readonly AccessTools.FieldRef<NCardRewardAlternativeButton, MegaLabel> ButtonLabel =
 		AccessTools.FieldRefAccess<NCardRewardAlternativeButton, MegaLabel>("_label");
 

@@ -22,7 +22,7 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 
 ## Hybrid: swap button on card rewards
 
-- [ ] A card reward offering Rupture shows a button "Rupture: StS1 version" (or "StS2 version") next to Skip; other cards get no button. French: "Rupture : version StS1".
+- [ ] A card reward offering Rupture shows a button "StS1 version" (or "StS2 version") under that card, between the card and Skip; other cards get no button. French: "Version StS1". The text fits inside the button frame, and the card growing on hover does not cover it.
 - [ ] Pressing it turns the card into the other version in place (art, text); pressing again turns it back. The upgrade (+) is kept.
 - [ ] Taking the card after a swap adds the version shown.
 - [ ] Skip and Reroll still work; after a reroll that brings a Rupture, its button works too.
