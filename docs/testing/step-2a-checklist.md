@@ -2,6 +2,7 @@
 
 Tick when checked in game. "Base / +" means the card before and after upgrade.
 Quickest way to get a card: Custom Run with "Slay the Spire 1 Cards" ticked, Ironclad, then card rewards and shops.
+Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run has it) and type `sts1card STS1_HEAVY_BLADE` (Tab completes the id; add `Deck` to put it in the deck). Vanilla helpers: `energy 9`, `godmode`, `upgrade 0` (leftmost card in hand).
 
 ## Card set modes
 

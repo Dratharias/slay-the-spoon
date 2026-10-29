@@ -2,6 +2,7 @@
 
 Tick when checked in game. "Base / +" means the card before and after upgrade.
 Quickest way: Custom Run, Ironclad, "Cards From Both Games" (Hybrid) or "Slay the Spire 1 Cards" ticked.
+Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run has it) and type `sts1card STS1_HEAVY_BLADE` (Tab completes the id; add `Deck` to put it in the deck). Vanilla helpers: `energy 9`, `godmode`, `upgrade 0` (leftmost card in hand).
 
 ## Namesakes
 

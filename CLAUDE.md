@@ -101,6 +101,7 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/Config/CardSetModifiers.cs` | Card set modes: `SpoonCardSetSts1Only`, `SpoonCardSetHybrid` (mutually exclusive) |
 | `src/CardSets/` | One postfix on `CardPoolModel.GetUnlockedCards` makes every card source (rewards, shop, transform, random generation) follow the mode; `Sts1Matches.g.cs` is generated. Hybrid duplicates: `VersionSwap`, `RandomVersionPatch` (CardFactory postfixes), `RewardSwapPatch` |
 | `src/Cards/` | `Sts1Card` / `Sts1IroncladCard` bases, the hidden `Sts1IroncladCardPool`, one class per StS1 card (`Sts1HeavyBlade`), StS1 powers in `Sts1/Powers/` (icons borrowed from vanilla powers through `IBorrowedIcon`) |
+| `src/DevConsole/` | `sts1card` console command (the vanilla `card` command can't see the hidden StS1 pools) |
 | `tools/sts1/` | Python (Podman image `slayspoon-tools`): `extract.py` → `data/sts1/`, `match.py` → `data/duplicates/` + review page, `art.py` → portraits, `codegen.py` → card skeletons + text. Codegen never overwrites a ported card |
 | `godot/SlaySpoon/` | Packed into the PCK. Localization tables merge into the game's (`res://SlaySpoon/localization/<lang>/<table>.json`) |
 
