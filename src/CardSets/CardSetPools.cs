@@ -15,7 +15,7 @@ namespace SlaySpoon.CardSets;
 /// <summary>Builds a character's card pool for a player's card set mode.</summary>
 public static class CardSetPools
 {
-	/// <summary>A vanilla character pool, its StS1 pool and the vanilla ids that have a StS1 namesake.</summary>
+	/// <summary>A vanilla ordinary pool, its StS1 pool and the vanilla ids that have a StS1 namesake.</summary>
 	private sealed record Pair(Type Vanilla, Type Sts1, string[] Matched);
 
 	private static readonly Pair[] Pairs =
@@ -23,6 +23,7 @@ public static class CardSetPools
 		new(typeof(IroncladCardPool), typeof(Sts1IroncladCardPool), Sts1Matches.Ironclad),
 		new(typeof(SilentCardPool), typeof(Sts1SilentCardPool), Sts1Matches.Silent),
 		new(typeof(DefectCardPool), typeof(Sts1DefectCardPool), Sts1Matches.Defect),
+		new(typeof(ColorlessCardPool), typeof(Sts1ColorlessCardPool), Sts1Matches.Colorless),
 	};
 
 	/// <summary>The run's card set mode, as ticked in Custom Run (none = StS2 only).</summary>
@@ -94,18 +95,18 @@ public static class CardSetPools
 	{
 		var byId = new Dictionary<string, CardModel>();
 		var entries = new List<Sts1Entry>();
-		foreach (Pair pair in Pairs)
+		IEnumerable<CardModel> cards = Pairs.SelectMany(pair =>
+			ModelDb.GetById<CardPoolModel>(ModelDb.GetId(pair.Sts1)).AllCards)
+			.Concat(ModelDb.CardPool<Sts1EventCardPool>().AllCards);
+		foreach (Sts1Card card in cards.OfType<Sts1Card>())
 		{
-			foreach (Sts1Card card in ModelDb.GetById<CardPoolModel>(ModelDb.GetId(pair.Sts1)).AllCards.OfType<Sts1Card>())
+			byId[card.Id.Entry] = card;
+			if (card.Sts2Counterpart != null)
 			{
-				byId[card.Id.Entry] = card;
-				if (card.Sts2Counterpart != null)
-				{
-					CardModel sts2 = ModelDb.GetById<CardModel>(ModelDb.GetId(card.Sts2Counterpart));
-					byId[sts2.Id.Entry] = sts2;
-				}
-				entries.Add(EntryOf(card));
+				CardModel sts2 = ModelDb.GetById<CardModel>(ModelDb.GetId(card.Sts2Counterpart));
+				byId[sts2.Id.Entry] = sts2;
 			}
+			entries.Add(EntryOf(card));
 		}
 		return VersionPairs.Of(entries).ToDictionary(kv => kv.Key, kv => byId[kv.Value]);
 	}

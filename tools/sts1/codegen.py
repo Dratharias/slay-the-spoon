@@ -34,7 +34,9 @@ GOLD = {
 
 
 def class_name(sts1_class: str) -> str:
-    return "Sts1" + sts1_class.replace("_", "")
+    # Acronyms such as JAX need PascalCase: the game's slugger splits adjacent capitals differently.
+    name = sts1_class.title() if sts1_class.isupper() else sts1_class
+    return "Sts1" + name.replace("_", "")
 
 
 def convert_text(text: str, lang: str) -> tuple:
@@ -75,7 +77,7 @@ def card_texts(card: dict, lang: str) -> dict:
     return {"title": t["name"], "description": description}
 
 
-def skeleton(card: dict, character: str) -> str:
+def skeleton(card: dict, character: str, row: dict | None = None) -> str:
     name = class_name(card["class"])
     cost = card["cost"]
     x_cost = cost == -1
@@ -110,6 +112,10 @@ def skeleton(card: dict, character: str) -> str:
             upgrade.append(f"AddKeyword(CardKeyword.{KEYWORDS[k]});")
 
     body = []
+    if row and row.get("sts2") and row["relation"] in ("same-sts1", "duplicate"):
+        relation = "SameKeepSts1" if row["relation"] == "same-sts1" else "Duplicate"
+        body.append(f"\tpublic override SlaySpoon.Core.Sts1Relation Relation => SlaySpoon.Core.Sts1Relation.{relation};\n")
+        body.append(f"\tpublic override Type Sts2Counterpart => typeof(MegaCrit.Sts2.Core.Models.Cards.{row['sts2']});\n")
     if "Strike" in (card["text"]["eng"]["name"] or ""):
         body.append("\tprotected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };\n")
     if keywords:
@@ -148,6 +154,7 @@ def skeleton(card: dict, character: str) -> str:
 
 def generate(cards: list, rows: list, character: str, src: Path, loc: Path, relations: set) -> list:
     wanted = {r["sts1"] for r in rows if r["relation"] in relations}
+    by_class = {r["sts1"]: r for r in rows}
     src.mkdir(parents=True, exist_ok=True)
     created = []
     tables = {}
@@ -160,7 +167,7 @@ def generate(cards: list, rows: list, character: str, src: Path, loc: Path, rela
         name = class_name(card["class"])
         path = src / f"{name}.cs"
         if not path.exists():
-            path.write_text(skeleton(card, character), encoding="utf-8")
+            path.write_text(skeleton(card, character, by_class[card["class"]]), encoding="utf-8")
             created.append(path)
         key = match.slug(name)
         for lang in ("eng", "fra"):

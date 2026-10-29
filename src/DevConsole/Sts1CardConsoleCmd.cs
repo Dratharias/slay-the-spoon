@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Cards.Pools;
+using SlaySpoon.Cards;
 
 namespace SlaySpoon.DevConsole;
 
@@ -24,7 +25,7 @@ public sealed class Sts1CardConsoleCmd : AbstractConsoleCmd
 
 	public override bool IsNetworked => true;
 
-	private static IEnumerable<CardModel> Sts1Cards => ModelDb.CardPool<Sts1IroncladCardPool>().AllCards;
+	private static IEnumerable<CardModel> Sts1Cards => Sts1CardTypes.Of<Sts1Card>();
 
 	public override CmdResult Process(Player? issuingPlayer, string[] args)
 	{

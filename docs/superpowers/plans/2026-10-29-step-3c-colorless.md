@@ -9,23 +9,25 @@ per-player Hybrid follows the Spire Souvenir amendment.
 
 ## Current checkpoint — 2026-10-29
 
-Tasks 1 and 2 are committed on `step-3` (`0a195e1` and `bc96f48`). **Resume at Task 3.**
-Version remains 0.4.0; no colorless runtime classes, pool registration or portraits exist yet.
+Tasks 1 and 2 are committed on `step-3` (`0a195e1` and `bc96f48`); Task 3 is implemented.
+**Resume at Task 4 (six attacks).** Version remains 0.4.0. Infrastructure, 31 skeletons and
+portraits exist; the skeletons are not playable yet. Do not install this intermediate build.
 
 | Task | Status |
 |------|--------|
 | 1 — Catalog | Complete |
 | 2 — Namesake classification | Builder review complete; owner review pending |
-| 3 — Infrastructure | Next; not started |
-| 4 — Six attacks | Not started |
+| 3 — Infrastructure | Complete; in-game checks pending |
+| 4 — Six attacks | Next; not started |
 | 5 — Twenty-two skills | Not started |
 | 6 — Three Powers | Not started |
 | 7 — Validation and version 0.5.0 | Not started |
 
-Latest checks: 61 xUnit and 33 pytest pass. Classification regeneration preserved all reviewed
-decisions. No build was needed for Task 2's data/documentation changes; the last Defect build
-had zero warnings/errors. No installation or in-game testing was performed. In-game checks
-and final namesake approval remain with the owner; no merge or publication has been performed.
+Latest checks: build has zero warnings/errors; 82 xUnit pass and `NoUnportedCards` fails on the
+31 planned skeletons; 35 pytest pass. All 11 Harmony injection points match the local game assembly.
+No installation or in-game testing was performed. In-game checks and final namesake approval
+remain with the owner; no merge or publication has been performed. Source audit and checklist:
+`docs/testing/step-3c-checklist.md`.
 
 ## Recon and constraints
 
@@ -98,14 +100,23 @@ playability condition when the draw pile has no matching type. Preserve these be
 porting, with synced selection and RNG. Native Fatal and card-source Block conventions remain
 the engine adaptation for reused HandOfGreed and PanicButton.
 
-## Task 3 — infrastructure
+## Task 3 — infrastructure (complete)
 
-- [ ] Add Sts1ColorlessCard and its hidden pool with vanilla colorless frame/energy metadata.
-- [ ] Pair ordinary ColorlessCardPool in CardSetPools; handle all seven event-only classes outside that pool.
-- [ ] Audit player context for merchant, events, transforms and random colorless generation.
-- [ ] Extend the dev console to include special cards without exposing them to ordinary rewards.
-- [ ] Generate portraits and skeletons only for final classifications; integrate regeneration into
+- [x] Add Sts1ColorlessCard and its hidden pool with vanilla colorless frame/energy metadata.
+- [x] Pair ordinary ColorlessCardPool in CardSetPools; handle all seven event-only classes outside that pool.
+- [x] Audit player context for merchant, events, transforms and random colorless generation.
+- [x] Extend the dev console to include special cards without exposing them to ordinary rewards.
+- [x] Generate portraits and skeletons only for final classifications; integrate regeneration into
   `make sts1-data` after the base classes exist. Build with zero warnings/errors.
+
+Implementation notes: direct native event grants and their previews are patched at the source,
+not through generic CreateCard (which would invalidate typed return casts). Event duplicates
+remain registered for version pairing, outside ordinary pools. Merchant type checks now recognize
+the custom ordinary colorless pool. Massive Scroll rebuilds its selection for its owner and
+falls back to ordinary allowed cards if there are no co-op-exclusive candidates (builder default
+pending owner feedback). The generator writes namesake metadata; JAX uses class `Sts1Jax` and
+id `STS1_JAX` to avoid the game's acronym-splitting discrepancy. Ritual Dagger's skeleton has
+its initial 15 damage, but permanent growth still belongs to Task 4.
 
 ## Task 4 — attacks
 

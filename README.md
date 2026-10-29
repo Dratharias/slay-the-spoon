@@ -49,7 +49,8 @@ Current (0.4.0):
 - **Defect's Slay the Spire 1 cards:** 38 cards ported with their Slay the Spire 1 art and numbers
   (Electrodynamics, Recursion, Seek, Amplify, Self Repair…), including four switchable versions:
   Chill, Fusion, Storm and Tempest. The starting deck stays the same; Orbs use Slay the Spire 2's
-  mechanics. Regent, Necrobinder and Colorless cards keep their vanilla pools for now.
+  mechanics. Regent and Necrobinder keep their vanilla character pools. Colorless cards are
+  in development (see the checkpoint below).
 
 - **Neow's Blessings:** a Custom Run option that brings back Neow's usual starting choice. Without it,
   any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers
@@ -76,24 +77,25 @@ and merchant loans between players.
 Work is on `step-3`, not merged or published. The current version is **0.4.0**:
 Ironclad, Silent and Defect cards are implemented; in-game validation remains pending.
 
-Colorless cards (step 3c, target **0.5.0**) are at the catalog stage:
+Colorless cards (step 3c, target **0.5.0**) have their infrastructure in place:
 
 - **Done:** catalog of 39 cards and comparison of all 22 StS2 namesakes. Classifications are
   checked against the game sources, but still await the author's review in
   [the colorless comparison](docs/review/colorless-duplicates.md).
-- **Next:** Task 3, colorless pool infrastructure, event grants, console access, portraits and
-  card skeletons. No colorless gameplay changes are implemented yet.
-- **Then:** implement 6 attacks, 22 skills and 3 Powers, followed by validation and the 0.5.0 update.
+- **Done:** Task 3, colorless pool infrastructure, event grants, console access, portraits and
+  31 card skeletons. The skeletons are not playable; do not install this intermediate build.
+- **Next:** Task 4, implement 6 attacks, then 22 skills and 3 Powers, followed by validation and the 0.5.0 update.
 
 The planned ordinary StS1 colorless pool contains **32 cards** (24 custom and 8 native).
 **Apotheosis, Apparition, Bite, Enlightenment, JAX and Metamorphosis, plus Ritual Dagger, stay
 event-only**, including in StS1-only and Hybrid: they must not appear in ordinary rewards,
-shops, transforms or random combat generation. This rule is recorded for implementation;
-new events are outside the current task scope.
+shops, transforms or random combat generation. Pool exclusions are implemented; new events
+are outside the current task scope. Bite, JAX and Ritual Dagger currently have console access only.
 
-Latest automated validation: **61 xUnit and 33 Python tests passed**. The Defect build passed
-with zero warnings and errors; subsequent colorless work only changed catalog data and
-documentation. The mod was not installed or tested in game during this work.
+Latest automated validation: **82 xUnit and 35 Python tests passed**. `NoUnportedCards` remains
+enabled and fails on the 31 planned skeletons. The build passed with zero warnings and errors;
+all 11 Harmony injection points matched the local game assembly. The mod was not installed
+or tested in game during this work. See [the checklist](docs/testing/step-3c-checklist.md).
 See [the step 3c plan](docs/superpowers/plans/2026-10-29-step-3c-colorless.md) for the remaining tasks.
 
 ## Languages

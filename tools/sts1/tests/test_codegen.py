@@ -77,6 +77,19 @@ def test_strike_tag():
     assert "CardTag.Strike" not in codegen.skeleton(card("FakeGuard"), "Ironclad")
 
 
+def test_generated_namesake_registers_relation_and_counterpart():
+    for relation, expected in (("same-sts1", "SameKeepSts1"), ("duplicate", "Duplicate")):
+        src = codegen.skeleton(card("FakeSlash"), "Colorless", {
+            "sts1": "FakeSlash", "sts2": "FakeSlash", "relation": relation,
+        })
+        assert f"Relation => SlaySpoon.Core.Sts1Relation.{expected}" in src
+        assert "typeof(MegaCrit.Sts2.Core.Models.Cards.FakeSlash)" in src
+
+
+def test_acronym_card_class_name():
+    assert codegen.class_name("JAX") == "Sts1Jax"
+
+
 def test_never_overwrites_existing_file(tmp_path):
     src_dir = tmp_path / "src"
     loc = tmp_path / "loc"
