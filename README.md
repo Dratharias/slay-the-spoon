@@ -41,6 +41,14 @@ Current (0.2.0):
   characters keep their own cards in both modes for now. The Ironclad's starting deck is the same
   in both games.
 
+- **Neow's Blessings:** a Custom Run option that brings back Neow's usual starting choice. Without it,
+  any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers
+  like Draft. With it, those options come first, then the blessings.
+
+- **`sts1card` console command** for testing: in a modded game the developer console opens with the
+  `` ` `` key (`*` or `'` on AZERTY); `sts1card STS1_HEAVY_BLADE` puts that card in your hand in combat,
+  or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
+
 Planned: the version switch at the merchant and on choose-a-card screens, Silent, Defect and
 Colorless cards, and merchant loans between players.
 

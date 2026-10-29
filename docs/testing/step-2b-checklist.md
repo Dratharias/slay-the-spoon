@@ -29,3 +29,12 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 - [ ] Co-op: swap then take the card; the other player's view of your deck shows the same version, and nothing desyncs.
 - [ ] Standard and StS1-only rewards: no swap button, Skip/Reroll unchanged.
 - [ ] Controller: the swap button can be focused and pressed; its hotkey (draw pile button) works.
+
+## Neow's Blessings
+
+- [ ] Custom Run shows "Neow's Blessings" / "Bénédictions de Neow" with its description in both languages.
+- [ ] Ticked with Monster HP 150 % (or a card set mode): Neow offers its usual choice (two blessings and a curse option), as in a Standard run.
+- [ ] Not ticked, same options: Neow offers nothing, as before.
+- [ ] Ticked with Draft (or Sealed Deck): Draft's picks come first, then Neow's blessings; picking one finishes the event.
+- [ ] The top bar shows "Neow" for it.
+- [ ] Co-op: the host ticks it; both players get Neow's blessings, no desync.

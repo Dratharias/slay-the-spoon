@@ -8,5 +8,8 @@
   "SPOON_CARD_SET_STS1_ONLY.short": "StS1",
   "SPOON_CARD_SET_HYBRID.title": "Cards From Both Games",
   "SPOON_CARD_SET_HYBRID.description": "Rewards, shops and card generation mix Slay the Spire 1 and Slay the Spire 2 cards. So far only the Ironclad has Slay the Spire 1 cards; other characters keep their own. A card that plays differently in each game comes as either version; card rewards let you switch.",
-  "SPOON_CARD_SET_HYBRID.short": "1+2"
+  "SPOON_CARD_SET_HYBRID.short": "1+2",
+  "SPOON_NEOW_BLESSING.title": "Neow's Blessings",
+  "SPOON_NEOW_BLESSING.description": "Neow offers its usual blessings, as in a Standard run, even with other modifiers. Modifiers that bring their own Neow option (Draft, Sealed Deck…) offer it first.",
+  "SPOON_NEOW_BLESSING.short": "Neow"
 }

@@ -11,7 +11,7 @@ namespace SlaySpoon.TopBar;
 /// <summary>
 /// The mod ships no modifier icons, so the top bar would show the game's "missing" placeholder.
 /// Show a label instead: the percent (red when monsters are stronger than vanilla, blue when weaker), or
-/// the card set mode's short name.
+/// the short name of a card set mode or Neow's Blessings.
 /// The hover tip still names the modifier.
 /// </summary>
 [HarmonyPatch(typeof(NTopBarModifier), nameof(NTopBarModifier._Ready))]
@@ -36,8 +36,8 @@ public static class TopBarPercentPatch
 					_ => StsColors.cream,
 				});
 				break;
-			case SpoonCardSet cardSet:
-				ReplaceIcon(__instance, new LocString("modifiers", cardSet.Id.Entry + ".short").GetFormattedText(), StsColors.cream);
+			case SpoonCardSet or SpoonNeowBlessing:
+				ReplaceIcon(__instance, new LocString("modifiers", Modifier(__instance).Id.Entry + ".short").GetFormattedText(), StsColors.cream);
 				break;
 		}
 	}
