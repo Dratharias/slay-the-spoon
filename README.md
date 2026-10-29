@@ -83,8 +83,10 @@ Colorless cards (step 3c, target **0.5.0**) have their infrastructure in place:
   checked against the game sources, but still await the author's review in
   [the colorless comparison](docs/review/colorless-duplicates.md).
 - **Done:** Task 3, colorless pool infrastructure, event grants, console access, portraits and
-  31 card skeletons. The skeletons are not playable; do not install this intermediate build.
-- **Next:** Task 4, implement 6 attacks, then 22 skills and 3 Powers, followed by validation and the 0.5.0 update.
+  card skeletons; Task 4, the six attacks (Bite, Dramatic Entrance, Flash of Steel, Mind Blast,
+  Ritual Dagger and Swift Strike), with EN/FR text and Ritual Dagger's persistent growth.
+- **Next:** Task 5, implement 22 skills, then 3 Powers, followed by validation and the 0.5.0 update.
+  Those 25 cards remain skeletons; do not install this intermediate build.
 
 The planned ordinary StS1 colorless pool contains **32 cards** (24 custom and 8 native).
 **Apotheosis, Apparition, Bite, Enlightenment, JAX and Metamorphosis, plus Ritual Dagger, stay
@@ -93,9 +95,10 @@ shops, transforms or random combat generation. Pool exclusions are implemented; 
 are outside the current task scope. Bite, JAX and Ritual Dagger currently have console access only.
 
 Latest automated validation: **82 xUnit and 35 Python tests passed**. `NoUnportedCards` remains
-enabled and fails on the 31 planned skeletons. The build passed with zero warnings and errors;
+enabled and fails on the 25 remaining skeletons. The build passed with zero warnings and errors;
 all 11 Harmony injection points matched the local game assembly. The mod was not installed
-or tested in game during this work. See [the checklist](docs/testing/step-3c-checklist.md).
+or tested in game during this work. Ritual Dagger also passed a local check of JSON/network
+serialization and growth retention after downgrade. See [the checklist](docs/testing/step-3c-checklist.md).
 See [the step 3c plan](docs/superpowers/plans/2026-10-29-step-3c-colorless.md) for the remaining tasks.
 
 ## Languages

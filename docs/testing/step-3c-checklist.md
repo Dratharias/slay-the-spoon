@@ -1,7 +1,8 @@
 # Step 3c — Colorless cards
 
 Target: StS2 v0.107.1. All in-game checks below remain pending. Infrastructure is implemented,
-but the 31 custom cards are still skeletons; do not install this intermediate build for play.
+but 25 custom cards are still skeletons; do not install this intermediate build for play.
+The six attacks are implemented, with their in-game checks still pending.
 
 ## Infrastructure audit (Task 3)
 
@@ -47,9 +48,34 @@ is unchanged. This fallback was proposed to the owner and used as the default pe
 ## Automated checkpoint — 2026-10-29
 
 - Build: zero warnings, zero errors; DLL and PCK produced, not installed.
-- xUnit: 82 pass; `NoUnportedCards` fails on the 31 planned skeletons. The test remains enabled.
+- xUnit: 82 pass; `NoUnportedCards` fails on the 25 remaining skeletons. The test remains enabled.
 - Python: 35 pass (run separately because `make test` stops on the xUnit failure).
 - Local assembly inspection: all 11 Harmony injection points matched StS2 v0.107.1.
   This checks instruction matching, not an in-game execution of the patches.
-- Asset, localization coverage and placeholder checks pass. Generated text still requires hand editing
-  alongside each implementation in Tasks 4–6.
+- Asset, localization coverage and placeholder checks pass. Attack text is hand-reviewed in EN/FR;
+  generated text for skills and Powers still needs editing alongside Tasks 5–6.
+- Ritual Dagger: a local probe against the game assembly confirms unchanged saved-property network
+  IDs/bit width, 15 initial damage, +3/+5 growth, JSON and packet round-trips, and growth retained
+  after downgrade. This does not exercise combat, actual run saves or a co-op session.
+
+## Colorless attacks (Task 4)
+
+| Card | Base → upgraded | Checks |
+|------|-----------------|--------|
+| Bite | 1 energy, 7 → 8 damage, heal 2 → 3 HP | Healing follows the attack even when damage is fully blocked or kills the last enemy; event-only |
+| Dramatic Entrance | 0 energy, 8 → 12 damage to all enemies | Innate and Exhaust remain on both versions; no friendly fire in co-op |
+| Flash of Steel | 0 energy, 3 → 6 damage, draw 1 | Damage precedes draw; test empty draw pile and full hand |
+| Mind Blast | 2 → 1 energy, damage equal to current draw pile size | Innate; preview and actual damage reflect draw pile changes and normal attack modifiers |
+| Ritual Dagger | 1 energy, 15 initial damage, Fatal growth +3 → +5 | Exhaust; event-only; upgrade changes growth, not existing damage |
+| Swift Strike | 0 energy, 7 → 10 damage | Strike tag works with Strike-specific effects |
+
+- [ ] Verify all six attacks and their upgrades in EN/FR, including portraits and keyword tooltips.
+- [ ] Mind Blast: test zero/nonzero draw piles, Strength, Weak and Vulnerable; no stale preview.
+- [ ] Ritual Dagger: a surviving enemy, blocked hit or Minion kill grants no permanent growth;
+  a valid Fatal grants growth once, including the final enemy of a combat.
+- [ ] Ritual Dagger: deck and combat card gain the same amount; a temporary combat upgrade uses +5
+  without permanently upgrading the deck card. An unrelated second dagger does not gain damage.
+- [ ] Ritual Dagger: test repeated plays, combat copies, downgrade, save/resume and one-holder co-op.
+  Deck growth follows StS2's DeckVersion linkage, as for The Scythe; a detached combat copy must
+  not mutate an unrelated deck card.
+- [ ] Bite and Ritual Dagger remain excluded from ordinary pools and random generation.
