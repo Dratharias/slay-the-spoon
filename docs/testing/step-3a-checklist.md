@@ -35,3 +35,22 @@ StS2's Clash, Dual Wield and Entrench are Event cards and Shockwave is colorless
 - [ ] Grand Finale (0): playable only with an empty draw pile (glows gold then); 50 / 60 damage to ALL enemies, with the StS2 animation.
 - [ ] Skewer (X): 7 / 10 damage X times.
 - [ ] Sucker Punch (1): 7 / 9 damage, 1 / 2 Weak.
+
+## Silent skills
+
+- [ ] Catalyst (1, Exhaust): doubles / triples the enemy's Poison (nothing happens without Poison).
+- [ ] Concentrate (0): choose 3 / 2 cards to discard, then gain 2 energy.
+- [ ] Corpse Explosion (2): 6 / 9 Poison and a "Corpse Explosion" debuff (bomb icon); when that enemy dies, every other enemy takes damage equal to its Max HP (Strength doesn't add to it). Two copies on one enemy: twice its Max HP.
+- [ ] Crippling Cloud (2, Exhaust): 4 / 7 Poison and 2 Weak to ALL enemies.
+- [ ] Doppelganger (X, Exhaust): next turn, draw X (X+1) more cards and gain X (X+1) energy. At X = 0 the base version does nothing.
+- [ ] Phantasmal Killer (1 / 0): next turn, your Attacks deal double damage (vanilla Shadow Step's buff, then Double Damage).
+- [ ] Setup (1 / 0): choose a card in hand; it goes on top of the draw pile and costs 0 when you draw it, until you play it. The prompt reads "Choose a card to put on top of your Draw Pile." / « Choisissez une carte à placer sur le dessus de votre Pioche. ».
+- [ ] Terror (1 / 0, Exhaust): 99 Vulnerable.
+- [ ] StS1-only and Hybrid, Silent: Alchemize, Distraction and Outmaneuver show up in their StS1 version (StS2's are outside the Silent pool).
+- [ ] Alchemize (1 / 0, Exhaust): gives a random potion.
+- [ ] Distraction (1 / 0, Exhaust): adds a random Silent Skill to your hand, free this turn (in StS1-only, a StS1 Skill).
+- [ ] Outmaneuver (1): next turn, gain 2 / 3 energy.
+- [ ] Blade Dance (1, no Exhaust): adds 3 / 4 Shivs to your hand.
+- [ ] Calculated Gamble (0, Exhaust; upgraded: no Exhaust): discards your hand, then draws that many cards.
+- [ ] Reflex (Unplayable): when a card discards it (Survivor, Acrobatics, Calculated Gamble…), draw 2 / 3. Discarding it at end of turn does nothing.
+- [ ] Tactician (Unplayable): when a card discards it, gain 1 / 2 energy. Discarding it at end of turn does nothing.
