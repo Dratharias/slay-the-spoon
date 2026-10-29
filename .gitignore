@@ -4,3 +4,4 @@ obj/
 *.user
 .godot/
 .superpowers/
+__pycache__/

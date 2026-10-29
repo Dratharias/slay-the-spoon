@@ -12,7 +12,19 @@ DOTNET    := podman run --rm \
 	-v slayspoon-nuget:/root/.nuget \
 	-w /repo mcr.microsoft.com/dotnet/sdk:9.0
 
-.PHONY: build test up down restart clean mp
+# StS1 card pipeline (tools/sts1, not shipped). Reads the local decompile, the StS1 jar and StS2's install.
+STS1_DECOMP ?= $(HOME)/Projects/sts-decomp/sts1
+STS1_JAR    ?= $(HOME)/.local/share/Steam/steamapps/common/SlayTheSpire/desktop-1.0.jar
+STS2_DECOMP ?= $(HOME)/Projects/sts-decomp/sts2
+TOOLS     := nice -n 19 podman run --rm \
+	--security-opt label=disable \
+	-v "$(CURDIR)":/repo \
+	-v "$(STS1_DECOMP)":/sts1:ro \
+	-v "$(STS1_JAR)":/sts1.jar:ro \
+	-v "$(STS2_DECOMP)":/sts2src:ro \
+	-w /repo localhost/slayspoon-tools
+
+.PHONY: build test up down restart clean mp tools-image sts1-data
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -22,6 +34,14 @@ build:
 
 test:
 	$(DOTNET) dotnet test tests --nologo
+	$(TOOLS) python -m pytest -q -p no:cacheprovider tools/sts1/tests
+
+tools-image:
+	podman build -q -t localhost/slayspoon-tools -f tools/sts1/Containerfile tools/sts1
+
+# Regenerate card data, the duplicate table, portraits and card skeletons from StS1.
+sts1-data:
+	$(TOOLS) python tools/sts1/extract.py --decomp /sts1 --color red --out data/sts1/ironclad.json
 
 # Build and install into the game's mods folder.
 up: build

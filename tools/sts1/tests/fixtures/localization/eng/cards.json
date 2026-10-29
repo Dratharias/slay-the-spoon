@@ -1,0 +1,23 @@
+{
+ "Fake Slash": {
+  "NAME": "Fake Slash",
+  "DESCRIPTION": "Deal !D! damage. NL Apply !M! Vulnerable."
+ },
+ "Fake Guard": {
+  "NAME": "Fake Guard",
+  "DESCRIPTION": "Ethereal. NL Gain !B! Block. NL Exhaust.",
+  "UPGRADE_DESCRIPTION": "Ethereal. NL Gain !B! Block."
+ },
+ "Fake Storm": {
+  "NAME": "Fake Storm",
+  "DESCRIPTION": "Deal !D! damage to ALL enemies X times."
+ },
+ "Fake Curse": {
+  "NAME": "Fake Curse",
+  "DESCRIPTION": "Unplayable."
+ },
+ "Fake Forge": {
+  "NAME": "Fake Forge",
+  "DESCRIPTION": "Deal !D! damage."
+ }
+}

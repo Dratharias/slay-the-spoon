@@ -1,0 +1,23 @@
+{
+ "Fake Slash": {
+  "NAME": "Fausse Taillade",
+  "DESCRIPTION": "Infligez !D! dégâts. NL Appliquez !M! Vulnérable."
+ },
+ "Fake Guard": {
+  "NAME": "Fausse Garde",
+  "DESCRIPTION": "Éthéré. NL Gagnez !B! de Blocage. NL Épuisement.",
+  "UPGRADE_DESCRIPTION": "Éthéré. NL Gagnez !B! de Blocage."
+ },
+ "Fake Storm": {
+  "NAME": "Fausse Tempête",
+  "DESCRIPTION": "Infligez !D! dégâts à TOUS les ennemis X fois."
+ },
+ "Fake Curse": {
+  "NAME": "Fausse Malédiction",
+  "DESCRIPTION": "Injouable."
+ },
+ "Fake Forge": {
+  "NAME": "Fausse Forge",
+  "DESCRIPTION": "Deal !D! damage."
+ }
+}
