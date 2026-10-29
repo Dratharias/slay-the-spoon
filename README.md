@@ -2,13 +2,13 @@
 
 A Slay the Spire 2 mod for chaotic co-op and solo runs: it brings Slay the Spire 1 cards into
 Slay the Spire 2 and adds run options that the lobby host sets in the **Custom Run** screen.
-Standard and Daily runs are left untouched.
+Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic described below.
 
 > **Unofficial.** This mod is not affiliated with, endorsed by or sponsored by Mega Crit.
 > Slay the Spire, Slay the Spire 2 and their assets (art, card text) belong to Mega Crit.
 > The mod is free; there is no paid content.
 
-> **Vibe coded.** The code in this repository was written by an AI (Claude, by Anthropic) under
+> **Vibe coded.** The code in this repository was written with AI coding agents (Claude and Codex) under
 > the direction of the author, who designed the mod and tests it in game.
 
 > **Found a bug?** The code is public. I patch the bugs that annoy me, when I have tokens to spare.
@@ -16,7 +16,7 @@ Standard and Daily runs are left untouched.
 
 ## Features
 
-Current (0.3.0):
+Current (0.4.0):
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps,
   synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -32,7 +32,7 @@ Current (0.3.0):
 - **Card sets:** two Custom Run options, at most one ticked. **Slay the Spire 1 Cards** offers
   Slay the Spire 1 cards instead of Slay the Spire 2 ones in rewards, shops and card generation;
   **Spire Souvenir** starts every character that has Slay the Spire 1 cards with the Spire Souvenir
-  relic (below), which mixes the two. With neither, cards are vanilla. A card that exists in
+  relic (below), which mixes the two. With neither and without the relic, cards are vanilla. A card that exists in
   both games is offered once: as its weaker version when only the numbers differ, and as either
   version when it plays differently, with a button on card rewards to switch between the two.
 
@@ -44,13 +44,18 @@ Current (0.3.0):
 
 - **Silent's Slay the Spire 1 cards:** the 37 Silent cards that Slay the Spire 2 dropped or changed
   (Catalyst, Corpse Explosion, Wraith Form, A Thousand Cuts, Grand Finale…), with their Slay the
-  Spire 1 art and numbers. Defect, Regent and Necrobinder keep their own cards in both modes for now.
+  Spire 1 art and numbers.
+
+- **Defect's Slay the Spire 1 cards:** 38 cards ported with their Slay the Spire 1 art and numbers
+  (Electrodynamics, Recursion, Seek, Amplify, Self Repair…), including four switchable versions:
+  Chill, Fusion, Storm and Tempest. The starting deck stays the same; Orbs use Slay the Spire 2's
+  mechanics. Regent, Necrobinder and Colorless cards keep their vanilla pools for now.
 
 - **Neow's Blessings:** a Custom Run option that brings back Neow's usual starting choice. Without it,
   any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers
   like Draft. With it, those options come first, then the blessings.
 
-- **Spire Souvenir:** a Common Ironclad and Silent relic, also found in Standard runs, that lets its owner find
+- **Spire Souvenir:** a Common Ironclad, Silent and Defect relic, also found in Standard runs, that lets its owner find
   cards from the other game: Slay the Spire 1 cards in a normal run, Slay the Spire 2 cards in a
   "Slay the Spire 1 Cards" run. It only affects its owner; losing it ends the effect. It never drops
   in a "Spire Souvenir" run (eligible players already start with it) or in a Daily run.
@@ -59,8 +64,12 @@ Current (0.3.0):
   `` ` `` key (`*` or `'` on AZERTY); `sts1card STS1_HEAVY_BLADE` puts that card in your hand in combat,
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
 
-Planned: the version switch at the merchant and on choose-a-card screens, Defect and
-Colorless cards, and merchant loans between players.
+The Defect implementation passes automated checks; in-game checks are still pending in
+[the step 3b checklist](docs/testing/step-3b-checklist.md). Namesake classifications remain subject
+to the author's review in [the Defect comparison](docs/review/defect-duplicates.md).
+
+Planned: the version switch at the merchant and on choose-a-card screens, Colorless cards,
+and merchant loans between players.
 
 ## Languages
 

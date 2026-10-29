@@ -10,6 +10,14 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-28-slay-the-spoon-design.md` (§3.3, §3.3b, §3.4, §6, §7 step 3), amended by `docs/superpowers/specs/2026-10-29-spire-souvenir-relic-design.md` §7.
 
+## Completion status
+
+Implementation is complete on `step-3` in version 0.4.0. Tasks 1–6 delivered 38 Defect cards;
+Task 7 and the Task 8 final gate pass (61 xUnit tests, 32 pytest tests, build with zero warnings
+and errors). README, CLAUDE.md and the in-game checklist are updated. The checklist and namesake
+review still require the owner's in-game validation and review; no install, merge or publication
+was performed. Earlier task descriptions below preserve the original plan.
+
 ## Recon
 
 - StS1 ships a `blue/Impulse` class it never uses (no text, no art, nothing creates it). The extractor skips classes with no English name: 75 blue cards.
@@ -71,5 +79,5 @@ As in 3a: read the StS1 java, copy the closest StS2 card or power pattern, typed
 
 ### Task 8: Wrap-up
 
-- [ ] **Step 1:** Checklist header and mode lines (StS1-only Defect rewards; Spire Souvenir run starts the Defect with the relic; Hybrid swap on a Defect duplicate; co-op Defect + another character); README; CLAUDE.md; version `0.4.0`.
-- [ ] **Step 2:** `make test` and `make build` green. Commit `docs: step 3b wrap-up`.
+- [x] **Step 1:** Checklist header and mode lines (StS1-only Defect rewards; Spire Souvenir run starts the Defect with the relic; Hybrid swap on a Defect duplicate; co-op Defect + another character); README; CLAUDE.md; version `0.4.0`.
+- [x] **Step 2:** `make test` and `make build` green. Commit `docs: step 3b wrap-up`.

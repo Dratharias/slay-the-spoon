@@ -1,8 +1,22 @@
-# Step 3b — in-game checklist
+# Step 3b — Defect in-game checklist (0.4.0)
+
+Target: Slay the Spire 2 v0.107.1. Automated checks pass; in-game validation is pending.
 
 Tick when checked in game. "Base / +" means the card before and after upgrade.
 Quickest way: Custom Run, Defect, "Spire Souvenir" (Hybrid: the Defect starts with the relic) or "Slay the Spire 1 Cards" ticked.
 Fastest: in combat, open the dev console (` key) and type `sts1card STS1_BARRAGE` (Tab completes the id; add `Deck` to put it in the deck). Vanilla helpers: `energy 9`, `godmode`, `upgrade 0` (leftmost card in hand).
+
+## Card sets, rewards and co-op
+
+- [ ] StS1-only, Defect: rewards, shops and random card generation offer the StS1 set (including weaker StS1 namesakes); StS2-only Defect cards are absent. Starting deck remains 4 Strikes, 4 Defends, Zap and Dualcast.
+- [ ] Spire Souvenir Custom Run: the Defect starts with the relic and receives a mixed pool; Ironclad and Silent still receive theirs, Regent and Necrobinder do not.
+- [ ] Hybrid rewards: Chill, Fusion, Storm and Tempest each occupy one duplicate slot; the switch button changes art, text and behavior to the other version, including upgraded rewards. Accepting a switched card adds that version to the deck.
+- [ ] Standard or Custom Run without a card-set modifier or Souvenir: Defect card rewards stay vanilla. Finding the Souvenir enables Hybrid only for its holder; losing it restores the run's base mode.
+- [ ] The Souvenir can drop for the Defect in Standard and StS1-only runs; no extra copies drop in a Spire Souvenir run. Daily card/relic pools stay vanilla.
+- [ ] Regent, Necrobinder and Colorless pools remain vanilla in both modes. Ironclad and Silent modes and duplicate switches still work.
+- [ ] Co-op, Defect + another character: host options agree on both clients, duplicate switches sync, and each player's pool follows their own Souvenir. Resume the same run and verify pools, decks and Genetic Algorithm growth on both clients.
+- [ ] Co-op, two Defects: Orb histories, Focus, Lock-On damage and Power triggers use the correct owner; one player's cards never change the other's costs, growth or generated cards.
+- [ ] English and French: lobby options, card rewards, upgrade previews, power tooltips and duplicate-switch labels render without missing keys.
 
 ## Defect attacks
 

@@ -34,7 +34,15 @@ Read `README.md` for the player view and the spec for every decision.
     plus Clash, Dual Wield, Entrench and Shockwave for the Ironclad (their StS2 versions are outside its pool).
   - Namesakes take StS2's French title (StS1's own French names collide: its Outmaneuver is "Tacticien").
   - Not tested in game: `docs/testing/step-3a-checklist.md`. The owner still has to review `docs/review/silent-duplicates.md`.
-- **Next:** step 3b (Defect), then 3c (colorless); the owner tests at the end, then merges when they say so.
+- **Step 3b is implemented on `step-3`** (not merged; plan `docs/superpowers/plans/2026-10-29-step-3b-defect.md`, version 0.4.0):
+  - 38 Defect cards (24 unique, 10 StS1 namesakes kept, 4 duplicates), the Defect pool and Spire Souvenir eligibility;
+  - 12 attacks, 20 skills and 6 Powers, with EN/FR text and StS1 portraits;
+  - Genetic Algorithm persists growth through `Sts1SavedProperties`; saved property names reuse vanilla IDs;
+  - Electrodynamics changes Lightning targeting only for its holder; Lock-On scopes its marker per target;
+  - build: 0 warnings / 0 errors; tests: 61 xUnit and 32 pytest pass, including `NoUnportedCards`;
+  - not installed or tested in game: `docs/testing/step-3b-checklist.md` remains unchecked, especially save/reload and co-op;
+  - the owner still has to review `docs/review/defect-duplicates.md` (classifications stay draft).
+- **Next:** step 3c (colorless); the owner tests at the end, then merges when they say so.
   After step 3, look at a Steam Workshop "alpha" with the owner (no upload without their go-ahead).
   The swap at the merchant and on choose-a-card screens is in the backlog.
 - **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
@@ -48,7 +56,7 @@ Read `README.md` for the player view and the spec for every decision.
 | `docs/superpowers/plans/2026-10-28-step-1-*.md` | Step 1 plan (done) |
 | `docs/superpowers/plans/2026-10-28-step-2a-*.md`, `...-step-2b-*.md` | Step 2 plans (done) |
 | `docs/testing/step-*-checklist.md` | In-game checklists the owner ticks |
-| `docs/review/ironclad-duplicates.md` | Owner review page: every StS1 Ironclad card against StS2 (generated from `data/duplicates/ironclad.json`) |
+| `docs/review/*-duplicates.md` | Owner review pages for Ironclad, Silent and Defect (generated from `data/duplicates/*.json`) |
 | `docs/backlog.md` | Known gaps, fixed when the owner feels like it |
 
 ## Owner rules
@@ -108,9 +116,9 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/TopBar/` | Percent label instead of the missing modifier icon |
 | `src/Config/CardSetModifiers.cs` | Card set modifiers: `SpoonCardSetSts1Only`, and `SpoonSpireSouvenirModifier`, which gives the Spire Souvenir at run start to every character with StS1 cards (Hybrid comes from the relic; mutually exclusive) |
 | `src/CardSets/` | One postfix on `CardPoolModel.GetUnlockedCards` makes every card source (rewards, shop, transform, random generation) follow the mode; `Sts1Matches.g.cs` is generated. Hybrid duplicates: `VersionSwap`, `RandomVersionPatch` (CardFactory postfixes), `RewardSwapPatch` |
-| `src/Cards/` | `Sts1Card` / `Sts1IroncladCard` / `Sts1SilentCard` bases, the hidden per-character StS1 pools, one class per StS1 card (`Sts1HeavyBlade`), StS1 powers in `Sts1/Powers/` (icons borrowed from vanilla powers through `IBorrowedIcon`) |
+| `src/Cards/` | `Sts1Card` / `Sts1IroncladCard` / `Sts1SilentCard` / `Sts1DefectCard` bases, the hidden per-character StS1 pools, one class per StS1 card (`Sts1HeavyBlade`), StS1 powers in `Sts1/Powers/` (icons borrowed from vanilla powers through `IBorrowedIcon`) |
 | `src/Neow/` | Neow's Blessings: a transpiler makes Neow read a zero modifier count; after vanilla modifier options, the blessings replace the "done" page |
-| `src/Relics/` | Spire Souvenir relic (Ironclad and Silent pool postfix, kept out of the run-start grab bag shuffle so seeds stay vanilla, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor` |
+| `src/Relics/` | Spire Souvenir relic (Ironclad, Silent and Defect pool postfix, kept out of the run-start grab bag shuffle so seeds stay vanilla, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor` |
 | `src/DevConsole/` | `sts1card` console command (the vanilla `card` command can't see the hidden StS1 pools) |
 | `tools/sts1/` | Python (Podman image `slayspoon-tools`): `extract.py` → `data/sts1/`, `match.py` → `data/duplicates/` + review page, `art.py` → portraits, `codegen.py` → card skeletons + text. Codegen never overwrites a ported card |
 | `godot/SlaySpoon/` | Packed into the PCK. Localization tables merge into the game's (`res://SlaySpoon/localization/<lang>/<table>.json`) |
