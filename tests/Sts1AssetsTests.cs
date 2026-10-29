@@ -94,6 +94,11 @@ public class Sts1AssetsTests
 			{
 				vars.Add(m.Groups[1].Value);
 			}
+			// Var names held in a constant, as in new DynamicVar(IncreaseKey, 5m).
+			foreach (Match m in Regex.Matches(source, @"const string \w+Key = ""(\w+)"""))
+			{
+				vars.Add(m.Groups[1].Value);
+			}
 			string key = ModelIds.FromClassName(Path.GetFileNameWithoutExtension(file));
 			foreach (string lang in new[] { "eng", "fra" })
 			{

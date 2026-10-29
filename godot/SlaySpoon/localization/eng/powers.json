@@ -19,5 +19,8 @@
 	"STS1_FIRE_BREATHING_POWER.title": "Fire Breathing",
 	"STS1_METALLICIZE_POWER.description": "At the end of your turn, gain [gold]Block[/gold].",
 	"STS1_METALLICIZE_POWER.smartDescription": "At the end of your turn, gain [blue]{Amount}[/blue] [gold]Block[/gold].",
-	"STS1_METALLICIZE_POWER.title": "Metallicize"
+	"STS1_METALLICIZE_POWER.title": "Metallicize",
+	"STS1_RUPTURE_POWER.description": "Whenever you lose HP from a card, gain [gold]Strength[/gold].",
+	"STS1_RUPTURE_POWER.smartDescription": "Whenever you lose HP from a card, gain [blue]{Amount}[/blue] [gold]Strength[/gold].",
+	"STS1_RUPTURE_POWER.title": "Rupture"
 }
