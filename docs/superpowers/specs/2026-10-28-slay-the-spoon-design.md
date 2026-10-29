@@ -34,7 +34,8 @@ The mod is published on the Steam Workshop and in a public GitHub repository.
 - Regent and Necrobinder: untouched. They have no StS1 counterpart and keep their StS2 cards in every
   mode (colorless cards still follow the mode, see §3.3).
 - Balancing. Strange and overpowered builds are intended.
-- Anything outside StS2's Custom Run mode. A normal (Standard) run is untouched vanilla StS2.
+- Anything outside StS2's Custom Run mode. A normal (Standard) run is untouched vanilla StS2, except
+  for the Spire Souvenir relic (amended 2026-10-29, see `2026-10-29-spire-souvenir-relic-design.md`).
 
 **Anti-goals — failure even if it technically works**
 - Multiplayer desyncs.
@@ -47,7 +48,8 @@ The mod is published on the Steam Workshop and in a public GitHub repository.
 These were decided in conversation and are not open for the builder to change.
 
 1. **Custom Run only.** Every Slay the Spoon option lives in StS2's Custom Run screen (solo and
-   multiplayer `host_custom`). Standard and Daily runs are not modified.
+   multiplayer `host_custom`). Standard and Daily runs are not modified. Amended 2026-10-29: the Spire
+   Souvenir relic can be found in Standard runs (see `2026-10-29-spire-souvenir-relic-design.md`).
 2. **Who configures:** the lobby host in multiplayer, the player in solo.
 3. **Card set mode:** `StS1 only` / `StS2 only` / `Hybrid`, one choice per run. Colorless cards follow
    the mode too (StS1 colorless in StS1 only, both in Hybrid), for every character including Regent
