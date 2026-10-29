@@ -42,7 +42,12 @@ Read `README.md` for the player view and the spec for every decision.
   - build: 0 warnings / 0 errors; tests: 61 xUnit and 32 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3b-checklist.md` remains unchecked, especially save/reload and co-op;
   - the owner still has to review `docs/review/defect-duplicates.md` (classifications stay draft).
-- **Next:** step 3c (colorless); the owner tests at the end, then merges when they say so.
+- **Step 3c started:** catalog task complete (39 colorless cards, including four special cards),
+  `make sts1-colorless-data`, draft review page and namesake ids. No colorless gameplay changes yet.
+  Plan: `docs/superpowers/plans/2026-10-29-step-3c-colorless.md`.
+  Tests: 61 xUnit and 33 pytest pass. Next: Task 2, classify the 22 namesakes against both sources
+  and actual pool membership before generating playable classes.
+- The owner tests at the end, then merges when they say so.
   After step 3, look at a Steam Workshop "alpha" with the owner (no upload without their go-ahead).
   The swap at the merchant and on choose-a-card screens is in the backlog.
 - **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and

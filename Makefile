@@ -26,7 +26,7 @@ TOOLS     := nice -n 19 podman run --rm \
 	-v "$(STS2_LOC)":/sts2loc:ro \
 	-w /repo localhost/slayspoon-tools
 
-.PHONY: build test up down restart clean mp tools-image sts1-data sts2-loc
+.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts2-loc
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -62,6 +62,14 @@ sts1-data:
 			--character $$character --src src/Cards/Sts1/$$character --loc godot/SlaySpoon/localization \
 			--relations unique,same-sts1,duplicate || exit 1; \
 	done
+
+# Colorless catalog first: no playable skeletons until namesakes and special cards are reviewed.
+sts1-colorless-data:
+	$(TOOLS) python tools/sts1/extract.py --decomp /sts1 --color colorless --out data/sts1/colorless.json
+	$(TOOLS) python tools/sts1/match.py --sts1 data/sts1/colorless.json \
+		--sts2-cards /sts2src/MegaCrit.Sts2.Core.Models.Cards --sts2-loc /sts2loc \
+		--table data/duplicates/colorless.json --review docs/review/colorless-duplicates.md \
+		--matches src/CardSets/Sts1Matches.Colorless.g.cs --character Colorless --color colorless
 
 # Build and install into the game's mods folder.
 up: build

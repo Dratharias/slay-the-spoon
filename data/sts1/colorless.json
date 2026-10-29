@@ -1,0 +1,1368 @@
+[
+ {
+  "class": "Apotheosis",
+  "id": "Apotheosis",
+  "snake": "apotheosis",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/apotheosis",
+  "text": {
+   "eng": {
+    "name": "Apotheosis",
+    "description": "Upgrade ALL your cards for the rest of combat. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Apothéose",
+    "description": "Améliorez TOUTES vos cartes pour le reste du combat. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Apparition",
+  "id": "Ghostly",
+  "snake": "apparition",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "special",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "ethereal",
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/apparition",
+  "text": {
+   "eng": {
+    "name": "Apparition",
+    "description": "Ethereal. NL Gain 1 Intangible. NL Exhaust.",
+    "upgrade_description": "Gain 1 Intangible. NL Exhaust."
+   },
+   "fra": {
+    "name": "Apparition",
+    "description": "Gagnez 1 Intangible. NL Épuisement. NL Éthérée.",
+    "upgrade_description": "Gagnez 1 Intangible. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "BandageUp",
+  "id": "Bandage Up",
+  "snake": "bandage_up",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/bandage_up",
+  "text": {
+   "eng": {
+    "name": "Bandage Up",
+    "description": "Heal !M! HP. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Bandages",
+    "description": "Récupérez !M! PV. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Bite",
+  "id": "Bite",
+  "snake": "bite",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "special",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": 1,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/attack/bite",
+  "text": {
+   "eng": {
+    "name": "Bite",
+    "description": "Deal !D! damage. NL Heal !M! HP.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Morsure",
+    "description": "Infligez !D! dégâts. NL Récupérez !M! PV.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Blind",
+  "id": "Blind",
+  "snake": "blind",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/blind",
+  "text": {
+   "eng": {
+    "name": "Blind",
+    "description": "Apply !M! Weak.",
+    "upgrade_description": "Apply !M! Weak to ALL enemies."
+   },
+   "fra": {
+    "name": "Aveuglement",
+    "description": "Appliquez !M! de Faiblesse.",
+    "upgrade_description": "Appliquez !M! Faiblesse à TOUS les ennemis."
+   }
+  }
+ },
+ {
+  "class": "Chrysalis",
+  "id": "Chrysalis",
+  "snake": "chrysalis",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/chrysalis",
+  "text": {
+   "eng": {
+    "name": "Chrysalis",
+    "description": "Shuffle !M! random Skills into your draw pile. They cost 0 this combat. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Chrysalide",
+    "description": "Ajoutez !M! Compétences aléatoires à votre pioche. Elles coûtent 0 ce combat. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DarkShackles",
+  "id": "Dark Shackles",
+  "snake": "dark_shackles",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": 9,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 6
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/dark_shackles",
+  "text": {
+   "eng": {
+    "name": "Dark Shackles",
+    "description": "Enemy loses !M! Strength this turn. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Sombres chaînes",
+    "description": "L'ennemi perd !M! de Force pour le reste du tour. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DeepBreath",
+  "id": "Deep Breath",
+  "snake": "deep_breath",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/deep_breath",
+  "text": {
+   "eng": {
+    "name": "Deep Breath",
+    "description": "Shuffle your discard pile into your draw pile. NL Draw !M! card.",
+    "upgrade_description": "Shuffle your discard pile into your draw pile. NL Draw !M! cards."
+   },
+   "fra": {
+    "name": "Inspiration",
+    "description": "Mélangez les cartes de votre défausse à votre pioche. NL Piochez !M! carte.",
+    "upgrade_description": "Mélangez votre défausse avec votre pioche. NL Piochez !M! cartes."
+   }
+  }
+ },
+ {
+  "class": "Discovery",
+  "id": "Discovery",
+  "snake": "discovery",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/discovery",
+  "text": {
+   "eng": {
+    "name": "Discovery",
+    "description": "Choose 1 of 3 random cards to add into your hand. It costs 0 this turn. NL Exhaust.",
+    "upgrade_description": "Choose 1 of 3 random cards to add into your hand. It costs 0 this turn."
+   },
+   "fra": {
+    "name": "Découverte",
+    "description": "Choisissez 1 carte à ajouter à votre main parmi 3 cartes aléatoires. Elle coûte 0 ce tour. NL Épuisement.",
+    "upgrade_description": "Choisissez 1 carte à ajouter à votre main parmi 3 cartes aléatoires. Elle coûte 0 ce tour."
+   }
+  }
+ },
+ {
+  "class": "DramaticEntrance",
+  "id": "Dramatic Entrance",
+  "snake": "dramatic_entrance",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "all_enemy",
+  "damage": 8,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "innate"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "innate"
+  ],
+  "portrait": "colorless/attack/dramatic_entrance",
+  "text": {
+   "eng": {
+    "name": "Dramatic Entrance",
+    "description": "Innate. NL Deal !D! damage to ALL enemies. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Entrée fracassante",
+    "description": "Inné. NL Inflige !D! dégâts à TOUS les ennemis. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Enlightenment",
+  "id": "Enlightenment",
+  "snake": "enlightenment",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/enlightenment",
+  "text": {
+   "eng": {
+    "name": "Enlightenment",
+    "description": "Reduce the cost of all cards in your hand to 1 this turn.",
+    "upgrade_description": "Reduce the cost of all cards in your hand to 1 this combat."
+   },
+   "fra": {
+    "name": "Illumination",
+    "description": "Réduit à 1 le coût des cartes dans votre main pendant ce tour.",
+    "upgrade_description": "Réduit à 1 le coût des cartes dans votre main pendant ce combat."
+   }
+  }
+ },
+ {
+  "class": "Finesse",
+  "id": "Finesse",
+  "snake": "finesse",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 2,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 2,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/finesse",
+  "text": {
+   "eng": {
+    "name": "Finesse",
+    "description": "Gain !B! Block. NL Draw 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Subtilité",
+    "description": "Gagnez !B! d'Armure. NL Piochez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "FlashOfSteel",
+  "id": "Flash of Steel",
+  "snake": "flash_of_steel",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 3,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/attack/flash_of_steel",
+  "text": {
+   "eng": {
+    "name": "Flash of Steel",
+    "description": "Deal !D! damage. NL Draw 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Éclair d'acier",
+    "description": "Infligez !D! dégâts. NL Piochez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Forethought",
+  "id": "Forethought",
+  "snake": "forethought",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/forethought",
+  "text": {
+   "eng": {
+    "name": "Forethought",
+    "description": "Put a card from your hand to the bottom of your draw pile. It costs 0 until played.",
+    "upgrade_description": "Put any number of cards from your hand to the bottom of your draw pile. They cost 0 until played."
+   },
+   "fra": {
+    "name": "Prévoyance",
+    "description": "Placez une carte de votre main sous votre pioche. NL Elle coûte 0 jusqu'à ce qu'elle soit jouée.",
+    "upgrade_description": "Placez n'importe quel nombre de cartes de votre main sous votre pioche. NL Elles coûtent 0 jusqu'à ce qu'elles soient jouées."
+   }
+  }
+ },
+ {
+  "class": "GoodInstincts",
+  "id": "Good Instincts",
+  "snake": "good_instincts",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 6,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/good_instincts",
+  "text": {
+   "eng": {
+    "name": "Good Instincts",
+    "description": "Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Instincts de survie",
+    "description": "Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "HandOfGreed",
+  "id": "HandOfGreed",
+  "snake": "hand_of_greed",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": 20,
+  "block": null,
+  "magic": 20,
+  "upgrade": {
+   "damage": 5,
+   "block": null,
+   "magic": 5
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/attack/hand_of_greed",
+  "text": {
+   "eng": {
+    "name": "Hand of Greed",
+    "description": "Deal !D! damage. NL If Fatal, gain !M! Gold.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Main de la cupidité",
+    "description": "Infligez !D! dégâts. Si l'ennemi succombe, gagnez !M! d'Or.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Impatience",
+  "id": "Impatience",
+  "snake": "impatience",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/impatience",
+  "text": {
+   "eng": {
+    "name": "Impatience",
+    "description": "If you have no Attacks in your hand, draw !M! cards.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Impatience",
+    "description": "Si vous n'avez pas de carte Attaque dans votre main, piochez !M! cartes.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "JAX",
+  "id": "J.A.X.",
+  "snake": "jax",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "special",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/jax",
+  "text": {
+   "eng": {
+    "name": "J.A.X.",
+    "description": "Lose 3 HP. NL Gain !M! Strength.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "D.O.P.E.",
+    "description": "Perdez 3 PV. NL Gagnez !M! de Force.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "JackOfAllTrades",
+  "id": "Jack Of All Trades",
+  "snake": "jack_of_all_trades",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/jack_of_all_trades",
+  "text": {
+   "eng": {
+    "name": "Jack of All Trades",
+    "description": "Add !M! random Colorless card into your hand. NL Exhaust.",
+    "upgrade_description": "Add !M! random Colorless cards into your hand. NL Exhaust."
+   },
+   "fra": {
+    "name": "Polyvalence",
+    "description": "Ajoutez !M! carte incolore aléatoire à votre main. NL Épuisement.",
+    "upgrade_description": "Ajoutez !M! cartes incolores aléatoires à votre main. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "Madness",
+  "id": "Madness",
+  "snake": "madness",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/madness",
+  "text": {
+   "eng": {
+    "name": "Madness",
+    "description": "Reduce the cost of a random card in your hand to 0 this combat. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Folie",
+    "description": "Une carte aléatoire de votre main coûte 0 pour le reste du combat. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Magnetism",
+  "id": "Magnetism",
+  "snake": "magnetism",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/power/magnetism",
+  "text": {
+   "eng": {
+    "name": "Magnetism",
+    "description": "At the start of your turn, add a random Colorless card into your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Magnétisme",
+    "description": "Au début de chaque tour, ajoutez une carte incolore aléatoire à votre main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "MasterOfStrategy",
+  "id": "Master of Strategy",
+  "snake": "master_of_strategy",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/master_of_strategy",
+  "text": {
+   "eng": {
+    "name": "Master of Strategy",
+    "description": "Draw !M! cards. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Maître stratège",
+    "description": "Piochez !M! cartes. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Mayhem",
+  "id": "Mayhem",
+  "snake": "mayhem",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/power/mayhem",
+  "text": {
+   "eng": {
+    "name": "Mayhem",
+    "description": "At the start of your turn, play the top card of your draw pile.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Grabuge",
+    "description": "Au début de votre tour, jouez la première carte de votre pioche.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Metamorphosis",
+  "id": "Metamorphosis",
+  "snake": "metamorphosis",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/metamorphosis",
+  "text": {
+   "eng": {
+    "name": "Metamorphosis",
+    "description": "Shuffle !M! random Attacks into your draw pile. They cost 0 this combat. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Métamorphose",
+    "description": "Ajoutez !M! Attaques aléatoires à votre pioche. Elles coûtent 0 ce combat. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "MindBlast",
+  "id": "Mind Blast",
+  "snake": "mind_blast",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 0,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "innate"
+  ],
+  "keywords_upgraded": [
+   "innate"
+  ],
+  "portrait": "colorless/attack/mind_blast",
+  "text": {
+   "eng": {
+    "name": "Mind Blast",
+    "description": "Innate. NL Deal damage equal to the number of cards in your draw pile.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Détonation mentale",
+    "description": "Inné. NL Infligez autant de dégâts qu'il y a de cartes dans votre pioche.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Panacea",
+  "id": "Panacea",
+  "snake": "panacea",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/panacea",
+  "text": {
+   "eng": {
+    "name": "Panacea",
+    "description": "Gain !M! Artifact. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Panacée",
+    "description": "Gagnez !M! d'Artefact. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Panache",
+  "id": "Panache",
+  "snake": "panache",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 10,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 4
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/power/panache",
+  "text": {
+   "eng": {
+    "name": "Panache",
+    "description": "Every time you play 5 cards in a single turn, deal !M! damage to ALL enemies.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Panache",
+    "description": "Chaque fois que vous jouez 5 cartes en un tour, infligez !M! dégâts à TOUS les ennemis.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "PanicButton",
+  "id": "PanicButton",
+  "snake": "panic_button",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 30,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": 10,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/panic_button",
+  "text": {
+   "eng": {
+    "name": "Panic Button",
+    "description": "Gain !B! Block. You cannot gain Block from cards for !M! turns. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Bouton de secours",
+    "description": "Gagnez !B! d'Armure. Vous ne pouvez plus gagner d'Armure avec des cartes pendant les !M! prochains tours. Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Purity",
+  "id": "Purity",
+  "snake": "purity",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/purity",
+  "text": {
+   "eng": {
+    "name": "Purity",
+    "description": "Exhaust up to !M! cards in your hand. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Pureté",
+    "description": "Épuisez jusqu'à !M! cartes de votre main. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "RitualDagger",
+  "id": "RitualDagger",
+  "snake": "ritual_dagger",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "special",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/attack/ritual_dagger",
+  "text": {
+   "eng": {
+    "name": "Ritual Dagger",
+    "description": "Deal !D! damage. NL If Fatal, permanently increase this card's damage by !M!. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Dague rituelle",
+    "description": "Infligez !D! dégâts. Si cette carte tue un ennemi, ses dégâts augmentent de !M!. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SadisticNature",
+  "id": "Sadistic Nature",
+  "snake": "sadistic_nature",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 5,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/power/sadistic_nature",
+  "text": {
+   "eng": {
+    "name": "Sadistic Nature",
+    "description": "Whenever you apply a debuff to an enemy, they take !M! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Sadisme",
+    "description": "Quand vous appliquez un débuff à un ennemi, il subit !M! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SecretTechnique",
+  "id": "Secret Technique",
+  "snake": "secret_technique",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/secret_technique",
+  "text": {
+   "eng": {
+    "name": "Secret Technique",
+    "description": "Put a Skill from your draw pile into your hand. NL Exhaust.",
+    "upgrade_description": "Put a Skill from your draw pile into your hand."
+   },
+   "fra": {
+    "name": "Technique secrète",
+    "description": "Choisissez une carte Compétence dans votre pioche et placez-la dans votre main. NL Épuisement.",
+    "upgrade_description": "Choisissez une carte Compétence dans votre pioche et placez-la dans votre main."
+   }
+  }
+ },
+ {
+  "class": "SecretWeapon",
+  "id": "Secret Weapon",
+  "snake": "secret_weapon",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/secret_weapon",
+  "text": {
+   "eng": {
+    "name": "Secret Weapon",
+    "description": "Put an Attack from your draw pile into your hand. NL Exhaust.",
+    "upgrade_description": "Put an Attack from your draw pile into your hand."
+   },
+   "fra": {
+    "name": "Arme secrète",
+    "description": "Choisissez une carte Attaque dans votre pioche et placez-la dans votre main. NL Épuisement.",
+    "upgrade_description": "Choisissez une carte Attaque dans votre pioche et placez-la dans votre main."
+   }
+  }
+ },
+ {
+  "class": "SwiftStrike",
+  "id": "Swift Strike",
+  "snake": "swift_strike",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/attack/swift_strike",
+  "text": {
+   "eng": {
+    "name": "Swift Strike",
+    "description": "Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Frappe rapide",
+    "description": "Infligez !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "TheBomb",
+  "id": "The Bomb",
+  "snake": "the_bomb",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 40,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 10
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/the_bomb",
+  "text": {
+   "eng": {
+    "name": "The Bomb",
+    "description": "At the end of 3 turns, deal !M! damage to ALL enemies.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "La Bombe",
+    "description": "Dans 3 tours, infligez !M! dégats à TOUS les ennemis.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ThinkingAhead",
+  "id": "Thinking Ahead",
+  "snake": "thinking_ahead",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/thinking_ahead",
+  "text": {
+   "eng": {
+    "name": "Thinking Ahead",
+    "description": "Draw 2 cards. NL Put a card from your hand on top of your draw pile. NL Exhaust.",
+    "upgrade_description": "Draw 2 cards. NL Put a card from your hand on top of your draw pile."
+   },
+   "fra": {
+    "name": "Coup d'avance",
+    "description": "Piochez 2 cartes, puis placez une carte de votre main sur le haut de la pioche. NL Épuisement.",
+    "upgrade_description": "Piochez 2 cartes, puis placez une carte de votre main sur le haut de la pioche."
+   }
+  }
+ },
+ {
+  "class": "Transmutation",
+  "id": "Transmutation",
+  "snake": "transmutation",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/transmutation",
+  "text": {
+   "eng": {
+    "name": "Transmutation",
+    "description": "Add X random Colorless cards into your hand. They cost 0 this turn. NL Exhaust.",
+    "upgrade_description": "Add X random Upgraded Colorless cards into your hand. They cost 0 this turn. NL Exhaust."
+   },
+   "fra": {
+    "name": "Transmutation",
+    "description": "Ajoutez X cartes incolores à votre main. Elles coûtent 0 ce tour. NL Épuisement.",
+    "upgrade_description": "Ajoutez X cartes incolores Améliorées à votre main. Elles coûtent 0 ce tour. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "Trip",
+  "id": "Trip",
+  "snake": "trip",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/skill/trip",
+  "text": {
+   "eng": {
+    "name": "Trip",
+    "description": "Apply !M! Vulnerable.",
+    "upgrade_description": "Apply !M! Vulnerable to ALL enemies."
+   },
+   "fra": {
+    "name": "Croche-pied",
+    "description": "Appliquez !M! de Vulnérabilité.",
+    "upgrade_description": "Appliquez !M! de Vulnérabilité à TOUS les ennemis."
+   }
+  }
+ },
+ {
+  "class": "Violence",
+  "id": "Violence",
+  "snake": "violence",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/violence",
+  "text": {
+   "eng": {
+    "name": "Violence",
+    "description": "Put !M! random Attacks from your draw pile into your hand. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Violence",
+    "description": "Placez !M! Attaques aléatoires de votre pioche dans votre main. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ }
+]

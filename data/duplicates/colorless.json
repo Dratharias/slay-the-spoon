@@ -1,0 +1,275 @@
+[
+ {
+  "sts1": "Apotheosis",
+  "sts2": "Apotheosis",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords ['exhaust']→['exhaust'] vs ['exhaust', 'innate']→['exhaust', 'innate']"
+ },
+ {
+  "sts1": "Apparition",
+  "sts2": "Apparition",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['IntangiblePower']"
+ },
+ {
+  "sts1": "BandageUp",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Bite",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Blind",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Chrysalis",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "DarkShackles",
+  "sts2": "DarkShackles",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "DeepBreath",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Discovery",
+  "sts2": "Discovery",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "DramaticEntrance",
+  "sts2": "DramaticEntrance",
+  "relation": "same-sts1",
+  "draft": true,
+  "note": "StS1 weaker: damage 8 vs 11, damage+ 12 vs 15"
+ },
+ {
+  "sts1": "Enlightenment",
+  "sts2": "Enlightenment",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords []→[] vs ['exhaust']→['exhaust']"
+ },
+ {
+  "sts1": "Finesse",
+  "sts2": "Finesse",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['Block', 'Cards']"
+ },
+ {
+  "sts1": "FlashOfSteel",
+  "sts2": "FlashOfSteel",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['Cards', 'Damage']"
+ },
+ {
+  "sts1": "Forethought",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "GoodInstincts",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "HandOfGreed",
+  "sts2": "HandOfGreed",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Impatience",
+  "sts2": "Impatience",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "JAX",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "JackOfAllTrades",
+  "sts2": "JackOfAllTrades",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Madness",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Magnetism",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "MasterOfStrategy",
+  "sts2": "MasterOfStrategy",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Mayhem",
+  "sts2": "Mayhem",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=1 vs StS2 vars []"
+ },
+ {
+  "sts1": "Metamorphosis",
+  "sts2": "Metamorphosis",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "MindBlast",
+  "sts2": "MindBlast",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['CalculatedDamage', 'CalculationBase', 'ExtraDamage']; damage/block presence differs"
+ },
+ {
+  "sts1": "Panacea",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Panache",
+  "sts2": "Panache",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "PanicButton",
+  "sts2": "PanicButton",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Purity",
+  "sts2": "Purity",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords ['exhaust']→['exhaust'] vs ['exhaust', 'retain']→['exhaust', 'retain']"
+ },
+ {
+  "sts1": "RitualDagger",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "SadisticNature",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "SecretTechnique",
+  "sts2": "SecretTechnique",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "SecretWeapon",
+  "sts2": "SecretWeapon",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "SwiftStrike",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "TheBomb",
+  "sts2": "TheBomb",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=40 vs StS2 vars ['BombDamage', 'Turns']"
+ },
+ {
+  "sts1": "ThinkingAhead",
+  "sts2": "ThinkingAhead",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['Cards']"
+ },
+ {
+  "sts1": "Transmutation",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Trip",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Violence",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ }
+]
