@@ -93,7 +93,7 @@ public sealed class LoanLedger
 		}
 	}
 
-	/// <summary>Drops every debt of that borrower (death, run end).</summary>
+	/// <summary>Drops every debt of that borrower (explicit ledger reset only; never on player death).</summary>
 	public void Cancel(int borrower)
 	{
 		_entries.RemoveAll(e => e.Borrower == borrower);

@@ -73,6 +73,16 @@ Read `README.md` for the player view and the spec for every decision.
 - **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
   pushed only when the owner says so. The same goes for the Steam Workshop upload.
 
+## Step 5 status (2026-10-29)
+
+- Merchant Loans is implemented on `step-5` (0.7.0): ledger, synchronized requests/offers,
+  reserved offer gold, automatic repayment, top-bar debt display, merchant ask popup and loan panel.
+- Owner correction: debts survive death and co-op resurrection. No death hook clears them.
+- English/French text includes the rule and the need to retry the purchase after accepting.
+- Build: 0 warnings / 0 errors; tests: 154 xUnit and 42 pytest pass.
+- In-game validation remains pending in `docs/testing/step-5-checklist.md`.
+- Built artifacts are staged in `build/mods/SlaySpoon`; this update has not been installed.
+
 ## Documents
 
 | Path | What |

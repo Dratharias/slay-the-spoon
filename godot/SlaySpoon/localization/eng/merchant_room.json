@@ -1,0 +1,20 @@
+{
+  "SLAY_SPOON_LOANS.title": "Merchant loans",
+  "SLAY_SPOON_LOANS.ask_body": "You are {Missing} gold short. Ask the other players for help?",
+  "SLAY_SPOON_LOANS.ask": "Ask",
+  "SLAY_SPOON_LOANS.cancel": "Cancel",
+  "SLAY_SPOON_LOANS.rules": "Future gold repays loans. Death does not erase debts. After accepting, buy the item again.",
+  "SLAY_SPOON_LOANS.missing": "{Amount} gold needed",
+  "SLAY_SPOON_LOANS.gold": "{Amount} gold",
+  "SLAY_SPOON_LOANS.gift": "Gift",
+  "SLAY_SPOON_LOANS.rate": "Interest: {Amount}%",
+  "SLAY_SPOON_LOANS.selected": "Selected: {Amount} gold",
+  "SLAY_SPOON_LOANS.debt": "New debt: {Amount} gold",
+  "SLAY_SPOON_LOANS.accept": "Accept",
+  "SLAY_SPOON_LOANS.amount": "Amount: {Amount} gold",
+  "SLAY_SPOON_LOANS.held": "Your offer: {Amount} gold held until accepted or withdrawn.",
+  "SLAY_SPOON_LOANS.lend": "Lend",
+  "SLAY_SPOON_LOANS.give": "Give",
+  "SLAY_SPOON_LOANS.withdraw": "Withdraw",
+  "SLAY_SPOON_LOANS.reset": "Reset"
+}

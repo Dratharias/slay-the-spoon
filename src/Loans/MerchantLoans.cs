@@ -26,7 +26,7 @@ public static class MerchantLoans
 
 	public static LoanBoard Board { get; } = new();
 
-	/// <summary>Raised after the debts change (loan taken, repayment, death).</summary>
+	/// <summary>Raised after the debts change (loan taken, repayment).</summary>
 	public static event Action? Changed;
 
 	public static IRunState? Run => State(RunManager.Instance);

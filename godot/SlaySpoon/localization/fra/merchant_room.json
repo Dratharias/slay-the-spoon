@@ -1,0 +1,20 @@
+{
+  "SLAY_SPOON_LOANS.title": "Prêts au marchand",
+  "SLAY_SPOON_LOANS.ask_body": "Il vous manque {Missing} pièces d’or. Demander de l’aide aux autres joueurs ?",
+  "SLAY_SPOON_LOANS.ask": "Demander",
+  "SLAY_SPOON_LOANS.cancel": "Annuler",
+  "SLAY_SPOON_LOANS.rules": "L’or gagné rembourse les prêts. La mort n’efface pas les dettes. Après acceptation, achetez à nouveau l’objet.",
+  "SLAY_SPOON_LOANS.missing": "Il manque {Amount} pièces d’or",
+  "SLAY_SPOON_LOANS.gold": "{Amount} pièces d’or",
+  "SLAY_SPOON_LOANS.gift": "Don",
+  "SLAY_SPOON_LOANS.rate": "Intérêt : {Amount} %",
+  "SLAY_SPOON_LOANS.selected": "Sélection : {Amount} pièces d’or",
+  "SLAY_SPOON_LOANS.debt": "Nouvelle dette : {Amount} pièces d’or",
+  "SLAY_SPOON_LOANS.accept": "Accepter",
+  "SLAY_SPOON_LOANS.amount": "Montant : {Amount} pièces d’or",
+  "SLAY_SPOON_LOANS.held": "Votre offre : {Amount} pièces d’or réservées jusqu’à acceptation ou retrait.",
+  "SLAY_SPOON_LOANS.lend": "Prêter",
+  "SLAY_SPOON_LOANS.give": "Donner",
+  "SLAY_SPOON_LOANS.withdraw": "Retirer",
+  "SLAY_SPOON_LOANS.reset": "Réinitialiser"
+}

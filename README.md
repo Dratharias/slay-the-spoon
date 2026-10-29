@@ -81,7 +81,15 @@ Current (0.6.0):
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
   `sts1event STS1_NEST` (or `STS1_VAMPIRES`, `STS1_AUGMENTER`) opens a Slay the Spire 1 event.
 
-Planned: merchant loans between players.
+**Merchant Loans** (co-op Custom Runs): enable the modifier in the lobby. If a merchant purchase
+fails for lack of gold, choose **Ask** to open a request. Other players can lend gold at 0–300%
+interest or give it. Offers reserve the lender's gold until accepted, withdrawn, cancelled, or the
+room is left. Select enough offers and accept, then try buying the item again.
+
+Future gold gains repay the oldest loan first, shared equally between its remaining lenders.
+Interest is fixed on acceptance; gifts create no debt. **Death and resurrection do not erase debts.**
+Debts are saved with the run. Solo, Standard and Daily runs are unaffected.
+The merchant interface still needs in-game validation; see `docs/testing/step-5-checklist.md`.
 
 ## Development status — 2026-10-29
 

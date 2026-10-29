@@ -1,5 +1,3 @@
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using SlaySpoon.Core;
@@ -36,14 +34,5 @@ public sealed class SpoonMerchantLoans : ModifierModel
 		}
 	}
 
-	public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
-	{
-		if (!wasRemovalPrevented && creature.Player is { } player && MerchantLoans.IndexOf(player) is var borrower and >= 0
-			&& _ledger.DebtOf(borrower) > 0)
-		{
-			_ledger.Cancel(borrower);
-			MerchantLoans.LedgerChanged(this, $"{MerchantLoans.NameOf(player)} died, debts cancelled");
-		}
-		return Task.CompletedTask;
-	}
+	// Death and co-op resurrection never change the ledger. Debts belong to the run.
 }

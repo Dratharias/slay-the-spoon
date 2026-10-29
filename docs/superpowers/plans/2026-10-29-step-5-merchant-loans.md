@@ -8,7 +8,7 @@ they take; every gold the borrower gains afterwards repays their lenders in equa
 
 **Architecture:** Pure maths in `src/Core/` (`LoanLedger`, `LoanBoard`), tested with xUnit. A `SpoonMerchantLoans`
 modifier owns the ledger, saves it in a vanilla-named `int[]` saved property, repays from `ModifyGoldGained` and
-cancels debts in `AfterDeath`. Every request, offer and answer is one mod `INetAction` (`NetLoanAction` →
+keeps debts through death and resurrection. Every request, offer and answer is one mod `INetAction` (`NetLoanAction` →
 `LoanAction`) run on every client in the host's order, so the board, the transfers and the ledger stay identical.
 A code-built panel on the merchant room shows the requests.
 
@@ -27,8 +27,15 @@ A code-built panel on the merchant room shows the requests.
 - Interest: owed = amount + (amount × rate + 50) / 100 (integer, half up), fixed at acceptance.
 - Repayment: 100% of gold gained, oldest loan first, equal shares between that loan's lenders still owed,
   indivisible remainder to the earliest lenders; repayments reaching a lender are plain `Gold +=`, not gold gained.
-- Gifts never enter the ledger. Debts are cancelled when the borrower dies. Solo runs: the modifier does nothing.
+- Gifts never enter the ledger. Debts survive borrower death and resurrection. Solo runs: the modifier does nothing.
 - Version 0.7.0. Commit on `step-5`. No push, no install without the owner.
+
+## Implementation notes (2026-10-29)
+
+- Owner correction takes precedence over the original death rule: death/resurrection never clears debt.
+- Existing Task 3 implementation reserves offer gold immediately and refunds unused amounts;
+  the UI includes already-held gold when editing an offer.
+- Task 4 is implemented; in-game validation is still pending. See `docs/testing/step-5-checklist.md`.
 
 ## Review Focus
 
@@ -104,7 +111,7 @@ Modify `src/CustomRunUi/ModifierListPatch.cs`, `src/TopBar/TopBarPercentPatch.cs
 **Interfaces — Produces:**
 - `public sealed class SpoonMerchantLoans : ModifierModel` — `[SavedProperty] public int[] FurCoatCoordCols`
   (the encoded ledger); `LoanLedger Ledger`; `void Commit()` (re-encodes, logs, raises `Loans.Changed`);
-  `ModifyGoldGained(player, amount)` → kept amount, lenders credited with `Gold +=`; `AfterDeath` → `Cancel`.
+  `ModifyGoldGained(player, amount)` → kept amount, lenders credited with `Gold +=`; death and resurrection leave the ledger unchanged.
 - `public static class Loans` — `LoanBoard Board`; `event Action? Changed`; `SpoonMerchantLoans? ModifierOf(IRunState?)`;
   `bool IsActive(IRunState?)` (modifier present and ≥ 2 players); `int IndexOf(Player)`; `Player PlayerAt(IRunState, int)`;
   `void Send(NetLoanAction action)` (local player, `ActionQueueSynchronizer.RequestEnqueue`);
@@ -126,12 +133,12 @@ Modify `src/CustomRunUi/ModifierListPatch.cs`, `src/TopBar/TopBarPercentPatch.cs
 
 - A failed purchase for lack of gold (`NMerchantSlot.OnPurchaseFailed`, `PurchaseStatus.FailureGold`) with loans
   active and no open request of the local player opens an `NGenericPopup`: "You are {Missing} gold short…" → Ask.
-- `LoanPanel` (added to `NMerchantRoom` in `_Ready`, board cleared on `_ExitTree`), visible while any request is open:
+- `LoanPanel` (added to `NMerchantRoom` in `_Ready`, board refunded/cleared by the synchronized room-exit patch), visible while any request is open:
   - borrower's own request: missing, each offer as a toggle (picked by default), Accept enabled when the picked
     offers cover the missing amount, Cancel;
   - another player's request: amount (+1/+5/+10, reset), interest (+1/+5/+10 up to 300%, reset), Lend, Give,
     Withdraw (when an offer is up); the amount starts at min(need left, own gold) and never exceeds own gold.
-- [ ] **Step 1:** Implement; `make build` → 0/0; `make test` → pass.
+- [x] **Step 1:** Implement; `make build` → 0/0; `make test` → 154 xUnit and 42 pytest pass.
 - [ ] **Step 2:** Commit `feat: merchant loan panel and ask popup`.
 
 ### Task 5: Docs

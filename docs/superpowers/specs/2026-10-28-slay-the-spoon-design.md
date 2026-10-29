@@ -118,8 +118,8 @@ These were decided in conversation and are not open for the builder to change.
   Repayment takes 100% of gold gained until all debts are cleared; within one loan, each payment is
   split in equal shares between the lenders still owed (owner's decision; a lender paid off drops out
   and an indivisible remainder goes to the earliest lenders); separate loans are repaid oldest first.
-  Repayments reaching a lender are not "gold gained" for that lender. Debts are cancelled if the
-  borrower dies or the run ends.
+  Repayments reaching a lender are not "gold gained" for that lender. Debts survive borrower death and co-op resurrection (owner correction, 2026-10-29);
+  they remain until repaid or the run ends.
 - Hybrid starting deck: start from the StS2 starting deck composition; at run start, each starting
   card that has a different StS1 version is offered as a version choice. Starting cards classified
   `same` need no choice.
