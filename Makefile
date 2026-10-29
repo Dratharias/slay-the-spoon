@@ -36,7 +36,7 @@ build:
 
 test:
 	$(DOTNET) dotnet test tests --nologo
-	$(TOOLS) python -m pytest -q -p no:cacheprovider tools/sts1/tests
+	$(TOOLS) python -m pytest -q -p no:cacheprovider tools/sts1/tests tools/tests
 
 tools-image:
 	podman build -q -t localhost/slayspoon-tools -f tools/sts1/Containerfile tools/sts1

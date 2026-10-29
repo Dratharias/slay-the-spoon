@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Packs godot/SlaySpoon/** into a Godot 4.5.1 PCK.
+# Packs godot/SlaySpoon/** into a Godot 4.5.1 PCK, without the packing project's own files.
 # Usage: tools/build-pck.sh <output.pck>   (--godot-only: just download Godot)
 set -euo pipefail
 
@@ -25,3 +25,4 @@ OUT="$(realpath -m "$OUT")"
 mkdir -p "$(dirname "$OUT")"
 "$GODOT" --headless --path "$REPO/godot" --export-pack "SlaySpoon" "$OUT"
 test -s "$OUT"
+python3 -I "$REPO/tools/strip_pck.py" "$OUT"

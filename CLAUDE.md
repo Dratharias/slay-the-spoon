@@ -101,7 +101,7 @@ Read `README.md` for the player view and the spec for every decision.
 
 `make build | test | up | down | restart | mp | clean | workshop | workshop-upload`. .NET runs in Podman
 (`mcr.microsoft.com/dotnet/sdk:9.0`, `--security-opt label=disable` because of SELinux).
-`tools/build-pck.sh` downloads Godot 4.5.1 into `~/.cache/slay-spoon` and exports the PCK headless.
+`tools/build-pck.sh` downloads Godot 4.5.1 into `~/.cache/slay-spoon` and exports the PCK headless; `tools/strip_pck.py` then drops the `project.binary` and script class cache Godot adds.
 
 - **Game install:** `~/.local/share/Steam/steamapps/common/Slay the Spire 2`. The mod lives in
   `mods/SlaySpoon/` (`.json` + `.dll` + `.pck`).
@@ -121,7 +121,7 @@ Read `README.md` for the player view and the spec for every decision.
 - **Tests:** they are xUnit, and they only cover the game-independent code in `src/Core/`, which
   `tests/SlaySpoon.Tests.csproj` links in. Put pure logic there so it can be tested. They also read
   repo files: every StS1 card has its text in both languages, a portrait, no `NotImplementedException`,
-  and text placeholders that match its vars. `make test` also runs the `tools/sts1` pytest suite.
+  and text placeholders that match its vars. `make test` also runs the pytest suites in `tools/sts1/tests` and `tools/tests`.
 - **StS1 sources (local only):** the jar at `~/.local/share/Steam/steamapps/common/SlayTheSpire/desktop-1.0.jar`,
   CFR output in `~/Projects/sts-decomp/sts1/` (with `localization/{eng,fra}/cards.json`), and the
   StS2 card text dump in `~/Projects/sts-decomp/sts2-loc/` (`make sts2-loc`).

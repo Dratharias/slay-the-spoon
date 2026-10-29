@@ -2,8 +2,6 @@
 
 Known gaps deferred from step 1's final review. Fixed when the author feels like it.
 
-- The PCK also carries `res://project.binary` and `global_script_class_cache.cfg` (Godot's
-  `--export-pack` adds them).
 - Top bar: HP and Damage entries are told apart only by their hover tip.
 - With a card set mode and the vanilla "<Character> Cards" Custom Run modifier, an Ironclad merchant
   doesn't add the other character's cards: `CharacterCards.ModifyMerchantCardPool` gives up when an
