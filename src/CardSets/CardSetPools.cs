@@ -66,6 +66,13 @@ public static class CardSetPools
 		return PairOf(pool) != null;
 	}
 
+	/// <summary>The StS1 pool paired with the vanilla <paramref name="pool"/>, or null when it has none.</summary>
+	public static CardPoolModel? Sts1PoolOf(CardPoolModel pool)
+	{
+		Pair? pair = PairOf(pool);
+		return pair == null || pair.Vanilla != pool.GetType() ? null : ModelDb.GetById<CardPoolModel>(ModelDb.GetId(pair.Sts1));
+	}
+
 	/// <param name="vanillaUnlocked">Calls the game's own GetUnlockedCards on a pool (no mode applied).</param>
 	public static IReadOnlyList<CardModel> Compose(CardPoolModel pool, CardSetMode mode,
 		Func<CardPoolModel, IEnumerable<CardModel>> vanillaUnlocked)

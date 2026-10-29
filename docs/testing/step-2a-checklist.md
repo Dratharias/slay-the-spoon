@@ -13,6 +13,8 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 - [ ] "Spire Souvenir", Ironclad: rewards mix both games.
 - [ ] StS1-only with Silent, Defect, Regent or Necrobinder: their rewards stay vanilla.
 - [ ] Shop, card transform, and vanilla generators (Infernal Blade, Distraction-style random cards) follow the mode.
+- [ ] StS1-only or Spire Souvenir, Ironclad, with the vanilla "Silent Cards" modifier also ticked: the merchant's
+      character cards include Silent cards (StS1 ones in StS1-only), like the card rewards do.
 - [ ] Card library, from the main menu and from inside a run: vanilla pools only, no `Sts1*` cards.
 - [ ] Save, quit and resume with StS1 cards in the deck (upgraded ones too): the cards come back as they were.
 - [ ] Standard and Daily runs: rewards are vanilla even after a StS1-only Custom Run.
