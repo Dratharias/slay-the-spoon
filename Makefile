@@ -26,7 +26,7 @@ TOOLS     := nice -n 19 podman run --rm \
 	-v "$(STS2_LOC)":/sts2loc:ro \
 	-w /repo localhost/slayspoon-tools
 
-.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts2-loc
+.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts2-loc workshop workshop-upload
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -89,6 +89,14 @@ mp: up
 	cd "$(STS2_DIR)" && SteamAppId=2868840 ./SlayTheSpire2 --fastmp host_custom $(GAME_ARGS) --position 0,40 >/dev/null 2>&1 </dev/null &
 	sleep 12
 	cd "$(STS2_DIR)" && SteamAppId=2868840 ./SlayTheSpire2 --fastmp join --clientId 1001 $(GAME_ARGS) --position 1290,40 >/dev/null 2>&1 </dev/null &
+
+# Steam Workshop (friends-only alpha): stage build/workshop/ only, or stage and upload with SteamCMD.
+# The upload asks for the Steam account, password and Steam Guard code: run it in a terminal.
+workshop: build
+	tools/workshop-upload.sh --stage
+
+workshop-upload: build
+	tools/workshop-upload.sh
 
 clean:
 	rm -rf build src/bin src/obj tests/bin tests/obj

@@ -93,7 +93,7 @@ English and French. Other game languages show the English text.
 
 Every player in a co-op lobby needs the same version of the mod.
 
-- Steam Workshop: coming later.
+- Steam Workshop: a friends-only alpha.
 - Manually: copy the `SlaySpoon` folder (containing `SlaySpoon.json`, `SlaySpoon.dll`,
   `SlaySpoon.pck`) into `<Slay the Spire 2>/mods/`, then start the game and accept mod loading.
 
@@ -108,6 +108,7 @@ make up        # build and install into the game's mods folder
 make down      # uninstall
 make mp        # two local game windows (host + client) to test co-op
 make sts1-data # regenerate card data, art and text from a Slay the Spire 1 install
+make workshop-upload # upload build to the Steam Workshop (SteamCMD in Podman, asks for Steam login)
 ```
 
 Set `STS2_DIR` if the game is not in the default Steam library. `make sts1-data` also needs

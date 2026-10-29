@@ -56,6 +56,9 @@ Read `README.md` for the player view and the spec for every decision.
 - The owner tests at the end, then merges when they say so.
   After step 3, look at a Steam Workshop "alpha" with the owner (no upload without their go-ahead).
   The swap at the merchant and on choose-a-card screens is in the backlog.
+- **Steam Workshop:** `make workshop` stages `build/workshop/` (content, preview, `item.vdf`; visibility friends only);
+  `make workshop-upload` runs SteamCMD in Podman and needs the owner's Steam login, so only the owner runs it, in a terminal.
+  The first upload stores the item id in `workshop/published-file-id` (commit it). A local `mods/SlaySpoon` disables the Workshop copy.
 - **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
   pushed only when the owner says so. The same goes for the Steam Workshop upload.
 
@@ -87,7 +90,7 @@ Read `README.md` for the player view and the spec for every decision.
 
 ## Build and run
 
-`make build | test | up | down | restart | mp | clean`. .NET runs in Podman
+`make build | test | up | down | restart | mp | clean | workshop | workshop-upload`. .NET runs in Podman
 (`mcr.microsoft.com/dotnet/sdk:9.0`, `--security-opt label=disable` because of SELinux).
 `tools/build-pck.sh` downloads Godot 4.5.1 into `~/.cache/slay-spoon` and exports the PCK headless.
 

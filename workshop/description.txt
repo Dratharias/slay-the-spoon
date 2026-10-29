@@ -1,0 +1,22 @@
+[b]Alpha, friends only.[/b] Not tested much in game yet: expect bugs, and keep your saves backed up.
+
+Slay the Spoon brings Slay the Spire 1 cards into Slay the Spire 2 and adds run options that the lobby host sets in the [b]Custom Run[/b] screen. Every player in a co-op lobby needs the same version of the mod.
+
+[h2]Features[/h2]
+[list]
+[*][b]Monster HP[/b] and [b]Monster Damage[/b] options in Custom Run, 25% to 500%, synced in co-op and kept in saves.
+[*][b]Slay the Spire 1 Cards[/b]: rewards, shops and card generation offer Slay the Spire 1 cards instead of Slay the Spire 2 ones.
+[*][b]Spire Souvenir[/b]: a relic that lets its owner find cards from both games. A Custom Run option gives it at the start.
+[*]Slay the Spire 1 cards for the Ironclad, the Silent and the Defect, and colorless cards for every character, with their original art and numbers.
+[*][b]Neow's Blessings[/b]: brings back Neow's usual starting choice in Custom Runs.
+[*]Optional one-way copy of your regular progress into the modded profile. Your regular save is only read, never written.
+[/list]
+
+Standard and Daily runs stay vanilla, except that the Spire Souvenir can drop in Standard runs.
+
+English and French.
+
+[h2]Français[/h2]
+[b]Alpha, amis seulement.[/b] Le mod ajoute les cartes de Slay the Spire 1 à Slay the Spire 2 et des options de partie personnalisée réglées par l'hôte : PV et dégâts des monstres, cartes de Slay the Spire 1 seulement, relique Souvenir de la Tour, Bénédictions de Neow. Tous les joueurs d'une partie en coop doivent avoir la même version.
+
+[i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome, but fixes are not promised.[/i]
