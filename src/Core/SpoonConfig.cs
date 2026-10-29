@@ -13,55 +13,72 @@ public static class SpoonConfig
 	/// <summary>The saved choice, or null when the player has not been asked yet (or the file is unreadable).</summary>
 	public static bool? ReadSyncChoice(string? json)
 	{
-		if (json == null)
-		{
-			return null;
-		}
-		try
-		{
-			Dictionary<string, string>? values = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-			if (values != null && values.TryGetValue(SyncKey, out string? raw) && bool.TryParse(raw, out bool choice))
-			{
-				return choice;
-			}
-		}
-		catch (JsonException)
-		{
-		}
-		return null;
+		return Read(json).TryGetValue(SyncKey, out string? raw) && bool.TryParse(raw, out bool choice) ? choice : null;
 	}
 
-	public static string WriteSyncChoice(string? json, bool choice) => With(json, SyncKey, choice ? "True" : "False");
+	/// <summary>The new file content, or null when the existing content is unreadable and must not be overwritten.</summary>
+	public static string? WriteSyncChoice(string? json, bool choice) => With(json, SyncKey, choice ? "True" : "False");
 
 	public const string PreviewKey = "Act4Preview";
 
 	/// <summary>The permanent Act 4 unlock is per modded profile.</summary>
 	public static string Act4UnlockKey(int profileId) => $"Act4Unlocked.profile{profileId}";
 
-	/// <summary>Every key of the file; empty when the content is null or not a JSON object of strings.</summary>
-	public static Dictionary<string, string> Read(string? json)
+	/// <summary>
+	/// Every key of the file as strings (JSON booleans and numbers are accepted; a boolean becomes "True" or "False").
+	/// Empty when the content is null or not a JSON object.
+	/// </summary>
+	public static Dictionary<string, string> Read(string? json) => TryRead(json) ?? new Dictionary<string, string>();
+
+	/// <summary>Null when the content is not a JSON object; null or blank content gives an empty dictionary.</summary>
+	private static Dictionary<string, string>? TryRead(string? json)
 	{
-		if (json != null)
+		if (string.IsNullOrWhiteSpace(json))
 		{
-			try
+			return new Dictionary<string, string>();
+		}
+		try
+		{
+			using JsonDocument doc = JsonDocument.Parse(json);
+			if (doc.RootElement.ValueKind != JsonValueKind.Object)
 			{
-				Dictionary<string, string>? values = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-				if (values != null)
+				return null;
+			}
+			Dictionary<string, string> values = new();
+			foreach (JsonProperty property in doc.RootElement.EnumerateObject())
+			{
+				switch (property.Value.ValueKind)
 				{
-					return values;
+					case JsonValueKind.String:
+						values[property.Name] = property.Value.GetString() ?? "";
+						break;
+					case JsonValueKind.True:
+						values[property.Name] = "True";
+						break;
+					case JsonValueKind.False:
+						values[property.Name] = "False";
+						break;
+					case JsonValueKind.Number:
+						values[property.Name] = property.Value.GetRawText();
+						break;
 				}
 			}
-			catch (JsonException)
-			{
-			}
+			return values;
 		}
-		return new Dictionary<string, string>();
+		catch (JsonException)
+		{
+			return null;
+		}
 	}
 
-	/// <summary>The file content with one key set and every other key kept.</summary>
-	public static string With(string? json, string key, string value)
+	/// <summary>The file content with one key set and every other key kept; null when the existing content is unreadable (do not write).</summary>
+	public static string? With(string? json, string key, string value)
 	{
-		Dictionary<string, string> values = Read(json);
+		Dictionary<string, string>? values = TryRead(json);
+		if (values == null)
+		{
+			return null;
+		}
 		values[key] = value;
 		return JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true });
 	}
