@@ -53,6 +53,7 @@ make build     # build/mods/SlaySpoon/
 make test      # unit tests
 make up        # build and install into the game's mods folder
 make down      # uninstall
+make mp        # two local game windows (host + client) to test co-op
 ```
 
 Set `STS2_DIR` if the game is not in the default Steam library.
