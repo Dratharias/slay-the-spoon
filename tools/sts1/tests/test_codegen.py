@@ -23,6 +23,11 @@ def test_values_and_keyword_sentences():
     assert text == "Gagnez {Block:diff()} d'[gold]Armure[/gold]."
 
 
+def test_gold_words_skip_placeholders():
+    text, _ = codegen.convert_text("Gain !B! Block.", "eng")
+    assert text == "Gain {Block:diff()} [gold]Block[/gold]."
+
+
 def test_status_star_markup():
     text, _ = codegen.convert_text("Shuffle a *Wound into your draw pile.", "eng")
     assert text == "Shuffle a [gold]Wound[/gold] into your draw pile."

@@ -1,0 +1,5 @@
+{
+	"STS1_DOUBLE_TAP_POWER.description": "La prochaine Attaque que vous jouez ce tour est jouée une fois supplémentaire.",
+	"STS1_DOUBLE_TAP_POWER.smartDescription": "{Amount:plural:La prochaine Attaque|Les [blue]{}[/blue] prochaines Attaques} que vous jouez ce tour {Amount:plural:est jouée|sont jouées} une fois supplémentaire.",
+	"STS1_DOUBLE_TAP_POWER.title": "Attaque double"
+}

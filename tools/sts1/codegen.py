@@ -46,7 +46,7 @@ def convert_text(text: str, lang: str) -> tuple:
     text = text.replace("!D!", "{Damage:diff()}").replace("!B!", "{Block:diff()}").replace("!M!", "{Magic:diff()}")
     text = re.sub(r"\*(\w+)", r"[gold]\1[/gold]", text)
     words = "|".join(GOLD[lang])
-    text = re.sub(rf"(?<![\w\[])({words})(?![\w\]])(?![^\[]*\[/gold\])", r"[gold]\1[/gold]", text)
+    text = re.sub(rf"(?<![\w\[{{])({words})(?![\w\]])(?![^\[]*\[/gold\])", r"[gold]\1[/gold]", text)
     text = re.sub(r"\s*\bNL\b\s*", "\n", text)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r" ([.,])", r"\1", text)

@@ -1,0 +1,5 @@
+{
+	"STS1_DOUBLE_TAP_POWER.description": "This turn, your next Attack is played an extra time.",
+	"STS1_DOUBLE_TAP_POWER.smartDescription": "Your next {Amount:plural:Attack is|[blue]{}[/blue] Attacks are} played an extra time this turn.",
+	"STS1_DOUBLE_TAP_POWER.title": "Double Tap"
+}
