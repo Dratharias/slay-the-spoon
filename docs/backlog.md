@@ -6,3 +6,5 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   Custom Run (owner request, 2026-10-29).
 - Act 4 in Custom Run: a Custom Run option that brings back the StS1 keys (Ruby, Emerald, Sapphire)
   and the act after the last boss that they unlock (owner request, 2026-10-29).
+  Source import started on `step-6-act4`; see `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
+  Not playable yet.

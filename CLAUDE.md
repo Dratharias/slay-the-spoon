@@ -83,6 +83,14 @@ Read `README.md` for the player view and the spec for every decision.
 - In-game validation remains pending in `docs/testing/step-5-checklist.md`.
 - Built artifacts are staged in `build/mods/SlaySpoon`; this update has not been installed.
 
+## Step 6 status (2026-10-29)
+
+- Act 4 source import started on `step-6-act4`; plan: `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
+- `make sts1-act4-data` stages 23 assets and selected EN/FR monster/power text in `data/sts1/act4/`.
+- SHA-256 manifest and deterministic import tests; no Java/decompiled code committed.
+- Not playable or exposed in the lobby. Next: mechanics audit, animation compatibility, key state and act routing.
+- Co-op key ownership remains an owner decision; do not assume it during implementation.
+
 ## Documents
 
 | Path | What |

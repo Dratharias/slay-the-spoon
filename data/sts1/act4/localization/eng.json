@@ -1,0 +1,70 @@
+{
+  "monsters": {
+    "CorruptHeart": {
+      "MOVES": [
+        ""
+      ],
+      "NAME": "Corrupt Heart",
+      "DIALOG": [
+        ""
+      ]
+    },
+    "SpireShield": {
+      "MOVES": [
+        ""
+      ],
+      "NAME": "Spire Shield",
+      "DIALOG": [
+        ""
+      ]
+    },
+    "SpireSpear": {
+      "MOVES": [
+        ""
+      ],
+      "NAME": "Spire Spear"
+    }
+  },
+  "powers": {
+    "Invincible": {
+      "NAME": "Invincible",
+      "DESCRIPTIONS": [
+        "Can only lose #b",
+        " more HP this turn.",
+        "Can no longer be harmed this turn."
+      ]
+    },
+    "BeatOfDeath": {
+      "NAME": "Beat Of Death",
+      "DESCRIPTIONS": [
+        "Whenever you play a card, take #b",
+        " damage."
+      ]
+    },
+    "Painful Stabs": {
+      "NAME": "Painful Stabs",
+      "DESCRIPTIONS": [
+        "Whenever you receive attack damage from this enemy, add a #yWound into your discard pile."
+      ]
+    },
+    "Surrounded": {
+      "NAME": "Surrounded",
+      "DESCRIPTIONS": [
+        "Receive #b50% more damage if attacked from behind. Use targeting cards or potions to change your orientation."
+      ]
+    },
+    "BackAttack": {
+      "NAME": "Back Attack",
+      "DESCRIPTIONS": [
+        "Deals #b50% more damage as it is attacking you from behind."
+      ]
+    }
+  },
+  "ui": {
+    "TheEnding": {
+      "TEXT": [
+        "The Ending"
+      ]
+    }
+  }
+}

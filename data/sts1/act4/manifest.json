@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "source": "Slay the Spire / desktop-1.0.jar",
+  "status": "source_import_only_not_playable",
+  "monsters": [
+    "CorruptHeart",
+    "SpireShield",
+    "SpireSpear"
+  ],
+  "powers": [
+    "Invincible",
+    "BeatOfDeath",
+    "Painful Stabs",
+    "Surrounded",
+    "BackAttack"
+  ],
+  "animations": [
+    {
+      "source": "images/npcs/heart",
+      "spine_version": "3.4.02",
+      "animations": [
+        "idle"
+      ],
+      "status": "requires_sts2_conversion"
+    },
+    {
+      "source": "images/monsters/theEnding/shield",
+      "spine_version": "3.4.02",
+      "animations": [
+        "Attack",
+        "Hit",
+        "Idle",
+        "old_attack"
+      ],
+      "status": "requires_sts2_conversion"
+    },
+    {
+      "source": "images/monsters/theEnding/spear",
+      "spine_version": "3.4.02",
+      "animations": [
+        "Attack_1",
+        "Attack_2",
+        "Hit",
+        "Idle"
+      ],
+      "status": "requires_sts2_conversion"
+    }
+  ],
+  "assets": [
+    {
+      "source": "audio/music/STS_EndingStinger_v1.ogg",
+      "path": "assets/audio/music/STS_EndingStinger_v1.ogg",
+      "bytes": 542999,
+      "sha256": "b1e42dd569dd3a08c0b8375318760de8bd9c1be0568305ccf64d4981f0e4947c"
+    },
+    {
+      "source": "endingScene/scene.atlas",
+      "path": "assets/endingScene/scene.atlas",
+      "bytes": 539,
+      "sha256": "cce07fb0ab757441a33f0a1a1bf548a6d3417f7d74ea3e0611b4cccb8d5c65c2"
+    },
+    {
+      "source": "endingScene/scene.jpg",
+      "path": "assets/endingScene/scene.jpg",
+      "bytes": 60341,
+      "sha256": "c745a7d3c80dfbc73787b5ab2023bbe9c9fafd72ecf1c445ed62a5ccdde62dae"
+    },
+    {
+      "source": "endingScene/scene2.jpg",
+      "path": "assets/endingScene/scene2.jpg",
+      "bytes": 41579,
+      "sha256": "3c158f19e319ab62f0844abdd5157052d8ed395ad5143b2482341a5a965eaa83"
+    },
+    {
+      "source": "endingScene/scene3.jpg",
+      "path": "assets/endingScene/scene3.jpg",
+      "bytes": 43196,
+      "sha256": "0e473dd273314ce2a78d7fd51908aee3307a94344090e147b9efd346ea6bd671"
+    },
+    {
+      "source": "images/largeRelics/emerald_key.png",
+      "path": "assets/images/largeRelics/emerald_key.png",
+      "bytes": 4953,
+      "sha256": "05cd845a7d3339f1e6144bdeaa3673b9e8d6b3fe5b05c822b46ff085757a47b2"
+    },
+    {
+      "source": "images/largeRelics/ruby_key.png",
+      "path": "assets/images/largeRelics/ruby_key.png",
+      "bytes": 5426,
+      "sha256": "877fa043532cc0a4642c92b8888461c55215aa8818f49d575fec13d5e3372478"
+    },
+    {
+      "source": "images/largeRelics/sapphire_key.png",
+      "path": "assets/images/largeRelics/sapphire_key.png",
+      "bytes": 5329,
+      "sha256": "02728c77b21f16f11d7ded8ee22b9f18c8fe9da8f091cea024abff1f31822483"
+    },
+    {
+      "source": "images/monsters/theEnding/shield/shield.png",
+      "path": "assets/images/monsters/theEnding/shield/shield.png",
+      "bytes": 107291,
+      "sha256": "27fc7dc6c7158674417915b8e3d7d5185dbbce80f2fecc310fd6bd224f1d1257"
+    },
+    {
+      "source": "images/monsters/theEnding/shield/skeleton.atlas",
+      "path": "assets/images/monsters/theEnding/shield/skeleton.atlas",
+      "bytes": 462,
+      "sha256": "71c59617861925fff607121d6e1356a41e118381dd152dcdb61de0db2d894232"
+    },
+    {
+      "source": "images/monsters/theEnding/shield/skeleton.json",
+      "path": "assets/images/monsters/theEnding/shield/skeleton.json",
+      "bytes": 36589,
+      "sha256": "6912b8302a807eea1abc14288c452a4b72e5cd1c89e4951ac87e99a992be765f"
+    },
+    {
+      "source": "images/monsters/theEnding/spear/skeleton.atlas",
+      "path": "assets/images/monsters/theEnding/spear/skeleton.atlas",
+      "bytes": 559,
+      "sha256": "0d0377ad3d2ad4d1d65893c3d616d0bd874d469294c003d0d5e891845fffe958"
+    },
+    {
+      "source": "images/monsters/theEnding/spear/skeleton.json",
+      "path": "assets/images/monsters/theEnding/spear/skeleton.json",
+      "bytes": 64984,
+      "sha256": "5ab3de8eb31d34bc2fa06488a28ef0997da261d08bc89f2247c2209791c1278e"
+    },
+    {
+      "source": "images/monsters/theEnding/spear/spear.png",
+      "path": "assets/images/monsters/theEnding/spear/spear.png",
+      "bytes": 90525,
+      "sha256": "28e989da1d0beada0e7992e43fab83eeec33a5b2bf43d2368b66d6632fa5f963"
+    },
+    {
+      "source": "images/npcs/heart/skeleton.atlas",
+      "path": "assets/images/npcs/heart/skeleton.atlas",
+      "bytes": 1247,
+      "sha256": "df4a5c06f3369583e2d51de99e95af0dcf9c34ddf65e48fc89ab5e4e3b205279"
+    },
+    {
+      "source": "images/npcs/heart/skeleton.json",
+      "path": "assets/images/npcs/heart/skeleton.json",
+      "bytes": 197014,
+      "sha256": "b4ed0215978c76729b8ce1770f1274724bbeb0f81d532d94a51b83be01820bc8"
+    },
+    {
+      "source": "images/npcs/heart/skeleton.png",
+      "path": "assets/images/npcs/heart/skeleton.png",
+      "bytes": 419247,
+      "sha256": "3c4dbb046167b85194b212f3b0526cc72a1cbfd70bd47bb3d59e9024c55d30ec"
+    },
+    {
+      "source": "images/ui/map/boss/heart.png",
+      "path": "assets/images/ui/map/boss/heart.png",
+      "bytes": 34178,
+      "sha256": "3f3e1adb862af4c8123feb0a82235551f443dd77e83e44cf28e66a8daa584713"
+    },
+    {
+      "source": "images/ui/map/bossOutline/heart.png",
+      "path": "assets/images/ui/map/bossOutline/heart.png",
+      "bytes": 14372,
+      "sha256": "e485bf40e0f60e1070ec2e7eafdea78afa82096c71a9f4a384f3330ad3168c92"
+    },
+    {
+      "source": "images/ui/topPanel/key_blue.png",
+      "path": "assets/images/ui/topPanel/key_blue.png",
+      "bytes": 2028,
+      "sha256": "02dd6bf8371584b3513f0399f40fb7d5af07682fd40f7793923a22a288fa06cb"
+    },
+    {
+      "source": "images/ui/topPanel/key_green.png",
+      "path": "assets/images/ui/topPanel/key_green.png",
+      "bytes": 2051,
+      "sha256": "f54180f998fc81ebaadd19989d1913d8fb86fb8db01449e61d496724f725b8c2"
+    },
+    {
+      "source": "images/ui/topPanel/key_red.png",
+      "path": "assets/images/ui/topPanel/key_red.png",
+      "bytes": 2008,
+      "sha256": "bd081ca98d67bc686e10bc1f8abb4b3a6fee377972ce23671768c14fd7a9da37"
+    },
+    {
+      "source": "images/ui/topPanel/key_slots.png",
+      "path": "assets/images/ui/topPanel/key_slots.png",
+      "bytes": 2098,
+      "sha256": "c6acff79560cbd34b2c6cd2d7177e31021fb42d00e6a3d7df93e8f6dae9e503d"
+    }
+  ],
+  "localization": [
+    {
+      "path": "localization/eng.json",
+      "sha256": "fc936e6d0433f3696714e7aabcbab1f9751a36794a593bf031c3cde8a1e031f4"
+    },
+    {
+      "path": "localization/fra.json",
+      "sha256": "19411f80dc57af3749fbf0b9833f6642321ba93a5d3c10bf98d2fd4fcc794986"
+    }
+  ]
+}

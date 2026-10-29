@@ -26,7 +26,7 @@ TOOLS     := nice -n 19 podman run --rm \
 	-v "$(STS2_LOC)":/sts2loc:ro \
 	-w /repo localhost/slayspoon-tools
 
-.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts2-loc workshop workshop-upload
+.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts1-act4-data sts2-loc workshop workshop-upload
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -63,6 +63,10 @@ sts1-data:
 			--relations unique,same-sts1,duplicate || exit 1; \
 	done
 	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --events godot/SlaySpoon/images/events
+
+# Stage Act 4 source assets/text for conversion; this does not enable a playable act.
+sts1-act4-data:
+	$(TOOLS) python tools/sts1/act4.py --jar /sts1.jar --out data/sts1/act4
 
 # Colorless catalog first: no playable skeletons until namesakes and special cards are reviewed.
 sts1-colorless-data:

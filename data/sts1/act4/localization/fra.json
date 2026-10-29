@@ -1,0 +1,70 @@
+{
+  "monsters": {
+    "CorruptHeart": {
+      "MOVES": [
+        ""
+      ],
+      "NAME": "Cœur corrompu",
+      "DIALOG": [
+        ""
+      ]
+    },
+    "SpireShield": {
+      "MOVES": [
+        ""
+      ],
+      "NAME": "Bouclier de la Tour",
+      "DIALOG": [
+        ""
+      ]
+    },
+    "SpireSpear": {
+      "MOVES": [
+        ""
+      ],
+      "NAME": "Lance de la Tour"
+    }
+  },
+  "powers": {
+    "Invincible": {
+      "NAME": "Invincible",
+      "DESCRIPTIONS": [
+        "Ne peut perdre que #b",
+        " PV de plus ce tour.",
+        "Ne peut plus perdre de PV ce tour."
+      ]
+    },
+    "BeatOfDeath": {
+      "NAME": "Pulsation de la mort",
+      "DESCRIPTIONS": [
+        "Chaque fois que vous jouez une carte, recevez #b",
+        " dégât(s)."
+      ]
+    },
+    "Painful Stabs": {
+      "NAME": "Blessures douloureuses",
+      "DESCRIPTIONS": [
+        "À chaque fois que cet ennemi vous inflige des dégâts, ajoutez une #yPlaie à votre défausse."
+      ]
+    },
+    "Surrounded": {
+      "NAME": "Entouré",
+      "DESCRIPTIONS": [
+        "Recevez #b50% de dégâts supplémentaires quand vous êtes attaqué par derrière. Utilisez des cartes ou des potions pour changer votre orientation."
+      ]
+    },
+    "BackAttack": {
+      "NAME": "Attaque par derrière",
+      "DESCRIPTIONS": [
+        "Inflige #b50% de dégâts supplémentaires quand il vous attaque par derrière."
+      ]
+    }
+  },
+  "ui": {
+    "TheEnding": {
+      "TEXT": [
+        "La fin"
+      ]
+    }
+  }
+}
