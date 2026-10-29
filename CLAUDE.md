@@ -88,7 +88,11 @@ Read `README.md` for the player view and the spec for every decision.
 - Act 4 source import started on `step-6-act4`; plan: `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
 - `make sts1-act4-data` stages 23 assets and selected EN/FR monster/power text in `data/sts1/act4/`.
 - SHA-256 manifest and deterministic import tests; no Java/decompiled code committed.
-- Not playable or exposed in the lobby. Next: mechanics audit, animation compatibility, key state and act routing.
+- Mechanics audit recorded: `data/sts1/act4/mechanics.json` (hand-written, pinned to the jar's class SHA-256s,
+  checked by `tools/sts1/tests/test_act4_mechanics.py`) and `docs/review/act4-mechanics.md`. The StS1 Act 4
+  classes are decompiled in `~/Projects/sts-decomp/sts1/` (never commit them).
+- Open owner questions: which StS2 ascension carries the StS1 A18/A19 move changes; Invincible cap in co-op.
+- Not playable or exposed in the lobby. Next: animation compatibility, key state and act routing.
 - Approved Act 4 unlock: first reach Act 3 in a Standard run at Ascension 10; victory is not required.
   The unlock is permanent and makes Act 4 available at every ascension level, including 0.
   A Custom Run option bypasses this prerequisite. This rule is documented, not implemented yet.

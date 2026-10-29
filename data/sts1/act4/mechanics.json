@@ -1,0 +1,159 @@
+{
+  "about": "StS1 Ending enemy behavior, recorded by hand from the local StS1 jar (work package 2). Behavior only, no code. Ascension numbers are StS1 levels (1-20); a value object reads: base value, then 'ascended' from StS1 ascension 'at'. See docs/review/act4-mechanics.md.",
+  "source": {
+    "jar": "desktop-1.0.jar",
+    "classes": {
+      "com/megacrit/cardcrawl/dungeons/TheEnding.class": "0d1b79587089b6604d6e485a13349d5e575f159eb7b70a749575933f464b512a",
+      "com/megacrit/cardcrawl/monsters/ending/CorruptHeart.class": "569fac46a969acf9de6b12839484d62eed6e65fa272dff06ea21ffbb57169e78",
+      "com/megacrit/cardcrawl/monsters/ending/SpireShield.class": "f4055a62edacb9cd3cab8baead34c32aeb3f2df6cb1a772321d900ea74569a5e",
+      "com/megacrit/cardcrawl/monsters/ending/SpireSpear.class": "99b2c952947fe6cd985091782a6df2a29b88e5b49b5022f06686dc56189c35fb",
+      "com/megacrit/cardcrawl/powers/InvinciblePower.class": "10636e1ef6979db37b79101121caac2ef6aaf698ef0f679a449fd7ee7468d9bd",
+      "com/megacrit/cardcrawl/powers/BeatOfDeathPower.class": "da1c4e3475282bda0c3b4b7f569573b5aa643b81b2e39829e70457f12392de59",
+      "com/megacrit/cardcrawl/powers/PainfulStabsPower.class": "27e984a8be6fb3e7ec12f1cbe54de4ad9f06bd6d8466d288433dc135169acd13",
+      "com/megacrit/cardcrawl/powers/SurroundedPower.class": "76071a3971476b8d8d0fed13a22a10287dc215b57d5f1eb47834e8873c3b6428",
+      "com/megacrit/cardcrawl/powers/BackAttackPower.class": "f532ae703c44bb8d8c30eefec74197f0e5744878db986775e150de007248f394"
+    }
+  },
+  "map": ["rest", "shop", "elite", "boss", "victory"],
+  "encounters": {
+    "elite": {
+      "id": "Shield and Spear",
+      "monsters": ["SpireShield", "SpireSpear"],
+      "player_starts_facing": "right",
+      "positions": {"SpireShield": "left_of_player", "SpireSpear": "right_of_player"}
+    },
+    "boss": {"id": "The Heart", "monsters": ["CorruptHeart"]}
+  },
+  "monsters": {
+    "CorruptHeart": {
+      "type": "boss",
+      "hp": {"base": 750, "ascended": 800, "at": 9},
+      "start_of_combat": [
+        {"power": "Invincible", "target": "self", "amount": {"base": 300, "ascended": 200, "at": 19}},
+        {"power": "BeatOfDeath", "target": "self", "amount": {"base": 1, "ascended": 2, "at": 19}}
+      ],
+      "moves": {
+        "debilitate": {
+          "intent": "strong_debuff",
+          "effects": [
+            {"power": "Vulnerable", "target": "player", "amount": 2},
+            {"power": "Weak", "target": "player", "amount": 2},
+            {"power": "Frail", "target": "player", "amount": 2},
+            {"status_cards": ["Dazed", "Slimed", "Wound", "Burn", "Void"], "each": 1, "pile": "draw", "spot": "random"}
+          ]
+        },
+        "blood_shots": {
+          "intent": "attack",
+          "damage": {"base": 2, "ascended": 2, "at": 4},
+          "hits": {"base": 12, "ascended": 15, "at": 4}
+        },
+        "echo": {
+          "intent": "attack",
+          "damage": {"base": 40, "ascended": 45, "at": 4},
+          "hits": {"base": 1, "ascended": 1, "at": 4}
+        },
+        "buff": {
+          "intent": "buff",
+          "effects": [
+            {"strength": 2, "plus_clears_negative_strength": true},
+            {"by_buff_count": [
+              {"power": "Artifact", "amount": 2},
+              {"power": "BeatOfDeath", "amount": 1},
+              {"power": "PainfulStabs"},
+              {"power": "Strength", "amount": 10},
+              {"power": "Strength", "amount": 50, "repeats": true}
+            ]}
+          ]
+        }
+      },
+      "pattern": {
+        "first": "debilitate",
+        "cycle": [
+          {"random": ["blood_shots", "echo"]},
+          {"move": "echo", "unless_last": "echo", "else": "blood_shots"},
+          {"move": "buff"}
+        ]
+      }
+    },
+    "SpireShield": {
+      "type": "elite",
+      "hp": {"base": 110, "ascended": 125, "at": 8},
+      "start_of_combat": [
+        {"power": "Surrounded", "target": "player"},
+        {"power": "Artifact", "target": "self", "amount": {"base": 1, "ascended": 2, "at": 18}}
+      ],
+      "moves": {
+        "bash": {
+          "intent": "attack_debuff",
+          "damage": {"base": 12, "ascended": 14, "at": 3},
+          "hits": {"base": 1, "ascended": 1, "at": 3},
+          "effects": [
+            {"if_player_has_orbs": {"random": [
+              {"power": "Focus", "target": "player", "amount": -1},
+              {"power": "Strength", "target": "player", "amount": -1}
+            ]}, "else": {"power": "Strength", "target": "player", "amount": -1}}
+          ]
+        },
+        "fortify": {
+          "intent": "defend",
+          "effects": [{"block": 30, "target": "all_monsters"}]
+        },
+        "smash": {
+          "intent": "attack_defend",
+          "damage": {"base": 34, "ascended": 38, "at": 3},
+          "hits": {"base": 1, "ascended": 1, "at": 3},
+          "effects": [{"block": {"base": "smash_damage_after_modifiers", "ascended": 99, "at": 18}, "target": "self"}]
+        }
+      },
+      "pattern": {
+        "cycle": [
+          {"random": ["fortify", "bash"]},
+          {"move": "bash", "unless_last": "bash", "else": "fortify"},
+          {"move": "smash"}
+        ]
+      },
+      "on_death": "if another monster lives: the player faces it, loses Surrounded, and the survivor loses BackAttack"
+    },
+    "SpireSpear": {
+      "type": "elite",
+      "hp": {"base": 160, "ascended": 180, "at": 8},
+      "start_of_combat": [
+        {"power": "Artifact", "target": "self", "amount": {"base": 1, "ascended": 2, "at": 18}}
+      ],
+      "moves": {
+        "burn_strike": {
+          "intent": "attack_debuff",
+          "damage": {"base": 5, "ascended": 6, "at": 3},
+          "hits": {"base": 2, "ascended": 2, "at": 3},
+          "effects": [
+            {"status_cards": ["Burn"], "each": 2, "pile": {"base": "discard", "ascended": "draw_random_spot", "at": 18}}
+          ]
+        },
+        "piercer": {
+          "intent": "buff",
+          "effects": [{"power": "Strength", "target": "all_monsters", "amount": 2}]
+        },
+        "skewer": {
+          "intent": "attack",
+          "damage": {"base": 10, "ascended": 10, "at": 3},
+          "hits": {"base": 3, "ascended": 4, "at": 3}
+        }
+      },
+      "pattern": {
+        "cycle": [
+          {"move": "burn_strike", "unless_last": "burn_strike", "else": "piercer"},
+          {"move": "skewer"},
+          {"random": ["piercer", "burn_strike"]}
+        ]
+      },
+      "on_death": "if another monster lives: the player faces it, loses Surrounded, and the survivor loses BackAttack"
+    }
+  },
+  "powers": {
+    "Invincible": "Caps the owner's HP loss, counted after block, to what remains of the amount; the remainder drops by each HP loss and refills at the start of the monsters' turn. Every damage type counts, including HP loss. Priority 99.",
+    "BeatOfDeath": "After the player plays a card, deals the amount as Thorns damage to the player. Stacks.",
+    "PainfulStabs": "When the owner deals more than 0 non-Thorns damage after block, adds 1 Wound to the player's discard pile.",
+    "Surrounded": "Player marker. Playing a card that targets one enemy turns the player toward that enemy.",
+    "BackAttack": "The monster behind the player (opposite its facing) deals x1.5 damage: applied after the player's received-damage modifiers and stance, before final modifiers, rounded down."
+  }
+}

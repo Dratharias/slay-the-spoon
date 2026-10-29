@@ -8,6 +8,9 @@ This directory is a staging catalog, outside the Godot PCK. It contains original
 not playable StS2 monsters or scenes. The three skeletons use Spine 3.4.02 and still require
 compatibility work. The EN/FR text retains StS1 formatting and needs adaptation to StS2.
 
+`mechanics.json` is written by hand, not by the importer: enemy HP, moves, patterns, ascension values and
+powers, read from the local StS1 classes whose SHA-256 it records (see `docs/review/act4-mechanics.md`).
+
 Included: Heart, Shield and Spear animation sources; key icons; Heart map icons; Ending background;
 ending music stinger; selected names and power descriptions.
 Not yet imported: executable enemy behavior, key acquisition, act routing, combat music integration.
