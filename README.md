@@ -34,7 +34,9 @@ Current (0.6.0):
   **Spire Souvenir** starts every character that has Slay the Spire 1 cards with the Spire Souvenir
   relic (below), which mixes the two. With neither and without the relic, cards are vanilla. A card that exists in
   both games is offered once: as its weaker version when only the numbers differ, and as either
-  version when it plays differently, with a button on card rewards to switch between the two.
+  version when it plays differently, with a button to switch between the two on card rewards, at
+  the merchant and on choose-a-card screens. After a reward grid (Sealed Deck), each such card kept
+  asks which version to take.
 
 - **Ironclad's Slay the Spire 1 cards:** the 31 cards that Slay the Spire 2 dropped (Heavy Blade,
   Searing Blow, Limit Break, Berserk…), plus Slay the Spire 1's Juggernaut, Rampage, Rupture, Clash,
@@ -79,8 +81,7 @@ Current (0.6.0):
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
   `sts1event STS1_NEST` (or `STS1_VAMPIRES`, `STS1_AUGMENTER`) opens a Slay the Spire 1 event.
 
-Planned: the version switch at the merchant and on choose-a-card screens, and merchant loans
-between players.
+Planned: merchant loans between players.
 
 ## Development status — 2026-10-29
 
