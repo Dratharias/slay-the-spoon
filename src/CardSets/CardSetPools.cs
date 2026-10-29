@@ -42,14 +42,46 @@ public static class CardSetPools
 
 		Dictionary<string, CardModel> byId = vanilla.Concat(sts1).GroupBy(c => c.Id.Entry)
 			.ToDictionary(g => g.Key, g => g.First());
-		Sts1Entry[] entries = sts1.OfType<Sts1Card>().Select(c => new Sts1Entry(
-			c.Id.Entry,
-			c.Sts2Counterpart == null ? null : ModelDb.GetId(c.Sts2Counterpart).Entry,
-			c.Relation)).ToArray();
+		Sts1Entry[] entries = sts1.OfType<Sts1Card>().Select(EntryOf).ToArray();
 
 		return CardSetComposer.Compose(mode, vanilla.Select(c => c.Id.Entry).ToList(), pair.Matched, entries)
 			.Select(id => byId[id])
 			.ToList();
+	}
+
+	/// <summary>The other version of a duplicate card (canonical), or null when <paramref name="card"/> has none.</summary>
+	public static CardModel? PartnerOf(CardModel card)
+	{
+		return Partners.Value.GetValueOrDefault(card.Id.Entry);
+	}
+
+	private static readonly Lazy<IReadOnlyDictionary<string, CardModel>> Partners = new(BuildPartners);
+
+	private static IReadOnlyDictionary<string, CardModel> BuildPartners()
+	{
+		var byId = new Dictionary<string, CardModel>();
+		var entries = new List<Sts1Entry>();
+		foreach (Pair pair in Pairs)
+		{
+			foreach (Sts1Card card in ModelDb.GetById<CardPoolModel>(ModelDb.GetId(pair.Sts1)).AllCards.OfType<Sts1Card>())
+			{
+				byId[card.Id.Entry] = card;
+				if (card.Sts2Counterpart != null)
+				{
+					CardModel sts2 = ModelDb.GetById<CardModel>(ModelDb.GetId(card.Sts2Counterpart));
+					byId[sts2.Id.Entry] = sts2;
+				}
+				entries.Add(EntryOf(card));
+			}
+		}
+		return VersionPairs.Of(entries).ToDictionary(kv => kv.Key, kv => byId[kv.Value]);
+	}
+
+	private static Sts1Entry EntryOf(Sts1Card card)
+	{
+		return new Sts1Entry(card.Id.Entry,
+			card.Sts2Counterpart == null ? null : ModelDb.GetId(card.Sts2Counterpart).Entry,
+			card.Relation);
 	}
 
 	private static Pair? PairOf(CardPoolModel pool)
