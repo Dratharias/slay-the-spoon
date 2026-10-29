@@ -13,3 +13,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   doesn't add the other character's cards: `CharacterCards.ModifyMerchantCardPool` gives up when an
   offered card's `Pool` isn't the player's pool, and StS1 cards live in `Sts1IroncladCardPool`.
   Card rewards still get them.
+- Hybrid version switch on the merchant, choose-a-card screens (Discovery-style) and the Sealed Deck
+  grid (spec §4). They show a random version for now. Each needs its own synced path: the merchant
+  and choose-a-card sync only an index into their own list.

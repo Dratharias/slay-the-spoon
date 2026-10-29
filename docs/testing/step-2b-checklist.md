@@ -1,6 +1,7 @@
 # Step 2b — in-game checklist
 
 Tick when checked in game. "Base / +" means the card before and after upgrade.
+Quickest way: Custom Run, Ironclad, "Cards From Both Games" (Hybrid) or "Slay the Spire 1 Cards" ticked.
 
 ## Namesakes
 

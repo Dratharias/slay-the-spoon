@@ -31,16 +31,17 @@ Current (0.2.0):
 
 - **Card sets:** two Custom Run options, at most one ticked. **Slay the Spire 1 Cards** offers
   Slay the Spire 1 cards instead of Slay the Spire 2 ones in rewards, shops and card generation;
-  **Cards From Both Games** mixes the two. With neither, cards are vanilla. Cards that exist in
-  both games under the same name are the Slay the Spire 2 version.
+  **Cards From Both Games** mixes the two. With neither, cards are vanilla. A card that exists in
+  both games is offered once: as its weaker version when only the numbers differ, and as either
+  version when it plays differently, with a button on card rewards to switch between the two.
 
 - **Ironclad's Slay the Spire 1 cards:** the 31 cards that Slay the Spire 2 dropped (Heavy Blade,
-  Searing Blow, Limit Break, Berserk…), with their Slay the Spire 1 art and numbers. Other
+  Searing Blow, Limit Break, Berserk…), plus Slay the Spire 1's Juggernaut, Rampage and Rupture,
+  with their Slay the Spire 1 art and numbers. Other
   characters keep their own cards in both modes for now. The Ironclad's starting deck is the same
   in both games.
 
-Planned: the Ironclad's three cards that differ between the games (Juggernaut, Rampage, Rupture),
-a way to swap between both versions of a card in the mixed mode, then Silent, Defect and
+Planned: the version switch at the merchant and on choose-a-card screens, Silent, Defect and
 Colorless cards, and merchant loans between players.
 
 ## Languages
