@@ -5,13 +5,15 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.sts2.Core.Nodes.TopBar;
 using SlaySpoon.Config;
 using SlaySpoon.Core;
+using SlaySpoon.Loans;
 
 namespace SlaySpoon.TopBar;
 
 /// <summary>
 /// The mod ships no modifier icons, so the top bar would show the game's "missing" placeholder.
 /// Show a label instead: the percent (red when monsters are stronger than vanilla, blue when weaker), or
-/// the short name of a card set mode or Neow's Blessings.
+/// the short name of a card set mode or Neow's Blessings. Merchant Loans shows what the local player owes (red, "-N")
+/// or is owed (blue, "+N"), or its short name when there is no debt.
 /// The hover tip still names the modifier.
 /// </summary>
 [HarmonyPatch(typeof(NTopBarModifier), nameof(NTopBarModifier._Ready))]
@@ -39,10 +41,37 @@ public static class TopBarPercentPatch
 			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing:
 				ReplaceIcon(__instance, new LocString("modifiers", Modifier(__instance).Id.Entry + ".short").GetFormattedText(), StsColors.cream);
 				break;
+			case SpoonMerchantLoans loans:
+				ShowDebts(__instance, loans);
+				break;
 		}
 	}
 
-	private static void ReplaceIcon(NTopBarModifier __instance, string text, Color color)
+	private static void ShowDebts(NTopBarModifier __instance, SpoonMerchantLoans loans)
+	{
+		Label label = ReplaceIcon(__instance, "", StsColors.cream);
+		void Refresh()
+		{
+			if (!GodotObject.IsInstanceValid(label))
+			{
+				return;
+			}
+			int me = MerchantLoans.Me(MerchantLoans.Run) is { } player ? MerchantLoans.IndexOf(player) : -1;
+			int owes = me < 0 ? 0 : loans.Ledger.DebtOf(me);
+			int owed = me < 0 ? 0 : loans.Ledger.OwedTo(me);
+			(string text, Color color) = owes > 0 ? ("-" + owes, StsColors.red)
+				: owed > 0 ? ("+" + owed, StsColors.blue)
+				: (new LocString("modifiers", loans.Id.Entry + ".short").GetFormattedText(), StsColors.cream);
+			label.Text = text;
+			label.AddThemeColorOverride("font_color", color);
+			FitWidth(__instance, label);
+		}
+		Refresh();
+		MerchantLoans.Changed += Refresh;
+		__instance.TreeExiting += () => MerchantLoans.Changed -= Refresh;
+	}
+
+	private static Label ReplaceIcon(NTopBarModifier __instance, string text, Color color)
 	{
 		TextureRect icon = Icon(__instance);
 		icon.Texture = null;
@@ -62,7 +91,13 @@ public static class TopBarPercentPatch
 		__instance.AddChild(label);
 		label.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
 
-		// The text is wider than the icon slot; widen the entry so neighbours don't overlap it.
+		FitWidth(__instance, label);
+		return label;
+	}
+
+	/// <summary>The text is wider than the icon slot; widen the entry so neighbours don't overlap it.</summary>
+	private static void FitWidth(NTopBarModifier __instance, Label label)
+	{
 		float width = label.GetMinimumSize().X + Padding;
 		__instance.CustomMinimumSize = new Vector2(
 			Mathf.Max(width, __instance.CustomMinimumSize.X), __instance.CustomMinimumSize.Y);

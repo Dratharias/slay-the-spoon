@@ -11,5 +11,8 @@
   "SPOON_SPIRE_SOUVENIR_MODIFIER.short": "1+2",
   "SPOON_NEOW_BLESSING.title": "Neow's Blessings",
   "SPOON_NEOW_BLESSING.description": "Neow offers its usual blessings, as in a Standard run, even with other modifiers. Modifiers that bring their own Neow option (Draft, Sealed Deck…) offer it first.",
-  "SPOON_NEOW_BLESSING.short": "Neow"
+  "SPOON_NEOW_BLESSING.short": "Neow",
+  "SPOON_MERCHANT_LOANS.title": "Merchant Loans",
+  "SPOON_MERCHANT_LOANS.description": "Co-op only. A player short of gold at the merchant can ask the others for it. Each of them can lend it, at up to 300% interest, or give it. Every gold the borrower gains afterwards repays their lenders, in equal shares, until the debt is paid. Debts end when the borrower dies.",
+  "SPOON_MERCHANT_LOANS.short": "Loans"
 }
