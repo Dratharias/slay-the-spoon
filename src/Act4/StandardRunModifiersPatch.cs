@@ -36,11 +36,14 @@ public static class StandardRunModifiers
 [HarmonyPatch(typeof(StartRunLobby), "BeginRunForAllPlayers")]
 public static class StandardRunLobbyPatch
 {
+	private static readonly AccessTools.FieldRef<StartRunLobby, bool> BeginningRun =
+		AccessTools.FieldRefAccess<StartRunLobby, bool>("_isBeginningRun");
+
 	public static void Prefix(StartRunLobby __instance, ref List<ModifierModel> modifiers)
 	{
 		try
 		{
-			if (__instance.GameMode != GameMode.Standard || modifiers.Any(m => m is SpoonAct4) || !StandardRunModifiers.Wanted)
+			if (__instance.GameMode != GameMode.Standard || BeginningRun(__instance) || modifiers.Any(m => m is SpoonAct4) || !StandardRunModifiers.Wanted)
 			{
 				return;
 			}

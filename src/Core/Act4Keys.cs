@@ -72,10 +72,10 @@ public sealed class Act4Keys
 	}
 
 	/// <summary>Rebuilds a state from <see cref="Encode"/> output; throws <see cref="ArgumentException"/> on bad data.</summary>
-	public static Act4Keys Decode(int[] data)
+	public static Act4Keys Decode(int[]? data)
 	{
 		var keys = new Act4Keys();
-		if (data.Length == 0)
+		if (data == null || data.Length == 0)
 		{
 			return keys;
 		}

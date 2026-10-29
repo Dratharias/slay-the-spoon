@@ -54,6 +54,12 @@ public class Act4KeysTests
 	}
 
 	[Fact]
+	public void Decode_NullIsAFreshState()
+	{
+		Assert.False(Act4Keys.Decode(null!).Has(Act4Key.Ruby));
+	}
+
+	[Fact]
 	public void Decode_EmptyIsAFreshState()
 	{
 		Assert.False(Act4Keys.Decode(Array.Empty<int>()).Has(Act4Key.Ruby));

@@ -16,9 +16,11 @@ Look in `~/.local/share/SlayTheSpire2/mod_configs/SlaySpoon.cfg` for `Act4Unlock
 
 Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 first (see above). The flag is `SPOON_ACT4`.
 
-- [ ] Preview on and profile unlocked: a Standard solo run's log line (`Embarking on ...`) lists `SPOON_ACT4`, and `[SlaySpoon] act4: flag added` appears once.
+- [ ] Preview on and profile unlocked: a Standard solo run logs `[SlaySpoon] act4: flag added to the Standard run` once.
 - [ ] Neow still offers its usual blessings in that run (the flag is not counted as a modifier).
 - [ ] Save and quit, then resume: the run still has the flag and no `act4: saved key state dropped` error.
 - [ ] Without the unlock, or without the preview key: no flag.
 - [ ] Daily and Custom runs never get the flag.
 - [ ] Co-op Standard run: the host's unlock decides; a client without the unlock still gets the flag from the host.
+- [ ] A new Standard run after a run that took a key starts with no keys.
+- [ ] A new run after a run with a loan starts with no debt (same session).

@@ -15,6 +15,13 @@ public sealed class SpoonMerchantLoans : ModifierModel
 
 	public LoanLedger Ledger => _ledger;
 
+	/// <summary>MemberwiseClone would share the canonical instance's ledger with every run; each run starts with no debt.</summary>
+	protected override void DeepCloneFields()
+	{
+		base.DeepCloneFields();
+		_ledger = new LoanLedger();
+	}
+
 	/// <summary>The encoded ledger. Saved properties must reuse a vanilla name; Fur Coat's is an int array too.</summary>
 	[SavedProperty]
 	public int[] FurCoatCoordCols

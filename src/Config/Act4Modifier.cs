@@ -7,13 +7,20 @@ namespace SlaySpoon.Config;
 
 /// <summary>
 /// Hidden run flag: the run has Act 4. It owns the team's key state (<see cref="Act4Keys"/>). Standard runs get it from
-/// <see cref="Act4.StandardRunModifiersPatch"/>; it is not in the Custom Run list. Neow ignores it when counting modifiers.
+/// <see cref="Act4.StandardRunLobbyPatch"/>; it is not in the Custom Run list. Neow ignores it when counting modifiers.
 /// </summary>
 public sealed class SpoonAct4 : ModifierModel
 {
 	private Act4Keys _keys = new();
 
 	public Act4Keys Keys => _keys;
+
+	/// <summary>MemberwiseClone would share the canonical instance's key state with every run; each run starts fresh.</summary>
+	protected override void DeepCloneFields()
+	{
+		base.DeepCloneFields();
+		_keys = new Act4Keys();
+	}
 
 	/// <summary>The run's flag, or null when the run has no Act 4.</summary>
 	public static SpoonAct4? Of(IRunState? run)
