@@ -6,11 +6,11 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 
 ## Card set modes
 
-- [ ] Custom Run shows "Slay the Spire 1 Cards" and "Cards From Both Games"; ticking one unticks the other. Their names and descriptions read right in English and French.
+- [ ] Custom Run shows "Slay the Spire 1 Cards" and "Spire Souvenir" (formerly "Cards From Both Games"); ticking one unticks the other. Their names and descriptions read right in English and French.
 - [ ] In co-op, the client sees the host's tick.
 - [ ] The top bar shows the ticked mode's short label instead of a missing icon.
 - [ ] StS1-only, Ironclad: card rewards offer only `Sts1*` cards and StS2 cards that share a StS1 name (Bash, Inflame, Shrug It Off…). No StS2-only card (e.g. Ashen Strike).
-- [ ] Hybrid, Ironclad: rewards mix both games.
+- [ ] "Spire Souvenir", Ironclad: rewards mix both games.
 - [ ] StS1-only with Silent, Defect, Regent or Necrobinder: their rewards stay vanilla.
 - [ ] Shop, card transform, and vanilla generators (Infernal Blade, Distraction-style random cards) follow the mode.
 - [ ] Card library, from the main menu and from inside a run: vanilla pools only, no `Sts1*` cards.

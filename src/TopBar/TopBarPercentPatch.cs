@@ -36,7 +36,7 @@ public static class TopBarPercentPatch
 					_ => StsColors.cream,
 				});
 				break;
-			case SpoonCardSet or SpoonNeowBlessing:
+			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing:
 				ReplaceIcon(__instance, new LocString("modifiers", Modifier(__instance).Id.Entry + ".short").GetFormattedText(), StsColors.cream);
 				break;
 		}

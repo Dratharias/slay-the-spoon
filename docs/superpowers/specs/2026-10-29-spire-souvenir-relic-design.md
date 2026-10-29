@@ -95,3 +95,17 @@ first. And the Watcher as a playable character in StS1 card set modes is in the 
 - Tests: the per-player mode rule (run mode + owns relic → effective mode) is pure logic and gets unit
   tests; the rest goes in an in-game checklist (solo, co-op with the relic on one player only,
   save/resume, merchant, transform).
+
+## 7. Amendment (owner, 2026-10-29): Hybrid becomes "Spire Souvenir"
+
+- The Custom Run option "Cards From Both Games" is renamed **Spire Souvenir** / « Souvenir de la Tour ».
+  It no longer changes the run's card set: it gives the Spire Souvenir at run start, next to the
+  starting relic, to every player whose character has StS1 cards (only the Ironclad today). Other
+  characters get nothing and keep their own cards.
+- Hybrid is therefore always per player and always comes from the relic: losing it brings that player
+  back to StS2 cards. The run-wide card set is StS2 in such a run (Massive Scroll, which reads the
+  run-wide set, offers StS2 cards).
+- "Never offered when the run is already Hybrid" now reads: never dropped in a Spire Souvenir run.
+- Builder's call: the relic stays out of the run-start grab bag shuffle and is inserted afterwards on
+  its own RNG, so Daily and Spire Souvenir runs keep vanilla seeds and Standard runs differ only in the
+  order of Common relics past its slot.

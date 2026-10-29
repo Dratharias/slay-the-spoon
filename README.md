@@ -31,7 +31,8 @@ Current (0.2.0):
 
 - **Card sets:** two Custom Run options, at most one ticked. **Slay the Spire 1 Cards** offers
   Slay the Spire 1 cards instead of Slay the Spire 2 ones in rewards, shops and card generation;
-  **Cards From Both Games** mixes the two. With neither, cards are vanilla. A card that exists in
+  **Spire Souvenir** starts every character that has Slay the Spire 1 cards with the Spire Souvenir
+  relic (below), which mixes the two. With neither, cards are vanilla. A card that exists in
   both games is offered once: as its weaker version when only the numbers differ, and as either
   version when it plays differently, with a button on card rewards to switch between the two.
 
@@ -47,8 +48,8 @@ Current (0.2.0):
 
 - **Spire Souvenir:** a Common Ironclad relic, also found in Standard runs, that lets its owner find
   cards from the other game: Slay the Spire 1 cards in a normal run, Slay the Spire 2 cards in a
-  "Slay the Spire 1 Cards" run. It works like "Cards From Both Games" for that player only, and is
-  never offered in a "Cards From Both Games" run or a Daily run.
+  "Slay the Spire 1 Cards" run. It only affects its owner; losing it ends the effect. It never drops
+  in a "Spire Souvenir" run (eligible players already start with it) or in a Daily run.
 
 - **`sts1card` console command** for testing: in a modded game the developer console opens with the
   `` ` `` key (`*` or `'` on AZERTY); `sts1card STS1_HEAVY_BLADE` puts that card in your hand in combat,

@@ -16,7 +16,7 @@ Read `README.md` for the player view and the spec for every decision.
 - **Deferred minors:** listed in `docs/backlog.md`.
 - **Step 2a is done on branch `step-2`** (not merged; plan `docs/superpowers/plans/2026-10-28-step-2a-*.md`):
   - StS1 tooling: extraction, duplicate table, art, codegen (`tools/sts1/`, `make sts1-data`);
-  - card set modes (StS1-only, Hybrid) as Custom Run modifiers;
+  - card set modes (StS1-only, Hybrid) as Custom Run modifiers; Hybrid is now the "Spire Souvenir" modifier, which hands out the relic;
   - the 31 Ironclad cards StS2 dropped, ported by hand in `src/Cards/Sts1/Ironclad/`.
   - Not tested in game: everything in `docs/testing/step-2a-checklist.md`.
   - The Ironclad StS1 starter deck equals StS2's, so no starter change was needed, and Archaic
@@ -98,11 +98,11 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/Combat/` | Enemy HP scaling (`Creature.ScaleHpForMultiplayer` postfix + solo `CombatState.CreateCreature`) |
 | `src/Saves/` | Progress sync prefix on `ProgressSaveManager.LoadProgress`, first-launch popup, cfg file |
 | `src/TopBar/` | Percent label instead of the missing modifier icon |
-| `src/Config/CardSetModifiers.cs` | Card set modes: `SpoonCardSetSts1Only`, `SpoonCardSetHybrid` (mutually exclusive) |
+| `src/Config/CardSetModifiers.cs` | Card set modifiers: `SpoonCardSetSts1Only`, and `SpoonSpireSouvenirModifier`, which gives the Spire Souvenir at run start to every character with StS1 cards (Hybrid comes from the relic; mutually exclusive) |
 | `src/CardSets/` | One postfix on `CardPoolModel.GetUnlockedCards` makes every card source (rewards, shop, transform, random generation) follow the mode; `Sts1Matches.g.cs` is generated. Hybrid duplicates: `VersionSwap`, `RandomVersionPatch` (CardFactory postfixes), `RewardSwapPatch` |
 | `src/Cards/` | `Sts1Card` / `Sts1IroncladCard` bases, the hidden `Sts1IroncladCardPool`, one class per StS1 card (`Sts1HeavyBlade`), StS1 powers in `Sts1/Powers/` (icons borrowed from vanilla powers through `IBorrowedIcon`) |
 | `src/Neow/` | Neow's Blessings: a transpiler makes Neow read a zero modifier count; after vanilla modifier options, the blessings replace the "done" page |
-| `src/Relics/` | Spire Souvenir relic (Ironclad pool postfix, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor` |
+| `src/Relics/` | Spire Souvenir relic (Ironclad pool postfix, kept out of the run-start grab bag shuffle so seeds stay vanilla, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor` |
 | `src/DevConsole/` | `sts1card` console command (the vanilla `card` command can't see the hidden StS1 pools) |
 | `tools/sts1/` | Python (Podman image `slayspoon-tools`): `extract.py` → `data/sts1/`, `match.py` → `data/duplicates/` + review page, `art.py` → portraits, `codegen.py` → card skeletons + text. Codegen never overwrites a ported card |
 | `godot/SlaySpoon/` | Packed into the PCK. Localization tables merge into the game's (`res://SlaySpoon/localization/<lang>/<table>.json`) |

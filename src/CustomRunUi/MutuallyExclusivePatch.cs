@@ -4,7 +4,7 @@ using SlaySpoon.Config;
 
 namespace SlaySpoon.CustomRunUi;
 
-/// <summary>Ticking one card set mode in Custom Run unticks the other.</summary>
+/// <summary>Ticking "Slay the Spire 1 Cards" in Custom Run unticks "Spire Souvenir", and the other way round.</summary>
 [HarmonyPatch(typeof(ModelDb), nameof(ModelDb.MutuallyExclusiveModifiers), MethodType.Getter)]
 public static class MutuallyExclusivePatch
 {
@@ -13,7 +13,7 @@ public static class MutuallyExclusivePatch
 		HashSet<ModifierModel> cardSets = new()
 		{
 			ModelDb.Modifier<SpoonCardSetSts1Only>(),
-			ModelDb.Modifier<SpoonCardSetHybrid>(),
+			ModelDb.Modifier<SpoonSpireSouvenirModifier>(),
 		};
 		__result = __result.Append(cardSets).ToList();
 	}

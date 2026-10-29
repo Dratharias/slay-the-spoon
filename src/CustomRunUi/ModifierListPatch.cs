@@ -20,7 +20,7 @@ public static class ModifierListPatch
 			PercentModifierTable.CanonicalFor(typeof(SpoonMonsterHp), ScalingMath.DefaultPercent).ToMutable(),
 			PercentModifierTable.CanonicalFor(typeof(SpoonMonsterDamage), ScalingMath.DefaultPercent).ToMutable(),
 			ModelDb.Modifier<SpoonCardSetSts1Only>().ToMutable(),
-			ModelDb.Modifier<SpoonCardSetHybrid>().ToMutable(),
+			ModelDb.Modifier<SpoonSpireSouvenirModifier>().ToMutable(),
 			ModelDb.Modifier<SpoonNeowBlessing>().ToMutable(),
 		};
 		__result = __result.Concat(ours);

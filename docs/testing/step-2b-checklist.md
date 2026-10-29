@@ -1,7 +1,7 @@
 # Step 2b — in-game checklist
 
 Tick when checked in game. "Base / +" means the card before and after upgrade.
-Quickest way: Custom Run, Ironclad, "Cards From Both Games" (Hybrid) or "Slay the Spire 1 Cards" ticked.
+Quickest way: Custom Run, Ironclad, "Spire Souvenir" (Hybrid: the Ironclad starts with the relic) or "Slay the Spire 1 Cards" ticked.
 Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run has it) and type `sts1card STS1_HEAVY_BLADE` (Tab completes the id; add `Deck` to put it in the deck). Vanilla helpers: `energy 9`, `godmode`, `upgrade 0` (leftmost card in hand).
 
 ## Namesakes
@@ -41,14 +41,14 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 
 ## Spire Souvenir
 
-- [ ] Standard run, `relic add SPOON_SPIRE_SOUVENIR`: the tooltip shows the Dusty Tome icon and the text in English and French.
-- [ ] Standard run, relic held: card rewards show StS1 cards, and a duplicate (Rupture) shows the swap button.
-- [ ] Relic held: the merchant and a transform offer StS1 cards.
-- [ ] Custom Run with "Slay the Spire 1 Cards" and the relic: StS2 cards come back.
-- [ ] Custom Run with "Cards From Both Games": the relic never drops; given by console, nothing changes.
-- [ ] Relic held: Infernal Blade or an Attack Potion can create StS1 cards.
-- [ ] Daily run: the relic never drops, and the map matches the same Daily without the mod.
-- [ ] Standard Ironclad run, same seed with and without the mod: same map; the log shows `Spire Souvenir: Common slot`.
-- [ ] `relic remove SPOON_SPIRE_SOUVENIR`: the next reward is back to the run's mode.
+- [ ] Custom Run with "Spire Souvenir" ticked, Ironclad: the run starts with the relic next to Burning Blood; its tooltip shows the Dusty Tome icon and the text in English and French.
+- [ ] Same run with Silent, Defect, Regent or Necrobinder: no relic, vanilla cards.
+- [ ] Relic held: card rewards mix StS1 and StS2 cards, and a duplicate (Rupture) shows the swap button.
+- [ ] Relic held: the merchant, a transform, and Infernal Blade or an Attack Potion offer StS1 cards too.
+- [ ] "Spire Souvenir" run: the relic never drops as a reward (the Ironclad already has it).
+- [ ] Standard run, Ironclad: the relic can drop as a Common relic (or `relic add SPOON_SPIRE_SOUVENIR` in the console); held, it mixes the cards as above.
+- [ ] Custom Run with "Slay the Spire 1 Cards" and the relic (console): StS2 cards come back.
+- [ ] Daily run: the relic never drops.
+- [ ] `relic remove SPOON_SPIRE_SOUVENIR`: the next reward is back to the run's cards.
 - [ ] Save, quit and resume with the relic: the effect persists.
-- [ ] Co-op (`make mp`): relic on the host only; the client's rewards stay vanilla, and both screens agree on the host's reward.
+- [ ] Co-op (`make mp`), "Spire Souvenir" ticked, host Ironclad and client another character: only the host gets the relic and mixed rewards; no desync.

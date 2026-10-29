@@ -12,9 +12,11 @@ public static class SouvenirRule
 		return ownsSouvenir ? CardSetMode.Hybrid : runMode;
 	}
 
-	/// <summary>The relic may drop: it does nothing in a Hybrid run, and Daily runs stay vanilla.</summary>
-	public static bool IsOffered(CardSetMode runMode, bool isDaily)
+	/// <summary>
+	/// The relic may drop: a Spire Souvenir run already hands it out at the start, and Daily runs stay vanilla.
+	/// </summary>
+	public static bool IsOffered(bool souvenirRun, bool isDaily)
 	{
-		return runMode != CardSetMode.Hybrid && !isDaily;
+		return !souvenirRun && !isDaily;
 	}
 }

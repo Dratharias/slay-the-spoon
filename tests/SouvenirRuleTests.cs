@@ -27,11 +27,10 @@ public class SouvenirRuleTests
 	}
 
 	[Fact]
-	public void Offered_OutsideHybridAndDaily()
+	public void Offered_OutsideSouvenirAndDailyRuns()
 	{
-		Assert.True(SouvenirRule.IsOffered(CardSetMode.Sts2Only, isDaily: false));
-		Assert.True(SouvenirRule.IsOffered(CardSetMode.Sts1Only, isDaily: false));
-		Assert.False(SouvenirRule.IsOffered(CardSetMode.Hybrid, isDaily: false));
-		Assert.False(SouvenirRule.IsOffered(CardSetMode.Sts2Only, isDaily: true));
+		Assert.True(SouvenirRule.IsOffered(souvenirRun: false, isDaily: false));
+		Assert.False(SouvenirRule.IsOffered(souvenirRun: true, isDaily: false));
+		Assert.False(SouvenirRule.IsOffered(souvenirRun: false, isDaily: true));
 	}
 }

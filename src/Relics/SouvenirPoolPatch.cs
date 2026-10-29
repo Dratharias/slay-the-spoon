@@ -5,8 +5,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
-using SlaySpoon.CardSets;
-using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics;
 
@@ -26,8 +24,8 @@ public static class SouvenirPoolPatch
 /// <summary>
 /// Each player's grab bag is shuffled at run start on Rng.UpFront, which then generates the map. One more relic in
 /// the shuffle would draw one more number and change every room of the seed, even if the relic never drops. So the
-/// Souvenir sits out the vanilla shuffle and is inserted afterwards on its own Rng: Daily and Hybrid runs stay
-/// exactly vanilla, and other runs differ only in Common relic draws past its slot. The grab bag is saved, so the
+/// Souvenir sits out the vanilla shuffle and is inserted afterwards on its own Rng: Daily and Spire Souvenir
+/// runs keep the vanilla bag, and other runs differ only in Common relic draws past its slot. The grab bag is saved, so the
 /// slot survives a resume.
 /// </summary>
 [HarmonyPatch(typeof(RelicGrabBag), nameof(RelicGrabBag.Populate), typeof(Player), typeof(Rng))]
@@ -45,9 +43,7 @@ public static class SouvenirGrabBagPatch
 
 	public static void Postfix(RelicGrabBag __instance, Player player)
 	{
-		IRunState run = player.RunState;
-		if (player.Character.RelicPool is not IroncladRelicPool
-			|| !SouvenirRule.IsOffered(CardSetPools.ModeOf(run), run.GameMode == GameMode.Daily))
+		if (player.Character.RelicPool is not IroncladRelicPool || !SpoonSpireSouvenir.IsOffered(player.RunState))
 		{
 			return;
 		}
