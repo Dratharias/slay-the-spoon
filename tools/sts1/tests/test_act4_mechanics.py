@@ -69,3 +69,12 @@ def test_recorded_classes_match_the_installed_jar(mechanics):
     with zipfile.ZipFile(JAR) as archive:
         for name, digest in mechanics["source"]["classes"].items():
             assert hashlib.sha256(archive.read(name)).hexdigest() == digest, name
+
+
+def test_keys_record_the_three_sources_and_the_emerald_buffs(mechanics):
+    keys = mechanics["keys"]
+    assert keys["act4_requires"] == ["ruby", "emerald", "sapphire"]
+    assert [keys[k]["source"] for k in keys["act4_requires"]] == ["rest_site_option", "marked_elite", "chest"]
+    options = keys["emerald"]["buff"]["options"]
+    assert [o.get("power") for o in options] == ["Strength", None, "Metallicize", "RegenerateMonster"]
+    assert options[1]["max_hp_percent"] == 25

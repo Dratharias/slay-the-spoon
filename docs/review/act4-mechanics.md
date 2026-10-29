@@ -83,6 +83,27 @@ targets a single enemy turns the player toward that enemy.
   fight. Owner decision (2026-10-29): act 4 HP follows StS2's own formula. Since the formula has no act 4 factor,
   act 4 reuses act 3's (1.2 elite, 1.3 boss): HP × player count × factor.
 
+## Keys
+
+StS1 classes read (hashes in `mechanics.json`): `MonsterRoomElite`, `CampfireUI`, `AbstractChest`, `AbstractDungeon`,
+`RewardItem`, `IncreaseMaxHpAction`, `RegenerateMonsterPower`, `MetallicizePower`, `CampfireRecallEffect`,
+`AbstractPlayer`. Every key only appears while the final act is available and the key is not held; the Heart's act
+is entered only with all three.
+
+- **Ruby:** an extra rest site option ("Recall"). It is the rest site's action: no heal, no upgrade.
+- **Sapphire:** in a chest, the key is offered next to the relic, and taking one forgoes the other.
+- **Emerald:** after each act's map is generated, one elite node is marked, uniformly, with the map RNG. At combat
+  start in that node, every monster gets one buff at random (actNum is 1-3, the StS2 act index + 1):
+  Strength actNum + 1; max HP +25 % (rounded half up) with the same amount healed; Metallicize 2 × actNum + 2;
+  Regenerate 1 + 2 × actNum (heals at the end of the monster's turn unless it is dying, never decrements). Winning
+  adds the key as an extra reward, next to the elite's relic.
+
+StS2 port (owner decisions, 2026-10-29): the keys are team-wide. The Ruby costs the taker's own rest action only.
+The Sapphire is a swap offered after the chest's relics are handed out: any player who received one may give it back
+for the key, the first one to accept takes it for the team, and the swap undoes what the relic did on pickup
+(upgrades included). StS2 has no Metallicize: the mod's `Sts1MetallicizePower` serves. Its `RegenPower` decrements,
+so Regenerate needs its own power.
+
 ## Owner decisions (2026-10-29)
 
 1. **Ascension mapping.** StS1 HP raises (A8/A9) go to StS2 **Tough Enemies (A8)**, damage raises (A3/A4) to

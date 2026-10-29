@@ -100,7 +100,9 @@ Read `README.md` for the player view and the spec for every decision.
   The unlock is permanent and makes Act 4 available at every ascension level, including 0.
   A Custom Run option bypasses this prerequisite. This rule is documented, not implemented yet.
 - Co-op keys are team-wide (owner decision): one set for the team; a key any player collects counts for all.
-  Ruby: one player gives up their rest-site action; Sapphire: a choice among the chest's relics (usual tie-break).
+  Ruby: one player gives up their rest-site action. Sapphire: after a chest's relics are handed out, any player who
+  received one may give it back for the key (first to accept; the swap undoes the relic's pickup effects, upgrades included).
+- WP3 (unlock, keys, run state) is planned, not implemented: `docs/superpowers/plans/2026-10-29-step-6-act4-wp3-keys-unlock.md`.
 
 ## Documents
 

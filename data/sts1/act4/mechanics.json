@@ -11,7 +11,17 @@
       "com/megacrit/cardcrawl/powers/BeatOfDeathPower.class": "da1c4e3475282bda0c3b4b7f569573b5aa643b81b2e39829e70457f12392de59",
       "com/megacrit/cardcrawl/powers/PainfulStabsPower.class": "27e984a8be6fb3e7ec12f1cbe54de4ad9f06bd6d8466d288433dc135169acd13",
       "com/megacrit/cardcrawl/powers/SurroundedPower.class": "76071a3971476b8d8d0fed13a22a10287dc215b57d5f1eb47834e8873c3b6428",
-      "com/megacrit/cardcrawl/powers/BackAttackPower.class": "f532ae703c44bb8d8c30eefec74197f0e5744878db986775e150de007248f394"
+      "com/megacrit/cardcrawl/powers/BackAttackPower.class": "f532ae703c44bb8d8c30eefec74197f0e5744878db986775e150de007248f394",
+      "com/megacrit/cardcrawl/rooms/MonsterRoomElite.class": "3c25131c9038ed639eabb818adcec4552de8de378a997b8ab4192087cc0fa90c",
+      "com/megacrit/cardcrawl/rooms/CampfireUI.class": "271dd19302e1e485332c7c28ea4eb5197c12e44f8317405075651aa4dba7306e",
+      "com/megacrit/cardcrawl/rewards/chests/AbstractChest.class": "1b243cc4d396792be200cef41578247903dd7a417a32aaed6cdac99afd6b23d8",
+      "com/megacrit/cardcrawl/dungeons/AbstractDungeon.class": "5452fdd7b33fa47dcea5c2e58d5d521dfde3acefba006c095ad5b01c60eda369",
+      "com/megacrit/cardcrawl/rewards/RewardItem.class": "7f5abc79015ab6a6cb6781776fc1752a5e5143f47be61b4ee8bcf9cb057daf55",
+      "com/megacrit/cardcrawl/actions/unique/IncreaseMaxHpAction.class": "d0ed867bd7151996d445a6517a9fa67c6f9b649330837a81f66ca47abfef6a57",
+      "com/megacrit/cardcrawl/powers/RegenerateMonsterPower.class": "e648303674f044011b833bfd261e5c8772b5942aab708ac0075fccad7bb3f0d6",
+      "com/megacrit/cardcrawl/powers/MetallicizePower.class": "e7812a80d5c8fea930bfa06af10da1ff300038ab62688f8efa12726805ac907d",
+      "com/megacrit/cardcrawl/vfx/campfire/CampfireRecallEffect.class": "621b116ea23d4139b3e487e109bed1d4870f446717eeb8d9620dbbd9075e783d",
+      "com/megacrit/cardcrawl/characters/AbstractPlayer.class": "5dbefe89175f3e03fdd133d498b653d66073645a8c7fc109f3f4b717d10c266f"
     }
   },
   "map": ["rest", "shop", "elite", "boss", "victory"],
@@ -148,6 +158,28 @@
       },
       "on_death": "if another monster lives: the player faces it, loses Surrounded, and the survivor loses BackAttack"
     }
+  },
+  "keys": {
+    "about": "StS1 key acquisition. actNum is StS1's 1-3 (StS2 act index + 1). The StS2 port follows owner decisions, see docs/review/act4-mechanics.md.",
+    "requires_final_act_available": true,
+    "ruby": {"source": "rest_site_option", "effect": "takes the rest site's action: no heal, no upgrade"},
+    "sapphire": {"source": "chest", "effect": "alternative to the chest's relic: taking one forgoes the other"},
+    "emerald": {
+      "source": "marked_elite",
+      "marking": "after each act's map is generated, while the Emerald is not held: one elite node, uniformly, with the map RNG",
+      "reward": "an extra reward next to the elite's relic, not an alternative to it",
+      "buff": {
+        "applies_to": "every monster of the fight, at combat start",
+        "choice": "one of the options, uniformly",
+        "options": [
+          {"power": "Strength", "amount": "actNum + 1"},
+          {"max_hp_percent": 25, "rounding": "half_up", "heals_the_gain": true},
+          {"power": "Metallicize", "amount": "2 * actNum + 2"},
+          {"power": "RegenerateMonster", "amount": "1 + 2 * actNum", "note": "heals at the end of the monster's turn unless it is dying; never decrements"}
+        ]
+      }
+    },
+    "act4_requires": ["ruby", "emerald", "sapphire"]
   },
   "powers": {
     "Invincible": "Caps the owner's HP loss, counted after block, to what remains of the amount; the remainder drops by each HP loss and refills at the start of the monsters' turn. Every damage type counts, including HP loss. Priority 99.",
