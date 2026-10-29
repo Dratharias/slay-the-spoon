@@ -30,9 +30,9 @@ Mutagenic Strength relic that Augmenter hands out. Work on `step-3`, version 0.6
 
 ## Tasks
 
-1. [ ] `Sts1EventRule` in `src/Core/` (eligibility, card lock, replacement roll, Vampires max HP loss) with
+1. [x] `Sts1EventRule` in `src/Core/` (eligibility, card lock, replacement roll, Vampires max HP loss) with
    xUnit tests.
-2. [ ] Event art export in `tools/sts1/art.py` (`--events`) with pytest; run it.
-3. [ ] Events, relic, temporary Strength power, pool and portrait patches, event injection, console command,
+2. [x] Event art export in `tools/sts1/art.py` (`--events`) with pytest; run it.
+3. [x] Events, relic, temporary Strength power, pool and portrait patches, event injection, console command,
    EN/FR text; asset test for every event. Build 0/0.
 4. [ ] Checklist `docs/testing/step-3d-checklist.md`, README, CLAUDE.md, backlog, version 0.6.0.

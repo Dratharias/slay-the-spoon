@@ -1,5 +1,8 @@
 {
 	"SPOON_SPIRE_SOUVENIR.description": "You can now find cards from the other Slay the Spire.",
 	"SPOON_SPIRE_SOUVENIR.flavor": "A little piece of an older Spire.",
-	"SPOON_SPIRE_SOUVENIR.title": "Spire Souvenir"
+	"SPOON_SPIRE_SOUVENIR.title": "Spire Souvenir",
+	"STS1_MUTAGENIC_STRENGTH.description": "Start each combat with [blue]{StrengthPower}[/blue] [gold]Strength[/gold]. At the end of your first turn, lose [blue]{StrengthPower}[/blue] [gold]Strength[/gold].",
+	"STS1_MUTAGENIC_STRENGTH.flavor": "\"The results seem fleeting, triggering when the subject is in danger.\" - Unknown",
+	"STS1_MUTAGENIC_STRENGTH.title": "Mutagenic Strength"
 }
