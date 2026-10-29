@@ -91,6 +91,11 @@ Interest is fixed on acceptance; gifts create no debt. **Death and resurrection 
 Debts are saved with the run. Solo, Standard and Daily runs are unaffected.
 The merchant interface still needs in-game validation; see `docs/testing/step-5-checklist.md`.
 
+**Act 4 (in development, not playable yet):** reaching Act 3 in a Standard run at Ascension 10
+for the first time will permanently unlock Act 4, even if that run is lost. Once unlocked,
+it will be available at every ascension level, including 0. A Custom Run option will allow
+activation without this prerequisite. Daily runs will remain unchanged.
+
 ## Development status — 2026-10-29
 
 Work is on `step-3`, not merged or published. The current version is **0.6.0**: Ironclad, Silent,

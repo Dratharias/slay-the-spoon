@@ -29,13 +29,14 @@ The mod is published on the Steam Workshop and in a public GitHub repository.
 - Works in multiplayer (StS2 co-op) and solo.
 
 **Non-goals (for now)**
-- StS1 relics, potions, events, monsters, bosses. Cards only.
+- General StS1 content beyond the approved ports. Act 4 monsters and bosses are now explicitly
+  in scope (2026-10-29 amendment below).
 - Watcher: no cards, no character, no stances/Mantra/Scry/Divinity.
 - Regent and Necrobinder: untouched. They have no StS1 counterpart and keep their StS2 cards in every
   mode (colorless cards still follow the mode, see §3.3).
 - Balancing. Strange and overpowered builds are intended.
-- Anything outside StS2's Custom Run mode. A normal (Standard) run is untouched vanilla StS2, except
-  for the Spire Souvenir relic (amended 2026-10-29, see `2026-10-29-spire-souvenir-relic-design.md`).
+- Standard-run changes beyond the approved Spire Souvenir relic and Act 4 unlock
+  (amended 2026-10-29; see §3.1 and the Act 4 scope amendment below). Daily stays vanilla.
 
 **Anti-goals — failure even if it technically works**
 - Multiplayer desyncs.
@@ -47,9 +48,14 @@ The mod is published on the Steam Workshop and in a public GitHub repository.
 
 These were decided in conversation and are not open for the builder to change.
 
-1. **Custom Run only.** Every Slay the Spoon option lives in StS2's Custom Run screen (solo and
-   multiplayer `host_custom`). Standard and Daily runs are not modified. Amended 2026-10-29: the Spire
+1. **Custom Run options, with approved Standard exceptions.** Lobby options live in StS2's Custom Run
+   screen (solo and multiplayer `host_custom`). Daily runs remain unchanged. Amended 2026-10-29: the Spire
    Souvenir relic can be found in Standard runs (see `2026-10-29-spire-souvenir-relic-design.md`).
+   Further amendment, 2026-10-29: Act 4 permanently unlocks the first time Act 3 is reached in
+   a Standard run at Ascension 10. Victory is not required and defeat does not revoke it.
+   After unlocking, Act 4 is available at every ascension level, including 0. Custom Runs
+   can activate it without this prerequisite. Daily runs remain unchanged. This approved
+   Act 4 behavior is still under implementation; see `../plans/2026-10-29-step-6-act4.md`.
 2. **Who configures:** the lobby host in multiplayer, the player in solo.
 3. **Card set mode:** `StS1 only` / `StS2 only` / `Hybrid`, one choice per run. Colorless cards follow
    the mode too (StS1 colorless in StS1 only, both in Hybrid), for every character including Regent
@@ -227,6 +233,13 @@ before cards are coded.
 properties so it survives save/load and is identical on all clients. Requests/offers travel as mod
 synced actions (`INetAction`, found in mods by the game); the gold transfer and every repayment are deterministic synced game actions, never
 local-only state changes.
+
+## Act 4 scope amendment (2026-10-29)
+
+Act 4 is an explicit exception to the original Custom-only scope. Its permanent Standard-run
+unlock requires reaching Act 3 at Ascension 10 once, regardless of victory or defeat. After that,
+Act 4 is available at all ascension levels. Custom activation bypasses the unlock requirement.
+This does not authorize modifying the regular save or changing Daily runs.
 
 ## 7. Delivery order
 

@@ -89,6 +89,9 @@ Read `README.md` for the player view and the spec for every decision.
 - `make sts1-act4-data` stages 23 assets and selected EN/FR monster/power text in `data/sts1/act4/`.
 - SHA-256 manifest and deterministic import tests; no Java/decompiled code committed.
 - Not playable or exposed in the lobby. Next: mechanics audit, animation compatibility, key state and act routing.
+- Approved Act 4 unlock: first reach Act 3 in a Standard run at Ascension 10; victory is not required.
+  The unlock is permanent and makes Act 4 available at every ascension level, including 0.
+  A Custom Run option bypasses this prerequisite. This rule is documented, not implemented yet.
 - Co-op key ownership remains an owner decision; do not assume it during implementation.
 
 ## Documents
@@ -111,8 +114,9 @@ Read `README.md` for the player view and the spec for every decision.
 - The mod ships in **English and French only**. Every text the mod adds goes in both
   `godot/SlaySpoon/localization/eng/` and `.../fra/`.
 - The mod must **never write the regular (unmodded) save**. Progress sync only reads it.
-- Standard and Daily runs stay available and vanilla. A lock on them was tried and reverted.
-  The mod's options live only in Custom Run.
+- Standard and Daily modes remain available; never lock the modes themselves.
+  Daily stays vanilla. Standard exceptions are Spire Souvenir and the approved Act 4 unlock
+  documented above. Lobby activation options live in Custom Run.
 - Bug reports are not support requests (see README). Don't promise fixes.
 - Never commit decompiled game code.
 - Commit on a step branch. Push and publish only on request.
