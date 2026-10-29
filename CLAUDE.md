@@ -135,7 +135,7 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/Core/` | Pure logic: scaling maths, save paths, config parsing |
 | `src/Config/` | `ModifierModel`s. One sealed class per percent (`SpoonMonsterHp150`); the class name *is* the value, so the game's own id sync and save carry it |
 | `src/CustomRunUi/` | Extra Custom Run rows with − / + steppers, co-op sync, lobby init fixes |
-| `src/Combat/` | Enemy HP scaling (`Creature.ScaleHpForMultiplayer` postfix + solo `CombatState.CreateCreature`) |
+| `src/Combat/` | Enemy HP scaling (`Creature.ScaleHpForMultiplayer` postfix + solo `CombatState.CreateCreature`); `EnemyEffectDamage` flags dealer-less enemy damage for Monster Damage |
 | `src/Saves/` | Progress sync prefix on `ProgressSaveManager.LoadProgress`, first-launch popup, cfg file |
 | `src/TopBar/` | Percent label instead of the missing modifier icon |
 | `src/Config/CardSetModifiers.cs` | Card set modifiers: `SpoonCardSetSts1Only`, and `SpoonSpireSouvenirModifier`, which gives the Spire Souvenir at run start to every character with StS1 cards (Hybrid comes from the relic; mutually exclusive) |
@@ -157,7 +157,9 @@ Read `README.md` for the player view and the spec for every decision.
   - Don't instantiate models outside `ModelDb`: it throws `DuplicateModelException`.
   - The lobby rejects players whose mods differ.
 - **Damage:** `ModifyDamageMultiplicative` scales attacks and intents together.
-- **Damage sources not scaled:** damage with no enemy dealer (Constrict, Burn…). It is in the backlog.
+- **Damage with no enemy dealer:** `MonsterDamageRule` also scales Status cards no player created (a `creator` on
+  `AddGeneratedCardsToCombat` marks player-made ones) and Constrict/Galvanic (an `AsyncLocal` victim set around
+  their async hook). Curses and the players' own powers stay vanilla (owner call, 2026-10-29).
 - **Private members:** read them with `AccessTools.FieldRefAccess` / `MethodDelegate`.
   - `RunManager.State` is private.
   - The Custom Run screen is cached and reused between openings.

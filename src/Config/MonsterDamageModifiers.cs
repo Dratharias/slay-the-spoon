@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using SlaySpoon.Combat;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Config;
@@ -11,10 +12,12 @@ public abstract class SpoonMonsterDamage : SpoonPercentModifier
 {
 	protected override string FamilyKey => "SPOON_MONSTER_DAMAGE";
 
-	/// <summary>Scales all damage dealt by enemies; the game's damage pipeline does the rounding.</summary>
+	/// <summary>Scales all damage enemies cause (<see cref="MonsterDamageRule"/>); the game's damage pipeline does the rounding.</summary>
 	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
-		return dealer?.Side == CombatSide.Enemy ? ScalingMath.DamageMultiplier(Percent) : 1m;
+		bool scales = MonsterDamageRule.Scales(dealer?.Side == CombatSide.Enemy, target?.Side == CombatSide.Enemy,
+			EnemyEffectDamage.IsEnemyStatus(cardSource), EnemyEffectDamage.IsEnemyEffectOn(target));
+		return scales ? ScalingMath.DamageMultiplier(Percent) : 1m;
 	}
 }
 

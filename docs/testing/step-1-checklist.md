@@ -19,6 +19,9 @@ co-op check should also be done once over Steam with a friend.
 - [ ] Solo, Monster HP 200 %: the first enemy has double its usual HP range.
 - [ ] Monster HP 25 %: a very low-HP enemy still has at least 1 HP.
 - [ ] Monster Damage 50 %: enemy intents and the HP you actually lose are halved.
+- [ ] Monster Damage 200 %, enemy effects with no attacker (backlog fix): Constrict (Slithering Strangler) and
+      Galvanic (Globe Head) deal double; a Burn from Mecha Knight deals 4 and its card text says so; a Burn from
+      Overclock or StS1 Immolate still deals 2; curses (Regret, Bad Luck, Decay) stay vanilla.
 - [ ] A fight with summons (an enemy that spawns minions): the minions are scaled too, once.
 - [ ] Test Subject boss: its second and third forms are scaled too. Ovicopter: hatched eggs are scaled.
 - [x] Co-op: host and client see identical enemy HP.
