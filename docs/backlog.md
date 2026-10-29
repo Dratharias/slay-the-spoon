@@ -2,7 +2,6 @@
 
 Known gaps deferred from step 1's final review. Fixed when the author feels like it.
 
-- Top bar: HP and Damage entries are told apart only by their hover tip.
 - With a card set mode and the vanilla "<Character> Cards" Custom Run modifier, an Ironclad merchant
   doesn't add the other character's cards: `CharacterCards.ModifyMerchantCardPool` gives up when an
   offered card's `Pool` isn't the player's pool, and StS1 cards live in `Sts1IroncladCardPool`.
