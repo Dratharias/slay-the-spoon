@@ -81,7 +81,7 @@ public class Sts1AssetsTests
 	}
 
 	// Placeholders the game fills itself rather than from the card's own vars.
-	private static readonly HashSet<string> BuiltInPlaceholders = new() { "IfUpgraded", "energyPrefix" };
+	private static readonly HashSet<string> BuiltInPlaceholders = new() { "IfUpgraded", "energyPrefix", "InCombat" };
 
 	/// <summary>A {Name:...} placeholder with no matching card var throws when the card text is shown.</summary>
 	[Fact]
