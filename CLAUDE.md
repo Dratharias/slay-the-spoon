@@ -99,7 +99,7 @@ Read `README.md` for the player view and the spec for every decision.
 - Approved Act 4 unlock: first reach Act 3 in a Standard run at Ascension 10; victory is not required.
   The unlock is permanent and makes Act 4 available at every ascension level, including 0.
   A Custom Run option bypasses this prerequisite. This rule is documented, not implemented yet.
-- Co-op key ownership remains an owner decision; do not assume it during implementation.
+- Co-op keys are team-wide (owner decision): one set for the team; a key any player collects counts for all.
 
 ## Documents
 
