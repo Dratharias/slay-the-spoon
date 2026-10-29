@@ -1,5 +1,6 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
+using SlaySpoon.Cards.Pools;
 using SlaySpoon.Config;
 
 namespace SlaySpoon;
@@ -12,6 +13,7 @@ public static class ModEntry
 	public static void Initialize()
 	{
 		PercentModifierTable.SelfCheck();
+		Sts1CardTypes.SelfCheck();
 		LinuxHarmonyFix.Apply();
 		new Harmony("slayspoon").PatchAll(typeof(ModEntry).Assembly);
 		SpoonLog.Info($"Slay the Spoon {Version} loaded");

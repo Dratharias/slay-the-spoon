@@ -56,6 +56,8 @@ sts1-data:
 		--matches src/CardSets/Sts1Matches.g.cs --character Ironclad
 	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --sts1 data/sts1/ironclad.json \
 		--table data/duplicates/ironclad.json --out godot/SlaySpoon/images/cards/ironclad
+	$(TOOLS) python tools/sts1/codegen.py --sts1 data/sts1/ironclad.json --table data/duplicates/ironclad.json \
+		--character Ironclad --src src/Cards/Sts1/Ironclad --loc godot/SlaySpoon/localization
 
 # Build and install into the game's mods folder.
 up: build

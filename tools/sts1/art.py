@@ -13,21 +13,25 @@ from pathlib import Path
 
 from PIL import Image
 
+import codegen
+import match
+
 SIZE = (250, 190)
 
 
 def export(jar: Path, cards: list, rows: list, out: Path) -> list:
-    """Write sts1_<snake>.png for every card whose relation is not same-sts2; return the paths."""
+    """Write <model id>.png for every card whose relation is not same-sts2; return the paths."""
     shipped = {r["sts1"] for r in rows if r["relation"] != "same-sts2"}
     out.mkdir(parents=True, exist_ok=True)
     written = []
     with zipfile.ZipFile(jar) as z:
-        for card in sorted(cards, key=lambda c: c["snake"]):
+        for card in sorted(cards, key=lambda c: c["class"]):
             if card["class"] not in shipped:
                 continue
             data = z.read(f"images/1024Portraits/{card['portrait']}.png")
             img = Image.open(io.BytesIO(data)).convert("RGBA").resize(SIZE, Image.LANCZOS)
-            path = out / f"sts1_{card['snake']}.png"
+            # Named after the ModelDb id, which is what Sts1Card.PortraitPath uses.
+            path = out / f"{match.slug(codegen.class_name(card['class'])).lower()}.png"
             img.save(path, optimize=True)
             written.append(path)
     return written

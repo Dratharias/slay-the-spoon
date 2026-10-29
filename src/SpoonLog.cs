@@ -9,4 +9,9 @@ public static class SpoonLog
 	{
 		Log.Info("[SlaySpoon] " + message);
 	}
+
+	public static void Error(string message)
+	{
+		Log.Error("[SlaySpoon] " + message);
+	}
 }

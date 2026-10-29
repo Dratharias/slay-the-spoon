@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h8x5du1pcdro"
-path="res://.godot/imported/sts1_drop_kick.png-f4c663abd07463a57d75e3da4f6b428c.ctex"
+uid="uid://5ion4ig4ddij"
+path="res://.godot/imported/sts1_dropkick.png-ea831e93c2d0da5ff76d12ca0259d58e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SlaySpoon/images/cards/ironclad/sts1_drop_kick.png"
-dest_files=["res://.godot/imported/sts1_drop_kick.png-f4c663abd07463a57d75e3da4f6b428c.ctex"]
+source_file="res://SlaySpoon/images/cards/ironclad/sts1_dropkick.png"
+dest_files=["res://.godot/imported/sts1_dropkick.png-ea831e93c2d0da5ff76d12ca0259d58e.ctex"]
 
 [params]
 
