@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 
@@ -9,8 +10,10 @@ namespace SlaySpoon.Config;
 /// </summary>
 public abstract class SpoonPercentModifier : ModifierModel
 {
-	/// <summary>Read from the class name suffix (SpoonMonsterHp150 → 150), the single source of the value.</summary>
-	public int Percent => PercentOf(GetType());
+	private static readonly ConcurrentDictionary<Type, int> Percents = new();
+
+	/// <summary>Read from the class name suffix (SpoonMonsterHp150 → 150), the single source of the value; parsed once per type.</summary>
+	public int Percent => Percents.GetOrAdd(GetType(), PercentOf);
 
 	/// <summary>Percent encoded in a concrete family member's class name.</summary>
 	public static int PercentOf(Type type)
