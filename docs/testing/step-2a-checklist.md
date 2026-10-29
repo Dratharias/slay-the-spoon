@@ -38,7 +38,7 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 - [ ] Flex (0 energy): +2 / +4 Strength, lost at the end of the turn. The buff shows the Flex Potion icon and names Flex.
 - [ ] Ghostly Armor: Ethereal, 10 / 13 Block.
 - [ ] Intimidate (0 energy, Exhausts): 1 / 2 Weak to ALL enemies.
-- [ ] Limit Break: doubles Strength (with -2 Strength it goes to -4). Exhausts; the upgrade doesn't.
+- [x] Limit Break: doubles Strength (with -2 Strength it goes to -4). Exhausts; the upgrade doesn't.
 - [ ] Power Through: 2 Wounds into the hand, 15 / 20 Block. With a full hand the Wounds go where vanilla sends overflow.
 - [ ] Seeing Red (1 / 0 energy, Exhausts): +2 energy.
 - [ ] Sentinel: 5 / 8 Block. Exhausted by another card (e.g. Sever Soul, True Grit) or by Ethereal: +2 / +3 energy.
