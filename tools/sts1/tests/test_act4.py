@@ -63,3 +63,13 @@ def test_missing_resource_leaves_existing_import_untouched(tmp_path):
     with pytest.raises(KeyError):
         act4.import_act4(jar, out)
     assert before == {p.relative_to(out): p.read_bytes() for p in out.rglob("*") if p.is_file()}
+
+
+def test_key_sprites_match_the_import():
+    root = __import__("pathlib").Path(__file__).resolve().parents[3]
+    source = root / "data/sts1/act4/assets/images"
+    keys = root / "godot/SlaySpoon/images/keys"
+    sprites = {f"key_{c}.png": source / "ui/topPanel" for c in ("red", "green", "blue")}
+    sprites.update({f"{k}_key.png": source / "largeRelics" for k in ("ruby", "emerald", "sapphire")})
+    for name, folder in sprites.items():
+        assert (keys / name).read_bytes() == (folder / name).read_bytes(), name

@@ -3,6 +3,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.sts2.Core.Nodes.TopBar;
+using SlaySpoon.Act4;
 using SlaySpoon.Config;
 using SlaySpoon.Core;
 using SlaySpoon.Loans;
@@ -44,6 +45,9 @@ public static class TopBarPercentPatch
 			case SpoonMerchantLoans loans:
 				ShowDebts(__instance, loans);
 				break;
+			case SpoonAct4 act4:
+				ShowKeys(__instance, act4);
+				break;
 		}
 	}
 
@@ -69,6 +73,46 @@ public static class TopBarPercentPatch
 		Refresh();
 		MerchantLoans.Changed += Refresh;
 		__instance.TreeExiting += () => MerchantLoans.Changed -= Refresh;
+	}
+
+	/// <summary>Three small key sprites (red, green, blue as in StS1): full opacity when held, dim when missing.</summary>
+	private static void ShowKeys(NTopBarModifier __instance, SpoonAct4 act4)
+	{
+		Icon(__instance).Texture = null;
+		Act4Key[] order = { Act4Key.Ruby, Act4Key.Emerald, Act4Key.Sapphire };
+		HBoxContainer row = new HBoxContainer { Name = "SpoonKeys", MouseFilter = Control.MouseFilterEnum.Ignore };
+		row.AddThemeConstantOverride("separation", 2);
+		TextureRect[] rects = new TextureRect[order.Length];
+		for (int i = 0; i < order.Length; i++)
+		{
+			rects[i] = new TextureRect
+			{
+				Texture = GD.Load<Texture2D>(KeySprites.Path(order[i], large: false)),
+				StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+				ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+				CustomMinimumSize = new Vector2(24f, 24f),
+				MouseFilter = Control.MouseFilterEnum.Ignore,
+			};
+			row.AddChild(rects[i]);
+		}
+		__instance.AddChild(row);
+		row.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
+		__instance.CustomMinimumSize = new Vector2(
+			Mathf.Max(order.Length * 26f + Padding, __instance.CustomMinimumSize.X), __instance.CustomMinimumSize.Y);
+		void Refresh()
+		{
+			if (!GodotObject.IsInstanceValid(row))
+			{
+				return;
+			}
+			for (int i = 0; i < order.Length; i++)
+			{
+				rects[i].Modulate = new Color(1f, 1f, 1f, act4.Keys.Has(order[i]) ? 1f : 0.25f);
+			}
+		}
+		Refresh();
+		Act4Keys.Changed += Refresh;
+		__instance.TreeExiting += () => Act4Keys.Changed -= Refresh;
 	}
 
 	private static Label ReplaceIcon(NTopBarModifier __instance, string text, Color color)

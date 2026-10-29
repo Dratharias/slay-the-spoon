@@ -24,3 +24,9 @@ Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 firs
 - [ ] Co-op Standard run: the host's unlock decides; a client without the unlock still gets the flag from the host.
 - [ ] A new Standard run after a run that took a key starts with no keys.
 - [ ] A new run after a run with a loan starts with no debt (same session).
+
+## Act 4 keys in the top bar (Task 5)
+
+- [ ] A run with the Act 4 flag shows three dim keys (red, green, blue) in the top bar at run start; the hover tip is unchanged.
+- [ ] When one player takes a key, that key brightens for every player.
+- [ ] Save and resume: held keys stay bright.
