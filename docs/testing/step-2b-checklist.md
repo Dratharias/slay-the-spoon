@@ -10,7 +10,7 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 - [ ] Juggernaut (2 energy): whenever you gain Block, 5 / 7 damage to a random enemy.
 - [x] Rampage: 8 damage, then +5 / +8 damage each play this combat; back to 8 next combat.
 - [ ] StS1-only: Rupture is offered only in its StS1 version.
-- [ ] StS1 Rupture: losing HP to your own cards (Bloodletting, Offering, Hemokinesis…), Brutality or Combust gives 1 / 2 Strength at once, on any turn. Damage from enemies doesn't.
+- [x] StS1 Rupture: losing HP to your own cards (Bloodletting, Offering, Hemokinesis…), Brutality or Combust gives 1 / 2 Strength at once, on any turn. Damage from enemies doesn't.
 
 ## Hybrid: duplicates
 
