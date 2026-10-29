@@ -1,4 +1,7 @@
 {
+	"STS1_A_THOUSAND_CUTS_POWER.description": "Chaque fois que vous jouez une carte, infligez des dégâts à TOUS les ennemis.",
+	"STS1_A_THOUSAND_CUTS_POWER.smartDescription": "Chaque fois que vous jouez une carte, infligez [blue]{Amount}[/blue] dégâts à TOUS les ennemis.",
+	"STS1_A_THOUSAND_CUTS_POWER.title": "Mille coupures",
 	"STS1_BERSERK_POWER.description": "Au début de votre tour, gagnez de l'[gold]Énergie[/gold].",
 	"STS1_BERSERK_POWER.smartDescription": "Au début de votre tour, gagnez [blue]{Amount}[/blue] {energyPrefix:energyIcons(1)}.",
 	"STS1_BERSERK_POWER.title": "Folie furieuse",
@@ -25,5 +28,8 @@
 	"STS1_METALLICIZE_POWER.title": "Métallisation",
 	"STS1_RUPTURE_POWER.description": "Quand une carte vous fait perdre des PV, gagnez de la [gold]Force[/gold].",
 	"STS1_RUPTURE_POWER.smartDescription": "Quand une carte vous fait perdre des PV, gagnez [blue]{Amount}[/blue] de [gold]Force[/gold].",
-	"STS1_RUPTURE_POWER.title": "Rupture"
+	"STS1_RUPTURE_POWER.title": "Rupture",
+	"STS1_WRAITH_FORM_POWER.description": "À la fin de votre tour, perdez de la [gold]Dextérité[/gold].",
+	"STS1_WRAITH_FORM_POWER.smartDescription": "À la fin de votre tour, perdez [blue]{Amount}[/blue] de [gold]Dextérité[/gold].",
+	"STS1_WRAITH_FORM_POWER.title": "Forme spectrale"
 }

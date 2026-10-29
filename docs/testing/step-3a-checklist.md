@@ -54,3 +54,12 @@ StS2's Clash, Dual Wield and Entrench are Event cards and Shockwave is colorless
 - [ ] Calculated Gamble (0, Exhaust; upgraded: no Exhaust): discards your hand, then draws that many cards.
 - [ ] Reflex (Unplayable): when a card discards it (Survivor, Acrobatics, Calculated Gamble…), draw 2 / 3. Discarding it at end of turn does nothing.
 - [ ] Tactician (Unplayable): when a card discards it, gain 1 / 2 energy. Discarding it at end of turn does nothing.
+
+## Silent powers
+
+- [ ] A Thousand Cuts (2): whenever you play a card, 1 / 2 damage to ALL enemies (Phantom Blades icon). The copy that applies it doesn't trigger it; a second copy deals the old amount, then stacks.
+- [ ] Wraith Form (3): 2 / 3 Intangible; at the END of your turn, lose 1 Dexterity (Wraith Form icon, red debuff).
+- [ ] StS1-only and Hybrid, Silent: Caltrops and Envenom show up in their StS1 version.
+- [ ] Caltrops (1): 3 / 5 Thorns.
+- [ ] Envenom (2 / 1): whenever an Attack deals unblocked damage, apply 1 Poison.
+- [ ] French titles of the namesakes match StS2's: Astucieux (Outmaneuver), Réflexes, Embrocher (Skewer), Tactique (Tactician), Envenimer.
