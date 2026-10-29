@@ -17,3 +17,13 @@ Tick when checked in game. "Base / +" means the card before and after upgrade.
 - [ ] An upgraded Rupture in a reward stays upgraded whichever version it comes out as.
 - [ ] Co-op Hybrid: no desync after rewards, a merchant visit or a transform that produced a Rupture.
 - [ ] Standard and StS1-only runs: never a random version (StS1-only always has the StS1 Rupture).
+
+## Hybrid: swap button on card rewards
+
+- [ ] A card reward offering Rupture shows a button "Rupture: StS1 version" (or "StS2 version") next to Skip; other cards get no button. French: "Rupture : version StS1".
+- [ ] Pressing it turns the card into the other version in place (art, text); pressing again turns it back. The upgrade (+) is kept.
+- [ ] Taking the card after a swap adds the version shown.
+- [ ] Skip and Reroll still work; after a reroll that brings a Rupture, its button works too.
+- [ ] Co-op: swap then take the card; the other player's view of your deck shows the same version, and nothing desyncs.
+- [ ] Standard and StS1-only rewards: no swap button, Skip/Reroll unchanged.
+- [ ] Controller: the swap button can be focused and pressed; its hotkey (draw pile button) works.
