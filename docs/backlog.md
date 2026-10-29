@@ -27,4 +27,4 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
 - StS1 Panache keeps a card in its counted set if that card's play is aborted between
   `BeforeCardPlayed` and `AfterCardPlayed`; harmless, the power is gone at combat end.
 - Bite, J.A.X. and Ritual Dagger are event-only cards with no event yet (console only): StS1's
-  Vampires, Augmenter and Nloth-style sources don't exist in StS2.
+  events (Vampires, Augmenter, The Nest) don't exist in StS2.
