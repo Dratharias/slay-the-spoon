@@ -91,7 +91,9 @@ Read `README.md` for the player view and the spec for every decision.
 - Mechanics audit recorded: `data/sts1/act4/mechanics.json` (hand-written, pinned to the jar's class SHA-256s,
   checked by `tools/sts1/tests/test_act4_mechanics.py`) and `docs/review/act4-mechanics.md`. The StS1 Act 4
   classes are decompiled in `~/Projects/sts-decomp/sts1/` (never commit them).
-- Open owner questions: which StS2 ascension carries the StS1 A18/A19 move changes; Invincible cap in co-op.
+- Owner decisions: StS1 HP raises → StS2 A8, damage raises → A9, StS1 A18/A19 changes → A10; the Heart's
+  Invincible cap scales with the same multiplayer factor as HP.
+- StS2's `MultiplayerScalingModel.GetMultiplayerScaling` throws for act index 3: patch it before any act 4 co-op fight.
 - Not playable or exposed in the lobby. Next: animation compatibility, key state and act routing.
 - Approved Act 4 unlock: first reach Act 3 in a Standard run at Ascension 10; victory is not required.
   The unlock is permanent and makes Act 4 available at every ascension level, including 0.

@@ -77,10 +77,15 @@ targets a single enemy turns the player toward that enemy.
 - **Visuals:** StS2 ships the Spine **4.2** runtime. The StS1 skeletons are Spine **3.4.02**: they must be
   converted to 4.2, or replaced by another visual (owner choice, work package 5).
 
-## Owner questions
+- **Multiplayer HP scaling crashes past act 3.** `Creature.ScaleHpForMultiplayer` multiplies HP by
+  `playerCount × MultiplayerScalingModel.GetMultiplayerScaling(encounter, actIndex)`, and that method throws
+  `ArgumentOutOfRangeException` for any act index above 2. Act 4 (index 3) needs a patch there before any co-op
+  fight. Builder call: reuse act 3's factors (1.2 elite, 1.3 boss).
 
-1. **Ascension mapping.** StS1 raises elite/boss damage at A3/A4, HP at A8/A9, and the special moves at A18/A19
-   (Invincible 200, Beat of Death 2, Artifact 2, Smash 99 Block, Burns in the draw pile). StS2 has 10 levels:
-   Tough Enemies (A8) for HP and Deadly Enemies (A9) for damage are the natural slots. Where do the special moves go?
-2. **Invincible in co-op.** StS2 scales enemy HP with the player count. Does the 300 cap stay shared by every
-   player, or scale with the player count like HP?
+## Owner decisions (2026-10-29)
+
+1. **Ascension mapping.** StS1 HP raises (A8/A9) go to StS2 **Tough Enemies (A8)**, damage raises (A3/A4) to
+   **Deadly Enemies (A9)**, and the StS1 A18/A19 changes (Invincible 200, Beat of Death 2, Artifact 2, Smash
+   99 Block, Burns in the draw pile) to **A10** (Double Boss, the highest level).
+2. **Invincible in co-op.** The cap scales like the Heart's HP: 300 (or 200) × the same multiplayer factor,
+   so a co-op fight takes about as many turns as a solo one. Every player's damage shares that one cap.
