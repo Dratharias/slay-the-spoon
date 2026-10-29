@@ -38,3 +38,14 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 - [ ] Ticked with Draft (or Sealed Deck): Draft's picks come first, then Neow's blessings; picking one finishes the event.
 - [ ] The top bar shows "Neow" for it.
 - [ ] Co-op: the host ticks it; both players get Neow's blessings, no desync.
+
+## Spire Souvenir
+
+- [ ] Standard run, `relic add SPOON_SPIRE_SOUVENIR`: the tooltip shows the Dusty Tome icon and the text in English and French.
+- [ ] Standard run, relic held: card rewards show StS1 cards, and a duplicate (Rupture) shows the swap button.
+- [ ] Relic held: the merchant and a transform offer StS1 cards.
+- [ ] Custom Run with "Slay the Spire 1 Cards" and the relic: StS2 cards come back.
+- [ ] Custom Run with "Cards From Both Games": the relic never drops; given by console, nothing changes.
+- [ ] `relic remove SPOON_SPIRE_SOUVENIR`: the next reward is back to the run's mode.
+- [ ] Save, quit and resume with the relic: the effect persists.
+- [ ] Co-op (`make mp`): relic on the host only; the client's rewards stay vanilla, and both screens agree on the host's reward.

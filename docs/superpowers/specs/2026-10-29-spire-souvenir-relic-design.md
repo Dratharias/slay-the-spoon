@@ -1,7 +1,7 @@
 # Spire Souvenir relic — Design
 
 Date: 2026-10-29
-Status: draft, awaiting the owner's approval
+Status: approved by the owner 2026-10-29
 Amends: `2026-10-28-slay-the-spoon-design.md` (§2 non-goal "anything outside Custom Run", §3.1)
 
 ## 1. Intent

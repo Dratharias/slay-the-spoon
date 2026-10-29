@@ -1,22 +1,23 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.CardSets;
 
-/// <summary>Turns a duplicate card into its other version (Hybrid mode only).</summary>
+/// <summary>Turns a duplicate card into its other version (players in Hybrid only).</summary>
 public static class VersionSwap
 {
-	/// <summary>The other version of <paramref name="card"/> when its run is Hybrid, else null.</summary>
+	/// <summary>The other version of <paramref name="card"/> when its owner is in Hybrid, else null.</summary>
 	public static CardModel? PartnerOf(CardModel card)
 	{
-		return IsHybrid(card.RunState) ? CardSetPools.PartnerOf(card) : null;
+		return IsHybrid(card.Owner) ? CardSetPools.PartnerOf(card) : null;
 	}
 
-	public static bool IsHybrid(IRunState? run)
+	public static bool IsHybrid(Player? player)
 	{
-		return CardSetPools.ModeOf(run) == CardSetMode.Hybrid;
+		return CardSetPools.ModeFor(player) == CardSetMode.Hybrid;
 	}
 
 	/// <summary>

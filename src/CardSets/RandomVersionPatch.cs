@@ -19,7 +19,7 @@ public static class RandomVersionPatch
 	[HarmonyPatch(nameof(CardFactory.CreateForReward), typeof(Player), typeof(int), typeof(CardCreationOptions))]
 	public static void Reward(Player player, ref IEnumerable<CardCreationResult> __result)
 	{
-		if (VersionSwap.IsHybrid(player.RunState))
+		if (VersionSwap.IsHybrid(player))
 		{
 			__result = __result.Select(VersionSwap.RollVersion).ToList();
 		}
@@ -52,7 +52,7 @@ public static class RandomVersionPatch
 	private static void Combat(Player player, ref IEnumerable<CardModel> result)
 	{
 		// The vanilla result may be lazy; it is enumerated once here, in the same order as vanilla would.
-		if (VersionSwap.IsHybrid(player.RunState))
+		if (VersionSwap.IsHybrid(player))
 		{
 			result = result.Select(VersionSwap.RollVersion).ToList();
 		}

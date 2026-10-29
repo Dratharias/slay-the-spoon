@@ -45,6 +45,11 @@ Current (0.2.0):
   any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers
   like Draft. With it, those options come first, then the blessings.
 
+- **Spire Souvenir:** a Common Ironclad relic, also found in Standard runs, that lets its owner find
+  cards from the other game: Slay the Spire 1 cards in a normal run, Slay the Spire 2 cards in a
+  "Slay the Spire 1 Cards" run. It works like "Cards From Both Games" for that player only, and is
+  never offered in a "Cards From Both Games" run or a Daily run.
+
 - **`sts1card` console command** for testing: in a modded game the developer console opens with the
   `` ` `` key (`*` or `'` on AZERTY); `sts1card STS1_HEAVY_BLADE` puts that card in your hand in combat,
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.

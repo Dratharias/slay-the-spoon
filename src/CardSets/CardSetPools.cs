@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Runs;
@@ -7,10 +8,11 @@ using SlaySpoon.Cards;
 using SlaySpoon.Cards.Pools;
 using SlaySpoon.Config;
 using SlaySpoon.Core;
+using SlaySpoon.Relics;
 
 namespace SlaySpoon.CardSets;
 
-/// <summary>Builds a character's card pool for the run's card set mode.</summary>
+/// <summary>Builds a character's card pool for a player's card set mode.</summary>
 public static class CardSetPools
 {
 	/// <summary>A vanilla character pool, its StS1 pool and the vanilla ids that have a StS1 namesake.</summary>
@@ -21,9 +23,32 @@ public static class CardSetPools
 		new(typeof(IroncladCardPool), typeof(Sts1IroncladCardPool), Sts1Matches.Ironclad),
 	};
 
+	/// <summary>The run's card set mode, as ticked in Custom Run (none = StS2 only).</summary>
 	public static CardSetMode ModeOf(IRunState? run)
 	{
 		return run?.Modifiers.OfType<SpoonCardSet>().FirstOrDefault()?.Mode ?? CardSetMode.Sts2Only;
+	}
+
+	/// <summary>
+	/// The mode <paramref name="player"/>'s card sources follow: the run's, or Hybrid while they hold the Spire
+	/// Souvenir. Read live, so losing the relic ends the effect. With no player, the mode of <paramref name="fallbackRun"/>.
+	/// </summary>
+	public static CardSetMode ModeFor(Player? player, IRunState? fallbackRun = null)
+	{
+		if (player == null)
+		{
+			return ModeOf(fallbackRun);
+		}
+		return SouvenirRule.EffectiveMode(ModeOf(player.RunState), player.Relics.Any(r => r is SpoonSpireSouvenir));
+	}
+
+	/// <summary>
+	/// The player a GetUnlockedCards call is for. Each player owns a distinct UnlockState and vanilla callers pass
+	/// theirs; the run-wide RunState.UnlockState (Massive Scroll) matches nobody.
+	/// </summary>
+	public static Player? PlayerOf(IRunState? run, UnlockState unlockState)
+	{
+		return run?.Players.FirstOrDefault(p => ReferenceEquals(p.UnlockState, unlockState));
 	}
 
 	/// <summary>True when <paramref name="pool"/> is a vanilla pool or StS1 pool that the mode reshapes.</summary>

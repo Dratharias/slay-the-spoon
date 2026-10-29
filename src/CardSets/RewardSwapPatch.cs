@@ -52,7 +52,7 @@ public static class RewardSwapPatch
 	{
 		public static void Postfix(CardReward cardReward, ref IReadOnlyList<CardRewardAlternative> __result)
 		{
-			if (!VersionSwap.IsHybrid(cardReward.Player.RunState))
+			if (!VersionSwap.IsHybrid(cardReward.Player))
 			{
 				return;
 			}

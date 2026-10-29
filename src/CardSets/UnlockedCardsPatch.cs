@@ -12,6 +12,7 @@ namespace SlaySpoon.CardSets;
 /// Every vanilla path that offers or generates a character card reads the pool through GetUnlockedCards:
 /// rewards (CardCreationOptions), the merchant, transforms, and random generation by cards and powers
 /// (Infernal Blade, Creative AI, ...). Reshaping its result here makes all of them follow the card set mode.
+/// The mode is per player (Spire Souvenir); the player is found through the UnlockState the caller passes.
 /// </summary>
 [HarmonyPatch(typeof(CardPoolModel), nameof(CardPoolModel.GetUnlockedCards))]
 public static class UnlockedCardsPatch
@@ -30,7 +31,8 @@ public static class UnlockedCardsPatch
 		{
 			return;
 		}
-		CardSetMode mode = CardSetPools.ModeOf(RunState(RunManager.Instance));
+		RunState? run = RunState(RunManager.Instance);
+		CardSetMode mode = CardSetPools.ModeFor(CardSetPools.PlayerOf(run, unlockState), run);
 		if (mode == CardSetMode.Sts2Only)
 		{
 			return;
