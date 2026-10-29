@@ -1,0 +1,2532 @@
+[
+ {
+  "class": "Aggregate",
+  "id": "Aggregate",
+  "snake": "aggregate",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": -1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/aggregate",
+  "text": {
+   "eng": {
+    "name": "Aggregate",
+    "description": "Gain [B] for every !M! cards in your draw pile.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Agglomération",
+    "description": "Gagnez [B] pour chaque tranche de !M! cartes dans votre pioche.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "AllForOne",
+  "id": "All For One",
+  "snake": "all_for_one",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": 10,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/all_for_one",
+  "text": {
+   "eng": {
+    "name": "All for One",
+    "description": "Deal !D! damage. NL Put all cost 0 cards from your discard pile into your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Tous pour un",
+    "description": "Infligez !D! dégâts. Placez toutes les cartes coûtant 0 de votre défausse dans votre main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Amplify",
+  "id": "Amplify",
+  "snake": "amplify",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/amplify",
+  "text": {
+   "eng": {
+    "name": "Amplify",
+    "description": "This turn, your next Power card is played twice.",
+    "upgrade_description": "This turn, your next !M! Power cards are played twice."
+   },
+   "fra": {
+    "name": "Amplification",
+    "description": "Ce tour, votre prochain Pouvoir est joué deux fois.",
+    "upgrade_description": "Ce tour, vos !M! prochains Pouvoirs sont joués deux fois."
+   }
+  }
+ },
+ {
+  "class": "AutoShields",
+  "id": "Auto Shields",
+  "snake": "auto_shields",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 11,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 4,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/auto_shields",
+  "text": {
+   "eng": {
+    "name": "Auto-Shields",
+    "description": "If you have no Block, gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Boucliers automatiques",
+    "description": "Si vous n'avez pas d'Armure, gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "BallLightning",
+  "id": "Ball Lightning",
+  "snake": "ball_lightning",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/ball_lightning",
+  "text": {
+   "eng": {
+    "name": "Ball Lightning",
+    "description": "Deal !D! damage. Channel !M! Lightning.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Foudre en boule",
+    "description": "Infligez !D! dégâts. Canalisez !M! Orbe Kéraunique.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Barrage",
+  "id": "Barrage",
+  "snake": "barrage",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 4,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/barrage",
+  "text": {
+   "eng": {
+    "name": "Barrage",
+    "description": "Deal !D! damage for each Channeled Orb.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Déluge",
+    "description": "Infligez !D! dégâts pour chaque Orbe Canalisé.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "BeamCell",
+  "id": "Beam Cell",
+  "snake": "beam_cell",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 3,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 1,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/beam_cell",
+  "text": {
+   "eng": {
+    "name": "Beam Cell",
+    "description": "Deal !D! damage. NL Apply !M! Vulnerable.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Rayon cellulaire",
+    "description": "Infligez !D! dégâts et appliquez !M! de Vulnérabilité.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "BiasedCognition",
+  "id": "Biased Cognition",
+  "snake": "biased_cognition",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/biased_cognition",
+  "text": {
+   "eng": {
+    "name": "Biased Cognition",
+    "description": "Gain !M! Focus. NL At the start of your turn, lose 1 Focus.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Biais cognitif",
+    "description": "Gagnez !M! de Concentration. NL Au début de chaque tour, perdez 1 de Concentration.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Blizzard",
+  "id": "Blizzard",
+  "snake": "blizzard",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "all_enemy",
+  "damage": 0,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/blizzard",
+  "text": {
+   "eng": {
+    "name": "Blizzard",
+    "description": "Deal damage equal to !M! times the number of Frost Channeled this combat to ALL enemies.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Blizzard",
+    "description": "Infligez !M! dégâts par Orbe Glaciaire Canalisé ce combat à TOUS les ennemis.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "BootSequence",
+  "id": "BootSequence",
+  "snake": "boot_sequence",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 10,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "innate"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "innate"
+  ],
+  "portrait": "blue/skill/boot_sequence",
+  "text": {
+   "eng": {
+    "name": "Boot Sequence",
+    "description": "Innate. NL Gain !B! Block. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Démarrage",
+    "description": "Gagnez !B! d'Armure. NL Inné. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Buffer",
+  "id": "Buffer",
+  "snake": "buffer",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/buffer",
+  "text": {
+   "eng": {
+    "name": "Buffer",
+    "description": "Prevent the next time you would lose HP.",
+    "upgrade_description": "Prevent the next !M! times you would lose HP."
+   },
+   "fra": {
+    "name": "Tampon",
+    "description": "Empêche votre prochaine perte de PV",
+    "upgrade_description": "Empêche vos !M! prochaines pertes de PV."
+   }
+  }
+ },
+ {
+  "class": "Capacitor",
+  "id": "Capacitor",
+  "snake": "capacitor",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/capacitor",
+  "text": {
+   "eng": {
+    "name": "Capacitor",
+    "description": "Gain !M! Orb slots.",
+    "upgrade_description": "Gain !M! Orb slots."
+   },
+   "fra": {
+    "name": "Condensateur",
+    "description": "Gagnez !M! emplacement d'Orbe.",
+    "upgrade_description": "Gagnez !M! emplacements d'Orbe."
+   }
+  }
+ },
+ {
+  "class": "Chaos",
+  "id": "Chaos",
+  "snake": "chaos",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/chaos",
+  "text": {
+   "eng": {
+    "name": "Chaos",
+    "description": "Channel !M! random Orb.",
+    "upgrade_description": "Channel !M! random Orbs."
+   },
+   "fra": {
+    "name": "Chaos",
+    "description": "Canalisez !M! Orbe aléatoire.",
+    "upgrade_description": "Canalisez !M! Orbes aléatoires."
+   }
+  }
+ },
+ {
+  "class": "Chill",
+  "id": "Chill",
+  "snake": "chill",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "innate"
+  ],
+  "portrait": "blue/skill/chill",
+  "text": {
+   "eng": {
+    "name": "Chill",
+    "description": "Channel !M! Frost for each enemy in combat. NL Exhaust.",
+    "upgrade_description": "Innate. NL Channel !M! Frost for each enemy in combat. NL Exhaust."
+   },
+   "fra": {
+    "name": "Frisson",
+    "description": "Canalisez !M! Orbe Glaciaire pour chaque ennemi dans ce combat. NL Épuisement.",
+    "upgrade_description": "Inné. Canalisez !M! Orbe Glaciaire pour chaque ennemi dans ce combat. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "Claw",
+  "id": "Gash",
+  "snake": "claw",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 3,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/claw",
+  "text": {
+   "eng": {
+    "name": "Claw",
+    "description": "Deal !D! damage. NL Increase the damage of ALL Claw cards by !M! this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Griffe",
+    "description": "Infligez !D! dégâts. NL Toutes les cartes Griffe font !M! dégâts supplémentaires ce combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ColdSnap",
+  "id": "Cold Snap",
+  "snake": "cold_snap",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 6,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/cold_snap",
+  "text": {
+   "eng": {
+    "name": "Cold Snap",
+    "description": "Deal !D! damage. Channel !M! Frost.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Vague de froid",
+    "description": "Infligez !D! dégâts. Canalisez !M! Orbe Glaciaire.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "CompileDriver",
+  "id": "Compile Driver",
+  "snake": "compile_driver",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/compile_driver",
+  "text": {
+   "eng": {
+    "name": "Compile Driver",
+    "description": "Deal !D! damage. NL Draw !M! card for each unique Orb you have.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Compilateur de pilote",
+    "description": "Infligez !D! dégâts. NL Piochez !M! cartes pour chaque Orbe différent que vous avez.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ConserveBattery",
+  "id": "Conserve Battery",
+  "snake": "charge_battery",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 7,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/charge_battery",
+  "text": {
+   "eng": {
+    "name": "Charge Battery",
+    "description": "Gain !B! Block. NL Next turn, gain [B].",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Recharger les batteries",
+    "description": "Gagnez !B! d'Armure. NL Au prochain tour, gagnez [B].",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Consume",
+  "id": "Consume",
+  "snake": "consume",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/consume",
+  "text": {
+   "eng": {
+    "name": "Consume",
+    "description": "Gain !M! Focus. NL Lose 1 Orb slot.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Consummer",
+    "description": "Gagnez !M! de Concentration. NL Perdez 1 emplacement d'Orbe.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Coolheaded",
+  "id": "Coolheaded",
+  "snake": "coolheaded",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/coolheaded",
+  "text": {
+   "eng": {
+    "name": "Coolheaded",
+    "description": "Channel 1 Frost. NL Draw !M! card.",
+    "upgrade_description": "Channel 1 Frost. NL Draw !M! cards."
+   },
+   "fra": {
+    "name": "Sang-froid",
+    "description": "Canalisez 1 Orbe Glaciaire. NL Piochez !M! carte.",
+    "upgrade_description": "Canalisez 1 Orbe Glaciaire. NL Piochez !M! cartes."
+   }
+  }
+ },
+ {
+  "class": "CoreSurge",
+  "id": "Core Surge",
+  "snake": "core_surge",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": 11,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "blue/attack/core_surge",
+  "text": {
+   "eng": {
+    "name": "Core Surge",
+    "description": "Deal !D! damage. NL Gain !M! Artifact. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Surtension nucléique",
+    "description": "Infligez !D! dégâts. NL Gagnez !M! d'Artefact. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "CreativeAI",
+  "id": "Creative AI",
+  "snake": "creative_ai",
+  "cost": 3,
+  "cost_upgraded": 2,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/creative_ai",
+  "text": {
+   "eng": {
+    "name": "Creative AI",
+    "description": "At the start of your turn, add a random Power card into your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "IA créative",
+    "description": "Au début de chaque tour, ajoutez un Pouvoir aléatoire à votre main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Darkness",
+  "id": "Darkness",
+  "snake": "darkness",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/darkness",
+  "text": {
+   "eng": {
+    "name": "Darkness",
+    "description": "Channel !M! Dark.",
+    "upgrade_description": "Channel !M! Dark. NL Trigger the passive ability of all Dark orbs."
+   },
+   "fra": {
+    "name": "Ténèbres",
+    "description": "Canalisez !M! Orbe Obscur.",
+    "upgrade_description": "Canalisez !M! Orbe Obscur. NL Utilisez la capacité passive de tous vos Orbes Obscurs."
+   }
+  }
+ },
+ {
+  "class": "Defend_Blue",
+  "id": "Defend_B",
+  "snake": "defend",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "basic",
+  "target": "self",
+  "damage": null,
+  "block": 5,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/defend",
+  "text": {
+   "eng": {
+    "name": "Defend",
+    "description": "Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Défense",
+    "description": "Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Defragment",
+  "id": "Defragment",
+  "snake": "defragment",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/defragment",
+  "text": {
+   "eng": {
+    "name": "Defragment",
+    "description": "Gain !M! Focus.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Défragmentation",
+    "description": "Gagnez !M! de Concentration.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DoomAndGloom",
+  "id": "Doom and Gloom",
+  "snake": "doom_and_gloom",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "all_enemy",
+  "damage": 10,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/doom_and_gloom",
+  "text": {
+   "eng": {
+    "name": "Doom and Gloom",
+    "description": "Deal !D! damage to ALL enemies. NL Channel !M! Dark.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Sinistrose",
+    "description": "Infligez !D! dégâts à TOUS les ennemis. NL Canalisez !M! Orbe Obscur.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DoubleEnergy",
+  "id": "Double Energy",
+  "snake": "double_energy",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "blue/skill/double_energy",
+  "text": {
+   "eng": {
+    "name": "Double Energy",
+    "description": "Double your Energy. NL Exhaust.",
+    "upgrade_description": "Double your Energy."
+   },
+   "fra": {
+    "name": "Énergie double",
+    "description": "Doublez votre Énergie. NL Épuisement.",
+    "upgrade_description": "Doublez votre Énergie."
+   }
+  }
+ },
+ {
+  "class": "Dualcast",
+  "id": "Dualcast",
+  "snake": "dualcast",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "basic",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/dualcast",
+  "text": {
+   "eng": {
+    "name": "Dualcast",
+    "description": "Evoke your next Orb twice.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Activation double",
+    "description": "Activez votre prochain Orbe 2 fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "EchoForm",
+  "id": "Echo Form",
+  "snake": "echo_form",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "ethereal"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/echo_form",
+  "text": {
+   "eng": {
+    "name": "Echo Form",
+    "description": "Ethereal. NL The first card you play each turn is played twice.",
+    "upgrade_description": "The first card you play each turn is played twice."
+   },
+   "fra": {
+    "name": "Forme résonnante",
+    "description": "La première carte que vous jouez chaque tour est jouée deux fois. Éthérée",
+    "upgrade_description": "La première carte que vous jouez chaque tour est jouée deux fois."
+   }
+  }
+ },
+ {
+  "class": "Electrodynamics",
+  "id": "Electrodynamics",
+  "snake": "electrodynamics",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/electrodynamics",
+  "text": {
+   "eng": {
+    "name": "Electrodynamics",
+    "description": "Lightning now hits ALL enemies. NL Channel !M! Lightning.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Électrodynamique",
+    "description": "Les Orbes Kérauniques frappent TOUS les ennemis. Canalisez !M! Orbes Kérauniques.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Equilibrium",
+  "id": "Undo",
+  "snake": "equilibrium",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 13,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/equilibrium",
+  "text": {
+   "eng": {
+    "name": "Equilibrium",
+    "description": "Gain !B! Block. NL Retain your hand this turn.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Equilibrium",
+    "description": "Gagnez !B! d'Armure. NL Conservez toute votre main ce tour.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "FTL",
+  "id": "FTL",
+  "snake": "ftl",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 5,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": 1,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/ftl",
+  "text": {
+   "eng": {
+    "name": "FTL",
+    "description": "Deal !D! damage. If you have played less than !M! cards this turn, draw 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "FTL",
+    "description": "Infligez !D! dégâts. Si vous avez joué moins de !M! cartes ce tour, piochez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Fission",
+  "id": "Fission",
+  "snake": "fission",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "blue/skill/fission",
+  "text": {
+   "eng": {
+    "name": "Fission",
+    "description": "Remove all your Orbs. Gain [B] and draw !M! card for each Orb removed. NL Exhaust.",
+    "upgrade_description": "Evoke all your Orbs. Gain [B] and draw !M! card for each Orb Evoked. NL Exhaust."
+   },
+   "fra": {
+    "name": "Fission",
+    "description": "Perdez TOUS vos Orbes. Gagnez [B] et piochez !M! carte pour chaque Orbe perdu. NL Épuisement.",
+    "upgrade_description": "Activez TOUS vos Orbes. Gagnez [B] et piochez !M! carte pour chaque Orbe activé. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "ForceField",
+  "id": "Force Field",
+  "snake": "forcefield",
+  "cost": 4,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 12,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 4,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/forcefield",
+  "text": {
+   "eng": {
+    "name": "Force Field",
+    "description": "Costs 1 less [B] for each Power card played this combat. NL Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Champ de force",
+    "description": "Coûte 1 [B] de moins pour chaque Pouvoir joué ce combat. NL Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Fusion",
+  "id": "Fusion",
+  "snake": "fusion",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/fusion",
+  "text": {
+   "eng": {
+    "name": "Fusion",
+    "description": "Channel !M! Plasma.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fusion",
+    "description": "Canalisez !M! Orbe Plasmique.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "GeneticAlgorithm",
+  "id": "Genetic Algorithm",
+  "snake": "genetic_algorithm",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "blue/skill/genetic_algorithm",
+  "text": {
+   "eng": {
+    "name": "Genetic Algorithm",
+    "description": "Gain !B! Block. Permanently increase this card's Block by !M!. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Algorithme génétique",
+    "description": "Gagnez !B! d'Armure. Après avoir été jouée, l'Armure de cette carte augmente de !M! définitivement. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Glacier",
+  "id": "Glacier",
+  "snake": "glacier",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 7,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/glacier",
+  "text": {
+   "eng": {
+    "name": "Glacier",
+    "description": "Gain !B! Block. NL Channel !M! Frost.",
+    "upgrade_description": "Gain !B! Block. NL Channel !M! Frost."
+   },
+   "fra": {
+    "name": "Glacier",
+    "description": "Gagnez !B! d'Armure. NL Canalisez !M! Orbes Glaciaires.",
+    "upgrade_description": "Gagnez !B! d'Armure. NL Canalisez !M! Orbes Glaciaires."
+   }
+  }
+ },
+ {
+  "class": "GoForTheEyes",
+  "id": "Go for the Eyes",
+  "snake": "go_for_the_eyes",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 3,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 1,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/go_for_the_eyes",
+  "text": {
+   "eng": {
+    "name": "Go for the Eyes",
+    "description": "Deal !D! damage. NL If the enemy intends to attack, apply !M! Weak.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Vise les yeux",
+    "description": "Infligez !D! dégâts. Si l'ennemi compte attaquer, appliquez !M! de Faiblesse.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Heatsinks",
+  "id": "Heatsinks",
+  "snake": "heatsinks",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/heatsinks",
+  "text": {
+   "eng": {
+    "name": "Heatsinks",
+    "description": "Whenever you play a Power card, draw !M! card.",
+    "upgrade_description": "Whenever you play a Power card, draw !M! cards."
+   },
+   "fra": {
+    "name": "Dissipateur de chaleur",
+    "description": "Quand vous jouez un Pouvoir, piochez !M! carte.",
+    "upgrade_description": "Quand vous jouez un Pouvoir, piochez !M! cartes."
+   }
+  }
+ },
+ {
+  "class": "HelloWorld",
+  "id": "Hello World",
+  "snake": "hello_world",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [
+   "innate"
+  ],
+  "portrait": "blue/power/hello_world",
+  "text": {
+   "eng": {
+    "name": "Hello World",
+    "description": "At the start of your turn, add a random Common card into your hand.",
+    "upgrade_description": "Innate. NL At the start of your turn, add a random Common card into your hand."
+   },
+   "fra": {
+    "name": "Hello World",
+    "description": "Au début de chaque tour, ajoutez une carte Commune aléatoire à votre main.",
+    "upgrade_description": "Inné. NL Au début de chaque tour, ajoutez une carte Commune aléatoire à votre main."
+   }
+  }
+ },
+ {
+  "class": "Hologram",
+  "id": "Hologram",
+  "snake": "hologram",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 3,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 2,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/hologram",
+  "text": {
+   "eng": {
+    "name": "Hologram",
+    "description": "Gain !B! Block. NL Put a card from your discard pile into your hand. NL Exhaust.",
+    "upgrade_description": "Gain !B! Block. NL Put a card from your discard pile into your hand."
+   },
+   "fra": {
+    "name": "Hologramme",
+    "description": "Gagnez !B! d'Armure. NL Ajoutez une carte de votre défausse à votre main. NL Épuisement.",
+    "upgrade_description": "Gagnez !B! d'Armure. NL Ajoutez une carte de votre défausse à votre main."
+   }
+  }
+ },
+ {
+  "class": "Hyperbeam",
+  "id": "Hyperbeam",
+  "snake": "hyper_beam",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "all_enemy",
+  "damage": 26,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": 8,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/hyper_beam",
+  "text": {
+   "eng": {
+    "name": "Hyperbeam",
+    "description": "Deal !D! damage to ALL enemies. NL Lose !M! Focus.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Ultralaser",
+    "description": "Infligez !D! dégâts à TOUS les ennemis. NL Perdez !M! de Concentration.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Leap",
+  "id": "Leap",
+  "snake": "leap",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 9,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/leap",
+  "text": {
+   "eng": {
+    "name": "Leap",
+    "description": "Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Saut",
+    "description": "Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "LockOn",
+  "id": "Lockon",
+  "snake": "lock_on",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 8,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/lock_on",
+  "text": {
+   "eng": {
+    "name": "Bullseye",
+    "description": "Deal !D! damage. NL Apply !M! Lock-On.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Cible",
+    "description": "Infligez !D! dégâts. NL Appliquez !M! de Ciblage.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Loop",
+  "id": "Loop",
+  "snake": "loop",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/loop",
+  "text": {
+   "eng": {
+    "name": "Loop",
+    "description": "At the start of your turn, trigger the passive ability of your next Orb.",
+    "upgrade_description": "At the start of your turn, trigger the passive ability of your next Orb !M! times."
+   },
+   "fra": {
+    "name": "Boucle",
+    "description": "Au début de chaque tour, utilisez la capacité passive de votre prochain Orbe.",
+    "upgrade_description": "Au début de chaque tour, utilisez la capacité passive de votre prochain Orbe !M! fois."
+   }
+  }
+ },
+ {
+  "class": "MachineLearning",
+  "id": "Machine Learning",
+  "snake": "machine_learning",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [
+   "innate"
+  ],
+  "portrait": "blue/power/machine_learning",
+  "text": {
+   "eng": {
+    "name": "Machine Learning",
+    "description": "At the start of your turn, draw !M! additional card.",
+    "upgrade_description": "Innate. NL At the start of your turn, draw !M! additional card."
+   },
+   "fra": {
+    "name": "Machine Learning",
+    "description": "Piochez !M! carte supplémentaire au début de chaque tour.",
+    "upgrade_description": "Inné. NL Piochez !M! carte supplémentaire au début de chaque tour."
+   }
+  }
+ },
+ {
+  "class": "Melter",
+  "id": "Melter",
+  "snake": "melter",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 10,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/melter",
+  "text": {
+   "eng": {
+    "name": "Melter",
+    "description": "Remove all Block from the enemy. NL Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fondeur",
+    "description": "Enlevez toute l'Armure de l'ennemi. NL Infligez !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "MeteorStrike",
+  "id": "Meteor Strike",
+  "snake": "meteor_strike",
+  "cost": 5,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": 24,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": 6,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/meteor_strike",
+  "text": {
+   "eng": {
+    "name": "Meteor Strike",
+    "description": "Deal !D! damage. NL Channel !M! Plasma.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Frappe météore",
+    "description": "Infligez !D! dégâts. NL Canalisez !M! Orbes Plasmiques.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "MultiCast",
+  "id": "Multi-Cast",
+  "snake": "multicast",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/multicast",
+  "text": {
+   "eng": {
+    "name": "Multi-Cast",
+    "description": "Evoke your next Orb X times.",
+    "upgrade_description": "Evoke your next Orb X+1 times."
+   },
+   "fra": {
+    "name": "Activation multiple",
+    "description": "Activez votre prochain Orbe X fois.",
+    "upgrade_description": "Activez votre prochain Orbe X+1 fois."
+   }
+  }
+ },
+ {
+  "class": "Overclock",
+  "id": "Steam Power",
+  "snake": "overclock",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/overclock",
+  "text": {
+   "eng": {
+    "name": "Overclock",
+    "description": "Draw !M! cards. NL Add a *Burn into your discard pile.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Overclock",
+    "description": "Piochez !M! cartes. NL Ajoutez une *Brûlure à votre défausse.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Rainbow",
+  "id": "Rainbow",
+  "snake": "rainbow",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/rainbow",
+  "text": {
+   "eng": {
+    "name": "Rainbow",
+    "description": "Channel 1 Lightning. NL Channel 1 Frost. NL Channel 1 Dark. NL Exhaust.",
+    "upgrade_description": "Channel 1 Lightning. NL Channel 1 Frost. NL Channel 1 Dark."
+   },
+   "fra": {
+    "name": "Arc-en-ciel",
+    "description": "Canalisez NL 1 Orbe Kéraunique, NL 1 Orbe Glaciaire et NL 1 Orbe Obscur. NL Épuisement.",
+    "upgrade_description": "Canalisez NL 1 Orbe Kéraunique, NL 1 Orbe Glaciaire et NL 1 Orbe Obscur."
+   }
+  }
+ },
+ {
+  "class": "Reboot",
+  "id": "Reboot",
+  "snake": "reboot",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "blue/skill/reboot",
+  "text": {
+   "eng": {
+    "name": "Reboot",
+    "description": "Shuffle ALL your cards into your draw pile. NL Draw !M! cards. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Redémarrage",
+    "description": "Mélangez toutes vos cartes dans votre pioche. NL Piochez !M! cartes. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Rebound",
+  "id": "Rebound",
+  "snake": "rebound",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 9,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/rebound",
+  "text": {
+   "eng": {
+    "name": "Rebound",
+    "description": "Deal !D! damage. NL Put the next card you play this turn on top of your draw pile.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Rebond",
+    "description": "Infligez !D! dégâts. NL Placez la prochaine carte que vous jouez ce tour au sommet de votre pioche.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Recursion",
+  "id": "Redo",
+  "snake": "recursion",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/recursion",
+  "text": {
+   "eng": {
+    "name": "Recursion",
+    "description": "Evoke your next Orb. NL Channel the Orb that was just Evoked.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Récursivité",
+    "description": "Activez votre prochain Orbe. NL Canalisez l'Orbe que vous venez d'Activer.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Recycle",
+  "id": "Recycle",
+  "snake": "recycle",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/recycle",
+  "text": {
+   "eng": {
+    "name": "Recycle",
+    "description": "Exhaust a card. NL Gain [B] equal to its cost.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Recyclage",
+    "description": "Épuisez une carte. NL Gagnez autant de [B] que son coût.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ReinforcedBody",
+  "id": "Reinforced Body",
+  "snake": "reinforced_body",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 7,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 2,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/reinforced_body",
+  "text": {
+   "eng": {
+    "name": "Reinforced Body",
+    "description": "Gain !B! Block X times.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Renforcement",
+    "description": "Gagnez !B! d'Armure X fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Reprogram",
+  "id": "Reprogram",
+  "snake": "reprogram",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/reprogram",
+  "text": {
+   "eng": {
+    "name": "Reprogram",
+    "description": "Lose !M! Focus. NL Gain !M! Strength. NL Gain !M! Dexterity.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Reprogrammation",
+    "description": "Perdez !M! de Concentration. NL Gagnez !M! de Force. NL Gagnez !M! de Dextérité.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "RipAndTear",
+  "id": "Rip and Tear",
+  "snake": "rip_and_tear",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "all_enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/rip_and_tear",
+  "text": {
+   "eng": {
+    "name": "Rip and Tear",
+    "description": "Deal !D! damage to a random enemy twice.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Lacération",
+    "description": "Infligez !D! dégâts à un ennemi aléatoire !M! fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Scrape",
+  "id": "Scrape",
+  "snake": "scrape",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/scrape",
+  "text": {
+   "eng": {
+    "name": "Scrape",
+    "description": "Deal !D! damage. NL Draw !M! cards. NL Discard all cards drawn this way that do not cost 0.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Éraflure",
+    "description": "Infligez !D! dégâts. NL Piochez !M! cartes. NL Défaussez directement celles qui ne coûtent pas 0.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Seek",
+  "id": "Seek",
+  "snake": "seek",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "blue/skill/seek",
+  "text": {
+   "eng": {
+    "name": "Seek",
+    "description": "Put !M! card from your draw pile into your hand. NL Exhaust.",
+    "upgrade_description": "Put !M! cards from your draw pile into your hand. NL Exhaust."
+   },
+   "fra": {
+    "name": "Recherche",
+    "description": "Choisissez !M! carte de votre pioche et ajoutez-la à votre main. NL Épuisement.",
+    "upgrade_description": "Choisissez !M! cartes de votre pioche et ajoutez-les à votre main. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "SelfRepair",
+  "id": "Self Repair",
+  "snake": "self_repair",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 7,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 3
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/self_repair",
+  "text": {
+   "eng": {
+    "name": "Self Repair",
+    "description": "At the end of combat, heal !M! HP.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Autoréparation",
+    "description": "À la fin du combat, récupérez !M! PV.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Skim",
+  "id": "Skim",
+  "snake": "skim",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/skim",
+  "text": {
+   "eng": {
+    "name": "Skim",
+    "description": "Draw !M! cards.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Parcourir",
+    "description": "Piochez !M! cartes.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Stack",
+  "id": "Stack",
+  "snake": "stack",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 0,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/stack",
+  "text": {
+   "eng": {
+    "name": "Stack",
+    "description": "Gain Block equal to the number of cards in your discard pile.",
+    "upgrade_description": "Gain Block equal to the number of cards in your discard pile +3."
+   },
+   "fra": {
+    "name": "Pile",
+    "description": "Gagnez autant d'Armure qu'il y a de cartes dans votre défausse.",
+    "upgrade_description": "Gagnez autant d'Armure qu'il y a de cartes dans votre défausse + 3."
+   }
+  }
+ },
+ {
+  "class": "StaticDischarge",
+  "id": "Static Discharge",
+  "snake": "static_discharge",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/power/static_discharge",
+  "text": {
+   "eng": {
+    "name": "Static Discharge",
+    "description": "Whenever you receive unblocked attack damage, Channel !M! Lightning.",
+    "upgrade_description": "Whenever you receive unblocked attack damage, Channel !M! Lightning."
+   },
+   "fra": {
+    "name": "Décharge statique",
+    "description": "Quand vous subissez des dégâts d'attaque non bloqués, Canalisez !M! Orbe Kéraunique.",
+    "upgrade_description": "Quand vous subissez des dégâts d'attaque non bloqués, Canalisez !M! Orbes Kérauniques."
+   }
+  }
+ },
+ {
+  "class": "SteamBarrier",
+  "id": "Steam",
+  "snake": "steam_barrier",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 6,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 2,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/steam_barrier",
+  "text": {
+   "eng": {
+    "name": "Steam Barrier",
+    "description": "Gain !B! Block. Decrease this card's Block by 1 this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Barrière de vapeur",
+    "description": "Gagnez !B! d'Armure. NL L'Armure de cette carte est diminuée de 1 pour le combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Storm",
+  "id": "Storm",
+  "snake": "storm",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [
+   "innate"
+  ],
+  "portrait": "blue/power/storm",
+  "text": {
+   "eng": {
+    "name": "Storm",
+    "description": "Whenever you play a Power card, Channel 1 Lightning.",
+    "upgrade_description": "Innate. NL Whenever you play a Power card, Channel 1 Lightning."
+   },
+   "fra": {
+    "name": "Orage",
+    "description": "Quand vous jouez un Pouvoir, Canalisez 1 Orbe Kéraunique.",
+    "upgrade_description": "Inné. NL Quand vous jouez un Pouvoir, Canalisez 1 Orbe Kéraunique."
+   }
+  }
+ },
+ {
+  "class": "Streamline",
+  "id": "Streamline",
+  "snake": "streamline",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 15,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 5,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/streamline",
+  "text": {
+   "eng": {
+    "name": "Streamline",
+    "description": "Deal !D! damage. NL Reduce this card's cost by !M! this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fuselage",
+    "description": "Infligez !D! dégâts. NL Quand vous jouez cette carte, son coût est réduit de !M! pour le combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Strike_Blue",
+  "id": "Strike_B",
+  "snake": "strike",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "basic",
+  "target": "enemy",
+  "damage": 6,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/strike",
+  "text": {
+   "eng": {
+    "name": "Strike",
+    "description": "Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Frappe",
+    "description": "Infligez !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Sunder",
+  "id": "Sunder",
+  "snake": "sunder",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 24,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 8,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/sunder",
+  "text": {
+   "eng": {
+    "name": "Sunder",
+    "description": "Deal !D! damage. NL If this kills an enemy, gain [B] [B] [B].",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Désassemblage",
+    "description": "Infligez !D! dégâts. NL Si l'ennemi succombe, gagnez [B] [B] [B].",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SweepingBeam",
+  "id": "Sweeping Beam",
+  "snake": "sweeping_beam",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "all_enemy",
+  "damage": 6,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/sweeping_beam",
+  "text": {
+   "eng": {
+    "name": "Sweeping Beam",
+    "description": "Deal !D! damage to ALL enemies. NL Draw !M! card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Faisceau balayant",
+    "description": "Infligez !D! dégâts à TOUS les ennemis. NL Piochez !M! carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Tempest",
+  "id": "Tempest",
+  "snake": "tempest",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "blue/skill/tempest",
+  "text": {
+   "eng": {
+    "name": "Tempest",
+    "description": "Channel X Lightning. NL Exhaust.",
+    "upgrade_description": "Channel X+1 Lightning. NL Exhaust."
+   },
+   "fra": {
+    "name": "Tempête",
+    "description": "Canalisez X Orbe(s) Kéraunique(s). NL Épuisement.",
+    "upgrade_description": "Canalisez X+1 Orbe(s) Kéraunique(s). NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "ThunderStrike",
+  "id": "Thunder Strike",
+  "snake": "thunder_strike",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "all_enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 0,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/attack/thunder_strike",
+  "text": {
+   "eng": {
+    "name": "Thunder Strike",
+    "description": "Deal !D! damage to a random enemy for each Lightning Channeled this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Frappe kéraunique",
+    "description": "Infligez !D! dégâts à un ennemi aléatoire pour chaque Orbe Kéraunique Canalisé ce combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Turbo",
+  "id": "Turbo",
+  "snake": "turbo",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/turbo",
+  "text": {
+   "eng": {
+    "name": "TURBO",
+    "description": "Gain [B] [B]. NL Add a *Void into your discard pile.",
+    "upgrade_description": "Gain [B] [B] [B]. NL Add a *Void into your discard pile."
+   },
+   "fra": {
+    "name": "TURBO",
+    "description": "Gagnez [B] [B]. NL Ajoutez un *Néant dans votre défausse.",
+    "upgrade_description": "Gagnez [B] [B] [B]. NL Ajoutez un *Néant dans votre défausse."
+   }
+  }
+ },
+ {
+  "class": "WhiteNoise",
+  "id": "White Noise",
+  "snake": "white_noise",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "blue/skill/white_noise",
+  "text": {
+   "eng": {
+    "name": "White Noise",
+    "description": "Add a random Power card into your hand. NL It costs 0 this turn. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Bruit blanc",
+    "description": "Ajoutez un Pouvoir aléatoire à votre main. NL Il coûte 0 ce tour. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Zap",
+  "id": "Zap",
+  "snake": "zap",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "basic",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "blue/skill/zap",
+  "text": {
+   "eng": {
+    "name": "Zap",
+    "description": "Channel !M! Lightning.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Électrisation",
+    "description": "Canalisez !M! Orbe Kéraunique.",
+    "upgrade_description": null
+   }
+  }
+ }
+]

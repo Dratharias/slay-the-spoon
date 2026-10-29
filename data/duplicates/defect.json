@@ -1,0 +1,527 @@
+[
+ {
+  "sts1": "Aggregate",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "AllForOne",
+  "sts2": "AllForOne",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Amplify",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "AutoShields",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "BallLightning",
+  "sts2": "BallLightning",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=1 vs StS2 vars ['Damage']"
+ },
+ {
+  "sts1": "Barrage",
+  "sts2": "Barrage",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['CalculatedHits', 'CalculationBase', 'CalculationExtra', 'Damage']"
+ },
+ {
+  "sts1": "BeamCell",
+  "sts2": "BeamCell",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "BiasedCognition",
+  "sts2": "BiasedCognition",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=4 vs StS2 vars ['BiasedCognitionPower', 'FocusPower']"
+ },
+ {
+  "sts1": "Blizzard",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "BootSequence",
+  "sts2": "BootSequence",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Buffer",
+  "sts2": "Buffer",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Capacitor",
+  "sts2": "Capacitor",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Chaos",
+  "sts2": "Chaos",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Chill",
+  "sts2": "Chill",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords ['exhaust']→['exhaust', 'innate'] vs ['exhaust']→[]; values: StS1 magic=1 vs StS2 vars []"
+ },
+ {
+  "sts1": "Claw",
+  "sts2": "Claw",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "? mixed: StS1 better on damage+ 5 vs 4; StS2 better on magic+ 2 vs 3"
+ },
+ {
+  "sts1": "ColdSnap",
+  "sts2": "ColdSnap",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=1 vs StS2 vars ['Damage']"
+ },
+ {
+  "sts1": "CompileDriver",
+  "sts2": "CompileDriver",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=1 vs StS2 vars ['CalculatedCards', 'CalculationBase', 'CalculationExtra', 'Damage']"
+ },
+ {
+  "sts1": "ConserveBattery",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Consume",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Coolheaded",
+  "sts2": "Coolheaded",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "CoreSurge",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "CreativeAI",
+  "sts2": "CreativeAi",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Darkness",
+  "sts2": "Darkness",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=1 vs StS2 vars []"
+ },
+ {
+  "sts1": "Defend_Blue",
+  "sts2": "DefendDefect",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Defragment",
+  "sts2": "Defragment",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "DoomAndGloom",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "DoubleEnergy",
+  "sts2": "DoubleEnergy",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Dualcast",
+  "sts2": "Dualcast",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "EchoForm",
+  "sts2": "EchoForm",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['EchoForm']"
+ },
+ {
+  "sts1": "Electrodynamics",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Equilibrium",
+  "sts2": "Equilibrium",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "FTL",
+  "sts2": "Ftl",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=3 vs StS2 vars ['Cards', 'Damage', 'PlayMax']"
+ },
+ {
+  "sts1": "Fission",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "ForceField",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Fusion",
+  "sts2": "Fusion",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords []→[] vs ['exhaust']→[]; values: StS1 magic=1 vs StS2 vars []"
+ },
+ {
+  "sts1": "GeneticAlgorithm",
+  "sts2": "GeneticAlgorithm",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "damage/block presence differs"
+ },
+ {
+  "sts1": "Glacier",
+  "sts2": "Glacier",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=2 vs StS2 vars ['Block']"
+ },
+ {
+  "sts1": "GoForTheEyes",
+  "sts2": "GoForTheEyes",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Heatsinks",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "HelloWorld",
+  "sts2": "HelloWorld",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Hologram",
+  "sts2": "Hologram",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Hyperbeam",
+  "sts2": "Hyperbeam",
+  "relation": "same-sts1",
+  "draft": true,
+  "note": "StS1 weaker: damage 26 vs 28, damage+ 34 vs 36"
+ },
+ {
+  "sts1": "Leap",
+  "sts2": "Leap",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "LockOn",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Loop",
+  "sts2": "Loop",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "MachineLearning",
+  "sts2": "MachineLearning",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Melter",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "MeteorStrike",
+  "sts2": "MeteorStrike",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=3 vs StS2 vars ['Damage']"
+ },
+ {
+  "sts1": "MultiCast",
+  "sts2": "MultiCast",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Overclock",
+  "sts2": "Overclock",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Rainbow",
+  "sts2": "Rainbow",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Reboot",
+  "sts2": "Reboot",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Rebound",
+  "sts2": "Rebound",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Recursion",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Recycle",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "ReinforcedBody",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Reprogram",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "RipAndTear",
+  "sts2": "RipAndTear",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "target all_enemy vs enemy; values: StS1 magic=2 vs StS2 vars ['Damage']"
+ },
+ {
+  "sts1": "Scrape",
+  "sts2": "Scrape",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Seek",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "SelfRepair",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Skim",
+  "sts2": "Skim",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Stack",
+  "sts2": "Stack",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['CalculatedBlock', 'CalculationBase', 'CalculationExtra']; damage/block presence differs"
+ },
+ {
+  "sts1": "StaticDischarge",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "SteamBarrier",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Storm",
+  "sts2": "Storm",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords []→['innate'] vs []→[]"
+ },
+ {
+  "sts1": "Streamline",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Strike_Blue",
+  "sts2": "StrikeDefect",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Sunder",
+  "sts2": "Sunder",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['Damage', 'Energy']"
+ },
+ {
+  "sts1": "SweepingBeam",
+  "sts2": "SweepingBeam",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Tempest",
+  "sts2": "Tempest",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords ['exhaust']→['exhaust'] vs []→[]"
+ },
+ {
+  "sts1": "ThunderStrike",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Turbo",
+  "sts2": "Turbo",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "WhiteNoise",
+  "sts2": "WhiteNoise",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Zap",
+  "sts2": "Zap",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=1 vs StS2 vars []"
+ }
+]

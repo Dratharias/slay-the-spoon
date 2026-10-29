@@ -56,3 +56,8 @@ def test_delegating_constructor_and_scaling_upgrade():
     c = cards()["FakeForge"]
     assert (c["cost"], c["damage"]) == (2, 12)
     assert "upgrade depends on timesUpgraded" in c["warnings"]
+
+
+def test_skips_cut_cards_without_text():
+    # StS1 ships a few card classes it never uses (the Defect's Impulse): no text, no art.
+    assert "FakeCut" not in cards()

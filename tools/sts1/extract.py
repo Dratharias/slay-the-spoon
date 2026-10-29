@@ -157,7 +157,9 @@ def parse_card(path: Path, text: dict) -> dict:
 def extract(decomp: Path, color: str) -> list:
     text = load_text(decomp)
     paths = sorted(cards_dir(decomp, color).glob("*.java"))
-    return sorted((parse_card(p, text) for p in paths), key=lambda c: c["class"])
+    cards = (parse_card(p, text) for p in paths)
+    # A class with no English name is a card StS1 never shipped (the Defect's Impulse).
+    return sorted((c for c in cards if c["text"]["eng"]["name"]), key=lambda c: c["class"])
 
 
 def main():
