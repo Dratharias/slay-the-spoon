@@ -63,8 +63,9 @@ Read `README.md` for the player view and the spec for every decision.
 | `docs/superpowers/specs/2026-10-28-slay-the-spoon-design.md` | Approved design: owner decisions (§3), builder calls (§4), game recon (§5), architecture (§6), delivery order (§7) |
 | `docs/superpowers/plans/2026-10-28-step-1-*.md` | Step 1 plan (done) |
 | `docs/superpowers/plans/2026-10-28-step-2a-*.md`, `...-step-2b-*.md` | Step 2 plans (done) |
+| `docs/superpowers/plans/2026-10-29-step-3c-colorless.md` | Current checkpoint: Tasks 1–2 complete; resume Task 3 infrastructure |
 | `docs/testing/step-*-checklist.md` | In-game checklists the owner ticks |
-| `docs/review/*-duplicates.md` | Owner review pages for Ironclad, Silent and Defect (generated from `data/duplicates/*.json`) |
+| `docs/review/*-duplicates.md` | Owner review pages for Ironclad, Silent, Defect and Colorless (generated from `data/duplicates/*.json`) |
 | `docs/backlog.md` | Known gaps, fixed when the owner feels like it |
 
 ## Owner rules

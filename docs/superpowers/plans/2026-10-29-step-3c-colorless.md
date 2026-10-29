@@ -7,6 +7,26 @@ Target: StS2 v0.107.1. Work on `step-3`; commit per task, no install or publicat
 Spec: `docs/superpowers/specs/2026-10-28-slay-the-spoon-design.md` §3.3, §3.4 and §6;
 per-player Hybrid follows the Spire Souvenir amendment.
 
+## Current checkpoint — 2026-10-29
+
+Tasks 1 and 2 are committed on `step-3` (`0a195e1` and `bc96f48`). **Resume at Task 3.**
+Version remains 0.4.0; no colorless runtime classes, pool registration or portraits exist yet.
+
+| Task | Status |
+|------|--------|
+| 1 — Catalog | Complete |
+| 2 — Namesake classification | Builder review complete; owner review pending |
+| 3 — Infrastructure | Next; not started |
+| 4 — Six attacks | Not started |
+| 5 — Twenty-two skills | Not started |
+| 6 — Three Powers | Not started |
+| 7 — Validation and version 0.5.0 | Not started |
+
+Latest checks: 61 xUnit and 33 pytest pass. Classification regeneration preserved all reviewed
+decisions. No build was needed for Task 2's data/documentation changes; the last Defect build
+had zero warnings/errors. No installation or in-game testing was performed. In-game checks
+and final namesake approval remain with the owner; no merge or publication has been performed.
+
 ## Recon and constraints
 
 - StS1 has 39 colorless classes: 35 ordinary cards and four special cards (Apparition, Bite,

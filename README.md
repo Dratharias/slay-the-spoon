@@ -71,6 +71,31 @@ to the author's review in [the Defect comparison](docs/review/defect-duplicates.
 Planned: the version switch at the merchant and on choose-a-card screens, Colorless cards,
 and merchant loans between players.
 
+## Development status — 2026-10-29
+
+Work is on `step-3`, not merged or published. The current version is **0.4.0**:
+Ironclad, Silent and Defect cards are implemented; in-game validation remains pending.
+
+Colorless cards (step 3c, target **0.5.0**) are at the catalog stage:
+
+- **Done:** catalog of 39 cards and comparison of all 22 StS2 namesakes. Classifications are
+  checked against the game sources, but still await the author's review in
+  [the colorless comparison](docs/review/colorless-duplicates.md).
+- **Next:** Task 3, colorless pool infrastructure, event grants, console access, portraits and
+  card skeletons. No colorless gameplay changes are implemented yet.
+- **Then:** implement 6 attacks, 22 skills and 3 Powers, followed by validation and the 0.5.0 update.
+
+The planned ordinary StS1 colorless pool contains **32 cards** (24 custom and 8 native).
+**Apotheosis, Apparition, Bite, Enlightenment, JAX and Metamorphosis, plus Ritual Dagger, stay
+event-only**, including in StS1-only and Hybrid: they must not appear in ordinary rewards,
+shops, transforms or random combat generation. This rule is recorded for implementation;
+new events are outside the current task scope.
+
+Latest automated validation: **61 xUnit and 33 Python tests passed**. The Defect build passed
+with zero warnings and errors; subsequent colorless work only changed catalog data and
+documentation. The mod was not installed or tested in game during this work.
+See [the step 3c plan](docs/superpowers/plans/2026-10-29-step-3c-colorless.md) for the remaining tasks.
+
 ## Languages
 
 English and French. Other game languages show the English text.
