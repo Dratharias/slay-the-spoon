@@ -45,3 +45,16 @@ def test_named_after_the_model_id_not_the_sts1_art_name(tmp_path):
     make_jar(jar, ["red/skill/fakeguard"])
     written = art.export(jar, CARDS[1:], [{"sts1": "FakeGuard", "relation": "unique"}], tmp_path / "out")
     assert [p.name for p in written] == ["sts1_fake_guard.png"]
+
+
+def test_events_export_named_after_the_event_model_id(tmp_path):
+    jar = tmp_path / "game.jar"
+    with zipfile.ZipFile(jar, "w") as z:
+        for name in ("vampires", "drugDealer", "theNest"):
+            buf = io.BytesIO()
+            Image.new("RGB", (600, 600), (20, 20, 60)).save(buf, "JPEG")
+            z.writestr(f"images/events/{name}.jpg", buf.getvalue())
+    written = art.export_events(jar, tmp_path / "out")
+    assert sorted(p.name for p in written) == ["sts1_augmenter.png", "sts1_nest.png", "sts1_vampires.png"]
+    img = Image.open(tmp_path / "out" / "sts1_nest.png")
+    assert img.size == (600, 600)

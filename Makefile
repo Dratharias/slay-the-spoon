@@ -47,7 +47,7 @@ sts2-loc:
 	cd tools/sts1 && PCK="$(STS2_DIR)/SlayTheSpire2.pck" OUT="$(STS2_LOC)" nice -n 19 \
 		"$${XDG_CACHE_HOME:-$$HOME/.cache}/slay-spoon/godot-4.5.1/Godot_v4.5.1-stable_linux.x86_64" --headless -s dump_sts2_loc.gd
 
-# Regenerate card data, the duplicate table, portraits and card skeletons from StS1.
+# Regenerate card data, the duplicate table, portraits, card skeletons and event art from StS1.
 sts1-data:
 	for pair in red:Ironclad green:Silent blue:Defect colorless:Colorless; do \
 		color=$${pair%%:*}; character=$${pair##*:}; lower=$$(echo $$character | tr A-Z a-z); \
@@ -62,6 +62,7 @@ sts1-data:
 			--character $$character --src src/Cards/Sts1/$$character --loc godot/SlaySpoon/localization \
 			--relations unique,same-sts1,duplicate || exit 1; \
 	done
+	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --events godot/SlaySpoon/images/events
 
 # Colorless catalog first: no playable skeletons until namesakes and special cards are reviewed.
 sts1-colorless-data:

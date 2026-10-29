@@ -2,8 +2,10 @@
 
 Usage: python art.py --jar desktop-1.0.jar --sts1 data/sts1/ironclad.json
            --table data/duplicates/ironclad.json --out godot/SlaySpoon/images/cards/ironclad
+       python art.py --jar desktop-1.0.jar --events godot/SlaySpoon/images/events
 
 StS1's 1024Portraits are 500×380; StS2 draws card art from 250×190 atlas sprites (same aspect).
+Event art (step 3d) keeps StS1's 600×600 size.
 """
 import argparse
 import io
@@ -17,6 +19,9 @@ import codegen
 import match
 
 SIZE = (250, 190)
+
+# StS1 event image -> mod event ModelDb id (src/Events/), which the event portrait patch looks up.
+EVENTS = {"vampires": "sts1_vampires", "drugDealer": "sts1_augmenter", "theNest": "sts1_nest"}
 
 
 def export(jar: Path, cards: list, rows: list, out: Path) -> list:
@@ -37,13 +42,32 @@ def export(jar: Path, cards: list, rows: list, out: Path) -> list:
     return written
 
 
+def export_events(jar: Path, out: Path) -> list:
+    """Write <event id>.png for the StS1 card events; return the paths."""
+    out.mkdir(parents=True, exist_ok=True)
+    written = []
+    with zipfile.ZipFile(jar) as z:
+        for name, model_id in sorted(EVENTS.items()):
+            img = Image.open(io.BytesIO(z.read(f"images/events/{name}.jpg"))).convert("RGBA")
+            path = out / f"{model_id}.png"
+            img.save(path, optimize=True)
+            written.append(path)
+    return written
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--jar", type=Path, required=True)
-    ap.add_argument("--sts1", type=Path, required=True)
-    ap.add_argument("--table", type=Path, required=True)
-    ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--events", type=Path)
+    ap.add_argument("--sts1", type=Path)
+    ap.add_argument("--table", type=Path)
+    ap.add_argument("--out", type=Path)
     args = ap.parse_args()
+    if args.events:
+        print(f"{len(export_events(args.jar, args.events))} event images")
+        return
+    if not (args.sts1 and args.table and args.out):
+        ap.error("--sts1, --table and --out are required without --events")
     cards = json.loads(args.sts1.read_text(encoding="utf-8"))
     rows = json.loads(args.table.read_text(encoding="utf-8"))
     print(f"{len(export(args.jar, cards, rows, args.out))} portraits")
