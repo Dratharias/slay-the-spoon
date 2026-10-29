@@ -104,6 +104,12 @@ Read `README.md` for the player view and the spec for every decision.
   received one may give it back for the key (first to accept; the swap undoes the relic's pickup effects, upgrades included).
 - WP3 (unlock, keys, run state) is planned, not implemented: `docs/superpowers/plans/2026-10-29-step-6-act4-wp3-keys-unlock.md`.
 
+## Step 7 status (2026-10-29)
+
+- The Watcher as a playable character (Custom Run with a StS1 card set) is planned, not implemented:
+  `docs/superpowers/plans/2026-10-29-step-7-watcher.md`. Owner decisions: static visuals first, all her cards,
+  relics and potions. Branch `step-7-watcher` from `step-6-act4` when work starts.
+
 ## Documents
 
 | Path | What |
