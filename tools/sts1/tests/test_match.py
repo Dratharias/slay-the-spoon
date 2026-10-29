@@ -102,3 +102,9 @@ def test_target_none_counts_as_self():
     guard["keywords"], guard["keywords_upgraded"] = ["ethereal"], ["ethereal"]
     rows = match.build_table(cards, FIXTURES / "sts2cards", [])
     assert row(rows, "FakeGuard")["relation"] == "same-sts2"
+
+
+def test_review_title_names_the_character():
+    page = match.review_md([], [], FIXTURES / "sts2cards", {}, character="Silent")
+    assert page.startswith("# Silent — StS1 / StS2 duplicate table")
+    assert "data/duplicates/silent.json" in page

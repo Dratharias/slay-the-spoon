@@ -1,0 +1,2545 @@
+[
+ {
+  "class": "AThousandCuts",
+  "id": "A Thousand Cuts",
+  "snake": "a_thousand_cuts",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/a_thousand_cuts",
+  "text": {
+   "eng": {
+    "name": "A Thousand Cuts",
+    "description": "Whenever you play a card, deal !M! damage to ALL enemies.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Mille coupures",
+    "description": "Quand vous jouez une carte, infligez !M! dégâts à TOUS les ennemis.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Accuracy",
+  "id": "Accuracy",
+  "snake": "accuracy",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/accuracy",
+  "text": {
+   "eng": {
+    "name": "Accuracy",
+    "description": "*Shivs deal !M! additional damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Précision",
+    "description": "Les *Surins infligent !M! dégâts supplémentaires.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Acrobatics",
+  "id": "Acrobatics",
+  "snake": "acrobatics",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/acrobatics",
+  "text": {
+   "eng": {
+    "name": "Acrobatics",
+    "description": "Draw !M! cards. NL Discard 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Acrobaties",
+    "description": "Piochez !M! cartes. NL Défaussez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Adrenaline",
+  "id": "Adrenaline",
+  "snake": "adrenaline",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/adrenaline",
+  "text": {
+   "eng": {
+    "name": "Adrenaline",
+    "description": "Gain [G]. NL Draw 2 cards. NL Exhaust.",
+    "upgrade_description": "Gain [G] [G]. NL Draw 2 cards. NL Exhaust."
+   },
+   "fra": {
+    "name": "Adrénaline",
+    "description": "Gagnez [G] . NL Piochez 2 cartes. NL Épuisement.",
+    "upgrade_description": "Gagnez [G] [G] . NL Piochez 2 cartes. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "AfterImage",
+  "id": "After Image",
+  "snake": "after_image",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [
+   "innate"
+  ],
+  "portrait": "green/power/after_image",
+  "text": {
+   "eng": {
+    "name": "After Image",
+    "description": "Whenever you play a card, gain 1 Block.",
+    "upgrade_description": "Innate. NL Whenever you play a card, gain 1 Block."
+   },
+   "fra": {
+    "name": "Image rémanente",
+    "description": "Quand vous jouez une carte, gagnez 1 d'Armure.",
+    "upgrade_description": "Inné. NL Quand vous jouez une carte, gagnez 1 d'Armure."
+   }
+  }
+ },
+ {
+  "class": "Alchemize",
+  "id": "Venomology",
+  "snake": "alchemize",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/alchemize",
+  "text": {
+   "eng": {
+    "name": "Alchemize",
+    "description": "Obtain a random potion. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Alchimie",
+    "description": "Obtenez une potion. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "AllOutAttack",
+  "id": "All Out Attack",
+  "snake": "all_out_attack",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "all_enemy",
+  "damage": 10,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/all_out_attack",
+  "text": {
+   "eng": {
+    "name": "All-Out Attack",
+    "description": "Deal !D! damage to ALL enemies. NL Discard 1 card at random.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Attaque suprême",
+    "description": "Infligez !D! dégâts à TOUS les ennemis. NL Défaussez une carte aléatoire de votre main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Backflip",
+  "id": "Backflip",
+  "snake": "backflip",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 5,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/backflip",
+  "text": {
+   "eng": {
+    "name": "Backflip",
+    "description": "Gain !B! Block. NL Draw 2 cards.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Salto",
+    "description": "Gagnez !B! d'Armure. NL Piochez 2 cartes.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Backstab",
+  "id": "Backstab",
+  "snake": "backstab",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 11,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "innate"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "innate"
+  ],
+  "portrait": "green/attack/backstab",
+  "text": {
+   "eng": {
+    "name": "Backstab",
+    "description": "Innate. NL Deal !D! damage. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Coup de poignard",
+    "description": "Infligez !D! dégâts. NL Inné. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Bane",
+  "id": "Bane",
+  "snake": "bane",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/bane",
+  "text": {
+   "eng": {
+    "name": "Bane",
+    "description": "Deal !D! damage. NL If the enemy has Poison, deal !D! damage again.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fléau",
+    "description": "Infligez !D! dégâts. NL Si l'ennemi est Empoisonné, infligez !D! dégâts à nouveau.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "BladeDance",
+  "id": "Blade Dance",
+  "snake": "blade_dance",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/blade_dance",
+  "text": {
+   "eng": {
+    "name": "Blade Dance",
+    "description": "Add !M! *Shivs into your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Danse des lames",
+    "description": "Ajoutez !M! *Surins à votre main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Blur",
+  "id": "Blur",
+  "snake": "blur",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 5,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/blur",
+  "text": {
+   "eng": {
+    "name": "Blur",
+    "description": "Gain !B! Block. NL Block is not removed at the start of your next turn.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Flou",
+    "description": "Gagnez !B! d'Armure. NL L'Armure n'est pas retirée au début du prochain tour.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "BouncingFlask",
+  "id": "Bouncing Flask",
+  "snake": "bouncing_flask",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "all_enemy",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/bouncing_flask",
+  "text": {
+   "eng": {
+    "name": "Bouncing Flask",
+    "description": "Apply 3 Poison to a random enemy !M! times.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Flasque rebondissante",
+    "description": "Appliquez 3 de Poison à un ennemi aléatoire !M! fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "BulletTime",
+  "id": "Bullet Time",
+  "snake": "bullet_time",
+  "cost": 3,
+  "cost_upgraded": 2,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/bullet_time",
+  "text": {
+   "eng": {
+    "name": "Bullet Time",
+    "description": "You cannot draw additional cards this turn. Reduce the cost of all cards in your hand to 0 this turn.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Bullet time",
+    "description": "Impossible de piocher ce tour. Les cartes dans votre main coûtent 0 ce tour.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Burst",
+  "id": "Burst",
+  "snake": "burst",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/burst",
+  "text": {
+   "eng": {
+    "name": "Burst",
+    "description": "This turn, your next Skill is played twice.",
+    "upgrade_description": "This turn, your next !M! Skills are played twice."
+   },
+   "fra": {
+    "name": "Déflagration",
+    "description": "Pendant ce tour, votre prochaine carte Compétence sera jouée 2 fois.",
+    "upgrade_description": "Pendant ce tour, vos !M! prochaines cartes Compétence seront jouées 2 fois."
+   }
+  }
+ },
+ {
+  "class": "CalculatedGamble",
+  "id": "Calculated Gamble",
+  "snake": "calculated_gamble",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/calculated_gamble",
+  "text": {
+   "eng": {
+    "name": "Calculated Gamble",
+    "description": "Discard your hand, NL then draw that many cards. NL Exhaust.",
+    "upgrade_description": "Discard your hand, NL then draw that many cards."
+   },
+   "fra": {
+    "name": "Coup de poker",
+    "description": "Défaussez votre main NL et piochez le même nombre de cartes. Épuisement.",
+    "upgrade_description": "Défaussez votre main NL et piochez le même nombre de cartes."
+   }
+  }
+ },
+ {
+  "class": "Caltrops",
+  "id": "Caltrops",
+  "snake": "caltrops",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/caltrops",
+  "text": {
+   "eng": {
+    "name": "Caltrops",
+    "description": "Whenever you are attacked, deal !M! damage back.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Chausse-trapes",
+    "description": "À chaque fois qu'un ennemi vous attaque, il reçoit !M! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Catalyst",
+  "id": "Catalyst",
+  "snake": "catalyst",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/catalyst",
+  "text": {
+   "eng": {
+    "name": "Catalyst",
+    "description": "Double the enemy's Poison. NL Exhaust.",
+    "upgrade_description": "Triple the enemy's Poison. NL Exhaust."
+   },
+   "fra": {
+    "name": "Catalyse",
+    "description": "Doublez le Poison d'un ennemi. NL Épuisement.",
+    "upgrade_description": "Triplez le Poison d'un ennemi. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "Choke",
+  "id": "Choke",
+  "snake": "choke",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 12,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/choke",
+  "text": {
+   "eng": {
+    "name": "Choke",
+    "description": "Deal !D! damage. NL Whenever you play a card this turn, the enemy loses !M! HP.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Étranglement",
+    "description": "Infligez !D! dégâts. NL Chaque fois que vous jouez une carte ce tour, infligez !M! dégâts à la cible.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "CloakAndDagger",
+  "id": "Cloak And Dagger",
+  "snake": "cloak_and_dagger",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 6,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/cloak_and_dagger",
+  "text": {
+   "eng": {
+    "name": "Cloak and Dagger",
+    "description": "Gain !B! Block. NL Add !M! *Shiv into your hand.",
+    "upgrade_description": "Gain !B! Block. NL Add !M! *Shivs into your hand."
+   },
+   "fra": {
+    "name": "Cape et épée",
+    "description": "Gagnez !B! d'Armure. NL Ajoutez !M! *Surin à votre main.",
+    "upgrade_description": "Gagnez !B! d'Armure. NL Ajoutez !M! *Surins à votre main."
+   }
+  }
+ },
+ {
+  "class": "Concentrate",
+  "id": "Concentrate",
+  "snake": "concentrate",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": -1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/concentrate",
+  "text": {
+   "eng": {
+    "name": "Concentrate",
+    "description": "Discard !M! cards. NL Gain [G] [G].",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Concentration",
+    "description": "Défaussez !M! cartes. NL Gagnez [G] [G] .",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "CorpseExplosion",
+  "id": "Corpse Explosion",
+  "snake": "corpse_explosion",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": 6,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 3
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/corpse_explosion",
+  "text": {
+   "eng": {
+    "name": "Corpse Explosion",
+    "description": "Apply !M! Poison. NL When the enemy dies, deal damage equal to its Max HP to ALL enemies.",
+    "upgrade_description": "deprecated"
+   },
+   "fra": {
+    "name": "Explosion morbide",
+    "description": "Appliquez !M! Poison. NL Quand cet ennemi meurt, infligez autant de dégâts que ses PV max à TOUS les ennemis.",
+    "upgrade_description": "deprecated"
+   }
+  }
+ },
+ {
+  "class": "CripplingPoison",
+  "id": "Crippling Poison",
+  "snake": "crippling_poison",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "all_enemy",
+  "damage": null,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 3
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/crippling_poison",
+  "text": {
+   "eng": {
+    "name": "Crippling Cloud",
+    "description": "Apply !M! Poison and 2 Weak to ALL enemies. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Nuage paralysant",
+    "description": "Appliquez !M! de Poison et 2 de Faiblesse à TOUS les ennemis. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DaggerSpray",
+  "id": "Dagger Spray",
+  "snake": "dagger_spray",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "all_enemy",
+  "damage": 4,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/dagger_spray",
+  "text": {
+   "eng": {
+    "name": "Dagger Spray",
+    "description": "Deal !D! damage to ALL enemies twice.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Pluie de dagues",
+    "description": "Infligez !D! dégâts à TOUS les ennemis 2 fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DaggerThrow",
+  "id": "Dagger Throw",
+  "snake": "dagger_throw",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 9,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/dagger_throw",
+  "text": {
+   "eng": {
+    "name": "Dagger Throw",
+    "description": "Deal !D! damage. NL Draw 1 card. NL Discard 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Lancer de dagues",
+    "description": "Infligez !D! dégâts. NL Piochez 1 carte. NL Défaussez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Dash",
+  "id": "Dash",
+  "snake": "dash",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 10,
+  "block": 10,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/dash",
+  "text": {
+   "eng": {
+    "name": "Dash",
+    "description": "Gain !B! Block. NL Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Esquive",
+    "description": "Gagnez !B! d'Armure. NL Inflige !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DeadlyPoison",
+  "id": "Deadly Poison",
+  "snake": "deadly_poison",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": 5,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/deadly_poison",
+  "text": {
+   "eng": {
+    "name": "Deadly Poison",
+    "description": "Apply !M! Poison.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Poison mortel",
+    "description": "Appliquez !M! de Poison.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Defend_Green",
+  "id": "Defend_G",
+  "snake": "defend",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "basic",
+  "target": "self",
+  "damage": null,
+  "block": 5,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/defend",
+  "text": {
+   "eng": {
+    "name": "Defend",
+    "description": "Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Défense",
+    "description": "Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Deflect",
+  "id": "Deflect",
+  "snake": "deflect",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 4,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/deflect",
+  "text": {
+   "eng": {
+    "name": "Deflect",
+    "description": "Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Parade",
+    "description": "Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DieDieDie",
+  "id": "Die Die Die",
+  "snake": "die_die_die",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "all_enemy",
+  "damage": 13,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/attack/die_die_die",
+  "text": {
+   "eng": {
+    "name": "Die Die Die",
+    "description": "Deal !D! damage to ALL enemies. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Mise à mort",
+    "description": "Infligez !D! dégâts à TOUS les ennemis. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Distraction",
+  "id": "Distraction",
+  "snake": "distraction",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/distraction",
+  "text": {
+   "eng": {
+    "name": "Distraction",
+    "description": "Add a random Skill into your hand. NL It costs 0 this turn. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Distraction",
+    "description": "Ajoutez une Compétence aléatoire à votre main. NL Elle coûte 0 ce tour. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DodgeAndRoll",
+  "id": "Dodge and Roll",
+  "snake": "dodge_and_roll",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 4,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 2,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/dodge_and_roll",
+  "text": {
+   "eng": {
+    "name": "Dodge and Roll",
+    "description": "Gain !B! Block. NL Next turn, gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Dérobade",
+    "description": "Gagnez !B! d'Armure. NL Au prochain tour, gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Doppelganger",
+  "id": "Doppelganger",
+  "snake": "doppelganger",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/doppelganger",
+  "text": {
+   "eng": {
+    "name": "Doppelganger",
+    "description": "Next turn, draw X cards and gain X [G]. NL Exhaust.",
+    "upgrade_description": "Next turn, draw X+1 cards and gain X+1 [G]. NL Exhaust."
+   },
+   "fra": {
+    "name": "Clonage",
+    "description": "Au prochain tour, piochez X cartes et gagnez X [G] . NL Épuisement.",
+    "upgrade_description": "Au prochain tour, piochez X+1 cartes et gagnez X+1 [G] . NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "EndlessAgony",
+  "id": "Endless Agony",
+  "snake": "endless_agony",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 4,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/attack/endless_agony",
+  "text": {
+   "eng": {
+    "name": "Endless Agony",
+    "description": "Deal !D! damage. NL Whenever you draw this card, add a copy of it into your hand. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Agonie éternelle",
+    "description": "Infligez !D! dégâts. NL Ajoutez une copie de cette carte à votre main quand vous la piochez. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Envenom",
+  "id": "Envenom",
+  "snake": "envenom",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/envenom",
+  "text": {
+   "eng": {
+    "name": "Envenom",
+    "description": "Whenever an Attack deals unblocked damage, apply 1 Poison.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Envenimement",
+    "description": "Dès qu'une carte Attaque inflige des dégâts non-bloqués, appliquez 1 de Poison.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "EscapePlan",
+  "id": "Escape Plan",
+  "snake": "escape_plan",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 3,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 2,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/escape_plan",
+  "text": {
+   "eng": {
+    "name": "Escape Plan",
+    "description": "Draw 1 card. NL If you draw a Skill, gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Plan d'évasion",
+    "description": "Piochez 1 carte. NL S'il s'agit d'une carte Compétence, gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Eviscerate",
+  "id": "Eviscerate",
+  "snake": "eviscerate",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/eviscerate",
+  "text": {
+   "eng": {
+    "name": "Eviscerate",
+    "description": "Costs 1 less [G] NL for each card discarded this turn. NL Deal !D! damage 3 times.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Éviscération",
+    "description": "Coûte 1 [G] en moins NL par carte défaussée ce tour. NL Infligez !D! dégâts 3 fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Expertise",
+  "id": "Expertise",
+  "snake": "expertise",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 6,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/expertise",
+  "text": {
+   "eng": {
+    "name": "Expertise",
+    "description": "Draw cards until you have !M! in your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Expertise",
+    "description": "Piochez des cartes jusqu'à en avoir !M! dans votre main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Finisher",
+  "id": "Finisher",
+  "snake": "finisher",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 6,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/finisher",
+  "text": {
+   "eng": {
+    "name": "Finisher",
+    "description": "Deal !D! damage for each Attack played this turn.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Coup de grâce",
+    "description": "Infligez !D! dégâts par carte Attaque jouée ce tour.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Flechettes",
+  "id": "Flechettes",
+  "snake": "flechettes",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 4,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/flechettes",
+  "text": {
+   "eng": {
+    "name": "Flechettes",
+    "description": "Deal !D! damage for each Skill in your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fléchettes",
+    "description": "Infligez !D! dégâts par Compétence en main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "FlyingKnee",
+  "id": "Flying Knee",
+  "snake": "flying_knee",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 8,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/flying_knee",
+  "text": {
+   "eng": {
+    "name": "Flying Knee",
+    "description": "Deal !D! damage. NL Next turn, gain [G].",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Coup de genou",
+    "description": "Infligez !D! dégâts. NL Au prochain tour, gagnez [G] .",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Footwork",
+  "id": "Footwork",
+  "snake": "footwork",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/footwork",
+  "text": {
+   "eng": {
+    "name": "Footwork",
+    "description": "Gain !M! Dexterity.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Jeu de jambes",
+    "description": "Gagnez !M! de Dextérité.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "GlassKnife",
+  "id": "Glass Knife",
+  "snake": "glass_knife",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": 8,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/glass_knife",
+  "text": {
+   "eng": {
+    "name": "Glass Knife",
+    "description": "Deal !D! damage twice. Decrease the damage of this card by 2 this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Couteau de verre",
+    "description": "Infligez !D! dégâts 2 fois. Couteau de verre inflige 2 dégâts de moins pour ce combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "GrandFinale",
+  "id": "Grand Finale",
+  "snake": "grand_finale",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "all_enemy",
+  "damage": 50,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 10,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/grand_finale",
+  "text": {
+   "eng": {
+    "name": "Grand Finale",
+    "description": "Can only be played if there are no cards in your draw pile. NL Deal !D! damage to ALL enemies.",
+    "upgrade_description": "My draw pile NL must be #rEmpty."
+   },
+   "fra": {
+    "name": "Clou du spectacle",
+    "description": "Jouable si la pioche est vide. NL Infligez !D! dégâts à TOUS les ennemis.",
+    "upgrade_description": "Ma pioche NL doit être #rVide."
+   }
+  }
+ },
+ {
+  "class": "HeelHook",
+  "id": "Heel Hook",
+  "snake": "heel_hook",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 5,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/heel_hook",
+  "text": {
+   "eng": {
+    "name": "Heel Hook",
+    "description": "Deal !D! damage. NL If the enemy has Weak, NL gain [G] and NL draw 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Croc-en-jambe",
+    "description": "Infligez !D! dégâts. NL Si l'ennemi est Affaibli, NL gagnez [G] et NL piochez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "InfiniteBlades",
+  "id": "Infinite Blades",
+  "snake": "infinite_blades",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [
+   "innate"
+  ],
+  "portrait": "green/power/infinite_blades",
+  "text": {
+   "eng": {
+    "name": "Infinite Blades",
+    "description": "At the start of your turn, add a *Shiv into your hand.",
+    "upgrade_description": "Innate. NL At the start of your turn, add a *Shiv into your hand."
+   },
+   "fra": {
+    "name": "Lames infinies",
+    "description": "Au début du tour, ajoutez un *Surin à votre main.",
+    "upgrade_description": "Inné. NL Au début du tour, ajoutez un *Surin à votre main."
+   }
+  }
+ },
+ {
+  "class": "LegSweep",
+  "id": "Leg Sweep",
+  "snake": "leg_sweep",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": null,
+  "block": 11,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/leg_sweep",
+  "text": {
+   "eng": {
+    "name": "Leg Sweep",
+    "description": "Apply !M! Weak. NL Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Balayette",
+    "description": "Appliquez !M! de Faiblesse. NL Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Malaise",
+  "id": "Malaise",
+  "snake": "malaise",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/malaise",
+  "text": {
+   "eng": {
+    "name": "Malaise",
+    "description": "Enemy loses X Strength. Apply X Weak. NL Exhaust.",
+    "upgrade_description": "Enemy loses X+1 Strength. Apply X+1 Weak. NL Exhaust."
+   },
+   "fra": {
+    "name": "Malaise",
+    "description": "L'ennemi perd X de Force. Appliquez X de Faiblesse. NL Épuisement.",
+    "upgrade_description": "L'ennemi perd X+1 de Force. Applique X+1 de Faiblesse. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "MasterfulStab",
+  "id": "Masterful Stab",
+  "snake": "masterful_stab",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 12,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/masterful_stab",
+  "text": {
+   "eng": {
+    "name": "Masterful Stab",
+    "description": "Costs 1 additional [G] NL for each time you lose HP this combat. NL Deal !D! damage.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Poignard expert",
+    "description": "Infligez !D! dégâts. Quand vous prenez des dégâts, le coût de cette carte augmente de 1.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Neutralize",
+  "id": "Neutralize",
+  "snake": "neutralize",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "basic",
+  "target": "enemy",
+  "damage": 3,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 1,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/neutralize",
+  "text": {
+   "eng": {
+    "name": "Neutralize",
+    "description": "Deal !D! damage. NL Apply !M! Weak.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Neutralisation",
+    "description": "Infligez !D! dégâts. NL Appliquez !M! de Faiblesse.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Nightmare",
+  "id": "Night Terror",
+  "snake": "nightmare",
+  "cost": 3,
+  "cost_upgraded": 2,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/nightmare",
+  "text": {
+   "eng": {
+    "name": "Nightmare",
+    "description": "Choose a card. NL Next turn, add !M! copies of that card into your hand. Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Cauchemar",
+    "description": "Choisissez une carte. NL Au prochain tour, gagnez !M! copies de cette carte dans votre main. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "NoxiousFumes",
+  "id": "Noxious Fumes",
+  "snake": "noxious_fumes",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/noxious_fumes",
+  "text": {
+   "eng": {
+    "name": "Noxious Fumes",
+    "description": "At the start of your turn, apply !M! Poison to ALL enemies.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fumées toxiques",
+    "description": "Au début du tour, appliquez !M! de Poison à TOUS les ennemis.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Outmaneuver",
+  "id": "Outmaneuver",
+  "snake": "outmaneuver",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/outmaneuver",
+  "text": {
+   "eng": {
+    "name": "Outmaneuver",
+    "description": "Next turn, NL gain [G] [G].",
+    "upgrade_description": "Next turn, NL gain [G] [G] [G]."
+   },
+   "fra": {
+    "name": "Tacticien",
+    "description": "Au prochain tour, NL gagnez [G] [G] .",
+    "upgrade_description": "Au prochain tour, NL gagnez [G] [G] [G] ."
+   }
+  }
+ },
+ {
+  "class": "PhantasmalKiller",
+  "id": "Phantasmal Killer",
+  "snake": "phantasmal_killer",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/phantasmal_killer",
+  "text": {
+   "eng": {
+    "name": "Phantasmal Killer",
+    "description": "Next turn, your Attacks deal double damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Tueur illusoire",
+    "description": "Au prochain tour, vos dégâts d'Attaque sont doublés.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "PiercingWail",
+  "id": "PiercingWail",
+  "snake": "piercing_wail",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "all_enemy",
+  "damage": null,
+  "block": null,
+  "magic": 6,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/piercing_wail",
+  "text": {
+   "eng": {
+    "name": "Piercing Wail",
+    "description": "ALL enemies lose !M! Strength this turn. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Hurlement perçant",
+    "description": "TOUS les ennemis perdent !M! de Force pendant 1 tour. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "PoisonedStab",
+  "id": "Poisoned Stab",
+  "snake": "poisoned_stab",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 6,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/poisoned_stab",
+  "text": {
+   "eng": {
+    "name": "Poisoned Stab",
+    "description": "Deal !D! damage. NL Apply !M! Poison.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Poignard empoisonné",
+    "description": "Infligez !D! dégâts. NL Appliquez !M! de Poison.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Predator",
+  "id": "Predator",
+  "snake": "predator",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 15,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 5,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/predator",
+  "text": {
+   "eng": {
+    "name": "Predator",
+    "description": "Deal !D! damage. NL Next turn, draw 2 additional cards.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Prédateur",
+    "description": "Infligez !D! dégâts. NL Piochez 2 cartes supplémentaires au prochain tour.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Prepared",
+  "id": "Prepared",
+  "snake": "prepared",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/prepared",
+  "text": {
+   "eng": {
+    "name": "Prepared",
+    "description": "Draw !M! card. NL Discard !M! card.",
+    "upgrade_description": "Draw !M! cards. NL Discard !M! cards."
+   },
+   "fra": {
+    "name": "Préparatifs",
+    "description": "Piochez !M! carte. NL Défaussez !M! carte.",
+    "upgrade_description": "Piochez !M! cartes. NL Défaussez !M! cartes."
+   }
+  }
+ },
+ {
+  "class": "QuickSlash",
+  "id": "Quick Slash",
+  "snake": "quick_slash",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 8,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/quick_slash",
+  "text": {
+   "eng": {
+    "name": "Quick Slash",
+    "description": "Deal !D! damage. NL Draw 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Lacération rapide",
+    "description": "Infligez !D! dégâts. NL Piochez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Reflex",
+  "id": "Reflex",
+  "snake": "reflex",
+  "cost": -2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "unplayable"
+  ],
+  "keywords_upgraded": [
+   "unplayable"
+  ],
+  "portrait": "green/skill/reflex",
+  "text": {
+   "eng": {
+    "name": "Reflex",
+    "description": "Unplayable. NL If this card is discarded from your hand, draw !M! cards.",
+    "upgrade_description": "Unplayable. NL If this card is discarded from your hand, draw !M! cards."
+   },
+   "fra": {
+    "name": "Réflexe",
+    "description": "Injouable. NL Quand cette carte est défaussée, piochez !M! cartes.",
+    "upgrade_description": "Injouable. NL Quand cette carte est défaussée, piochez !M! cartes."
+   }
+  }
+ },
+ {
+  "class": "RiddleWithHoles",
+  "id": "Riddle With Holes",
+  "snake": "riddle_with_holes",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 3,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 1,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/riddle_with_holes",
+  "text": {
+   "eng": {
+    "name": "Riddle with Holes",
+    "description": "Deal !D! damage 5 times.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Criblé de trous",
+    "description": "Infligez !D! dégâts 5 fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Setup",
+  "id": "Setup",
+  "snake": "setup",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/setup",
+  "text": {
+   "eng": {
+    "name": "Setup",
+    "description": "Put a card from your hand on top of your draw pile. NL It costs 0 until played.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Mise en place",
+    "description": "Placez une carte de votre main sur le haut de la pioche. NL Coûte 0 avant d'être jouée.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Skewer",
+  "id": "Skewer",
+  "snake": "skewer",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/skewer",
+  "text": {
+   "eng": {
+    "name": "Skewer",
+    "description": "Deal !D! damage X times.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Brochette",
+    "description": "Infligez !D! dégâts X fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Slice",
+  "id": "Slice",
+  "snake": "slice",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 6,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/slice",
+  "text": {
+   "eng": {
+    "name": "Slice",
+    "description": "Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Tranche",
+    "description": "Infligez !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SneakyStrike",
+  "id": "Underhanded Strike",
+  "snake": "sneaky_strike",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 12,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/sneaky_strike",
+  "text": {
+   "eng": {
+    "name": "Sneaky Strike",
+    "description": "Deal !D! damage. NL If you have discarded a card this turn, NL gain [G] [G].",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Frappe sournoise",
+    "description": "Infligez !D! dégâts. NL Si vous avez défaussé une carte ce tour, gagnez [G] [G].",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "StormOfSteel",
+  "id": "Storm of Steel",
+  "snake": "storm_of_steel",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/storm_of_steel",
+  "text": {
+   "eng": {
+    "name": "Storm of Steel",
+    "description": "Discard your hand. NL Add 1 *Shiv into your hand for each card discarded.",
+    "upgrade_description": "Discard your hand. NL Add 1 *Shiv+ into your hand for each card discarded."
+   },
+   "fra": {
+    "name": "Tempête d'acier",
+    "description": "Défaussez votre main. NL Ajoutez 1 *Surin à votre main par carte défaussée.",
+    "upgrade_description": "Défaussez votre main. NL Ajoutez 1 *Surin+ à votre main par carte défaussée."
+   }
+  }
+ },
+ {
+  "class": "Strike_Green",
+  "id": "Strike_G",
+  "snake": "strike",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "basic",
+  "target": "enemy",
+  "damage": 6,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/strike",
+  "text": {
+   "eng": {
+    "name": "Strike",
+    "description": "Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Frappe",
+    "description": "Infligez !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SuckerPunch",
+  "id": "Sucker Punch",
+  "snake": "sucker_punch",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/sucker_punch",
+  "text": {
+   "eng": {
+    "name": "Sucker Punch",
+    "description": "Deal !D! damage. NL Apply !M! Weak.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Coup bas",
+    "description": "Infligez !D! dégâts. NL Appliquez !M! de Faiblesse.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Survivor",
+  "id": "Survivor",
+  "snake": "survivor",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "basic",
+  "target": "self",
+  "damage": null,
+  "block": 8,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/skill/survivor",
+  "text": {
+   "eng": {
+    "name": "Survivor",
+    "description": "Gain !B! Block. NL Discard 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Survivant",
+    "description": "Gagnez !B! d'Armure. NL Défaussez une carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Tactician",
+  "id": "Tactician",
+  "snake": "tactician",
+  "cost": -2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "unplayable"
+  ],
+  "keywords_upgraded": [
+   "unplayable"
+  ],
+  "portrait": "green/skill/tactician",
+  "text": {
+   "eng": {
+    "name": "Tactician",
+    "description": "Unplayable. NL If this card is discarded from your hand, gain [G].",
+    "upgrade_description": "Unplayable. NL If this card is discarded from your hand, gain [G] [G]."
+   },
+   "fra": {
+    "name": "Stratège",
+    "description": "Injouable. NL Quand cette carte est défaussée, gagnez [G] .",
+    "upgrade_description": "Injouable. NL Quand cette carte est défaussée, NL gagnez [G] [G] ."
+   }
+  }
+ },
+ {
+  "class": "Terror",
+  "id": "Terror",
+  "snake": "terror",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "green/skill/terror",
+  "text": {
+   "eng": {
+    "name": "Terror",
+    "description": "Apply 99 Vulnerable. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Terreur",
+    "description": "Appliquez 99 de Vulnérabilité. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ToolsOfTheTrade",
+  "id": "Tools of the Trade",
+  "snake": "tools_of_the_trade",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/tools_of_the_trade",
+  "text": {
+   "eng": {
+    "name": "Tools of the Trade",
+    "description": "At the start of your turn, draw 1 card and discard 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Savoir-faire",
+    "description": "Au début du tour, piochez 1 carte et défaussez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Unload",
+  "id": "Unload",
+  "snake": "unload",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": 14,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/attack/unload",
+  "text": {
+   "eng": {
+    "name": "Unload",
+    "description": "Deal !D! damage. NL Discard all non-Attack cards in your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Déchargement",
+    "description": "Infligez !D! dégâts. NL Défaussez TOUTES les cartes (sauf Attaque).",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "WellLaidPlans",
+  "id": "Well Laid Plans",
+  "snake": "well_laid_plans",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/well_laid_plans",
+  "text": {
+   "eng": {
+    "name": "Well-Laid Plans",
+    "description": "At the end of your turn, Retain up to !M! card.",
+    "upgrade_description": "At the end of your turn, Retain up to !M! cards."
+   },
+   "fra": {
+    "name": "Planification",
+    "description": "À la fin du tour, Retenez jusqu'à !M! carte.",
+    "upgrade_description": "À la fin du tour, Retenez jusqu'à !M! cartes."
+   }
+  }
+ },
+ {
+  "class": "WraithForm",
+  "id": "Wraith Form v2",
+  "snake": "wraith_form",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "green/power/wraith_form",
+  "text": {
+   "eng": {
+    "name": "Wraith Form",
+    "description": "Gain !M! Intangible. NL At the end of your turn, lose 1 Dexterity.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Forme spectrale",
+    "description": "Gagnez !M! Intangible. NL À la fin de chaque tour, perdez 1 de Dextérité.",
+    "upgrade_description": null
+   }
+  }
+ }
+]

@@ -49,15 +49,18 @@ sts2-loc:
 
 # Regenerate card data, the duplicate table, portraits and card skeletons from StS1.
 sts1-data:
-	$(TOOLS) python tools/sts1/extract.py --decomp /sts1 --color red --out data/sts1/ironclad.json
-	$(TOOLS) python tools/sts1/match.py --sts1 data/sts1/ironclad.json \
-		--sts2-cards /sts2src/MegaCrit.Sts2.Core.Models.Cards --sts2-loc /sts2loc \
-		--table data/duplicates/ironclad.json --review docs/review/ironclad-duplicates.md \
-		--matches src/CardSets/Sts1Matches.g.cs --character Ironclad
-	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --sts1 data/sts1/ironclad.json \
-		--table data/duplicates/ironclad.json --out godot/SlaySpoon/images/cards/ironclad
-	$(TOOLS) python tools/sts1/codegen.py --sts1 data/sts1/ironclad.json --table data/duplicates/ironclad.json \
-		--character Ironclad --src src/Cards/Sts1/Ironclad --loc godot/SlaySpoon/localization
+	for pair in red:Ironclad green:Silent; do \
+		color=$${pair%%:*}; character=$${pair##*:}; lower=$$(echo $$character | tr A-Z a-z); \
+		$(TOOLS) python tools/sts1/extract.py --decomp /sts1 --color $$color --out data/sts1/$$lower.json && \
+		$(TOOLS) python tools/sts1/match.py --sts1 data/sts1/$$lower.json \
+			--sts2-cards /sts2src/MegaCrit.Sts2.Core.Models.Cards --sts2-loc /sts2loc \
+			--table data/duplicates/$$lower.json --review docs/review/$$lower-duplicates.md \
+			--matches src/CardSets/Sts1Matches.$$character.g.cs --character $$character --color $$color && \
+		$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --sts1 data/sts1/$$lower.json \
+			--table data/duplicates/$$lower.json --out godot/SlaySpoon/images/cards/$$lower && \
+		$(TOOLS) python tools/sts1/codegen.py --sts1 data/sts1/$$lower.json --table data/duplicates/$$lower.json \
+			--character $$character --src src/Cards/Sts1/$$character --loc godot/SlaySpoon/localization || exit 1; \
+	done
 
 # Build and install into the game's mods folder.
 up: build

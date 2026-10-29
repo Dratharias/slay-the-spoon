@@ -1,0 +1,527 @@
+[
+ {
+  "sts1": "AThousandCuts",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Accuracy",
+  "sts2": "Accuracy",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Acrobatics",
+  "sts2": "Acrobatics",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Adrenaline",
+  "sts2": "Adrenaline",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['Cards', 'Energy']"
+ },
+ {
+  "sts1": "AfterImage",
+  "sts2": "Afterimage",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['AfterimagePower']"
+ },
+ {
+  "sts1": "Alchemize",
+  "sts2": "Alchemize",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "AllOutAttack",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Backflip",
+  "sts2": "Backflip",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['Block', 'Cards']"
+ },
+ {
+  "sts1": "Backstab",
+  "sts2": "Backstab",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Bane",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "BladeDance",
+  "sts2": "BladeDance",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords []→[] vs ['exhaust']→['exhaust']"
+ },
+ {
+  "sts1": "Blur",
+  "sts2": "Blur",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['Block', 'Blur']"
+ },
+ {
+  "sts1": "BouncingFlask",
+  "sts2": "BouncingFlask",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "target all_enemy vs enemy; values: StS1 magic=3 vs StS2 vars ['PoisonPower', 'Repeat']"
+ },
+ {
+  "sts1": "BulletTime",
+  "sts2": "BulletTime",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Burst",
+  "sts2": "Burst",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "CalculatedGamble",
+  "sts2": "CalculatedGamble",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords ['exhaust']→[] vs ['exhaust']→['exhaust', 'retain']"
+ },
+ {
+  "sts1": "Caltrops",
+  "sts2": "Caltrops",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Catalyst",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Choke",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "CloakAndDagger",
+  "sts2": "CloakAndDagger",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Concentrate",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "CorpseExplosion",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "CripplingPoison",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "DaggerSpray",
+  "sts2": "DaggerSpray",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "DaggerThrow",
+  "sts2": "DaggerThrow",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Dash",
+  "sts2": "Dash",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "DeadlyPoison",
+  "sts2": "DeadlyPoison",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Defend_Green",
+  "sts2": "DefendSilent",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Deflect",
+  "sts2": "Deflect",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "DieDieDie",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Distraction",
+  "sts2": "Distraction",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "DodgeAndRoll",
+  "sts2": "DodgeAndRoll",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Doppelganger",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "EndlessAgony",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Envenom",
+  "sts2": "Envenom",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['EnvenomPower']"
+ },
+ {
+  "sts1": "EscapePlan",
+  "sts2": "EscapePlan",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Eviscerate",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Expertise",
+  "sts2": "Expertise",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Finisher",
+  "sts2": "Finisher",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['CalculatedHits', 'CalculationBase', 'CalculationExtra', 'Damage']"
+ },
+ {
+  "sts1": "Flechettes",
+  "sts2": "Flechettes",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['CalculatedHits', 'CalculationBase', 'CalculationExtra', 'Damage']"
+ },
+ {
+  "sts1": "FlyingKnee",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Footwork",
+  "sts2": "Footwork",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "GlassKnife",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "GrandFinale",
+  "sts2": "GrandFinale",
+  "relation": "same-sts1",
+  "draft": true,
+  "note": "StS1 weaker: damage 50 vs 60, damage+ 60 vs 75"
+ },
+ {
+  "sts1": "HeelHook",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "InfiniteBlades",
+  "sts2": "InfiniteBlades",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "LegSweep",
+  "sts2": "LegSweep",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Malaise",
+  "sts2": "Malaise",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "MasterfulStab",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Neutralize",
+  "sts2": "Neutralize",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Nightmare",
+  "sts2": "Nightmare",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=3 vs StS2 vars []"
+ },
+ {
+  "sts1": "NoxiousFumes",
+  "sts2": "NoxiousFumes",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Outmaneuver",
+  "sts2": "Outmaneuver",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=None vs StS2 vars ['Energy']"
+ },
+ {
+  "sts1": "PhantasmalKiller",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "PiercingWail",
+  "sts2": "PiercingWail",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "PoisonedStab",
+  "sts2": "PoisonedStab",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Predator",
+  "sts2": "Predator",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Prepared",
+  "sts2": "Prepared",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "QuickSlash",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Reflex",
+  "sts2": "Reflex",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords ['unplayable']→['unplayable'] vs []→[]"
+ },
+ {
+  "sts1": "RiddleWithHoles",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Setup",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "Skewer",
+  "sts2": "Skewer",
+  "relation": "same-sts1",
+  "draft": true,
+  "note": "StS1 weaker: damage 7 vs 8, damage+ 10 vs 11"
+ },
+ {
+  "sts1": "Slice",
+  "sts2": "Slice",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "SneakyStrike",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "StormOfSteel",
+  "sts2": "StormOfSteel",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Strike_Green",
+  "sts2": "StrikeSilent",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "SuckerPunch",
+  "sts2": "SuckerPunch",
+  "relation": "same-sts1",
+  "draft": true,
+  "note": "StS1 weaker: damage 7 vs 8, damage+ 9 vs 10"
+ },
+ {
+  "sts1": "Survivor",
+  "sts2": "Survivor",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Tactician",
+  "sts2": "Tactician",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "keywords ['unplayable']→['unplayable'] vs []→[]"
+ },
+ {
+  "sts1": "Terror",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "ToolsOfTheTrade",
+  "sts2": "ToolsOfTheTrade",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "Unload",
+  "sts2": null,
+  "relation": "unique",
+  "draft": true,
+  "note": ""
+ },
+ {
+  "sts1": "WellLaidPlans",
+  "sts2": "WellLaidPlans",
+  "relation": "same-sts2",
+  "draft": true,
+  "note": "identical numbers"
+ },
+ {
+  "sts1": "WraithForm",
+  "sts2": "WraithForm",
+  "relation": "duplicate",
+  "draft": true,
+  "note": "values: StS1 magic=2 vs StS2 vars ['IntangiblePower', 'WraithFormPower']"
+ }
+]
