@@ -35,4 +35,4 @@ Mutagenic Strength relic that Augmenter hands out. Work on `step-3`, version 0.6
 2. [x] Event art export in `tools/sts1/art.py` (`--events`) with pytest; run it.
 3. [x] Events, relic, temporary Strength power, pool and portrait patches, event injection, console command,
    EN/FR text; asset test for every event. Build 0/0.
-4. [ ] Checklist `docs/testing/step-3d-checklist.md`, README, CLAUDE.md, backlog, version 0.6.0.
+4. [x] Checklist `docs/testing/step-3d-checklist.md`, README, CLAUDE.md, backlog, version 0.6.0.

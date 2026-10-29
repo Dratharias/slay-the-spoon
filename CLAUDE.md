@@ -53,6 +53,15 @@ Read `README.md` for the player view and the spec for every decision.
   - Ritual Dagger reuses The Scythe's saved property names; Sadistic Nature reuses vanilla `SleightOfFleshPower`;
   - build: 0 warnings / 0 errors; tests: 83 xUnit and 35 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3c-checklist.md` remains unchecked.
+- **Step 3d is implemented on `step-3`** (not merged; plan `docs/superpowers/plans/2026-10-29-step-3d-sts1-events.md`, version 0.6.0):
+  - StS1 events Vampires, Augmenter and The Nest (`src/Events/`) give Bite, J.A.X. and Ritual Dagger, plus the
+    Mutagenic Strength relic (Augmenter only, borrowed Symbiotic Virus icon, `TemporaryStrengthPower`);
+  - a `Hook.ModifyNextEvent` postfix replaces an act 2 event with an eligible unseen one 1 time in 3, on its own
+    `Rng` (seeds stay vanilla); the rule lives in `src/Core/Sts1EventRule.cs`: StS1-only run or a Souvenir holder,
+    Vampires needs every player to hold it, and players without it see the card option locked;
+  - `sts1event <id>` console command; event portraits in `godot/SlaySpoon/images/events/` (`art.py --events`);
+  - build: 0 warnings / 0 errors; tests: 100 xUnit and 36 pytest pass;
+  - not installed or tested in game: `docs/testing/step-3d-checklist.md` remains unchecked.
 - The owner tests at the end, then merges when they say so.
   After step 3, look at a Steam Workshop "alpha" with the owner (no upload without their go-ahead).
   The swap at the merchant and on choose-a-card screens is in the backlog.
@@ -133,8 +142,9 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/CardSets/` | One postfix on `CardPoolModel.GetUnlockedCards` makes every card source (rewards, shop, transform, random generation) follow the mode; `Sts1Matches.g.cs` is generated. Hybrid duplicates: `VersionSwap`, `RandomVersionPatch` (CardFactory postfixes), `RewardSwapPatch` |
 | `src/Cards/` | `Sts1Card` / `Sts1IroncladCard` / `Sts1SilentCard` / `Sts1DefectCard` bases, the hidden per-character StS1 pools, one class per StS1 card (`Sts1HeavyBlade`), StS1 powers in `Sts1/Powers/` (icons borrowed from vanilla powers through `IBorrowedIcon`) |
 | `src/Neow/` | Neow's Blessings: a transpiler makes Neow read a zero modifier count; after vanilla modifier options, the blessings replace the "done" page |
-| `src/Relics/` | Spire Souvenir relic (Ironclad, Silent and Defect pool postfix, kept out of the run-start grab bag shuffle so seeds stay vanilla, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor` |
-| `src/DevConsole/` | `sts1card` console command (the vanilla `card` command can't see the hidden StS1 pools) |
+| `src/Relics/` | Spire Souvenir relic (Ironclad, Silent and Defect pool postfix, kept out of the run-start grab bag shuffle so seeds stay vanilla, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor`. Mutagenic Strength, appended to the event relic pool |
+| `src/Events/` | StS1 events (`Sts1Event` base, portrait path patch), `EventInjectionPatch` (act 2 replacement); text in `localization/<lang>/events.json` |
+| `src/DevConsole/` | `sts1card` and `sts1event` console commands (the vanilla `card` and `event` commands can't see the hidden StS1 pools or events) |
 | `tools/sts1/` | Python (Podman image `slayspoon-tools`): `extract.py` → `data/sts1/`, `match.py` → `data/duplicates/` + review page, `art.py` → portraits, `codegen.py` → card skeletons + text. Codegen never overwrites a ported card |
 | `godot/SlaySpoon/` | Packed into the PCK. Localization tables merge into the game's (`res://SlaySpoon/localization/<lang>/<table>.json`) |
 

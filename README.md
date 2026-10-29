@@ -16,7 +16,7 @@ Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic descri
 
 ## Features
 
-Current (0.5.0):
+Current (0.6.0):
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps,
   synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -57,7 +57,13 @@ Current (0.5.0):
   both games' colorless cards for its owner. Apotheosis, Apparition, Bite, Enlightenment, J.A.X.,
   Metamorphosis and Ritual Dagger stay out of ordinary rewards, shops, transforms and random card
   generation: events that give their Slay the Spire 2 counterpart give the matching version, and
-  Bite, J.A.X. and Ritual Dagger have no event yet (console only).
+  Bite, J.A.X. and Ritual Dagger come from the Slay the Spire 1 events below.
+
+- **Slay the Spire 1 events:** Vampires(?), Augmenter and The Nest, with their Slay the Spire 1 art and
+  text, can replace an act 2 event when Slay the Spire 1 cards are in play: in a "Slay the Spire 1
+  Cards" run, or when a player holds the Spire Souvenir. The Nest and Augmenter need one holder; in
+  co-op, players without the relic see their card option locked. Vampires needs every player to hold
+  it. Augmenter can also give **Mutagenic Strength**, a relic ported from Slay the Spire 1.
 
 - **Neow's Blessings:** a Custom Run option that brings back Neow's usual starting choice. Without it,
   any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers
@@ -71,17 +77,18 @@ Current (0.5.0):
 - **`sts1card` console command** for testing: in a modded game the developer console opens with the
   `` ` `` key (`*` or `'` on AZERTY); `sts1card STS1_HEAVY_BLADE` puts that card in your hand in combat,
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
+  `sts1event STS1_NEST` (or `STS1_VAMPIRES`, `STS1_AUGMENTER`) opens a Slay the Spire 1 event.
 
 Planned: the version switch at the merchant and on choose-a-card screens, and merchant loans
 between players.
 
 ## Development status — 2026-10-29
 
-Work is on `step-3`, not merged or published. The current version is **0.5.0**: Ironclad, Silent,
-Defect and colorless cards are implemented and pass the automated checks (83 xUnit and 35 Python
-tests, build with zero warnings). None of it has been tested in game yet; see the checklists
-for [Silent](docs/testing/step-3a-checklist.md), [Defect](docs/testing/step-3b-checklist.md)
-and [colorless cards](docs/testing/step-3c-checklist.md). Which cards count as the same card in
+Work is on `step-3`, not merged or published. The current version is **0.6.0**: Ironclad, Silent,
+Defect and colorless cards and the Slay the Spire 1 events are implemented and pass the automated
+checks (100 xUnit and 36 Python tests, build with zero warnings). None of it has been tested in game yet; see the checklists
+for [Silent](docs/testing/step-3a-checklist.md), [Defect](docs/testing/step-3b-checklist.md),
+[colorless cards](docs/testing/step-3c-checklist.md) and [events](docs/testing/step-3d-checklist.md). Which cards count as the same card in
 both games is still subject to the author's review in the comparison pages under
 [docs/review/](docs/review/).
 
