@@ -44,3 +44,13 @@ Fastest: in combat, open the dev console (` key) and type `sts1card STS1_BARRAGE
 - [ ] Steam Barrier (0): gain 6 / 8 Block; that copy loses 1 base Block each play this combat, down to 0; upgrades/downgrades keep the reduction, other copies and the next combat reset normally.
 - [ ] Tempest (X, Exhaust): Channel X / X+1 Lightning; check 0 Energy, Chemical X, repeated plays and zero Orb slots.
 - [ ] All skill descriptions render in English and French, including upgrade previews, Energy icons and Orb/Power hover tips.
+
+## Defect powers
+
+- [ ] Electrodynamics (2): Channel 2 / 3 Lightning, after making Lightning hit ALL enemies. Both passive and Evoke hit every hittable enemy; Focus applies normally, Lock-On increases damage only on marked targets, Dark remains single-target. Replaying does not multiply damage, but still channels Orbs. Full/zero Orb slots work; without this power, Lightning retains vanilla random targeting. In co-op only the holder's Lightning changes.
+- [ ] Heatsinks (1): subsequent Powers draw 1 / 2 cards; the first Heatsinks does not draw for itself. A second Heatsinks draws using the previous amount, then stacks for later Powers. Check Amplify, empty draw pile, full hand, No Draw, and teammate Powers (no draw).
+- [ ] Hello World (1): at the start of each turn, add a random Common card to hand; upgrade adds Innate. Stacks; generated cards follow StS1-only / Hybrid pools, with synced RNG and duplicate handling in co-op. Uses the vanilla Hello World power.
+- [ ] Self Repair (1): heal 7 / 10 HP at victory, never immediately; stacks and Amplify add healing. Check missing/full HP, healing modifiers, and a dead co-op player (no resurrection). New combat has no pending healing.
+- [ ] Static Discharge (1): Channel 1 / 2 Lightning for each unblocked attack hit, regardless of damage amount. A multi-hit can trigger repeatedly; fully blocked hits, self-damage, Poison and Thorns do not trigger. Check partial Block, zero/full Orb slots and lethal damage; a teammate taking damage must not trigger it.
+- [ ] Storm (1): subsequent Powers Channel 1 Lightning; upgrade adds Innate, never a second Lightning. First Storm does not trigger itself; later Storms trigger the previous amount and stack. Check Amplify and teammate Powers. Hybrid offers the StS1/StS2 versions through the duplicate slot.
+- [ ] All six cards and four custom power tooltips render in EN/FR, with borrowed icons (Electrodynamics: Lightning Rod; Heatsinks: Machine Learning; Self Repair: Regen; Static Discharge: Storm). Verify upgrade previews and Orb hover tips.
