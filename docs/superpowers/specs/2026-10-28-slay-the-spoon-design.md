@@ -82,6 +82,10 @@ These were decided in conversation and are not open for the builder to change.
    relic or a card can ask other players for financing, with or without interest. Several lenders can
    **pool their gold** to fund the same purchase. Repayment is **automatic**: gold the borrower gains
    afterwards goes to repaying the debt first.
+   Owner's details (2026-10-29): a lender sets the amount with +1 / +5 / +10 buttons and may ask for
+   interest up to 300%, set with +1 / +5 / +10 buttons too; anyone may give the gold instead (a gift is
+   never repaid); the borrower picks which offers fund the purchase; a loan is repaid in equal shares
+   between its lenders.
 7. **Sealed Deck:** use StS2's existing `SealedDeck` modifier as is (30 cards, keep 10, replaces the
    starting deck). Do not reinvent it. It must respect the chosen card set mode.
 8. **Scope now:** cards only.
@@ -108,10 +112,14 @@ These were decided in conversation and are not open for the builder to change.
 - Loans: the borrower sends a request (item, missing amount). Other players answer with
   contributions: an amount and an interest rate in percent (0% = no interest) on that share. Several
   lenders may pool contributions to fund one purchase (owner's decision); once the contributions
-  cover the missing amount, the borrower accepts, the gold is transferred and the item can be bought.
-  Repayment takes 100% of gold gained until all debts are cleared; within one loan, contributors are
-  repaid pro rata to what each is owed; separate loans are repaid oldest first. Debts are cancelled if
-  the borrower dies or the run ends.
+  cover the missing amount, the borrower accepts the offers they pick, the gold is transferred and the
+  item can be bought. A contribution may be a gift (never repaid). Interest is simple and fixed when the
+  loan is accepted: owed = amount + amount × rate / 100, rounded half up; rates go from 0% to 300%.
+  Repayment takes 100% of gold gained until all debts are cleared; within one loan, each payment is
+  split in equal shares between the lenders still owed (owner's decision; a lender paid off drops out
+  and an indivisible remainder goes to the earliest lenders); separate loans are repaid oldest first.
+  Repayments reaching a lender are not "gold gained" for that lender. Debts are cancelled if the
+  borrower dies or the run ends.
 - Hybrid starting deck: start from the StS2 starting deck composition; at run start, each starting
   card that has a different StS1 version is offered as a version choice. Starting cards classified
   `same` need no choice.
@@ -217,7 +225,7 @@ before cards are coded.
 
 **Loans.** A ledger (lender, borrower, principal, interest, remaining) stored in the modifier's saved
 properties so it survives save/load and is identical on all clients. Requests/offers travel as mod
-network messages; the gold transfer and every repayment are deterministic synced game actions, never
+synced actions (`INetAction`, found in mods by the game); the gold transfer and every repayment are deterministic synced game actions, never
 local-only state changes.
 
 ## 7. Delivery order
