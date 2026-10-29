@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn82uvxcvyoe5"
-path="res://.godot/imported/sts1_after_image.png-0a9fcf3b443e6f004633c721f778e7bc.ctex"
+uid="uid://cmdyolfsmi5e0"
+path="res://.godot/imported/sts1_caltrops.png-aac0c25b3f8228a0fc9ffc76c9aada08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SlaySpoon/images/cards/silent/sts1_after_image.png"
-dest_files=["res://.godot/imported/sts1_after_image.png-0a9fcf3b443e6f004633c721f778e7bc.ctex"]
+source_file="res://SlaySpoon/images/cards/silent/sts1_caltrops.png"
+dest_files=["res://.godot/imported/sts1_caltrops.png-aac0c25b3f8228a0fc9ffc76c9aada08.ctex"]
 
 [params]
 

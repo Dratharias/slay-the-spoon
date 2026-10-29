@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cokfgkv3qc5uu"
-path="res://.godot/imported/sts1_backflip.png-2e649bd8a5721722d87947cbe17bf908.ctex"
+uid="uid://cpjn5678a0lvt"
+path="res://.godot/imported/sts1_shockwave.png-1fd772711808c71451eba6cf670f935d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SlaySpoon/images/cards/silent/sts1_backflip.png"
-dest_files=["res://.godot/imported/sts1_backflip.png-2e649bd8a5721722d87947cbe17bf908.ctex"]
+source_file="res://SlaySpoon/images/cards/ironclad/sts1_shockwave.png"
+dest_files=["res://.godot/imported/sts1_shockwave.png-1fd772711808c71451eba6cf670f935d.ctex"]
 
 [params]
 

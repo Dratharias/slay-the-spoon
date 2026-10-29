@@ -102,9 +102,9 @@
  {
   "sts1": "Clash",
   "sts2": "Clash",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "Same effect and numbers.",
+  "note": "Same effect and numbers. StS2's Clash is an Event card, outside the Ironclad pool, so the StS1 card is kept for StS1-only and Hybrid.",
   "checked": true
  },
  {
@@ -184,17 +184,17 @@
  {
   "sts1": "DualWield",
   "sts2": "DualWield",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "Same effect and numbers.",
+  "note": "Same effect and numbers. StS2's Dual Wield is an Event card, outside the Ironclad pool, so the StS1 card is kept for StS1-only and Hybrid.",
   "checked": true
  },
  {
   "sts1": "Entrench",
   "sts2": "Entrench",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "Same effect and numbers.",
+  "note": "Same effect and numbers. StS2's Entrench is an Event card, outside the Ironclad pool, so the StS1 card is kept for StS1-only and Hybrid.",
   "checked": true
  },
  {
@@ -478,9 +478,9 @@
  {
   "sts1": "Shockwave",
   "sts2": "Shockwave",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "Same effect and numbers.",
+  "note": "Same effect and numbers. StS2's Shockwave is a colorless card, outside the Ironclad pool, so the StS1 card is kept for StS1-only and Hybrid.",
   "checked": true
  },
  {

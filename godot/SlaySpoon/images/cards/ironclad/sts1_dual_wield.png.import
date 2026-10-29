@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dux0djq7dairw"
-path="res://.godot/imported/sts1_adrenaline.png-ec4e6939d44c1461428e0e0c38211ca0.ctex"
+uid="uid://cbojpgvg6fjw3"
+path="res://.godot/imported/sts1_dual_wield.png-827b51487c4771bfc70f818322a9e8e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SlaySpoon/images/cards/silent/sts1_adrenaline.png"
-dest_files=["res://.godot/imported/sts1_adrenaline.png-ec4e6939d44c1461428e0e0c38211ca0.ctex"]
+source_file="res://SlaySpoon/images/cards/ironclad/sts1_dual_wield.png"
+dest_files=["res://.godot/imported/sts1_dual_wield.png-827b51487c4771bfc70f818322a9e8e7.ctex"]
 
 [params]
 

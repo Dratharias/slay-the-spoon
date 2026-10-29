@@ -16,14 +16,18 @@ Numbers in the StS2 column are the card's values with the upgrade in parentheses
 |---|---|---|
 | **Rupture** (1, uncommon) Whenever you lose HP from a card, gain 1 Strength.<br>Upgrade: magic +1 | **Rupture** (1, uncommon) Whenever you lose HP on your turn, gain 1 (+1) [gold]Strength[/gold].<br>Upgrade: Strength +1 | Different trigger: StS1 gains Strength when you lose HP from a card; StS2 whenever you lose HP on your turn. ⚠ draft |
 
-## same-sts1 (2)
+## same-sts1 (6)
 
 | StS1 | StS2 | Note |
 |---|---|---|
+| **Clash** (0, common) Can only be played if every card in your hand is an Attack. Deal 14 damage.<br>Upgrade: damage +4 | **Clash** (0, event) Can only be played if every card in your [gold]Hand[/gold] is an Attack. Deal 14 (+4) damage.<br>Upgrade: Damage +4 | Same effect and numbers. StS2's Clash is an Event card, outside the Ironclad pool, so the StS1 card is kept for StS1-only and Hybrid. ⚠ draft |
+| **Dual Wield** (1, uncommon) Choose an Attack or Power card. Add a copy of that card into your hand.<br>Upgrade: magic +1; text: Choose an Attack or Power card. Add 2 copies of that card into your hand. | **Dual Wield** (1, event) Choose an Attack or Power card. Add {IfUpgraded:show:{Cards} copies|a copy} of that card into your [gold]Hand[/gold].<br>Upgrade: Cards +1 | Same effect and numbers. StS2's Dual Wield is an Event card, outside the Ironclad pool, so the StS1 card is kept for StS1-only and Hybrid. ⚠ draft |
+| **Entrench** (2, uncommon) Double your Block.<br>Upgrade: cost → 1; text: Double your Block. | **Entrench** (2, event) Double your [gold]Block[/gold].<br>Upgrade: cost → 1 | Same effect and numbers. StS2's Entrench is an Event card, outside the Ironclad pool, so the StS1 card is kept for StS1-only and Hybrid. ⚠ draft |
 | **Juggernaut** (2, rare) Whenever you gain Block, deal 5 damage to a random enemy.<br>Upgrade: magic +2 | **Juggernaut** (2, rare) Whenever you gain [gold]Block[/gold], deal 6 (+2) damage to a random enemy.<br>Upgrade: JuggernautPower +2 | StS1 is weaker: 5 damage (+2) vs 6 (+2). ⚠ draft |
 | **Rampage** (1, uncommon) Deal 8 damage. Increase this card's damage by 5 this combat.<br>Upgrade: magic +3 | **Rampage** (1, uncommon) Deal 9 damage. Increase this card's damage by 5 (+4) this combat.<br>Upgrade: Increase +4 | StS1 is weaker: 8 damage, +5 per play (+8 upgraded) vs 9, +5 (+9 upgraded). ⚠ draft |
+| **Shockwave** (2, uncommon) Apply 3 Weak and Vulnerable to ALL enemies. Exhaust.<br>Upgrade: magic +2 | **Shockwave** (2, uncommon) Apply 3 (+2) [gold]Weak[/gold] and [gold]Vulnerable[/gold] to ALL enemies.<br>Upgrade: Power +2 | Same effect and numbers. StS2's Shockwave is a colorless card, outside the Ironclad pool, so the StS1 card is kept for StS1-only and Hybrid. ⚠ draft |
 
-## same-sts2 (41)
+## same-sts2 (37)
 
 | StS1 | StS2 | Note |
 |---|---|---|
@@ -36,13 +40,10 @@ Numbers in the StS2 column are the card's values with the upgrade in parentheses
 | **Bludgeon** (3, rare) Deal 32 damage.<br>Upgrade: damage +10 | **Bludgeon** (3, uncommon) Deal 32 (+10) damage.<br>Upgrade: Damage +10 | Same effect and numbers. ⚠ draft |
 | **Body Slam** (1, common) Deal damage equal to your Block.<br>Upgrade: cost → 0; text:  (Deals !D! damage.) | **Body Slam** (1, common) Deal damage equal to your [gold]Block[/gold].{InCombat: (Deals None damage)|}<br>Upgrade: cost → 0 | Same effect; upgrade cost 1 → 0 in both. ⚠ draft |
 | **Burning Pact** (1, uncommon) Exhaust 1 card. Draw 2 cards.<br>Upgrade: magic +1 | **Burning Pact** (1, uncommon) [gold]Exhaust[/gold] 1 card. Draw 2 (+1) cards.<br>Upgrade: Cards +1 | Same effect and numbers. ⚠ draft |
-| **Clash** (0, common) Can only be played if every card in your hand is an Attack. Deal 14 damage.<br>Upgrade: damage +4 | **Clash** (0, event) Can only be played if every card in your [gold]Hand[/gold] is an Attack. Deal 14 (+4) damage.<br>Upgrade: Damage +4 | Same effect and numbers. ⚠ draft |
 | **Corruption** (3, rare) Skills cost 0. Whenever you play a Skill, Exhaust it.<br>Upgrade: cost → 2 | **Corruption** (3, ancient) Skills cost 0 {energyPrefix:energyIcons(1)}. Whenever you play a Skill, [gold]Exhaust[/gold] it.<br>Upgrade: cost → 2 | Same effect and upgrade (cost 3 → 2). StS1's magic number is unused. ⚠ draft |
 | **Dark Embrace** (2, uncommon) Whenever a card is Exhausted, draw 1 card.<br>Upgrade: cost → 1 | **Dark Embrace** (2, rare) Whenever a card is [gold]Exhausted[/gold], draw 1 card.<br>Upgrade: cost → 1 | Same effect and numbers. ⚠ draft |
 | **Defend** (1, basic) Gain 5 Block.<br>Upgrade: block +3 | **Defend** (1, basic) Gain 5 (+3) [gold]Block[/gold].<br>Upgrade: Block +3 | Same effect and numbers. ⚠ draft |
 | **Demon Form** (3, rare) At the start of your turn, gain 2 Strength.<br>Upgrade: magic +1 | **Demon Form** (3, rare) At the start of your turn, gain 2 (+1) [gold]Strength[/gold].<br>Upgrade: StrengthPower +1 | Same effect and numbers. ⚠ draft |
-| **Dual Wield** (1, uncommon) Choose an Attack or Power card. Add a copy of that card into your hand.<br>Upgrade: magic +1; text: Choose an Attack or Power card. Add 2 copies of that card into your hand. | **Dual Wield** (1, event) Choose an Attack or Power card. Add {IfUpgraded:show:{Cards} copies|a copy} of that card into your [gold]Hand[/gold].<br>Upgrade: Cards +1 | Same effect and numbers. ⚠ draft |
-| **Entrench** (2, uncommon) Double your Block.<br>Upgrade: cost → 1; text: Double your Block. | **Entrench** (2, event) Double your [gold]Block[/gold].<br>Upgrade: cost → 1 | Same effect and numbers. ⚠ draft |
 | **Feed** (1, rare) Deal 10 damage. If Fatal, raise your Max HP by 3. Exhaust.<br>Upgrade: damage +2; magic +1 | **Feed** (1, rare) Deal 10 (+2) damage. If [gold]Fatal[/gold], raise your Max HP by 3 (+1).<br>Upgrade: Damage +2; MaxHp +1 | Same effect and numbers. ⚠ draft |
 | **Feel No Pain** (1, uncommon) Whenever a card is Exhausted, gain 3 Block.<br>Upgrade: magic +1 | **Feel No Pain** (1, uncommon) Whenever a card is [gold]Exhausted[/gold], gain 3 (+1) [gold]Block[/gold].<br>Upgrade: Power +1 | Same effect and numbers. ⚠ draft |
 | **Fiend Fire** (2, rare) Exhaust your hand. Deal 7 damage for each card Exhausted. Exhaust.<br>Upgrade: damage +3 | **Fiend Fire** (2, rare) [gold]Exhaust[/gold] your [gold]Hand[/gold]. Deal 7 (+3) damage for each card [gold]Exhausted[/gold].<br>Upgrade: Damage +3 | Same effect and numbers. ⚠ draft |
@@ -59,7 +60,6 @@ Numbers in the StS2 column are the card's values with the upgrade in parentheses
 | **Pommel Strike** (1, common) Deal 9 damage. Draw 1 card.<br>Upgrade: damage +1; magic +1; text: Deal !D! damage. Draw !M! cards. | **Pommel Strike** (1, common) Deal 9 (+1) damage. Draw 1 (+1) 1 (+1).<br>Upgrade: Damage +1; Cards +1 | Same effect and numbers. ⚠ draft |
 | **Rage** (0, uncommon) Whenever you play an Attack this turn, gain 3 Block.<br>Upgrade: magic +2 | **Rage** (0, uncommon) Whenever you play an Attack this turn, gain 3 (+2) [gold]Block[/gold].<br>Upgrade: Power +2 | Same effect and numbers. ⚠ draft |
 | **Second Wind** (1, uncommon) Exhaust all non-Attack cards in your hand. Gain 5 Block for each card Exhausted.<br>Upgrade: block +2 | **Second Wind** (1, uncommon) [gold]Exhaust[/gold] all non-Attack cards in your [gold]Hand[/gold]. Gain 5 (+2) [gold]Block[/gold] for each card [gold]Exhausted[/gold].<br>Upgrade: Block +2 | Same effect and numbers. ⚠ draft |
-| **Shockwave** (2, uncommon) Apply 3 Weak and Vulnerable to ALL enemies. Exhaust.<br>Upgrade: magic +2 | **Shockwave** (2, uncommon) Apply 3 (+2) [gold]Weak[/gold] and [gold]Vulnerable[/gold] to ALL enemies.<br>Upgrade: Power +2 | Same effect and numbers. ⚠ draft |
 | **Shrug It Off** (1, common) Gain 8 Block. Draw 1 card.<br>Upgrade: block +3 | **Shrug It Off** (1, common) Gain 8 (+3) [gold]Block[/gold]. Draw 1 card.<br>Upgrade: Block +3 | Same numbers (8 Block +3, draw 1). ⚠ draft |
 | **Strike** (1, basic) Deal 6 damage.<br>Upgrade: damage +3 | **Strike** (1, basic) Deal 6 (+3) damage.<br>Upgrade: Damage +3 | Same effect and numbers. ⚠ draft |
 | **Sword Boomerang** (1, common) Deal 3 damage to a random enemy 3 times.<br>Upgrade: magic +1 | **Sword Boomerang** (1, common) Deal 3 damage to a random enemy 3 (+1) times.<br>Upgrade: Repeat +1 | Same effect: 3 damage to a random enemy 3 times (4 upgraded). ⚠ draft |

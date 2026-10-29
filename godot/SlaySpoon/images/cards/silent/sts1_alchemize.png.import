@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctamdnf2e8rrc"
-path="res://.godot/imported/sts1_blur.png-d51b8729621cda08641991c474c9a4be.ctex"
+uid="uid://die6va0rsbjvh"
+path="res://.godot/imported/sts1_alchemize.png-2756f3057fe44e21f4856ff85cdbeba2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SlaySpoon/images/cards/silent/sts1_blur.png"
-dest_files=["res://.godot/imported/sts1_blur.png-d51b8729621cda08641991c474c9a4be.ctex"]
+source_file="res://SlaySpoon/images/cards/silent/sts1_alchemize.png"
+dest_files=["res://.godot/imported/sts1_alchemize.png-2756f3057fe44e21f4856ff85cdbeba2.ctex"]
 
 [params]
 

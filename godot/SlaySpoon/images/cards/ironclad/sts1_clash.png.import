@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxxbb5tllne0i"
-path="res://.godot/imported/sts1_bouncing_flask.png-754ceb1dc2d5ae6a0cf42b60b3d5b8a3.ctex"
+uid="uid://dnlbewi2cqo80"
+path="res://.godot/imported/sts1_clash.png-0cc6235294170a118d07bcc6267a0183.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SlaySpoon/images/cards/silent/sts1_bouncing_flask.png"
-dest_files=["res://.godot/imported/sts1_bouncing_flask.png-754ceb1dc2d5ae6a0cf42b60b3d5b8a3.ctex"]
+source_file="res://SlaySpoon/images/cards/ironclad/sts1_clash.png"
+dest_files=["res://.godot/imported/sts1_clash.png-0cc6235294170a118d07bcc6267a0183.ctex"]
 
 [params]
 

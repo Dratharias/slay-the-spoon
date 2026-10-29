@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ocjcaryj6n1r"
-path="res://.godot/imported/sts1_nightmare.png-0fa967936375f42d8b755355f13d1bec.ctex"
+uid="uid://bp8ga258ulv5t"
+path="res://.godot/imported/sts1_entrench.png-e62877be22972cabe820dccf9888d1e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SlaySpoon/images/cards/silent/sts1_nightmare.png"
-dest_files=["res://.godot/imported/sts1_nightmare.png-0fa967936375f42d8b755355f13d1bec.ctex"]
+source_file="res://SlaySpoon/images/cards/ironclad/sts1_entrench.png"
+dest_files=["res://.godot/imported/sts1_entrench.png-e62877be22972cabe820dccf9888d1e7.ctex"]
 
 [params]
 

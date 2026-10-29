@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw20yq1g5jlns"
-path="res://.godot/imported/sts1_finisher.png-43b73892273cdb6943a16fd43cd23ec6.ctex"
+uid="uid://ddbvo7nftd3qt"
+path="res://.godot/imported/sts1_distraction.png-18ffa6532631d5f1bee5e2dfde1c6543.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SlaySpoon/images/cards/silent/sts1_finisher.png"
-dest_files=["res://.godot/imported/sts1_finisher.png-43b73892273cdb6943a16fd43cd23ec6.ctex"]
+source_file="res://SlaySpoon/images/cards/silent/sts1_distraction.png"
+dest_files=["res://.godot/imported/sts1_distraction.png-18ffa6532631d5f1bee5e2dfde1c6543.ctex"]
 
 [params]
 

@@ -59,7 +59,8 @@ sts1-data:
 		$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --sts1 data/sts1/$$lower.json \
 			--table data/duplicates/$$lower.json --out godot/SlaySpoon/images/cards/$$lower && \
 		$(TOOLS) python tools/sts1/codegen.py --sts1 data/sts1/$$lower.json --table data/duplicates/$$lower.json \
-			--character $$character --src src/Cards/Sts1/$$character --loc godot/SlaySpoon/localization || exit 1; \
+			--character $$character --src src/Cards/Sts1/$$character --loc godot/SlaySpoon/localization \
+			--relations unique,same-sts1,duplicate || exit 1; \
 	done
 
 # Build and install into the game's mods folder.
