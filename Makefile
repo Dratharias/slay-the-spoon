@@ -54,6 +54,8 @@ sts1-data:
 		--sts2-cards /sts2src/MegaCrit.Sts2.Core.Models.Cards --sts2-loc /sts2loc \
 		--table data/duplicates/ironclad.json --review docs/review/ironclad-duplicates.md \
 		--matches src/CardSets/Sts1Matches.g.cs --character Ironclad
+	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --sts1 data/sts1/ironclad.json \
+		--table data/duplicates/ironclad.json --out godot/SlaySpoon/images/cards/ironclad
 
 # Build and install into the game's mods folder.
 up: build
