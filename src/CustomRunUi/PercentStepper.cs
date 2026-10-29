@@ -2,6 +2,7 @@ using System.Reflection;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.addons.mega_text;
+using MegaCrit.Sts2.Core.ControllerInput;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.CustomRun;
@@ -14,6 +15,8 @@ namespace SlaySpoon.CustomRunUi;
 /// <summary>
 /// The −/+ buttons on a percent modifier row. A press swaps the row's modifier for the family member
 /// with the next percent and tells the list it changed, which makes the host re-send the modifiers.
+/// The buttons take no focus: with a gamepad (or the arrow keys), left/right on the focused row step it,
+/// like the game's settings sliders.
 /// </summary>
 public static class PercentStepper
 {
@@ -37,6 +40,7 @@ public static class PercentStepper
 		buttons.AddChild(MakeButton("−", tickbox, -1));
 		buttons.AddChild(MakeButton("+", tickbox, 1));
 		tickbox.GetNode<HBoxContainer>(RowNodeName).AddChild(buttons);
+		tickbox.GuiInput += input => OnGuiInput(tickbox, input);
 		SetButtonsEnabled(tickbox, tickbox.IsEnabled);
 		RefreshLabel(tickbox);
 	}
@@ -101,6 +105,18 @@ public static class PercentStepper
 		style.SetBorderWidthAll(2);
 		style.SetCornerRadiusAll(6);
 		return style;
+	}
+
+	/// <summary>Left/right on the focused row; the event is consumed so focus doesn't leave the list.</summary>
+	private static void OnGuiInput(NRunModifierTickbox tickbox, InputEvent input)
+	{
+		int direction = input.IsActionPressed(MegaInput.left) ? -1 : input.IsActionPressed(MegaInput.right) ? 1 : 0;
+		if (direction == 0 || !tickbox.IsEnabled)
+		{
+			return;
+		}
+		tickbox.AcceptEvent();
+		OnPressed(tickbox, direction);
 	}
 
 	private static void OnPressed(NRunModifierTickbox tickbox, int direction)

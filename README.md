@@ -18,8 +18,8 @@ Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic descri
 
 Current (0.6.0):
 
-- **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps,
-  synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
+- **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps (− / + buttons,
+  or left/right on a gamepad), synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
   red when monsters are stronger than vanilla and blue when weaker.
 
 - **Progress sync (optional):** with mods active, Slay the Spire 2 uses a separate "modded" profile

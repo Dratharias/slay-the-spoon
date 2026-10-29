@@ -11,6 +11,8 @@ co-op check should also be done once over Steam with a friend.
 - [x] Starting the run: the log line "Embarking on a CUSTOM ... Modifiers:" lists MODIFIER.SPOON_MONSTER_HP… / SPOON_MONSTER_DAMAGE….
 - [ ] Co-op (`make mp`): ticking a row or changing a value on the host shows up on the client.
 - [ ] Co-op: the client's − / + buttons are greyed out and do nothing.
+- [ ] Gamepad (backlog fix): on a focused Monster HP / Damage row, left/right steps the percent and ticks the row;
+      focus stays on the row; up/down still move between rows; on the client's greyed rows left/right do nothing.
 - [ ] Co-op: set 200 % on the host **before** the client joins; after joining, the client shows 200 %.
 - [ ] Tick HP 200 %, press Back, reopen Custom Run and embark: the log's "Modifiers:" line still lists SPOON_MONSTER_HP200.
 
