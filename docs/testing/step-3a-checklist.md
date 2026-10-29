@@ -4,6 +4,14 @@ Tick when checked in game. "Base / +" means the card before and after upgrade.
 Quickest way: Custom Run, Silent, "Spire Souvenir" (Hybrid: the Silent starts with the relic) or "Slay the Spire 1 Cards" ticked.
 Fastest: in combat, open the dev console (` key) and type `sts1card STS1_BANE` (Tab completes the id; add `Deck` to put it in the deck). Vanilla helpers: `energy 9`, `godmode`, `upgrade 0` (leftmost card in hand), `power POISON_POWER 5 1` (5 Poison on creature 1; the index runs over every creature in the fight, so try 1 or 2 for the first enemy).
 
+## Modes
+
+- [ ] Custom Run, Silent, "Slay the Spire 1 Cards": card rewards, the merchant and transforms offer only Silent StS1 cards (StS1 art), plus the StS2 cards the Silent shares with StS1.
+- [ ] Custom Run, Silent, "Spire Souvenir": the Silent starts with the Spire Souvenir next to Ring of the Snake; rewards mix both games.
+- [ ] Same run: a Silent duplicate (Blade Dance, Calculated Gamble, Reflex, Tactician or Wraith Form) in a card reward shows the swap button; it switches between the two versions.
+- [ ] Standard run, Silent: the relic can drop as a Common relic (or `relic add SPOON_SPIRE_SOUVENIR`).
+- [ ] Co-op (`make mp`), host Silent + guest Ironclad, "Spire Souvenir": both start with the relic; rewards and the swap button stay in sync; no desync.
+
 ## Ironclad cards whose StS2 version sits outside the Ironclad pool
 
 StS2's Clash, Dual Wield and Entrench are Event cards and Shockwave is colorless, so the Ironclad's StS1-only and Hybrid pools carry the StS1 copies.

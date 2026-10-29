@@ -4,7 +4,7 @@ Slay the Spire 2 mod (StS2 Early Access v0.107.1, Godot 4.5.1 + C# .NET 9, Harmo
 vanilla Slay the Spire 1 cards into StS2 and adds Custom Run options set by the lobby host.
 Read `README.md` for the player view and the spec for every decision.
 
-## Where we are (2026-10-28)
+## Where we are (2026-10-29)
 
 - **Step 1 is done and merged into `main`:**
   - mod skeleton;
@@ -27,8 +27,16 @@ Read `README.md` for the player view and the spec for every decision.
     have a synced swap button (hidden reward alternatives, `src/CardSets/RewardSwapPatch.cs`).
   - Not tested in game: `docs/testing/step-2b-checklist.md`.
   - The owner still has to review `docs/review/ironclad-duplicates.md`.
-- **Next:** in-game tests by the owner, then merge `step-2` into `main` when they say so; then step 3
-  (Silent, Defect, colorless; the swap at the merchant and on choose-a-card screens is in the backlog).
+- **Step 3a is done on branch `step-3`** (branched from `step-2`, not merged; plan `docs/superpowers/plans/2026-10-29-step-3a-silent.md`, version 0.3.0):
+  - tooling handles several characters (`make sts1-data` writes per-character data and review pages);
+  - the Silent StS1 pool and the Spire Souvenir in the Silent relic pool;
+  - 37 Silent cards in `src/Cards/Sts1/Silent/` (23 unique, 9 StS1 namesakes kept, 5 duplicates),
+    plus Clash, Dual Wield, Entrench and Shockwave for the Ironclad (their StS2 versions are outside its pool).
+  - Namesakes take StS2's French title (StS1's own French names collide: its Outmaneuver is "Tacticien").
+  - Not tested in game: `docs/testing/step-3a-checklist.md`. The owner still has to review `docs/review/silent-duplicates.md`.
+- **Next:** step 3b (Defect), then 3c (colorless); the owner tests at the end, then merges when they say so.
+  After step 3, look at a Steam Workshop "alpha" with the owner (no upload without their go-ahead).
+  The swap at the merchant and on choose-a-card screens is in the backlog.
 - **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
   pushed only when the owner says so. The same goes for the Steam Workshop upload.
 
@@ -100,9 +108,9 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/TopBar/` | Percent label instead of the missing modifier icon |
 | `src/Config/CardSetModifiers.cs` | Card set modifiers: `SpoonCardSetSts1Only`, and `SpoonSpireSouvenirModifier`, which gives the Spire Souvenir at run start to every character with StS1 cards (Hybrid comes from the relic; mutually exclusive) |
 | `src/CardSets/` | One postfix on `CardPoolModel.GetUnlockedCards` makes every card source (rewards, shop, transform, random generation) follow the mode; `Sts1Matches.g.cs` is generated. Hybrid duplicates: `VersionSwap`, `RandomVersionPatch` (CardFactory postfixes), `RewardSwapPatch` |
-| `src/Cards/` | `Sts1Card` / `Sts1IroncladCard` bases, the hidden `Sts1IroncladCardPool`, one class per StS1 card (`Sts1HeavyBlade`), StS1 powers in `Sts1/Powers/` (icons borrowed from vanilla powers through `IBorrowedIcon`) |
+| `src/Cards/` | `Sts1Card` / `Sts1IroncladCard` / `Sts1SilentCard` bases, the hidden per-character StS1 pools, one class per StS1 card (`Sts1HeavyBlade`), StS1 powers in `Sts1/Powers/` (icons borrowed from vanilla powers through `IBorrowedIcon`) |
 | `src/Neow/` | Neow's Blessings: a transpiler makes Neow read a zero modifier count; after vanilla modifier options, the blessings replace the "done" page |
-| `src/Relics/` | Spire Souvenir relic (Ironclad pool postfix, kept out of the run-start grab bag shuffle so seeds stay vanilla, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor` |
+| `src/Relics/` | Spire Souvenir relic (Ironclad and Silent pool postfix, kept out of the run-start grab bag shuffle so seeds stay vanilla, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor` |
 | `src/DevConsole/` | `sts1card` console command (the vanilla `card` command can't see the hidden StS1 pools) |
 | `tools/sts1/` | Python (Podman image `slayspoon-tools`): `extract.py` → `data/sts1/`, `match.py` → `data/duplicates/` + review page, `art.py` → portraits, `codegen.py` → card skeletons + text. Codegen never overwrites a ported card |
 | `godot/SlaySpoon/` | Packed into the PCK. Localization tables merge into the game's (`res://SlaySpoon/localization/<lang>/<table>.json`) |

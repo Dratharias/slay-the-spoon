@@ -16,7 +16,7 @@ Standard and Daily runs are left untouched.
 
 ## Features
 
-Current (0.2.0):
+Current (0.3.0):
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps,
   synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -37,16 +37,20 @@ Current (0.2.0):
   version when it plays differently, with a button on card rewards to switch between the two.
 
 - **Ironclad's Slay the Spire 1 cards:** the 31 cards that Slay the Spire 2 dropped (Heavy Blade,
-  Searing Blow, Limit Break, Berserk…), plus Slay the Spire 1's Juggernaut, Rampage and Rupture,
-  with their Slay the Spire 1 art and numbers. Other
-  characters keep their own cards in both modes for now. The Ironclad's starting deck is the same
+  Searing Blow, Limit Break, Berserk…), plus Slay the Spire 1's Juggernaut, Rampage, Rupture, Clash,
+  Dual Wield, Entrench and Shockwave,
+  with their Slay the Spire 1 art and numbers. The Ironclad's starting deck is the same
   in both games.
+
+- **Silent's Slay the Spire 1 cards:** the 37 Silent cards that Slay the Spire 2 dropped or changed
+  (Catalyst, Corpse Explosion, Wraith Form, A Thousand Cuts, Grand Finale…), with their Slay the
+  Spire 1 art and numbers. Defect, Regent and Necrobinder keep their own cards in both modes for now.
 
 - **Neow's Blessings:** a Custom Run option that brings back Neow's usual starting choice. Without it,
   any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers
   like Draft. With it, those options come first, then the blessings.
 
-- **Spire Souvenir:** a Common Ironclad relic, also found in Standard runs, that lets its owner find
+- **Spire Souvenir:** a Common Ironclad and Silent relic, also found in Standard runs, that lets its owner find
   cards from the other game: Slay the Spire 1 cards in a normal run, Slay the Spire 2 cards in a
   "Slay the Spire 1 Cards" run. It only affects its owner; losing it ends the effect. It never drops
   in a "Spire Souvenir" run (eligible players already start with it) or in a Daily run.
@@ -55,7 +59,7 @@ Current (0.2.0):
   `` ` `` key (`*` or `'` on AZERTY); `sts1card STS1_HEAVY_BLADE` puts that card in your hand in combat,
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
 
-Planned: the version switch at the merchant and on choose-a-card screens, Silent, Defect and
+Planned: the version switch at the merchant and on choose-a-card screens, Defect and
 Colorless cards, and merchant loans between players.
 
 ## Languages

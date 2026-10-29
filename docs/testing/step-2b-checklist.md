@@ -42,7 +42,7 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 ## Spire Souvenir
 
 - [ ] Custom Run with "Spire Souvenir" ticked, Ironclad: the run starts with the relic next to Burning Blood; its tooltip shows the Dusty Tome icon and the text in English and French.
-- [ ] Same run with Silent, Defect, Regent or Necrobinder: no relic, vanilla cards.
+- [ ] Same run with Defect, Regent or Necrobinder: no relic, vanilla cards. (Since step 3a the Silent gets the relic too; see `step-3a-checklist.md`.)
 - [ ] Relic held: card rewards mix StS1 and StS2 cards, and a duplicate (Rupture) shows the swap button.
 - [ ] Relic held: the merchant, a transform, and Infernal Blade or an Attack Potion offer StS1 cards too.
 - [ ] "Spire Souvenir" run: the relic never drops as a reward (the Ironclad already has it).
