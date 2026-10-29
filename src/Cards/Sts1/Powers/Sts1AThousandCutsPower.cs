@@ -13,9 +13,10 @@ public sealed class Sts1AThousandCutsPower : PowerModel, IBorrowedIcon
 {
 	private class Data
 	{
-		// Amount when each card started its play, as vanilla Afterimage does: the card that applies
-		// the power doesn't trigger it, and a second copy deals the old amount before stacking.
-		public readonly Dictionary<CardModel, int> AmountsForPlayedCards = new();
+		// Amount when each play started: the card that applies the power doesn't trigger it, and a second
+		// copy deals the old amount before stacking. Keyed by play, not card, so a card played again inside
+		// its own play (each play is a new CardPlay) gets both hits.
+		public readonly Dictionary<CardPlay, int> AmountsForPlays = new();
 	}
 
 	public override PowerType Type => PowerType.Buff;
@@ -30,7 +31,7 @@ public sealed class Sts1AThousandCutsPower : PowerModel, IBorrowedIcon
 	{
 		if (cardPlay.Card.Owner.Creature == Owner)
 		{
-			GetInternalData<Data>().AmountsForPlayedCards[cardPlay.Card] = Amount;
+			GetInternalData<Data>().AmountsForPlays[cardPlay] = Amount;
 		}
 		return Task.CompletedTask;
 	}
@@ -38,7 +39,7 @@ public sealed class Sts1AThousandCutsPower : PowerModel, IBorrowedIcon
 	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		if (cardPlay.Card.Owner.Creature == Owner
-			&& GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out int amount)
+			&& GetInternalData<Data>().AmountsForPlays.Remove(cardPlay, out int amount)
 			&& amount > 0 && CombatState != null)
 		{
 			Flash();

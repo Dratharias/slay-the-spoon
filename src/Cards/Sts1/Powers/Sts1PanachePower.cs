@@ -23,9 +23,9 @@ public sealed class Sts1PanachePower : PowerModel, IBorrowedIcon
 
 	private class Data
 	{
-		// Cards whose play began while this power existed: the Panache that applies it doesn't count,
-		// a later Panache does.
-		public readonly HashSet<CardModel> CountedCards = new();
+		// Plays that began while this power existed: the Panache that applies it doesn't count, a later
+		// Panache does. Keyed by play, so a card played again inside its own play counts twice.
+		public readonly HashSet<CardPlay> CountedPlays = new();
 	}
 
 	public override PowerType Type => PowerType.Buff;
@@ -47,14 +47,14 @@ public sealed class Sts1PanachePower : PowerModel, IBorrowedIcon
 	{
 		if (cardPlay.Card.Owner == Owner.Player)
 		{
-			GetInternalData<Data>().CountedCards.Add(cardPlay.Card);
+			GetInternalData<Data>().CountedPlays.Add(cardPlay);
 		}
 		return Task.CompletedTask;
 	}
 
 	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		if (cardPlay.Card.Owner != Owner.Player || !GetInternalData<Data>().CountedCards.Remove(cardPlay.Card))
+		if (cardPlay.Card.Owner != Owner.Player || !GetInternalData<Data>().CountedPlays.Remove(cardPlay))
 		{
 			return;
 		}

@@ -32,7 +32,7 @@ StS2's Clash, Dual Wield and Entrench are Event cards and Shockwave is colorless
 - [ ] Riddle with Holes (2): 3 / 4 damage 5 times.
 - [ ] Unload (1): 14 / 18 damage, then discards every non-Attack card in hand.
 - [ ] Eviscerate (3): costs 1 less for each card you discarded this turn (Survivor, Acrobatics, All-Out Attack…), down to 0; the cost shown on the card drops as you discard; back to 3 next turn. 7 / 9 damage 3 times.
-- [ ] Masterful Stab (0): costs 1 more each time you lost HP this combat (the cost shown goes up after an unblocked hit); 12 / 16 damage. Back to 0 next combat.
+- [ ] Masterful Stab (0): costs 1 more each time you lost HP this combat (the cost shown goes up after an unblocked hit, and after self HP loss such as Bloodletting); 12 / 16 damage. Back to 0 next combat. A copy created mid-combat (e.g. Discovery) starts at 0.
 - [ ] Flying Knee (1): 8 / 11 damage; next turn you start with 1 extra energy.
 - [ ] Glass Knife (1): 8 / 12 damage twice; each play lowers its damage by 2 for the rest of the combat (never below 0); back to full next combat.
 - [ ] Heel Hook (1): 5 / 8 damage; if the enemy was Weak, gain 1 energy and draw 1 (glows gold when an enemy is Weak).
