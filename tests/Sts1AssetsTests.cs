@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using SlaySpoon.Core;
 using Xunit;
 
@@ -59,7 +60,7 @@ public class Sts1AssetsTests
 		Assert.Empty(problems);
 	}
 
-	[Fact(Skip = "Cards are ported in Tasks 7-10")]
+	[Fact]
 	public void NoUnportedCards()
 	{
 		string[] unported = Directory.EnumerateFiles(Path.Combine(Repo, "src/Cards/Sts1"), "*.cs", SearchOption.AllDirectories)
@@ -67,5 +68,45 @@ public class Sts1AssetsTests
 			.Select(Path.GetFileName)
 			.ToArray()!;
 		Assert.Empty(unported);
+	}
+
+	// Placeholders the game fills itself rather than from the card's own vars.
+	private static readonly HashSet<string> BuiltInPlaceholders = new() { "IfUpgraded", "energyPrefix" };
+
+	/// <summary>A {Name:...} placeholder with no matching card var throws when the card text is shown.</summary>
+	[Fact]
+	public void CardTextPlaceholders_MatchCardVars()
+	{
+		var problems = new List<string>();
+		foreach (string file in CardFiles("Ironclad"))
+		{
+			string source = File.ReadAllText(file);
+			var vars = new HashSet<string>(BuiltInPlaceholders);
+			foreach (Match m in Regex.Matches(source, @"new (DamageVar|BlockVar|EnergyVar|CardsVar|RepeatVar)\("))
+			{
+				vars.Add(m.Groups[1].Value[..^3]);
+			}
+			foreach (Match m in Regex.Matches(source, @"new PowerVar<(\w+)>\("))
+			{
+				vars.Add(m.Groups[1].Value);
+			}
+			foreach (Match m in Regex.Matches(source, @"new DynamicVar\(""(\w+)"""))
+			{
+				vars.Add(m.Groups[1].Value);
+			}
+			string key = ModelIds.FromClassName(Path.GetFileNameWithoutExtension(file));
+			foreach (string lang in new[] { "eng", "fra" })
+			{
+				string text = Table(lang, "cards").GetValueOrDefault(key + ".description", "");
+				foreach (Match m in Regex.Matches(text, @"\{(\w+):"))
+				{
+					if (!vars.Contains(m.Groups[1].Value))
+					{
+						problems.Add($"{lang} {key}: {{{m.Groups[1].Value}}}");
+					}
+				}
+			}
+		}
+		Assert.Empty(problems);
 	}
 }

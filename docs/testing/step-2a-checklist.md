@@ -31,3 +31,10 @@ Quickest way to get a card: Custom Run with "Slay the Spire 1 Cards" ticked, Iro
 - [ ] Warcry (0 energy, Exhausts): draw 1 / 2, then pick a card to put on top of the draw pile (prompt in English and French).
 - [ ] Exhume (1 / 0 energy, Exhausts): pick a card from the Exhaust pile into the hand; other Exhumes aren't offered. With an empty Exhaust pile nothing happens.
 - [ ] Double Tap: the next 1 / 2 Attacks this turn are played twice. The buff shows the Burst icon and reads "Attack" in its tooltip; it's gone at the end of the turn.
+- [ ] Berserk (0 energy): gain 2 / 1 Vulnerable; from next turn on, +1 energy at the start of each turn (before the draw). Two Berserks give +2.
+- [ ] Brutality (0 energy; Innate when upgraded): after the hand is drawn each turn, draw 1 card and lose 1 HP.
+- [ ] Combust: at the end of the turn, lose 1 HP and deal 5 / 7 damage to ALL enemies. A second Combust makes it 2 HP and 10 (or 12/14) damage. Does nothing once every enemy is dead.
+- [ ] Evolve: drawing a Status (Wound, Dazed, Burn…) draws 1 / 2 more cards, also during the start-of-turn draw.
+- [ ] Fire Breathing: drawing a Status or a Curse deals 6 / 10 damage to ALL enemies (Strength doesn't add).
+- [ ] Metallicize: at the end of each turn, gain 3 / 4 Block. It never decays (unlike Plating).
+- [ ] Every StS1 power shows a vanilla icon (Berserk: Energy Next Turn, Brutality: Draw Cards Next Turn, Combust: Inferno, Evolve: Adaptable, Fire Breathing: Pyre, Metallicize: Plating, Double Tap: Burst, Flex: Flex Potion) and its tooltip in English and French.

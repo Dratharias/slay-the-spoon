@@ -1,5 +1,23 @@
 {
+	"STS1_BERSERK_POWER.description": "At the start of your turn, gain [gold]Energy[/gold].",
+	"STS1_BERSERK_POWER.smartDescription": "At the start of your turn, gain [blue]{Amount}[/blue] {energyPrefix:energyIcons(1)}.",
+	"STS1_BERSERK_POWER.title": "Berserk",
+	"STS1_BRUTALITY_POWER.description": "At the start of your turn, lose HP and draw cards.",
+	"STS1_BRUTALITY_POWER.smartDescription": "At the start of your turn, lose [blue]{Amount}[/blue] HP and draw [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
+	"STS1_BRUTALITY_POWER.title": "Brutality",
+	"STS1_COMBUST_POWER.description": "At the end of your turn, lose HP and deal damage to ALL enemies.",
+	"STS1_COMBUST_POWER.smartDescription": "At the end of your turn, lose [blue]{SelfDamage}[/blue] HP and deal [blue]{Amount}[/blue] damage to ALL enemies.",
+	"STS1_COMBUST_POWER.title": "Combust",
 	"STS1_DOUBLE_TAP_POWER.description": "This turn, your next Attack is played an extra time.",
 	"STS1_DOUBLE_TAP_POWER.smartDescription": "Your next {Amount:plural:Attack is|[blue]{}[/blue] Attacks are} played an extra time this turn.",
-	"STS1_DOUBLE_TAP_POWER.title": "Double Tap"
+	"STS1_DOUBLE_TAP_POWER.title": "Double Tap",
+	"STS1_EVOLVE_POWER.description": "Whenever you draw a [gold]Status[/gold] card, draw cards.",
+	"STS1_EVOLVE_POWER.smartDescription": "Whenever you draw a [gold]Status[/gold] card, draw [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
+	"STS1_EVOLVE_POWER.title": "Evolve",
+	"STS1_FIRE_BREATHING_POWER.description": "Whenever you draw a [gold]Status[/gold] or [gold]Curse[/gold] card, deal damage to ALL enemies.",
+	"STS1_FIRE_BREATHING_POWER.smartDescription": "Whenever you draw a [gold]Status[/gold] or [gold]Curse[/gold] card, deal [blue]{Amount}[/blue] damage to ALL enemies.",
+	"STS1_FIRE_BREATHING_POWER.title": "Fire Breathing",
+	"STS1_METALLICIZE_POWER.description": "At the end of your turn, gain [gold]Block[/gold].",
+	"STS1_METALLICIZE_POWER.smartDescription": "At the end of your turn, gain [blue]{Amount}[/blue] [gold]Block[/gold].",
+	"STS1_METALLICIZE_POWER.title": "Metallicize"
 }

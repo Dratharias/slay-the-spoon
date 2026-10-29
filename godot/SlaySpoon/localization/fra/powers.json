@@ -1,5 +1,23 @@
 {
+	"STS1_BERSERK_POWER.description": "Au début de votre tour, gagnez de l'[gold]Énergie[/gold].",
+	"STS1_BERSERK_POWER.smartDescription": "Au début de votre tour, gagnez [blue]{Amount}[/blue] {energyPrefix:energyIcons(1)}.",
+	"STS1_BERSERK_POWER.title": "Folie furieuse",
+	"STS1_BRUTALITY_POWER.description": "Au début de votre tour, perdez des PV et piochez des cartes.",
+	"STS1_BRUTALITY_POWER.smartDescription": "Au début de votre tour, perdez [blue]{Amount}[/blue] PV et piochez [blue]{Amount}[/blue] {Amount:plural:carte|cartes}.",
+	"STS1_BRUTALITY_POWER.title": "Brutalité",
+	"STS1_COMBUST_POWER.description": "À la fin de votre tour, perdez des PV et infligez des dégâts à TOUS les ennemis.",
+	"STS1_COMBUST_POWER.smartDescription": "À la fin de votre tour, perdez [blue]{SelfDamage}[/blue] PV et infligez [blue]{Amount}[/blue] dégâts à TOUS les ennemis.",
+	"STS1_COMBUST_POWER.title": "Combustion",
 	"STS1_DOUBLE_TAP_POWER.description": "La prochaine Attaque que vous jouez ce tour est jouée une fois supplémentaire.",
 	"STS1_DOUBLE_TAP_POWER.smartDescription": "{Amount:plural:La prochaine Attaque|Les [blue]{}[/blue] prochaines Attaques} que vous jouez ce tour {Amount:plural:est jouée|sont jouées} une fois supplémentaire.",
-	"STS1_DOUBLE_TAP_POWER.title": "Attaque double"
+	"STS1_DOUBLE_TAP_POWER.title": "Attaque double",
+	"STS1_EVOLVE_POWER.description": "Lorsque vous piochez une carte [gold]Statut[/gold], piochez des cartes.",
+	"STS1_EVOLVE_POWER.smartDescription": "Lorsque vous piochez une carte [gold]Statut[/gold], piochez [blue]{Amount}[/blue] {Amount:plural:carte|cartes}.",
+	"STS1_EVOLVE_POWER.title": "Évolution",
+	"STS1_FIRE_BREATHING_POWER.description": "Lorsque vous piochez une carte [gold]Statut[/gold] ou [gold]Malédiction[/gold], infligez des dégâts à TOUS les ennemis.",
+	"STS1_FIRE_BREATHING_POWER.smartDescription": "Lorsque vous piochez une carte [gold]Statut[/gold] ou [gold]Malédiction[/gold], infligez [blue]{Amount}[/blue] dégâts à TOUS les ennemis.",
+	"STS1_FIRE_BREATHING_POWER.title": "Souffle de feu",
+	"STS1_METALLICIZE_POWER.description": "À la fin de votre tour, gagnez de l'[gold]Armure[/gold].",
+	"STS1_METALLICIZE_POWER.smartDescription": "À la fin de votre tour, gagnez [blue]{Amount}[/blue] d'[gold]Armure[/gold].",
+	"STS1_METALLICIZE_POWER.title": "Métallisation"
 }
