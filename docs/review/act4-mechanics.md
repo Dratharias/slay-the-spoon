@@ -80,12 +80,14 @@ targets a single enemy turns the player toward that enemy.
 - **Multiplayer HP scaling crashes past act 3.** `Creature.ScaleHpForMultiplayer` multiplies HP by
   `playerCount × MultiplayerScalingModel.GetMultiplayerScaling(encounter, actIndex)`, and that method throws
   `ArgumentOutOfRangeException` for any act index above 2. Act 4 (index 3) needs a patch there before any co-op
-  fight. Builder call: reuse act 3's factors (1.2 elite, 1.3 boss).
+  fight. Owner decision (2026-10-29): act 4 HP follows StS2's own formula. Since the formula has no act 4 factor,
+  act 4 reuses act 3's (1.2 elite, 1.3 boss): HP × player count × factor.
 
 ## Owner decisions (2026-10-29)
 
 1. **Ascension mapping.** StS1 HP raises (A8/A9) go to StS2 **Tough Enemies (A8)**, damage raises (A3/A4) to
    **Deadly Enemies (A9)**, and the StS1 A18/A19 changes (Invincible 200, Beat of Death 2, Artifact 2, Smash
    99 Block, Burns in the draw pile) to **A10** (Double Boss, the highest level).
-2. **Invincible in co-op.** The cap scales like the Heart's HP: 300 (or 200) × the same multiplayer factor,
-   so a co-op fight takes about as many turns as a solo one. Every player's damage shares that one cap.
+2. **Invincible in co-op.** The cap scales like the Heart's HP, with StS2's formula: 300 (or 200) × player
+   count × 1.3, so a co-op fight takes about as many turns as a solo one. Every player's damage shares that one cap.
+3. **Multiplayer HP.** Act 4 enemies follow StS2's formula (HP × player count × act factor), with act 3's factors.

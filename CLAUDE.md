@@ -94,6 +94,7 @@ Read `README.md` for the player view and the spec for every decision.
 - Owner decisions: StS1 HP raises → StS2 A8, damage raises → A9, StS1 A18/A19 changes → A10; the Heart's
   Invincible cap scales with the same multiplayer factor as HP.
 - StS2's `MultiplayerScalingModel.GetMultiplayerScaling` throws for act index 3: patch it before any act 4 co-op fight.
+  Owner decision: act 4 HP keeps StS2's formula (HP × player count × factor) with act 3's factors (1.2 elite, 1.3 boss).
 - Not playable or exposed in the lobby. Next: animation compatibility, key state and act routing.
 - Approved Act 4 unlock: first reach Act 3 in a Standard run at Ascension 10; victory is not required.
   The unlock is permanent and makes Act 4 available at every ascension level, including 0.
