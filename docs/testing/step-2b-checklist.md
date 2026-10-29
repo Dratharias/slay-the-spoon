@@ -46,6 +46,9 @@ Fastest: in combat, open the dev console (` key, or ' / * / ^; any modded run ha
 - [ ] Relic held: the merchant and a transform offer StS1 cards.
 - [ ] Custom Run with "Slay the Spire 1 Cards" and the relic: StS2 cards come back.
 - [ ] Custom Run with "Cards From Both Games": the relic never drops; given by console, nothing changes.
+- [ ] Relic held: Infernal Blade or an Attack Potion can create StS1 cards.
+- [ ] Daily run: the relic never drops, and the map matches the same Daily without the mod.
+- [ ] Standard Ironclad run, same seed with and without the mod: same map; the log shows `Spire Souvenir: Common slot`.
 - [ ] `relic remove SPOON_SPIRE_SOUVENIR`: the next reward is back to the run's mode.
 - [ ] Save, quit and resume with the relic: the effect persists.
 - [ ] Co-op (`make mp`): relic on the host only; the client's rewards stay vanilla, and both screens agree on the host's reward.
