@@ -5,16 +5,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Defect;
 
-public sealed class Sts1CompileDriver : Sts1DefectCard
+public sealed class Sts1HelloWorld : Sts1DefectCard
 {
-	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-	{
-		new DamageVar(7m, ValueProp.Move),
-		new DynamicVar("Magic", 1m),
-	};
-
-	public Sts1CompileDriver()
-		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+	public Sts1HelloWorld()
+		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 
@@ -25,6 +19,6 @@ public sealed class Sts1CompileDriver : Sts1DefectCard
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars.Damage.UpgradeValueBy(3m);
+		AddKeyword(CardKeyword.Innate);
 	}
 }

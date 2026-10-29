@@ -5,15 +5,15 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Defect;
 
-public sealed class Sts1Glacier : Sts1DefectCard
+public sealed class Sts1Equilibrium : Sts1DefectCard
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new BlockVar(7m, ValueProp.Move),
-		new DynamicVar("Magic", 2m),
+		new BlockVar(13m, ValueProp.Move),
+		new DynamicVar("Magic", 1m),
 	};
 
-	public Sts1Glacier()
+	public Sts1Equilibrium()
 		: base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
 	}

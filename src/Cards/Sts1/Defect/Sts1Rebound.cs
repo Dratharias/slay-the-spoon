@@ -5,15 +5,15 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Defect;
 
-public sealed class Sts1Zap : Sts1DefectCard
+public sealed class Sts1Rebound : Sts1DefectCard
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 1m),
+		new DamageVar(9m, ValueProp.Move),
 	};
 
-	public Sts1Zap()
-		: base(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
+	public Sts1Rebound()
+		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
 
@@ -24,6 +24,6 @@ public sealed class Sts1Zap : Sts1DefectCard
 
 	protected override void OnUpgrade()
 	{
-		EnergyCost.UpgradeBy(-1);
+		DynamicVars.Damage.UpgradeValueBy(3m);
 	}
 }

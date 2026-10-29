@@ -5,18 +5,16 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Defect;
 
-public sealed class Sts1MeteorStrike : Sts1DefectCard
+public sealed class Sts1Claw : Sts1DefectCard
 {
-	protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
-
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DamageVar(24m, ValueProp.Move),
-		new DynamicVar("Magic", 3m),
+		new DamageVar(3m, ValueProp.Move),
+		new DynamicVar("Magic", 2m),
 	};
 
-	public Sts1MeteorStrike()
-		: base(5, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+	public Sts1Claw()
+		: base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
 
@@ -27,6 +25,6 @@ public sealed class Sts1MeteorStrike : Sts1DefectCard
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars.Damage.UpgradeValueBy(6m);
+		DynamicVars.Damage.UpgradeValueBy(2m);
 	}
 }

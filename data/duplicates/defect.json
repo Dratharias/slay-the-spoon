@@ -11,7 +11,8 @@
   "sts2": "AllForOne",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Amplify",
@@ -30,30 +31,34 @@
  {
   "sts1": "BallLightning",
   "sts2": "BallLightning",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=1 vs StS2 vars ['Damage']"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Barrage",
   "sts2": "Barrage",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['CalculatedHits', 'CalculationBase', 'CalculationExtra', 'Damage']"
+  "note": "Same effect; StS1 deals less damage per orb (4 vs 5).",
+  "checked": true
  },
  {
   "sts1": "BeamCell",
   "sts2": "BeamCell",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "BiasedCognition",
   "sts2": "BiasedCognition",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=4 vs StS2 vars ['BiasedCognitionPower', 'FocusPower']"
+  "note": "Same effect and numbers. StS2's is an Ancient card, StS1's a Rare (as Corruption in step 2).",
+  "checked": true
  },
  {
   "sts1": "Blizzard",
@@ -67,56 +72,64 @@
   "sts2": "BootSequence",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (Innate, Exhaust).",
+  "checked": true
  },
  {
   "sts1": "Buffer",
   "sts2": "Buffer",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Capacitor",
   "sts2": "Capacitor",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Chaos",
   "sts2": "Chaos",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Chill",
   "sts2": "Chill",
   "relation": "duplicate",
   "draft": true,
-  "note": "keywords ['exhaust']→['exhaust', 'innate'] vs ['exhaust']→[]; values: StS1 magic=1 vs StS2 vars []"
+  "note": "Different upgrade: StS1 keeps Exhaust and gains Innate, StS2 loses Exhaust.",
+  "checked": true
  },
  {
   "sts1": "Claw",
   "sts2": "Claw",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "? mixed: StS1 better on damage+ 5 vs 4; StS2 better on magic+ 2 vs 3"
+  "note": "Same effect; StS1's upgrade adds 2 damage but no growth, StS2's adds 1 damage and 1 growth per play, which wins over a combat.",
+  "checked": true
  },
  {
   "sts1": "ColdSnap",
   "sts2": "ColdSnap",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=1 vs StS2 vars ['Damage']"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "CompileDriver",
   "sts2": "CompileDriver",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=1 vs StS2 vars ['CalculatedCards', 'CalculationBase', 'CalculationExtra', 'Damage']"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "ConserveBattery",
@@ -137,7 +150,8 @@
   "sts2": "Coolheaded",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "CoreSurge",
@@ -151,28 +165,32 @@
   "sts2": "CreativeAi",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (upgrade: cost 3 → 2).",
+  "checked": true
  },
  {
   "sts1": "Darkness",
   "sts2": "Darkness",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "values: StS1 magic=1 vs StS2 vars []"
+  "note": "StS1 only channels; its upgrade adds one trigger of the Dark orbs' passive, StS2's base already has it (twice upgraded): StS1 is weaker.",
+  "checked": true
  },
  {
   "sts1": "Defend_Blue",
   "sts2": "DefendDefect",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Defragment",
   "sts2": "Defragment",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers; StS2 makes it Rare.",
+  "checked": true
  },
  {
   "sts1": "DoomAndGloom",
@@ -186,21 +204,24 @@
   "sts2": "DoubleEnergy",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (Exhaust; upgrade: cost 1 → 0).",
+  "checked": true
  },
  {
   "sts1": "Dualcast",
   "sts2": "Dualcast",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (upgrade: cost 1 → 0).",
+  "checked": true
  },
  {
   "sts1": "EchoForm",
   "sts2": "EchoForm",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['EchoForm']"
+  "note": "Same effect and numbers (Ethereal, removed on upgrade).",
+  "checked": true
  },
  {
   "sts1": "Electrodynamics",
@@ -212,16 +233,18 @@
  {
   "sts1": "Equilibrium",
   "sts2": "Equilibrium",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers, but StS2's is a colorless card: StS1-only and Hybrid keep the StS1 copy in the Defect pool.",
+  "checked": true
  },
  {
   "sts1": "FTL",
   "sts2": "Ftl",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=3 vs StS2 vars ['Cards', 'Damage', 'PlayMax']"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Fission",
@@ -242,28 +265,32 @@
   "sts2": "Fusion",
   "relation": "duplicate",
   "draft": true,
-  "note": "keywords []→[] vs ['exhaust']→[]; values: StS1 magic=1 vs StS2 vars []"
+  "note": "StS1 costs 2 (1 upgraded) with no Exhaust; StS2 costs 1 with Exhaust, removed on upgrade.",
+  "checked": true
  },
  {
   "sts1": "GeneticAlgorithm",
   "sts2": "GeneticAlgorithm",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "damage/block presence differs"
+  "note": "Same effect; StS1 grows by 2 (3) per play, StS2 by 3 (4). StS1 is Uncommon, StS2 Rare.",
+  "checked": true
  },
  {
   "sts1": "Glacier",
   "sts2": "Glacier",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=2 vs StS2 vars ['Block']"
+  "note": "Same effect; StS2 gives less Block (6 vs 7).",
+  "checked": true
  },
  {
   "sts1": "GoForTheEyes",
   "sts2": "GoForTheEyes",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Heatsinks",
@@ -275,30 +302,34 @@
  {
   "sts1": "HelloWorld",
   "sts2": "HelloWorld",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers, but StS2's is an Event card: StS1-only and Hybrid keep the StS1 copy.",
+  "checked": true
  },
  {
   "sts1": "Hologram",
   "sts2": "Hologram",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (Exhaust, removed on upgrade).",
+  "checked": true
  },
  {
   "sts1": "Hyperbeam",
   "sts2": "Hyperbeam",
   "relation": "same-sts1",
   "draft": true,
-  "note": "StS1 weaker: damage 26 vs 28, damage+ 34 vs 36"
+  "note": "Same effect; StS1 deals less damage (26 vs 28).",
+  "checked": true
  },
  {
   "sts1": "Leap",
   "sts2": "Leap",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "LockOn",
@@ -312,14 +343,16 @@
   "sts2": "Loop",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "MachineLearning",
   "sts2": "MachineLearning",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (upgrade: Innate).",
+  "checked": true
  },
  {
   "sts1": "Melter",
@@ -331,44 +364,50 @@
  {
   "sts1": "MeteorStrike",
   "sts2": "MeteorStrike",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=3 vs StS2 vars ['Damage']"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "MultiCast",
   "sts2": "MultiCast",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Overclock",
   "sts2": "Overclock",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Rainbow",
   "sts2": "Rainbow",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (Exhaust, removed on upgrade).",
+  "checked": true
  },
  {
   "sts1": "Reboot",
   "sts2": "Reboot",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (Exhaust).",
+  "checked": true
  },
  {
   "sts1": "Rebound",
   "sts2": "Rebound",
-  "relation": "same-sts2",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers, but StS2's is an Event card: StS1-only and Hybrid keep the StS1 copy.",
+  "checked": true
  },
  {
   "sts1": "Recursion",
@@ -401,16 +440,18 @@
  {
   "sts1": "RipAndTear",
   "sts2": "RipAndTear",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "target all_enemy vs enemy; values: StS1 magic=2 vs StS2 vars ['Damage']"
+  "note": "Same effect and numbers, but StS2's is an Event card: StS1-only and Hybrid keep the StS1 copy.",
+  "checked": true
  },
  {
   "sts1": "Scrape",
   "sts2": "Scrape",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Seek",
@@ -431,14 +472,16 @@
   "sts2": "Skim",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Stack",
   "sts2": "Stack",
-  "relation": "duplicate",
+  "relation": "same-sts1",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['CalculatedBlock', 'CalculationBase', 'CalculationExtra']; damage/block presence differs"
+  "note": "Same effect and numbers, but StS2's is an Event card: StS1-only and Hybrid keep the StS1 copy.",
+  "checked": true
  },
  {
   "sts1": "StaticDischarge",
@@ -459,7 +502,8 @@
   "sts2": "Storm",
   "relation": "duplicate",
   "draft": true,
-  "note": "keywords []→['innate'] vs []→[]"
+  "note": "Different upgrade: StS1 gains Innate, StS2 channels 2 Lightning.",
+  "checked": true
  },
  {
   "sts1": "Streamline",
@@ -473,28 +517,32 @@
   "sts2": "StrikeDefect",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Sunder",
   "sts2": "Sunder",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=None vs StS2 vars ['Damage', 'Energy']"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "SweepingBeam",
   "sts2": "SweepingBeam",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "Tempest",
   "sts2": "Tempest",
   "relation": "duplicate",
   "draft": true,
-  "note": "keywords ['exhaust']→['exhaust'] vs []→[]"
+  "note": "StS1 Exhausts, StS2 doesn't.",
+  "checked": true
  },
  {
   "sts1": "ThunderStrike",
@@ -508,20 +556,23 @@
   "sts2": "Turbo",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers.",
+  "checked": true
  },
  {
   "sts1": "WhiteNoise",
   "sts2": "WhiteNoise",
   "relation": "same-sts2",
   "draft": true,
-  "note": "identical numbers"
+  "note": "Same effect and numbers (Exhaust; upgrade: cost 1 → 0).",
+  "checked": true
  },
  {
   "sts1": "Zap",
   "sts2": "Zap",
-  "relation": "duplicate",
+  "relation": "same-sts2",
   "draft": true,
-  "note": "values: StS1 magic=1 vs StS2 vars []"
+  "note": "Same effect and numbers (starter card; upgrade: cost 1 → 0).",
+  "checked": true
  }
 ]
