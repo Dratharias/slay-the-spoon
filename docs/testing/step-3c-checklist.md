@@ -47,12 +47,11 @@ is unchanged. This fallback was proposed to the owner and used as the default pe
 ## Automated checkpoint — 2026-10-29
 
 - Build: zero warnings, zero errors; DLL and PCK produced, not installed.
-- xUnit: 82 pass; `NoUnportedCards` fails on the 25 remaining skeletons. The test remains enabled.
-- Python: 35 pass (run separately because `make test` stops on the xUnit failure).
+- xUnit: 83 pass, including `NoUnportedCards` (no skeleton left) and the placeholder check on every card text.
+- Python: 35 pass.
 - Local assembly inspection: all 11 Harmony injection points matched StS2 v0.107.1.
   This checks instruction matching, not an in-game execution of the patches.
-- Asset, localization coverage and placeholder checks pass. Attack text is hand-reviewed in EN/FR;
-  generated text for skills and Powers still needs editing alongside Tasks 5–6.
+- Asset and localization coverage pass; every colorless card text is hand-reviewed in EN/FR.
 - Ritual Dagger: a local probe against the game assembly confirms unchanged saved-property network
   IDs/bit width, 15 initial damage, +3/+5 growth, JSON and packet round-trips, and growth retained
   after downgrade. This does not exercise combat, actual run saves or a co-op session.

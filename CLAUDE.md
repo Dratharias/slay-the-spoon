@@ -42,22 +42,17 @@ Read `README.md` for the player view and the spec for every decision.
   - build: 0 warnings / 0 errors; tests: 61 xUnit and 32 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3b-checklist.md` remains unchecked, especially save/reload and co-op;
   - the owner still has to review `docs/review/defect-duplicates.md` (classifications stay draft).
-- **Step 3c Tasks 1–4 complete:** catalog, namesake classification, infrastructure and six attacks (39 colorless cards,
-  including four source-Special cards). `make sts1-data` now includes colorless portraits and skeletons;
-  `make sts1-colorless-data` remains catalog-only. Do not install the intermediate skeleton build.
-  Plan: `docs/superpowers/plans/2026-10-29-step-3c-colorless.md`.
-  All 22 namesakes are builder-checked, still draft for owner review: 17 unique, 6 same-sts1,
-  8 duplicates, 8 native cards reused; 31 classes planned (6 attacks, 22 skills, 3 Powers).
-  Build: zero warnings/errors. Tests: 82 xUnit pass, `NoUnportedCards` fails on the remaining 25 skeletons;
-  35 pytest pass. Eleven Harmony injection points checked against the local game assembly.
-  Bite, Dramatic Entrance, Flash of Steel, Mind Blast, Ritual Dagger and Swift Strike are implemented
-  with EN/FR text. Ritual Dagger reuses The Scythe's saved property names; local JSON/packet
-  round-trips and downgrade preserve growth. In-game combat/Fatal checks remain pending.
-  Next: Task 5, 22 skills. Ordinary/event hidden pools, direct event grants and previews,
-  merchant recognition and console access are wired. Seven event-only classes remain outside
-  ordinary pools (32 ordinary cards), as requested. Massive Scroll uses owner context and falls
-  back to ordinary allowed cards if its co-op-only filter leaves none (builder default pending feedback).
-  No in-game tests or install; checklist and source audit: `docs/testing/step-3c-checklist.md`.
+- **Step 3c is implemented on `step-3`** (not merged; plan `docs/superpowers/plans/2026-10-29-step-3c-colorless.md`, version 0.5.0):
+  - 39 StS1 colorless cards cataloged; 31 custom classes in `src/Cards/Sts1/Colorless/` (6 attacks, 22 skills,
+    3 Powers) and 8 native cards reused; all 22 namesakes still draft for owner review (`docs/review/colorless-duplicates.md`);
+  - the colorless pool follows the mode for all five characters; the Souvenir holder gets Hybrid colorless;
+  - seven event-only classes (Apotheosis, Apparition, Bite, Enlightenment, JAX, Metamorphosis, Ritual Dagger)
+    live in a hidden event pool, outside ordinary pools (32 ordinary cards); vanilla event grants are patched;
+    Bite, JAX and Ritual Dagger have console access only;
+  - Massive Scroll falls back to ordinary allowed cards when its co-op-only filter leaves none (builder default pending feedback);
+  - Ritual Dagger reuses The Scythe's saved property names; Sadistic Nature reuses vanilla `SleightOfFleshPower`;
+  - build: 0 warnings / 0 errors; tests: 83 xUnit and 35 pytest pass, including `NoUnportedCards`;
+  - not installed or tested in game: `docs/testing/step-3c-checklist.md` remains unchecked.
 - The owner tests at the end, then merges when they say so.
   After step 3, look at a Steam Workshop "alpha" with the owner (no upload without their go-ahead).
   The swap at the merchant and on choose-a-card screens is in the backlog.
@@ -71,7 +66,7 @@ Read `README.md` for the player view and the spec for every decision.
 | `docs/superpowers/specs/2026-10-28-slay-the-spoon-design.md` | Approved design: owner decisions (§3), builder calls (§4), game recon (§5), architecture (§6), delivery order (§7) |
 | `docs/superpowers/plans/2026-10-28-step-1-*.md` | Step 1 plan (done) |
 | `docs/superpowers/plans/2026-10-28-step-2a-*.md`, `...-step-2b-*.md` | Step 2 plans (done) |
-| `docs/superpowers/plans/2026-10-29-step-3c-colorless.md` | Current checkpoint: Tasks 1–4 complete; resume Task 5 skills |
+| `docs/superpowers/plans/2026-10-29-step-3c-colorless.md` | Step 3c plan (done) |
 | `docs/testing/step-*-checklist.md` | In-game checklists the owner ticks |
 | `docs/review/*-duplicates.md` | Owner review pages for Ironclad, Silent, Defect and Colorless (generated from `data/duplicates/*.json`) |
 | `docs/backlog.md` | Known gaps, fixed when the owner feels like it |

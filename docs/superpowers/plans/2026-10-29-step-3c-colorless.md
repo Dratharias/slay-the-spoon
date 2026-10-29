@@ -7,29 +7,15 @@ Target: StS2 v0.107.1. Work on `step-3`; commit per task, no install or publicat
 Spec: `docs/superpowers/specs/2026-10-28-slay-the-spoon-design.md` §3.3, §3.4 and §6;
 per-player Hybrid follows the Spire Souvenir amendment.
 
-## Current checkpoint — 2026-10-29
+## Completion status
 
-Tasks 1–4 are implemented on `step-3`: catalog, classification, infrastructure and six attacks.
-**Resume at Task 5 (22 skills).** Version remains 0.4.0. Of 31 custom classes, six attacks
-are implemented and 25 skills/Powers remain skeletons. Do not install this intermediate build.
-
-| Task | Status |
-|------|--------|
-| 1 — Catalog | Complete |
-| 2 — Namesake classification | Builder review complete; owner review pending |
-| 3 — Infrastructure | Complete; in-game checks pending |
-| 4 — Six attacks | Complete; in-game checks pending |
-| 5 — Twenty-two skills | Next; not started |
-| 6 — Three Powers | Not started |
-| 7 — Validation and version 0.5.0 | Not started |
-
-Latest checks: build has zero warnings/errors; 82 xUnit pass and `NoUnportedCards` fails on the
-25 remaining skeletons; 35 pytest pass. Task 3's 11 Harmony injection points matched the local game assembly.
-Ritual Dagger's growth, JSON/packet serialization, unchanged network property IDs and downgrade
-were checked directly against the local game assembly.
-No installation or in-game testing was performed. In-game checks and final namesake approval
-remain with the owner; no merge or publication has been performed. Source audit and checklist:
-`docs/testing/step-3c-checklist.md`.
+Implementation is complete on `step-3` in version 0.5.0. Tasks 1–7 delivered 31 custom colorless
+classes (6 attacks, 22 skills, 3 Powers) next to 8 reused native cards. Build has zero
+warnings/errors; 83 xUnit tests (including `NoUnportedCards`) and 35 pytest tests pass. Task 3's
+11 Harmony injection points matched the local game assembly. README, CLAUDE.md and the in-game
+checklist are updated. In-game checks (`docs/testing/step-3c-checklist.md`) and the namesake review
+(`docs/review/colorless-duplicates.md`) remain with the owner; no install, merge or publication
+was performed. Task descriptions below preserve the original plan.
 
 ## Recon and constraints
 
@@ -131,19 +117,19 @@ instance and linked deck card. It reuses The Scythe's CurrentDamage/IncreasedDam
 through Sts1SavedProperties; no new network property identifiers are introduced. Actual combat
 Fatal edge cases and full run save/resume remain unchecked in the in-game checklist.
 
-## Task 5 — skills
+## Task 5 — skills (complete)
 
-- [ ] Port skills and special skills, localization and checklist entries. Verify selection cancellation,
+- [x] Port skills and special skills, localization and checklist entries. Verify selection cancellation,
   cost duration, X-cost and generated cards with the effective mode. Build and commit.
 
-## Task 6 — Powers
+## Task 6 — Powers (complete)
 
-- [ ] Port missing Powers and supporting power models, EN/FR text and borrowed icons; add checklist
+- [x] Port missing Powers and supporting power models, EN/FR text and borrowed icons; add checklist
   entries covering turn timing and co-op ownership. Build and commit.
 
-## Task 7 — validation and release
+## Task 7 — validation and release (complete)
 
-- [ ] Tests pass, no unported cards or missing assets. Build with zero warnings/errors.
-- [ ] Checklist covers all five characters, one-holder co-op, save/resume, shops and generated cards,
+- [x] Tests pass, no unported cards or missing assets. Build with zero warnings/errors.
+- [x] Checklist covers all five characters, one-holder co-op, save/resume, shops and generated cards,
   special-card exclusion and Hybrid swaps. Leave in-game checks unchecked for the owner.
-- [ ] Update README and CLAUDE.md, version 0.5.0, then commit. No install, merge, push or publication.
+- [x] Update README and CLAUDE.md, version 0.5.0, then commit. No install, merge, push or publication.

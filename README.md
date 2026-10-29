@@ -16,7 +16,7 @@ Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic descri
 
 ## Features
 
-Current (0.4.0):
+Current (0.5.0):
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps,
   synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -49,8 +49,15 @@ Current (0.4.0):
 - **Defect's Slay the Spire 1 cards:** 38 cards ported with their Slay the Spire 1 art and numbers
   (Electrodynamics, Recursion, Seek, Amplify, Self Repair…), including four switchable versions:
   Chill, Fusion, Storm and Tempest. The starting deck stays the same; Orbs use Slay the Spire 2's
-  mechanics. Regent and Necrobinder keep their vanilla character pools. Colorless cards are
-  in development (see the checkpoint below).
+  mechanics. Regent and Necrobinder keep their vanilla character pools.
+
+- **Colorless Slay the Spire 1 cards:** 31 cards ported with their Slay the Spire 1 art and numbers
+  (Apotheosis, Chrysalis, Madness, Magnetism, Panache, Secret Weapon…), for every character.
+  The colorless pool follows the card set mode for all five characters, and the Spire Souvenir mixes
+  both games' colorless cards for its owner. Apotheosis, Apparition, Bite, Enlightenment, J.A.X.,
+  Metamorphosis and Ritual Dagger stay out of ordinary rewards, shops, transforms and random card
+  generation: events that give their Slay the Spire 2 counterpart give the matching version, and
+  Bite, J.A.X. and Ritual Dagger have no event yet (console only).
 
 - **Neow's Blessings:** a Custom Run option that brings back Neow's usual starting choice. Without it,
   any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers
@@ -65,41 +72,18 @@ Current (0.4.0):
   `` ` `` key (`*` or `'` on AZERTY); `sts1card STS1_HEAVY_BLADE` puts that card in your hand in combat,
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
 
-The Defect implementation passes automated checks; in-game checks are still pending in
-[the step 3b checklist](docs/testing/step-3b-checklist.md). Namesake classifications remain subject
-to the author's review in [the Defect comparison](docs/review/defect-duplicates.md).
-
-Planned: the version switch at the merchant and on choose-a-card screens, Colorless cards,
-and merchant loans between players.
+Planned: the version switch at the merchant and on choose-a-card screens, and merchant loans
+between players.
 
 ## Development status — 2026-10-29
 
-Work is on `step-3`, not merged or published. The current version is **0.4.0**:
-Ironclad, Silent and Defect cards are implemented; in-game validation remains pending.
-
-Colorless cards (step 3c, target **0.5.0**) have their infrastructure in place:
-
-- **Done:** catalog of 39 cards and comparison of all 22 StS2 namesakes. Classifications are
-  checked against the game sources, but still await the author's review in
-  [the colorless comparison](docs/review/colorless-duplicates.md).
-- **Done:** Task 3, colorless pool infrastructure, event grants, console access, portraits and
-  card skeletons; Task 4, the six attacks (Bite, Dramatic Entrance, Flash of Steel, Mind Blast,
-  Ritual Dagger and Swift Strike), with EN/FR text and Ritual Dagger's persistent growth.
-- **Next:** Task 5, implement 22 skills, then 3 Powers, followed by validation and the 0.5.0 update.
-  Those 25 cards remain skeletons; do not install this intermediate build.
-
-The planned ordinary StS1 colorless pool contains **32 cards** (24 custom and 8 native).
-**Apotheosis, Apparition, Bite, Enlightenment, JAX and Metamorphosis, plus Ritual Dagger, stay
-event-only**, including in StS1-only and Hybrid: they must not appear in ordinary rewards,
-shops, transforms or random combat generation. Pool exclusions are implemented; new events
-are outside the current task scope. Bite, JAX and Ritual Dagger currently have console access only.
-
-Latest automated validation: **82 xUnit and 35 Python tests passed**. `NoUnportedCards` remains
-enabled and fails on the 25 remaining skeletons. The build passed with zero warnings and errors;
-all 11 Harmony injection points matched the local game assembly. The mod was not installed
-or tested in game during this work. Ritual Dagger also passed a local check of JSON/network
-serialization and growth retention after downgrade. See [the checklist](docs/testing/step-3c-checklist.md).
-See [the step 3c plan](docs/superpowers/plans/2026-10-29-step-3c-colorless.md) for the remaining tasks.
+Work is on `step-3`, not merged or published. The current version is **0.5.0**: Ironclad, Silent,
+Defect and colorless cards are implemented and pass the automated checks (83 xUnit and 35 Python
+tests, build with zero warnings). None of it has been tested in game yet; see the checklists
+for [Silent](docs/testing/step-3a-checklist.md), [Defect](docs/testing/step-3b-checklist.md)
+and [colorless cards](docs/testing/step-3c-checklist.md). Which cards count as the same card in
+both games is still subject to the author's review in the comparison pages under
+[docs/review/](docs/review/).
 
 ## Languages
 
