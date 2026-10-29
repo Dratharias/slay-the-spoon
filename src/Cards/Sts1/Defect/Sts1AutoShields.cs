@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -12,14 +13,19 @@ public sealed class Sts1AutoShields : Sts1DefectCard
 		new BlockVar(11m, ValueProp.Move),
 	};
 
+	public override bool GainsBlock => true;
+
 	public Sts1AutoShields()
 		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		if (Owner.Creature.Block == 0)
+		{
+			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+		}
 	}
 
 	protected override void OnUpgrade()

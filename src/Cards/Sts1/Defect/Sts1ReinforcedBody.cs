@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -14,14 +15,20 @@ public sealed class Sts1ReinforcedBody : Sts1DefectCard
 		new BlockVar(7m, ValueProp.Move),
 	};
 
+	public override bool GainsBlock => true;
+
 	public Sts1ReinforcedBody()
 		: base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		int repeats = ResolveEnergyXValue();
+		for (int i = 0; i < repeats; i++)
+		{
+			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+		}
 	}
 
 	protected override void OnUpgrade()

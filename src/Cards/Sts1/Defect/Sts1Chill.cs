@@ -1,17 +1,26 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Orbs;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Cards.Sts1.Defect;
 
+/// <summary>StS1 Chill: its upgrade keeps Exhaust and adds Innate, StS2's drops Exhaust.</summary>
 public sealed class Sts1Chill : Sts1DefectCard
 {
+	public override Sts1Relation Relation => Sts1Relation.Duplicate;
+
+	public override Type Sts2Counterpart => typeof(Chill);
+
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
 	{
-		new DynamicVar("Magic", 1m),
+		HoverTipFactory.Static(StaticHoverTip.Channeling),
+		HoverTipFactory.FromOrb<FrostOrb>(),
 	};
 
 	public Sts1Chill()
@@ -19,9 +28,14 @@ public sealed class Sts1Chill : Sts1DefectCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+		int enemies = CombatState!.HittableEnemies.Count;
+		for (int i = 0; i < enemies; i++)
+		{
+			await OrbCmd.Channel<FrostOrb>(choiceContext, Owner);
+		}
 	}
 
 	protected override void OnUpgrade()

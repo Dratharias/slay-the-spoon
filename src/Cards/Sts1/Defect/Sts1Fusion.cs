@@ -1,15 +1,24 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Orbs;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Cards.Sts1.Defect;
 
+/// <summary>StS1 Fusion: costs 2 (1 upgraded) and never exhausts; StS2's costs 1 and exhausts.</summary>
 public sealed class Sts1Fusion : Sts1DefectCard
 {
-	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
+	public override Sts1Relation Relation => Sts1Relation.Duplicate;
+
+	public override Type Sts2Counterpart => typeof(Fusion);
+
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
 	{
-		new DynamicVar("Magic", 1m),
+		HoverTipFactory.Static(StaticHoverTip.Channeling),
+		HoverTipFactory.FromOrb<PlasmaOrb>(),
 	};
 
 	public Sts1Fusion()
@@ -17,9 +26,10 @@ public sealed class Sts1Fusion : Sts1DefectCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+		await OrbCmd.Channel<PlasmaOrb>(choiceContext, Owner);
 	}
 
 	protected override void OnUpgrade()

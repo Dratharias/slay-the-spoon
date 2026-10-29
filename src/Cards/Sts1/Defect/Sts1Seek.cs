@@ -1,7 +1,8 @@
+using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Defect;
 
@@ -11,7 +12,7 @@ public sealed class Sts1Seek : Sts1DefectCard
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 1m),
+		new CardsVar(1),
 	};
 
 	public Sts1Seek()
@@ -19,13 +20,18 @@ public sealed class Sts1Seek : Sts1DefectCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		var chosen = await CardSelectCmd.FromCombatPile(choiceContext, PileType.Draw.GetPile(Owner), Owner,
+			new CardSelectorPrefs(SelectionScreenPrompt, DynamicVars.Cards.IntValue));
+		foreach (var card in chosen)
+		{
+			await CardPileCmd.Add(card, PileType.Hand);
+		}
 	}
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars["Magic"].UpgradeValueBy(1m);
+		DynamicVars.Cards.UpgradeValueBy(1m);
 	}
 }

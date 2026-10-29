@@ -1,4 +1,7 @@
 {
+	"STS1_AMPLIFY_POWER.description": "Ce tour, votre prochain Pouvoir est joué une fois de plus.",
+	"STS1_AMPLIFY_POWER.smartDescription": "Ce tour, {Amount:plural:votre prochain Pouvoir est joué|vos [blue]{}[/blue] prochains Pouvoirs sont joués} une fois de plus.",
+	"STS1_AMPLIFY_POWER.title": "Amplification",
 	"STS1_A_THOUSAND_CUTS_POWER.description": "Chaque fois que vous jouez une carte, infligez des dégâts à TOUS les ennemis.",
 	"STS1_A_THOUSAND_CUTS_POWER.smartDescription": "Chaque fois que vous jouez une carte, infligez [blue]{Amount}[/blue] dégâts à TOUS les ennemis.",
 	"STS1_A_THOUSAND_CUTS_POWER.title": "Mille coupures",
