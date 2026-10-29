@@ -2,5 +2,11 @@
   "SPOON_MONSTER_HP.title": "PV des monstres",
   "SPOON_MONSTER_HP.description": "Les ennemis ont {Percent} % de leurs PV normaux.",
   "SPOON_MONSTER_DAMAGE.title": "Dégâts des monstres",
-  "SPOON_MONSTER_DAMAGE.description": "Les ennemis infligent {Percent} % de leurs dégâts normaux."
+  "SPOON_MONSTER_DAMAGE.description": "Les ennemis infligent {Percent} % de leurs dégâts normaux.",
+  "SPOON_CARD_SET_STS1_ONLY.title": "Cartes de Slay the Spire 1",
+  "SPOON_CARD_SET_STS1_ONLY.description": "Les récompenses, les boutiques et les cartes générées proposent les cartes de Slay the Spire 1 au lieu de celles de Slay the Spire 2. Pour l'instant, seul le Soldat de Fer en a ; les autres personnages gardent leurs cartes.",
+  "SPOON_CARD_SET_STS1_ONLY.short": "StS1",
+  "SPOON_CARD_SET_HYBRID.title": "Cartes des deux jeux",
+  "SPOON_CARD_SET_HYBRID.description": "Les récompenses, les boutiques et les cartes générées mélangent les cartes de Slay the Spire 1 et de Slay the Spire 2. Pour l'instant, seul le Soldat de Fer a des cartes de Slay the Spire 1 ; les autres personnages gardent les leurs.",
+  "SPOON_CARD_SET_HYBRID.short": "1+2"
 }

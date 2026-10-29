@@ -1,6 +1,7 @@
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.sts2.Core.Nodes.TopBar;
 using SlaySpoon.Config;
 using SlaySpoon.Core;
@@ -9,7 +10,8 @@ namespace SlaySpoon.TopBar;
 
 /// <summary>
 /// The mod ships no modifier icons, so the top bar would show the game's "missing" placeholder.
-/// Show the percent instead: red when monsters are stronger than vanilla, blue when weaker.
+/// Show a label instead: the percent (red when monsters are stronger than vanilla, blue when weaker), or
+/// the card set mode's short name.
 /// The hover tip still names the modifier.
 /// </summary>
 [HarmonyPatch(typeof(NTopBarModifier), nameof(NTopBarModifier._Ready))]
@@ -24,28 +26,37 @@ public static class TopBarPercentPatch
 
 	public static void Postfix(NTopBarModifier __instance)
 	{
-		if (Modifier(__instance) is not SpoonPercentModifier modifier)
+		switch (Modifier(__instance))
 		{
-			return;
+			case SpoonPercentModifier percent:
+				ReplaceIcon(__instance, percent.Percent + "%", ScalingMath.Tone(percent.Percent) switch
+				{
+					> 0 => StsColors.red,
+					< 0 => StsColors.blue,
+					_ => StsColors.cream,
+				});
+				break;
+			case SpoonCardSet cardSet:
+				ReplaceIcon(__instance, new LocString("modifiers", cardSet.Id.Entry + ".short").GetFormattedText(), StsColors.cream);
+				break;
 		}
+	}
+
+	private static void ReplaceIcon(NTopBarModifier __instance, string text, Color color)
+	{
 		TextureRect icon = Icon(__instance);
 		icon.Texture = null;
 
 		Label label = new Label
 		{
 			Name = "SpoonPercent",
-			Text = modifier.Percent + "%",
+			Text = text,
 			HorizontalAlignment = HorizontalAlignment.Center,
 			VerticalAlignment = VerticalAlignment.Center,
 			MouseFilter = Control.MouseFilterEnum.Ignore,
 		};
 		label.AddThemeFontSizeOverride("font_size", 22);
-		label.AddThemeColorOverride("font_color", ScalingMath.Tone(modifier.Percent) switch
-		{
-			> 0 => StsColors.red,
-			< 0 => StsColors.blue,
-			_ => StsColors.cream,
-		});
+		label.AddThemeColorOverride("font_color", color);
 		label.AddThemeColorOverride("font_outline_color", Colors.Black);
 		label.AddThemeConstantOverride("outline_size", 8);
 		__instance.AddChild(label);
