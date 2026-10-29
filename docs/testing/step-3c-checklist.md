@@ -1,8 +1,8 @@
 # Step 3c — Colorless cards
 
 Target: StS2 v0.107.1. All in-game checks below remain pending. Infrastructure is implemented,
-but 25 custom cards are still skeletons; do not install this intermediate build for play.
-The six attacks are implemented, with their in-game checks still pending.
+but the 3 Powers are still skeletons; do not install this intermediate build for play.
+The six attacks and 22 skills are implemented, with their in-game checks still pending.
 
 ## Infrastructure audit (Task 3)
 
@@ -79,3 +79,30 @@ is unchanged. This fallback was proposed to the owner and used as the default pe
   Deck growth follows StS2's DeckVersion linkage, as for The Scythe; a detached combat copy must
   not mutate an unrelated deck card.
 - [ ] Bite and Ritual Dagger remain excluded from ordinary pools and random generation.
+
+## Colorless skills (Task 5)
+
+"Base / +" means the card before and after upgrade.
+
+- [ ] Apotheosis (2 / 1, Exhaust, event-only): upgrades every card in the combat (hand, piles, exhausted); not Innate, unlike StS2's.
+- [ ] Apparition (1, Ethereal, Exhaust, event-only): 1 Intangible; the upgrade loses Ethereal.
+- [ ] Bandage Up (0, Exhaust): heal 4 / 6 HP.
+- [ ] Blind (0): 2 Weak to one enemy; upgraded, to ALL enemies (no target arrow).
+- [ ] Trip (0): 2 Vulnerable to one enemy; upgraded, to ALL enemies (no target arrow).
+- [ ] Chrysalis (2, Exhaust): 3 / 5 random Skills of your character shuffled into the draw pile, free this combat (in StS1-only, StS1 Skills).
+- [ ] Metamorphosis (2, Exhaust, event-only): same with 3 / 5 Attacks.
+- [ ] Deep Breath (0): shuffles the discard pile into the draw pile, then draws 1 / 2; with an empty discard pile it only draws.
+- [ ] Discovery (1, Exhaust; upgraded: no Exhaust): choose 1 of 3 character cards, free this turn; the choice can't be skipped.
+- [ ] Enlightenment (0, no Exhaust, event-only): hand cards cost at most 1 this turn / this combat; cards already cheaper keep their cost.
+- [ ] Finesse (0): 2 / 4 Block, draw 1. French title "Finesse".
+- [ ] Forethought (0): base, choose exactly 1 hand card; upgraded, any number (0 allowed). They go under the draw pile and cost 0 until played; an X-cost card stays X. Empty hand: nothing happens. Prompts in EN/FR.
+- [ ] Good Instincts (0): 6 / 9 Block. French title "Instinct" (the game's own translation).
+- [ ] Jack of All Trades (0, Exhaust): 1 / 2 random colorless cards to hand (repeats possible; in StS1-only, StS1 colorless cards; never an event-only card).
+- [ ] J.A.X. (0, event-only, console only): lose 3 HP (ignores Block), gain 2 / 3 Strength.
+- [ ] Madness (1 / 0, Exhaust): a random hand card that currently costs energy costs 0 this combat; X-cost cards are never picked; nothing happens if no card qualifies.
+- [ ] Panacea (0, Exhaust): 1 / 2 Artifact.
+- [ ] Purity (0, Exhaust, no Retain): exhaust up to 3 / 5 hand cards; picking none is allowed. French title "Épuration".
+- [ ] Secret Technique / Secret Weapon (0, Exhaust; upgraded: no Exhaust): unplayable without a Skill / an Attack in the draw pile; choose one to put in hand.
+- [ ] Transmutation (X, Exhaust): X random colorless cards, upgraded when this is, free this turn; X = 0 does nothing; Chemical X adds 2.
+- [ ] Violence (0, Exhaust): 3 / 4 random Attacks from the draw pile to hand; fewer if the pile holds fewer; a full hand sends the rest to the discard pile as vanilla.
+- [ ] Generated cards (Chrysalis, Discovery, Jack, Transmutation) follow the effective mode and stay in sync in co-op.

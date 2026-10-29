@@ -1,17 +1,20 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models;
 
 namespace SlaySpoon.Cards.Sts1.Colorless;
 
+/// <summary>StS1 Chrysalis: random character Skills, free this combat, shuffled into the draw pile.</summary>
 public sealed class Sts1Chrysalis : Sts1ColorlessCard
 {
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 3m),
+		new CardsVar(3),
 	};
 
 	public Sts1Chrysalis()
@@ -19,13 +22,20 @@ public sealed class Sts1Chrysalis : Sts1ColorlessCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		IEnumerable<CardModel> pool = Owner.Character.CardPool
+			.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
+			.Where(c => c.Type == CardType.Skill);
+		foreach (CardModel card in CardFactory.GetForCombat(Owner, pool, DynamicVars.Cards.IntValue, Owner.RunState.Rng.CombatCardGeneration))
+		{
+			card.SetToFreeThisCombat();
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, Owner, CardPilePosition.Random));
+		}
 	}
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars["Magic"].UpgradeValueBy(2m);
+		DynamicVars.Cards.UpgradeValueBy(2m);
 	}
 }

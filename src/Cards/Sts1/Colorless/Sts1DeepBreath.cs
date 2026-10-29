@@ -1,7 +1,7 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Colorless;
 
@@ -9,7 +9,7 @@ public sealed class Sts1DeepBreath : Sts1ColorlessCard
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 1m),
+		new CardsVar(1),
 	};
 
 	public Sts1DeepBreath()
@@ -17,13 +17,17 @@ public sealed class Sts1DeepBreath : Sts1ColorlessCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		if (PileType.Discard.GetPile(Owner).Cards.Count > 0)
+		{
+			await CardPileCmd.Shuffle(choiceContext, Owner);
+		}
+		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
 	}
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars["Magic"].UpgradeValueBy(1m);
+		DynamicVars.Cards.UpgradeValueBy(1m);
 	}
 }

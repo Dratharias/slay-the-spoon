@@ -1,7 +1,8 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Colorless;
 
@@ -11,7 +12,7 @@ public sealed class Sts1BandageUp : Sts1ColorlessCard
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 4m),
+		new HealVar(4m),
 	};
 
 	public Sts1BandageUp()
@@ -19,13 +20,14 @@ public sealed class Sts1BandageUp : Sts1ColorlessCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+		await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
 	}
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars["Magic"].UpgradeValueBy(2m);
+		DynamicVars.Heal.UpgradeValueBy(2m);
 	}
 }

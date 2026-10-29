@@ -1,13 +1,15 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Cards.Sts1.Colorless;
 
+/// <summary>StS1 Apotheosis: costs 2 (1 upgraded) and Exhausts; StS2's is Innate.</summary>
 public sealed class Sts1Apotheosis : Sts1ColorlessCard
 {
-	public override SlaySpoon.Core.Sts1Relation Relation => SlaySpoon.Core.Sts1Relation.Duplicate;
+	public override Sts1Relation Relation => Sts1Relation.Duplicate;
 
 	public override Type Sts2Counterpart => typeof(MegaCrit.Sts2.Core.Models.Cards.Apotheosis);
 
@@ -20,7 +22,14 @@ public sealed class Sts1Apotheosis : Sts1ColorlessCard
 
 	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		foreach (CardModel card in Owner.PlayerCombatState!.AllCards)
+		{
+			if (card != this && card.IsUpgradable)
+			{
+				CardCmd.Upgrade(card);
+			}
+		}
+		return Task.CompletedTask;
 	}
 
 	protected override void OnUpgrade()

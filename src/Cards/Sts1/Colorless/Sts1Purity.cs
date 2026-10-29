@@ -1,13 +1,17 @@
+using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Cards.Sts1.Colorless;
 
+/// <summary>StS1 Purity: no Retain, unlike StS2's.</summary>
 public sealed class Sts1Purity : Sts1ColorlessCard
 {
-	public override SlaySpoon.Core.Sts1Relation Relation => SlaySpoon.Core.Sts1Relation.Duplicate;
+	public override Sts1Relation Relation => Sts1Relation.Duplicate;
 
 	public override Type Sts2Counterpart => typeof(MegaCrit.Sts2.Core.Models.Cards.Purity);
 
@@ -15,7 +19,7 @@ public sealed class Sts1Purity : Sts1ColorlessCard
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 3m),
+		new CardsVar(3),
 	};
 
 	public Sts1Purity()
@@ -23,13 +27,17 @@ public sealed class Sts1Purity : Sts1ColorlessCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, DynamicVars.Cards.IntValue);
+		foreach (CardModel card in (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).ToList())
+		{
+			await CardCmd.Exhaust(choiceContext, card);
+		}
 	}
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars["Magic"].UpgradeValueBy(2m);
+		DynamicVars.Cards.UpgradeValueBy(2m);
 	}
 }

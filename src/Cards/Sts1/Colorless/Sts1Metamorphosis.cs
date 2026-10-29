@@ -1,13 +1,17 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Cards.Sts1.Colorless;
 
+/// <summary>StS1 Metamorphosis, kept for event grants; same effect as StS2's.</summary>
 public sealed class Sts1Metamorphosis : Sts1ColorlessCard
 {
-	public override SlaySpoon.Core.Sts1Relation Relation => SlaySpoon.Core.Sts1Relation.SameKeepSts1;
+	public override Sts1Relation Relation => Sts1Relation.SameKeepSts1;
 
 	public override Type Sts2Counterpart => typeof(MegaCrit.Sts2.Core.Models.Cards.Metamorphosis);
 
@@ -15,7 +19,7 @@ public sealed class Sts1Metamorphosis : Sts1ColorlessCard
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Magic", 3m),
+		new CardsVar(3),
 	};
 
 	public Sts1Metamorphosis()
@@ -23,13 +27,20 @@ public sealed class Sts1Metamorphosis : Sts1ColorlessCard
 	{
 	}
 
-	protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		throw new NotImplementedException("STS1 port");
+		IEnumerable<CardModel> pool = Owner.Character.CardPool
+			.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
+			.Where(c => c.Type == CardType.Attack);
+		foreach (CardModel card in CardFactory.GetForCombat(Owner, pool, DynamicVars.Cards.IntValue, Owner.RunState.Rng.CombatCardGeneration))
+		{
+			card.SetToFreeThisCombat();
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, Owner, CardPilePosition.Random));
+		}
 	}
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars["Magic"].UpgradeValueBy(2m);
+		DynamicVars.Cards.UpgradeValueBy(2m);
 	}
 }
