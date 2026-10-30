@@ -24,3 +24,26 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - `StandardCharacterSelectPatch` sets `Pending` for any game mode; `Act4UnlockPatch.Record` logs failures at info.
   - `SpoonConfigFile` writes are not atomic, an unreadable cfg logs on every query, non-scalar values are dropped on rewrite.
   - Regenerate's text uses `{Amount}`; Metallicize's text speaks to the player when an enemy has it.
+- Act 4 keys (step 6 WP3), design calls made without the owner (change any of them):
+  - Sapphire give-back undoes the pickup heal (never below 1 HP) and added potion slots; a relic whose effect has no
+    safe undo gets no Sapphire button.
+  - Ruby, Emerald and Sapphire text, key sprites at 25 % opacity in the top bar while missing.
+  - Emerald elite buff: Strength act+2, +25 max HP, Metallicize 2·act+4, Regenerate 2·act+3 (one of them, rolled).
+  - The cfg holding the permanent unlock is never overwritten when unreadable; bool and number values are accepted.
+- Act 4 The Ending (step 6 WP4-6), design calls made without the owner (change any of them):
+  - Static sprites rendered from the StS1 setup pose, not animations.
+  - Monster visuals and the elite slot layout are built in code, not as scenes.
+  - The Ending is added to the run when the team takes its last key, so the act 3 boss gives normal boss rewards.
+  - The Ending uses Glory's music, map, rest site and combat backgrounds; StS1's ending scene images are unused.
+  - Map: rest site → merchant → elite → Heart, no ancient, no event.
+  - The Spear applies Surrounded (Shield Back Attack Left, Spear Back Attack Right).
+  - Co-op: Debilitate, Bash's debuff and Burn Strike's Burns hit every player; Beat of Death hits the card's player;
+    Smash's Block equals its highest damage to one player.
+  - The Monster HP % does not change the Heart's Invincible budget.
+  - Move names (StS1 has none): Bash/Coup, Fortify/Fortifier, Smash/Fracasser, Burn Strike/Frappe ardente,
+    Piercer/Perceur, Skewer/Embrocher, Debilitate/Affaiblir, Blood Shots/Tirs sanglants, Echo/Écho, Buff/Renforcement.
+  - Act 4 elite rewards are vanilla elite rewards.
+  - Statuses shuffled into the draw pile take their position from the monster's own RNG.
+  - The StS1 ending stinger plays once at the victory room (dropped if it clashes with the game's music).
+  - Neow ignores the Act 4 Custom Run option.
+  - The fixed map is built when the act's map is generated and forced over Golden Compass's map.
