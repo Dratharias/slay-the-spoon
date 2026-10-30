@@ -55,6 +55,8 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     past the top of the screen, as in StS1 (no camera zoom added). Intents sit 60 px above the hitbox (estimate).
   - Blood Shots and Echo use vanilla's blunt hit effect; StS1's Blood Shot and Vice Crush effects and sounds are not ported.
   - The Heart's English/French loss lines are the builder's own wording.
+  - The act's French title is StS1's "La fin"; StS2's French act titles capitalize the noun ("La Gloire"), so "La Fin"
+    would match the game's style.
 - Act 4 The Ending (step 6 WP4-6), minors left after review:
   - The Invincible clamp sits in `Sts1InvinciblePower`, not in the tested `HeartInvincibleRule`; it flashes inside the modify
     hook (vanilla flashes after modifying, and the overkill path can call the hook twice).
@@ -73,5 +75,11 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     the status intent shows 5, the per-player count.
   - The Heart's status shuffles share its RNG with its move roll, so Blood Shots vs Echo on turn 2 depends on the
     number of players and their draw piles (deterministic on every peer, seeds stay vanilla).
+  - The Ending act's rooms are seeded from the caller's Rng seed in `EndingRoomsPatch` but from the run seed in
+    `Sts1EndingAct.CreateForRun`: the same result today (one elite, one boss), divergent if a list ever grows.
+    `FillRooms` does not reset the ancient or visit counters (only called on a fresh act). No automated test covers the
+    act model or its patches (game-bound; the checklist covers them).
+  - Visiting the act may add `STS1_ENDING_ACT` to the modded profile's discovered acts (not checked). If a later game
+    build fills in `CheckForDefeatedAllEnemiesAchievement`, its achievement lookup would throw for this act.
   - The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
     in co-op (the power is game-bound).
