@@ -51,6 +51,10 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - The Heart's sprite is the setup pose without IK/path constraints: its three top vents look folded.
   - The Heart's Painful Stabs buff applies 1 stack (StS1's data gives no amount).
   - The fixed map is built when the act's map is generated and forced over Golden Compass's map.
+  - A10 with all three keys: the first act 3 boss also gives boss rewards once act 4 is appended (vanilla gives none to
+    either act 3 boss when act 3 is last). Maybe only the second act 3 boss should reward.
+  - The Ending is appended as soon as the team holds all three keys, even in act 1 or 2 (harmless: only the last act
+    checks the act count).
   - The Heart's intents and health bar use StS1's hitbox (476 × 410), not the full sprite; its vent tops may run ~90 px
     past the top of the screen, as in StS1 (no camera zoom added). Intents sit 60 px above the hitbox (estimate).
   - Blood Shots and Echo use vanilla's blunt hit effect; StS1's Blood Shot and Vice Crush effects and sounds are not ported.
@@ -81,5 +85,12 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     act model or its patches (game-bound; the checklist covers them).
   - Visiting the act may add `STS1_ENDING_ACT` to the modded profile's discovered acts (not checked). If a later game
     build fills in `CheckForDefeatedAllEnemiesAchievement`, its achievement lookup would throw for this act.
+  - The Ending map: with only three grid rows its four nodes sit far apart (check in game); after the start rest site
+    the map marker is not drawn on it (vanilla skips the start row); Golden Compass bought in act 4 leaves
+    `GoldenPathAct = 3` set (harmless). The `ModifyGeneratedMap` postfix discards late-listener edits on a fresh act 4
+    map (none in vanilla; another mod's quest marks would be lost). If `ActModel.CreateMap` is inlined the prefix is dead
+    and the postfix logs "replaced by the Ending map". Only the layout constants are unit-tested.
+  - Run history stores the Ending act's id: with the mod removed, history shows a placeholder act; run metrics
+    (`ActWinMetric`) would carry the mod's act id if the game uploads metrics for modded runs (not checked).
   - The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
     in co-op (the power is game-bound).
