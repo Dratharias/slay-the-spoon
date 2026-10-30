@@ -155,6 +155,10 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     cost modifiers, so a retained card that is free this turn gets no combat discount.
   - Deva Form applies 1 instead of its Magic var.
   - Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.
+  - Wave of the Hand applies Weak through a throwing choice context (`AfterBlockGained` gives none); harmless unless a
+    hook on Weak ever opens a choice.
+  - Mental Fortress, Empty Fist and Flurry of Blows show all three stance tips (Calm, Wrath, Divinity), not only the
+    stances they name.
   - Spirit Shield shows no live Block; Mark and the end-turn death effect share the Doom icon.
   - Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.
   - `LastCardPlayed` reset between combats (Sanctity) is unverified.
@@ -162,7 +166,7 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     Consecrate lacks a `<summary>`; mixed `ThrowIfNull` vs `Target!`.
   - Unused `using` blocks in card and power files, empty `OnUpgrade` bodies, a stray blank line in Deus Ex Machina.
   - Weak tests: pure-logic coverage of `MantraTracker` keying, retain gating and Lesson Learned selection; power tests are
-    mostly arithmetic and `WatcherPowerTextTests` greps source; stale pytest name `test_pending_ports_never_enter_runtime`.
+    mostly arithmetic and `WatcherPowerTextTests` greps source; stale pytest name `test_pending_ports_never_enter_runtime`; Task 9's tests were written after the code (no red run).
 - The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
   and in-game validation of everything in `docs/testing/step-7-checklist.md`. A "Deep backlog priority" section, if one
   exists on `main`, keeps its own wording; Watcher animations stay at the bottom of it.

@@ -232,7 +232,7 @@ in hand at turn end), Duality (Yang: +1 temporary Dexterity per attack played).
 
 **Task 6 implementation checkpoint (2026-10-30):**
 - Data import includes 75 registered purple cards, 8 generated cards and 5 choice cards; other characters' outputs are unchanged.
-- 71 pending skeletons are staged outside `src` to keep unported cards out of the playable pool until Tasks 7–9 (ported in Tasks 7–9).
+- 71 pending skeletons are staged outside `src` to keep unported cards out of the playable pool until they were ported in Tasks 7–9.
 - Eight generated cards, five choices, eight custom relics and three potions are implemented with EN/FR text and art.
 - Native shared Cloak Clasp is reused. Holy Water and Violet Lotus are inactive former boss ports, following the
   owner's later backlog decision; they reject normal acquisition. Holy Water replaces Pure Water when explicitly granted.
