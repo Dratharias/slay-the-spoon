@@ -66,10 +66,9 @@ def test_relic_icons_include_small_large_and_outline(tmp_path):
 
 
 def test_pending_ports_never_enter_runtime():
+    # Every Watcher card is ported: no staged skeleton is left and no port throws.
     pending = list((ROOT / 'data/sts1/watcher-skeletons').glob('*.cs'))
-    assert pending
-    assert all('NotImplementedException' in p.read_text() for p in pending)
-    # The pool discovers only subclasses compiled from src, not staged skeletons.
+    assert pending == []
     assert all('NotImplementedException' not in p.read_text()
                for p in (ROOT / 'src/Cards/Sts1/Watcher').glob('*.cs'))
 

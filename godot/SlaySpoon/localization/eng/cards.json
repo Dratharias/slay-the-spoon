@@ -350,7 +350,7 @@
 	"STS1_RITUAL_DAGGER.title": "Ritual Dagger",
 	"STS1_RUPTURE.description": "Whenever you lose HP from a card, gain {StrengthPower:diff()} [gold]Strength[/gold].",
 	"STS1_RUPTURE.title": "Rupture",
-	"STS1_RUSHDOWN.description": "{IfUpgraded:show:DEPRECATED|Whenever you enter Wrath, draw {Magic:diff()} cards.}",
+	"STS1_RUSHDOWN.description": "Whenever you enter Wrath, draw {Magic:diff()} cards.",
 	"STS1_RUSHDOWN.title": "Rushdown",
 	"STS1_SADISTIC_NATURE.description": "Whenever you apply a debuff to an enemy, they take {SleightOfFleshPower:diff()} damage.",
 	"STS1_SADISTIC_NATURE.title": "Sadistic Nature",

@@ -194,3 +194,19 @@ See `docs/review/watcher-task6.md` for values, hidden-pool decisions and test co
 - [ ] Worship (cost 2) gains 5 Mantra; upgraded it Retains.
 - [ ] Wreath of Flame gives 5/8 Vigor.
 - [ ] All 34 cards show EN/FR text with no raw placeholders and the right hover tips.
+
+## Task 9 — powers
+
+- [ ] Battle Hymn (cost 1, Innate when upgraded): at the start of each turn, before the draw, a Smite goes into the hand; two plays give two; none once all enemies are dead.
+- [ ] Deva Form (cost 3, Ethereal; upgraded not Ethereal): turn 1 gains 1 energy, turn 2 gains 2, turn 3 gains 3; a second copy raises the current gain by 1 and the step to 2.
+- [ ] Devotion (cost 1) gains 2/3 Mantra after the draw each turn; at 10 or more with no Mantra held it enters Divinity directly (use `sts1stance` to check).
+- [ ] Establishment (cost 1, Innate when upgraded): every Retained card costs 1 less for the rest of the combat, never below 0.
+- [ ] Fasting (cost 2) gives 3/4 Strength and Dexterity and costs 1 energy at the start of every turn (stacks per play).
+- [ ] Foresight (cost 1) Scrys 3/4 before the draw each turn, reshuffling first if the draw pile is empty.
+- [ ] Like Water (cost 1) gives 5/7 Block at end of turn only while in Calm.
+- [ ] Master Reality (cost 1/0): cards created in combat (Smite, Insight, Miracle, Shiv-style tokens) come out upgraded; cards of other players do not.
+- [ ] Mental Fortress (cost 1) gives 4/6 Block on every stance change, not when re-entering the same stance.
+- [ ] Nirvana (cost 1) gives 3/4 Block on every Scry, including a Scry of an empty pile.
+- [ ] Rushdown (cost 1/0) draws 2 cards when entering Wrath, not when already in Wrath.
+- [ ] Study (cost 2/1) shuffles an Insight into the draw pile at end of each turn.
+- [ ] All 12 powers show EN/FR power text with no raw placeholders; cards show the right hover tips (Smite, Insight, Mantra, Retain, Energy).
