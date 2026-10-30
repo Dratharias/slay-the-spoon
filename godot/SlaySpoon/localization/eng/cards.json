@@ -45,7 +45,7 @@
 	"STS1_BLOOD_FOR_BLOOD.title": "Blood for Blood",
 	"STS1_BOWLING_BASH.description": "Deal {Damage:diff()} damage for each enemy in combat.",
 	"STS1_BOWLING_BASH.title": "Bowling Bash",
-	"STS1_BRILLIANCE.description": "Deal {Damage:diff()} damage.\nDeals additional damage equal to Mantra gained this combat.",
+	"STS1_BRILLIANCE.description": "Deal {CalculationBase:diff()} damage.\nDeals additional damage equal to Mantra gained this combat.{InCombat:\n(Deals {CalculatedDamage:diff()} damage)|}",
 	"STS1_BRILLIANCE.title": "Brilliance",
 	"STS1_BRUTALITY.description": "At the start of your turn, lose 1 HP and draw 1 card.",
 	"STS1_BRUTALITY.title": "Brutality",

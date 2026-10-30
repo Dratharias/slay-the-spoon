@@ -92,7 +92,7 @@ public class Sts1AssetsTests
 		{
 			string source = File.ReadAllText(file);
 			var vars = new HashSet<string>(BuiltInPlaceholders);
-			foreach (Match m in Regex.Matches(source, @"new (DamageVar|BlockVar|EnergyVar|CardsVar|RepeatVar|CalculatedDamageVar|CalculatedBlockVar|ExtraDamageVar|HealVar|HpLossVar)\("))
+			foreach (Match m in Regex.Matches(source, @"new (DamageVar|BlockVar|EnergyVar|CardsVar|RepeatVar|CalculatedDamageVar|CalculationBaseVar|CalculatedBlockVar|ExtraDamageVar|HealVar|HpLossVar)\("))
 			{
 				vars.Add(m.Groups[1].Value[..^3]);
 			}

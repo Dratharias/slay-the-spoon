@@ -112,3 +112,37 @@ See `docs/review/watcher-task6.md` for values, hidden-pool decisions and test co
 - [ ] Generated/choice cards never appear in rewards, shops, transforms or ordinary random generation.
 - [ ] Holy Water and Violet Lotus never appear in ordinary rewards/shops/random generation; debug grants work.
 - [ ] Vanilla characters retain their existing potion/relic pools; Standard and Daily are unchanged.
+
+## Task 7 — Attacks
+
+- [ ] Bowling Bash hits the target once per living enemy (7/10 each); a dead or escaped enemy is not counted.
+- [ ] Brilliance deals 12/16 plus all Mantra its owner gained this combat (Mantra that became Divinity still counts);
+      the preview updates in hand; a teammate's Mantra and a previous combat's Mantra never count.
+- [ ] Carve Reality deals 6/10 and puts a Smite in hand (hand full: it goes to discard as usual).
+- [ ] Conclude hits ALL enemies for 12/16, then ends the owner's turn (Retain and end-of-turn effects still run).
+- [ ] Consecrate hits ALL enemies for 5/8 at 0 cost.
+- [ ] Crush Joints deals 8/10 and applies 1/2 Vulnerable only if the owner's previous card was a Skill.
+- [ ] Cut Through Fate deals 7/9, Scrys 2/3 (owner chooses), then draws 1.
+- [ ] Empty Fist deals 9/14 and returns to Neutral (Calm exit energy; no effect when already Neutral).
+- [ ] Fear No Evil deals 8/11 and enters Calm only if the target intended to attack when the card was played.
+- [ ] Flurry of Blows deals 4/6 and returns from the discard pile to hand on each stance change of its owner,
+      not on a teammate's change, and not from draw or exhaust.
+- [ ] Flying Sleeves hits twice for 4/6 each and is retained at end of turn.
+- [ ] Follow-Up deals 7/11 and gives 1 Energy only if the owner's previous card was an Attack.
+- [ ] Just Lucky Scrys 1/2, gains 2/3 Block, then deals 3/4 damage.
+- [ ] Lesson Learned deals 10/13, Exhausts, and a fatal hit upgrades one random upgradable card in the owner's deck
+      (permanent; a teammate's deck is untouched; no effect without a kill or with Minion-style non-fatal deaths).
+- [ ] Ragnarok costs 3 and hits random enemies 5/6 times for 5/6; each hit picks again, both peers agree.
+- [ ] Reach Heaven deals 10/15 and shuffles a Through Violence into the draw pile.
+- [ ] Sands of Time (20/26, cost 4, Retain) loses 1 cost per retained turn this combat; the deck copy is unchanged next combat.
+- [ ] Sash Whip deals 8/10 and applies 1/2 Weak only if the owner's previous card was an Attack.
+- [ ] Signature Move (30/40) is unplayable, and not glowing, while another Attack is in hand; playable when alone.
+- [ ] Talk to the Hand deals 5/7 and Exhausts; the enemy gets Block Return 2/3; every attack on it (card, relic-less
+      player damage) gives the ATTACKING player that Block, in co-op too; Thorns and HP loss do not.
+- [ ] Tantrum deals 3 damage 3/4 times, enters Wrath, and shuffles itself into a random spot of the draw pile.
+- [ ] Wallop deals 9/12 and gives Block equal to the unblocked damage dealt (zero when fully blocked).
+- [ ] Weave deals 4/6 and returns from the discard pile to hand whenever its owner Scrys (also from a Scry that
+      discarded itself); a teammate's Scry does not.
+- [ ] Wheel Kick deals 15/20 and draws 2/3.
+- [ ] Windmill Strike (7/10, Retain) gains 4/5 damage per retained turn this combat; the deck copy is unchanged next combat.
+- [ ] All 25 cards show EN/FR text with no raw placeholders and the right hover tips (stances, Mantra, Smite, Through Violence, Fatal, Block Return).

@@ -45,7 +45,7 @@
 	"STS1_BLOOD_FOR_BLOOD.title": "Sang pour sang",
 	"STS1_BOWLING_BASH.description": "Infligez {Damage:diff()} dégâts pour chaque ennemi en combat.",
 	"STS1_BOWLING_BASH.title": "Jeu de quille",
-	"STS1_BRILLIANCE.description": "Infligez {Damage:diff()} dégâts.\nInflige autant de dégâts supplémentaires que vous avez gagné de Mantra ce combat.",
+	"STS1_BRILLIANCE.description": "Infligez {CalculationBase:diff()} dégâts.\nInflige autant de dégâts supplémentaires que vous avez gagné de Mantra ce combat.{InCombat:\n(Inflige {CalculatedDamage:diff()} dégâts)|}",
 	"STS1_BRILLIANCE.title": "Brillance",
 	"STS1_BRUTALITY.description": "Au début de votre tour, perdez 1 PV et piochez 1 carte.",
 	"STS1_BRUTALITY.title": "Brutalité",

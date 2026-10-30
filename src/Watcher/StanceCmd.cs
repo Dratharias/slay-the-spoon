@@ -80,6 +80,7 @@ public static class StanceCmd
 			return;
 		}
 		choiceContext ??= new ThrowingPlayerChoiceContext();
+		MantraTracker.Record(player, amount);
 		int before = creature.GetPowerAmount<Sts1MantraPower>();
 		Sts1MantraPower? mantra = await PowerCmd.Apply<Sts1MantraPower>(choiceContext, creature, amount, creature, source);
 		(int left, bool enterDivinity) = StanceMath.AddMantra(before, amount);
