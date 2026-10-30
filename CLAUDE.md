@@ -95,7 +95,6 @@ Read `README.md` for the player view and the spec for every decision.
   Invincible cap scales with the same multiplayer factor as HP.
 - StS2's `MultiplayerScalingModel.GetMultiplayerScaling` throws for act index 3: patch it before any act 4 co-op fight.
   Owner decision: act 4 HP keeps StS2's formula (HP × player count × factor) with act 3's factors (1.2 elite, 1.3 boss).
-- Not playable or exposed in the lobby. Next: act routing and enemies/visuals (WP4/WP5).
 - Approved Act 4 unlock: first reach Act 3 in a Standard run at Ascension 10; victory is not required.
   The unlock is permanent and makes Act 4 available at every ascension level, including 0.
   A Custom Run option bypasses this prerequisite. The unlock and the keys are implemented in WP3 (see below).
@@ -104,10 +103,15 @@ Read `README.md` for the player view and the spec for every decision.
   received one may give it back for the key (first to accept; the swap undoes the relic's pickup effects, upgrades included).
 - WP3 is implemented (0.8.0): team key state, permanent unlock, hidden Standard run flag, key sprites/top bar,
   Ruby Recall rest option, Emerald elite marker/buffs, and Sapphire chest-relic swap (EN/FR).
-  Access requires `Act4Preview` and the profile unlock; no lobby option yet.
   Build: 0 warnings / 0 errors; tests: 223 xUnit and 52 pytest pass. In-game checks remain pending.
-  Next: WP4–6 (act routing, enemies/visuals, release). WP3 implementation plan:
-  `docs/superpowers/plans/2026-10-29-step-6-act4-wp3-keys-unlock.md`.
+- WP4-6 implemented (0.9.0) on `step-6-act4`: Spire Shield and Spear elite, Corrupt Heart boss (static sprites rendered from
+  the StS1 setup pose, `make sts1-ending-art`), The Ending act on Glory's assets, fixed map rest → merchant → elite → Heart,
+  the act is appended when the team holds all three keys (the act 3 boss then gives rewards), victory through the Architect,
+  StS1 ending stinger.
+- Released: Standard access after the unlock; Custom Run option "Act 4" (`SpoonAct4`) bypasses the unlock; Daily unchanged.
+  Build: 0 warnings / 0 errors; tests: 285 xUnit and 64 pytest pass. In-game checks pending in `docs/testing/step-6-checklist.md`;
+  design calls and minors in `docs/backlog.md`. Plan: `docs/superpowers/plans/2026-10-29-step-6-act4-wp4-6-ending.md`
+  (WP3 plan: `docs/superpowers/plans/2026-10-29-step-6-act4-wp3-keys-unlock.md`).
 
 ## Step 7 status (2026-10-29)
 

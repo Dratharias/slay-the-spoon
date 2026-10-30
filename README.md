@@ -91,10 +91,13 @@ Interest is fixed on acceptance; gifts create no debt. **Death and resurrection 
 Debts are saved with the run. Solo, Standard and Daily runs are unaffected.
 The merchant interface still needs in-game validation; see `docs/testing/step-5-checklist.md`.
 
-**Act 4 (in development, not playable yet):** reaching Act 3 in a Standard run at Ascension 10
-for the first time will permanently unlock Act 4, even if that run is lost. Once unlocked,
-it will be available at every ascension level, including 0. A Custom Run option will allow
-activation without this prerequisite. Daily runs will remain unchanged.
+**Act 4, The Ending:** reaching Act 3 in a Standard run at Ascension 10 for the first time permanently
+unlocks Act 4, even if that run is lost. Once unlocked, it is available at every ascension level, including 0.
+Collect the Ruby, Emerald and Sapphire keys (one set for the whole team in co-op); with all three, the Act 3 boss
+gives its rewards and the run continues into The Ending: a rest site, a merchant, the Spire Shield and Spear, then
+the Corrupt Heart. Without all keys the run ends after Act 3 as usual. A Custom Run option, "Act 4", turns on the
+keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-game validation; see
+`docs/testing/step-6-checklist.md`.
 
 ## Development status — 2026-10-29
 

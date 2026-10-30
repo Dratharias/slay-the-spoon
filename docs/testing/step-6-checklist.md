@@ -130,3 +130,13 @@ Needs `Act4Preview = true` in `SlaySpoon.cfg` until Task 10.
 - [ ] Killing the Heart leads to the Architect and a victory screen; run history shows 4 acts and a win.
 - [ ] The StS1 ending stinger plays once at the Architect (log: `act4: ending stinger played`). It does not replay after save and quit inside the Architect room, and it does not follow the game's music volume slider.
 - [ ] Dying to the Heart, or to the Shield and Spear, is a normal defeat ("killed by" shows the localized name).
+
+## Release (WP4-6 Task 10)
+
+- [ ] Solo and co-op; no keys and all keys; resume in act 3 and act 4; both act 3 endings (vanilla victory without keys, act 4 with keys).
+- [ ] Monster HP and Monster Damage modifiers apply in act 4; test both victory and defeat.
+- [ ] Standard: the unlock persists after a restart, and once unlocked Act 4 is offered at every ascension including 0 (with `Act4Preview` off).
+- [ ] Standard, not unlocked: no keys and no act 4.
+- [ ] Custom Run: the "Act 4" row is listed; ticking it gives keys and act 4 without the unlock, and Neow's offer is unchanged.
+- [ ] Daily runs show no "Act 4" row, no keys, and end after act 3.
+- [ ] The mod list shows version 0.9.0.

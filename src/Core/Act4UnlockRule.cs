@@ -10,8 +10,8 @@ public static class Act4UnlockRule
 /// <summary>Whether Act 4 is offered in Standard runs.</summary>
 public static class Act4Access
 {
-	/// <summary>Off until the Act 4 package is released (WP6); the owner previews it with the Act4Preview config key.</summary>
-	public const bool Released = false;
+	/// <summary>Act 4 is released (0.9.0). The Act4Preview config key stays as a harmless leftover from the preview period.</summary>
+	public const bool Released = true;
 
 	public static bool InStandardRun(bool unlocked, bool preview) => (Released || preview) && unlocked;
 }

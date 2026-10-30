@@ -14,10 +14,10 @@ public class Act4UnlockRuleTests
 	public void ShouldUnlock(bool standard, int ascension, int actIndex, bool expected) => Assert.Equal(expected, Act4UnlockRule.ShouldUnlock(standard, ascension, actIndex));
 
 	[Fact]
-	public void InStandardRun_NeedsUnlockAndReleaseOrPreview()
+	public void InStandardRun_NeedsTheUnlockOnceReleased()
 	{
-		Assert.False(Act4Access.InStandardRun(true, false));
-		Assert.True(Act4Access.InStandardRun(true, true));
+		Assert.True(Act4Access.InStandardRun(true, false));
+		Assert.False(Act4Access.InStandardRun(false, false));
 		Assert.False(Act4Access.InStandardRun(false, true));
 	}
 }
