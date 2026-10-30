@@ -92,5 +92,14 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     and the postfix logs "replaced by the Ending map". Only the layout constants are unit-tested.
   - Run history stores the Ending act's id: with the mod removed, history shows a placeholder act; run metrics
     (`ActWinMetric`) would carry the mod's act id if the game uploads metrics for modded runs (not checked).
+  - Routing's WinTime repair misses one sequence that needs both live callers to fail first: act 3 boss counted as final,
+    save on the reward screen, resume: the load postfix appends act 4 but does not reset `WinTime`, so the run clock stays
+    frozen at the act 3 time. No unit test for `EnsureEndingAct` idempotence (game-bound).
+  - The ending stinger ignores the game's volume sliders (Godot player, not FMOD), keeps playing if the player quits to
+    the menu during it, and its `EnterNextAct` prefix has no try/catch (the postfix side does).
+  - The `Act4Preview` cfg key is a no-op since the release (`Released || preview`); the key and the parameter can go.
+    `ModifierListPatch`'s `OfferedIn(Custom)` guard is always true at runtime (the list is Custom-only) and reads the
+    pure list by string name.
+  - The Act 4 row in Custom Run has no icon (check how it renders).
   - The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
     in co-op (the power is game-bound).
