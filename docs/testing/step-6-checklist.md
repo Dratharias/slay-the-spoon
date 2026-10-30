@@ -55,7 +55,10 @@ Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 firs
 - [ ] War Paint / Whetstone: the affected cards return to their previous upgrades and deck positions; save/reload preserves those cards.
 - [ ] Old Coin: pickup gold is removed. Pear / Strawberry: gained max HP is removed. Added potions are discarded.
 - [ ] A relic that removed or transformed a card has no swap offer.
+- [ ] Mango / Strawberry while damaged, then Sapphire: max HP and current HP both return to their values before the pickup.
+- [ ] Potion Belt, then Sapphire: potion slots return to the count before the pickup; potions held before stay.
+- [ ] Co-op: both players accept at the same time: one key, one relic lost (the first accepted), both screens agree.
 - [ ] Co-op: both recipients see an offer. Simultaneous acceptance consumes only the first player's relic, on every peer.
-- [ ] Co-op with different animation timing: a swap waits for pickup completion on the slower peer.
+- [ ] Co-op with different animation timing: accept as soon as the button appears; both screens agree (relic removed, key granted, same deck).
 - [ ] Leaving or reloading the treasure room drops the offer; a queued stale offer cannot affect a later chest.
 - [ ] Saving after the swap preserves the team key and the reverted inventory.

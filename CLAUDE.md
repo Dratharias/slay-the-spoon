@@ -105,7 +105,7 @@ Read `README.md` for the player view and the spec for every decision.
 - WP3 is implemented (0.8.0): team key state, permanent unlock, hidden Standard run flag, key sprites/top bar,
   Ruby Recall rest option, Emerald elite marker/buffs, and Sapphire chest-relic swap (EN/FR).
   Access requires `Act4Preview` and the profile unlock; no lobby option yet.
-  Build: 0 warnings / 0 errors; tests: 202 xUnit and 52 pytest pass. In-game checks remain pending.
+  Build: 0 warnings / 0 errors; tests: 223 xUnit and 52 pytest pass. In-game checks remain pending.
   Next: WP4–6 (act routing, enemies/visuals, release). WP3 implementation plan:
   `docs/superpowers/plans/2026-10-29-step-6-act4-wp3-keys-unlock.md`.
 

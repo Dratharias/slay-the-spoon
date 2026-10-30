@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.TreasureRelicPicking;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
@@ -18,18 +19,21 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Act4;
 
-/// <summary>Room-scoped chest pickup records. Nothing is serialized: a resumed chest has no stale swap offer.</summary>
+/// <summary>
+/// Sapphire chest swap. The pickup records live in a run-scoped ledger filled by game logic every peer runs (the chest's
+/// award and <see cref="RelicCmd.Obtain"/>), so the queued swap decides from run state only. The room UI only decides
+/// when the button shows. Nothing is serialized: a resumed chest has no stale swap offer.
+/// </summary>
 internal static class SapphireChestPatch
 {
 	private static readonly JsonSerializerOptions CardJson = new() { IncludeFields = true };
-	internal sealed class Pickup(Player player, ModelId id)
+
+	/// <summary>What one chest relic's pickup changed, recorded on every peer.</summary>
+	internal sealed class Entry(Player player)
 	{
 		public readonly Player Player = player;
-		public readonly ModelId Id = id;
-		public readonly TaskCompletionSource Ready = new();
 		public readonly Dictionary<CardModel, int> Handles = new();
 		public readonly Dictionary<int, SerializableCard> Saved = new();
-		public RelicModel? Relic;
 		public PickupSnapshot? Before;
 		public PickupRevertPlan? Plan;
 		public PotionModel[] AddedPotions = [];
@@ -45,27 +49,79 @@ internal static class SapphireChestPatch
 				deck[handle] = JsonSerializer.Serialize(save, CardJson);
 				if (before) Saved[handle] = save;
 			}
-			return new(deck, Player.Gold, Player.Creature.MaxHp, Player.Potions.Count());
+			return new(deck, Player.Gold, Player.Creature.MaxHp, Player.Potions.Count(), Player.Creature.CurrentHp,
+				Player.MaxPotionCount);
 		}
 	}
 
+	/// <summary>Local UI view of a chest award: only used to know when every pickup's effects have finished.</summary>
+	internal sealed class Pickup(Player player, ModelId id)
+	{
+		public readonly Player Player = player;
+		public readonly ModelId Id = id;
+		public readonly TaskCompletionSource Ready = new();
+		public RelicModel? Relic;
+	}
+
+	private sealed record ObtainState(Entry? Entry, Pickup? Pickup);
+
+	// Game-logic state, the same on every peer.
+	private static readonly PickupLedger<(Player, RelicModel), Entry> Ledger = new();
+	private static IRunState? _ledgerRun;
+
+	// Local UI state.
 	private static readonly List<Pickup> Pickups = [];
 	private static IRunState? _run;
 	private static object? _room;
-	private static TaskCompletionSource _awardsStarted = new();
 	private static event Action? Changed;
 	private static readonly AccessTools.FieldRef<NTreasureRoom, IRunState> Run =
 		AccessTools.FieldRefAccess<NTreasureRoom, IRunState>("_runState");
 
-	private static void Clear()
+	private static void ClearLedger()
 	{
-		// Invalidate first: completing a task can resume a waiting swap synchronously.
+		Ledger.Clear();
+		_ledgerRun = null;
+	}
+
+	private static void ClearUi()
+	{
 		_run = null;
 		_room = null;
-		_awardsStarted.TrySetResult();
-		_awardsStarted = new();
 		foreach (var pickup in Pickups) pickup.Ready.TrySetResult();
 		Pickups.Clear();
+	}
+
+	/// <summary>A new or loaded run starts with an empty ledger.</summary>
+	[HarmonyPatch(typeof(RunManager), "InitializeShared")]
+	private static class RunStartPatch
+	{
+		private static void Postfix() => ClearLedger();
+	}
+
+	/// <summary>Leaving a room clears the ledger in the synchronized room flow, before the next room starts.</summary>
+	[HarmonyPatch(typeof(RunManager), "ExitCurrentRooms")]
+	private static class RoomExitPatch
+	{
+		private static void Prefix() => ClearLedger();
+	}
+
+	/// <summary>Every peer runs the award once all votes are in: remember which relic ids this chest hands out.</summary>
+	[HarmonyPatch(typeof(TreasureRoomRelicSynchronizer), "AwardRelics")]
+	private static class AwardPatch
+	{
+		private static readonly AccessTools.FieldRef<TreasureRoomRelicSynchronizer, List<RelicModel>?> Current =
+			AccessTools.FieldRefAccess<TreasureRoomRelicSynchronizer, List<RelicModel>?>("_currentRelics");
+		private static readonly AccessTools.FieldRef<TreasureRoomRelicSynchronizer, IPlayerCollection> Players =
+			AccessTools.FieldRefAccess<TreasureRoomRelicSynchronizer, IPlayerCollection>("_playerCollection");
+
+		private static void Prefix(TreasureRoomRelicSynchronizer __instance)
+		{
+			if (Current(__instance) is not { Count: > 0 } relics || Players(__instance) is not IRunState run) return;
+			if (SpoonAct4.Of(run) is not { } act4 || act4.Keys.Has(Act4Key.Sapphire)) return;
+			if (_ledgerRun != run) ClearLedger();
+			_ledgerRun = run;
+			Ledger.Expect(relics.Select(r => r.Id.ToString()));
+		}
 	}
 
 	[HarmonyPatch(typeof(NTreasureRoom), nameof(NTreasureRoom._Ready))]
@@ -73,7 +129,8 @@ internal static class SapphireChestPatch
 	{
 		private static void Postfix(NTreasureRoom __instance)
 		{
-			Clear();
+			ClearUi();
+			ClearLedger();
 			var run = Run(__instance);
 			if (SpoonAct4.Of(run) is not { } act4 || act4.Keys.Has(Act4Key.Sapphire)) return;
 			_run = run;
@@ -84,12 +141,14 @@ internal static class SapphireChestPatch
 				Position = new Vector2(650, 770), Visible = false };
 			button.AddThemeFontSizeOverride("font_size", 24);
 			__instance.AddChild(button);
-			Pickup? offered = null;
+			RelicModel? offered = null;
 			void Refresh()
 			{
-				offered = Pickups.FirstOrDefault(p => p.Player == me && p.Ready.Task.IsCompleted && p.Plan?.Reversible == true && p.Relic != null);
+				// Wait in the UI, not in the queued action, until every pickup's own effects have finished.
+				offered = Pickups.FirstOrDefault(p => p.Player == me && p.Ready.Task.IsCompleted && p.Relic != null
+					&& Ledger.TryFind((me, p.Relic), run.TotalFloor, out var entry) && entry.Plan?.Reversible == true)?.Relic;
 				button.Visible = offered != null && !act4.Keys.Has(Act4Key.Sapphire) && Pickups.All(p => p.Ready.Task.IsCompleted);
-				if (offered?.Relic is { } relic)
+				if (offered is { } relic)
 				{
 					var tip = new LocString("merchant_room", "SPOON_SAPPHIRE_SWAP_TIP");
 					tip.Add("Relic", relic.Title.GetFormattedText());
@@ -98,7 +157,7 @@ internal static class SapphireChestPatch
 			}
 			button.Pressed += () =>
 			{
-				if (offered?.Relic is not { } relic || button.Disabled) return;
+				if (offered is not { } relic || button.Disabled) return;
 				int index = me.Relics.IndexOf(relic);
 				if (index < 0) return;
 				button.Disabled = true;
@@ -111,7 +170,7 @@ internal static class SapphireChestPatch
 			{
 				Changed -= Refresh;
 				Act4Keys.Changed -= Refresh;
-				Clear();
+				ClearUi();
 			};
 		}
 	}
@@ -124,70 +183,94 @@ internal static class SapphireChestPatch
 			if (_run == null || _run.CurrentRoom != _room) return;
 			foreach (var result in results.Where(r => r.player != null && r.type != RelicPickingResultType.Skipped))
 				Pickups.Add(new Pickup(result.player!, result.relic.Id));
-			_awardsStarted.TrySetResult();
 		}
 	}
 
 	[HarmonyPatch(typeof(RelicCmd), nameof(RelicCmd.Obtain), [typeof(RelicModel), typeof(Player), typeof(int)])]
 	private static class ObtainPatch
 	{
-		private static void Prefix(RelicModel relic, Player player, out Pickup? __state)
+		private static void Prefix(RelicModel relic, Player player, out ObtainState? __state)
 		{
-			__state = _run == player.RunState && _run.CurrentRoom == _room
+			__state = null;
+			var run = player.RunState;
+			Entry? entry = null;
+			if (run == _ledgerRun && Ledger.ConsumeExpected(relic.Id.ToString()))
+			{
+				entry = new Entry(player);
+				entry.Before = entry.Snapshot(before: true);
+				entry.BeforePotions = player.Potions.ToArray();
+				Ledger.Record((player, relic), run.TotalFloor, entry);
+			}
+			var pickup = _run == run && run.CurrentRoom == _room
 				? Pickups.FirstOrDefault(p => p.Player == player && p.Id == relic.Id && p.Relic == null) : null;
-			if (__state == null) return;
-			__state.Relic = relic;
-			__state.Before = __state.Snapshot(before: true);
-			__state.BeforePotions = player.Potions.ToArray();
+			if (pickup != null) pickup.Relic = relic;
+			if (entry != null || pickup != null) __state = new(entry, pickup);
 		}
-		private static void Postfix(Pickup? __state, ref Task<RelicModel> __result)
+		private static void Postfix(ObtainState? __state, ref Task<RelicModel> __result)
 		{
 			if (__state != null) __result = Finish(__result, __state);
 		}
-		private static async Task<RelicModel> Finish(Task<RelicModel> task, Pickup pickup)
+		private static async Task<RelicModel> Finish(Task<RelicModel> task, ObtainState state)
 		{
 			try
 			{
 				var relic = await task;
-				pickup.Plan = SapphireRevert.Plan(pickup.Before!, pickup.Snapshot(before: false));
-				pickup.AddedPotions = pickup.Player.Potions.Except(pickup.BeforePotions).ToArray();
+				if (state.Entry is { } entry)
+				{
+					entry.Plan = SapphireRevert.Plan(entry.Before!, entry.Snapshot(before: false));
+					entry.AddedPotions = entry.Player.Potions.Except(entry.BeforePotions).ToArray();
+				}
 				return relic;
 			}
-			finally { pickup.Ready.TrySetResult(); Changed?.Invoke(); }
+			finally
+			{
+				state.Pickup?.Ready.TrySetResult();
+				Changed?.Invoke();
+			}
 		}
 	}
 
+	/// <summary>
+	/// The queued swap. It reads run state only and never waits: a failed check returns before the key is taken, the
+	/// same way on every peer.
+	/// </summary>
 	internal static async Task Swap(Player player, NetSapphireSwap action)
 	{
 		var run = player.RunState;
-		if (_run != run || run.CurrentRoom != _room || run.TotalFloor != action.Floor || action.RelicIndex < 0) return;
-		// Other peers may still be animating the chest when this queued choice reaches them.
-		await _awardsStarted.Task;
-		if (_run != run || run.CurrentRoom != _room || run.TotalFloor != action.Floor) return;
-		await Task.WhenAll(Pickups.Select(p => p.Ready.Task));
-		if (_run != run || run.CurrentRoom != _room || action.RelicIndex >= player.Relics.Count) return;
+		if (run != _ledgerRun || action.RelicIndex < 0 || action.RelicIndex >= player.Relics.Count) return;
 		var relic = player.Relics[action.RelicIndex];
-		var pickup = Pickups.FirstOrDefault(p => p.Player == player && p.Relic == relic);
-		if (pickup?.Plan is not { Reversible: true } plan || SpoonAct4.Of(run) is not { } act4) return;
-		var cards = pickup.Handles.ToDictionary(p => p.Value, p => p.Key);
-		if (plan.Restore.Concat(plan.Remove).Any(h => !player.Deck.Cards.Contains(cards[h]))) return;
+		var act4 = SpoonAct4.Of(run);
+		Ledger.TryFind((player, relic), action.Floor, out var entry);
+		var cards = entry?.Handles.ToDictionary(p => p.Value, p => p.Key);
+		var plan = SapphireRevert.SwapPlan(entry?.Plan, player.Relics.Contains(relic),
+			act4 == null || act4.Keys.Has(Act4Key.Sapphire),
+			h => cards != null && cards.TryGetValue(h, out var card) && player.Deck.Cards.Contains(card));
+		if (plan == null || entry == null || cards == null || act4 == null) return;
 		if (!act4.Keys.Take(Act4Key.Sapphire)) return;
 		foreach (int handle in plan.Restore)
 		{
 			var original = cards[handle];
 			int index = player.Deck.Cards.IndexOf(original);
-			var restored = CardModel.FromSerializable(pickup.Saved[handle]);
+			var restored = CardModel.FromSerializable(entry.Saved[handle]);
 			run.AddCard(restored, player);
 			original.RemoveFromState();
 			player.Deck.AddInternal(restored, index);
 		}
 		foreach (int handle in plan.Remove) cards[handle].RemoveFromState();
 		if (plan.GoldToLose > 0) await PlayerCmd.LoseGold(plan.GoldToLose, player);
+		var creature = player.Creature;
+		int hpBefore = creature.CurrentHp;
 		if (plan.MaxHpToLose > 0)
-			await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), player.Creature, plan.MaxHpToLose, isFromCard: false);
-		foreach (var potion in pickup.AddedPotions.Where(p => player.Potions.Contains(p)).Take(plan.PotionsToDiscard))
+			await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), creature, plan.MaxHpToLose, isFromCard: false);
+		// GainMaxHp also healed: take back what the max HP clamp did not already take, by setting HP (no damage hooks).
+		int hpLoss = SapphireRevert.HpLoss(plan.HpToLose, hpBefore - creature.CurrentHp, creature.CurrentHp);
+		if (hpLoss > 0) await CreatureCmd.SetCurrentHp(creature, creature.CurrentHp - hpLoss);
+		foreach (var potion in entry.AddedPotions.Where(p => player.Potions.Contains(p)).Take(plan.PotionsToDiscard))
 			await PotionCmd.Discard(potion);
+		// After the discards, so the potions the player kept move into the remaining slots.
+		if (plan.PotionSlotsToLose > 0) await PlayerCmd.LoseMaxPotionCount(plan.PotionSlotsToLose, player);
 		await RelicCmd.Remove(relic);
-		SpoonLog.Info($"act4: Sapphire swap {player.NetId} {relic.Id}: restore {plan.Restore.Count}, remove {plan.Remove.Count}, gold {plan.GoldToLose}, HP {plan.MaxHpToLose}");
+		SpoonLog.Info($"act4: Sapphire swap {player.NetId} {relic.Id}: restore {plan.Restore.Count}, remove {plan.Remove.Count}, "
+			+ $"gold {plan.GoldToLose}, max HP {plan.MaxHpToLose}, HP {hpLoss}, potion slots {plan.PotionSlotsToLose}");
 	}
 }
