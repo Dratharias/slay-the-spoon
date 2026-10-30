@@ -6,9 +6,9 @@ run in game yet; the matching checkboxes are in `docs/testing/step-7-checklist.m
 
 ## How to start a Watcher run
 
-`make up`, launch the game, open the dev console from the main menu and type `sts1watcher`. It starts a solo Custom
-run (no modifiers, ascension 0, random seed) as the Watcher, the way the Custom Run screen starts one. The command is
-temporary: Task 2 puts her in the Custom Run lobby and removes it.
+`make up`, launch the game and open Custom Run. Tick "Slay the Spire 1 Cards" or "Spire Souvenir": her button appears
+at the end of the character row (Task 2, `src/CustomRunUi/WatcherButtonPatch.cs`). The temporary `sts1watcher` console
+command Task 1 used is gone.
 
 Until Task 7 ports her cards, card rewards, shops and random card generation draw from the Ironclad's pool
 (`WatcherSpikeRewardsPatch`): her own pool holds only the four Basic starter cards. Pure Water has its text but no
