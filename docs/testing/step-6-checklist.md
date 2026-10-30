@@ -39,3 +39,12 @@ Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 firs
 - [ ] Co-op (`make mp`): one player recalls, the other can still rest or smith; their Recall icon greys out and cannot be selected.
 - [ ] Co-op simultaneous Recall choices: both players spend their action and the team holds one Ruby, consistently on both peers.
 - [ ] Without the Act 4 flag, rest sites have no Recall option.
+
+## Emerald elite (Task 7)
+
+- [ ] Before taking the Emerald, one elite per act (1–3) shows a green key; both co-op clients see the same node.
+- [ ] Save/reload preserves the marked node. Skipping it marks an elite in the next act.
+- [ ] Marked combat logs its buff and applies it to every enemy: Strength, +25% scaled max HP, Metallicize or non-decaying Regenerate.
+- [ ] Regenerate heals at the end of the enemy turn without losing stacks; dead enemies stay dead.
+- [ ] Winning grants the team the Emerald, brightens the top-bar key and removes the map marker. Later acts have no marker.
+- [ ] With the same seed, map layout and ordinary rewards match a run without Act 4; no vanilla RNG is consumed by the marker or buff.
