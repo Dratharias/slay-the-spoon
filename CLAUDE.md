@@ -34,7 +34,7 @@ Read `README.md` for the player view and the spec for every decision.
     plus Clash, Dual Wield, Entrench and Shockwave for the Ironclad (their StS2 versions are outside its pool).
   - Namesakes take StS2's French title (StS1's own French names collide: its Outmaneuver is "Tacticien").
   - Not tested in game: `docs/testing/step-3a-checklist.md`. The owner still has to review `docs/review/silent-duplicates.md`.
-- **Step 3b is implemented and merged into `main`** ( plan `docs/superpowers/plans/2026-10-29-step-3b-defect.md`, version 0.4.0):
+- **Step 3b is implemented and merged into `main`** (plan `docs/superpowers/plans/2026-10-29-step-3b-defect.md`, version 0.4.0):
   - 38 Defect cards (24 unique, 10 StS1 namesakes kept, 4 duplicates), the Defect pool and Spire Souvenir eligibility;
   - 12 attacks, 20 skills and 6 Powers, with EN/FR text and StS1 portraits;
   - Genetic Algorithm persists growth through `Sts1SavedProperties`; saved property names reuse vanilla IDs;
@@ -42,7 +42,7 @@ Read `README.md` for the player view and the spec for every decision.
   - build: 0 warnings / 0 errors; tests: 61 xUnit and 32 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3b-checklist.md` remains unchecked, especially save/reload and co-op;
   - the owner still has to review `docs/review/defect-duplicates.md` (classifications stay draft).
-- **Step 3c is implemented and merged into `main`** ( plan `docs/superpowers/plans/2026-10-29-step-3c-colorless.md`, version 0.5.0):
+- **Step 3c is implemented and merged into `main`** (plan `docs/superpowers/plans/2026-10-29-step-3c-colorless.md`, version 0.5.0):
   - 39 StS1 colorless cards cataloged; 31 custom classes in `src/Cards/Sts1/Colorless/` (6 attacks, 22 skills,
     3 Powers) and 8 native cards reused; all 22 namesakes still draft for owner review (`docs/review/colorless-duplicates.md`);
   - the colorless pool follows the mode for all five characters; the Souvenir holder gets Hybrid colorless;
@@ -53,7 +53,7 @@ Read `README.md` for the player view and the spec for every decision.
   - Ritual Dagger reuses The Scythe's saved property names; Sadistic Nature reuses vanilla `SleightOfFleshPower`;
   - build: 0 warnings / 0 errors; tests: 83 xUnit and 35 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3c-checklist.md` remains unchecked.
-- **Step 3d is implemented and merged into `main`** ( plan `docs/superpowers/plans/2026-10-29-step-3d-sts1-events.md`, version 0.6.0):
+- **Step 3d is implemented and merged into `main`** (plan `docs/superpowers/plans/2026-10-29-step-3d-sts1-events.md`, version 0.6.0):
   - StS1 events Vampires, Augmenter and The Nest (`src/Events/`) give Bite, J.A.X. and Ritual Dagger, plus the
     Mutagenic Strength relic (Augmenter only, borrowed Symbiotic Virus icon, `TemporaryStrengthPower`);
   - a `Hook.ModifyNextEvent` postfix replaces an act 2 event with an eligible unseen one 1 time in 3, on its own
@@ -62,7 +62,7 @@ Read `README.md` for the player view and the spec for every decision.
   - `sts1event <id>` console command; event portraits in `godot/SlaySpoon/images/events/` (`art.py --events`);
   - build: 0 warnings / 0 errors; tests: 100 xUnit and 36 pytest pass;
   - not installed or tested in game: `docs/testing/step-3d-checklist.md` remains unchecked.
-- The owner tests at the end, then merges when they say so.
+- Steps 2 to 6 are merged. Step 7 (the Watcher, on `step-7-watcher`) is merged only when the owner says so.
   After step 3, look at a Steam Workshop "alpha" with the owner (no upload without their go-ahead).
   The Hybrid version switch also covers the merchant (local, price kept), choose-a-card screens (the synced
   index carries the version, `src/Core/VersionChoiceCode.cs`) and reward grids such as Sealed Deck (a synced
@@ -119,7 +119,7 @@ Read `README.md` for the player view and the spec for every decision.
   a sixth character, playable in Custom Run only while a StS1 card set modifier (StS1-only or Spire Souvenir) is ticked.
   She never enters `ModelDb.AllCharacters`, so Standard, Daily, random picks and vanilla epoch counts stay vanilla.
 - Done: static visuals (combat body, corpse, rest site, merchant, stance eye), stances (Wrath, Calm, Divinity) and Mantra,
-  Scry, last-card tracking, all 71 ported cards (25 attacks, 34 skills, 12 powers; Discipline and Unraveling are not
+  Scry, last-card tracking, 71 cards plus her 4 starter cards (25 attacks, 34 skills, 12 powers; Discipline and Unraveling are not
   ported), the 8 generated cards, her relics (Pure Water starter; Holy Water and Violet Lotus ported with no acquisition
   source; native Cloak Clasp reused), her 3 potions, EN/FR text and the progress guards.
 - Owner decisions: static visuals first, animations and in-game validation deep backlog; she may obtain Archaic Tooth

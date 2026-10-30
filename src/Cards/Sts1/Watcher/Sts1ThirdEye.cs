@@ -25,11 +25,7 @@ public sealed class Sts1ThirdEye : Sts1WatcherCard
 {
 	public override bool GainsBlock => true;
 
-	// Scry has no native tip; its text lives in the card_selection table.
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
-	{
-		new HoverTip(new MegaCrit.Sts2.Core.Localization.LocString("card_selection", "SPOON_SCRY_TIP.title"), new MegaCrit.Sts2.Core.Localization.LocString("card_selection", "SPOON_SCRY_TIP.description")),
-	};
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { WatcherTips.Scry() };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{

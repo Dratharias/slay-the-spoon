@@ -20,6 +20,8 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Cut Through Fate: damage, Scry, then draw 1 card.</summary>
 public sealed class Sts1CutThroughFate : Sts1WatcherCard
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { WatcherTips.Scry() };
+
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
 		new DamageVar(7m, ValueProp.Move),

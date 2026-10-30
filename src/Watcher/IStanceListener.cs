@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Watcher;
@@ -10,5 +11,5 @@ namespace SlaySpoon.Watcher;
 /// </summary>
 public interface IStanceListener
 {
-	Task AfterStanceChanged(Player player, Stance from, Stance to);
+	Task AfterStanceChanged(PlayerChoiceContext choiceContext, Player player, Stance from, Stance to);
 }

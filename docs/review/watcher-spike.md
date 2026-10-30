@@ -11,7 +11,7 @@ at the end of the character row (Task 2, `src/CustomRunUi/WatcherButtonPatch.cs`
 command Task 1 used is gone.
 
 Until Task 7 ports her cards, card rewards, shops and random card generation draw from the Ironclad's pool
-(`WatcherSpikeRewardsPatch`): her own pool holds only the four Basic starter cards. Pure Water has its text but no
+(`WatcherSpikeRewardsPatch`, since deleted): her own pool holds only the four Basic starter cards. Pure Water has its text but no
 effect until Task 6.
 
 ## Asset paths and the fallback chosen for each
@@ -47,7 +47,7 @@ but not Spine skeletons or FMOD events, so every Spine scene and sound comes fro
 - After an elite or boss win, `ProgressSaveManager` looks up her epochs: `CheckFifteenElitesDefeatedEpoch` and
   `CheckFifteenBossesDefeatedEpoch` throw for an unknown character and `ObtainCharUnlockEpoch` asks for
   `STS1_WATCHER2_EPOCH`, which does not exist. `WatcherProgressPatch` skips all three for her.
-- Rewards and shops would find no card in her pool (Basic only): `WatcherSpikeRewardsPatch` (temporary).
+- Rewards and shops would find no card in her pool (Basic only): `WatcherSpikeRewardsPatch` (temporary, since deleted).
 
 ## Known gaps, not fixed in Task 1
 

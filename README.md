@@ -70,7 +70,7 @@ Current (0.10.0):
 - **The Watcher:** Slay the Spire 1's Watcher is playable as a sixth character in a Custom Run, only while
   **Slay the Spire 1 Cards** or **Spire Souvenir** is ticked (her button appears at the end of the character row;
   unticking sends the selection back to the last vanilla character). She is never offered in Standard or Daily runs.
-  She brings stances (Wrath, Calm, Divinity), Mantra and Scry, all 71 of her cards and the cards they create, her
+  She brings stances (Wrath, Calm, Divinity), Mantra and Scry, 71 cards plus her 4 starter cards and the cards they create, her
   relics and her three potions, with Slay the Spire 1 art and numbers. Her visuals are static images for now (no
   animation). Discipline and Unraveling, which Slay the Spire 1 never registered, are not ported. Holy Water and Violet
   Lotus work but cannot be found yet. In a solo run her ascension is capped by your best vanilla character. Her

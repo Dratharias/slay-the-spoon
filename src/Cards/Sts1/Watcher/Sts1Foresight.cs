@@ -23,6 +23,8 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Foresight: Scry at the start of each turn.</summary>
 public sealed class Sts1Foresight : Sts1WatcherCard
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { WatcherTips.Scry() };
+
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
 		new DynamicVar("Magic", 3m),

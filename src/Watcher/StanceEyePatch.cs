@@ -49,8 +49,9 @@ public static class StanceEyePatch
 		eye.Visible = true;
 	}
 
-	// Saved powers are restored before the creature node is ready. Use the node directly here,
-	// because the room may not have registered it in its creature lookup yet.
+	// StS2 does not save combat, so there is nothing to restore: the eye is rebuilt from the creature's current powers
+	// whenever its node is (re)created. Use the node directly, because the room may not have registered it in its
+	// creature lookup yet.
 	[HarmonyPatch(typeof(NCreature), nameof(NCreature._Ready))]
 	[HarmonyPostfix]
 	public static void RestoreEye(NCreature __instance)

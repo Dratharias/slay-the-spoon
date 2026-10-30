@@ -29,7 +29,7 @@ public static class StanceCmd
 	/// new one (Divinity gives energy), then tells every <see cref="IStanceListener"/>. Nothing happens, and no listener
 	/// fires, when the player already holds that stance.
 	/// </summary>
-	public static async Task Enter(Player player, Stance stance, CardModel? source, PlayerChoiceContext? choiceContext = null)
+	public static async Task Enter(Player player, Stance stance, CardModel? source, PlayerChoiceContext choiceContext)
 	{
 		Creature creature = player.Creature;
 		Stance from = Current(creature);
@@ -37,7 +37,6 @@ public static class StanceCmd
 		{
 			return;
 		}
-		choiceContext ??= new ThrowingPlayerChoiceContext();
 		await PowerCmd.Remove(StancePower(creature, from));
 		int exitEnergy = StanceMath.EnergyOnExit(from, violetLotus: player.GetRelic<SlaySpoon.Relics.Watcher.Sts1VioletLotus>() != null);
 		if (exitEnergy > 0)
@@ -64,7 +63,7 @@ public static class StanceCmd
 		StanceEyePatch.Show(creature, Current(creature));
 		foreach (IStanceListener listener in Listeners(player))
 		{
-			await listener.AfterStanceChanged(player, from, stance);
+			await listener.AfterStanceChanged(choiceContext, player, from, stance);
 		}
 	}
 
@@ -72,14 +71,13 @@ public static class StanceCmd
 	/// Adds <paramref name="amount"/> Mantra. Reaching the threshold enters Divinity and keeps the remainder, as StS1's
 	/// Mantra does when it stacks.
 	/// </summary>
-	public static async Task GainMantra(Player player, int amount, CardModel? source = null, PlayerChoiceContext? choiceContext = null)
+	public static async Task GainMantra(Player player, int amount, CardModel? source, PlayerChoiceContext choiceContext)
 	{
 		Creature creature = player.Creature;
 		if (amount <= 0 || player.PlayerCombatState == null)
 		{
 			return;
 		}
-		choiceContext ??= new ThrowingPlayerChoiceContext();
 		MantraTracker.Record(player, amount);
 		int before = creature.GetPowerAmount<Sts1MantraPower>();
 		Sts1MantraPower? mantra = await PowerCmd.Apply<Sts1MantraPower>(choiceContext, creature, amount, creature, source);

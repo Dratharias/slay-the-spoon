@@ -24,7 +24,7 @@ public sealed class Sts1MentalFortressPower : PowerModel, IStanceListener, IBorr
 
 	public Type IconSource => typeof(UnmovablePower);
 
-	public async Task AfterStanceChanged(Player player, Stance from, Stance to)
+	public async Task AfterStanceChanged(PlayerChoiceContext choiceContext, Player player, Stance from, Stance to)
 	{
 		if (player != Owner.Player || from == to)
 		{

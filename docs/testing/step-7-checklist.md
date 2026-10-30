@@ -228,5 +228,6 @@ See `docs/review/watcher-task6.md` for values, hidden-pool decisions and test co
 - [ ] Mental Fortress (cost 1) gives 4/6 Block on every stance change, not when re-entering the same stance.
 - [ ] Nirvana (cost 1) gives 3/4 Block on every Scry, including a Scry of an empty pile.
 - [ ] Rushdown (cost 1/0) draws 2 cards when entering Wrath, not when already in Wrath.
+- [ ] Rushdown + Melange: enter Wrath with an empty draw pile; the reshuffle's Scry opens normally, nothing breaks.
 - [ ] Study (cost 2/1) shuffles an Insight into the draw pile at end of each turn.
 - [ ] All 12 powers show EN/FR power text with no raw placeholders; cards show the right hover tips (Smite, Insight, Mantra, Retain, Energy).

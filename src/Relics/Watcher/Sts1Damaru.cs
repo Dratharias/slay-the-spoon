@@ -23,6 +23,6 @@ public sealed class Sts1Damaru : Sts1WatcherRelic
 	{
 		if (player != Owner) return;
 		Flash();
-		await StanceCmd.GainMantra(Owner, 1, choiceContext: choiceContext);
+		await StanceCmd.GainMantra(Owner, 1, null, choiceContext);
 	}
 }

@@ -20,6 +20,8 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Flurry of Blows: comes back from the discard pile whenever its owner changes stance.</summary>
 public sealed class Sts1FlurryOfBlows : Sts1WatcherCard, IStanceListener
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => WatcherTips.Stances();
+
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
 		new DamageVar(4m, ValueProp.Move),
@@ -41,7 +43,7 @@ public sealed class Sts1FlurryOfBlows : Sts1WatcherCard, IStanceListener
 		DynamicVars.Damage.UpgradeValueBy(2m);
 	}
 
-	public async Task AfterStanceChanged(Player player, Stance from, Stance to)
+	public async Task AfterStanceChanged(PlayerChoiceContext choiceContext, Player player, Stance from, Stance to)
 	{
 		if (player == Owner && Pile?.Type == PileType.Discard)
 		{

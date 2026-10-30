@@ -24,13 +24,13 @@ public sealed class Sts1RushdownPower : PowerModel, IStanceListener, IBorrowedIc
 
 	public Type IconSource => typeof(DrawCardsNextTurnPower);
 
-	public async Task AfterStanceChanged(Player player, Stance from, Stance to)
+	public async Task AfterStanceChanged(PlayerChoiceContext choiceContext, Player player, Stance from, Stance to)
 	{
 		if (player != Owner.Player || from == to || to != Stance.Wrath)
 		{
 			return;
 		}
 		Flash();
-		await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(), Amount, player);
+		await CardPileCmd.Draw(choiceContext, Amount, player);
 	}
 }

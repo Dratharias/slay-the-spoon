@@ -20,6 +20,8 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Weave: comes back from the discard pile whenever its owner Scries.</summary>
 public sealed class Sts1Weave : Sts1WatcherCard, IScryListener
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { WatcherTips.Scry() };
+
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
 		new DamageVar(4m, ValueProp.Move),

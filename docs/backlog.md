@@ -9,8 +9,7 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   in a Standard run at Ascension 10, whether that run is won or lost. Once unlocked, Act 4 is
   available at every ascension level, including 0. A Custom Run option bypasses the prerequisite
   (owner clarification, 2026-10-29). Daily runs remain unchanged.
-  Source import started on `step-6-act4`; see `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
-  Not playable yet.
+  Act 4 shipped in 0.9.0; the source import plan is `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
 - StS1 character-specific relics (Ironclad, Silent, Defect, Watcher pools) that StS2 dropped, offered when a StS1 card
   set mode is active (owner request, 2026-10-29). Not planned yet.
 - Act 4 keys (step 6 WP3), minors left after review:
@@ -150,14 +149,12 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     rebuilt per call; no log when the vanilla ascension cap applies; `VanillaCount` and `MaxAscensionFor` are untested
     (game-bound).
   - Block Return gives no Block on the killing hit (StS1 does) and ignores pet (Osty) attacks.
-  - Hover tips: the Scry tip (`SPOON_SCRY_TIP`) is only on Third Eye; the other Scry cards (Foresight, Nirvana, Cut Through
-    Fate, Just Lucky...) lack it. No stance tips on Mental Fortress, Empty Fist and Flurry; no Strength/Dexterity tips on
-    Fasting.
   - Master Reality upgrades Foreign Influence's pick and has no Status/Curse filter (StS1 upgrades only temp-card, Discovery
     and colorless-choice cards).
   - Establishment discounts cards kept by Runic Pyramid or Ringing Triangle (StS1 only Retain); its clamp reads this-turn
     cost modifiers, so a retained card that is free this turn gets no combat discount.
-  - Rushdown draws with a throwing choice context (`IStanceListener` carries none); Deva Form applies 1 instead of its Magic var.
+  - Deva Form applies 1 instead of its Magic var.
+  - Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.
   - Spirit Shield shows no live Block; Mark and the end-turn death effect share the Doom icon.
   - Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.
   - `LastCardPlayed` reset between combats (Sanctity) is unverified.

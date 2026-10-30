@@ -20,6 +20,8 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Just Lucky: Scry, Block, damage, in that order.</summary>
 public sealed class Sts1JustLucky : Sts1WatcherCard
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { WatcherTips.Scry() };
+
 	public override bool GainsBlock => true;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]

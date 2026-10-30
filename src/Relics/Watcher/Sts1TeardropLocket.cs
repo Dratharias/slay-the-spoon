@@ -1,7 +1,9 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -22,6 +24,8 @@ public sealed class Sts1TeardropLocket : Sts1WatcherRelic
 	public override async Task BeforeCombatStart()
 	{
 		Flash();
-		await StanceCmd.Enter(Owner, Stance.Calm, null);
+		// BeforeCombatStart gives no choice context; build the hook's own so a listener (Rushdown's draw) can open a choice.
+		var context = new HookPlayerChoiceContext(this, LocalContext.NetId!.Value, Owner.Creature.CombatState!, GameActionType.Combat);
+		await context.AssignTaskAndWaitForPauseOrCompletion(StanceCmd.Enter(Owner, Stance.Calm, null, context));
 	}
 }

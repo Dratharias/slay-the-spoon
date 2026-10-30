@@ -23,7 +23,12 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Fasting: gain Strength and Dexterity, and lose 1 energy at the start of every turn for the rest of the combat.</summary>
 public sealed class Sts1Fasting : Sts1WatcherCard
 {
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { HoverTipFactory.ForEnergy(this) };
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
+	{
+		HoverTipFactory.ForEnergy(this),
+		HoverTipFactory.FromPower<StrengthPower>(),
+		HoverTipFactory.FromPower<DexterityPower>(),
+	};
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
