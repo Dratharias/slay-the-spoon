@@ -26,7 +26,7 @@ TOOLS     := nice -n 19 podman run --rm \
 	-v "$(STS2_LOC)":/sts2loc:ro \
 	-w /repo localhost/slayspoon-tools
 
-.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts1-act4-data sts2-loc workshop workshop-upload
+.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts1-act4-data sts1-ending-art sts2-loc workshop workshop-upload
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -67,6 +67,10 @@ sts1-data:
 # Stage Act 4 source assets/text for conversion; this does not enable a playable act.
 sts1-act4-data:
 	$(TOOLS) python tools/sts1/act4.py --jar /sts1.jar --out data/sts1/act4
+
+# Static Ending sprites (setup pose) and the Heart's map icons, from the staged Act 4 assets.
+sts1-ending-art:
+	$(TOOLS) python tools/sts1/ending_art.py --assets data/sts1/act4/assets --out godot/SlaySpoon/images/ending
 
 # Colorless catalog first: no playable skeletons until namesakes and special cards are reviewed.
 sts1-colorless-data:

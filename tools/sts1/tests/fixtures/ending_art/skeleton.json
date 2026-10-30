@@ -1,0 +1,35 @@
+{
+  "skeleton": { "spine": "3.4.02", "width": 15, "height": 6, "images": "" },
+  "bones": [
+    { "name": "root" },
+    { "name": "arm", "parent": "root", "x": 10, "rotation": 90 }
+  ],
+  "slots": [
+    { "name": "body", "bone": "root", "attachment": "square" },
+    { "name": "limb", "bone": "arm", "attachment": "bar" }
+  ],
+  "skins": {
+    "default": {
+      "body": {
+        "square": { "x": 0, "y": 3, "width": 6, "height": 6 }
+      },
+      "limb": {
+        "bar": {
+          "type": "mesh",
+          "uvs": [ 0, 0, 1, 0, 1, 1, 0, 1 ],
+          "triangles": [ 0, 1, 2, 2, 3, 0 ],
+          "vertices": [
+            1, 1, 6, 2, 1,
+            1, 1, 6, -2, 1,
+            2, 0, 12, 0, 0.5, 1, 0, -2, 0.5,
+            2, 0, 8, 0, 0.5, 1, 0, 2, 0.5
+          ],
+          "hull": 4,
+          "width": 4,
+          "height": 6
+        }
+      }
+    }
+  },
+  "animations": {}
+}

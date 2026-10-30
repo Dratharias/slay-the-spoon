@@ -1,0 +1,20 @@
+
+fixture.png
+size: 16,16
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+square
+  rotate: false
+  xy: 1, 1
+  size: 6, 6
+  orig: 6, 6
+  offset: 0, 0
+  index: -1
+bar
+  rotate: true
+  xy: 9, 1
+  size: 4, 6
+  orig: 4, 6
+  offset: 0, 0
+  index: -1
