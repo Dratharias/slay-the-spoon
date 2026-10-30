@@ -47,3 +47,9 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - The StS1 ending stinger plays once at the victory room (dropped if it clashes with the game's music).
   - Neow ignores the Act 4 Custom Run option.
   - The fixed map is built when the act's map is generated and forced over Golden Compass's map.
+- Act 4 The Ending (step 6 WP4-6), minors left after review:
+  - The Invincible clamp sits in `Sts1InvinciblePower`, not in the tested `HeartInvincibleRule`; it flashes inside the modify
+    hook (vanilla flashes after modifying, and the overkill path can call the hook twice).
+  - `PoisonTicksDrainTheSameBudget` only exercises unblockable damage; `BlockedHitsAndExhaustedBudget` is vaguely named.
+  - `Sts1InvinciblePower.AfterApplied` takes the turn cap from the current amount: a mid-turn re-apply would use the
+    depleted value.
