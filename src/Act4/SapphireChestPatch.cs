@@ -80,7 +80,7 @@ internal static class SapphireChestPatch
 			_room = run.CurrentRoom;
 			var me = LocalContext.GetMe(run);
 			if (me == null) return;
-			var button = new Button { Text = new LocString("treasure_room", "SPOON_SAPPHIRE.swap").GetFormattedText(),
+			var button = new Button { Text = new LocString("merchant_room", "SPOON_SAPPHIRE_SWAP").GetFormattedText(),
 				Position = new Vector2(650, 770), Visible = false };
 			button.AddThemeFontSizeOverride("font_size", 24);
 			__instance.AddChild(button);
@@ -91,7 +91,7 @@ internal static class SapphireChestPatch
 				button.Visible = offered != null && !act4.Keys.Has(Act4Key.Sapphire) && Pickups.All(p => p.Ready.Task.IsCompleted);
 				if (offered?.Relic is { } relic)
 				{
-					var tip = new LocString("treasure_room", "SPOON_SAPPHIRE.description");
+					var tip = new LocString("merchant_room", "SPOON_SAPPHIRE_SWAP_TIP");
 					tip.Add("Relic", relic.Title.GetFormattedText());
 					button.TooltipText = tip.GetFormattedText();
 				}
@@ -178,11 +178,11 @@ internal static class SapphireChestPatch
 			int index = player.Deck.Cards.IndexOf(original);
 			var restored = CardModel.FromSerializable(pickup.Saved[handle]);
 			run.AddCard(restored, player);
-			player.Deck.RemoveInternal(original);
+			original.RemoveFromState();
 			player.Deck.AddInternal(restored, index);
 		}
-		foreach (int handle in plan.Remove) player.Deck.RemoveInternal(cards[handle]);
-		await PlayerCmd.LoseGold(plan.GoldToLose, player);
+		foreach (int handle in plan.Remove) cards[handle].RemoveFromState();
+		if (plan.GoldToLose > 0) await PlayerCmd.LoseGold(plan.GoldToLose, player);
 		if (plan.MaxHpToLose > 0)
 			await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), player.Creature, plan.MaxHpToLose, isFromCard: false);
 		foreach (var potion in pickup.AddedPotions.Where(p => player.Potions.Contains(p)).Take(plan.PotionsToDiscard))

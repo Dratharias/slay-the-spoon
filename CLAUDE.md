@@ -95,10 +95,10 @@ Read `README.md` for the player view and the spec for every decision.
   Invincible cap scales with the same multiplayer factor as HP.
 - StS2's `MultiplayerScalingModel.GetMultiplayerScaling` throws for act index 3: patch it before any act 4 co-op fight.
   Owner decision: act 4 HP keeps StS2's formula (HP × player count × factor) with act 3's factors (1.2 elite, 1.3 boss).
-- Not playable or exposed in the lobby. Next: animation compatibility, key state and act routing.
+- Not playable or exposed in the lobby. Next: act routing and enemies/visuals (WP4/WP5).
 - Approved Act 4 unlock: first reach Act 3 in a Standard run at Ascension 10; victory is not required.
   The unlock is permanent and makes Act 4 available at every ascension level, including 0.
-  A Custom Run option bypasses this prerequisite. This rule is documented, not implemented yet.
+  A Custom Run option bypasses this prerequisite. The unlock and the keys are implemented in WP3 (see below).
 - Co-op keys are team-wide (owner decision): one set for the team; a key any player collects counts for all.
   Ruby: one player gives up their rest-site action. Sapphire: after a chest's relics are handed out, any player who
   received one may give it back for the key (first to accept; the swap undoes the relic's pickup effects, upgrades included).

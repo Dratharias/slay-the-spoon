@@ -35,7 +35,9 @@ public sealed class SpoonAct4 : ModifierModel
 		return Task.CompletedTask;
 	}
 
+	/// <summary>The marked node counts only while its room is an elite fight: Golden Compass can regenerate the map and leave the coordinate on a normal node.</summary>
 	private bool AtEmeraldElite => !Keys.Has(Act4Key.Emerald)
+		&& RunState.CurrentRoom is { RoomType: RoomType.Elite }
 		&& RunState.CurrentMapCoord is { } coord
 		&& Keys.EmeraldNode(RunState.CurrentActIndex) == (coord.col, coord.row);
 

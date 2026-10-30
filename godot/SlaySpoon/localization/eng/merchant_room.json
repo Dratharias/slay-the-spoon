@@ -16,5 +16,7 @@
   "SLAY_SPOON_LOANS.lend": "Lend",
   "SLAY_SPOON_LOANS.give": "Give",
   "SLAY_SPOON_LOANS.withdraw": "Withdraw",
-  "SLAY_SPOON_LOANS.reset": "Reset"
+  "SLAY_SPOON_LOANS.reset": "Reset",
+  "SPOON_SAPPHIRE_SWAP": "Swap for the Sapphire Key",
+  "SPOON_SAPPHIRE_SWAP_TIP": "Give back {Relic} and undo what it did on pickup. The key counts for the whole team."
 }
