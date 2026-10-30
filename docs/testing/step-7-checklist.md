@@ -22,3 +22,11 @@ Start each run from the main menu with the console command `sts1watcher` (tempor
 - [ ] Victory: the Architect scene plays her four hits and the victory screen shows.
 - [ ] Save and quit mid-run, then continue: the run resumes as the Watcher.
 - [ ] Standard and Daily runs never offer or show her; the regular (unmodded) save is untouched.
+
+## Progress guards (Task 3)
+
+- [ ] After a Watcher Custom run (any outcome) with fewer than five vanilla characters played, the Daily and Orobas
+      epochs are not granted early (timeline unchanged); log has no `watcher: rewrote` or `watcher: no CharacterStats` error.
+- [ ] Solo Custom run with the Watcher: the ascension selector goes up to the best vanilla character's max ascension
+      (0 when no vanilla ascension is unlocked), and the run starts at the chosen level instead of being reset to 0.
+- [ ] Vanilla characters keep their own max ascension in solo runs; Standard and Daily are unchanged.
