@@ -25,8 +25,9 @@ public static class ModifierListPatch
 			ModelDb.Modifier<SpoonNeowBlessing>().ToMutable(),
 			ModelDb.Modifier<SpoonMerchantLoans>().ToMutable(),
 		};
-		if (!CustomRunOptions.OfferedIn(nameof(GameMode.Custom))) return;
-		IEnumerable<ModifierModel> extra = CustomRunOptions.TypeNames.Contains(nameof(SpoonAct4))
+		// Only the Act 4 row is gated: the other rows are always part of the Custom Run list.
+		IEnumerable<ModifierModel> extra = CustomRunOptions.OfferedIn(nameof(GameMode.Custom))
+			&& CustomRunOptions.TypeNames.Contains(nameof(SpoonAct4))
 			? new[] { ModelDb.Modifier<SpoonAct4>().ToMutable() }
 			: Array.Empty<ModifierModel>();
 		__result = __result.Concat(ours).Concat(extra);

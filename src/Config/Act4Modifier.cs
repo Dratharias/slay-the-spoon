@@ -16,8 +16,10 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Config;
 
 /// <summary>
-/// Hidden run flag: the run has Act 4. It owns the team's key state (<see cref="Act4Keys"/>). Standard runs get it from
-/// <see cref="Act4.StandardRunLobbyPatch"/>; it is not in the Custom Run list. Neow ignores it when counting modifiers.
+/// Run flag: the run has Act 4. It owns the team's key state (<see cref="Act4Keys"/>). Custom Runs offer it as the
+/// "Act 4" row (<see cref="CustomRunUi.ModifierListPatch"/>), which needs no unlock. Standard runs get it, hidden, from
+/// <see cref="Act4.StandardRunLobbyPatch"/> once the profile holds the permanent unlock (<see cref="Act4UnlockRule"/>,
+/// <see cref="Act4Access"/>). Daily runs never carry it. Neow ignores it when counting modifiers.
 /// </summary>
 public sealed class SpoonAct4 : ModifierModel
 {

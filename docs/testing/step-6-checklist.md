@@ -14,13 +14,14 @@ Look in `~/.local/share/SlayTheSpire2/mod_configs/SlaySpoon.cfg` for `Act4Unlock
 
 ## Act 4 run flag (Task 4)
 
-Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 first (see above). The flag is `SPOON_ACT4`.
+Act 4 is released: a Standard run gets the flag once the profile holds the unlock (see above); a Custom Run gets it
+from the "Act 4" row, without the unlock. No `Act4Preview` key is needed. The flag is `SPOON_ACT4`.
 
-- [ ] Preview on and profile unlocked: a Standard solo run logs `[SlaySpoon] act4: flag added to the Standard run` once.
+- [ ] Profile unlocked: a Standard solo run logs `[SlaySpoon] act4: flag added to the Standard run` once.
 - [ ] Neow still offers its usual blessings in that run (the flag is not counted as a modifier).
 - [ ] Save and quit, then resume: the run still has the flag and no `act4: saved key state dropped` error.
-- [ ] Without the unlock, or without the preview key: no flag.
-- [ ] Daily and Custom runs never get the flag.
+- [ ] Standard without the unlock: no flag.
+- [ ] Daily runs never get the flag; Custom runs get it only with the "Act 4" row ticked.
 - [ ] Co-op Standard run: the host's unlock decides; a client without the unlock still gets the flag from the host.
 - [ ] A new Standard run after a run that took a key starts with no keys.
 - [ ] A new run after a run with a loan starts with no debt (same session).
@@ -111,10 +112,13 @@ Reach the fight with the vanilla console: `fight STS1_CORRUPT_HEART_BOSS`.
 - [ ] Buying Golden Compass at the act 4 merchant does not change the map; the log shows `act4: GoldenPathActMap replaced by the Ending map`.
 - [ ] Save and quit at the merchant, then resume: the same map, with the rest site visited and the elite travelable.
 - [ ] After the elite, only the Heart is travelable. The four nodes are spread over the whole map screen; the paths between them are drawn.
+- [ ] The act 4 rest site shows the characters animated (glory loop) and hoverable, solo and in co-op (`make mp`); the Necrobinder's fire flickers. The log has no `Unexpected act` error.
+- [ ] The Heart icon (and its outline) shows in the top bar boss icon during act 4, in the top bar room icon during the Heart fight, and on the Heart's floor in run history.
+- [ ] Save and quit, then resume, on each act 4 node (rest site, merchant, elite, Heart): the run resumes in act 4 ("The Ending") at the same node.
 
 ## Route into The Ending (WP4-6 Task 8)
 
-Needs `Act4Preview = true` in `SlaySpoon.cfg` until Task 10.
+Start a Custom Run with the "Act 4" row ticked, or a Standard run once the profile holds the unlock.
 
 - [ ] Without all three keys, the act 3 boss ends the run as in vanilla (victory room, credits).
 - [ ] With all three keys, the act 3 boss gives rewards, then act 4 starts. The log shows `act4: The Ending appended` when the last key is taken.
@@ -135,7 +139,7 @@ Needs `Act4Preview = true` in `SlaySpoon.cfg` until Task 10.
 
 - [ ] Solo and co-op; no keys and all keys; resume in act 3 and act 4; both act 3 endings (vanilla victory without keys, act 4 with keys).
 - [ ] Monster HP and Monster Damage modifiers apply in act 4; test both victory and defeat.
-- [ ] Standard: the unlock persists after a restart, and once unlocked Act 4 is offered at every ascension including 0 (with `Act4Preview` off).
+- [ ] Standard: the unlock persists after a restart, and once unlocked Act 4 is offered at every ascension including 0 (no `Act4Preview` key in the cfg).
 - [ ] Standard, not unlocked: no keys and no act 4.
 - [ ] Custom Run: the "Act 4" row is listed; ticking it gives keys and act 4 without the unlock, and Neow's offer is unchanged.
 - [ ] Daily runs show no "Act 4" row, no keys, and end after act 3.

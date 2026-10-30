@@ -103,3 +103,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - The Act 4 row in Custom Run has no icon (check how it renders).
   - The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
     in co-op (the power is game-bound).
+  - Killing the Heart logs two vanilla errors from `ProgressSaveManager.ObtainCharUnlockEpoch` (`Act 4 is not yet
+    implemented.`, `EpochModel was not found :(`): it switches on the act index for the character epochs and has no act 4
+    case. Harmless (no epoch, no write); left alone because routing it to act 3 would hand out an epoch.

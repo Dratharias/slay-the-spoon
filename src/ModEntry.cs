@@ -16,7 +16,14 @@ public static class ModEntry
 		PercentModifierTable.SelfCheck();
 		Sts1CardTypes.SelfCheck();
 		Sts1SavedProperties.Register();
-		Act4.Sts1EndingAct.SelfCheck();
+		try
+		{
+			Act4.Sts1EndingAct.SelfCheck();
+		}
+		catch (Exception e)
+		{
+			SpoonLog.Error($"Sts1EndingAct self-check failed: {e.Message}");
+		}
 		Act4.Act4Routing.Register();
 		LinuxHarmonyFix.Apply();
 		new Harmony("slayspoon").PatchAll(typeof(ModEntry).Assembly);
