@@ -67,3 +67,17 @@ Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 firs
 
 - [ ] Invincible: the Heart's HP loss stops at 300 per turn solo, 200 at A10, and 780 with two players. Block on the Heart is not counted. Poison counts.
 - [ ] Beat of Death: each card you play deals 1 damage to you (2 at A10). Strength does not change it. Monster Damage 200 % doubles it once.
+
+## Spire Shield and Spear (WP4-6 Task 4)
+
+Reach the fight with the vanilla console: `fight STS1_SHIELD_AND_SPEAR_ELITE` (it looks encounters up in ModelDb, mod ones included).
+
+- [ ] Shield stands behind the players on the left, Spear in front on the right; players show Surrounded; Shield shows Back Attack.
+- [ ] Both monsters show their static StS1 sprite, intents above it, and a hitbox matching the sprite. Hits shake them; death fades them out.
+- [ ] Shield's opening is Fortify or Bash; turn 3 is always Smash. Smash's Block equals the damage it dealt (99 at A10).
+- [ ] Bash removes 1 Strength (Defect sometimes loses 1 Focus instead).
+- [ ] Spear opens with Burn Strike, never twice in a row; turn 2 is Skewer; Burns go to the discard pile (shuffled into the draw pile at A10).
+- [ ] Killing either one removes Surrounded and the survivor's Back Attack; the players face the survivor.
+- [ ] In co-op, attacks hit every player, and the host and client logs show the same `ending:` lines.
+- [ ] Monster HP 200 % doubles both monsters' HP once; Monster Damage 50 % halves Bash.
+- [ ] Victory gives elite rewards (gold, card, relic, sometimes a potion).

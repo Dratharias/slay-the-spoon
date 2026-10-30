@@ -1,0 +1,4 @@
+{
+	"STS1_SHIELD_AND_SPEAR_ELITE.loss": "{character} a été pris{characterGender:choose(feminine):e|} en tenaille par [gold]{encounter}[/gold].",
+	"STS1_SHIELD_AND_SPEAR_ELITE.title": "Bouclier et Lance de la Tour"
+}
