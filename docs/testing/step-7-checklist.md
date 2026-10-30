@@ -146,3 +146,50 @@ See `docs/review/watcher-task6.md` for values, hidden-pool decisions and test co
 - [ ] Wheel Kick deals 15/20 and draws 2/3.
 - [ ] Windmill Strike (7/10, Retain) gains 4/5 damage per retained turn this combat; the deck copy is unchanged next combat.
 - [ ] All 25 cards show EN/FR text with no raw placeholders and the right hover tips (stances, Mantra, Smite, Through Violence, Fatal, Block Return).
+
+## Task 8 — skills
+
+- [ ] Alpha (cost 1, Exhaust; Innate upgraded) shuffles a Beta into a random spot of the draw pile.
+- [ ] Blasphemy (cost 1, Exhaust; Retain upgraded) enters Divinity; the owner dies at the start of their next turn
+      (Fairy in a Bottle still saves them); a teammate is unaffected.
+- [ ] Collect is X cost, Exhausts; for the next X (X+1 upgraded) turns a Miracle+ arrives in hand at turn start; Chemical X adds 2;
+      X = 0 unupgraded does nothing; the power counts down to nothing.
+- [ ] Conjure Blade is X cost, Exhausts; it shuffles an Expunger that hits X (X+1 upgraded) times (Chemical X included); the
+      Expunger hits that many times.
+- [ ] Crescendo (cost 1, Exhaust, Retain; cost 0 upgraded) enters Wrath.
+- [ ] Deceive Reality gives 4/7 Block and a Safety in hand.
+- [ ] Deus Ex Machina is unplayable; when drawn (turn draw or card draw) it adds 2/3 Miracles to hand and exhausts; it also
+      triggers when drawn into a full hand (check what happens to the Miracles).
+- [ ] Empty Body gives 7/10 Block and exits the stance; Empty Mind draws 2/3 and exits the stance (Calm exit energy).
+- [ ] Evaluate gives 6/10 Block and shuffles an unupgraded Insight into the draw pile (card text matches).
+- [ ] Foreign Influence (cost 0, Exhaust) offers 3 distinct Attacks drawn from the card set mode's pools (StS1-only: Ironclad,
+      Silent, Defect, Watcher StS1 attacks; Hybrid adds Necrobinder and Regent); the pick goes to hand; upgraded it costs 0 this turn.
+- [ ] Halt (cost 0) gives 3/4 Block, plus 9/14 more while in Wrath (two Block gains).
+- [ ] Indignation applies 3/5 Vulnerable to ALL enemies while in Wrath, otherwise enters Wrath.
+- [ ] Inner Peace draws 3/4 while in Calm, otherwise enters Calm.
+- [ ] Judgement (cost 1) kills an enemy at or below 30/40 HP, otherwise does nothing.
+- [ ] Meditate puts 1/2 cards from the discard pile into hand (all of them when few), Retains them this turn, enters Calm and
+      ends the turn.
+- [ ] Omniscience (cost 4/3, Exhaust) lets the owner pick any draw pile card and plays it twice; the card ends in the exhaust pile
+      (no duplicate left behind); an X card or a targeted Attack picks sensible targets/energy.
+- [ ] Perseverance (5/7 Block, Retain) gains 2/3 Block for each turn it is retained this combat; the deck copy is unchanged next combat.
+- [ ] Pray gains 3/4 Mantra and shuffles an Insight into the draw pile.
+- [ ] Pressure Points applies 8/11 Mark, then every enemy loses HP equal to its Mark (ignores Block); a second play adds to the Mark and
+      triggers again; in co-op the Mark is shared.
+- [ ] Prostrate (cost 0) gains 2/3 Mantra and 4 Block; its upgraded text does not say DEPRECATED.
+- [ ] Protect (cost 2, Retain) gives 12/16 Block.
+- [ ] Sanctity gives 6/9 Block and draws 2 only if the owner's previous card was a Skill.
+- [ ] Scrawl (cost 1/0, Exhaust) draws until the hand is full (10 cards).
+- [ ] Simmering Fury: next turn the owner enters Wrath before drawing and draws 2/3 extra cards.
+- [ ] Spirit Shield (cost 2) gives 3/4 Block for each other card in hand.
+- [ ] Swivel gives 8/11 Block; the next Attack costs 0.
+- [ ] Third Eye gives 7/9 Block and Scrys 3/5.
+- [ ] Tranquility (cost 1/0, Exhaust, Retain) enters Calm.
+- [ ] Vault (cost 3/2, Exhaust) ends the turn and the owner takes an extra turn; enemies do not act in between; in co-op only the
+      owner gets the extra turn.
+- [ ] Wave of the Hand: this turn each Block gain applies 1/2 Weak to ALL enemies; it wears off at end of turn.
+- [ ] Wish (cost 3, Exhaust) offers Strength 3/4, Plated Armor 6/8 and Gold 25/30 through the synchronized choice screen; the
+      upgraded options show upgraded values.
+- [ ] Worship (cost 2) gains 5 Mantra; upgraded it Retains.
+- [ ] Wreath of Flame gives 5/8 Vigor.
+- [ ] All 34 cards show EN/FR text with no raw placeholders and the right hover tips.
