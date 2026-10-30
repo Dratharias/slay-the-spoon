@@ -9,7 +9,7 @@ Mod lines in `~/.local/share/SlayTheSpire2/logs/godot.log` start with `[SlaySpoo
 Start each run from Custom Run with "Slay the Spire 1 Cards" or "Spire Souvenir" ticked, then pick the Watcher.
 
 - [ ] The run starts: transition fade and sound, Neow, then the map with her marker. No error in the log.
-- [ ] Top bar: her icon, 72/72 HP, 99 gold, Pure Water in the relic bar with its EN/FR text and the basin icon.
+- [ ] Top bar: her icon, 72/72 HP, 99 gold, Pure Water in the relic bar with its EN/FR text and its StS1 icon.
 - [ ] Deck view: 4 Strike, 4 Defend, Eruption, Vigilance, with StS1 portraits and EN/FR text.
 - [ ] Combat: her body stands at the usual place, hover box and intents look right, 3 energy with the purple orb
       (log has no `Watcher energy counter: no LayerN`), Strike/Eruption deal 6/9, Defend/Vigilance give 5/8 Block.
@@ -84,3 +84,31 @@ Automated validation: 326 xUnit tests and 66 pytest tests pass; build has 0 warn
   react only to the owning player's `AfterFlush` retained-card list.
 
 Golden Eye's +2 is covered by pure math tests; wiring the relic is part of Task 6.
+
+## Task 6 — Generated cards, relics and potions
+
+See `docs/review/watcher-task6.md` for values, hidden-pool decisions and test commands.
+
+- [ ] Pure Water creates one Miracle before the first draw each combat; Retain works and playing it gains 1/2 Energy.
+- [ ] Insight draws 2/3, Smite deals 12/16, Safety gives 12/16 Block, Through Violence deals 20/30; Retain and Exhaust work.
+- [ ] Expunger deals 9/15 damage per configured hit, keeps its hit count when cloned, and does not Exhaust.
+      Full creation through Conjure Blade awaits Task 8.
+- [ ] Beta costs 2/1, Exhausts, and shuffles an unupgraded Omega into draw; both peers see the same insertion.
+- [ ] Omega deals 50/60 at the holder's turn end, stacks, and is not amplified by Wrath/Divinity or Strength.
+- [ ] Wish options apply 3/4 Strength, 6/8 Plated Armor or 25/30 Gold without firing card-play hooks.
+      Full selection through Wish awaits Task 8.
+- [ ] Plated Armor gives Block at the owner's turn end; each unblocked attack removes one stack. Blocked attacks,
+      HP costs, Thorns and teammate turns do not remove stacks. Verify multiple hits and Buffer.
+- [ ] Holy Water removes Pure Water on pickup and creates three Miracles, not four. Save/reload preserves replacement.
+- [ ] Damaru gives one Mantra before each owner draw, including the first turn and extra turns; a teammate's extra
+      turn grants none. At 9 Mantra, entering Divinity survives the turn-start stance expiry and grants 3 Energy.
+- [ ] Teardrop Locket starts each combat in Calm; Violet Lotus gives 3 Energy on leaving Calm, never on re-entry.
+- [ ] Melange asks the shuffling player to Scry 3; Golden Eye makes it 5. Empty and short piles never reshuffle again.
+- [ ] Native Cloak Clasp remains a single shared relic. Duality grants temporary Dexterity per attack and clears it
+      at the holder's turn end; teammate attacks have no effect.
+- [ ] Bottled Miracle creates two Miracles; Stance Potion's unskippable choice enters the selected stance;
+      Ambrosia enters Divinity. Verify all three on both peers and with potion-doubling effects.
+- [ ] All relic art sizes and potion borrowed icons/outlines load; EN/FR cards, powers, relics and potions show no raw placeholders.
+- [ ] Generated/choice cards never appear in rewards, shops, transforms or ordinary random generation.
+- [ ] Holy Water and Violet Lotus never appear in ordinary rewards/shops/random generation; debug grants work.
+- [ ] Vanilla characters retain their existing potion/relic pools; Standard and Daily are unchanged.

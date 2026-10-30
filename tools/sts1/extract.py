@@ -154,9 +154,33 @@ def parse_card(path: Path, text: dict) -> dict:
     return card
 
 
-def extract(decomp: Path, color: str) -> list:
+WATCHER_TOKENS = ("Miracle", "Insight", "Smite", "Safety", "ThroughViolence", "Expunger", "Beta", "Omega")
+WATCHER_OPTIONS = ("BecomeAlmighty", "FameAndFortune", "LiveForever", "ChooseCalm", "ChooseWrath")
+
+
+def purple_allowlist(decomp: Path) -> set:
+    source = (decomp / "com/megacrit/cardcrawl/helpers/CardLibrary.java").read_text(encoding="utf-8")
+    body = method_body(source, "private static void addPurpleCards()")
+    names = set(re.findall(r"CardLibrary\.add\(new (\w+)\(", body))
+    if len(names) != 75:
+        raise ValueError(f"Expected 75 registered purple cards, found {len(names)}")
+    return names
+
+
+def extract_generated(decomp: Path) -> list:
+    text = load_text(decomp)
+    return sorted([parse_card(cards_dir(decomp, folder) / (name + ".java"), text)
+                   for folder, names in (("tempCards", WATCHER_TOKENS), ("optionCards", WATCHER_OPTIONS))
+                   for name in names], key=lambda c: c["class"])
+
+
+def extract(decomp: Path, color: str, only: set | None = None) -> list:
     text = load_text(decomp)
     paths = sorted(cards_dir(decomp, color).glob("*.java"))
+    if color == "purple":
+        only = purple_allowlist(decomp) if only is None else only & purple_allowlist(decomp)
+    if only is not None:
+        paths = [p for p in paths if p.stem in only]
     cards = (parse_card(p, text) for p in paths)
     # A class with no English name is a card StS1 never shipped (the Defect's Impulse).
     return sorted((c for c in cards if c["text"]["eng"]["name"]), key=lambda c: c["class"])
@@ -167,8 +191,9 @@ def main():
     ap.add_argument("--decomp", type=Path, required=True)
     ap.add_argument("--color", required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--only", help="comma-separated class allowlist")
     args = ap.parse_args()
-    cards = extract(args.decomp, args.color)
+    cards = extract_generated(args.decomp) if args.color == "watcher-generated" else extract(args.decomp, args.color, set(args.only.split(",")) if args.only else None)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(cards, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     warned = [c for c in cards if "warnings" in c]

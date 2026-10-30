@@ -1,0 +1,2572 @@
+[
+ {
+  "class": "Alpha",
+  "id": "Alpha",
+  "snake": "alpha",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "innate"
+  ],
+  "portrait": "purple/skill/alpha",
+  "text": {
+   "eng": {
+    "name": "Alpha",
+    "description": "Shuffle a *Beta into your draw pile. NL Exhaust.",
+    "upgrade_description": "Innate. NL Shuffle a *Beta into your draw pile. NL Exhaust."
+   },
+   "fra": {
+    "name": "Alpha",
+    "description": "Ajoutez une carte *Bêta dans votre pioche. NL Épuisement.",
+    "upgrade_description": "Inné. NL Ajoutez une carte *Bêta dans votre pioche. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "BattleHymn",
+  "id": "BattleHymn",
+  "snake": "battle_hymn",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [
+   "innate"
+  ],
+  "portrait": "purple/power/battle_hymn",
+  "text": {
+   "eng": {
+    "name": "Battle Hymn",
+    "description": "At the start of each turn, add a *Smite into your hand.",
+    "upgrade_description": "Innate. NL At the start of each turn, add a *Smite into your hand."
+   },
+   "fra": {
+    "name": "Hymne de bataille",
+    "description": "Au début de chaque tour, ajoutez une *Gifle à votre main.",
+    "upgrade_description": "Inné. NL Au début de chaque tour, ajoutez une *Gifle à votre main."
+   }
+  }
+ },
+ {
+  "class": "Blasphemy",
+  "id": "Blasphemy",
+  "snake": "blasphemy",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "retain"
+  ],
+  "portrait": "purple/skill/blasphemy",
+  "text": {
+   "eng": {
+    "name": "Blasphemy",
+    "description": "Enter Divinity. NL Die next turn. NL Exhaust.",
+    "upgrade_description": "Retain. NL Enter Divinity. NL Die next turn. NL Exhaust."
+   },
+   "fra": {
+    "name": "Blasphème",
+    "description": "Entrez en Divinité. NL Mourrez au prochain tour. NL Épuisement.",
+    "upgrade_description": "Retenue. NL Entrez en Divinité. NL Mourrez au prochain tour. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "BowlingBash",
+  "id": "BowlingBash",
+  "snake": "bowling_bash",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/bowling_bash",
+  "text": {
+   "eng": {
+    "name": "Bowling Bash",
+    "description": "Deal !D! damage for each enemy in combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Jeu de quille",
+    "description": "Infligez !D! dégâts pour chaque ennemi en combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Brilliance",
+  "id": "Brilliance",
+  "snake": "brilliance",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": 12,
+  "block": null,
+  "magic": 0,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/brilliance",
+  "text": {
+   "eng": {
+    "name": "Brilliance",
+    "description": "Deal !D! damage. NL Deals additional damage equal to Mantra gained this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Brillance",
+    "description": "Infligez !D! dégâts. NL Inflige autant de dégâts supplémentaires que vous avez gagné de Mantra ce combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "CarveReality",
+  "id": "CarveReality",
+  "snake": "carve_reality",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 6,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/carve_reality",
+  "text": {
+   "eng": {
+    "name": "Carve Reality",
+    "description": "Deal !D! damage. NL Add a *Smite into your hand.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Sculpte-réalité",
+    "description": "Infligez !D! dégâts. Ajoutez une *Gifle à votre main.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Collect",
+  "id": "Collect",
+  "snake": "collect",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/skill/collect",
+  "text": {
+   "eng": {
+    "name": "Collect",
+    "description": "Put a *Miracle+ into your hand at the start of your next X turns. NL Exhaust.",
+    "upgrade_description": "Put a *Miracle+ into your hand at the start of your next X+1 turns. NL Exhaust."
+   },
+   "fra": {
+    "name": "Collecte",
+    "description": "Ajoutez un *Miracle+ à votre main au début de vos X prochains tours. NL Épuisement.",
+    "upgrade_description": "Ajoutez un *Miracle+ à votre main au début de vos X+1 prochains tours. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "Conclude",
+  "id": "Conclude",
+  "snake": "conclude",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "all_enemy",
+  "damage": 12,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/conclude",
+  "text": {
+   "eng": {
+    "name": "Conclude",
+    "description": "Deal !D! damage to ALL enemies. NL End your turn.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Conclusion",
+    "description": "Infligez !D! dégâts à TOUS les ennemis. NL Terminez votre tour.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ConjureBlade",
+  "id": "ConjureBlade",
+  "snake": "conjure_blade",
+  "cost": -1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/skill/conjure_blade",
+  "text": {
+   "eng": {
+    "name": "Conjure Blade",
+    "description": "Shuffle an *Expunger into your draw pile. NL Exhaust.",
+    "upgrade_description": "Shuffle an *Expunger with X+1 into your draw pile. NL Exhaust."
+   },
+   "fra": {
+    "name": "Conjuration de lame",
+    "description": "Mélangez une carte *Expurgation dans votre pioche. NL Épuisement.",
+    "upgrade_description": "Mélangez une carte *Expurgation avec X+1 dans votre pile. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "Consecrate",
+  "id": "Consecrate",
+  "snake": "consecrate",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "all_enemy",
+  "damage": 5,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/consecrate",
+  "text": {
+   "eng": {
+    "name": "Consecrate",
+    "description": "Deal !D! damage to ALL enemies.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Consécration",
+    "description": "Infligez !D! dégâts à TOUS les ennemis.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Crescendo",
+  "id": "Crescendo",
+  "snake": "crescendo",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "retain"
+  ],
+  "portrait": "purple/skill/crescendo",
+  "text": {
+   "eng": {
+    "name": "Crescendo",
+    "description": "Retain. NL Enter Wrath. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Crescendo",
+    "description": "Retenue. NL Entrez en Colère. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "CrushJoints",
+  "id": "CrushJoints",
+  "snake": "crush_joints",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 8,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/crush_joints",
+  "text": {
+   "eng": {
+    "name": "Crush Joints",
+    "description": "Deal !D! damage. NL If the last card played this combat was a Skill, apply !M! Vulnerable.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Brise-articulation",
+    "description": "Infligez !D! dégâts. NL Si la dernière carte jouée était une Compétence, appliquez !M! de vulnérabilité.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "CutThroughFate",
+  "id": "CutThroughFate",
+  "snake": "cut_through_fate",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/cut_through_fate",
+  "text": {
+   "eng": {
+    "name": "Cut Through Fate",
+    "description": "Deal !D! damage. NL Scry !M!. NL Draw 1 card.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Changez le destin",
+    "description": "Infligez !D! dégâts. NL Scrutez !M! cartes. NL Piochez 1 carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DeceiveReality",
+  "id": "DeceiveReality",
+  "snake": "deceive_reality",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 4,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/deceive_reality",
+  "text": {
+   "eng": {
+    "name": "Deceive Reality",
+    "description": "Gain !B! Block. NL Add a *Safety into NL your hand.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Trompe-réalité",
+    "description": "Gagnez !B! d'Armure. NL Ajoutez une *Sécurité à votre main.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Defend_Watcher",
+  "id": "Defend_P",
+  "snake": "defend",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "basic",
+  "target": "self",
+  "damage": null,
+  "block": 5,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/defend",
+  "text": {
+   "eng": {
+    "name": "Defend",
+    "description": "Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Défense",
+    "description": "Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DeusExMachina",
+  "id": "DeusExMachina",
+  "snake": "deus_ex_machina",
+  "cost": -2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust",
+   "unplayable"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "unplayable"
+  ],
+  "portrait": "purple/skill/deus_ex_machina",
+  "text": {
+   "eng": {
+    "name": "Deus Ex Machina",
+    "description": "Unplayable. NL When you draw this card, add !M! *Miracles to your hand and Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Deus Ex Machina",
+    "description": "Injouable. NL Lorsque vous piochez cette carte, ajoutez !M! *Miracle dans votre main et Épuisez cette carte.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "DevaForm",
+  "id": "DevaForm",
+  "snake": "deva_form",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "ethereal"
+  ],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/deva_form",
+  "text": {
+   "eng": {
+    "name": "Deva Form",
+    "description": "Ethereal. NL At the start of your turn, gain [W] NL and increase this gain by !M!.",
+    "upgrade_description": "At the start of your turn, gain [W] NL and increase this gain by !M!."
+   },
+   "fra": {
+    "name": "Forme Deva",
+    "description": "Éthérée. NL Au début de votre tour, gagnez [W] NL et augmentez ce gain de !M!.",
+    "upgrade_description": "Au début de votre tour, gagnez [W] NL et augmentez ce gain de !M!."
+   }
+  }
+ },
+ {
+  "class": "Devotion",
+  "id": "Devotion",
+  "snake": "devotion",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/devotion",
+  "text": {
+   "eng": {
+    "name": "Devotion",
+    "description": "At the start of your turn, gain !M! Mantra.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Dévotion",
+    "description": "Au début de votre tour, gagnez !M! de Mantra.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "EmptyBody",
+  "id": "EmptyBody",
+  "snake": "empty_body",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 7,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/empty_body",
+  "text": {
+   "eng": {
+    "name": "Empty Body",
+    "description": "Gain !B! Block. NL Exit your Stance.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Corps vide",
+    "description": "Gagnez !B! d'Armure. NL Quittez votre Position.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "EmptyFist",
+  "id": "EmptyFist",
+  "snake": "empty_fist",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 9,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 5,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/empty_fist",
+  "text": {
+   "eng": {
+    "name": "Empty Fist",
+    "description": "Deal !D! damage. NL Exit your Stance.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Poing vide",
+    "description": "Infligez !D! dégâts. NL Quittez votre Position.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "EmptyMind",
+  "id": "EmptyMind",
+  "snake": "empty_mind",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/empty_mind",
+  "text": {
+   "eng": {
+    "name": "Empty Mind",
+    "description": "Draw !M! cards. NL Exit your Stance.",
+    "upgrade_description": "Draw !M! cards. NL Exit your Stance."
+   },
+   "fra": {
+    "name": "Esprit clair",
+    "description": "Piochez !M! cartes. NL Quittez votre Position.",
+    "upgrade_description": "Piochez !M! cartes. NL Quittez votre Position."
+   }
+  }
+ },
+ {
+  "class": "Eruption",
+  "id": "Eruption",
+  "snake": "eruption",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "attack",
+  "rarity": "basic",
+  "target": "enemy",
+  "damage": 9,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/eruption",
+  "text": {
+   "eng": {
+    "name": "Eruption",
+    "description": "Deal !D! damage. NL Enter Wrath.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Éruption",
+    "description": "Infligez !D! dégâts. NL Entrez en Colère.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Establishment",
+  "id": "Establishment",
+  "snake": "establishment",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [
+   "innate"
+  ],
+  "portrait": "purple/power/establishment",
+  "text": {
+   "eng": {
+    "name": "Establishment",
+    "description": "Whenever a card is Retained, reduce its cost by !M! this combat.",
+    "upgrade_description": "Innate. NL Whenever a card is Retained, reduce its cost by !M! this combat."
+   },
+   "fra": {
+    "name": "Fondation",
+    "description": "Lorsqu'une carte est Retenue, réduisez son coût de !M! pour ce combat.",
+    "upgrade_description": "Inné. NL Lorsqu'une carte est Retenue, réduisez son coût de !M! pour ce combat."
+   }
+  }
+ },
+ {
+  "class": "Evaluate",
+  "id": "Evaluate",
+  "snake": "evaluate",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 6,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 4,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/evaluate",
+  "text": {
+   "eng": {
+    "name": "Evaluate",
+    "description": "Gain !B! Block. NL Shuffle an *Insight into your draw pile.",
+    "upgrade_description": "Gain !B! Block. NL Shuffle an *Insight+ into your draw pile."
+   },
+   "fra": {
+    "name": "Évaluation",
+    "description": "Gagnez !B! d'Armure. NL Ajoutez une *Perspicacité dans votre pioche.",
+    "upgrade_description": "Gagnez !B! d'Armure. NL Ajoutez une *Perspicacité+ dans votre pioche."
+   }
+  }
+ },
+ {
+  "class": "Fasting",
+  "id": "Fasting2",
+  "snake": "fasting",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/fasting",
+  "text": {
+   "eng": {
+    "name": "Fasting",
+    "description": "Gain !M! Strength. NL Gain !M! Dexterity. NL Gain 1 less [W] at the start of each turn.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Jeûne",
+    "description": "Gagnez !M! de Force. NL Gagnez !M! de Dextérité. NL Gagnez 1 [W] de moins au début de chaque tour.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "FearNoEvil",
+  "id": "FearNoEvil",
+  "snake": "fear_no_evil",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 8,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/fear_no_evil",
+  "text": {
+   "eng": {
+    "name": "Fear No Evil",
+    "description": "Deal !D! damage. NL If the enemy intends to Attack, enter Calm.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Sans crainte",
+    "description": "Infligez !D! dégâts. NL Si l'ennemi compte attaquer, entrez en Calme.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "FlurryOfBlows",
+  "id": "FlurryOfBlows",
+  "snake": "flurry_of_blows",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 4,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/flurry_of_blows",
+  "text": {
+   "eng": {
+    "name": "Flurry of Blows",
+    "description": "Deal !D! damage. NL Whenever you change Stances, return this from the discard pile to your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Rafale de coups",
+    "description": "Infligez !D! dégâts. NL Sort de votre défausse pour venir dans votre main lorsque vous changez de position.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "FlyingSleeves",
+  "id": "FlyingSleeves",
+  "snake": "flying_sleeves",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 4,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "retain"
+  ],
+  "portrait": "purple/attack/flying_sleeves",
+  "text": {
+   "eng": {
+    "name": "Flying Sleeves",
+    "description": "Retain. NL Deal !D! damage twice.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Manches flottantes",
+    "description": "Retenue. NL Infligez !D! dégâts deux fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "FollowUp",
+  "id": "FollowUp",
+  "snake": "follow_up",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/follow_up",
+  "text": {
+   "eng": {
+    "name": "Follow-Up",
+    "description": "Deal !D! damage. NL If the last card played this combat was an Attack, gain [W].",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Poursuite",
+    "description": "Infligez !D! dégâts. NL Si la dernière carte jouée ce combat était une Attaque, gagnez [W].",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ForeignInfluence",
+  "id": "ForeignInfluence",
+  "snake": "foreign_influence",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/skill/foreign_influence",
+  "text": {
+   "eng": {
+    "name": "Foreign Influence",
+    "description": "Choose 1 of 3 Attacks of any color to add into your hand. NL Exhaust.",
+    "upgrade_description": "Choose 1 of 3 Attacks of any color to add into your hand. NL It costs 0 this turn. NL Exhaust."
+   },
+   "fra": {
+    "name": "Influence extérieure",
+    "description": "Choisissez 1 Attaque de n'importe quelle couleur parmi 3 à ajouter à votre main. NL Épuisement.",
+    "upgrade_description": "Choisissez 1 Attaque de n'importe quelle couleur parmi 3 à ajouter à votre main. NL Elle coûte 0 ce tour. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "Foresight",
+  "id": "Wireheading",
+  "snake": "foresight",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/foresight",
+  "text": {
+   "eng": {
+    "name": "Foresight",
+    "description": "At the start of your turn, Scry !M!.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Prévoyance",
+    "description": "Au début de votre tour, Scrutez !M! cartes.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Halt",
+  "id": "Halt",
+  "snake": "halt",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 3,
+  "magic": 9,
+  "upgrade": {
+   "damage": null,
+   "block": 1,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/halt",
+  "text": {
+   "eng": {
+    "name": "Halt",
+    "description": "Gain !B! Block. NL If you are in Wrath, gain !M! additional Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Halte",
+    "description": "Gagnez !B! d'Armure. NL Si vous êtes en Colère, gagnez !M! d'Armure supplémentaire.",
+    "upgrade_description": null
+   }
+  },
+  "warnings": [
+   "upgrade depends on timesUpgraded"
+  ]
+ },
+ {
+  "class": "Indignation",
+  "id": "Indignation",
+  "snake": "indignation",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/indignation",
+  "text": {
+   "eng": {
+    "name": "Indignation",
+    "description": "If you are in Wrath, apply !M! Vulnerable to ALL enemies, otherwise enter Wrath.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Indignation",
+    "description": "Si vous êtes en Colère, appliquez !M! de Vulnérabilité à TOUS les ennemis. Sinon, entrez en Colère.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "InnerPeace",
+  "id": "InnerPeace",
+  "snake": "inner_peace",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/inner_peace",
+  "text": {
+   "eng": {
+    "name": "Inner Peace",
+    "description": "If you are in Calm, draw !M! cards, otherwise enter Calm.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Paix intérieure",
+    "description": "Si vous êtes en Calme, piochez !M! cartes. Sinon, entrez en Calme.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Judgement",
+  "id": "Judgement",
+  "snake": "judgment",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": 30,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 10
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/judgment",
+  "text": {
+   "eng": {
+    "name": "Judgment",
+    "description": "If the enemy has !M! or less HP, set their NL HP to 0.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Jugement",
+    "description": "Si l'ennemi a !M! PV ou moins, descendez ses PV à 0.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "JustLucky",
+  "id": "JustLucky",
+  "snake": "just_lucky",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 3,
+  "block": 2,
+  "magic": 1,
+  "upgrade": {
+   "damage": 1,
+   "block": 1,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/just_lucky",
+  "text": {
+   "eng": {
+    "name": "Just Lucky",
+    "description": "Scry !M!. NL Gain !B! Block. NL Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Chanceux",
+    "description": "Scrutez !M! cartes. NL Gagnez !B! d'Armure. NL Infligez !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "LessonLearned",
+  "id": "LessonLearned",
+  "snake": "lessons_learned",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "enemy",
+  "damage": 10,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/attack/lessons_learned",
+  "text": {
+   "eng": {
+    "name": "Lesson Learned",
+    "description": "Deal !D! damage. NL If Fatal, Upgrade a random card in your deck. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Leçon apprise",
+    "description": "Infligez !D! dégâts. NL Si l'ennemi succombe, Améliorez une carte aléatoire de votre deck. Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "LikeWater",
+  "id": "LikeWater",
+  "snake": "like_water",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 5,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/like_water",
+  "text": {
+   "eng": {
+    "name": "Like Water",
+    "description": "At the end of your turn, if you are in Calm, gain !M! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fluidité",
+    "description": "À la fin de votre tour, si vous êtes en Calme, gagnez !M! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "MasterReality",
+  "id": "MasterReality",
+  "snake": "master_reality",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "power",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/master_reality",
+  "text": {
+   "eng": {
+    "name": "Master Reality",
+    "description": "Whenever a card is created during combat, Upgrade it.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Maîtrise-réalité",
+    "description": "Lorsqu'une carte est créée pendant un combat, Améliorez-la.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Meditate",
+  "id": "Meditate",
+  "snake": "meditate",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/meditate",
+  "text": {
+   "eng": {
+    "name": "Meditate",
+    "description": "Put a card from your discard pile into your hand and Retain it. NL Enter Calm. NL End your turn.",
+    "upgrade_description": "Put 2 cards from your discard pile into your hand and Retain them. NL Enter Calm. NL End your turn."
+   },
+   "fra": {
+    "name": "Méditation",
+    "description": "Ajoutez une carte de votre défausse à votre main et Retenez-la. NL Entrez en Calme. Terminez votre tour.",
+    "upgrade_description": "Ajoutez deux cartes de votre défausse à votre main et Retenez-les. NL Entrez en Calme. Terminez votre tour."
+   }
+  }
+ },
+ {
+  "class": "MentalFortress",
+  "id": "MentalFortress",
+  "snake": "mental_fortress",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/mental_fortress",
+  "text": {
+   "eng": {
+    "name": "Mental Fortress",
+    "description": "Whenever you change Stances, gain !M! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Forteresse mentale",
+    "description": "Lorsque vous changez de Position, gagnez !M! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Nirvana",
+  "id": "Nirvana",
+  "snake": "nirvana",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/nirvana",
+  "text": {
+   "eng": {
+    "name": "Nirvana",
+    "description": "Whenever you Scry, gain !M! Block.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Nirvana",
+    "description": "Lorsque vous Scrutez, gagnez !M! d'Armure.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Omniscience",
+  "id": "Omniscience",
+  "snake": "omniscience",
+  "cost": 4,
+  "cost_upgraded": 3,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/skill/omniscience",
+  "text": {
+   "eng": {
+    "name": "Omniscience",
+    "description": "Choose a card in your draw pile. NL Play the chosen card twice and exhaust it. NL Exhaust.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Omniscience",
+    "description": "Choisissez une carte dans votre pioche. NL Jouez la carte choisie deux fois et Épuisez-la. NL Épuisement.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Perseverance",
+  "id": "Perseverance",
+  "snake": "perseverance",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 5,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": 2,
+   "magic": 1
+  },
+  "keywords": [
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "retain"
+  ],
+  "portrait": "purple/skill/perseverance",
+  "text": {
+   "eng": {
+    "name": "Perseverance",
+    "description": "Retain. NL Gain !B! Block. NL When Retained, increase its Block by !M! this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Persévérance",
+    "description": "Retenue. NL Gagnez !B! d'Armure. NL Lorsque cette carte est retenue, augmente son gain d'Armure de !M! pour ce combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Pray",
+  "id": "Pray",
+  "snake": "pray",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/pray",
+  "text": {
+   "eng": {
+    "name": "Pray",
+    "description": "Gain !M! Mantra. NL Shuffle an *Insight into your draw pile.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Prière",
+    "description": "Gagnez !M! de Mantra. NL Ajoutez une *Perspicacité dans votre pioche.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "PressurePoints",
+  "id": "PathToVictory",
+  "snake": "pressure_points",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": null,
+  "block": null,
+  "magic": 8,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 3
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/pressure_points",
+  "text": {
+   "eng": {
+    "name": "Pressure Points",
+    "description": "Apply !M! *Mark. NL ALL enemies lose HP equal to their *Mark.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Points vitaux",
+    "description": "Appliquez !M! de *Marque. NL TOUS les ennemis perdent des PV équivalents à leur *Marque.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Prostrate",
+  "id": "Prostrate",
+  "snake": "prostrate",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 4,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/prostrate",
+  "text": {
+   "eng": {
+    "name": "Prostrate",
+    "description": "Gain !M! Mantra. NL Gain !B! Block.",
+    "upgrade_description": "DEPRECATED"
+   },
+   "fra": {
+    "name": "Prosternation",
+    "description": "Gagnez !M! de Mantra. NL Gagnez !B! d'Armure.",
+    "upgrade_description": "DEPRECATED"
+   }
+  }
+ },
+ {
+  "class": "Protect",
+  "id": "Protect",
+  "snake": "protect",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 12,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 4,
+   "magic": null
+  },
+  "keywords": [
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "retain"
+  ],
+  "portrait": "purple/skill/protect",
+  "text": {
+   "eng": {
+    "name": "Protect",
+    "description": "Retain. NL Gain !B! Block.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Protection",
+    "description": "Retenue. NL Gagnez !B! d'Armure.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Ragnarok",
+  "id": "Ragnarok",
+  "snake": "ragnarok",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "rare",
+  "target": "all_enemy",
+  "damage": 5,
+  "block": null,
+  "magic": 5,
+  "upgrade": {
+   "damage": 1,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/ragnarok",
+  "text": {
+   "eng": {
+    "name": "Ragnarok",
+    "description": "Deal !D! damage to a random enemy !M! times.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Ragnarok",
+    "description": "Infligez !D! dégâts à un ennemi aléatoire !M! fois.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ReachHeaven",
+  "id": "ReachHeaven",
+  "snake": "reach_heaven",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 10,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 5,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/reach_heaven",
+  "text": {
+   "eng": {
+    "name": "Reach Heaven",
+    "description": "Deal !D! damage. NL Shuffle a NL *Through *Violence into your draw pile.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Atteinte du paradis",
+    "description": "Infligez !D! dégâts. NL Ajoutez 1 carte NL *Par *la *violence dans votre pioche.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Rushdown",
+  "id": "Adaptation",
+  "snake": "rushdown",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/rushdown",
+  "text": {
+   "eng": {
+    "name": "Rushdown",
+    "description": "Whenever you enter Wrath, draw !M! cards.",
+    "upgrade_description": "DEPRECATED"
+   },
+   "fra": {
+    "name": "Précipitation",
+    "description": "Lorsque vous entrez en Colère, piochez !M! cartes.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Sanctity",
+  "id": "Sanctity",
+  "snake": "sanctity",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 6,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/sanctity",
+  "text": {
+   "eng": {
+    "name": "Sanctity",
+    "description": "Gain !B! Block. NL If the last card played this combat was a Skill, draw !M! cards.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Sainteté",
+    "description": "Gagnez !B! d'Armure. NL Si la dernière carte jouée était une Compétence, piochez !M! cartes.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SandsOfTime",
+  "id": "SandsOfTime",
+  "snake": "sands_of_time",
+  "cost": 4,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 20,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 6,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "retain"
+  ],
+  "portrait": "purple/attack/sands_of_time",
+  "text": {
+   "eng": {
+    "name": "Sands of Time",
+    "description": "Retain. NL Deal !D! damage. NL When Retained, lower its cost by 1 this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Sables du temps",
+    "description": "Retenue. NL Infligez !D! dégâts. NL Lorsque cette carte est Retenue, diminuez son coût de 1 pour ce combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SashWhip",
+  "id": "SashWhip",
+  "snake": "sash_whip",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "common",
+  "target": "enemy",
+  "damage": 8,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/sash_whip",
+  "text": {
+   "eng": {
+    "name": "Sash Whip",
+    "description": "Deal !D! damage. NL If the last card played this combat was an Attack, apply !M! Weak.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fouet",
+    "description": "Infligez !D! dégâts. NL Si la dernière carte jouée était une Attaque, appliquez !M! de Faiblesse.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Scrawl",
+  "id": "Scrawl",
+  "snake": "scrawl",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/skill/scrawl",
+  "text": {
+   "eng": {
+    "name": "Scrawl",
+    "description": "Draw cards until your hand is full. NL Exhaust.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Griffonage",
+    "description": "Piochez des cartes jusqu'à remplir votre main. NL Épuisement.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "SignatureMove",
+  "id": "SignatureMove",
+  "snake": "signature_move",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 30,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 10,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/signature_move",
+  "text": {
+   "eng": {
+    "name": "Signature Move",
+    "description": "Can only be played if this is the only Attack in your hand. NL Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Attaque signature",
+    "description": "Peut être jouée uniquement si c'est la seule Attaque dans votre main. NL Inflige !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SimmeringFury",
+  "id": "Vengeance",
+  "snake": "simmering_fury",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/simmering_fury",
+  "text": {
+   "eng": {
+    "name": "Simmering Fury",
+    "description": "At the start of your next turn, enter Wrath and draw !M! cards.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Rage bouillonnante",
+    "description": "Au début de votre prochain tour, entrez en Colère et piochez !M! cartes.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "SpiritShield",
+  "id": "SpiritShield",
+  "snake": "spirit_shield",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/spirit_shield",
+  "text": {
+   "eng": {
+    "name": "Spirit Shield",
+    "description": "Gain !M! Block for each card in your hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Bouclier spirituel",
+    "description": "Gagnez !M! d'Armure pour chaque carte dans votre main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Strike_Purple",
+  "id": "Strike_P",
+  "snake": "strike",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "basic",
+  "target": "enemy",
+  "damage": 6,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/strike",
+  "text": {
+   "eng": {
+    "name": "Strike",
+    "description": "Deal !D! damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Frappe",
+    "description": "Infligez !D! dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Study",
+  "id": "Study",
+  "snake": "study",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "power",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/power/study",
+  "text": {
+   "eng": {
+    "name": "Study",
+    "description": "At the end of your turn, shuffle an *Insight into your draw pile.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Étude",
+    "description": "À la fin de votre tour, mélangez une *Perspicacité dans votre pioche.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Swivel",
+  "id": "Swivel",
+  "snake": "swivel",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": 8,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 3,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/swivel",
+  "text": {
+   "eng": {
+    "name": "Swivel",
+    "description": "Gain !B! Block. NL The next Attack you play costs 0.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Pivot",
+    "description": "Gagnez !B! d'Armure. NL La prochaine Attaque que vous jouez coûte 0.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "TalkToTheHand",
+  "id": "TalkToTheHand",
+  "snake": "talk_to_the_hand",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 5,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/attack/talk_to_the_hand",
+  "text": {
+   "eng": {
+    "name": "Talk to the Hand",
+    "description": "Deal !D! damage. NL Whenever you attack this enemy, gain !M! Block. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Parle à ma main",
+    "description": "Infligez !D! dégâts. NL Lorsque vous attaquez cet ennemi, gagnez !M! d'Armure. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Tantrum",
+  "id": "Tantrum",
+  "snake": "tantrum",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 3,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/tantrum",
+  "text": {
+   "eng": {
+    "name": "Tantrum",
+    "description": "Deal !D! damage NL !M! times. NL Enter Wrath. NL Shuffle this card into your draw pile.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Crise de colère",
+    "description": "Infligez !D! dégâts NL !M! fois. NL Entrez en Colère. NL Mélangez cette carte dans votre pioche.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ThirdEye",
+  "id": "ThirdEye",
+  "snake": "third_eye",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": 7,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": 2,
+   "magic": 2
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/third_eye",
+  "text": {
+   "eng": {
+    "name": "Third Eye",
+    "description": "Gain !B! Block. NL Scry !M!.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Troisième œil",
+    "description": "Gagnez !B! d'Armure. NL Scrutez !M! cartes.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Tranquility",
+  "id": "ClearTheMind",
+  "snake": "tranquility",
+  "cost": 1,
+  "cost_upgraded": 0,
+  "type": "skill",
+  "rarity": "common",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "retain"
+  ],
+  "portrait": "purple/skill/tranquility",
+  "text": {
+   "eng": {
+    "name": "Tranquility",
+    "description": "Retain. NL Enter Calm. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Tranquillité",
+    "description": "Retenue. Entrez en Calme. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Vault",
+  "id": "Vault",
+  "snake": "vault",
+  "cost": 3,
+  "cost_upgraded": 2,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "all",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/skill/vault",
+  "text": {
+   "eng": {
+    "name": "Vault",
+    "description": "Take an extra turn after this one. NL End your turn. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Saut",
+    "description": "Jouez un tour supplémentaire après celui-ci. NL Terminez votre tour. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Vigilance",
+  "id": "Vigilance",
+  "snake": "vigilance",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "basic",
+  "target": "self",
+  "damage": null,
+  "block": 8,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 4,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/vigilance",
+  "text": {
+   "eng": {
+    "name": "Vigilance",
+    "description": "Gain !B! Block. NL Enter Calm.",
+    "upgrade_description": "Deprecated."
+   },
+   "fra": {
+    "name": "Vigilance",
+    "description": "Gagnez !B! d'Armure. Entrez en Calme.",
+    "upgrade_description": "Deprecated."
+   }
+  }
+ },
+ {
+  "class": "Wallop",
+  "id": "Wallop",
+  "snake": "wallop",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 9,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/wallop",
+  "text": {
+   "eng": {
+    "name": "Wallop",
+    "description": "Deal !D! damage. NL Gain Block equal to unblocked damage dealt.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Fracas",
+    "description": "Infligez !D! dégâts. NL Gagnez de l'Armure équivalente aux dégâts infligés non bloqués.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "WaveOfTheHand",
+  "id": "WaveOfTheHand",
+  "snake": "wave_of_the_hand",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 1,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/wave_of_the_hand",
+  "text": {
+   "eng": {
+    "name": "Wave of the Hand",
+    "description": "Whenever you gain Block this turn, apply !M! Weak to ALL enemies.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Revers de la main",
+    "description": "Lorsque vous gagnez de l'Armure ce tour, appliquez !M! de Faiblesse à TOUS les ennemis.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Weave",
+  "id": "Weave",
+  "snake": "weave",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 4,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 2,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/weave",
+  "text": {
+   "eng": {
+    "name": "Weave",
+    "description": "Deal !D! damage. NL Whenever you Scry, return this from the discard pile to your Hand.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Tissage",
+    "description": "Infligez !D! dégâts. NL Lorsque vous Scrutez, reprenez cette carte de votre défausse et ajoutez-la à votre main.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "WheelKick",
+  "id": "WheelKick",
+  "snake": "wheel_kick",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 15,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": 5,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/attack/wheel_kick",
+  "text": {
+   "eng": {
+    "name": "Wheel Kick",
+    "description": "Deal !D! damage. NL Draw !M! cards.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Coup de pied tournoyant",
+    "description": "Infligez !D! dégâts. NL Piochez !M! cartes.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "WindmillStrike",
+  "id": "WindmillStrike",
+  "snake": "windmill_strike",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "uncommon",
+  "target": "enemy",
+  "damage": 7,
+  "block": null,
+  "magic": 4,
+  "upgrade": {
+   "damage": 3,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "retain"
+  ],
+  "portrait": "purple/attack/windmill_strike",
+  "text": {
+   "eng": {
+    "name": "Windmill Strike",
+    "description": "Retain. NL Deal !D! damage. NL When Retained, increase its damage by !M! this combat.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Frappe du moulin",
+    "description": "Retenue. NL Infligez !D! dégâts. NL Lorsque cette carte est Retenue, augmente ses dégâts de !M! pour ce combat.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Wish",
+  "id": "Wish",
+  "snake": "wish",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "rare",
+  "target": "none",
+  "damage": 3,
+  "block": 6,
+  "magic": 25,
+  "upgrade": {
+   "damage": 1,
+   "block": 2,
+   "magic": 5
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "purple/skill/wish",
+  "text": {
+   "eng": {
+    "name": "Wish",
+    "description": "Choose one: NL Gain !B! Plated Armor, !D! Strength, or !M! Gold. NL Exhaust.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Vœu",
+    "description": "Choisissez : NL Gagnez !B! d'Armure plaquée, !D! de Force ou !M! d'Or. NL Épuisement.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "Worship",
+  "id": "Worship",
+  "snake": "worship",
+  "cost": 2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 5,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [
+   "retain"
+  ],
+  "portrait": "purple/skill/worship",
+  "text": {
+   "eng": {
+    "name": "Worship",
+    "description": "Gain !M! Mantra.",
+    "upgrade_description": "Retain. NL Gain !M! Mantra."
+   },
+   "fra": {
+    "name": "Vénération",
+    "description": "Gagnez !M! de Mantra.",
+    "upgrade_description": "Retenue. NL Gagnez !M! de Mantra."
+   }
+  }
+ },
+ {
+  "class": "WreathOfFlame",
+  "id": "WreathOfFlame",
+  "snake": "wreathe_of_flame",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "uncommon",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 5,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 3
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "purple/skill/wreathe_of_flame",
+  "text": {
+   "eng": {
+    "name": "Wreath of Flame",
+    "description": "Your next Attack deals !M! additional damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Couronne de flammes",
+    "description": "Votre prochaine Attaque inflige !M! dégâts supplémentaires.",
+    "upgrade_description": null
+   }
+  }
+ }
+]

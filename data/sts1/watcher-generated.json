@@ -1,0 +1,485 @@
+[
+ {
+  "class": "BecomeAlmighty",
+  "id": "BecomeAlmighty",
+  "snake": "become_almighty",
+  "cost": -2,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "special",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 3,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "unplayable"
+  ],
+  "keywords_upgraded": [
+   "unplayable"
+  ],
+  "portrait": "colorless/power/become_almighty",
+  "text": {
+   "eng": {
+    "name": "Become Almighty",
+    "description": "Gain !M! Strength.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Surpuissance",
+    "description": "Gagnez !M! de Force.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Beta",
+  "id": "Beta",
+  "snake": "beta",
+  "cost": 2,
+  "cost_upgraded": 1,
+  "type": "skill",
+  "rarity": "special",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust"
+  ],
+  "keywords_upgraded": [
+   "exhaust"
+  ],
+  "portrait": "colorless/skill/beta",
+  "text": {
+   "eng": {
+    "name": "Beta",
+    "description": "Shuffle an *Omega into your draw pile. NL Exhaust.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Bêta",
+    "description": "Mélangez un *Oméga dans votre pioche. NL Épuisement.",
+    "upgrade_description": ""
+   }
+  }
+ },
+ {
+  "class": "ChooseCalm",
+  "id": "Calm",
+  "snake": "calm",
+  "cost": -2,
+  "cost_upgraded": null,
+  "type": "status",
+  "rarity": "common",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "unplayable"
+  ],
+  "keywords_upgraded": [
+   "unplayable"
+  ],
+  "portrait": "colorless/skill/calm",
+  "text": {
+   "eng": {
+    "name": "Calm",
+    "description": "Upon exiting Calm, gain [W] [W].",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Calme",
+    "description": "Lorsque vous quittez le Calme, gagnez [W] [W].",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ChooseWrath",
+  "id": "Wrath",
+  "snake": "wrath",
+  "cost": -2,
+  "cost_upgraded": null,
+  "type": "status",
+  "rarity": "common",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "unplayable"
+  ],
+  "keywords_upgraded": [
+   "unplayable"
+  ],
+  "portrait": "colorless/skill/wrath",
+  "text": {
+   "eng": {
+    "name": "Wrath",
+    "description": "Deal and receive double attack damage.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Colère",
+    "description": "Infligez et subissez le double de dégâts.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Expunger",
+  "id": "Expunger",
+  "snake": "expunger",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "special",
+  "target": "enemy",
+  "damage": 9,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 6,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/attack/expunger",
+  "text": {
+   "eng": {
+    "name": "Expunger",
+    "description": "Deal !D! damage X times.",
+    "upgrade_description": ""
+   },
+   "fra": {
+    "name": "Expurgation",
+    "description": "Infligez !D! dégâts X fois.",
+    "upgrade_description": "Infligez !D! dégâts X+1 fois."
+   }
+  }
+ },
+ {
+  "class": "FameAndFortune",
+  "id": "FameAndFortune",
+  "snake": "fame_and_fortune",
+  "cost": -2,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "special",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 25,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 5
+  },
+  "keywords": [
+   "unplayable"
+  ],
+  "keywords_upgraded": [
+   "unplayable"
+  ],
+  "portrait": "colorless/skill/fame_and_fortune",
+  "text": {
+   "eng": {
+    "name": "Fame and Fortune",
+    "description": "Gain !M! Gold.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Gloire et fortune",
+    "description": "Gagnez !M! d'Or.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Insight",
+  "id": "Insight",
+  "snake": "insight",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "special",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 2,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 1
+  },
+  "keywords": [
+   "exhaust",
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "retain"
+  ],
+  "portrait": "colorless/skill/insight",
+  "text": {
+   "eng": {
+    "name": "Insight",
+    "description": "Retain. NL Draw !M! cards. NL Exhaust.",
+    "upgrade_description": "Retain. NL Draw !M! cards. NL Exhaust."
+   },
+   "fra": {
+    "name": "Perspicacité",
+    "description": "Retenue. NL Piochez !M! cartes. NL Épuisement.",
+    "upgrade_description": "Retenue. NL Piochez !M! cartes. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "LiveForever",
+  "id": "LiveForever",
+  "snake": "live_forever",
+  "cost": -2,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "special",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": 6,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 2
+  },
+  "keywords": [
+   "unplayable"
+  ],
+  "keywords_upgraded": [
+   "unplayable"
+  ],
+  "portrait": "colorless/power/live_forever",
+  "text": {
+   "eng": {
+    "name": "Live Forever",
+    "description": "Gain !M! *Plated *Armor.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Immortalité",
+    "description": "À la fin de votre tour, gagnez !M! d'Armure Plaquée.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Miracle",
+  "id": "Miracle",
+  "snake": "miracle",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "special",
+  "target": "none",
+  "damage": null,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "retain"
+  ],
+  "portrait": "colorless/skill/miracle",
+  "text": {
+   "eng": {
+    "name": "Miracle",
+    "description": "Retain. NL Gain [W]. NL Exhaust.",
+    "upgrade_description": "Retain. NL Gain [W] [W]. NL Exhaust."
+   },
+   "fra": {
+    "name": "Miracle",
+    "description": "Retenue. NL Gagnez [W]. NL Épuisement.",
+    "upgrade_description": "Retenue. NL Gagnez [W] [W]. NL Épuisement."
+   }
+  }
+ },
+ {
+  "class": "Omega",
+  "id": "Omega",
+  "snake": "omega",
+  "cost": 3,
+  "cost_upgraded": null,
+  "type": "power",
+  "rarity": "special",
+  "target": "self",
+  "damage": null,
+  "block": null,
+  "magic": 50,
+  "upgrade": {
+   "damage": null,
+   "block": null,
+   "magic": 10
+  },
+  "keywords": [],
+  "keywords_upgraded": [],
+  "portrait": "colorless/power/omega",
+  "text": {
+   "eng": {
+    "name": "Omega",
+    "description": "At the end of your turn, deal !M! damage to ALL enemies.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Oméga",
+    "description": "À la fin de votre tour, infligez !M! dégâts à TOUS les ennemis.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Safety",
+  "id": "Safety",
+  "snake": "safety",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "skill",
+  "rarity": "special",
+  "target": "self",
+  "damage": null,
+  "block": 12,
+  "magic": null,
+  "upgrade": {
+   "damage": null,
+   "block": 4,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "retain"
+  ],
+  "portrait": "colorless/skill/safety",
+  "text": {
+   "eng": {
+    "name": "Safety",
+    "description": "Retain. NL Gain !B! Block. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Sécurité",
+    "description": "Retenue. NL Gagnez !B! d'Armure. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "Smite",
+  "id": "Smite",
+  "snake": "smite",
+  "cost": 1,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "special",
+  "target": "enemy",
+  "damage": 12,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 4,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "retain"
+  ],
+  "portrait": "colorless/attack/smite",
+  "text": {
+   "eng": {
+    "name": "Smite",
+    "description": "Retain. NL Deal !D! damage. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Gifle",
+    "description": "Retenue. NL Infligez !D! dégâts. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ },
+ {
+  "class": "ThroughViolence",
+  "id": "ThroughViolence",
+  "snake": "through_violence",
+  "cost": 0,
+  "cost_upgraded": null,
+  "type": "attack",
+  "rarity": "special",
+  "target": "enemy",
+  "damage": 20,
+  "block": null,
+  "magic": null,
+  "upgrade": {
+   "damage": 10,
+   "block": null,
+   "magic": null
+  },
+  "keywords": [
+   "exhaust",
+   "retain"
+  ],
+  "keywords_upgraded": [
+   "exhaust",
+   "retain"
+  ],
+  "portrait": "colorless/attack/through_violence",
+  "text": {
+   "eng": {
+    "name": "Through Violence",
+    "description": "Retain. NL Deal !D! damage. NL Exhaust.",
+    "upgrade_description": null
+   },
+   "fra": {
+    "name": "Par la violence",
+    "description": "Retenue. Infligez !D! dégâts. NL Épuisement.",
+    "upgrade_description": null
+   }
+  }
+ }
+]

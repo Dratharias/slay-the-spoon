@@ -49,8 +49,9 @@ sts2-loc:
 
 # Regenerate card data, the duplicate table, portraits, card skeletons and event art from StS1.
 sts1-data:
-	for pair in red:Ironclad green:Silent blue:Defect colorless:Colorless; do \
+	for pair in red:Ironclad green:Silent blue:Defect colorless:Colorless purple:Watcher; do \
 		color=$${pair%%:*}; character=$${pair##*:}; lower=$$(echo $$character | tr A-Z a-z); \
+		if [ "$$color" = purple ]; then $(TOOLS) python tools/sts1/watcher.py --decomp /sts1 --jar /sts1.jar || exit 1; continue; fi; \
 		$(TOOLS) python tools/sts1/extract.py --decomp /sts1 --color $$color --out data/sts1/$$lower.json && \
 		$(TOOLS) python tools/sts1/match.py --sts1 data/sts1/$$lower.json \
 			--sts2-cards /sts2src/MegaCrit.Sts2.Core.Models.Cards --sts2-loc /sts2loc \

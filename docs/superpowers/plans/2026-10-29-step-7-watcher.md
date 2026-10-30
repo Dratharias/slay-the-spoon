@@ -25,7 +25,8 @@
   membership in `retainedCards`, rather than treating every card left in hand as retained.
 - Scry requires the caller's `PlayerChoiceContext` as its third argument, so card and hook selections cooperate with
   co-op action queues. The console supplies a `HookPlayerChoiceContext` like the native draw command.
-- Violet Lotus and Golden Eye integration await Task 6. Tasks 6–10 remain to be implemented.
+- Task 6 is implemented: data import, hidden generated/choice cards, relics and potions; Violet Lotus and Golden Eye
+  are integrated. Validation: 326 xUnit and 74 pytest tests pass; build has 0 warnings/errors. Tasks 7–10 remain.
 - Other minor Task 2 review findings are deferred to the backlog; their details have not been supplied.
 
 ## Owner decisions (2026-10-29)
@@ -228,6 +229,17 @@ in hand at turn end), Duality (Yang: +1 temporary Dexterity per attack played).
 - [ ] **Step 3:** Port the relics, potions and the 8 generated cards (hidden token pool, outside every reward source).
   Holy Water replaces Pure Water on pickup, as in StS1. `make build` 0 warnings.
 - [ ] **Step 4:** Commit `feat: Watcher card data, generated cards, relics and potions`.
+
+**Task 6 implementation checkpoint (2026-10-30):**
+- Data import includes 75 registered purple cards, 8 generated cards and 5 choice cards; other characters' outputs are unchanged.
+- 71 pending skeletons are staged outside `src` to keep unported cards out of the playable pool until Tasks 7–9.
+- Eight generated cards, five choices, eight custom relics and three potions are implemented with EN/FR text and art.
+- Native shared Cloak Clasp is reused. Holy Water and Violet Lotus are inactive former boss ports, following the
+  owner's later backlog decision; they reject normal acquisition. Holy Water replaces Pure Water when explicitly granted.
+- Golden Eye and Violet Lotus are wired into Scry/stance commands; a dedicated Plated Armor effect preserves StS1 behavior.
+- `sts1watcheritem` provides networked debug grants for hidden relics/potions. Details: `docs/review/watcher-task6.md`.
+- Validation: 326 xUnit and 74 pytest tests pass; build has 0 warnings/errors. Repeated data generation is byte-identical,
+  as are existing non-Watcher outputs. Game checks remain pending in `docs/testing/step-7-checklist.md`.
 
 ### Tasks 7–9: Port the Watcher's cards
 

@@ -39,8 +39,7 @@ public static class StanceCmd
 		}
 		choiceContext ??= new ThrowingPlayerChoiceContext();
 		await PowerCmd.Remove(StancePower(creature, from));
-		// Task 6 seam: Violet Lotus adds 1 to the Calm exit energy; pass whether the player holds it once it exists.
-		int exitEnergy = StanceMath.EnergyOnExit(from, violetLotus: false);
+		int exitEnergy = StanceMath.EnergyOnExit(from, violetLotus: player.GetRelic<SlaySpoon.Relics.Watcher.Sts1VioletLotus>() != null);
 		if (exitEnergy > 0)
 		{
 			await PlayerCmd.GainEnergy(exitEnergy, player);

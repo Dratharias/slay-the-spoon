@@ -17,8 +17,7 @@ public static class ScryCmd
 	public static async Task Scry(Player player, int amount, PlayerChoiceContext choiceContext)
 	{
 		if (player.PlayerCombatState is not { } combat || CombatManager.Instance.IsOverOrEnding) return;
-		// Task 6 wires Golden Eye into this bonus when the relic exists.
-		int count = ScryMath.CardsToShow(amount, combat.DrawPile.Cards.Count, goldenEye: false);
+		int count = ScryMath.CardsToShow(amount, combat.DrawPile.Cards.Count, goldenEye: player.GetRelic<SlaySpoon.Relics.Watcher.Sts1GoldenEye>() != null);
 		var shown = combat.DrawPile.Cards.Take(count).ToList();
 		int discarded = 0;
 		if (shown.Count > 0)

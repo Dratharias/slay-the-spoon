@@ -1,16 +1,32 @@
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
+using SlaySpoon.Cards.Sts1.WatcherTokens;
+using SlaySpoon.Core;
+using SlaySpoon.Watcher;
+using SlaySpoon.Watcher.Powers;
 
 namespace SlaySpoon.Relics.Watcher;
 
-/// <summary>
-/// StS1 Pure Water, the Watcher's starter relic. Placeholder: Miracle is not ported yet, so the relic does nothing
-/// until step 7, task 6 (its text already states the StS1 effect).
-/// </summary>
-public sealed class Sts1PureWater : RelicModel
+public sealed class Sts1PureWater : Sts1WatcherRelic
 {
 	public override RelicRarity Rarity => RelicRarity.Starter;
-
-	/// <summary>The mod ships no relic art: the icons come from Ripple Basin (a basin of still water).</summary>
-	protected override string IconBaseName => "ripple_basin";
+	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new CardsVar(1) };
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[] { HoverTipFactory.FromCard<Sts1Miracle>() };
+	public override async Task BeforeCombatStart()
+	{
+		Flash();
+		for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
+		{
+			CardModel card = Owner.Creature.CombatState!.CreateCard<Sts1Miracle>(Owner);
+			await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+		}
+	}
 }

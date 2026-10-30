@@ -204,15 +204,36 @@ def export_watcher(jar: Path, out: Path) -> dict:
     return meta
 
 
+WATCHER_RELICS = {
+    "PureWater": "clean_water", "HolyWater": "holy_water", "Damaru": "damaru",
+    "TeardropLocket": "tear_drop_locket", "VioletLotus": "violet_lotus", "Melange": "melange",
+    "GoldenEye": "golden_eye", "CloakClasp": "clasp", "Duality": "duality",
+}
+
+
+def export_relics(jar: Path, out: Path) -> list:
+    written = []
+    with zipfile.ZipFile(jar) as z:
+        for cls, stem in sorted(WATCHER_RELICS.items()):
+            model_id = match.slug("Sts1" + cls).lower()
+            for source, suffix in (("relics", ""), ("relics/outline", "_outline"), ("largeRelics", "_large")):
+                written.append(_save(_open(z, f"images/{source}/{stem}.png"), out / f"{model_id}{suffix}.png"))
+    return written
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--jar", type=Path, required=True)
     ap.add_argument("--events", type=Path)
+    ap.add_argument("--relics", type=Path)
     ap.add_argument("--watcher", type=Path, help="the mod's PCK root (godot/SlaySpoon)")
     ap.add_argument("--sts1", type=Path)
     ap.add_argument("--table", type=Path)
     ap.add_argument("--out", type=Path)
     args = ap.parse_args()
+    if args.relics:
+        print(f"{len(export_relics(args.jar, args.relics))} relic images")
+        return
     if args.events:
         print(f"{len(export_events(args.jar, args.events))} event images")
         return

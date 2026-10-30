@@ -35,6 +35,7 @@ GOLD = {
 
 def class_name(sts1_class: str) -> str:
     # Acronyms such as JAX need PascalCase: the game's slugger splits adjacent capitals differently.
+    sts1_class = {"Strike_Purple": "StrikeWatcher", "Defend_Watcher": "DefendWatcher"}.get(sts1_class, sts1_class)
     name = sts1_class.title() if sts1_class.isupper() else sts1_class
     return "Sts1" + name.replace("_", "")
 
@@ -43,8 +44,8 @@ def convert_text(text: str, lang: str) -> tuple:
     """StS1 card text → (StS2 SmartFormat text, number of energy icons)."""
     sentences = "|".join(re.escape(w) for w in KEYWORD_SENTENCES[lang])
     text = re.sub(rf"(^|\bNL\s+|\s)(?:{sentences})\s*\.(?=\s|$)", r"\1", text)
-    energy = len(re.findall(r"\[R\]", text))
-    text = re.sub(r"\[R\](?:\s*\[R\])*", "{Energy:energyIcons()}", text)
+    energy = len(re.findall(r"\[[RGBW]\]", text))
+    text = re.sub(r"\[[RGBW]\](?:\s*\[[RGBW]\])*", "{Energy:energyIcons()}", text)
     text = text.replace("!D!", "{Damage:diff()}").replace("!B!", "{Block:diff()}").replace("!M!", "{Magic:diff()}")
     text = re.sub(r"\*(\w+)", r"[gold]\1[/gold]", text)
     words = "|".join(GOLD[lang])
