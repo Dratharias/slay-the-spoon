@@ -81,3 +81,19 @@ Reach the fight with the vanilla console: `fight STS1_SHIELD_AND_SPEAR_ELITE` (i
 - [ ] In co-op, attacks hit every player, and the host and client logs show the same `ending:` lines.
 - [ ] Monster HP 200 % doubles both monsters' HP once; Monster Damage 50 % halves Bash.
 - [ ] Victory gives elite rewards (gold, card, relic, sometimes a potion).
+
+## Corrupt Heart (WP4-6 Task 5)
+
+Reach the fight with the vanilla console: `fight STS1_CORRUPT_HEART_BOSS`.
+
+- [ ] The Heart shows its static StS1 sprite; its intents and health bar sit on its body (StS1 hitbox), not above the vents. The vent tops may run past the top of the screen, as in StS1.
+- [ ] It starts with Invincible (300, 200 at A10) and Beat of Death (1, 2 at A10).
+- [ ] Turn 1 is always Debilitate: Vulnerable 2, Weak 2, Frail 2, and five statuses (Dazed, Slimed, Wound, Burn, Void) shuffled into the draw pile at random spots.
+- [ ] The next turns cycle: Blood Shots or Echo, then the other one (never two Echoes in a row), then Buff.
+- [ ] Buffs in order: Artifact 2, Beat of Death +1, Painful Stabs, Strength +10, then Strength +50 each time, plus Strength +2 each time. With negative Strength (for example after Disarm), Buff first brings it back to 0.
+- [ ] Painful Stabs: each unblocked Blood Shots hit adds one Wound to your discard pile; Beat of Death adds none.
+- [ ] HP 750 (800 at A8 or higher); Blood Shots 2×12 (×15 at A9); Echo 40 (45 at A9).
+- [ ] The map shows the Heart icon on the boss node, with its outline when hovered.
+- [ ] Two players: HP 750 × 2 × 1.3 = 1950; the Invincible budget is 780 and both players' hits share it. Debilitate hits both players, each with their own five statuses. Artifact shows 3 (vanilla co-op Artifact scaling).
+- [ ] Monster HP 200 % doubles the Heart's HP once but leaves the Invincible budget unchanged.
+- [ ] In co-op, the host and client logs show the same `ending:` lines, including the `buff N` lines.

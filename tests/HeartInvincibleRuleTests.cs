@@ -35,6 +35,14 @@ public class HeartInvincibleRuleTests
 		Assert.Equal(0, HeartInvincibleRule.AfterHpLoss(left, 20));
 	}
 
+	/// <summary>The cap depends only on ascension and players: the signature carries no Monster HP percent.</summary>
+	[Fact] public void InvincibleBudgetIgnoresMonsterHpPercent()
+	{
+		Assert.Equal(780, HeartInvincibleRule.InitialCap(9, 2));
+		Assert.Equal(520, HeartInvincibleRule.InitialCap(10, 2));
+		Assert.Equal(2, typeof(HeartInvincibleRule).GetMethod(nameof(HeartInvincibleRule.InitialCap))!.GetParameters().Length);
+	}
+
 	[Fact] public void SoloCapIgnoresTheMultiplayerFactor() => Assert.Equal(300, HeartInvincibleRule.InitialCap(0, 1));
 
 	[Theory] [InlineData(30, 0, 30)] [InlineData(30, 40, 0)]

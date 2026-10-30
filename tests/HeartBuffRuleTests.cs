@@ -15,4 +15,9 @@ public class HeartBuffRuleTests
 		Assert.Equal((HeartBuffKind.Strength, 50), HeartBuffRule.Extra(4));
 		Assert.Equal((HeartBuffKind.Strength, 50), HeartBuffRule.Extra(9));
 	}
+
+	[Theory]
+	[InlineData(0, 2)] [InlineData(5, 2)] [InlineData(-3, 5)] [InlineData(-1, 3)]
+	public void BaseStrengthFirstLiftsNegativeStrengthToZero(int current, int expectedGain) =>
+		Assert.Equal(expectedGain, HeartBuffRule.StrengthGain(current));
 }

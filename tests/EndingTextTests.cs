@@ -33,6 +33,13 @@ public class EndingTextTests
 	[InlineData("monsters", "STS1_SPIRE_SPEAR.moves.SKEWER.title")]
 	[InlineData("encounters", "STS1_SHIELD_AND_SPEAR_ELITE.title")]
 	[InlineData("encounters", "STS1_SHIELD_AND_SPEAR_ELITE.loss")]
+	[InlineData("monsters", "STS1_CORRUPT_HEART.name")]
+	[InlineData("monsters", "STS1_CORRUPT_HEART.moves.DEBILITATE.title")]
+	[InlineData("monsters", "STS1_CORRUPT_HEART.moves.BLOOD_SHOTS.title")]
+	[InlineData("monsters", "STS1_CORRUPT_HEART.moves.ECHO.title")]
+	[InlineData("monsters", "STS1_CORRUPT_HEART.moves.BUFF.title")]
+	[InlineData("encounters", "STS1_CORRUPT_HEART_BOSS.title")]
+	[InlineData("encounters", "STS1_CORRUPT_HEART_BOSS.loss")]
 	public void EndingTextExistsInBothLanguages(string table, string key)
 	{
 		foreach (string lang in new[] { "eng", "fra" })

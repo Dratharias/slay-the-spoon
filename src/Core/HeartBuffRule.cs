@@ -7,6 +7,9 @@ public static class HeartBuffRule
 {
 	public const int BaseStrength = 2;
 
+	/// <summary>StS1: negative Strength is first lifted to 0, then the base Strength is added, in one application.</summary>
+	public static int StrengthGain(int currentStrength) => Math.Max(0, -currentStrength) + BaseStrength;
+
 	public static (HeartBuffKind Kind, int Amount) Extra(int buffsDone) => buffsDone switch
 	{
 		0 => (HeartBuffKind.Artifact, 2),

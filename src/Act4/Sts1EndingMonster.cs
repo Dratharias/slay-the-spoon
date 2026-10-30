@@ -23,6 +23,8 @@ public abstract class Sts1EndingMonster : MonsterModel, IEndingMonster
 	public abstract string TexturePath { get; }
 	public abstract Vector2 Origin { get; }
 	public abstract Vector2 Size { get; }
+	/// <summary>The whole sprite by default; a monster whose sprite reaches far above its body narrows it.</summary>
+	public virtual Rect2 Hitbox => new(-Origin, Size);
 
 	/// <summary>A real vanilla scene, so asset preloading succeeds; <see cref="EndingVisuals"/> builds the node instead.</summary>
 	protected override string VisualsPath => SceneHelper.GetScenePath("creature_visuals/fallback");

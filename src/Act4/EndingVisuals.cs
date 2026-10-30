@@ -13,6 +13,8 @@ public interface IEndingMonster
 	/// <summary>The skeleton root (ground point) in image pixels, from the top-left.</summary>
 	Vector2 Origin { get; }
 	Vector2 Size { get; }
+	/// <summary>Hover and health-bar box relative to the ground point; intents sit above it.</summary>
+	Rect2 Hitbox { get; }
 }
 
 /// <summary>
@@ -25,7 +27,7 @@ public static class EndingVisuals
 {
 	private const float IntentGap = 60f;
 
-	public static NCreatureVisuals Create(string texturePath, Vector2 origin, Vector2 size)
+	public static NCreatureVisuals Create(string texturePath, Vector2 origin, Rect2 hitbox)
 	{
 		var root = new NCreatureVisuals { Name = "EndingVisuals" };
 		// Offset rather than position, so a horizontal flip of the body mirrors around the ground point.
@@ -39,14 +41,14 @@ public static class EndingVisuals
 		Add(root, new Control
 		{
 			Name = "Bounds",
-			Position = -origin,
-			Size = size,
+			Position = hitbox.Position,
+			Size = hitbox.Size,
 			MouseFilter = Control.MouseFilterEnum.Ignore,
 		});
-		float centerX = size.X / 2f - origin.X;
-		Add(root, new Marker2D { Name = "IntentPos", Position = new Vector2(centerX, -origin.Y - IntentGap) });
-		Add(root, new Marker2D { Name = "CenterPos", Position = new Vector2(centerX, size.Y / 2f - origin.Y) });
-		Add(root, new Marker2D { Name = "TalkPos", Position = new Vector2(centerX, -origin.Y) });
+		Vector2 center = hitbox.GetCenter();
+		Add(root, new Marker2D { Name = "IntentPos", Position = new Vector2(center.X, hitbox.Position.Y - IntentGap) });
+		Add(root, new Marker2D { Name = "CenterPos", Position = center });
+		Add(root, new Marker2D { Name = "TalkPos", Position = new Vector2(center.X, hitbox.Position.Y) });
 		return root;
 	}
 
@@ -61,7 +63,7 @@ public static class EndingVisuals
 	private static bool Prefix(MonsterModel __instance, ref NCreatureVisuals __result)
 	{
 		if (__instance is not IEndingMonster monster) return true;
-		__result = Create(monster.TexturePath, monster.Origin, monster.Size);
+		__result = Create(monster.TexturePath, monster.Origin, monster.Hitbox);
 		return false;
 	}
 }

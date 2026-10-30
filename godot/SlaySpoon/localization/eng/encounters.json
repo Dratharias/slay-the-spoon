@@ -1,4 +1,6 @@
 {
+	"STS1_CORRUPT_HEART_BOSS.loss": "{character} fell before the [gold]{encounter}[/gold], which beats on.",
+	"STS1_CORRUPT_HEART_BOSS.title": "Corrupt Heart",
 	"STS1_SHIELD_AND_SPEAR_ELITE.loss": "The [gold]{encounter}[/gold] struck {character} from both sides.",
 	"STS1_SHIELD_AND_SPEAR_ELITE.title": "Spire Shield and Spear"
 }

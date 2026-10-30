@@ -25,6 +25,13 @@ public sealed class Sts1InvinciblePower : PowerModel, IBorrowedIcon
 		return Task.CompletedTask;
 	}
 
+	/// <summary>Sets the budget the power refills to each enemy turn, independent of the amount left when applied.</summary>
+	public void SetTurnCap(int cap)
+	{
+		_turnCap = cap;
+		SetAmount(cap);
+	}
+
 	// Intent previews and block loss only; the authoritative clamp is ModifyHpLostAfterOsty.
 	public override decimal ModifyDamageCap(Creature? target, ValueProp props, Creature? dealer, CardModel? cardSource) =>
 		target == Owner ? HeartInvincibleRule.DamageCap(Amount, Owner.Block, props.HasFlag(ValueProp.Unblockable)) : decimal.MaxValue;
