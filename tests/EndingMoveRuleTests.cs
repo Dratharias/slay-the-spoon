@@ -42,4 +42,12 @@ public class EndingMoveRuleTests
 		Assert.Equal(SpearMove.Piercer, EndingMoveRule.Spear(3, SpearMove.BurnStrike, 0));
 		Assert.Equal(SpearMove.BurnStrike, EndingMoveRule.Spear(3, SpearMove.Piercer, 0));
 	}
+
+	[Fact]
+	public void BashTakesFocusOnlyFromOrbUsersOnTheRoll()
+	{
+		Assert.Equal(BashDebuff.Strength, EndingMoveRule.BashDebuffFor(false, 1));
+		Assert.Equal(BashDebuff.Strength, EndingMoveRule.BashDebuffFor(true, 0));
+		Assert.Equal(BashDebuff.Focus, EndingMoveRule.BashDebuffFor(true, 1));
+	}
 }

@@ -3,6 +3,7 @@ namespace SlaySpoon.Core;
 public enum HeartMove { Debilitate, BloodShots, Echo, Buff }
 public enum ShieldMove { Bash, Fortify, Smash }
 public enum SpearMove { BurnStrike, Piercer, Skewer }
+public enum BashDebuff { Strength, Focus }
 
 /// <summary>StS1 Ending move cycles; turn is zero-based, roll is a fair 0/1 choice.</summary>
 public static class EndingMoveRule
@@ -25,4 +26,6 @@ public static class EndingMoveRule
 		1 => SpearMove.Skewer,
 		_ => roll == 0 ? SpearMove.Piercer : SpearMove.BurnStrike,
 	};
+	/// <summary>Bash takes Focus only from a player with orbs, on a roll of 1.</summary>
+	public static BashDebuff BashDebuffFor(bool hasOrbSlots, int roll) => hasOrbSlots && roll == 1 ? BashDebuff.Focus : BashDebuff.Strength;
 }
