@@ -352,9 +352,9 @@ Decisions:
 
   | Key | EN | FR |
   |---|---|---|
-  | BASH | Bash | Coup |
+  | BASH | Bash | Heurt |
   | FORTIFY | Fortify | Fortifier |
-  | SMASH | Smash | Fracasser |
+  | SMASH | Smash | Fracas |
   | BURN_STRIKE | Burn Strike | Frappe ardente |
   | PIERCER | Piercer | Perceur |
   | SKEWER | Skewer | Embrocher |
@@ -703,7 +703,7 @@ No push and no Workshop upload; the owner decides both.
 6. **The Spear (right) applies Surrounded,** mirroring vanilla Rocket. The Shield (left) has Back Attack Left, the Spear Back Attack Right.
 7. **Co-op targeting:** Debilitate, Bash's debuff and Burn Strike's Burns hit every player; Beat of Death hits only the player who played the card; Smash gains Block equal to its highest damage dealt to one player.
 8. **Monster HP % does not change the Invincible budget** (only ascension and player count, per owner decision 2).
-9. **Move names** (StS1 has none): Bash/Coup, Fortify/Fortifier, Smash/Fracasser, Burn Strike/Frappe ardente, Piercer/Perceur, Skewer/Embrocher, Debilitate/Affaiblir, Blood Shots/Tirs sanglants, Echo/Écho, Buff/Renforcement.
+9. **Move names** (StS1 has none): Bash/Heurt, Fortify/Fortifier, Smash/Fracas, Burn Strike/Frappe ardente, Piercer/Perceur, Skewer/Embrocher, Debilitate/Affaiblir, Blood Shots/Tirs sanglants, Echo/Écho, Buff/Renforcement.
 10. **Act 4 elite rewards** are vanilla elite rewards (gold, potion roll, card, relic).
 11. **Statuses shuffled into the draw pile** take their position from the monster's own RNG, not vanilla `CardPilePosition.Random` (which uses the shared shuffle RNG).
 12. **The StS1 ending stinger** plays once at the victory room (optional, dropped if it clashes with FMOD music).

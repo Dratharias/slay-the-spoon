@@ -40,12 +40,13 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - Co-op: Debilitate, Bash's debuff and Burn Strike's Burns hit every player; Beat of Death hits the card's player;
     Smash's Block equals its highest damage to one player.
   - The Monster HP % does not change the Heart's Invincible budget.
-  - Move names (StS1 has none): Bash/Coup, Fortify/Fortifier, Smash/Fracasser, Burn Strike/Frappe ardente,
+  - Move names (StS1 has none): Bash/Heurt, Fortify/Fortifier, Smash/Fracas, Burn Strike/Frappe ardente,
     Piercer/Perceur, Skewer/Embrocher, Debilitate/Affaiblir, Blood Shots/Tirs sanglants, Echo/Écho, Buff/Renforcement.
   - Act 4 elite rewards are vanilla elite rewards.
   - Statuses shuffled into the draw pile take their position from the monster's own RNG.
   - The StS1 ending stinger plays once at the victory room (dropped if it clashes with the game's music).
   - Neow ignores the Act 4 Custom Run option.
+  - Co-op: Shield and Spear get vanilla's multiplayer Artifact bonus (+1 per extra player), as every StS2 enemy does.
   - The Heart's sprite is the setup pose without IK/path constraints: its three top vents look folded.
   - The Heart's Painful Stabs buff applies 1 stack (StS1's data gives no amount).
   - The fixed map is built when the act's map is generated and forced over Golden Compass's map.
@@ -57,3 +58,9 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     depleted value.
   - `EndingMoveBrain` tests are weak: they compare two brains or re-read getters instead of asserting an expected move
     sequence. `EndingNumbers` tests miss the low side of some thresholds; `HeartBuffRule.Extra` accepts a negative count.
+  - `ending_art.py` ignores atlas `offset`/`orig` (fine for the three StS1 atlases, wrong for a trimmed one); its additive
+    blend is untested and not Spine-exact; triangle edges are not antialiased; no grandparent or shear bone test.
+  - Smash's Block counts the damage actually dealt (blocked + unblocked), not overkill; StS1 used the pre-block damage.
+  - The French loss line "pris en tenaille par Bouclier et Lance de la Tour" has no article.
+  - Code-built monsters have no death animation length: their fade may be cut short.
+  - Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).
