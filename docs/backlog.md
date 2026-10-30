@@ -46,6 +46,8 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - Statuses shuffled into the draw pile take their position from the monster's own RNG.
   - The StS1 ending stinger plays once at the victory room (dropped if it clashes with the game's music).
   - Neow ignores the Act 4 Custom Run option.
+  - The Heart's sprite is the setup pose without IK/path constraints: its three top vents look folded.
+  - The Heart's Painful Stabs buff applies 1 stack (StS1's data gives no amount).
   - The fixed map is built when the act's map is generated and forced over Golden Compass's map.
 - Act 4 The Ending (step 6 WP4-6), minors left after review:
   - The Invincible clamp sits in `Sts1InvinciblePower`, not in the tested `HeartInvincibleRule`; it flashes inside the modify
@@ -53,3 +55,5 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - `PoisonTicksDrainTheSameBudget` only exercises unblockable damage; `BlockedHitsAndExhaustedBudget` is vaguely named.
   - `Sts1InvinciblePower.AfterApplied` takes the turn cap from the current amount: a mid-turn re-apply would use the
     depleted value.
+  - `EndingMoveBrain` tests are weak: they compare two brains or re-read getters instead of asserting an expected move
+    sequence. `EndingNumbers` tests miss the low side of some thresholds; `HeartBuffRule.Extra` accepts a negative count.
