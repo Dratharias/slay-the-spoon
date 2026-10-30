@@ -26,7 +26,7 @@ TOOLS     := nice -n 19 podman run --rm \
 	-v "$(STS2_LOC)":/sts2loc:ro \
 	-w /repo localhost/slayspoon-tools
 
-.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts1-act4-data sts1-ending-art sts2-loc workshop workshop-upload
+.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts1-act4-data sts1-ending-art sts1-watcher-art sts2-loc workshop workshop-upload
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -71,6 +71,10 @@ sts1-act4-data:
 # Static Ending sprites (setup pose) and the Heart's map icons, from the staged Act 4 assets.
 sts1-ending-art:
 	$(TOOLS) python tools/sts1/ending_art.py --assets data/sts1/act4/assets --out godot/SlaySpoon/images/ending
+
+# The Watcher's static visuals (setup pose, icons, orb layers, starter portraits) at the vanilla paths for sts1_watcher.
+sts1-watcher-art:
+	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --watcher godot/SlaySpoon
 
 # Colorless catalog first: no playable skeletons until namesakes and special cards are reviewed.
 sts1-colorless-data:
