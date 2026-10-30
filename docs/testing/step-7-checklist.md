@@ -67,3 +67,20 @@ Automated validation: 314 xUnit tests and 66 pytest tests pass. The following ch
 - [ ] In a temporary debug build, throw before scene creation and then after button insertion: Custom Run still opens,
   vanilla characters remain selectable, no partial Watcher button remains, and the exception is logged.
 - [ ] Toggle modifiers and reopen the cached screen after the failure; the vanilla screen stays usable.
+
+## Task 5 — Scry and last card played
+
+Automated validation: 326 xUnit tests and 66 pytest tests pass; build has 0 warnings/errors.
+
+- [ ] `sts1scry 3` reveals the top three cards, in draw order, with an EN/FR prompt. Select none, some and all.
+- [ ] Draw afterward: cards not selected remain in the original order; selected cards enter discard in reveal order.
+- [ ] A pile smaller than the requested amount shows only its contents; an empty pile never reshuffles or opens a selection.
+- [ ] Co-op: each peer applies the issuing player's selection, while the other player's piles stay unchanged.
+- [ ] Post-Scry listeners fire once even with zero cards shown or discarded; a card just moved to discard is included.
+- [ ] Scry does not activate manual hand-discard effects (Tactician, Reflex, Tough Bandages or Sly).
+- [ ] During a card's OnPlay, `LastCardPlayed.Type` returns the owner's previous completed play, including replay;
+  teammates' plays do not change it. It returns null before the first completed play or outside combat.
+- [ ] Once the relevant cards are ported: Retain and temporary Retain use vanilla expiration, and retain-growth effects
+  react only to the owning player's `AfterFlush` retained-card list.
+
+Golden Eye's +2 is covered by pure math tests; wiring the relic is part of Task 6.

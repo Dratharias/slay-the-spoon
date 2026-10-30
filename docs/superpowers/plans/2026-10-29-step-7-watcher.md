@@ -18,7 +18,14 @@
 - Task 4 is implemented: stance powers, Mantra, energy transitions, listeners, static eye, starter card effects,
   EN/FR text and the networked `sts1stance` console command. The eye is restored from powers when its node loads.
 - Validation: 314 xUnit tests and 66 pytest tests pass. Game checks are listed in `docs/testing/step-7-checklist.md`.
-- Violet Lotus integration awaits Task 6. Tasks 5–10 remain to be implemented.
+- Task 5 is implemented: ordered, synchronized Scry selection, post-Scry listeners, last completed card type per player,
+  and `sts1scry <amount>` for testing. Validation: 326 xUnit and 66 pytest tests pass; build has 0 warnings/errors.
+- Retain uses native `CardKeyword.Retain`, `GiveSingleTurnRetain()` and `AfterFlush(..., retainedCards)`;
+  there is no separate retention state or custom end-turn patch. Future growth effects must check the owner and
+  membership in `retainedCards`, rather than treating every card left in hand as retained.
+- Scry requires the caller's `PlayerChoiceContext` as its third argument, so card and hook selections cooperate with
+  co-op action queues. The console supplies a `HookPlayerChoiceContext` like the native draw command.
+- Violet Lotus and Golden Eye integration await Task 6. Tasks 6–10 remain to be implemented.
 - Other minor Task 2 review findings are deferred to the backlog; their details have not been supplied.
 
 ## Owner decisions (2026-10-29)
