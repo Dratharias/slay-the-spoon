@@ -132,6 +132,7 @@ See `docs/review/watcher-task6.md` for values, hidden-pool decisions and test co
 - [ ] Just Lucky Scrys 1/2, gains 2/3 Block, then deals 3/4 damage.
 - [ ] Lesson Learned deals 10/13, Exhausts, and a fatal hit upgrades one random upgradable card in the owner's deck
       (permanent; a teammate's deck is untouched; no effect without a kill or with Minion-style non-fatal deaths).
+- [ ] Kill the last enemy with Lesson Learned: a deck card is upgraded (also saved after reload, same card on both peers).
 - [ ] Ragnarok costs 3 and hits random enemies 5/6 times for 5/6; each hit picks again, both peers agree.
 - [ ] Reach Heaven deals 10/15 and shuffles a Through Violence into the draw pile.
 - [ ] Sands of Time (20/26, cost 4, Retain) loses 1 cost per retained turn this combat; the deck copy is unchanged next combat.
@@ -143,8 +144,8 @@ See `docs/review/watcher-task6.md` for values, hidden-pool decisions and test co
 - [ ] Wallop deals 9/12 and gives Block equal to the unblocked damage dealt (zero when fully blocked).
 - [ ] Weave deals 4/6 and returns from the discard pile to hand whenever its owner Scrys (also from a Scry that
       discarded itself); a teammate's Scry does not.
-- [ ] Wheel Kick deals 15/20 and draws 2/3.
-- [ ] Windmill Strike (7/10, Retain) gains 4/5 damage per retained turn this combat; the deck copy is unchanged next combat.
+- [ ] Wheel Kick deals 15/20 and draws 2.
+- [ ] Windmill Strike (7/10, Retain) gains 4/5 damage per retained turn this combat (kept if downgraded in combat); the deck copy is unchanged next combat.
 - [ ] All 25 cards show EN/FR text with no raw placeholders and the right hover tips (stances, Mantra, Smite, Through Violence, Fatal, Block Return).
 
 ## Task 8 — skills

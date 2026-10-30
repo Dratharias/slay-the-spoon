@@ -48,7 +48,7 @@ public sealed class Sts1LessonLearned : Sts1WatcherCard
 			CardModel? chosen = Owner.RunState.Rng.CombatCardSelection.NextItem(upgradable);
 			if (chosen != null)
 			{
-				CardCmd.Upgrade(chosen);
+				UpgradeDeckCard(chosen);
 			}
 		}
 	}
@@ -56,5 +56,23 @@ public sealed class Sts1LessonLearned : Sts1WatcherCard
 	protected override void OnUpgrade()
 	{
 		DynamicVars.Damage.UpgradeValueBy(3m);
+	}
+
+	// CardCmd.Upgrade does nothing once the last enemy is dead and combat is ending, which is the usual case for a
+	// kill. In that case do what it does for a deck card (history entry, upgrade, finalize) without the guard or the preview.
+	private void UpgradeDeckCard(CardModel card)
+	{
+		if (!CombatManager.Instance.IsEnding)
+		{
+			CardCmd.Upgrade(card);
+			return;
+		}
+		if (!card.IsUpgradable)
+		{
+			return;
+		}
+		Owner.RunState.CurrentMapPointHistoryEntry?.GetEntry(Owner.NetId).UpgradedCards.Add(card.Id);
+		card.UpgradeInternal();
+		card.FinalizeUpgradeInternal();
 	}
 }

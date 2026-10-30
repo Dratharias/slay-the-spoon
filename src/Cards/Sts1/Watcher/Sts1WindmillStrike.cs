@@ -20,6 +20,8 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Windmill Strike: each time the owner retains it, its damage grows for the rest of the combat (combat copy only).</summary>
 public sealed class Sts1WindmillStrike : Sts1WatcherCard
 {
+	private decimal _gained;
+
 	protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Retain };
@@ -52,8 +54,17 @@ public sealed class Sts1WindmillStrike : Sts1WatcherCard
 		// Only a card the owner kept through this flush grows. The deck card is untouched, so the growth ends with the combat.
 		if (player == Owner && retainedCards.Contains(this))
 		{
-			DynamicVars.Damage.BaseValue += DynamicVars["Magic"].BaseValue;
+			decimal growth = DynamicVars["Magic"].BaseValue;
+			_gained += growth;
+			DynamicVars.Damage.BaseValue += growth;
 		}
 		return Task.CompletedTask;
+	}
+
+	// A downgrade rebuilds the dynamic vars from the canonical card, which would drop the growth.
+	protected override void AfterDowngraded()
+	{
+		base.AfterDowngraded();
+		DynamicVars.Damage.BaseValue += _gained;
 	}
 }
