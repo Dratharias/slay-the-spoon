@@ -48,3 +48,14 @@ Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 firs
 - [ ] Regenerate heals at the end of the enemy turn without losing stacks; dead enemies stay dead.
 - [ ] Winning grants the team the Emerald, brightens the top-bar key and removes the map marker. Later acts have no marker.
 - [ ] With the same seed, map layout and ordinary rewards match a run without Act 4; no vanilla RNG is consumed by the marker or buff.
+
+## Sapphire chest swap (Task 8)
+
+- [ ] Obtain a chest relic: an EN/FR swap button appears after pickup effects finish. Swapping removes the relic and grants the team the Sapphire.
+- [ ] War Paint / Whetstone: the affected cards return to their previous upgrades and deck positions; save/reload preserves those cards.
+- [ ] Old Coin: pickup gold is removed. Pear / Strawberry: gained max HP is removed. Added potions are discarded.
+- [ ] A relic that removed or transformed a card has no swap offer.
+- [ ] Co-op: both recipients see an offer. Simultaneous acceptance consumes only the first player's relic, on every peer.
+- [ ] Co-op with different animation timing: a swap waits for pickup completion on the slower peer.
+- [ ] Leaving or reloading the treasure room drops the offer; a queued stale offer cannot affect a later chest.
+- [ ] Saving after the swap preserves the team key and the reverted inventory.
