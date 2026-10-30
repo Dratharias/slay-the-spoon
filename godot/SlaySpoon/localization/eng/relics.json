@@ -4,5 +4,8 @@
 	"SPOON_SPIRE_SOUVENIR.title": "Spire Souvenir",
 	"STS1_MUTAGENIC_STRENGTH.description": "Start each combat with [blue]{StrengthPower}[/blue] [gold]Strength[/gold]. At the end of your first turn, lose [blue]{StrengthPower}[/blue] [gold]Strength[/gold].",
 	"STS1_MUTAGENIC_STRENGTH.flavor": "\"The results seem fleeting, triggering when the subject is in danger.\" - Unknown",
-	"STS1_MUTAGENIC_STRENGTH.title": "Mutagenic Strength"
+	"STS1_MUTAGENIC_STRENGTH.title": "Mutagenic Strength",
+	"STS1_PURE_WATER.description": "At the start of each combat, add a [gold]Miracle[/gold] into your hand.",
+	"STS1_PURE_WATER.flavor": "Filtered through fine sand and free of impurities.",
+	"STS1_PURE_WATER.title": "Pure Water"
 }

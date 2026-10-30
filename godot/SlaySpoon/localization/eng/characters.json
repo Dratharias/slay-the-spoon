@@ -1,0 +1,17 @@
+{
+	"STS1_WATCHER.aromaPrinciple": "[sine][purple]...evaluate... ascend... divinity...[/purple][/sine]",
+	"STS1_WATCHER.banter.alive.endTurnPing": "[sine]...[/sine]",
+	"STS1_WATCHER.banter.dead.endTurnPing": "...",
+	"STS1_WATCHER.cardsModifierDescription": "Watcher cards will now appear in rewards and shops.",
+	"STS1_WATCHER.cardsModifierTitle": "Watcher Cards",
+	"STS1_WATCHER.description": "A blind ascetic who has come to \"Evaluate\" the Spire.\nMaster of the divine Stances.",
+	"STS1_WATCHER.eventDeathPrevention": "My evaluation is not yet complete...",
+	"STS1_WATCHER.goldMonologue": "[sine]Riches mean nothing to the divine...[/sine]",
+	"STS1_WATCHER.possessiveAdjective": "her",
+	"STS1_WATCHER.pronounObject": "her",
+	"STS1_WATCHER.pronounPossessive": "hers",
+	"STS1_WATCHER.pronounSubject": "she",
+	"STS1_WATCHER.title": "The Watcher",
+	"STS1_WATCHER.titleObject": "The Watcher",
+	"STS1_WATCHER.unlockText": "Play a single run to unlock this character."
+}

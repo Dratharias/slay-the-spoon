@@ -1,0 +1,17 @@
+{
+	"STS1_WATCHER.aromaPrinciple": "[sine][purple]...évaluer... m'élever... divinité...[/purple][/sine]",
+	"STS1_WATCHER.banter.alive.endTurnPing": "[sine]...[/sine]",
+	"STS1_WATCHER.banter.dead.endTurnPing": "...",
+	"STS1_WATCHER.cardsModifierDescription": "Les cartes de la gardienne peuvent apparaître dans les récompenses et dans la boutique.",
+	"STS1_WATCHER.cardsModifierTitle": "Cartes de la gardienne",
+	"STS1_WATCHER.description": "Une ascétique aveugle qui est venue pour \"Évaluer\" la Tour.\nMaître des Positions divines.",
+	"STS1_WATCHER.eventDeathPrevention": "Mon évaluation n'est pas encore terminée...",
+	"STS1_WATCHER.goldMonologue": "[sine]Les richesses ne sont rien pour le divin...[/sine]",
+	"STS1_WATCHER.possessiveAdjective": "son/sa/ses",
+	"STS1_WATCHER.pronounObject": "elle",
+	"STS1_WATCHER.pronounPossessive": "le sien/la sienne/les siens/les siennes",
+	"STS1_WATCHER.pronounSubject": "elle",
+	"STS1_WATCHER.title": "La gardienne",
+	"STS1_WATCHER.titleObject": "de la gardienne",
+	"STS1_WATCHER.unlockText": "Jouez une partie pour débloquer ce personnage."
+}

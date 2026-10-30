@@ -4,5 +4,8 @@
 	"SPOON_SPIRE_SOUVENIR.title": "Souvenir de la Tour",
 	"STS1_MUTAGENIC_STRENGTH.description": "Démarrez chaque combat avec [blue]{StrengthPower}[/blue] de [gold]Force[/gold]. À la fin de votre premier tour, perdez [blue]{StrengthPower}[/blue] de [gold]Force[/gold].",
 	"STS1_MUTAGENIC_STRENGTH.flavor": "« Les effets semblent passagers, ne se déclenchant que lorsque le sujet est en danger. » - Inconnu",
-	"STS1_MUTAGENIC_STRENGTH.title": "Force mutagène"
+	"STS1_MUTAGENIC_STRENGTH.title": "Force mutagène",
+	"STS1_PURE_WATER.description": "Au début de chaque combat, ajoutez un [gold]Miracle[/gold] dans votre main.",
+	"STS1_PURE_WATER.flavor": "Filtrée dans un sable fin et sans aucune impureté.",
+	"STS1_PURE_WATER.title": "Eau pure"
 }
