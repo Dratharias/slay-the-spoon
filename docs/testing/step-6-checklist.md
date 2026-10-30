@@ -103,3 +103,11 @@ Reach the fight with the vanilla console: `fight STS1_CORRUPT_HEART_BOSS`.
 - [ ] The log at startup shows `Ending act id: STS1_ENDING_ACT` and `Ending act self-check: ModelDb.GetById<ActModel>(STS1_ENDING_ACT) found`.
 - [ ] In act 4, the act banner reads "The Ending" (French: "La fin").
 - [ ] Act 4's music, ambience, map (backgrounds and dot colors), rest site background, combat backgrounds and chest are Glory's.
+
+## The Ending map (WP4-6 Task 7)
+
+- [ ] The act 4 map is one straight path: rest site → merchant → elite → Heart. The rest site is the travelable starting point, drawn as a normal rest site icon (no ancient).
+- [ ] The rest site has no Ruby option.
+- [ ] Buying Golden Compass at the act 4 merchant does not change the map; the log shows `act4: GoldenPathActMap replaced by the Ending map`.
+- [ ] Save and quit at the merchant, then resume: the same map, with the rest site visited and the elite travelable.
+- [ ] After the elite, only the Heart is travelable. The four nodes are spread over the whole map screen; the paths between them are drawn.
