@@ -1,3 +1,5 @@
 {
-	"SPOON_SCRY": "Scry: choose any cards to discard. The leftmost card is drawn next."
+	"SPOON_SCRY": "Scry: choose any cards to discard. The leftmost card is drawn next.",
+	"SPOON_SCRY_TIP.description": "Look at the top cards of your draw pile. You may discard any of them.",
+	"SPOON_SCRY_TIP.title": "Scry"
 }

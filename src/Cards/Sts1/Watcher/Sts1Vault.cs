@@ -26,7 +26,7 @@ public sealed class Sts1Vault : Sts1WatcherCard
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
 
 	public Sts1Vault()
-		: base(3, CardType.Skill, CardRarity.Rare, TargetType.AllEnemies)
+		: base(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
 	{
 	}
 

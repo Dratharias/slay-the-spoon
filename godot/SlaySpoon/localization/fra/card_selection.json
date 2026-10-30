@@ -1,3 +1,5 @@
 {
-	"SPOON_SCRY": "Regard : choisissez les cartes à défausser. La carte de gauche sera piochée en premier."
+	"SPOON_SCRY": "Regard : choisissez les cartes à défausser. La carte de gauche sera piochée en premier.",
+	"SPOON_SCRY_TIP.description": "Regardez les cartes du dessus de votre pioche. Vous pouvez en défausser.",
+	"SPOON_SCRY_TIP.title": "Regard"
 }

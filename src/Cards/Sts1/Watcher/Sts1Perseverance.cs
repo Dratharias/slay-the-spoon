@@ -23,6 +23,8 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Perseverance: Block; each time the owner retains it, its Block grows for the rest of the combat (combat copy only).</summary>
 public sealed class Sts1Perseverance : Sts1WatcherCard
 {
+	private decimal _gained;
+
 	public override bool GainsBlock => true;
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Retain };
@@ -54,8 +56,17 @@ public sealed class Sts1Perseverance : Sts1WatcherCard
 		// Only a card the owner kept through this flush grows; the deck card is untouched, so the growth ends with the combat.
 		if (player == Owner && retainedCards.Contains(this))
 		{
-			DynamicVars.Block.BaseValue += DynamicVars["Magic"].BaseValue;
+			decimal growth = DynamicVars["Magic"].BaseValue;
+			_gained += growth;
+			DynamicVars.Block.BaseValue += growth;
 		}
 		return Task.CompletedTask;
+	}
+
+	// A downgrade rebuilds the dynamic vars from the canonical card, which would drop the growth.
+	protected override void AfterDowngraded()
+	{
+		base.AfterDowngraded();
+		DynamicVars.Block.BaseValue += _gained;
 	}
 }

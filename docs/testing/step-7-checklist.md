@@ -171,9 +171,10 @@ See `docs/review/watcher-task6.md` for values, hidden-pool decisions and test co
 - [ ] Judgement (cost 1) kills an enemy at or below 30/40 HP, otherwise does nothing.
 - [ ] Meditate puts 1/2 cards from the discard pile into hand (all of them when few), Retains them this turn, enters Calm and
       ends the turn.
-- [ ] Omniscience (cost 4/3, Exhaust) lets the owner pick any draw pile card and plays it twice; the card ends in the exhaust pile
-      (no duplicate left behind); an X card or a targeted Attack picks sensible targets/energy.
-- [ ] Perseverance (5/7 Block, Retain) gains 2/3 Block for each turn it is retained this combat; the deck copy is unchanged next combat.
+- [ ] Omniscience (cost 4/3, Exhaust) lets the owner pick any draw pile card and plays it twice; the card and its copy are both
+      exhausted (StS1 purges the copy); an X card or a targeted Attack picks sensible targets/energy.
+- [ ] Perseverance (5/7 Block, Retain) gains 2/3 Block for each turn it is retained this combat; the deck copy is unchanged next combat;
+      the growth is kept if the card is downgraded in combat.
 - [ ] Pray gains 3/4 Mantra and shuffles an Insight into the draw pile.
 - [ ] Pressure Points applies 8/11 Mark, then every enemy loses HP equal to its Mark (ignores Block); a second play adds to the Mark and
       triggers again; in co-op the Mark is shared.

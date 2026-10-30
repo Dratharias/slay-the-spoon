@@ -25,12 +25,12 @@ public sealed class Sts1Wish : Sts1WatcherCard
 {
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
 
-	// Plain vars: they only feed the text, and a Damage or Block var would show Strength and Dexterity changes that do not apply.
+	// Plain vars, not Damage or Block: they only feed the text, and DynamicVarSet.Damage and .Block hard-cast to DamageVar and BlockVar.
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
-		new DynamicVar("Damage", 3m),
-		new DynamicVar("Block", 6m),
-		new DynamicVar("Magic", 25m),
+		new DynamicVar("Strength", 3m),
+		new DynamicVar("PlatedArmor", 6m),
+		new DynamicVar("Gold", 25m),
 	};
 
 	public Sts1Wish()
@@ -70,8 +70,8 @@ public sealed class Sts1Wish : Sts1WatcherCard
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars["Damage"].UpgradeValueBy(1m);
-		DynamicVars["Block"].UpgradeValueBy(2m);
-		DynamicVars["Magic"].UpgradeValueBy(5m);
+		DynamicVars["Strength"].UpgradeValueBy(1m);
+		DynamicVars["PlatedArmor"].UpgradeValueBy(2m);
+		DynamicVars["Gold"].UpgradeValueBy(5m);
 	}
 }
