@@ -59,12 +59,13 @@ internal static class SapphireChestPatch
 
 	private static void Clear()
 	{
+		// Invalidate first: completing a task can resume a waiting swap synchronously.
+		_run = null;
+		_room = null;
 		_awardsStarted.TrySetResult();
 		_awardsStarted = new();
 		foreach (var pickup in Pickups) pickup.Ready.TrySetResult();
 		Pickups.Clear();
-		_run = null;
-		_room = null;
 	}
 
 	[HarmonyPatch(typeof(NTreasureRoom), nameof(NTreasureRoom._Ready))]

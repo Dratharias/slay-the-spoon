@@ -102,10 +102,11 @@ Read `README.md` for the player view and the spec for every decision.
 - Co-op keys are team-wide (owner decision): one set for the team; a key any player collects counts for all.
   Ruby: one player gives up their rest-site action. Sapphire: after a chest's relics are handed out, any player who
   received one may give it back for the key (first to accept; the swap undoes the relic's pickup effects, upgrades included).
-- WP3 tasks 1–7 are implemented: team key state, permanent unlock, hidden Standard run flag, key sprites/top bar,
-  Ruby Recall rest option and Emerald elite marker/buffs (EN/FR). Access requires `Act4Preview` and the profile unlock; no lobby option yet.
-  Build: 0 warnings / 0 errors; tests: 194 xUnit and 52 pytest pass. In-game checks remain pending.
-  Next: task 8 (Sapphire), task 9 (version/status), then WP4–6 (act routing, enemies/visuals, release), in
+- WP3 is implemented (0.8.0): team key state, permanent unlock, hidden Standard run flag, key sprites/top bar,
+  Ruby Recall rest option, Emerald elite marker/buffs, and Sapphire chest-relic swap (EN/FR).
+  Access requires `Act4Preview` and the profile unlock; no lobby option yet.
+  Build: 0 warnings / 0 errors; tests: 202 xUnit and 52 pytest pass. In-game checks remain pending.
+  Next: WP4–6 (act routing, enemies/visuals, release). WP3 implementation plan:
   `docs/superpowers/plans/2026-10-29-step-6-act4-wp3-keys-unlock.md`.
 
 ## Step 7 status (2026-10-29)
