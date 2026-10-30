@@ -17,6 +17,7 @@ public static class ModEntry
 		Sts1CardTypes.SelfCheck();
 		Sts1SavedProperties.Register();
 		Act4.Sts1EndingAct.SelfCheck();
+		Act4.Act4Routing.Register();
 		LinuxHarmonyFix.Apply();
 		new Harmony("slayspoon").PatchAll(typeof(ModEntry).Assembly);
 		SpoonLog.Info($"Slay the Spoon {Version} loaded");

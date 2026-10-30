@@ -111,3 +111,16 @@ Reach the fight with the vanilla console: `fight STS1_CORRUPT_HEART_BOSS`.
 - [ ] Buying Golden Compass at the act 4 merchant does not change the map; the log shows `act4: GoldenPathActMap replaced by the Ending map`.
 - [ ] Save and quit at the merchant, then resume: the same map, with the rest site visited and the elite travelable.
 - [ ] After the elite, only the Heart is travelable. The four nodes are spread over the whole map screen; the paths between them are drawn.
+
+## Route into The Ending (WP4-6 Task 8)
+
+Needs `Act4Preview = true` in `SlaySpoon.cfg` until Task 10.
+
+- [ ] Without all three keys, the act 3 boss ends the run as in vanilla (victory room, credits).
+- [ ] With all three keys, the act 3 boss gives rewards, then act 4 starts. The log shows `act4: The Ending appended` when the last key is taken.
+- [ ] A10: both act 3 bosses (each gives rewards once act 4 follows), then act 4 with a single Heart.
+- [ ] Killing the Heart opens the victory room, then the run is won; the run time stops at the Heart, not at the act 3 boss.
+- [ ] Collect the last key, save and quit before the act 3 boss, then resume: act 4 still follows. The log shows "The Ending appended" once.
+- [ ] Co-op: the client collects the last key; both players go to act 4 together. Resuming the co-op run keeps act 4.
+- [ ] Daily run: no keys, no act 4.
+- [ ] The log never shows `act4: The Ending was appended only when leaving an act`.
