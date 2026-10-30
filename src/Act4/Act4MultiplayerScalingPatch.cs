@@ -1,5 +1,6 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models.Singleton;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Act4;
 
@@ -9,6 +10,6 @@ internal static class Act4MultiplayerScalingPatch
 {
 	private static void Prefix(ref int actIndex)
 	{
-		if (actIndex == 3) actIndex = 2;
+		actIndex = VanillaActIndex.For(actIndex);
 	}
 }
