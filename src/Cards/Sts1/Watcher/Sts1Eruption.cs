@@ -1,3 +1,5 @@
+using SlaySpoon.Core;
+using SlaySpoon.Watcher;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -6,7 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Watcher;
 
-/// <summary>StS1 Eruption. Damage only for now: entering Wrath comes with the stances (step 7, task 4).</summary>
+/// <summary>StS1 Eruption, entering Wrath after its initial effect.</summary>
 public sealed class Sts1Eruption : Sts1WatcherCard
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
@@ -25,6 +27,7 @@ public sealed class Sts1Eruption : Sts1WatcherCard
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_heavy_blunt")
 			.Execute(choiceContext);
+		await StanceCmd.Enter(Owner, Stance.Wrath, this, choiceContext);
 	}
 
 	protected override void OnUpgrade()

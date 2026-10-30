@@ -71,6 +71,18 @@ public class WatcherAssetsTests
 	}
 
 	[Fact]
+	public void StanceAndMantraTexts_AreComplete()
+	{
+		foreach (string lang in new[] { "eng", "fra" })
+		{
+			var powers = Table(lang, "powers");
+			foreach (string power in new[] { "CALM_STANCE", "WRATH_STANCE", "DIVINITY_STANCE", "MANTRA" })
+				foreach (string key in new[] { "title", "description", "smartDescription" })
+					Assert.False(string.IsNullOrWhiteSpace(powers.GetValueOrDefault($"STS1_{power}_POWER.{key}")), $"{lang} {power} {key}");
+		}
+	}
+
+	[Fact]
 	public void StarterRelicTexts_AreComplete()
 	{
 		string id = ModelIds.FromClassName("Sts1PureWater");

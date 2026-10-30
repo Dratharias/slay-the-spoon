@@ -44,24 +44,38 @@ public static class WatcherButtonPatch
 	[HarmonyPatch("InitCharacterButtons")]
 	public static void AddButton(NCustomRunScreen __instance)
 	{
-		Control container = ButtonContainer(__instance);
-		if (container.GetNodeOrNull(ButtonName) != null)
+		NCharacterSelectButton? button = null;
+		try
 		{
-			return;
+			Control container = ButtonContainer(__instance);
+			if (container.GetNodeOrNull(ButtonName) != null)
+			{
+				return;
+			}
+			button = PreloadManager.Cache.GetScene(ButtonScene)
+				.Instantiate<NCharacterSelectButton>(PackedScene.GenEditState.Disabled);
+			button.Name = ButtonName;
+			container.AddChildSafely(button);
+			button.Init(ModelDb.Character<Sts1Watcher>(), __instance);
+			// Not in the vanilla unlock state, so Init locks her; she has no unlock of her own.
+			button.DebugUnlock();
+			button.Visible = false;
+			button.FocusNeighborRight = button.GetPath();
+			button.FocusNeighborTop = SeedInput(__instance).GetPath();
+			button.FocusNeighborBottom = button.GetPath();
+			Control? left = LeftNeighbour(container, button);
+			button.FocusNeighborLeft = left?.GetPath() ?? button.GetPath();
 		}
-		NCharacterSelectButton button = PreloadManager.Cache.GetScene(ButtonScene)
-			.Instantiate<NCharacterSelectButton>(PackedScene.GenEditState.Disabled);
-		button.Name = ButtonName;
-		container.AddChildSafely(button);
-		button.Init(ModelDb.Character<Sts1Watcher>(), __instance);
-		// Not in the vanilla unlock state, so Init locks her; she has no unlock of her own.
-		button.DebugUnlock();
-		button.Visible = false;
-		button.FocusNeighborRight = button.GetPath();
-		button.FocusNeighborTop = SeedInput(__instance).GetPath();
-		button.FocusNeighborBottom = button.GetPath();
-		Control? left = LeftNeighbour(container, button);
-		button.FocusNeighborLeft = left?.GetPath() ?? button.GetPath();
+		catch (Exception error)
+		{
+			SpoonLog.Error($"watcher: button initialization failed; Custom Run remains available without her: {error}");
+			// Detach immediately: refresh must never find a half-initialized button.
+			if (GodotObject.IsInstanceValid(button))
+			{
+				button!.GetParent()?.RemoveChild(button);
+				button.QueueFree();
+			}
+		}
 	}
 
 	[HarmonyPostfix]

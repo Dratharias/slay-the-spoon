@@ -17,6 +17,12 @@ public static class WatcherAssets
 	/// <summary>Body ground point (between the feet) in image pixels, from the top-left.</summary>
 	public const float BodyOriginX = 171f, BodyOriginY = 274f;
 
+	// Setup-pose anchor from the StS1 idle skeleton; the eye itself stays unrotated.
+	public const float EyeAnchorX = -150.05057f, EyeAnchorY = -249.5976f;
+	public const float EyeRotationDegrees = 0f;
+	public const string EyeBase = Root + "creatures/sts1_watcher/eye_base.png";
+	public static string EyeIris(Stance stance) => Root + "creatures/sts1_watcher/eye_" + stance.ToString().ToLowerInvariant() + ".png";
+
 	public const string Corpse = Root + "creatures/sts1_watcher/corpse.png";
 
 	public const float CorpseOriginX = 256f, CorpseOriginY = 512f;
@@ -41,7 +47,7 @@ public static class WatcherAssets
 
 	public static IReadOnlyList<string> ModImages { get; } = new[]
 		{
-			Body, Corpse, TopBarIcon, TopBarIconOutline, CharacterSelectIcon, CharacterSelectLockedIcon, MapMarker,
+			Body, Corpse, EyeBase, EyeIris(Stance.Calm), EyeIris(Stance.Wrath), EyeIris(Stance.Divinity), TopBarIcon, TopBarIconOutline, CharacterSelectIcon, CharacterSelectLockedIcon, MapMarker,
 		}
 		.Concat(OrbLayers)
 		.ToArray();

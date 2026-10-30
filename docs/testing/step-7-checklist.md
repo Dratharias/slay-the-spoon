@@ -48,3 +48,22 @@ Start each run from Custom Run with "Slay the Spire 1 Cards" or "Spire Souvenir"
 - [ ] Orobas may offer her Archaic Tooth only when her deck holds Bash, Neutralize, Unleash, Falling Star or Dualcast
       (vanilla rule, e.g. after Prismatic Gem or a transform); otherwise its third option follows vanilla.
 - [ ] Standard and Daily character select never show her button.
+
+## Task 4 — Stances and Mantra
+
+Automated validation: 314 xUnit tests and 66 pytest tests pass. The following checks require the game.
+
+- [ ] Eruption deals damage before entering Wrath; Vigilance gives Block before entering Calm.
+- [ ] Leaving Calm gives 2 energy; entering Divinity gives 3; re-entering the same stance gives nothing.
+- [ ] Wrath doubles outgoing card attacks and incoming enemy attacks, with matching intents; Thorns and power damage stay unchanged.
+- [ ] Divinity triples card attacks and ends at the holder's next turn. Verify in solo and co-op.
+- [ ] Gain 9, 10 and 12 Mantra through `StanceCmd.GainMantra`: threshold enters Divinity and keeps the remainder.
+- [ ] `sts1stance calm|wrath|divinity|neutral` changes only the issuing player's stance on every peer.
+- [ ] Save/reload mid-combat preserves stance and Mantra and restores the staff eye; death hides it.
+- [ ] EN/FR stance and Mantra tooltips are readable.
+
+## Task 2 — Button failure fallback
+
+- [ ] In a temporary debug build, throw before scene creation and then after button insertion: Custom Run still opens,
+  vanilla characters remain selectable, no partial Watcher button remains, and the exception is logged.
+- [ ] Toggle modifiers and reopen the cached screen after the failure; the vanilla screen stays usable.

@@ -1,3 +1,5 @@
+using SlaySpoon.Core;
+using SlaySpoon.Watcher;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -6,7 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace SlaySpoon.Cards.Sts1.Watcher;
 
-/// <summary>StS1 Vigilance. Block only for now: entering Calm comes with the stances (step 7, task 4).</summary>
+/// <summary>StS1 Vigilance, entering Calm after its initial effect.</summary>
 public sealed class Sts1Vigilance : Sts1WatcherCard
 {
 	public override bool GainsBlock => true;
@@ -24,6 +26,7 @@ public sealed class Sts1Vigilance : Sts1WatcherCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+		await StanceCmd.Enter(Owner, Stance.Calm, this, choiceContext);
 	}
 
 	protected override void OnUpgrade()

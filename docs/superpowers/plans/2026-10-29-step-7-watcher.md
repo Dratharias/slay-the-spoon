@@ -10,6 +10,17 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-28-slay-the-spoon-design.md` (§3.3, §6), amended by the owner request in `docs/backlog.md` (2026-10-29: the Watcher is playable when a StS1 card set mode is ticked in a Custom Run) and the owner answers below.
 
+## Implementation checkpoint (2026-10-30)
+
+- Tasks 1–3 are committed on `step-7-watcher`; game checks remain separate from code completion.
+- Task 2 passed the owner's review. Button initialization now logs failures and removes the partial button,
+  allowing the existing Custom Run screen to continue. Forced-failure verification in Godot is still pending.
+- Task 4 is implemented: stance powers, Mantra, energy transitions, listeners, static eye, starter card effects,
+  EN/FR text and the networked `sts1stance` console command. The eye is restored from powers when its node loads.
+- Validation: 314 xUnit tests and 66 pytest tests pass. Game checks are listed in `docs/testing/step-7-checklist.md`.
+- Violet Lotus integration awaits Task 6. Tasks 5–10 remain to be implemented.
+- Other minor Task 2 review findings are deferred to the backlog; their details have not been supplied.
+
 ## Owner decisions (2026-10-29)
 
 1. **Availability:** Custom Run only, when StS1-only or Spire Souvenir is ticked. Standard and Daily never show her.
