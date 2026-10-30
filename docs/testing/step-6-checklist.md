@@ -124,3 +124,9 @@ Needs `Act4Preview = true` in `SlaySpoon.cfg` until Task 10.
 - [ ] Co-op: the client collects the last key; both players go to act 4 together. Resuming the co-op run keeps act 4.
 - [ ] Daily run: no keys, no act 4.
 - [ ] The log never shows `act4: The Ending was appended only when leaving an act`.
+
+## Victory after the Heart (WP4-6 Task 9)
+
+- [ ] Killing the Heart leads to the Architect and a victory screen; run history shows 4 acts and a win.
+- [ ] The StS1 ending stinger plays once at the Architect (log: `act4: ending stinger played`). It does not replay after save and quit inside the Architect room, and it does not follow the game's music volume slider.
+- [ ] Dying to the Heart, or to the Shield and Spear, is a normal defeat ("killed by" shows the localized name).
