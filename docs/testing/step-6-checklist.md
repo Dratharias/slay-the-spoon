@@ -97,3 +97,9 @@ Reach the fight with the vanilla console: `fight STS1_CORRUPT_HEART_BOSS`.
 - [ ] Two players: HP 750 × 2 × 1.3 = 1950; the Invincible budget is 780 and both players' hits share it. Debilitate hits both players, each with their own five statuses. Artifact shows 3 (vanilla co-op Artifact scaling).
 - [ ] Monster HP 200 % doubles the Heart's HP once but leaves the Invincible budget unchanged.
 - [ ] In co-op, the host and client logs show the same `ending:` lines, including the `buff N` lines.
+
+## The Ending act (WP4-6 Task 6)
+
+- [ ] The log at startup shows `Ending act id: STS1_ENDING_ACT` and `Ending act self-check: ModelDb.GetById<ActModel>(STS1_ENDING_ACT) found`.
+- [ ] In act 4, the act banner reads "The Ending" (French: "La fin").
+- [ ] Act 4's music, ambience, map (backgrounds and dot colors), rest site background, combat backgrounds and chest are Glory's.

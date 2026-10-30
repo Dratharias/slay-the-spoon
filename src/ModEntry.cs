@@ -16,6 +16,7 @@ public static class ModEntry
 		PercentModifierTable.SelfCheck();
 		Sts1CardTypes.SelfCheck();
 		Sts1SavedProperties.Register();
+		Act4.Sts1EndingAct.SelfCheck();
 		LinuxHarmonyFix.Apply();
 		new Harmony("slayspoon").PatchAll(typeof(ModEntry).Assembly);
 		SpoonLog.Info($"Slay the Spoon {Version} loaded");

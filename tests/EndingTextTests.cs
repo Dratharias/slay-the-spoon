@@ -40,6 +40,8 @@ public class EndingTextTests
 	[InlineData("monsters", "STS1_CORRUPT_HEART.moves.BUFF.title")]
 	[InlineData("encounters", "STS1_CORRUPT_HEART_BOSS.title")]
 	[InlineData("encounters", "STS1_CORRUPT_HEART_BOSS.loss")]
+	// A vanilla act has a single text key (GLORY.title is the only GLORY.* key in the game's PCK).
+	[InlineData("acts", "STS1_ENDING_ACT.title")]
 	public void EndingTextExistsInBothLanguages(string table, string key)
 	{
 		foreach (string lang in new[] { "eng", "fra" })
