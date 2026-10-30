@@ -1,8 +1,27 @@
 # Step 7 — The Watcher in-game checklist
 
-Build and automated tests pass. All checks below require the owner in game; none is claimed complete.
+Version 0.10.0. Build and automated tests pass. All checks below require the owner in game; none is claimed complete.
 Mod lines in `~/.local/share/SlayTheSpire2/logs/godot.log` start with `[SlaySpoon]`; also look there for
 `ERROR` lines that mention `sts1_watcher`. Details and fallbacks: `docs/review/watcher-spike.md`.
+
+How to start a Watcher run: Custom Run, tick "Slay the Spire 1 Cards" or "Spire Souvenir" (her button appears at the
+end of the character row), pick her, start. She is never offered in Standard or Daily.
+
+## Mode runs (Task 10)
+
+- [ ] StS1-only Watcher run, solo: starter deck, card rewards, shop and Neow all offer her purple StS1 cards only.
+- [ ] Spire Souvenir Watcher run, solo: her pool is her StS1 cards plus Hybrid colorless; she has no StS2 cards to mix.
+- [ ] Co-op Watcher plus a vanilla character (`make mp`): both reach combat, each sees their own pool, stances and
+      Mantra affect only their owner on both peers.
+- [ ] Unticking the modifier with her picked: the selection falls back to the previous vanilla character on every peer,
+      and a client never starts a run as a character the host cannot see.
+- [ ] Game over screen and victory screen show her without errors (first death and first victory create her stats entry).
+- [ ] Solo ascension cap: the selector goes up to the highest ascension any vanilla character has and the run starts there.
+- [ ] Save and reload mid-combat in a stance with Mantra: both are restored; mid-run with grown cards (Windmill Strike,
+      Perseverance, Sands of Time, Lesson Learned): growth that StS1 keeps on the combat copy stays on that copy.
+- [ ] Stances in a row (Calm, Wrath, Calm; entering the stance already held; Divinity from Mantra during Wrath): the
+      2 energy from leaving Calm is gained once per exit, re-entering the same stance triggers nothing.
+- [ ] Scry with fewer cards than asked, or an empty draw pile: nothing is shuffled in, and Nirvana and Weave still fire.
 
 ## Character shell spike (Task 1)
 
@@ -14,7 +33,7 @@ Start each run from Custom Run with "Slay the Spire 1 Cards" or "Spire Souvenir"
 - [ ] Combat: her body stands at the usual place, hover box and intents look right, 3 energy with the purple orb
       (log has no `Watcher energy counter: no LayerN`), Strike/Eruption deal 6/9, Defend/Vigilance give 5/8 Block.
 - [ ] Combat: attack and skill sounds play; the card trail is purple.
-- [ ] Card reward after combat: offers cards (Ironclad's for now) and no crash.
+- [ ] Card reward after combat: offers her own purple cards and no crash.
 - [ ] Elite win and boss win: no crash in the progress save (epoch checks skipped).
 - [ ] Rest site: her sprite stands at the fire, sized like a vanilla character, no Silent visible; Rest and Smith work.
 - [ ] Merchant: her sprite stands beside the merchant, no Silent visible; buying works.

@@ -16,7 +16,7 @@ Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic descri
 
 ## Features
 
-Current (0.6.0):
+Current (0.10.0):
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps (− / + buttons,
   or left/right on a gamepad), synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -66,6 +66,16 @@ Current (0.6.0):
   Cards" run, or when a player holds the Spire Souvenir. The Nest and Augmenter need one holder; in
   co-op, players without the relic see their card option locked. Vampires needs every player to hold
   it. Augmenter can also give **Mutagenic Strength**, a relic ported from Slay the Spire 1.
+
+- **The Watcher:** Slay the Spire 1's Watcher is playable as a sixth character in a Custom Run, only while
+  **Slay the Spire 1 Cards** or **Spire Souvenir** is ticked (her button appears at the end of the character row;
+  unticking sends the selection back to the last vanilla character). She is never offered in Standard or Daily runs.
+  She brings stances (Wrath, Calm, Divinity), Mantra and Scry, all 71 of her cards and the cards they create, her
+  relics and her three potions, with Slay the Spire 1 art and numbers. Her visuals are static images for now (no
+  animation). Discipline and Unraveling, which Slay the Spire 1 never registered, are not ported. Holy Water and Violet
+  Lotus work but cannot be found yet. In a solo run her ascension is capped by your best vanilla character. Her
+  playtime goes into the modded profile and never counts toward the regular unlocks. Needs in-game validation; see
+  `docs/testing/step-7-checklist.md`.
 
 - **Neow's Blessings:** a Custom Run option that brings back Neow's usual starting choice. Without it,
   any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers

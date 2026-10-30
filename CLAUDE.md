@@ -4,7 +4,7 @@ Slay the Spire 2 mod (StS2 Early Access v0.107.1, Godot 4.5.1 + C# .NET 9, Harmo
 vanilla Slay the Spire 1 cards into StS2 and adds Custom Run options set by the lobby host.
 Read `README.md` for the player view and the spec for every decision.
 
-## Where we are (2026-10-29)
+## Where we are (2026-10-30)
 
 - **Step 1 is done and merged into `main`:**
   - mod skeleton;
@@ -14,27 +14,27 @@ Read `README.md` for the player view and the spec for every decision.
 - **Not yet tested in game** (the owner tests these when they feel like it): the edge cases left
   unticked in `docs/testing/step-1-checklist.md`.
 - **Deferred minors:** listed in `docs/backlog.md`.
-- **Step 2a is done on branch `step-2`** (not merged; plan `docs/superpowers/plans/2026-10-28-step-2a-*.md`):
+- **Step 2a is done and merged into `main`** (was branch `step-2`; plan `docs/superpowers/plans/2026-10-28-step-2a-*.md`):
   - StS1 tooling: extraction, duplicate table, art, codegen (`tools/sts1/`, `make sts1-data`);
   - card set modes (StS1-only, Hybrid) as Custom Run modifiers; Hybrid is now the "Spire Souvenir" modifier, which hands out the relic;
   - the 31 Ironclad cards StS2 dropped, ported by hand in `src/Cards/Sts1/Ironclad/`.
   - Not tested in game: everything in `docs/testing/step-2a-checklist.md`.
   - The Ironclad StS1 starter deck equals StS2's, so no starter change was needed, and Archaic
     Tooth / Amalgamator work as in vanilla.
-- **Step 2b is done on the same branch** (plan `docs/superpowers/plans/2026-10-28-step-2b-*.md`):
+- **Step 2b is done and merged into `main`** (plan `docs/superpowers/plans/2026-10-28-step-2b-*.md`):
   - Juggernaut and Rampage (StS1 version kept) and Rupture (duplicate) ported;
   - Hybrid: a duplicate is one slot; created cards come out as a random version; card rewards
     have a synced swap button (hidden reward alternatives, `src/CardSets/RewardSwapPatch.cs`).
   - Not tested in game: `docs/testing/step-2b-checklist.md`.
   - The owner still has to review `docs/review/ironclad-duplicates.md`.
-- **Step 3a is done on branch `step-3`** (branched from `step-2`, not merged; plan `docs/superpowers/plans/2026-10-29-step-3a-silent.md`, version 0.3.0):
+- **Step 3a is done and merged into `main`** (was branch `step-3`; plan `docs/superpowers/plans/2026-10-29-step-3a-silent.md`, version 0.3.0):
   - tooling handles several characters (`make sts1-data` writes per-character data and review pages);
   - the Silent StS1 pool and the Spire Souvenir in the Silent relic pool;
   - 37 Silent cards in `src/Cards/Sts1/Silent/` (23 unique, 9 StS1 namesakes kept, 5 duplicates),
     plus Clash, Dual Wield, Entrench and Shockwave for the Ironclad (their StS2 versions are outside its pool).
   - Namesakes take StS2's French title (StS1's own French names collide: its Outmaneuver is "Tacticien").
   - Not tested in game: `docs/testing/step-3a-checklist.md`. The owner still has to review `docs/review/silent-duplicates.md`.
-- **Step 3b is implemented on `step-3`** (not merged; plan `docs/superpowers/plans/2026-10-29-step-3b-defect.md`, version 0.4.0):
+- **Step 3b is implemented and merged into `main`** ( plan `docs/superpowers/plans/2026-10-29-step-3b-defect.md`, version 0.4.0):
   - 38 Defect cards (24 unique, 10 StS1 namesakes kept, 4 duplicates), the Defect pool and Spire Souvenir eligibility;
   - 12 attacks, 20 skills and 6 Powers, with EN/FR text and StS1 portraits;
   - Genetic Algorithm persists growth through `Sts1SavedProperties`; saved property names reuse vanilla IDs;
@@ -42,7 +42,7 @@ Read `README.md` for the player view and the spec for every decision.
   - build: 0 warnings / 0 errors; tests: 61 xUnit and 32 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3b-checklist.md` remains unchecked, especially save/reload and co-op;
   - the owner still has to review `docs/review/defect-duplicates.md` (classifications stay draft).
-- **Step 3c is implemented on `step-3`** (not merged; plan `docs/superpowers/plans/2026-10-29-step-3c-colorless.md`, version 0.5.0):
+- **Step 3c is implemented and merged into `main`** ( plan `docs/superpowers/plans/2026-10-29-step-3c-colorless.md`, version 0.5.0):
   - 39 StS1 colorless cards cataloged; 31 custom classes in `src/Cards/Sts1/Colorless/` (6 attacks, 22 skills,
     3 Powers) and 8 native cards reused; all 22 namesakes still draft for owner review (`docs/review/colorless-duplicates.md`);
   - the colorless pool follows the mode for all five characters; the Souvenir holder gets Hybrid colorless;
@@ -53,7 +53,7 @@ Read `README.md` for the player view and the spec for every decision.
   - Ritual Dagger reuses The Scythe's saved property names; Sadistic Nature reuses vanilla `SleightOfFleshPower`;
   - build: 0 warnings / 0 errors; tests: 83 xUnit and 35 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3c-checklist.md` remains unchecked.
-- **Step 3d is implemented on `step-3`** (not merged; plan `docs/superpowers/plans/2026-10-29-step-3d-sts1-events.md`, version 0.6.0):
+- **Step 3d is implemented and merged into `main`** ( plan `docs/superpowers/plans/2026-10-29-step-3d-sts1-events.md`, version 0.6.0):
   - StS1 events Vampires, Augmenter and The Nest (`src/Events/`) give Bite, J.A.X. and Ritual Dagger, plus the
     Mutagenic Strength relic (Augmenter only, borrowed Symbiotic Virus icon, `TemporaryStrengthPower`);
   - a `Hook.ModifyNextEvent` postfix replaces an act 2 event with an eligible unseen one 1 time in 3, on its own
@@ -75,7 +75,7 @@ Read `README.md` for the player view and the spec for every decision.
 
 ## Step 5 status (2026-10-29)
 
-- Merchant Loans is implemented on `step-5` (0.7.0): ledger, synchronized requests/offers,
+- Merchant Loans is implemented and merged into `main` (0.7.0): ledger, synchronized requests/offers,
   reserved offer gold, automatic repayment, top-bar debt display, merchant ask popup and loan panel.
 - Owner correction: debts survive death and co-op resurrection. No death hook clears them.
 - English/French text includes the rule and the need to retry the purchase after accepting.
@@ -85,7 +85,7 @@ Read `README.md` for the player view and the spec for every decision.
 
 ## Step 6 status (2026-10-29)
 
-- Act 4 source import started on `step-6-act4`; plan: `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
+- Act 4 source import started (merged into `main`); plan: `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
 - `make sts1-act4-data` stages 23 assets and selected EN/FR monster/power text in `data/sts1/act4/`.
 - SHA-256 manifest and deterministic import tests; no Java/decompiled code committed.
 - Mechanics audit recorded: `data/sts1/act4/mechanics.json` (hand-written, pinned to the jar's class SHA-256s,
@@ -104,7 +104,7 @@ Read `README.md` for the player view and the spec for every decision.
 - WP3 is implemented (0.8.0): team key state, permanent unlock, hidden Standard run flag, key sprites/top bar,
   Ruby Recall rest option, Emerald elite marker/buffs, and Sapphire chest-relic swap (EN/FR).
   Build: 0 warnings / 0 errors; tests: 223 xUnit and 52 pytest pass. In-game checks remain pending.
-- WP4-6 implemented (0.9.0) on `step-6-act4`: Spire Shield and Spear elite, Corrupt Heart boss (static sprites rendered from
+- WP4-6 implemented (0.9.0, merged into `main`): Spire Shield and Spear elite, Corrupt Heart boss (static sprites rendered from
   the StS1 setup pose, `make sts1-ending-art`), The Ending act on Glory's assets, fixed map rest → merchant → elite → Heart,
   the act is appended when the team holds all three keys (the act 3 boss then gives rewards), victory through the Architect,
   StS1 ending stinger.
@@ -113,11 +113,19 @@ Read `README.md` for the player view and the spec for every decision.
   design calls and minors in `docs/backlog.md`. Plan: `docs/superpowers/plans/2026-10-29-step-6-act4-wp4-6-ending.md`
   (WP3 plan: `docs/superpowers/plans/2026-10-29-step-6-act4-wp3-keys-unlock.md`).
 
-## Step 7 status (2026-10-29)
+## Step 7 status (2026-10-30)
 
-- The Watcher as a playable character (Custom Run with a StS1 card set) is planned, not implemented:
-  `docs/superpowers/plans/2026-10-29-step-7-watcher.md`. Owner decisions: static visuals first, all her cards,
-  relics and potions. Branch `step-7-watcher` from `step-6-act4` when work starts.
+- The Watcher is implemented on `step-7-watcher` (0.10.0, not merged; plan `docs/superpowers/plans/2026-10-29-step-7-watcher.md`):
+  a sixth character, playable in Custom Run only while a StS1 card set modifier (StS1-only or Spire Souvenir) is ticked.
+  She never enters `ModelDb.AllCharacters`, so Standard, Daily, random picks and vanilla epoch counts stay vanilla.
+- Done: static visuals (combat body, corpse, rest site, merchant, stance eye), stances (Wrath, Calm, Divinity) and Mantra,
+  Scry, last-card tracking, all 71 ported cards (25 attacks, 34 skills, 12 powers; Discipline and Unraveling are not
+  ported), the 8 generated cards, her relics (Pure Water starter; Holy Water and Violet Lotus ported with no acquisition
+  source; native Cloak Clasp reused), her 3 potions, EN/FR text and the progress guards.
+- Owner decisions: static visuals first, animations and in-game validation deep backlog; she may obtain Archaic Tooth
+  through the vanilla rule (no guard).
+- Build: 0 warnings / 0 errors; tests: 366 xUnit and 74 pytest pass. In-game checks pending in
+  `docs/testing/step-7-checklist.md`; design calls and minors in `docs/backlog.md`.
 
 ## Documents
 
@@ -193,7 +201,11 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/Neow/` | Neow's Blessings: a transpiler makes Neow read a zero modifier count; after vanilla modifier options, the blessings replace the "done" page |
 | `src/Relics/` | Spire Souvenir relic (Ironclad, Silent and Defect pool postfix, kept out of the run-start grab bag shuffle so seeds stay vanilla, borrowed Dusty Tome icon); its effect lives in `CardSetPools.ModeFor`. Mutagenic Strength, appended to the event relic pool |
 | `src/Events/` | StS1 events (`Sts1Event` base, portrait path patch), `EventInjectionPatch` (act 2 replacement); text in `localization/<lang>/events.json` |
-| `src/DevConsole/` | `sts1card` and `sts1event` console commands (the vanilla `card` and `event` commands can't see the hidden StS1 pools or events) |
+| `src/DevConsole/` | `sts1card` and `sts1event` console commands (the vanilla `card` and `event` commands can't see the hidden StS1 pools or events); `sts1stance`, `sts1scry` and `sts1watcheritem` for the Watcher (stance change, Scry, hidden relics and potions) |
+| `src/Watcher/` | The Watcher's mechanics: stance powers and `StanceCmd` (Wrath, Calm, Divinity, energy on exit), Mantra, `ScryCmd`, last-card tracking, the static stance eye, her powers in `Powers/`; the numbers live in `src/Core/` (`StanceMath`, `ScryMath`) |
+| `src/Cards/Sts1/Watcher/`, `WatcherTokens/` | One class per ported Watcher card, and the hidden generated cards (Miracle, Insight, Smite, Safety, Through Violence, Expunger, Beta, Omega) outside every reward source |
+| `src/CustomRunUi/WatcherButtonPatch.cs` | Her Custom Run character button (shown only while a StS1 card set is ticked, fallback to the last vanilla pick when unticked, guarded against init failures) |
+| `src/Saves/WatcherProgressPatch.cs` | Progress guards: she never counts toward vanilla epochs, solo ascension cap from the best vanilla character |
 | `tools/sts1/` | Python (Podman image `slayspoon-tools`): `extract.py` → `data/sts1/`, `match.py` → `data/duplicates/` + review page, `art.py` → portraits, `codegen.py` → card skeletons + text. Codegen never overwrites a ported card |
 | `godot/SlaySpoon/` | Packed into the PCK. Localization tables merge into the game's (`res://SlaySpoon/localization/<lang>/<table>.json`) |
 

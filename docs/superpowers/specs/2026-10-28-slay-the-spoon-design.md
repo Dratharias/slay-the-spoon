@@ -241,6 +241,13 @@ unlock requires reaching Act 3 at Ascension 10 once, regardless of victory or de
 Act 4 is available at all ascension levels. Custom activation bypasses the unlock requirement.
 This does not authorize modifying the regular save or changing Daily runs.
 
+## Watcher scope amendment (2026-10-29)
+
+The Watcher is now in scope (owner request, 2026-10-29), overriding the earlier "Watcher is out of scope" lines: she is a
+playable character in a Custom Run while a StS1 card set mode is ticked, never in Standard or Daily, with her stances,
+Mantra, Scry, cards, relics and potions. Static visuals first, animation later. Plan:
+`docs/superpowers/plans/2026-10-29-step-7-watcher.md`.
+
 ## 7. Delivery order
 
 Each step ships as a usable Workshop update.

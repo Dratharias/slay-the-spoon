@@ -2,8 +2,9 @@
 
 Known gaps deferred from step 1's final review. Fixed when the author feels like it.
 
-- The Watcher (StS1 character) as a playable character when a StS1 card set mode is ticked in a
-  Custom Run (owner request, 2026-10-29).
+- ~~The Watcher (StS1 character) as a playable character when a StS1 card set mode is ticked in a
+  Custom Run (owner request, 2026-10-29).~~ Done in 0.10.0 (step 7): playable in Custom Run with a StS1
+  card set, static visuals. In-game validation and animations are deep backlog.
 - Act 4 with the StS1 keys (Ruby, Emerald, Sapphire): permanently unlock by first reaching Act 3
   in a Standard run at Ascension 10, whether that run is won or lost. Once unlocked, Act 4 is
   available at every ascension level, including 0. A Custom Run option bypasses the prerequisite
@@ -106,3 +107,65 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - Killing the Heart logs two vanilla errors from `ProgressSaveManager.ObtainCharUnlockEpoch` (`Act 4 is not yet
     implemented.`, `EpochModel was not found :(`): it switches on the act index for the character epochs and has no act 4
     case. Harmless (no epoch, no write); left alone because routing it to act 3 would hand out an epoch.
+- The Watcher (step 7), design calls made without the owner (change any of them):
+  - She never enters `AllCharacters`: no Standard, Daily or random-character Watcher.
+  - Spire Souvenir: she has no StS2 cards, so "Hybrid" for her is her StS1 pool plus Hybrid colorless.
+  - Solo ascension is capped by the highest ascension the player has on any vanilla character.
+  - Her playtime goes into the modded profile; she never counts toward vanilla epochs.
+  - Merchant, multiplayer hands and map marker borrow vanilla images until animation work; her FMOD sounds are silent
+    or borrowed. Potion icons are borrowed vanilla icons (StS1 potions have no single image to cut).
+  - The Architect has no dialogue for her: no attack scene at the victory, and `GetArchitectAttackVfx` is unused for now.
+  - Discipline and Unraveling are not ported (StS1 never registers them). Cloak Clasp is not ported: she finds the
+    native shared Cloak Clasp.
+  - Holy Water and Violet Lotus are ported with their effects (Holy Water replaces Pure Water with three Miracles) but have
+    no acquisition source: hidden from rewards, shops, events and random generation. Suggestion: Touch of Orobas could turn
+    Pure Water into Holy Water.
+  - She may obtain Archaic Tooth through the vanilla rule (Prismatic Gem or a transform can put Bash, Neutralize, Unleash,
+    Falling Star or Dualcast in her deck); no guard.
+  - A host that unticks the modifier and readies in the same moment can start a run with her and no StS1 set (race);
+    the Spire Souvenir may skip her (`HasSts1Cards`), which is harmless since her pool has no StS2 versions.
+  - Vault in co-op: an extra turn for the player who played it only.
+  - Brilliance shows a calculated damage preview text; Ragnarok hits random enemies (`RandomEnemy`); Signature Move gives
+    no can't-play message; Fear No Evil enters Calm on a kill only.
+  - Block Return gives Block on any powered player attack; Lesson Learned uses the combat card selection RNG and upgrades
+    its card directly when the kill ends the combat (no preview effect).
+  - Halt gives its two Block gains separately (as Juggernaut triggers twice); Wave of the Hand expires at the end of the
+    side's turn, StS1 at the end of the round.
+  - Foreign Influence draws from the attack pools of the current card set (character pools only, 55/30/15 rarity roll on
+    the combat card generation RNG), no colorless attacks.
+  - Omniscience's copies Exhaust (StS1 purges them), so on-exhaust triggers and Exhume see them.
+  - Battle Hymn stops adding Smites once no enemy is alive (StS1: "basically dead" check).
+  - Master Reality is a custom power that upgrades cards the owner creates in combat; other players' cards are untouched.
+  - Rushdown's English upgrade text has no DEPRECATED branch; Duality's power has no `powers.json` text of its own
+    (it extends vanilla `TemporaryDexterityPower`).
+  - Perseverance's French text keeps a duplicate "Retenue." keyword line.
+- The Watcher (step 7), minors left after review:
+  - Character shell: `OrbModel` takes the energy prefix from the pool title `sts1_watcher`; `WatcherAssetPatch`'s Layer log
+    message is misleading when the node exists with another type; `NGameOverScreen` reads `CharacterStats[her id]`
+    unguarded (the entry is created in memory, the checklist covers first death and victory).
+  - Custom Run button: the static `_previous` relies on vanilla selecting child 0 on open; selecting the fallback while
+    readied is unverified; tests hard-code modifier id strings.
+  - Progress guards: two classes are named `WatcherProgressPatch` (Characters and Saves; rename the Saves one, e.g.
+    `WatcherVanillaGuardsPatch`); the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
+    rebuilt per call; no log when the vanilla ascension cap applies; `VanillaCount` and `MaxAscensionFor` are untested
+    (game-bound).
+  - Block Return gives no Block on the killing hit (StS1 does) and ignores pet (Osty) attacks.
+  - Hover tips: the Scry tip (`SPOON_SCRY_TIP`) is only on Third Eye; the other Scry cards (Foresight, Nirvana, Cut Through
+    Fate, Just Lucky...) lack it. No stance tips on Mental Fortress, Empty Fist and Flurry; no Strength/Dexterity tips on
+    Fasting.
+  - Master Reality upgrades Foreign Influence's pick and has no Status/Curse filter (StS1 upgrades only temp-card, Discovery
+    and colorless-choice cards).
+  - Establishment discounts cards kept by Runic Pyramid or Ringing Triangle (StS1 only Retain); its clamp reads this-turn
+    cost modifiers, so a retained card that is free this turn gets no combat discount.
+  - Rushdown draws with a throwing choice context (`IStanceListener` carries none); Deva Form applies 1 instead of its Magic var.
+  - Spirit Shield shows no live Block; Mark and the end-turn death effect share the Doom icon.
+  - Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.
+  - `LastCardPlayed` reset between combats (Sanctity) is unverified.
+  - Flurry/Weave and Sands of Time/Windmill Strike share small logic blocks that could be helpers on `Sts1WatcherCard`;
+    Consecrate lacks a `<summary>`; mixed `ThrowIfNull` vs `Target!`.
+  - Unused `using` blocks in card and power files, empty `OnUpgrade` bodies, a stray blank line in Deus Ex Machina.
+  - Weak tests: pure-logic coverage of `MantraTracker` keying, retain gating and Lesson Learned selection; power tests are
+    mostly arithmetic and `WatcherPowerTextTests` greps source; stale pytest name `test_pending_ports_never_enter_runtime`.
+- The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
+  and in-game validation of everything in `docs/testing/step-7-checklist.md`. A "Deep backlog priority" section, if one
+  exists on `main`, keeps its own wording; Watcher animations stay at the bottom of it.

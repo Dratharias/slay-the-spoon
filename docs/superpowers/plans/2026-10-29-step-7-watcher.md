@@ -26,7 +26,7 @@
 - Scry requires the caller's `PlayerChoiceContext` as its third argument, so card and hook selections cooperate with
   co-op action queues. The console supplies a `HookPlayerChoiceContext` like the native draw command.
 - Task 6 is implemented: data import, hidden generated/choice cards, relics and potions; Violet Lotus and Golden Eye
-  are integrated. Validation: 326 xUnit and 74 pytest tests pass; build has 0 warnings/errors. Tasks 7–10 remain.
+  are integrated. Validation: 326 xUnit and 74 pytest tests pass; build has 0 warnings/errors. Tasks 7–9 followed (below) and Task 10 closes the step.
 - Other minor Task 2 review findings are deferred to the backlog; their details have not been supplied.
 
 ## Owner decisions (2026-10-29)
@@ -120,15 +120,15 @@ asset path our PCK cannot serve); `godot/SlaySpoon/` scenes and images at the va
 - Strike and Defend carry `CardTag.Strike` / `CardTag.Defend` (Amalgamator, Perfected Strike-likes count them).
 - Name: EN "The Watcher", FR from StS1's own French character text.
 
-- [ ] **Step 1:** pytest `test_watcher_art_outputs` (art.py `--watcher` writes every listed file, PNG sizes match the
+- [x] **Step 1:** pytest `test_watcher_art_outputs` (art.py `--watcher` writes every listed file, PNG sizes match the
   vanilla Ironclad counterparts). Run: FAIL.
-- [ ] **Step 2:** Implement the art cut: render the idle atlas's setup pose once to a PNG (pure Python compositing of
+- [x] **Step 2:** Implement the art cut: render the idle atlas's setup pose once to a PNG (pure Python compositing of
   the atlas regions at their slot transforms; no Spine runtime), corpse and eye frames as-is. Run: PASS.
-- [ ] **Step 3:** Add the character, the pools and the scenes; a temporary console command `sts1watcher` swaps the solo
+- [x] **Step 3:** Add the character, the pools and the scenes; a temporary console command `sts1watcher` swaps the solo
   player to her for the spike. `make build`: 0 warnings.
-- [ ] **Step 4:** Spike in game with the owner (owner clicks): combat, map, rest site, merchant, death and game over,
+- [ ] **Step 4:** (deferred to the checklist) Spike in game with the owner (owner clicks): combat, map, rest site, merchant, death and game over,
   victory screen. Record in `docs/review/watcher-spike.md` every crash or missing asset and the fix chosen.
-- [ ] **Step 5:** Commit `feat: Watcher character shell with static visuals`.
+- [x] **Step 5:** Commit `feat: Watcher character shell with static visuals`.
 
 ### Task 2: Custom Run registration and co-op
 
@@ -140,13 +140,13 @@ asset path our PCK cannot serve); `godot/SlaySpoon/` scenes and images at the va
   `SpoonCardSetSts1Only` or `SpoonSpireSouvenirModifier` is among them);
   `WatcherAvailability.Fallback(string selected, string previous, bool available) -> string`.
 
-- [ ] **Step 1:** Tests: `IsAvailable_WithSts1Only`, `IsAvailable_WithSouvenir`, `IsAvailable_FalseWithMonsterHpOnly`,
+- [x] **Step 1:** Tests: `IsAvailable_WithSts1Only`, `IsAvailable_WithSouvenir`, `IsAvailable_FalseWithMonsterHpOnly`,
   `Fallback_ReturnsPreviousWhenUnavailable`, `Fallback_KeepsWatcherWhenAvailable`. Run: FAIL.
-- [ ] **Step 2:** Implement. Run: PASS.
-- [ ] **Step 3:** Postfix `NCustomRunScreen.InitCharacterButtons`: instantiate the vanilla char select button for
+- [x] **Step 2:** Implement. Run: PASS.
+- [x] **Step 3:** Postfix `NCustomRunScreen.InitCharacterButtons`: instantiate the vanilla char select button for
   `Sts1Watcher`, toggle its visibility on every modifier change (host and client), apply `Fallback` through the lobby's
   own character change so peers sync. Remove the Task 1 console command.
-- [ ] **Step 4:** `make mp` check with the owner: host ticks StS1-only, client picks the Watcher, both reach a combat;
+- [ ] **Step 4:** (deferred to the checklist) `make mp` check with the owner: host ticks StS1-only, client picks the Watcher, both reach a combat;
   host unticks, client falls back. Commit `feat: Watcher selectable in Custom Run with a StS1 card set`.
 
 ### Task 3: Progress guards
@@ -157,13 +157,13 @@ asset path our PCK cannot serve); `godot/SlaySpoon/` scenes and images at the va
 - Produces: `WatcherProgress.VanillaStatsCount(IEnumerable<string> statIds, IEnumerable<string> vanillaIds) -> int`;
   `WatcherAscension.Cap(IEnumerable<int> vanillaMaxAscensions) -> int` (highest, 0 when empty).
 
-- [ ] **Step 1:** Tests: `VanillaStatsCount_IgnoresWatcher` (5 vanilla + `STS1_WATCHER` → 5; 4 + Watcher → 4),
+- [x] **Step 1:** Tests: `VanillaStatsCount_IgnoresWatcher` (5 vanilla + `STS1_WATCHER` → 5; 4 + Watcher → 4),
   `Cap_IsHighestVanilla`, `Cap_ZeroWhenNoStats`. Run: FAIL.
-- [ ] **Step 2:** Implement. Run: PASS.
-- [ ] **Step 3:** Transpiler on `ProgressSaveManager.UpdateEpochsPostRun` replaces the two `CharacterStats.Count` reads
+- [x] **Step 2:** Implement. Run: PASS.
+- [x] **Step 3:** Transpiler on `ProgressSaveManager.UpdateEpochsPostRun` replaces the two `CharacterStats.Count` reads
   with `VanillaStatsCount`; postfix on `StartRunLobby.BeginRunLocally`'s singleplayer clamp (or a prefix that raises the
   Watcher's `MaxAscension` view) uses `WatcherAscension.Cap`. Never write the Watcher's stats into the regular profile.
-- [ ] **Step 4:** `make build` 0 warnings; commit `fix: Watcher stats never count toward vanilla epochs`.
+- [x] **Step 4:** `make build` 0 warnings; commit `fix: Watcher stats never count toward vanilla epochs`.
 
 ### Task 4: Stances and Mantra core
 
@@ -185,13 +185,13 @@ text in `powers.json` (stance names and tips from StS1's `stances.json`); test `
   not Thorns or power damage), through `ModifyDamageMultiplicative`, so intents show it. Received ×2 in Wrath applies
   to enemy attacks.
 
-- [ ] **Step 1:** Tests: `Wrath_DoublesDealtAndReceived`, `Divinity_TriplesDealtOnly`, `CalmExit_GivesTwo`,
+- [x] **Step 1:** Tests: `Wrath_DoublesDealtAndReceived`, `Divinity_TriplesDealtOnly`, `CalmExit_GivesTwo`,
   `CalmExit_WithVioletLotus_GivesThree`, `NeutralExit_GivesNothing`, `Mantra_TenEntersDivinity`,
   `Mantra_TwelveKeepsTwo`, `Mantra_NineStays`. Run: FAIL.
-- [ ] **Step 2:** Implement `StanceMath`. Run: PASS.
-- [ ] **Step 3:** Implement the powers, `StanceCmd` and the static eye overlay on the Watcher's visuals. Console command
+- [x] **Step 2:** Implement `StanceMath`. Run: PASS.
+- [x] **Step 3:** Implement the powers, `StanceCmd` and the static eye overlay on the Watcher's visuals. Console command
   `sts1stance <calm|wrath|divinity|neutral>` for testing.
-- [ ] **Step 4:** `make build` 0 warnings; commit `feat: Watcher stances and Mantra`.
+- [x] **Step 4:** `make build` 0 warnings; commit `feat: Watcher stances and Mantra`.
 
 ### Task 5: Scry, Retain helpers, last card played
 
@@ -204,9 +204,9 @@ text in `powers.json` (stance names and tips from StS1's `stances.json`); test `
   top cards to discard, then `IScryListener.AfterScry(Player, int discarded)` even when 0 were shown);
   `LastCardPlayed.Type(Player) -> CardType?` for this combat, read from the combat history.
 
-- [ ] **Step 1:** Tests: `CardsToShow_CappedByPile`, `CardsToShow_EmptyPileIsZero`, `CardsToShow_GoldenEyeAddsTwo`. Run: FAIL.
-- [ ] **Step 2:** Implement. Run: PASS.
-- [ ] **Step 3:** Implement `ScryCmd` on StS2's card selection screen (prompt text in both languages) and
+- [x] **Step 1:** Tests: `CardsToShow_CappedByPile`, `CardsToShow_EmptyPileIsZero`, `CardsToShow_GoldenEyeAddsTwo`. Run: FAIL.
+- [x] **Step 2:** Implement. Run: PASS.
+- [x] **Step 3:** Implement `ScryCmd` on StS2's card selection screen (prompt text in both languages) and
   `LastCardPlayed`. `make build` 0 warnings; commit `feat: Scry and last-card tracking`.
 
 ### Task 6: Data, generated cards, relics and potions
@@ -222,13 +222,13 @@ Holy Water (3 Miracles, replaces Pure Water as boss relic), Damaru (1 Mantra per
 Calm), Violet Lotus (+1 on leaving Calm), Melange (Scry 3 on shuffle), Golden Eye (Scry +2), Cloak Clasp (1 Block per card
 in hand at turn end), Duality (Yang: +1 temporary Dexterity per attack played).
 
-- [ ] **Step 1:** pytest `test_purple_follows_card_library` (75 cards, no Discipline, no Unraveling) and
+- [x] **Step 1:** pytest `test_purple_follows_card_library` (75 cards, no Discipline, no Unraveling) and
   `test_watcher_generated_cards` (the 8 tokens plus Wish's and Stance Potion's options). Run: FAIL.
-- [ ] **Step 2:** Implement and run `make sts1-data`. Expected: Ironclad, Silent, Defect and Colorless outputs
+- [x] **Step 2:** Implement and run `make sts1-data`. Expected: Ironclad, Silent, Defect and Colorless outputs
   byte-identical (`git status`); new `data/sts1/watcher.json`, portraits and skeletons.
-- [ ] **Step 3:** Port the relics, potions and the 8 generated cards (hidden token pool, outside every reward source).
+- [x] **Step 3:** Port the relics, potions and the 8 generated cards (hidden token pool, outside every reward source).
   Holy Water replaces Pure Water on pickup, as in StS1. `make build` 0 warnings.
-- [ ] **Step 4:** Commit `feat: Watcher card data, generated cards, relics and potions`.
+- [x] **Step 4:** Commit `feat: Watcher card data, generated cards, relics and potions`.
 
 **Task 6 implementation checkpoint (2026-10-30):**
 - Data import includes 75 registered purple cards, 8 generated cards and 5 choice cards; other characters' outputs are unchanged.
@@ -243,6 +243,8 @@ in hand at turn end), Duality (Yang: +1 temporary Dexterity per attack played).
 
 ### Tasks 7–9: Port the Watcher's cards
 
+Done, split by type: Task 7 attacks (25), Task 8 skills (34), Task 9 powers (12).
+
 As in 3a–3c: read the StS1 class, copy the closest StS2 pattern, typed vars named in both `cards.json`, hover tips for
 stances, Mantra, Scry and Retain; new powers in `src/Cards/Sts1/Powers/` with a borrowed icon. Cards that grow while
 retained (Perseverance, Windmill Strike, Sands of Time) keep the growth on the combat copy. Vault uses
@@ -256,11 +258,11 @@ draws from the attack pools of the current card set mode. `make build` 0 warning
 
 ### Task 10: Wrap-up
 
-- [ ] **Step 1:** Checklist header and mode lines (StS1-only Watcher run; Spire Souvenir Watcher run; co-op Watcher +
+- [x] **Step 1:** Checklist header and mode lines (StS1-only Watcher run; Spire Souvenir Watcher run; co-op Watcher +
   vanilla character; unticking falls back; game over and victory screens; solo ascension cap; save/reload in a stance).
   README, CLAUDE.md (status and code map), `docs/backlog.md` (request done), spec amendment noting the Watcher is in scope.
   Version: next minor in `mod/SlaySpoon.json`.
-- [ ] **Step 2:** `make test` and `make build` green. Commit `docs: step 7 wrap-up`.
+- [x] **Step 2:** `make test` and `make build` green. Commit `docs: step 7 wrap-up`.
 
 ## Builder calls (for owner review)
 
