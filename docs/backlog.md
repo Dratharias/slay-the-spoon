@@ -41,7 +41,8 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     Smash's Block equals its highest damage to one player.
   - The Monster HP % does not change the Heart's Invincible budget.
   - Move names (StS1 has none): Bash/Heurt, Fortify/Fortifier, Smash/Fracas, Burn Strike/Frappe ardente,
-    Piercer/Perceur, Skewer/Embrocher, Debilitate/Affaiblir, Blood Shots/Tirs sanglants, Echo/Écho, Buff/Renforcement.
+    Piercer/Perceur, Skewer/Embrocher, Debilitate/Affaiblir, Blood Shots/Tirs sanglants, Echo/Écho, Buff/Buff (vanilla's French move title, not
+    the planned "Renforcement").
   - Act 4 elite rewards are vanilla elite rewards.
   - Statuses shuffled into the draw pile take their position from the monster's own RNG.
   - The StS1 ending stinger plays once at the victory room (dropped if it clashes with the game's music).
@@ -50,6 +51,10 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - The Heart's sprite is the setup pose without IK/path constraints: its three top vents look folded.
   - The Heart's Painful Stabs buff applies 1 stack (StS1's data gives no amount).
   - The fixed map is built when the act's map is generated and forced over Golden Compass's map.
+  - The Heart's intents and health bar use StS1's hitbox (476 × 410), not the full sprite; its vent tops may run ~90 px
+    past the top of the screen, as in StS1 (no camera zoom added). Intents sit 60 px above the hitbox (estimate).
+  - Blood Shots and Echo use vanilla's blunt hit effect; StS1's Blood Shot and Vice Crush effects and sounds are not ported.
+  - The Heart's English/French loss lines are the builder's own wording.
 - Act 4 The Ending (step 6 WP4-6), minors left after review:
   - The Invincible clamp sits in `Sts1InvinciblePower`, not in the tested `HeartInvincibleRule`; it flashes inside the modify
     hook (vanilla flashes after modifying, and the overkill path can call the hook twice).
@@ -64,3 +69,9 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - The French loss line "pris en tenaille par Bouclier et Lance de la Tour" has no article.
   - Code-built monsters have no death animation length: their fade may be cut short.
   - Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).
+  - Debilitate skips dead players: a player revived later in the fight never gets those debuffs or statuses. In co-op
+    the status intent shows 5, the per-player count.
+  - The Heart's status shuffles share its RNG with its move roll, so Blood Shots vs Echo on turn 2 depends on the
+    number of players and their draw piles (deterministic on every peer, seeds stay vanilla).
+  - The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
+    in co-op (the power is game-bound).
