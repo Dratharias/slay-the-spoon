@@ -10,3 +10,5 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   (owner clarification, 2026-10-29). Daily runs remain unchanged.
   Source import started on `step-6-act4`; see `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
   Not playable yet.
+- StS1 character-specific relics (Ironclad, Silent, Defect, Watcher pools) that StS2 dropped, offered when a StS1 card
+  set mode is active (owner request, 2026-10-29). Not planned yet.
