@@ -27,7 +27,7 @@ No events, treasure or other encounters.
 
 - HP 160 (180 from A8). Starts with Artifact 1 (2 from A18).
 - **Burn Strike:** 5 damage × 2 (6 × 2 from A3), then 2 Burns in the discard pile; from A18 the Burns are
-  shuffled into the draw pile instead.
+  put on top of the draw pile instead.
 - **Piercer:** +2 Strength to every enemy.
 - **Skewer:** 10 damage × 3 (× 4 from A3).
 - **Pattern:** 1st, Burn Strike unless it just used it, else Piercer; 2nd, Skewer; 3rd, 50 % Piercer /

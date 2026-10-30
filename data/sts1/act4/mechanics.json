@@ -136,7 +136,7 @@
           "damage": {"base": 5, "ascended": 6, "at": 3},
           "hits": {"base": 2, "ascended": 2, "at": 3},
           "effects": [
-            {"status_cards": ["Burn"], "each": 2, "pile": {"base": "discard", "ascended": "draw_random_spot", "at": 18}}
+            {"status_cards": ["Burn"], "each": 2, "pile": {"base": "discard", "ascended": "draw_top", "at": 18}}
           ]
         },
         "piercer": {

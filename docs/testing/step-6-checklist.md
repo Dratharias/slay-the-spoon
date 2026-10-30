@@ -76,7 +76,7 @@ Reach the fight with the vanilla console: `fight STS1_SHIELD_AND_SPEAR_ELITE` (i
 - [ ] Both monsters show their static StS1 sprite, intents above it, and a hitbox matching the sprite. Hits shake them; death fades them out.
 - [ ] Shield's opening is Fortify or Bash; turn 3 is always Smash. Smash's Block equals the damage it dealt (99 at A10).
 - [ ] Bash removes 1 Strength (Defect sometimes loses 1 Focus instead).
-- [ ] Spear opens with Burn Strike, never twice in a row; turn 2 is Skewer; Burns go to the discard pile (shuffled into the draw pile at A10).
+- [ ] Spear opens with Burn Strike, never twice in a row; turn 2 is Skewer; Burns go to the discard pile (put on top of the draw pile at A10).
 - [ ] Killing either one removes Surrounded and the survivor's Back Attack; the players face the survivor.
 - [ ] In co-op, attacks hit every player, and the host and client logs show the same `ending:` lines.
 - [ ] Monster HP 200 % doubles both monsters' HP once; Monster Damage 50 % halves Bash.

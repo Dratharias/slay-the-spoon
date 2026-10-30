@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
@@ -53,19 +52,12 @@ public sealed class Sts1SpireSpear : Sts1EndingMonster
 			.WithHitCount(EndingNumbers.SpearBurnStrikeHits)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(null);
-		var players = PlayersHit(attack);
-		if (!EndingNumbers.SpearBurnsToDrawPile(Ascension))
-		{
-			// No creator: MonsterDamageRule treats these Burns as enemy statuses.
-			await CardPileCmd.AddToCombatAndPreview<Burn>(players, PileType.Discard, EndingNumbers.SpearBurns, null);
-			return;
-		}
-		foreach (Creature player in players)
-		{
-			var burns = new List<CardModel>();
-			for (int i = 0; i < EndingNumbers.SpearBurns; i++) burns.Add(CombatState.CreateCard<Burn>(player.Player!));
-			await EndingDrawPile.ShuffleIn(player.Player!, burns, EndingRng);
-		}
+		// StS1 A18: MakeTempCardInDrawPileAction(..., randomSpot: false), so the Burns go on top of the draw pile.
+		// No creator: MonsterDamageRule treats these Burns as enemy statuses.
+		if (EndingNumbers.SpearBurnsToDrawPile(Ascension))
+			await CardPileCmd.AddToCombatAndPreview<Burn>(PlayersHit(attack), PileType.Draw, EndingNumbers.SpearBurns, null, CardPilePosition.Top);
+		else
+			await CardPileCmd.AddToCombatAndPreview<Burn>(PlayersHit(attack), PileType.Discard, EndingNumbers.SpearBurns, null);
 	}
 
 	private async Task PiercerMove(IReadOnlyList<Creature> targets)
