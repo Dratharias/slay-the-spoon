@@ -62,3 +62,8 @@ Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 firs
 - [ ] Co-op with different animation timing: accept as soon as the button appears; both screens agree (relic removed, key granted, same deck).
 - [ ] Leaving or reloading the treasure room drops the offer; a queued stale offer cannot affect a later chest.
 - [ ] Saving after the swap preserves the team key and the reverted inventory.
+
+## Heart powers (WP4-6 Task 1)
+
+- [ ] Invincible: the Heart's HP loss stops at 300 per turn solo, 200 at A10, and 780 with two players. Block on the Heart is not counted. Poison counts.
+- [ ] Beat of Death: each card you play deals 1 damage to you (2 at A10). Strength does not change it. Monster Damage 200 % doubles it once.

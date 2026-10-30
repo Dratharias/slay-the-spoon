@@ -6,6 +6,13 @@ namespace SlaySpoon.Tests;
 public class MonsterDamageRuleTests
 {
 	[Fact]
+	public void BeatOfDeathIsScaledOnceAsAnEnemyEffect()
+	{
+		Assert.True(MonsterDamageRule.Scales(dealerIsEnemy: false, targetIsEnemy: false, enemyStatus: false, enemyEffect: true));
+		Assert.True(MonsterDamageRule.Scales(dealerIsEnemy: true, targetIsEnemy: false, enemyStatus: false, enemyEffect: false));
+	}
+
+	[Fact]
 	public void Enemy_dealer_always_scales()
 	{
 		Assert.True(MonsterDamageRule.Scales(dealerIsEnemy: true, targetIsEnemy: false, enemyStatus: false, enemyEffect: false));
