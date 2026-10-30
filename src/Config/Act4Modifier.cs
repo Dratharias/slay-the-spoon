@@ -1,4 +1,7 @@
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.RestSite;
+using SlaySpoon.Act4;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using SlaySpoon.Core;
@@ -14,6 +17,13 @@ public sealed class SpoonAct4 : ModifierModel
 	private Act4Keys _keys = new();
 
 	public Act4Keys Keys => _keys;
+
+	public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
+	{
+		if (Keys.Has(Act4Key.Ruby)) return false;
+		options.Add(new Sts1RubyRestSiteOption(player));
+		return true;
+	}
 
 	/// <summary>MemberwiseClone would share the canonical instance's key state with every run; each run starts fresh.</summary>
 	protected override void DeepCloneFields()

@@ -30,3 +30,12 @@ Set `"Act4Preview": "True"` in `mod_configs/SlaySpoon.cfg` and unlock Act 4 firs
 - [ ] A run with the Act 4 flag shows three dim keys (red, green, blue) in the top bar at run start; the hover tip is unchanged.
 - [ ] When one player takes a key, that key brightens for every player.
 - [ ] Save and resume: held keys stay bright.
+
+## Ruby rest site option (Task 6)
+
+- [ ] With the Act 4 flag, Recall / Rappel shows the Ruby icon and localized text.
+- [ ] Solo: Recall takes the Ruby for the team and spends the rest action; no healing or smithing afterwards.
+- [ ] The next rest site no longer offers Recall; saving and resuming keeps the Ruby.
+- [ ] Co-op (`make mp`): one player recalls, the other can still rest or smith; their Recall icon greys out and cannot be selected.
+- [ ] Co-op simultaneous Recall choices: both players spend their action and the team holds one Ruby, consistently on both peers.
+- [ ] Without the Act 4 flag, rest sites have no Recall option.
