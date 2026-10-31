@@ -108,7 +108,9 @@ your co-op partners. It is cosmetic only.
 
 **Act 4, The Ending:** reaching Act 3 in a Standard run at Ascension 10 for the first time permanently
 unlocks Act 4, even if that run is lost. Once unlocked, it is available at every ascension level, including 0.
-Collect the Ruby, Emerald and Sapphire keys (one set for the whole team in co-op); with all three, the Act 3 boss
+Collect the Ruby, Emerald and Sapphire keys (one set for the whole team in co-op). The Sapphire Key sits in chests: in
+solo you take it instead of the relic; in co-op the players who lose the rock-paper-scissors rematch for the relics left,
+and the last one chooses between the last relic and the key. With all three keys, the Act 3 boss
 gives its rewards and the run continues into The Ending: a rest site, a merchant, the Spire Shield and Spear, then
 the Corrupt Heart. Without all keys the run ends after Act 3 as usual. A Custom Run option, "Act 4", turns on the
 keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-game validation; see
