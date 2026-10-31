@@ -59,7 +59,8 @@ Backlog sections "Act 4 The Ending (step 6 WP4-6)".
   postfix. Leave the volume-slider gap as a backlog line unless the game's music bus volume is readable from Godot
   (check, then state).
 
-- StS1 ending visuals (owner, 2026-10-30): no ending cutscene (StS1 has none for the Necrobinder or the Regent); use the
+- StS1 ending visuals (owner, 2026-10-30): no ending cutscene (StS1 has none for the Necrobinder or the Regent) and no
+  end credits; use the
   rest of StS1's Ending content in place of Glory's where StS1 has it (combat/room backgrounds, music if the jar holds
   it in a format Godot plays). Inventory the jar first; import through the existing `make sts1-act4-data` manifest
   (SHA-256, tests); keep Glory's asset for anything StS1 lacks (map, rest site if none). State what you used.
