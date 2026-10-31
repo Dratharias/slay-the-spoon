@@ -1,5 +1,8 @@
 # Fix wave (0.10.1) — in-game checklist
 
+Implementation complete and merged into main; build, 408 xUnit tests, 74 Python tests and Workshop staging pass.
+The gameplay checks below remain pending owner testing; automated validation does not tick them.
+
 ## Act 4 keys
 
 - [ ] Golden Compass picked up mid-act (Act 4 run, Emerald not yet held): the Emerald marker moves to an elite node of the regenerated map (or disappears if it has no elite); fighting that elite grants the Emerald key.

@@ -29,8 +29,9 @@ public sealed class Sts1WaveOfTheHandPower : PowerModel, IBorrowedIcon
 		await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), CombatState.HittableEnemies.ToList(), Amount, Owner, null);
 	}
 
-	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+	public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
+		// Keep enemy end-of-turn Block hooks active before removing the round-long effect.
 		if (side == CombatSide.Enemy)
 		{
 			await PowerCmd.Remove(this);

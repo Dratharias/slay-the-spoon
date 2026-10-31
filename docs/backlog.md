@@ -1,20 +1,13 @@
 # Backlog
 
-Known gaps deferred from step 1's final review. Fixed when the author feels like it.
+Remaining design decisions and deferred work after the 0.10.1 fix wave (2026-10-30).
+Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/fix-wave-checklist.md.
 
-- ~~The Watcher (StS1 character) as a playable character when a StS1 card set mode is ticked in a
-  Custom Run (owner request, 2026-10-29).~~ Done in 0.10.0 (step 7): playable in Custom Run with a StS1
-  card set, static visuals. In-game validation and animations are deep backlog.
-- Act 4 with the StS1 keys (Ruby, Emerald, Sapphire): permanently unlock by first reaching Act 3
-  in a Standard run at Ascension 10, whether that run is won or lost. Once unlocked, Act 4 is
-  available at every ascension level, including 0. A Custom Run option bypasses the prerequisite
-  (owner clarification, 2026-10-29). Daily runs remain unchanged.
-  Act 4 shipped in 0.9.0; the source import plan is `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
 - StS1 character-specific relics (Ironclad, Silent, Defect, Watcher pools) that StS2 dropped, offered when a StS1 card
   set mode is active (owner request, 2026-10-29). Inventory completed 2026-10-30:
   `docs/review/character-relics.md` and `data/duplicates/character-relics.json`.
-  First proposed slice: Champion Belt, Magic Flower, The Specimen. The eight missing boss relics are approved
-  for porting as inactive content: no acquisition or random generation for now (owner, 2026-10-30).
+  First slice in progress, uncommitted in the main working copy: Champion Belt, Magic Flower, The Specimen.
+  This work is outside the fix wave and is not included in its Workshop package.
   Owner decisions (2026-10-30): the boss relics are activated by a Custom Run option; special event relics are imported
   but not implemented, and how to obtain them is decided later.
 - Act 4 keys (step 6 WP3), minors left after review:
@@ -33,7 +26,8 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
 - Act 4 The Ending (step 6 WP4-6), design calls made without the owner (change any of them):
   - Static sprites rendered from the StS1 setup pose, not animations.
   - Monster visuals and the elite slot layout are built in code, not as scenes.
-  - The Ending is added to the run when the team takes its last key, so only the second act 3 boss at A10 gives rewards (the single boss below A10 still rewards).
+  - The Ending is added to the run when the team takes its last key; only the second act 3 boss at A10 gives rewards
+    (the single boss below A10 still rewards), per owner decision.
   - Map: rest site → merchant → elite → Heart, no ancient, no event.
   - The Spear applies Surrounded (Shield Back Attack Left, Spear Back Attack Right).
   - Co-op: Debilitate, Bash's debuff and Burn Strike's Burns hit every player; Beat of Death hits the card's player;
@@ -44,7 +38,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     the planned "Renforcement").
   - Act 4 elite rewards are vanilla elite rewards.
   - Statuses shuffled into the draw pile take their position from the monster's own RNG.
-  - The StS1 ending stinger plays once at the victory room (dropped if it clashes with the game's music).
   - Neow ignores the Act 4 Custom Run option.
   - Co-op: Shield and Spear get vanilla's multiplayer Artifact bonus (+1 per extra player), as every StS2 enemy does.
   - The Heart's sprite is the setup pose without IK/path constraints: its three top vents look folded.
@@ -115,7 +108,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     its card directly when the kill ends the combat (no preview effect).
   - Foreign Influence draws from the attack pools of the current card set (character pools only, 55/30/15 rarity roll on
     the combat card generation RNG), no colorless attacks. Owner-approved StS2 rule for cross-character generation.
-  - Master Reality is a custom power that upgrades cards the owner creates in combat; other players' cards are untouched.
 - The Watcher (step 7), minors left after review:
   - Signature Move's playability and glow match StS1, but the game displays its generic unplayable message:
     CardModel exposes only IsPlayable, with no per-card message override. A dialogue patch is deferred.

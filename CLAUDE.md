@@ -62,7 +62,7 @@ Read `README.md` for the player view and the spec for every decision.
   - `sts1event <id>` console command; event portraits in `godot/SlaySpoon/images/events/` (`art.py --events`);
   - build: 0 warnings / 0 errors; tests: 100 xUnit and 36 pytest pass;
   - not installed or tested in game: `docs/testing/step-3d-checklist.md` remains unchecked.
-- Steps 2 to 6 are merged. Step 7 (the Watcher, on `step-7-watcher`) is merged only when the owner says so.
+- Steps 2 to 7 are merged into `main`. The 0.10.1 fix wave is also merged incrementally (owner, 2026-10-30).
   After step 3, look at a Steam Workshop "alpha" with the owner (no upload without their go-ahead).
   The Hybrid version switch also covers the merchant (local, price kept), choose-a-card screens (the synced
   index carries the version, `src/Core/VersionChoiceCode.cs`) and reward grids such as Sealed Deck (a synced
@@ -105,7 +105,7 @@ Read `README.md` for the player view and the spec for every decision.
   Ruby Recall rest option, Emerald elite marker/buffs, and Sapphire chest-relic swap (EN/FR).
   Build: 0 warnings / 0 errors; tests: 223 xUnit and 52 pytest pass. In-game checks remain pending.
 - WP4-6 implemented (0.9.0, merged into `main`): Spire Shield and Spear elite, Corrupt Heart boss (static sprites rendered from
-  the StS1 setup pose, `make sts1-ending-art`), The Ending act on Glory's assets, fixed map rest → merchant → elite → Heart,
+  the StS1 setup pose, `make sts1-ending-art`), The Ending act (StS1 backgrounds/music since 0.10.1; Glory map), fixed map rest → merchant → elite → Heart,
   the act is appended when the team holds all three keys (the act 3 boss then gives rewards), victory through the Architect,
   StS1 ending stinger.
 - Released: Standard access after the unlock; Custom Run option "Act 4" (`SpoonAct4`) bypasses the unlock; Daily unchanged.
@@ -115,17 +115,37 @@ Read `README.md` for the player view and the spec for every decision.
 
 ## Step 7 status (2026-10-30)
 
-- The Watcher is implemented on `step-7-watcher` (0.10.0, not merged; plan `docs/superpowers/plans/2026-10-29-step-7-watcher.md`):
+- The Watcher is implemented and merged into `main` (0.10.0; plan `docs/superpowers/plans/2026-10-29-step-7-watcher.md`):
   a sixth character, playable in Custom Run only while a StS1 card set modifier (StS1-only or Spire Souvenir) is ticked.
   She never enters `ModelDb.AllCharacters`, so Standard, Daily, random picks and vanilla epoch counts stay vanilla.
 - Done: static visuals (combat body, corpse, rest site, merchant, stance eye), stances (Wrath, Calm, Divinity) and Mantra,
   Scry, last-card tracking, 71 cards plus her 4 starter cards (25 attacks, 34 skills, 12 powers; Discipline and Unraveling are not
-  ported), the 8 generated cards, her relics (Pure Water starter; Holy Water and Violet Lotus ported with no acquisition
-  source; native Cloak Clasp reused), her 3 potions, EN/FR text and the progress guards.
+  ported), the 8 generated cards, her relics (Pure Water starter; Holy Water and Violet Lotus available through the Orobas fallback since 0.10.1; native Cloak Clasp reused), her 3 potions, EN/FR text and the progress guards.
 - Owner decisions: static visuals first, animations and in-game validation deep backlog; she may obtain Archaic Tooth
   through the vanilla rule (no guard).
 - Build: 0 warnings / 0 errors; tests: 366 xUnit and 74 pytest pass. In-game checks pending in
   `docs/testing/step-7-checklist.md`; design calls and minors in `docs/backlog.md`.
+
+## Fix wave (2026-10-30)
+
+- Version remains **0.10.1** in both `mod/SlaySpoon.json` and `src/ModEntry.cs`.
+- Tasks 1–4 are committed and merged into `main`: keys/config fixes; Ending rewards, Smash, clock repair,
+  French defeat text, StS1 backgrounds/music and menu/volume handling; Watcher fidelity fixes; Orobas fallback.
+- StS1 combat and campfire backgrounds and Act 4/Heart music are shipped. Glory remains for the map;
+  the shared StS2 merchant scene remains. No new cutscene or credits.
+- At A10 only the second act 3 boss rewards when act 4 follows. Holy Water/Violet Lotus occupy the unavailable
+  Tooth slot for the Watcher only, selected with the owner's event RNG; other sources stay excluded.
+- Final review: source-level comparison with local StS1/StS2; 0 build warnings/errors; **408 xUnit + 74 pytest pass**.
+  `make workshop` succeeds; PCK resource references, EN/FR tables, version and staged DLL/PCK/JSON were verified.
+- Workshop package: `../slay-the-spoon-fixes/build/workshop/`, item `3829630403`. **Staged only, not uploaded or installed.**
+  Publish from that worktree while the main working copy contains the separate uncommitted character-relic work;
+  rebuilding in the main working copy would include its untracked C# files through the SDK glob.
+- In-game validation remains deferred in `docs/testing/fix-wave-checklist.md`; no unchecked item is marked passed.
+  Review notes: `docs/review/ending-fix-wave.md`, `watcher-fix-wave.md`, `orobas-fix-wave.md` and `fix-wave-final.md`.
+- Remaining decisions, preview gaps and co-op exceptions stay in `docs/backlog.md`. Character relics are the next
+  separate tranche (Champion Belt, Magic Flower, The Specimen); boss relics use a future Custom Run option and
+  special-event relics remain imported without implementation.
+- Owner instruction: merge each validated, Workshop-packageable task into `main` incrementally. No push/upload.
 
 ## Documents
 
