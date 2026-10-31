@@ -1,3 +1,4 @@
+using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,6 +19,16 @@ namespace SlaySpoon.Watcher.Powers;
 /// <summary>StS1 Establishment: each card the owner Retains costs Amount less for the rest of the combat (never below 0).</summary>
 public sealed class Sts1EstablishmentPower : PowerModel, IBorrowedIcon
 {
+	private static readonly AccessTools.FieldRef<CardEnergyCost, List<LocalCostModifier>> LocalModifiers =
+		AccessTools.FieldRefAccess<CardEnergyCost, List<LocalCostModifier>>("_localModifiers");
+
+	private static int CombatCost(CardEnergyCost cost)
+	{
+		int value = cost.GetWithModifiers(CostModifiers.None);
+		foreach (var modifier in LocalModifiers(cost).Where(m => m.Expiration == LocalCostModifierExpiration.EndOfCombat))
+			value = modifier.Modify(value);
+		return Math.Max(0, value);
+	}
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
@@ -33,11 +44,11 @@ public sealed class Sts1EstablishmentPower : PowerModel, IBorrowedIcon
 		bool flashed = false;
 		foreach (CardModel card in retainedCards)
 		{
-			if (card.Owner != player || card.EnergyCost.CostsX || card.EnergyCost.Canonical < 0)
+			if (card.Owner != player || !card.ShouldRetainThisTurn || card.EnergyCost.CostsX || card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
 			{
 				continue;
 			}
-			int change = WatcherPowerMath.EstablishmentReduction(card.EnergyCost.GetWithModifiers(CostModifiers.Local), Amount);
+			int change = WatcherPowerMath.EstablishmentReduction(CombatCost(card.EnergyCost), Amount);
 			if (change == 0)
 			{
 				continue;

@@ -299,7 +299,7 @@
 	"STS1_PANACEA.title": "Panacée",
 	"STS1_PANACHE.description": "Pour toutes les 5 cartes que vous jouez en un tour, infligez {Sts1PanachePower:diff()} dégâts à TOUS les ennemis.",
 	"STS1_PANACHE.title": "Panache",
-	"STS1_PERSEVERANCE.description": "Retenue.\nGagnez {Block:diff()} d'[gold]Armure[/gold].\nLorsque cette carte est retenue, augmente son gain d'[gold]Armure[/gold] de {Magic:diff()} pour ce combat.",
+	"STS1_PERSEVERANCE.description": "Gagnez {Block:diff()} d'[gold]Armure[/gold].\nLorsque cette carte est retenue, augmente son gain d'[gold]Armure[/gold] de {Magic:diff()} pour ce combat.",
 	"STS1_PERSEVERANCE.title": "Persévérance",
 	"STS1_PHANTASMAL_KILLER.description": "Au prochain tour, les Attaques infligent le double de dégâts.",
 	"STS1_PHANTASMAL_KILLER.title": "Tueur illusoire",

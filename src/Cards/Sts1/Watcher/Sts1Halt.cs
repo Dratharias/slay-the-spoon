@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -20,7 +21,7 @@ using SlaySpoon.Watcher.Powers;
 
 namespace SlaySpoon.Cards.Sts1.Watcher;
 
-/// <summary>StS1 Halt: Block, plus the Magic amount again while the owner is in Wrath (two gains, as StS1 applies Dexterity to both).</summary>
+/// <summary>StS1 Halt: Block, plus the Magic amount again while the owner is in Wrath (one gain, with Dexterity applied to both amounts as in StS1).</summary>
 public sealed class Sts1Halt : Sts1WatcherCard
 {
 	public override bool GainsBlock => true;
@@ -30,7 +31,7 @@ public sealed class Sts1Halt : Sts1WatcherCard
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{
 		new BlockVar(3m, ValueProp.Move),
-		new DynamicVar("Magic", 9m),
+		new BlockVar("Magic", 9m, ValueProp.Move),
 	};
 
 	public Sts1Halt()
@@ -40,11 +41,20 @@ public sealed class Sts1Halt : Sts1WatcherCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+		// HaltAction combines two independently modified amounts into one GainBlockAction.
+		decimal block = Hook.ModifyBlock(CombatState!, Owner.Creature, DynamicVars.Block.BaseValue,
+			DynamicVars.Block.Props, this, cardPlay, out var modifiers);
+		var affected = modifiers.ToList();
+		decimal extra = 0;
 		if (StanceCmd.Current(Owner) == Stance.Wrath)
 		{
-			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars["Magic"].BaseValue, DynamicVars.Block.Props, cardPlay);
+			extra = Hook.ModifyBlock(CombatState!, Owner.Creature, DynamicVars["Magic"].BaseValue,
+				DynamicVars.Block.Props, this, cardPlay, out var extraModifiers);
+			affected.AddRange(extraModifiers);
 		}
+		decimal total = WatcherFidelityRule.HaltBlock(block, extra);
+		await Hook.AfterModifyingBlockAmount(CombatState!, total, this, cardPlay, affected.Distinct());
+		await CreatureCmd.GainBlock(Owner.Creature, total, ValueProp.Unpowered, cardPlay);
 	}
 
 	protected override void OnUpgrade()

@@ -26,7 +26,7 @@ public sealed class Sts1BattleHymnPower : PowerModel, IBorrowedIcon
 
 	public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
 	{
-		if (player != Owner.Player || !CombatState.Enemies.Any(enemy => enemy.IsAlive))
+		if (player != Owner.Player || CombatManager.Instance.IsOverOrEnding || !CombatState.Enemies.Any(enemy => enemy.IsAlive))
 		{
 			return;
 		}

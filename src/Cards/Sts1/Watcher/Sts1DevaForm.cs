@@ -41,7 +41,7 @@ public sealed class Sts1DevaForm : Sts1WatcherCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		Sts1DevaFormPower? existing = Owner.Creature.GetPower<Sts1DevaFormPower>();
-		Sts1DevaFormPower? power = await PowerCmd.Apply<Sts1DevaFormPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);
+		Sts1DevaFormPower? power = await PowerCmd.Apply<Sts1DevaFormPower>(choiceContext, Owner.Creature, DynamicVars["Magic"].BaseValue, Owner.Creature, this);
 		if (existing != null && power != null)
 		{
 			power.RaiseGain();

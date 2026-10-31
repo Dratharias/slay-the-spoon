@@ -21,14 +21,17 @@ public sealed class Sts1BlockReturnPower : PowerModel, IBorrowedIcon
 
 	public Type IconSource => typeof(ThornsPower);
 
-	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target,
-		DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+	public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer,
+		DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
 	{
-		if (target != Owner || dealer?.Player == null || dealer == Owner || !props.IsPoweredAttack())
+		// AfterDamageGiven includes lethal hits, before the target's powers are removed.
+		// A pet attack belongs to its player: StS1 has no pets, and always blocks the player.
+		Creature? recipient = (dealer?.Player ?? dealer?.PetOwner)?.Creature;
+		if (target != Owner || recipient == null || dealer == Owner || !props.IsPoweredAttack())
 		{
 			return;
 		}
 		Flash();
-		await CreatureCmd.GainBlock(dealer, Amount, ValueProp.Unpowered, null);
+		await CreatureCmd.GainBlock(recipient, Amount, ValueProp.Unpowered, null);
 	}
 }

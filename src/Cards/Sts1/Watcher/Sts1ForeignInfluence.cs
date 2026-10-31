@@ -47,6 +47,8 @@ public sealed class Sts1ForeignInfluence : Sts1WatcherCard
 		{
 			chosen.SetToFreeThisTurn();
 		}
+		// StS1 ForeignInfluenceAction inserts its selection directly, bypassing Master Reality.
+		Sts1MasterRealityPower.ExcludeForeignInfluence(chosen);
 		await CardPileCmd.AddGeneratedCardToCombat(chosen, PileType.Hand, Owner);
 	}
 

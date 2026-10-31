@@ -114,21 +114,15 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - A host that unticks the modifier and readies in the same moment can start a run with her and no StS1 set (race);
     the Spire Souvenir may skip her (`HasSts1Cards`), which is harmless since her pool has no StS2 versions.
   - Vault in co-op: an extra turn for the player who played it only.
-  - Brilliance shows a calculated damage preview text; Ragnarok hits random enemies (`RandomEnemy`); Signature Move gives
-    no can't-play message; Fear No Evil enters Calm on a kill only.
-  - Block Return gives Block on any powered player attack; Lesson Learned uses the combat card selection RNG and upgrades
+  - Lesson Learned uses the combat card selection RNG and upgrades
     its card directly when the kill ends the combat (no preview effect).
-  - Halt gives its two Block gains separately (as Juggernaut triggers twice); Wave of the Hand expires at the end of the
-    side's turn, StS1 at the end of the round.
   - Foreign Influence draws from the attack pools of the current card set (character pools only, 55/30/15 rarity roll on
-    the combat card generation RNG), no colorless attacks.
-  - Omniscience's copies Exhaust (StS1 purges them), so on-exhaust triggers and Exhume see them.
-  - Battle Hymn stops adding Smites once no enemy is alive (StS1: "basically dead" check).
+    the combat card generation RNG), no colorless attacks. Owner-approved StS2 rule for cross-character generation.
   - Master Reality is a custom power that upgrades cards the owner creates in combat; other players' cards are untouched.
-  - Rushdown's English upgrade text has no DEPRECATED branch; Duality's power has no `powers.json` text of its own
-    (it extends vanilla `TemporaryDexterityPower`).
-  - Perseverance's French text keeps a duplicate "Retenue." keyword line.
 - The Watcher (step 7), minors left after review:
+  - Signature Move's playability and glow match StS1, but the game displays its generic unplayable message:
+    CardModel exposes only IsPlayable, with no per-card message override. A dialogue patch is deferred.
+  - Duality's power has no `powers.json` text of its own (it extends vanilla `TemporaryDexterityPower`).
   - Character shell: `OrbModel` takes the energy prefix from the pool title `sts1_watcher`; `WatcherAssetPatch`'s Layer log
     message is misleading when the node exists with another type; `NGameOverScreen` reads `CharacterStats[her id]`
     unguarded (the entry is created in memory, the checklist covers first death and victory).
@@ -138,12 +132,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     `WatcherVanillaGuardsPatch`); the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
     rebuilt per call; no log when the vanilla ascension cap applies; `VanillaCount` and `MaxAscensionFor` are untested
     (game-bound).
-  - Block Return gives no Block on the killing hit (StS1 does) and ignores pet (Osty) attacks.
-  - Master Reality upgrades Foreign Influence's pick and has no Status/Curse filter (StS1 upgrades only temp-card, Discovery
-    and colorless-choice cards).
-  - Establishment discounts cards kept by Runic Pyramid or Ringing Triangle (StS1 only Retain); its clamp reads this-turn
-    cost modifiers, so a retained card that is free this turn gets no combat discount.
-  - Deva Form applies 1 instead of its Magic var.
   - Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.
   - Wave of the Hand applies Weak through a throwing choice context (`AfterBlockGained` gives none); harmless unless a
     hook on Weak ever opens a choice.

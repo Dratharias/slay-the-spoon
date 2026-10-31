@@ -15,9 +15,11 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Watcher.Powers;
 
-/// <summary>StS1 Master Reality: every card created for the owner during combat is Upgraded (Watcher tokens included).</summary>
+/// <summary>StS1 Master Reality: eligible cards the holder creates in combat are upgraded; Status, Curse and Foreign Influence are excluded.</summary>
 public sealed class Sts1MasterRealityPower : PowerModel, IBorrowedIcon
 {
+	private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<CardModel, object> Excluded = new();
+	internal static void ExcludeForeignInfluence(CardModel card) => Excluded.GetValue(card, _ => new object());
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Single;
@@ -26,7 +28,8 @@ public sealed class Sts1MasterRealityPower : PowerModel, IBorrowedIcon
 
 	public override Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
 	{
-		if (creator != null && creator.Creature == Owner && card.IsUpgradable)
+		if (WatcherFidelityRule.MasterReality(creator?.Creature == Owner, card.IsUpgradable,
+			card.Type is CardType.Status or CardType.Curse, Excluded.TryGetValue(card, out _)))
 		{
 			Flash();
 			CardCmd.Upgrade(card);

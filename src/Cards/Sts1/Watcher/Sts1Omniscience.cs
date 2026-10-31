@@ -59,8 +59,8 @@ public sealed class Sts1Omniscience : Sts1WatcherCard
 		await CardCmd.AutoPlay(choiceContext, chosen, null);
 		foreach (CardModel copy in copies)
 		{
-			copy.ExhaustOnNextPlay = true;
-			await CardCmd.AutoPlay(choiceContext, copy, null);
+			using (OmnisciencePurge.Mark(copy))
+				await CardCmd.AutoPlay(choiceContext, copy, null);
 		}
 	}
 

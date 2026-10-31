@@ -100,7 +100,7 @@ public class Sts1AssetsTests
 			{
 				vars.Add(m.Groups[1].Value);
 			}
-			foreach (Match m in Regex.Matches(source, @"new DynamicVar\(""(\w+)"""))
+			foreach (Match m in Regex.Matches(source, @"new (?:DynamicVar|BlockVar|DamageVar)\(""(\w+)"""))
 			{
 				vars.Add(m.Groups[1].Value);
 			}
