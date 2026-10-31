@@ -11,7 +11,12 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   (owner clarification, 2026-10-29). Daily runs remain unchanged.
   Act 4 shipped in 0.9.0; the source import plan is `docs/superpowers/plans/2026-10-29-step-6-act4.md`.
 - StS1 character-specific relics (Ironclad, Silent, Defect, Watcher pools) that StS2 dropped, offered when a StS1 card
-  set mode is active (owner request, 2026-10-29). Not planned yet.
+  set mode is active (owner request, 2026-10-29). Inventory completed 2026-10-30:
+  `docs/review/character-relics.md` and `data/duplicates/character-relics.json`.
+  First proposed slice: Champion Belt, Magic Flower, The Specimen. The eight missing boss relics are approved
+  for porting as inactive content: no acquisition or random generation for now (owner, 2026-10-30).
+  Owner decisions (2026-10-30): the boss relics are activated by a Custom Run option; special event relics are imported
+  but not implemented, and how to obtain them is decided later.
 - Act 4 keys (step 6 WP3), minors left after review:
   - Golden Compass regenerates the map mid-act: the stored Emerald node may no longer be an elite, so that act loses its
     Emerald chance and the marker can sit on another point type (the grant already requires an elite room).
@@ -117,8 +122,8 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - Discipline and Unraveling are not ported (StS1 never registers them). Cloak Clasp is not ported: she finds the
     native shared Cloak Clasp.
   - Holy Water and Violet Lotus are ported with their effects (Holy Water replaces Pure Water with three Miracles) but have
-    no acquisition source: hidden from rewards, shops, events and random generation. Suggestion: Touch of Orobas could turn
-    Pure Water into Holy Water.
+    no acquisition source yet. Owner decision (2026-10-30): they replace Archaic Tooth in Orobas's offer when the Tooth's
+    conditions are not met (not implemented).
   - She may obtain Archaic Tooth through the vanilla rule (Prismatic Gem or a transform can put Bash, Neutralize, Unleash,
     Falling Star or Dualcast in her deck); no guard.
   - A host that unticks the modifier and readies in the same moment can start a run with her and no StS1 set (race);
@@ -170,3 +175,11 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
 - The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
   and in-game validation of everything in `docs/testing/step-7-checklist.md`. A "Deep backlog priority" section, if one
   exists on `main`, keeps its own wording; Watcher animations stay at the bottom of it.
+
+## Deep backlog priority (owner, 2026-10-30)
+
+- Character/Act 4 animations and in-game validation are deferred behind the remaining content work.
+  Existing testing checklists remain pending; this priority change does not mark them passed.
+- Watcher relic plan: reuse native shared Cloak Clasp rather than duplicate it; Holy Water and Violet Lotus
+  replace Archaic Tooth at Orobas when the Tooth's conditions fail. See `docs/review/character-relics.md`.
+- Bugs and in-game test results: the owner logs them here later.
