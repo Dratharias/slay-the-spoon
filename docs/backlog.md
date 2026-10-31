@@ -33,6 +33,8 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - Monster visuals and the elite slot layout are built in code, not as scenes.
   - The Ending is added to the run when the team takes its last key, so the act 3 boss gives normal boss rewards.
   - The Ending uses Glory's music, map, rest site and combat backgrounds; StS1's ending scene images are unused.
+    Owner decision (2026-10-30): no ending cutscene (the Necrobinder and the Regent have none); the rest of StS1's Ending
+    content replaces Glory's where StS1 has it (fix wave Task 2).
   - Map: rest site → merchant → elite → Heart, no ancient, no event.
   - The Spear applies Surrounded (Shield Back Attack Left, Spear Back Attack Right).
   - Co-op: Debilitate, Bash's debuff and Burn Strike's Burns hit every player; Beat of Death hits the card's player;
