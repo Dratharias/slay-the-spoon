@@ -36,7 +36,7 @@ public class EmeraldRuleTests
 	{
 		var keys = new Act4Keys();
 		Assert.True(EmeraldRule.MarkAct(keys, 1, [(3, 4)], 0));
-		Assert.False(EmeraldRule.MarkAct(keys, 1, [(5, 5)], 0));
+		Assert.False(EmeraldRule.MarkAct(keys, 1, [(3, 4), (5, 5)], 1));
 		Assert.Equal((3, 4), Act4Keys.Decode(keys.Encode()).EmeraldNode(1));
 	}
 
@@ -47,5 +47,35 @@ public class EmeraldRuleTests
 		Assert.False(EmeraldRule.MarkAct(keys, 3, [(1, 1)], 0));
 		keys.Take(Act4Key.Emerald);
 		Assert.False(EmeraldRule.MarkAct(keys, 0, [(1, 1)], 0));
+	}
+
+	[Fact]
+	public void MarkAct_RepicksWhenTheStoredNodeIsNoLongerAnElite()
+	{
+		var keys = new Act4Keys();
+		EmeraldRule.MarkAct(keys, 0, [(3, 4)], 0);
+		Assert.True(EmeraldRule.MarkAct(keys, 0, [(1, 6), (2, 2)], 1));
+		Assert.Equal((1, 6), keys.EmeraldNode(0));
+	}
+
+	[Fact]
+	public void MarkAct_ClearsTheStoredNodeWhenTheNewMapHasNoElite()
+	{
+		var keys = new Act4Keys();
+		EmeraldRule.MarkAct(keys, 0, [(3, 4)], 0);
+		Assert.True(EmeraldRule.MarkAct(keys, 0, [], 0));
+		Assert.Null(keys.EmeraldNode(0));
+	}
+
+	[Fact]
+	public void MarkAct_RepickLeavesOtherActsAndHeldKeyAlone()
+	{
+		var keys = new Act4Keys();
+		EmeraldRule.MarkAct(keys, 0, [(3, 4)], 0);
+		EmeraldRule.MarkAct(keys, 1, [(2, 2)], 0);
+		keys.Take(Act4Key.Emerald);
+		Assert.False(EmeraldRule.MarkAct(keys, 0, [(9, 9)], 0));
+		Assert.Equal((3, 4), keys.EmeraldNode(0));
+		Assert.Equal((2, 2), keys.EmeraldNode(1));
 	}
 }

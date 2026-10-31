@@ -117,4 +117,22 @@ public class PickupLedgerTests
 		Assert.False(ledger.ConsumeExpected("Anchor"));
 		Assert.True(ledger.ConsumeExpected("Pear"));
 	}
+
+	[Fact] public void IsExpected_IsTrueUntilTheRelicIsConsumed()
+	{
+		var ledger = new PickupLedger<string, int>();
+		ledger.Expect(["Mango"]);
+		Assert.True(ledger.IsExpected("Mango"));
+		Assert.False(ledger.IsExpected("Pear"));
+		ledger.ConsumeExpected("Mango");
+		Assert.False(ledger.IsExpected("Mango"));
+	}
+
+	[Theory]
+	[InlineData(true, false, false, true)]   // the reward animation has not handed the relic out yet
+	[InlineData(false, true, false, true)]   // handed out, its effects are still running
+	[InlineData(false, true, true, false)]   // done: decide now
+	[InlineData(false, false, false, false)] // never awarded here: refuse at once
+	public void ShouldWait_OnlyForAPickupThatIsStillComing(bool expected, bool recorded, bool planReady, bool wait) =>
+		Assert.Equal(wait, SapphireRevert.ShouldWait(expected, recorded, planReady));
 }

@@ -25,6 +25,14 @@ public static class SapphireRevert
 		Math.Max(0, Math.Min(planned - alreadyLost, currentHp - 1));
 
 	/// <summary>
+	/// A queued swap can reach a peer whose reward animation has not handed the relic out yet, or has not finished its
+	/// pickup effects. Such a swap waits for the pickup (every peer ends up with the same ledger); one for a relic this
+	/// peer never expected is refused at once.
+	/// </summary>
+	public static bool ShouldWait(bool relicExpected, bool entryRecorded, bool planReady) =>
+		relicExpected || (entryRecorded && !planReady);
+
+	/// <summary>
 	/// Decides a queued swap from run state only, so every peer reaches the same answer before the key is taken.
 	/// Returns the recorded plan, or null when the swap must not happen.
 	/// </summary>

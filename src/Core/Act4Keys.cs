@@ -59,6 +59,11 @@ public sealed class Act4Keys
 		_emerald[actIndex] = (col, row);
 	}
 
+	public void ClearEmerald(int actIndex)
+	{
+		_emerald.Remove(actIndex);
+	}
+
 	public int[] Encode()
 	{
 		var data = new List<int> { Version, _flags, _emerald.Count };
@@ -71,7 +76,7 @@ public sealed class Act4Keys
 		return data.ToArray();
 	}
 
-	/// <summary>Rebuilds a state from <see cref="Encode"/> output; throws <see cref="ArgumentException"/> on bad data.</summary>
+	/// <summary>Rebuilds a state from <see cref="Encode"/> output; throws <see cref="ArgumentException"/> on an unknown version, bad flags or a duplicate act; a corrupt node count keeps the flags and stores no node.</summary>
 	public static Act4Keys Decode(int[]? data)
 	{
 		var keys = new Act4Keys();
@@ -85,11 +90,16 @@ public sealed class Act4Keys
 		}
 		int flags = data[1];
 		int count = data[2];
-		if (flags < 0 || flags > AllFlags || count < 0 || data.Length != 3 + count * IntsPerNode)
+		if (flags < 0 || flags > AllFlags)
 		{
 			throw new ArgumentException("Corrupt Act 4 keys data.", nameof(data));
 		}
 		keys._flags = flags;
+		// Bound the count by what the array can hold before multiplying (no int overflow); a corrupt count stores no node.
+		if (count < 0 || count > (data.Length - 3) / IntsPerNode || data.Length != 3 + count * IntsPerNode)
+		{
+			return keys;
+		}
 		for (int i = 0; i < count; i++)
 		{
 			int at = 3 + i * IntsPerNode;

@@ -6,11 +6,13 @@ namespace SlaySpoon.Saves;
 /// <summary>Reads and writes user://mod_configs/SlaySpoon.cfg (next to BaseLib.cfg).</summary>
 public static class SpoonConfigFile
 {
+	private static bool _readFailureLogged;
+
 	private static string FilePath => ProjectSettings.GlobalizePath("user://mod_configs/SlaySpoon.cfg");
 
 	/// <summary>
 	/// The file content: ok with null when the file does not exist yet (first run), not ok when it could not be read
-	/// (logged once per failure); in that case nothing may be written.
+	/// (logged once per session); in that case nothing may be written.
 	/// </summary>
 	private static bool TryReadContent(out string? content)
 	{
@@ -25,7 +27,11 @@ public static class SpoonConfigFile
 		}
 		catch (Exception e) when (e is IOException or UnauthorizedAccessException)
 		{
-			SpoonLog.Error($"Could not read {FilePath}: {e.Message}");
+			if (!_readFailureLogged)
+			{
+				_readFailureLogged = true;
+				SpoonLog.Error($"Could not read {FilePath}: {e.Message}");
+			}
 			return false;
 		}
 	}
@@ -47,8 +53,11 @@ public static class SpoonConfigFile
 		}
 		try
 		{
+			// Temp file in the same directory, then a rename: a crash mid-write cannot truncate the unlock.
 			Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
-			File.WriteAllText(FilePath, json);
+			string temp = FilePath + ".tmp";
+			File.WriteAllText(temp, json);
+			File.Move(temp, FilePath, overwrite: true);
 		}
 		catch (Exception e) when (e is IOException or UnauthorizedAccessException)
 		{

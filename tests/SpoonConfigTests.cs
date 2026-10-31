@@ -102,4 +102,17 @@ public class SpoonConfigTests
 		Assert.False(SpoonConfig.ReadFlag("{\"K\": \"False\"}", "K"));
 		Assert.False(SpoonConfig.ReadFlag("{}", "K"));
 	}
+
+	[Fact]
+	public void With_KeepsNonScalarValues()
+	{
+		string json = SpoonConfig.With("{\"List\": [1, 2], \"Obj\": {\"a\": true}, \"N\": 3, \"Nil\": null}", SpoonConfig.PreviewKey, "True")!;
+		using var doc = System.Text.Json.JsonDocument.Parse(json);
+		var root = doc.RootElement;
+		Assert.Equal(2, root.GetProperty("List").GetArrayLength());
+		Assert.True(root.GetProperty("Obj").GetProperty("a").GetBoolean());
+		Assert.Equal(3, root.GetProperty("N").GetInt32());
+		Assert.Equal(System.Text.Json.JsonValueKind.Null, root.GetProperty("Nil").ValueKind);
+		Assert.True(SpoonConfig.ReadFlag(json, SpoonConfig.PreviewKey));
+	}
 }

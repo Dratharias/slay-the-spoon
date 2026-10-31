@@ -28,6 +28,9 @@ public sealed class PickupLedger<TKey, TEntry> where TKey : notnull
 	/// <summary>True (once per awarded copy) when this relic id is one the chest handed out.</summary>
 	public bool ConsumeExpected(string id) => _expected.Remove(id);
 
+	/// <summary>True while the chest's award of this relic id has not been obtained on this peer yet.</summary>
+	public bool IsExpected(string id) => _expected.Contains(id);
+
 	public void Clear()
 	{
 		_entries.Clear();

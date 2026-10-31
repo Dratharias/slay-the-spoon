@@ -158,11 +158,9 @@ internal static class SapphireChestPatch
 			button.Pressed += () =>
 			{
 				if (offered is not { } relic || button.Disabled) return;
-				int index = me.Relics.IndexOf(relic);
-				if (index < 0) return;
 				button.Disabled = true;
 				RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new SapphireSwapAction(me,
-					new NetSapphireSwap { RelicIndex = index, Floor = run.TotalFloor }));
+					new NetSapphireSwap { RelicId = relic.Id.ToString(), Floor = run.TotalFloor }));
 			};
 			Changed += Refresh;
 			Act4Keys.Changed += Refresh;
@@ -230,17 +228,46 @@ internal static class SapphireChestPatch
 		}
 	}
 
+	private static (RelicModel? Relic, Entry? Entry) FindPickup(Player player, NetSapphireSwap action)
+	{
+		var relic = player.Relics.FirstOrDefault(r => r.Id.ToString() == action.RelicId);
+		Entry? entry = null;
+		if (relic != null) Ledger.TryFind((player, relic), action.Floor, out entry);
+		return (relic, entry);
+	}
+
+	/// <summary>Polls for the pickup to finish on this peer, for at most <see cref="SwapWaitMs"/>.</summary>
+	private static async Task<(RelicModel? Relic, Entry? Entry)> AwaitPickup(Player player, NetSapphireSwap action)
+	{
+		for (int waited = 0; ; waited += SwapPollMs)
+		{
+			var (relic, entry) = FindPickup(player, action);
+			bool wait = SapphireRevert.ShouldWait(Ledger.IsExpected(action.RelicId), entry != null, entry?.Plan != null);
+			if (!wait) return (relic, entry);
+			if (waited >= SwapWaitMs)
+			{
+				SpoonLog.Info($"act4: Sapphire swap {player.NetId} {action.RelicId}: pickup not finished after {SwapWaitMs} ms, refused");
+				return (null, null);
+			}
+			await Task.Delay(SwapPollMs);
+		}
+	}
+
+	private const int SwapPollMs = 50;
+	private const int SwapWaitMs = 15000;
+
 	/// <summary>
-	/// The queued swap. It reads run state only and never waits: a failed check returns before the key is taken, the
-	/// same way on every peer.
+	/// The queued swap. The action names the relic by model id, so a peer whose reward animation has not handed it out
+	/// yet waits for its pickup (bounded) instead of refusing while the others apply the swap. Past the wait it reads
+	/// ledger state only; a failed check returns before the key is taken.
 	/// </summary>
 	internal static async Task Swap(Player player, NetSapphireSwap action)
 	{
 		var run = player.RunState;
-		if (run != _ledgerRun || action.RelicIndex < 0 || action.RelicIndex >= player.Relics.Count) return;
-		var relic = player.Relics[action.RelicIndex];
+		if (run != _ledgerRun || string.IsNullOrEmpty(action.RelicId)) return;
+		var (relic, entry) = await AwaitPickup(player, action);
+		if (relic == null) return;
 		var act4 = SpoonAct4.Of(run);
-		Ledger.TryFind((player, relic), action.Floor, out var entry);
 		var cards = entry?.Handles.ToDictionary(p => p.Value, p => p.Key);
 		var plan = SapphireRevert.SwapPlan(entry?.Plan, player.Relics.Contains(relic),
 			act4 == null || act4.Keys.Has(Act4Key.Sapphire),

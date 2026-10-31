@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace SlaySpoon.Core;
 
@@ -71,16 +72,34 @@ public static class SpoonConfig
 		}
 	}
 
-	/// <summary>The file content with one key set and every other key kept; null when the existing content is unreadable (do not write).</summary>
+	/// <summary>
+	/// The file content with one key set and every other key kept as it is (numbers, arrays and objects included);
+	/// null when the existing content is unreadable (do not write).
+	/// </summary>
 	public static string? With(string? json, string key, string value)
 	{
-		Dictionary<string, string>? values = TryRead(json);
-		if (values == null)
+		JsonObject root;
+		if (string.IsNullOrWhiteSpace(json))
 		{
-			return null;
+			root = new JsonObject();
 		}
-		values[key] = value;
-		return JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true });
+		else
+		{
+			try
+			{
+				if (JsonNode.Parse(json) is not JsonObject parsed)
+				{
+					return null;
+				}
+				root = parsed;
+			}
+			catch (JsonException)
+			{
+				return null;
+			}
+		}
+		root[key] = value;
+		return root.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
 	}
 
 	/// <summary>True only for the exact value "True".</summary>

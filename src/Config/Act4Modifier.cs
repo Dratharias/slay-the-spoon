@@ -31,6 +31,9 @@ public sealed class SpoonAct4 : ModifierModel
 	{
 		var elites = map.GetAllMapPoints().Where(p => p.PointType == MapPointType.Elite)
 			.Select(p => (p.coord.col, p.coord.row)).ToArray();
+		// Also runs again when Golden Compass regenerates the map (a re-pick, see EmeraldRule.MarkAct) and when a saved
+		// map loads (the stored node is kept). Stream: Rng(run seed, "SlaySpoonEmerald{act}"), a mod-owned name vanilla
+		// never draws from; a fresh instance per call gives every peer the same roll for the same elite count.
 		// Draw directly over the candidate count: modulo of a fixed range would bias the choice.
 		int roll = elites.Length == 0 ? 0 : new Rng(RunState.Rng.Seed, $"SlaySpoonEmerald{actIndex}").NextInt(elites.Length);
 		if (EmeraldRule.MarkAct(Keys, actIndex, elites, roll)) Act4Keys.NotifyChanged();

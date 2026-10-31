@@ -68,9 +68,30 @@ public class Act4KeysTests
 	[Theory]
 	[InlineData(new[] { 2, 0, 0 })]
 	[InlineData(new[] { 1, 8, 0 })]
-	[InlineData(new[] { 1, 0, 1, 0, 3 })]
 	public void Decode_RejectsBadData(int[] data)
 	{
 		Assert.Throws<ArgumentException>(() => Act4Keys.Decode(data));
+	}
+
+	[Theory]
+	[InlineData(new[] { 1, 4, 1, 0, 3 })]
+	[InlineData(new[] { 1, 4, -1 })]
+	[InlineData(new[] { 1, 4, int.MaxValue })]
+	[InlineData(new[] { 1, 4, 715827883, 0, 0, 0 })]
+	[InlineData(new[] { 1, 4, 1, 0, 3, 4, 5 })]
+	public void Decode_CorruptCountKeepsFlagsAndStoresNoNode(int[] data)
+	{
+		var keys = Act4Keys.Decode(data);
+		Assert.True(keys.Has(Act4Key.Sapphire));
+		Assert.Null(keys.EmeraldNode(0));
+	}
+
+	[Fact]
+	public void ClearEmerald_RemovesTheStoredNode()
+	{
+		var keys = new Act4Keys();
+		keys.MarkEmerald(1, 2, 3);
+		keys.ClearEmerald(1);
+		Assert.Null(keys.EmeraldNode(1));
 	}
 }

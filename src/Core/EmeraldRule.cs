@@ -25,11 +25,22 @@ public static class EmeraldRule
 
 	public static int MaxHpGain(int maxHp) => (int)Math.Round(maxHp / 4m, MidpointRounding.AwayFromZero);
 
-	public static bool MarkAct(Act4Keys keys, int actIndex, IReadOnlyList<(int, int)> elites, int roll)
+	/// <summary>
+	/// Marks the act's Emerald node. A stored node is kept while the map still has an elite there (a resumed run reads its
+	/// saved map); when the map was regenerated (Golden Compass) and the node is no longer an elite, it is re-picked from
+	/// the new elites, or cleared when there are none. True when the stored state changed.
+	/// </summary>
+	public static bool MarkAct(Act4Keys keys, int actIndex, IReadOnlyList<(int Col, int Row)> elites, int roll)
 	{
-		if (actIndex < 0 || actIndex > LastAct || keys.Has(Act4Key.Emerald) || keys.EmeraldNode(actIndex) != null)
-			return false;
-		if (Pick(elites, roll) is not { } point) return false;
+		if (actIndex < 0 || actIndex > LastAct || keys.Has(Act4Key.Emerald)) return false;
+		var stored = keys.EmeraldNode(actIndex);
+		if (stored is { } node && elites.Contains(node)) return false;
+		if (Pick(elites, roll) is not { } point)
+		{
+			if (stored == null) return false;
+			keys.ClearEmerald(actIndex);
+			return true;
+		}
 		keys.MarkEmerald(actIndex, point.Col, point.Row);
 		return true;
 	}
