@@ -48,6 +48,18 @@
   ],
   "assets": [
     {
+      "source": "audio/music/STS_Act4_BGM_v2.ogg",
+      "path": "assets/audio/music/STS_Act4_BGM_v2.ogg",
+      "bytes": 2666831,
+      "sha256": "7ddd2b4c027a5346f105bb012a49cb06a479348b35ce77662c54027c25dce45d"
+    },
+    {
+      "source": "audio/music/STS_Boss4_v6.ogg",
+      "path": "assets/audio/music/STS_Boss4_v6.ogg",
+      "bytes": 2449757,
+      "sha256": "fe03af06b1bac970315550be0b5c06603bac91bef5ddc9ed3a5a52f7af0ccc40"
+    },
+    {
       "source": "audio/music/STS_EndingStinger_v1.ogg",
       "path": "assets/audio/music/STS_EndingStinger_v1.ogg",
       "bytes": 542999,

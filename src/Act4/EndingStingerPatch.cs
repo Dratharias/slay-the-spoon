@@ -1,70 +1,117 @@
 using Godot;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Models.Acts;
 using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Audio;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Saves;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Act4;
 
-/// <summary>
-/// Plays StS1's ending stinger once when the Heart's act hands over to the Architect (the victory room).
-/// Vanilla <c>EnterNextAct</c> already does the rest: with the Ending act last, it enters the Architect event
-/// room and a second call wins the run. The Architect never reads the act index, so nothing else is patched.
-/// </summary>
-/// <remarks>
-/// The stinger is a plain Godot player on the Master bus, next to the game's FMOD music: the two mix in the
-/// OS, and it ignores the game's volume sliders. A run resumed inside the victory room does not replay it,
-/// because only the call that enters the room triggers it.
-/// </remarks>
+/// <summary>StS1 Ogg playback follows the game's squared Master/Music sliders and ends with the run.</summary>
+internal static class EndingAudio
+{
+	private static AudioStreamPlayer? _player;
+	private static string? _track;
+	internal static int Generation { get; private set; }
+
+	internal static void Stop()
+	{
+		Generation++;
+		if (GodotObject.IsInstanceValid(_player)) { _player!.Stop(); _player.QueueFree(); }
+		_player = null;
+		_track = null;
+	}
+
+	internal static void Play(string track, bool loop)
+	{
+		if (_track == track && GodotObject.IsInstanceValid(_player)) return;
+		Stop();
+		if (NGame.Instance is not { } game) return;
+		var stream = ResourceLoader.Load<AudioStreamOggVorbis>($"res://SlaySpoon/audio/{track}.ogg");
+		if (stream == null) throw new InvalidOperationException($"Missing Ending audio: {track}");
+		stream.Loop = loop;
+		_player = new AudioStreamPlayer { Stream = stream, Bus = "Master" };
+		_track = track;
+		game.AddChild(_player);
+		UpdateVolume();
+		_player.Play();
+	}
+
+	internal static void UpdateVolume(float? master = null, float? music = null)
+	{
+		if (!GodotObject.IsInstanceValid(_player)) return;
+		var settings = SaveManager.Instance.SettingsSave;
+		_player!.VolumeLinear = StingerVolume.Linear(master ?? settings.VolumeMaster, music ?? settings.VolumeBgm);
+	}
+
+	internal static bool UpdateRunMusic(NRunMusicController controller)
+	{
+		if (Act4Routing.CurrentRun() is not { Act: Sts1EndingAct } run) return true;
+		if (run.CurrentRoom is { IsVictoryRoom: true }) return false;
+		controller.StopMusic();
+		Play(run.CurrentRoom is CombatRoom { Encounter: Sts1CorruptHeartBoss } ? "ending_heart" : "ending_act", true);
+		return false;
+	}
+}
+
 [HarmonyPatch(typeof(RunManager), nameof(RunManager.EnterNextAct))]
 internal static class EndingStingerPatch
 {
-	private const string StingerPath = "res://SlaySpoon/audio/ending_stinger.ogg";
-
-	private static readonly Func<RunManager, RunState?> State =
-		AccessTools.MethodDelegate<Func<RunManager, RunState?>>(AccessTools.PropertyGetter(typeof(RunManager), "State"));
-
-	/// <summary>True when this call leaves the Ending act for the Architect (not the call that wins the run).</summary>
 	private static void Prefix(out bool __state)
 	{
-		RunState? run = State(RunManager.Instance);
-		__state = run != null
-			&& run.Acts.Count > 0
-			&& run.Acts[^1] is Sts1EndingAct
-			&& run.CurrentActIndex >= run.Acts.Count - 1
-			&& run.CurrentRoom is { IsVictoryRoom: false };
+		__state = false;
+		try
+		{
+			var run = Act4Routing.CurrentRun();
+			__state = run is { Act: Sts1EndingAct, CurrentRoom.IsVictoryRoom: false };
+		}
+		catch (Exception e) { SpoonLog.Error($"Ending stinger routing failed: {e}"); }
 	}
 
 	private static void Postfix(bool __state, ref Task __result)
 	{
-		if (__state) __result = EnterThenPlay(__result);
+		if (__state) __result = EnterThenPlay(__result, EndingAudio.Generation);
 	}
 
-	private static async Task EnterThenPlay(Task entering)
+	private static async Task EnterThenPlay(Task entering, int generation)
 	{
 		await entering;
 		try
 		{
-			Play();
+			// A return to the menu during the transition invalidates this pending playback.
+			if (generation != EndingAudio.Generation || Act4Routing.CurrentRun()?.CurrentRoom is not { IsVictoryRoom: true }) return;
+			NRunMusicController.Instance?.StopMusic();
+			EndingAudio.Play("ending_stinger", false);
 		}
-		catch (Exception e)
-		{
-			SpoonLog.Error($"Ending stinger failed: {e.Message}");
-		}
+		catch (Exception e) { SpoonLog.Error($"Ending stinger failed: {e}"); }
+	}
+}
+
+[HarmonyPatch(typeof(NGame), nameof(NGame.ReturnToMainMenu))]
+internal static class EndingAudioMenuPatch
+{
+	private static void Prefix() => EndingAudio.Stop();
+}
+
+[HarmonyPatch]
+internal static class EndingMusicPatch
+{
+	[HarmonyPatch(typeof(NRunMusicController), nameof(NRunMusicController.UpdateMusic))]
+	[HarmonyPatch(typeof(NRunMusicController), nameof(NRunMusicController.UpdateTrack), new Type[] { })]
+	[HarmonyPrefix]
+	private static bool Update(NRunMusicController __instance)
+	{
+		try { return EndingAudio.UpdateRunMusic(__instance); }
+		catch (Exception e) { SpoonLog.Error($"Ending music failed: {e}"); return true; }
 	}
 
-	private static void Play()
-	{
-		if (NGame.Instance is not { } game) return;
-		if (ResourceLoader.Load<AudioStream>(StingerPath) is not { } stream)
-		{
-			SpoonLog.Error($"Ending stinger missing: {StingerPath}");
-			return;
-		}
-		var player = new AudioStreamPlayer { Stream = stream, Bus = "Master" };
-		player.Finished += player.QueueFree;
-		game.AddChild(player);
-		player.Play();
-		SpoonLog.Info("act4: ending stinger played");
-	}
+	[HarmonyPatch(typeof(NAudioManager), nameof(NAudioManager.SetMasterVol))]
+	[HarmonyPostfix]
+	private static void Master(float volume) => EndingAudio.UpdateVolume(master: volume);
+
+	[HarmonyPatch(typeof(NAudioManager), nameof(NAudioManager.SetBgmVol))]
+	[HarmonyPostfix]
+	private static void Music(float volume) => EndingAudio.UpdateVolume(music: volume);
 }

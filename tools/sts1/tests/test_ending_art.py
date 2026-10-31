@@ -161,11 +161,28 @@ def test_cli_renders_monsters_and_copies_map_icons(tmp_path, capsys):
     for rel in ["images/ui/map/boss", "images/ui/map/bossOutline"]:
         (assets / rel).mkdir(parents=True)
         Image.new("RGBA", (2, 2), (1, 2, 3, 4)).save(assets / rel / "heart.png")
-    out = tmp_path / "out"
+    (assets / "endingScene").mkdir(parents=True)
+    page = Image.new("RGB", (2048, 2048), (0, 0, 0))
+    page.paste((9, 8, 7), (2, 2, 1922, 1138))
+    page.save(assets / "endingScene" / "scene.jpg", quality=100, subsampling=0)
+    for name in ["scene2.jpg", "scene3.jpg"]:
+        page.save(assets / "endingScene" / name)
+    audio = assets / "audio/music"
+    audio.mkdir(parents=True)
+    for name in ["STS_Act4_BGM_v2.ogg", "STS_Boss4_v6.ogg", "STS_EndingStinger_v1.ogg"]:
+        (audio / name).write_bytes(name.encode())
+    out = tmp_path / "SlaySpoon/images/ending"
     ending_art.main(["--assets", str(assets), "--out", str(out)])
+    # StS1 packs the room image at (2, 2) of a 2048 page: the combat background is that 1920 x 1136 region.
+    bg = Image.open(out / "combat_bg.jpg")
+    assert bg.size == (1920, 1136)
+    assert all(abs(a - b) <= 2 for a, b in zip(bg.getpixel((960, 568)), (9, 8, 7)))
     lines = [json.loads(line) for line in capsys.readouterr().out.splitlines()]
     assert [line["name"] for line in lines] == ["heart", "shield", "spear"]
     assert set(lines[0]) == {"name", "origin_x", "origin_y", "width", "height"}
     assert sorted(p.name for p in out.iterdir()) == [
-        "heart.png", "heart_boss.png", "heart_boss_outline.png", "shield.png", "spear.png"]
+        "campfire_bg.jpg", "combat_bg.jpg", "event_bg.jpg", "heart.png", "heart_boss.png", "heart_boss_outline.png", "shield.png", "spear.png"]
     assert Image.open(out / "shield.png").size == (lines[1]["width"], lines[1]["height"])
+
+    for source, target in [("STS_Act4_BGM_v2.ogg", "ending_act"), ("STS_Boss4_v6.ogg", "ending_heart"), ("STS_EndingStinger_v1.ogg", "ending_stinger")]:
+        assert (out.parents[1] / "audio" / f"{target}.ogg").read_bytes() == (audio / source).read_bytes()

@@ -12,4 +12,10 @@ public static class EndingRouteRule
 	/// </summary>
 	public static bool ShouldAppend(bool act4Run, bool hasAllKeys, int actCount) =>
 		act4Run && hasAllKeys && actCount == VanillaActCount;
+
+	/// <summary>
+	/// An appended Ending means the run is not won yet, so a recorded WinTime (act 3 boss counted as final, saved on
+	/// its reward screen) is stale: it would freeze the run clock and the Heart would record the time again.
+	/// </summary>
+	public static bool ShouldResetWinTime(bool justAppended, long winTime) => justAppended && winTime > 0;
 }

@@ -60,14 +60,26 @@ public sealed class Sts1SpireShield : Sts1EndingMonster
 			await CreatureCmd.GainBlock(ally, EndingNumbers.FortifyBlock, ValueProp.Move, null);
 	}
 
+	private List<int>? _smashHits;
+
+	public override Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount,
+		ValueProp props, Creature? dealer, MegaCrit.Sts2.Core.Models.CardModel? cardSource)
+	{
+		if (_smashHits != null && dealer == Creature && props.IsPoweredAttack())
+			_smashHits.Add(Math.Max(0, (int)amount));
+		return Task.CompletedTask;
+	}
+
 	private async Task SmashMove(IReadOnlyList<Creature> targets)
 	{
-		var attack = await DamageCmd.Attack(EndingNumbers.ShieldSmash(Ascension)).FromMonster(this)
-			.WithHitFx("vfx/vfx_attack_blunt")
-			.Execute(null);
-		// StS1 gains Block equal to the damage dealt (A18: a flat 99).
-		int block = EndingNumbers.ShieldSmashFixedBlock(Ascension)
-			?? attack.Results.SelectMany(hit => hit).Select(r => r.TotalDamage).DefaultIfEmpty(0).Max();
-		if (block > 0) await CreatureCmd.GainBlock(Creature, block, ValueProp.Move, null);
+		_smashHits = new List<int>();
+		try
+		{
+			await DamageCmd.Attack(EndingNumbers.ShieldSmash(Ascension)).FromMonster(this)
+				.WithHitFx("vfx/vfx_attack_blunt").Execute(null);
+			int block = EndingNumbers.ShieldSmashBlock(Ascension, _smashHits);
+			if (block > 0) await CreatureCmd.GainBlock(Creature, block, ValueProp.Move, null);
+		}
+		finally { _smashHits = null; }
 	}
 }

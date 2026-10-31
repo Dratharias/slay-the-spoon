@@ -11,8 +11,8 @@ namespace SlaySpoon.Act4;
 
 /// <summary>
 /// StS1's fourth act, "The Ending": one elite (Spire Shield and Spire Spear) and the Corrupt Heart. It borrows
-/// Glory's look and sound: music, ambience, map colors and chest are read from Glory's canonical model here, and
-/// <see cref="EndingActAssetsPatch"/> points the id-derived asset paths (backgrounds, map, rest site) at Glory's.
+/// StS1 combat/rest backgrounds and Ogg music through EndingBackgroundPatch and EndingAudio. Glory supplies
+/// the map and chest assets; the unused event background is imported for provenance.
 /// </summary>
 /// <remarks>
 /// <see cref="Index"/> is -1, so the act stays out of <c>ModelDb.ActsByIndex</c> and random act choice
@@ -35,9 +35,9 @@ public sealed class Sts1EndingAct : ActModel
 	public override Color MapUntraveledColor => Canon.MapUntraveledColor;
 	public override Color MapBgColor => Canon.MapBgColor;
 
-	public override string[] BgMusicOptions => Canon.BgMusicOptions;
-	public override string[] MusicBankPaths => Canon.MusicBankPaths;
-	public override string AmbientSfx => Canon.AmbientSfx;
+	public override string[] BgMusicOptions => [];
+	public override string[] MusicBankPaths => [];
+	public override string AmbientSfx => "";
 
 	public override string ChestSpineResourcePath => Canon.ChestSpineResourcePath;
 	public override string ChestSpineSkinNameNormal => Canon.ChestSpineSkinNameNormal;

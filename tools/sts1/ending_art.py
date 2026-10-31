@@ -2,7 +2,7 @@
 
 Usage: python ending_art.py --assets data/sts1/act4/assets --out godot/SlaySpoon/images/ending
 
-Writes heart.png, shield.png and spear.png (trimmed RGBA, setup pose, no constraints applied), copies the
+Writes combat_bg.jpg (StS1's Ending combat background), heart.png, shield.png and spear.png (trimmed RGBA, setup pose, no constraints applied), copies the
 Heart's map icons to heart_boss.png and heart_boss_outline.png, and prints one JSON line per monster:
 {"name", "origin_x", "origin_y", "width", "height"}. The origin is the pixel of the skeleton's origin
 (where the monster stands), counted from the image's top-left corner.
@@ -330,6 +330,17 @@ def render(skeleton: Path, atlas: Path, out: Path, scale: float = 1.0) -> tuple[
     return ox - left, oy - top, trimmed.width, trimmed.height
 
 
+# StS1's TheEndingScene reads three regions of endingScene/scene*.jpg; "bg" is the combat background, packed at
+# (2, 2) of a 2048 page and 1920 x 1136 big (scene.atlas).
+SCENE_SRC = "endingScene/scene.jpg"
+SCENE_BOX = (2, 2, 1922, 1138)
+
+
+def write_combat_bg(assets: Path, out: Path):
+    with Image.open(assets / SCENE_SRC) as page:
+        page.convert("RGB").crop(SCENE_BOX).save(out / "combat_bg.jpg", quality=95)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--assets", type=Path, required=True)
@@ -342,6 +353,15 @@ def main(argv=None):
         print(json.dumps({"name": name, "origin_x": x, "origin_y": y, "width": w, "height": h}))
     for src, dst in MAP_ICONS:
         shutil.copyfile(args.assets / src, args.out / dst)
+    write_combat_bg(args.assets, args.out)
+    for page, name in [("scene2.jpg", "campfire_bg"), ("scene3.jpg", "event_bg")]:
+        with Image.open(args.assets / "endingScene" / page) as source:
+            source.convert("RGB").crop(SCENE_BOX).save(args.out / f"{name}.jpg", quality=95)
+    audio = args.out.parents[1] / "audio"
+    audio.mkdir(parents=True, exist_ok=True)
+    for source, target in [("STS_Act4_BGM_v2.ogg", "ending_act"), ("STS_Boss4_v6.ogg", "ending_heart"),
+                           ("STS_EndingStinger_v1.ogg", "ending_stinger")]:
+        shutil.copyfile(args.assets / "audio/music" / source, audio / f"{target}.ogg")
 
 
 if __name__ == "__main__":

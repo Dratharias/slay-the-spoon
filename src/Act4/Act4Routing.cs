@@ -45,6 +45,13 @@ public static class Act4Routing
 		// A new list, as vanilla's debug act switch does: the old list may be enumerated elsewhere.
 		SetActs(state, new List<ActModel>(state.Acts) { Sts1EndingAct.CreateForRun(state) });
 		SpoonLog.Info("act4: The Ending appended");
+		// A save taken on the act 3 boss's reward screen, after it counted as the final boss, carries its WinTime.
+		RunManager manager = RunManager.Instance;
+		if (EndingRouteRule.ShouldResetWinTime(true, manager.WinTime))
+		{
+			SpoonLog.Info($"act4: stale WinTime {manager.WinTime} cleared");
+			manager.WinTime = 0;
+		}
 		return true;
 	}
 
@@ -83,7 +90,7 @@ internal static class EndingSavedRunPatch
 [HarmonyPatch(typeof(RunManager), nameof(RunManager.EnterNextAct))]
 internal static class EndingEnterNextActPatch
 {
-	private static void Prefix(RunManager __instance)
+	private static void Prefix()
 	{
 		try
 		{
@@ -91,8 +98,8 @@ internal static class EndingEnterNextActPatch
 			// Reaching here means the other callers missed the last key, so the act 3 boss counted as the final boss.
 			// Its recorded win time would freeze the run clock (RunTime returns WinTime once set), and the Heart would
 			// record that frozen time again.
+			// EnsureEndingAct has already cleared the stale WinTime.
 			SpoonLog.Error("act4: The Ending was appended only when leaving an act; the last boss may have given no rewards");
-			__instance.WinTime = 0;
 		}
 		catch (Exception e)
 		{

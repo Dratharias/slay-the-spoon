@@ -33,14 +33,11 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
 - Act 4 The Ending (step 6 WP4-6), design calls made without the owner (change any of them):
   - Static sprites rendered from the StS1 setup pose, not animations.
   - Monster visuals and the elite slot layout are built in code, not as scenes.
-  - The Ending is added to the run when the team takes its last key, so the act 3 boss gives normal boss rewards.
-  - The Ending uses Glory's music, map, rest site and combat backgrounds; StS1's ending scene images are unused.
-    Owner decision (2026-10-30): no ending cutscene (the Necrobinder and the Regent have none) and no end credits; the
-    rest of StS1's Ending content replaces Glory's where StS1 has it (fix wave Task 2).
+  - The Ending is added to the run when the team takes its last key, so only the second act 3 boss at A10 gives rewards (the single boss below A10 still rewards).
   - Map: rest site → merchant → elite → Heart, no ancient, no event.
   - The Spear applies Surrounded (Shield Back Attack Left, Spear Back Attack Right).
   - Co-op: Debilitate, Bash's debuff and Burn Strike's Burns hit every player; Beat of Death hits the card's player;
-    Smash's Block equals its highest damage to one player.
+    Smash's Block equals its highest pre-Block hit on one player (99 at A10).
   - The Monster HP % does not change the Heart's Invincible budget.
   - Move names (StS1 has none): Bash/Heurt, Fortify/Fortifier, Smash/Fracas, Burn Strike/Frappe ardente,
     Piercer/Perceur, Skewer/Embrocher, Debilitate/Affaiblir, Blood Shots/Tirs sanglants, Echo/Écho, Buff/Buff (vanilla's French move title, not
@@ -53,9 +50,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - The Heart's sprite is the setup pose without IK/path constraints: its three top vents look folded.
   - The Heart's Painful Stabs buff applies 1 stack (StS1's data gives no amount).
   - The fixed map is built when the act's map is generated and forced over Golden Compass's map.
-  - A10 with all three keys: the first act 3 boss also gives boss rewards once act 4 is appended (vanilla gives none to
-    either act 3 boss when act 3 is last). Owner decision (2026-10-30): only the second act 3 boss rewards (not
-    implemented).
   - The Ending is appended as soon as the team holds all three keys, even in act 1 or 2 (harmless: only the last act
     checks the act count).
   - The Heart's intents and health bar use StS1's hitbox (476 × 410), not the full sprite; its vent tops may run ~90 px
@@ -74,8 +68,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     sequence. `EndingNumbers` tests miss the low side of some thresholds; `HeartBuffRule.Extra` accepts a negative count.
   - `ending_art.py` ignores atlas `offset`/`orig` (fine for the three StS1 atlases, wrong for a trimmed one); its additive
     blend is untested and not Spine-exact; triangle edges are not antialiased; no grandparent or shear bone test.
-  - Smash's Block counts the damage actually dealt (blocked + unblocked), not overkill; StS1 used the pre-block damage.
-  - The French loss line "pris en tenaille par Bouclier et Lance de la Tour" has no article.
   - Code-built monsters have no death animation length: their fade may be cut short.
   - Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).
   - Debilitate skips dead players: a player revived later in the fight never gets those debuffs or statuses. In co-op
@@ -95,11 +87,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     and the postfix logs "replaced by the Ending map". Only the layout constants are unit-tested.
   - Run history stores the Ending act's id: with the mod removed, history shows a placeholder act; run metrics
     (`ActWinMetric`) would carry the mod's act id if the game uploads metrics for modded runs (not checked).
-  - Routing's WinTime repair misses one sequence that needs both live callers to fail first: act 3 boss counted as final,
-    save on the reward screen, resume: the load postfix appends act 4 but does not reset `WinTime`, so the run clock stays
-    frozen at the act 3 time. No unit test for `EnsureEndingAct` idempotence (game-bound).
-  - The ending stinger ignores the game's volume sliders (Godot player, not FMOD), keeps playing if the player quits to
-    the menu during it, and its `EnterNextAct` prefix has no try/catch (the postfix side does).
   - The `Act4Preview` cfg key is a no-op since the release (`Released || preview`); the key and the parameter can go.
     `ModifierListPatch`'s `OfferedIn(Custom)` guard is always true at runtime (the list is Custom-only) and reads the
     pure list by string name.

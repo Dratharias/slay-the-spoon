@@ -16,6 +16,13 @@ public static class EndingNumbers
 	/// <summary>Fixed Smash block from Double Boss; null means the block equals the Smash damage.</summary>
 	public static int? ShieldSmashFixedBlock(int ascension) => ascension >= 10 ? 99 : null;
 
+	/// <summary>
+	/// StS1 Smash gains Block equal to its hit's damage before Block: a hit that Block absorbed, or that overkilled a
+	/// player, counts in full. Co-op takes the highest hit on one player. A10 is the flat fixed block.
+	/// </summary>
+	public static int ShieldSmashBlock(int ascension, IEnumerable<int> preBlockDamages) =>
+		ShieldSmashFixedBlock(ascension) ?? preBlockDamages.DefaultIfEmpty(0).Max();
+
 	public static int SpearHp(int ascension) => ascension >= 8 ? 180 : 160;
 	public static int SpearArtifact(int ascension) => ascension >= 10 ? 2 : 1;
 	public static int SpearBurnStrike(int ascension) => ascension >= 9 ? 6 : 5;

@@ -32,6 +32,8 @@ ASSETS = (
     "endingScene/scene2.jpg",
     "endingScene/scene3.jpg",
     "audio/music/STS_EndingStinger_v1.ogg",
+    "audio/music/STS_Act4_BGM_v2.ogg",
+    "audio/music/STS_Boss4_v6.ogg",
     "images/npcs/heart/skeleton.json",
     "images/npcs/heart/skeleton.atlas",
     "images/npcs/heart/skeleton.png",

@@ -1,6 +1,6 @@
 {
 	"STS1_CORRUPT_HEART_BOSS.loss": "{character} s’est effondré{characterGender:choose(feminine):e|} devant le [gold]{encounter}[/gold], qui bat toujours.",
 	"STS1_CORRUPT_HEART_BOSS.title": "Cœur corrompu",
-	"STS1_SHIELD_AND_SPEAR_ELITE.loss": "{character} a été pris{characterGender:choose(feminine):e|} en tenaille par [gold]{encounter}[/gold].",
+	"STS1_SHIELD_AND_SPEAR_ELITE.loss": "{character} a été pris{characterGender:choose(feminine):e|} en tenaille par [gold]le Bouclier et la Lance de la Tour[/gold].",
 	"STS1_SHIELD_AND_SPEAR_ELITE.title": "Bouclier et Lance de la Tour"
 }
