@@ -150,7 +150,7 @@ Read `README.md` for the player view and the spec for every decision.
 ## 0.10.2 (2026-10-30)
 
 - Owner-request quick fixes: StS1 power icons no longer show the game's "NOPE" missing image; bigger top-bar keys;
-  loan panel on the right, − buttons, interest 0–900 %. Build 0 warnings; 408 xUnit + 74 pytest pass. Not tested in game.
+  loan panel on the right, − buttons, interest 0–900 %. Co-op Custom Run: allies' cards trigger Strangle/Choke. Build 0 warnings; 412 xUnit + 74 pytest pass. Not tested in game.
 
 ## Documents
 

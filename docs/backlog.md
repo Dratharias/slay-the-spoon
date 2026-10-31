@@ -153,9 +153,9 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - Sapphire in the chest: show the Sapphire key in the chest as a clickable choice next to the relics. In co-op, a player
   who loses the rock-paper-scissors while the key is still available chooses between the key and the relic instead of
   receiving the relic automatically.
-- Strangle in co-op: also trigger on cards played by allies, not only its owner's. Open question: vanilla Strangle
-  (StS2 Silent card, power "Strangulation") or only the mod's Choke, which reuses that power? Changing the vanilla power
-  would also change Standard/Daily.
+- ~~Strangle in co-op: also trigger on cards played by allies, not only its owner's.~~ Done in 0.10.2 for Strangle and Choke
+  (same power), Custom Run co-op only so Standard/Daily stay vanilla (`StrangleRule`). Minor: the power's vanilla text
+  still says "you play a card".
 - ~~StS1 powers show "NOPE" as their floating text when applied (seen on Metallicize; every StS1 buff does it).~~ Done in
   0.10.2: "NOPE" is the game's missing-power image; the borrowed big-icon path is now seeded into the getter's cache field.
 - Merchant Loans:
