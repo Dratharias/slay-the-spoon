@@ -7,6 +7,7 @@ The gameplay checks below remain pending owner testing; automated validation doe
 
 - [ ] Golden Compass picked up mid-act (Act 4 run, Emerald not yet held): the Emerald marker moves to an elite node of the regenerated map (or disappears if it has no elite); fighting that elite grants the Emerald key.
 - [ ] Resuming a run saved mid-act keeps the Emerald marker where it was (a saved map is not re-picked).
+- Superseded in 0.12.0 by the chest rematch (`sapphire-rematch-checklist.md`), the two Sapphire swap items below no longer apply.
 - [ ] Co-op Sapphire: one player presses the swap button the instant it appears; the other peer applies the same swap (same relic given back, same key on both screens) even if its chest animation was still running.
 - [ ] A Sapphire swap for a relic that finished its pickup long ago in the same chest still works as before.
 - [ ] Metallicize held by an enemy (Emerald elite buff) reads "At the end of its turn, gains N Block" (FR: "À la fin de son tour, gagne N d'Armure"); on the player it still reads "your turn ... gain" / "votre tour ... gagnez".

@@ -99,8 +99,9 @@ Read `README.md` for the player view and the spec for every decision.
   The unlock is permanent and makes Act 4 available at every ascension level, including 0.
   A Custom Run option bypasses this prerequisite. The unlock and the keys are implemented in WP3 (see below).
 - Co-op keys are team-wide (owner decision): one set for the team; a key any player collects counts for all.
-  Ruby: one player gives up their rest-site action. Sapphire: after a chest's relics are handed out, any player who
-  received one may give it back for the key (first to accept; the swap undoes the relic's pickup effects, upgrades included).
+  Ruby: one player gives up their rest-site action. Sapphire (0.12.0, replaces the 0.8.0 give-back swap): the
+  rock-paper-scissors losers of a chest rematch for the relics left until the last player chooses between the last relic
+  and the key (solo: relic or key); with the key held, chests are vanilla.
 - WP3 is implemented (0.8.0): team key state, permanent unlock, hidden Standard run flag, key sprites/top bar,
   Ruby Recall rest option, Emerald elite marker/buffs, and Sapphire chest-relic swap (EN/FR).
   Build: 0 warnings / 0 errors; tests: 223 xUnit and 52 pytest pass. In-game checks remain pending.
@@ -155,12 +156,21 @@ Read `README.md` for the player view and the spec for every decision.
 ## 0.11.0 (2026-10-30)
 
 - Emerald elite: StS1 map flames (green, `images/map/flame_*.png`, from `make sts1-act4-data`) plus the gem.
-- Sapphire key shown in the opened chest (`SapphireKeyView`); the RPS loser can swap too, but no pre-pickup choice yet.
+- Sapphire key shown in the opened chest (`SapphireKeyView`); replaced by the chest rematch in 0.12.0.
 - Loan panel on `src/Ui/SpoonWidgets.cs` (controller rows/buttons); gold hover lists what is left to repay or collect.
 - Character color (`src/Tint/`, pause menu button, `shaders/character_tint.gdshader`): overlay or dominant-hue mode,
   optional map lines, saved in the cfg (`CharacterTint`), shared in co-op by `TintAction`. Applied like StS2's monster
   hue variants (`SetNormalMaterial`).
 - Build 0 warnings; 421 xUnit + 74 pytest pass. Not tested in game (gamepad, co-op sync and tint visuals included).
+
+## 0.12.0 (2026-10-31)
+
+- Sapphire chest rematch (owner request): `src/Core/ChestRematchRule.cs` (rounds, tested), `src/Act4/ChestRematchPatch.cs`
+  (synchronizer prefixes; the key is the vote index past the last relic, sent as the vanilla `PickRelicAction`), and
+  `src/Act4/ChestRematchView.cs` (round animations, rematch line, key beside the relics left; the final award is the
+  vanilla animation queued after the rounds). The give-back swap (`SapphireChestPatch`, `SapphireRevert`,
+  `PickupLedger`) is removed. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game:
+  `docs/testing/sapphire-rematch-checklist.md`.
 
 ## Documents
 

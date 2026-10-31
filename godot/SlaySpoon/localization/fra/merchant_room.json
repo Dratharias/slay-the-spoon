@@ -17,8 +17,11 @@
   "SLAY_SPOON_LOANS.give": "Donner",
   "SLAY_SPOON_LOANS.withdraw": "Retirer",
   "SLAY_SPOON_LOANS.reset": "Réinitialiser",
-  "SPOON_SAPPHIRE_SWAP": "Prendre la clé de saphir",
-  "SPOON_SAPPHIRE_SWAP_TIP": "Rendez {Relic} et annulez ce qu'elle a fait à sa prise. La clé compte pour toute l'équipe.",
+  "SPOON_SAPPHIRE_KEY": "Prendre la clé de saphir",
+  "SPOON_SAPPHIRE_KEY_TIP": "Prenez la clé de saphir au lieu d'une relique. La clé compte pour toute l'équipe.",
+  "SPOON_CHEST_REMATCH": "Revanche : choisissez une autre relique",
+  "SPOON_CHEST_REMATCH_KEY": "Revanche : prenez la dernière relique ou la clé de saphir",
+  "SPOON_CHEST_REMATCH_WAIT": "Revanche : les autres choisissent à nouveau",
   "SLAY_SPOON_LOANS.hover_owe": "Vous devez encore {Amount} pièces d’or à {Player}.",
   "SLAY_SPOON_LOANS.hover_owed": "{Player} vous doit encore {Amount} pièces d’or."
 }

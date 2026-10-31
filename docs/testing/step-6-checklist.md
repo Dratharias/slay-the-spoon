@@ -52,6 +52,9 @@ from the "Act 4" row, without the unlock. No `Act4Preview` key is needed. The fl
 
 ## Sapphire chest swap (Task 8)
 
+Superseded in 0.12.0: the swap was replaced by the chest rematch (`sapphire-rematch-checklist.md`). The items below no
+longer apply.
+
 - [ ] Obtain a chest relic: an EN/FR swap button appears after pickup effects finish. Swapping removes the relic and grants the team the Sapphire.
 - [ ] War Paint / Whetstone: the affected cards return to their previous upgrades and deck positions; save/reload preserves those cards.
 - [ ] Old Coin: pickup gold is removed. Pear / Strawberry: gained max HP is removed. Added potions are discarded.
