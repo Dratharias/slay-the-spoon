@@ -6,6 +6,11 @@ namespace SlaySpoon.Cards.Sts1.Powers;
 [HarmonyPatch(typeof(PowerModel))]
 public static class BorrowedIconPatch
 {
+	// The big-icon getter caches its path in this field. Callers where the JIT inlined the getter read the field
+	// directly, past any postfix, and showed the game's "NOPE" missing-power image: seed the field instead.
+	private static readonly AccessTools.FieldRef<PowerModel, string?> ResolvedBigIcon =
+		AccessTools.FieldRefAccess<PowerModel, string?>("_resolvedBigIconPath");
+
 	[HarmonyPostfix]
 	[HarmonyPatch(nameof(PowerModel.PackedIconPath), MethodType.Getter)]
 	public static void PackedIcon(PowerModel __instance, ref string __result)
@@ -16,18 +21,38 @@ public static class BorrowedIconPatch
 		}
 	}
 
-	[HarmonyPostfix]
+	[HarmonyPrefix]
 	[HarmonyPatch(nameof(PowerModel.ResolvedBigIconPath), MethodType.Getter)]
-	public static void BigIcon(PowerModel __instance, ref string __result)
+	public static void BigIcon(PowerModel __instance)
 	{
-		if (__instance is IBorrowedIcon borrowed)
+		Seed(__instance);
+	}
+
+	/// <summary>Points a borrowed power's cached big-icon path at its source's icon.</summary>
+	public static void Seed(PowerModel power)
+	{
+		if (power is IBorrowedIcon borrowed)
 		{
-			__result = Source(borrowed).ResolvedBigIconPath;
+			ResolvedBigIcon(power) = Source(borrowed).ResolvedBigIconPath;
 		}
 	}
 
 	private static PowerModel Source(IBorrowedIcon borrowed)
 	{
 		return ModelDb.GetById<PowerModel>(ModelDb.GetId(borrowed.IconSource));
+	}
+}
+
+/// <summary>Seeds every canonical borrowed power once the game has resolved its icon paths; combat copies inherit it.</summary>
+[HarmonyPatch(typeof(ModelDb), nameof(ModelDb.Preload))]
+public static class BorrowedIconPreloadPatch
+{
+	[HarmonyPostfix]
+	public static void Postfix()
+	{
+		foreach (PowerModel power in ModelDb.AllPowers)
+		{
+			BorrowedIconPatch.Seed(power);
+		}
 	}
 }

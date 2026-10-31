@@ -27,6 +27,8 @@ public static class TopBarPercentPatch
 
 	private const float Padding = 14f;
 
+	private const float KeySize = 36f;
+
 	public static void Postfix(NTopBarModifier __instance)
 	{
 		switch (Modifier(__instance))
@@ -87,10 +89,15 @@ public static class TopBarPercentPatch
 		{
 			rects[i] = new TextureRect
 			{
-				Texture = GD.Load<Texture2D>(KeySprites.Path(order[i], large: false)),
+				// The large sprite cropped to its gem: the small StS1 sprites are mostly transparent padding.
+				Texture = new AtlasTexture
+				{
+					Atlas = GD.Load<Texture2D>(KeySprites.Path(order[i], large: true)),
+					Region = new Rect2(70f, 70f, 116f, 116f),
+				},
 				StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
 				ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
-				CustomMinimumSize = new Vector2(24f, 24f),
+				CustomMinimumSize = new Vector2(KeySize, KeySize),
 				MouseFilter = Control.MouseFilterEnum.Ignore,
 			};
 			row.AddChild(rects[i]);
@@ -98,7 +105,7 @@ public static class TopBarPercentPatch
 		__instance.AddChild(row);
 		row.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
 		__instance.CustomMinimumSize = new Vector2(
-			Mathf.Max(order.Length * 26f + Padding, __instance.CustomMinimumSize.X), __instance.CustomMinimumSize.Y);
+			Mathf.Max(order.Length * (KeySize + 2f) + Padding, __instance.CustomMinimumSize.X), __instance.CustomMinimumSize.Y);
 		void Refresh()
 		{
 			if (!GodotObject.IsInstanceValid(row))

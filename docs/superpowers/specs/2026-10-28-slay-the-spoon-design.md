@@ -89,7 +89,7 @@ These were decided in conversation and are not open for the builder to change.
    **pool their gold** to fund the same purchase. Repayment is **automatic**: gold the borrower gains
    afterwards goes to repaying the debt first.
    Owner's details (2026-10-29): a lender sets the amount with +1 / +5 / +10 buttons and may ask for
-   interest up to 300%, set with +1 / +5 / +10 buttons too; anyone may give the gold instead (a gift is
+   interest up to 900%, set with − / + buttons too; anyone may give the gold instead (a gift is
    never repaid); the borrower picks which offers fund the purchase; a loan is repaid in equal shares
    between its lenders.
 7. **Sealed Deck:** use StS2's existing `SealedDeck` modifier as is (30 cards, keep 10, replaces the
@@ -120,7 +120,7 @@ These were decided in conversation and are not open for the builder to change.
   lenders may pool contributions to fund one purchase (owner's decision); once the contributions
   cover the missing amount, the borrower accepts the offers they pick, the gold is transferred and the
   item can be bought. A contribution may be a gift (never repaid). Interest is simple and fixed when the
-  loan is accepted: owed = amount + amount × rate / 100, rounded half up; rates go from 0% to 300%.
+  loan is accepted: owed = amount + amount × rate / 100, rounded half up; rates go from 0% to 900%.
   Repayment takes 100% of gold gained until all debts are cleared; within one loan, each payment is
   split in equal shares between the lenders still owed (owner's decision; a lender paid off drops out
   and an indivisible remainder goes to the earliest lenders); separate loans are repaid oldest first.

@@ -30,8 +30,11 @@ public sealed class LoanPanel
 	{
 		_me = MerchantLoans.Me(MerchantLoans.Run)!;
 		room.AddChild(_panel);
-		_panel.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.TopLeft);
-		_panel.Position = new Vector2(20, 150);
+		// Right side, clear of the merchant's card shelves; grows leftwards.
+		_panel.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.TopRight);
+		_panel.GrowHorizontal = Control.GrowDirection.Begin;
+		_panel.OffsetRight = -20;
+		_panel.OffsetTop = 150;
 		_panel.CustomMinimumSize = new Vector2(460, 0);
 		var style = new StyleBoxFlat { BgColor = new Color(0.08f, 0.07f, 0.06f, 0.97f),
 			ContentMarginLeft = 14, ContentMarginRight = 14, ContentMarginTop = 12, ContentMarginBottom = 12 };
@@ -147,14 +150,14 @@ public sealed class LoanPanel
 		_drafts[borrower] = draft;
 		Stepper(Number("amount", draft.Amount), delta =>
 		{
-			_drafts[borrower] = (delta == 0 ? 0 : Math.Min(available, draft.Amount + delta), draft.Rate);
+			_drafts[borrower] = (delta == 0 ? 0 : Math.Clamp(draft.Amount + delta, 0, available), draft.Rate);
 			Schedule();
 		});
 		Stepper(Number("rate", draft.Rate), delta =>
 		{
-			_drafts[borrower] = (draft.Amount, delta == 0 ? 0 : Math.Min(LoanBoard.MaxRate, draft.Rate + delta));
+			_drafts[borrower] = (draft.Amount, delta == 0 ? 0 : Math.Clamp(draft.Rate + delta, 0, LoanBoard.MaxRate));
 			Schedule();
-		});
+		}, 1, 10, 100);
 		Label(_rows, Number("debt", LoanLedger.Owed(draft.Amount, draft.Rate)));
 		if (own != null) Label(_rows, Number("held", own.Amount));
 		var buttons = new HBoxContainer();
@@ -166,12 +169,15 @@ public sealed class LoanPanel
 		Button(buttons, Text("withdraw"), () => Offer(false, 0), own == null);
 	}
 
-	private void Stepper(string title, Action<int> change)
+	/// <summary>A value row: reset (delta 0), then − buttons from the largest step and + buttons from the smallest.</summary>
+	private void Stepper(string title, Action<int> change, params int[] steps)
 	{
+		if (steps.Length == 0) steps = new[] { 1, 5, 10 };
 		Label(_rows, title);
 		var row = new HBoxContainer();
 		_rows.AddChild(row);
 		Button(row, Text("reset"), () => change(0));
-		foreach (int step in new[] { 1, 5, 10 }) Button(row, "+" + step, () => change(step));
+		foreach (int step in steps.Reverse()) Button(row, "−" + step, () => change(-step));
+		foreach (int step in steps) Button(row, "+" + step, () => change(step));
 	}
 }

@@ -147,6 +147,11 @@ Read `README.md` for the player view and the spec for every decision.
   special-event relics remain imported without implementation.
 - Owner instruction: merge each validated, Workshop-packageable task into `main` incrementally. No push/upload.
 
+## 0.10.2 (2026-10-30)
+
+- Owner-request quick fixes: StS1 power icons no longer show the game's "NOPE" missing image; bigger top-bar keys;
+  loan panel on the right, − buttons, interest 0–900 %. Build 0 warnings; 408 xUnit + 74 pytest pass. Not tested in game.
+
 ## Documents
 
 | Path | What |

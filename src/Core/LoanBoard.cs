@@ -12,7 +12,7 @@ public sealed record LoanTransfer(int Lender, int Amount, int RatePercent, bool 
 /// </summary>
 public sealed class LoanBoard
 {
-	public const int MaxRate = 300;
+	public const int MaxRate = 900;
 
 	private sealed class OpenRequest
 	{

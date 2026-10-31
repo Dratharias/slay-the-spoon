@@ -56,13 +56,13 @@ public class LoanBoardTests
 	}
 
 	[Fact]
-	public void The_rate_is_clamped_to_300_percent()
+	public void The_rate_is_clamped_to_900_percent()
 	{
 		LoanBoard board = WithRequest(40);
-		board.Offer(Borrower, new LoanOffer(1, 20, 500, false));
+		board.Offer(Borrower, new LoanOffer(1, 20, 1000, false));
 		board.Offer(Borrower, new LoanOffer(2, 20, -5, false));
 
-		Assert.Equal(new[] { 300, 0 }, board.OffersFor(Borrower).Select(o => o.RatePercent));
+		Assert.Equal(new[] { 900, 0 }, board.OffersFor(Borrower).Select(o => o.RatePercent));
 	}
 
 	[Fact]

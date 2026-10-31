@@ -148,18 +148,22 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - Act 4 keys, visuals:
   - The Emerald key marker is barely visible on the map.
   - Import the StS1 burning elite map icon and use it for the Emerald elite.
-  - The keys are too small in the top bar.
+  - ~~The keys are too small in the top bar.~~ Done in 0.10.2 (cropped large sprites, 36 px).
   - The Sapphire swap button (plain "Swap for the Sapphire Key" label on a dark box) looks bad; redesign it.
 - Sapphire in the chest: show the Sapphire key in the chest as a clickable choice next to the relics. In co-op, a player
   who loses the rock-paper-scissors while the key is still available chooses between the key and the relic instead of
   receiving the relic automatically.
-- Strangle in co-op: also trigger on cards played by allies, not only its owner's.
-- StS1 powers show "NOPE" as their floating text when applied (seen on Metallicize; every StS1 buff does it).
+- Strangle in co-op: also trigger on cards played by allies, not only its owner's. Open question: vanilla Strangle
+  (StS2 Silent card, power "Strangulation") or only the mod's Choke, which reuses that power? Changing the vanilla power
+  would also change Standard/Daily.
+- ~~StS1 powers show "NOPE" as their floating text when applied (seen on Metallicize; every StS1 buff does it).~~ Done in
+  0.10.2: "NOPE" is the game's missing-power image; the borrowed big-icon path is now seeded into the getter's cache field.
 - Merchant Loans:
-  - The interest control also needs − buttons to lower the rate; interest ranges from 0 % (minimum) to 900 %.
+  - ~~The interest control also needs − buttons to lower the rate; interest ranges from 0 % (minimum) to 900 %.~~ Done in
+    0.10.2 (amount −10/−5/−1/+1/+5/+10, rate −100/−10/−1/+1/+10/+100).
   - Rebuild the loan panel from StS2's standard menu widgets (the Custom Run rows with − / + steppers) instead of custom
     controls, and make it usable with a gamepad if it is not already.
-  - Move the loan panel to the right side of the screen instead of the left.
+  - ~~Move the loan panel to the right side of the screen instead of the left.~~ Done in 0.10.2.
   - Hovering the gold in the top bar with an active debt or loan shows how much is left to repay or collect.
 - Character hue option: tint each character at 20 % opacity, player-chosen hue. Optionally tint the player's map
   drawings too. Refinement: compute the character's dominant color and tint only pixels near it within a threshold

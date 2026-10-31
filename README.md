@@ -92,7 +92,7 @@ Current (0.10.0):
   `sts1event STS1_NEST` (or `STS1_VAMPIRES`, `STS1_AUGMENTER`) opens a Slay the Spire 1 event.
 
 **Merchant Loans** (co-op Custom Runs): enable the modifier in the lobby. If a merchant purchase
-fails for lack of gold, choose **Ask** to open a request. Other players can lend gold at 0–300%
+fails for lack of gold, choose **Ask** to open a request. Other players can lend gold at 0–900%
 interest or give it. Offers reserve the lender's gold until accepted, withdrawn, cancelled, or the
 room is left. Select enough offers and accept, then try buying the item again.
 
