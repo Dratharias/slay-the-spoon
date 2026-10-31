@@ -57,7 +57,8 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - The Heart's Painful Stabs buff applies 1 stack (StS1's data gives no amount).
   - The fixed map is built when the act's map is generated and forced over Golden Compass's map.
   - A10 with all three keys: the first act 3 boss also gives boss rewards once act 4 is appended (vanilla gives none to
-    either act 3 boss when act 3 is last). Maybe only the second act 3 boss should reward.
+    either act 3 boss when act 3 is last). Owner decision (2026-10-30): only the second act 3 boss rewards (not
+    implemented).
   - The Ending is appended as soon as the team holds all three keys, even in act 1 or 2 (harmless: only the last act
     checks the act count).
   - The Heart's intents and health bar use StS1's hitbox (476 × 410), not the full sprite; its vent tops may run ~90 px
@@ -123,7 +124,7 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
     native shared Cloak Clasp.
   - Holy Water and Violet Lotus are ported with their effects (Holy Water replaces Pure Water with three Miracles) but have
     no acquisition source yet. Owner decision (2026-10-30): they replace Archaic Tooth in Orobas's offer when the Tooth's
-    conditions are not met (not implemented).
+    conditions are not met: one of the two at random (event RNG), for the Watcher only (not implemented).
   - She may obtain Archaic Tooth through the vanilla rule (Prismatic Gem or a transform can put Bash, Neutralize, Unleash,
     Falling Star or Dualcast in her deck); no guard.
   - A host that unticks the modifier and readies in the same moment can start a run with her and no StS1 set (race);
@@ -175,6 +176,10 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
 - The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
   and in-game validation of everything in `docs/testing/step-7-checklist.md`. A "Deep backlog priority" section, if one
   exists on `main`, keeps its own wording; Watcher animations stay at the bottom of it.
+
+- Fidelity rule (owner, 2026-10-30): StS1 character cards and StS1 content follow StS1 behavior wherever StS2's engine
+  allows; StS2 conventions apply to colorless cards and cross-character cards. Design calls above that chose StS2
+  behavior for character cards are to be brought back to StS1.
 
 ## Deep backlog priority (owner, 2026-10-30)
 
