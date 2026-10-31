@@ -106,9 +106,6 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   - The Architect has no dialogue for her: no attack scene at the victory, and `GetArchitectAttackVfx` is unused for now.
   - Discipline and Unraveling are not ported (StS1 never registers them). Cloak Clasp is not ported: she finds the
     native shared Cloak Clasp.
-  - Holy Water and Violet Lotus are ported with their effects (Holy Water replaces Pure Water with three Miracles) but have
-    no acquisition source yet. Owner decision (2026-10-30): they replace Archaic Tooth in Orobas's offer when the Tooth's
-    conditions are not met: one of the two at random (event RNG), for the Watcher only (not implemented).
   - She may obtain Archaic Tooth through the vanilla rule (Prismatic Gem or a transform can put Bash, Neutralize, Unleash,
     Falling Star or Dualcast in her deck); no guard.
   - A host that unticks the modifier and readies in the same moment can start a run with her and no StS1 set (race);

@@ -33,3 +33,11 @@
 - [ ] Fear No Evil enters Calm against an attacking enemy whether it survives or dies. Signature Move requires no other Attack in hand and glows accordingly.
 - [ ] Ragnarok rolls each hit among surviving enemies; Brilliance includes Mantra already consumed by Divinity and resets next combat.
 - [ ] Perseverance has one Retain line in French. Rushdown/Rushdown+ show their normal English description, never DEPRECATED; the upgrade changes only cost from 1 to 0.
+
+## Orobas
+
+- [ ] Watcher with no eligible Tooth card: third option pool contains Touch of Orobas when eligible plus exactly one random Holy Water/Violet Lotus fallback. If Touch is unavailable too, the relic replaces the locked option.
+- [ ] Watcher with a native starter card accepted by Archaic Tooth: vanilla Tooth remains and neither fallback is inserted. All other characters keep vanilla pools, including the locked option.
+- [ ] Same save/seed/owner produces the same options after reload and on both co-op peers; inspecting the library does not consume event RNG.
+- [ ] Holy Water removes Pure Water when present, then gives three Miracles each combat even when Pure Water was already absent. Violet Lotus adds its Calm-exit energy. Both remain excluded from shops and ordinary rewards.
+- [ ] Orobas fallback options and relic tooltips display existing English/French titles and descriptions, and choosing either option finishes the event normally.
