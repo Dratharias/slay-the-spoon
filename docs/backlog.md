@@ -13,7 +13,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - Act 4 keys (step 6 WP3), minors left after review:
   - A co-op Sapphire swap waits up to 15 s for its pickup: a peer whose pickup never arrives refuses after the wait while
     the others apply the swap (logged as a warning).
-  - The Sapphire button position is hard-coded (650, 770); anchor it to the chest's relic row.
+  - ~~The Sapphire button position is hard-coded (650, 770).~~ 0.11.0: the key sits in the chest, placed from the room's center
+    (+330, −70); it may overlap a wide co-op relic row.
   - The Ruby icon comes from a postfix on the private `RestSiteOption.IconPath` getter, which the JIT may inline.
   - The Sapphire heal revert sets HP directly: no HP-lost entry in run history, no sound.
   - `StandardCharacterSelectPatch` sets `Pending` for any game mode; `Act4UnlockPatch.Record` logs failures at info.
@@ -142,17 +143,21 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   allows; StS2 conventions apply to colorless cards and cross-character cards. Design calls above that chose StS2
   behavior for character cards are to be brought back to StS1.
 
-## Owner requests (2026-10-30), listed only, not started
+## Owner requests (2026-10-30)
 
 - New game mode: pick the starting relic among 10 random choices.
 - Act 4 keys, visuals:
-  - The Emerald key marker is barely visible on the map.
-  - Import the StS1 burning elite map icon and use it for the Emerald elite.
+  - ~~The Emerald key marker is barely visible on the map.~~ ~~Import the StS1 burning elite map icon.~~ Done in 0.11.0:
+    StS1's six map flame frames, tinted green, burn behind the node, with the emerald gem beside it.
   - ~~The keys are too small in the top bar.~~ Done in 0.10.2 (cropped large sprites, 36 px).
-  - The Sapphire swap button (plain "Swap for the Sapphire Key" label on a dark box) looks bad; redesign it.
+  - ~~The Sapphire swap button looks bad.~~ Done in 0.11.0: the key gem itself is clickable, with the game's reward
+    alternative button ("Take the Sapphire Key") under it for the controller.
 - Sapphire in the chest: show the Sapphire key in the chest as a clickable choice next to the relics. In co-op, a player
   who loses the rock-paper-scissors while the key is still available chooses between the key and the relic instead of
   receiving the relic automatically.
+  - 0.11.0, partial: the key shows in the opened chest. The rock-paper-scissors loser still receives the relic first,
+    then may click the key to give it back (same swap as the winners). A true "key or relic" choice before the
+    pickup is not done.
 - ~~Strangle in co-op: also trigger on cards played by allies, not only its owner's.~~ Done in 0.10.2 for Strangle and Choke
   (same power), Custom Run co-op only so Standard/Daily stay vanilla (`StrangleRule`). Minor: the power's vanilla text
   still says "you play a card".
@@ -161,13 +166,19 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - Merchant Loans:
   - ~~The interest control also needs − buttons to lower the rate; interest ranges from 0 % (minimum) to 900 %.~~ Done in
     0.10.2 (amount −10/−5/−1/+1/+5/+10, rate −100/−10/−1/+1/+10/+100).
-  - Rebuild the loan panel from StS2's standard menu widgets (the Custom Run rows with − / + steppers) instead of custom
-    controls, and make it usable with a gamepad if it is not already.
+  - ~~Rebuild the loan panel from standard widgets, usable with a gamepad.~~ Done in 0.11.0 (`src/Ui/SpoonWidgets.cs`):
+    focusable rows step with left/right like the Custom Run rows, buttons answer the game's confirm. Gamepad not tested
+    in game; the rows are Godot controls styled like the game, not the game's own scene.
   - ~~Move the loan panel to the right side of the screen instead of the left.~~ Done in 0.10.2.
-  - Hovering the gold in the top bar with an active debt or loan shows how much is left to repay or collect.
+  - ~~Hovering the gold shows what is left to repay or collect.~~ Done in 0.11.0 (`GoldHoverPatch`).
 - Character hue option: tint each character at 20 % opacity, player-chosen hue. Optionally tint the player's map
   drawings too. Refinement: compute the character's dominant color and tint only pixels near it within a threshold
   (e.g. turn the Silent's green toward turquoise at 70 % transparency); hue, threshold and opacity are player settings.
+  - Done in 0.11.0 (`src/Tint/`): pause menu "Character Color" (Off / Color overlay / Dominant color only; hue, strength,
+    threshold, map drawings), saved in the mod cfg, shared in co-op through the action queue. Applied like StS2's own
+    monster hue variants: a shader material on the combat body. The dominant color is the character's map drawing
+    color. Minors: the map ping, rest site and merchant bodies are not tinted; lines already drawn keep their color;
+    the tint replaces any normal material the character body had; co-op sync and the static Watcher body not tested.
 
 ## Deep backlog priority (owner, 2026-10-30)
 

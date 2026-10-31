@@ -1,12 +1,18 @@
 using Godot;
+using MegaCrit.Sts2.Core.ControllerInput;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using SlaySpoon.Core;
+using SlaySpoon.Ui;
 
 namespace SlaySpoon.Loans;
 
-/// <summary>Local controls only; all transactions go through the shared action queue.</summary>
+/// <summary>
+/// Local controls only; all transactions go through the shared action queue. Controller: up/down moves between rows,
+/// left/right steps a value row like the Custom Run percent rows (hold to step ten times faster), confirm presses a
+/// button. Focus comes to the panel when a request appears and stays on the same row across refreshes.
+/// </summary>
 public sealed class LoanPanel
 {
 	private readonly PanelContainer _panel = new() { Name = "SpoonLoans" };
@@ -16,6 +22,7 @@ public sealed class LoanPanel
 	private readonly Dictionary<(int Borrower, int Lender), bool> _picked = new();
 	private bool _queued;
 	private bool _closed;
+	private bool _wasVisible;
 
 	public static LocString Loc(string key) => new("merchant_room", "SLAY_SPOON_LOANS." + key);
 	private static string Text(string key) => Loc(key).GetFormattedText();
@@ -36,9 +43,7 @@ public sealed class LoanPanel
 		_panel.OffsetRight = -20;
 		_panel.OffsetTop = 150;
 		_panel.CustomMinimumSize = new Vector2(460, 0);
-		var style = new StyleBoxFlat { BgColor = new Color(0.08f, 0.07f, 0.06f, 0.97f),
-			ContentMarginLeft = 14, ContentMarginRight = 14, ContentMarginTop = 12, ContentMarginBottom = 12 };
-		_panel.AddThemeStyleboxOverride("panel", style);
+		_panel.AddThemeStyleboxOverride("panel", SpoonWidgets.PanelStyle());
 		var scroll = new ScrollContainer { CustomMinimumSize = new Vector2(460, 440),
 			HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
 		_panel.AddChild(scroll);
@@ -72,23 +77,21 @@ public sealed class LoanPanel
 		parent.AddChild(label);
 	}
 
-	private static Button Button(Control parent, string text, Action action, bool disabled = false)
-	{
-		var button = new Button { Text = text, Disabled = disabled };
-		button.AddThemeFontSizeOverride("font_size", 18);
-		button.Pressed += action;
-		parent.AddChild(button);
-		return button;
-	}
+	private static Button Button(Control parent, string text, Action action, bool disabled = false) =>
+		SpoonWidgets.Button(parent, text, action, disabled);
 
 	private void Refresh()
 	{
+		var focusables = Focusables();
+		int focused = focusables.FindIndex(c => c.HasFocus());
 		foreach (Node child in _rows.GetChildren()) { _rows.RemoveChild(child); child.QueueFree(); }
 		var board = MerchantLoans.Board;
 		_panel.Visible = board.Borrowers.Count > 0;
 		foreach (int stale in _drafts.Keys.Where(b => !board.HasRequest(b)).ToArray()) _drafts.Remove(stale);
 		foreach (var stale in _picked.Keys.Where(k => !board.OffersFor(k.Borrower).Any(o => o.Lender == k.Lender)).ToArray())
 			_picked.Remove(stale);
+		bool appeared = _panel.Visible && !_wasVisible;
+		_wasVisible = _panel.Visible;
 		if (!_panel.Visible) return;
 		Label(_rows, Text("title"));
 		Label(_rows, Text("rules"));
@@ -101,7 +104,10 @@ public sealed class LoanPanel
 			if (borrower == me) OwnRequest(borrower);
 			else OtherRequest(borrower, me);
 		}
+		SpoonWidgets.RestoreFocus(_rows, focused, appeared);
 	}
+
+	private List<Control> Focusables() => SpoonWidgets.Focusables(_rows);
 
 	private void OwnRequest(int borrower)
 	{
@@ -116,10 +122,16 @@ public sealed class LoanPanel
 			string name = MerchantLoans.NameOf(MerchantLoans.PlayerAt(_me.RunState, offer.Lender)!);
 			string details = offer.Gift ? Text("gift") : Number("rate", offer.RatePercent);
 			var toggle = new CheckButton { Text = name + ": " + Number("gold", offer.Amount) + " · " + details,
-				ButtonPressed = picked };
+				ButtonPressed = picked, FocusMode = Control.FocusModeEnum.All };
 			toggle.AddThemeFontSizeOverride("font_size", 18);
 			_rows.AddChild(toggle);
 			toggle.Toggled += value => { _picked[key] = value; Schedule(); };
+			toggle.GuiInput += input =>
+			{
+				if (!input.IsActionPressed(MegaInput.select)) return;
+				toggle.AcceptEvent();
+				toggle.ButtonPressed = !toggle.ButtonPressed;
+			};
 		}
 		Label(_rows, Number("selected", total));
 		// Preview the actual principal taken, including partial final offers.
@@ -169,15 +181,6 @@ public sealed class LoanPanel
 		Button(buttons, Text("withdraw"), () => Offer(false, 0), own == null);
 	}
 
-	/// <summary>A value row: reset (delta 0), then − buttons from the largest step and + buttons from the smallest.</summary>
-	private void Stepper(string title, Action<int> change, params int[] steps)
-	{
-		if (steps.Length == 0) steps = new[] { 1, 5, 10 };
-		Label(_rows, title);
-		var row = new HBoxContainer();
-		_rows.AddChild(row);
-		Button(row, Text("reset"), () => change(0));
-		foreach (int step in steps.Reverse()) Button(row, "−" + step, () => change(-step));
-		foreach (int step in steps) Button(row, "+" + step, () => change(step));
-	}
+	private void Stepper(string title, Action<int> change, params int[] steps) =>
+		SpoonWidgets.Stepper(_rows, title, Text("reset"), change, steps);
 }

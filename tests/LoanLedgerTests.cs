@@ -19,6 +19,19 @@ public class LoanLedgerTests
 	}
 
 	[Fact]
+	public void Balances_group_what_is_left_to_repay_and_collect_per_player()
+	{
+		var ledger = new LoanLedger();
+		ledger.AddLoan(Borrower, new[] { (Lender: 2, Owed: 30), (Lender: 1, Owed: 20) });
+		ledger.AddLoan(Borrower, new[] { (Lender: 2, Owed: 5) });
+		ledger.AddLoan(3, new[] { (Lender: Borrower, Owed: 12) });
+
+		Assert.Equal(new[] { (1, 20), (2, 35) }, ledger.Balances(Borrower, borrower: true));
+		Assert.Equal(new[] { (3, 12) }, ledger.Balances(Borrower, borrower: false));
+		Assert.Empty(ledger.Balances(1, borrower: true));
+	}
+
+	[Fact]
 	public void Repay_without_debt_keeps_everything()
 	{
 		var ledger = new LoanLedger();

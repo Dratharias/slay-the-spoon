@@ -31,7 +31,7 @@ def test_only_curated_resources_are_imported_with_verified_provenance(tmp_path):
     jar, out = tmp_path / "game.jar", tmp_path / "out"
     make_jar(jar)
     manifest = act4.import_act4(jar, out)
-    assert len(manifest["assets"]) == 25
+    assert len(manifest["assets"]) == 31
     for item in manifest["assets"] + manifest["localization"]:
         data = (out / item["path"]).read_bytes()
         assert hashlib.sha256(data).hexdigest() == item["sha256"]

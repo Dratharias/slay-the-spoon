@@ -85,4 +85,12 @@ public static class SpoonConfigFile
 
 	/// <summary>Owner preview switch: set Act4Preview to "True" (or true) in the cfg file.</summary>
 	public static bool Act4Preview => SpoonConfig.ReadFlag(Content, SpoonConfig.PreviewKey);
+
+	/// <summary>This player's character color (encoded <see cref="CharacterTint"/>), the default when unset.</summary>
+	public static CharacterTint CharacterTint =>
+		SpoonConfig.Read(Content).TryGetValue(SpoonConfig.TintKey, out string? raw) && int.TryParse(raw, out int code)
+			? CharacterTint.Decode(code) : CharacterTint.Default;
+
+	public static void SaveCharacterTint(CharacterTint tint) =>
+		Update(c => SpoonConfig.With(c, SpoonConfig.TintKey, tint.Encode().ToString(System.Globalization.CultureInfo.InvariantCulture)));
 }

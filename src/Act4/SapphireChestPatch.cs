@@ -137,31 +137,29 @@ internal static class SapphireChestPatch
 			_room = run.CurrentRoom;
 			var me = LocalContext.GetMe(run);
 			if (me == null) return;
-			var button = new Button { Text = new LocString("merchant_room", "SPOON_SAPPHIRE_SWAP").GetFormattedText(),
-				Position = new Vector2(650, 770), Visible = false };
-			button.AddThemeFontSizeOverride("font_size", 24);
-			__instance.AddChild(button);
 			RelicModel? offered = null;
+			var key = SapphireKeyView.Add(__instance, () =>
+			{
+				if (offered is not { } relic) return false;
+				RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new SapphireSwapAction(me,
+					new NetSapphireSwap { RelicId = relic.Id.ToString(), Floor = run.TotalFloor }));
+				return true;
+			});
 			void Refresh()
 			{
 				// Wait in the UI, not in the queued action, until every pickup's own effects have finished.
 				offered = Pickups.FirstOrDefault(p => p.Player == me && p.Ready.Task.IsCompleted && p.Relic != null
 					&& Ledger.TryFind((me, p.Relic), run.TotalFloor, out var entry) && entry.Plan?.Reversible == true)?.Relic;
-				button.Visible = offered != null && !act4.Keys.Has(Act4Key.Sapphire) && Pickups.All(p => p.Ready.Task.IsCompleted);
+				bool shown = offered != null && !act4.Keys.Has(Act4Key.Sapphire) && Pickups.All(p => p.Ready.Task.IsCompleted);
+				string tip = "";
 				if (offered is { } relic)
 				{
-					var tip = new LocString("merchant_room", "SPOON_SAPPHIRE_SWAP_TIP");
-					tip.Add("Relic", relic.Title.GetFormattedText());
-					button.TooltipText = tip.GetFormattedText();
+					var text = new LocString("merchant_room", "SPOON_SAPPHIRE_SWAP_TIP");
+					text.Add("Relic", relic.Title.GetFormattedText());
+					tip = text.GetFormattedText();
 				}
+				key.Show(shown, tip);
 			}
-			button.Pressed += () =>
-			{
-				if (offered is not { } relic || button.Disabled) return;
-				button.Disabled = true;
-				RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new SapphireSwapAction(me,
-					new NetSapphireSwap { RelicId = relic.Id.ToString(), Floor = run.TotalFloor }));
-			};
 			Changed += Refresh;
 			Act4Keys.Changed += Refresh;
 			__instance.TreeExiting += () =>

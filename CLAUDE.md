@@ -152,6 +152,16 @@ Read `README.md` for the player view and the spec for every decision.
 - Owner-request quick fixes: StS1 power icons no longer show the game's "NOPE" missing image; bigger top-bar keys;
   loan panel on the right, − buttons, interest 0–900 %. Co-op Custom Run: allies' cards trigger Strangle/Choke. Build 0 warnings; 412 xUnit + 74 pytest pass. Not tested in game.
 
+## 0.11.0 (2026-10-30)
+
+- Emerald elite: StS1 map flames (green, `images/map/flame_*.png`, from `make sts1-act4-data`) plus the gem.
+- Sapphire key shown in the opened chest (`SapphireKeyView`); the RPS loser can swap too, but no pre-pickup choice yet.
+- Loan panel on `src/Ui/SpoonWidgets.cs` (controller rows/buttons); gold hover lists what is left to repay or collect.
+- Character color (`src/Tint/`, pause menu button, `shaders/character_tint.gdshader`): overlay or dominant-hue mode,
+  optional map lines, saved in the cfg (`CharacterTint`), shared in co-op by `TintAction`. Applied like StS2's monster
+  hue variants (`SetNormalMaterial`).
+- Build 0 warnings; 421 xUnit + 74 pytest pass. Not tested in game (gamepad, co-op sync and tint visuals included).
+
 ## Documents
 
 | Path | What |

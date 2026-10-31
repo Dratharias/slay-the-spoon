@@ -22,6 +22,8 @@ public static class SpoonConfig
 
 	public const string PreviewKey = "Act4Preview";
 
+	public const string TintKey = "CharacterTint";
+
 	/// <summary>The permanent Act 4 unlock is per modded profile.</summary>
 	public static string Act4UnlockKey(int profileId) => $"Act4Unlocked.profile{profileId}";
 

@@ -98,8 +98,13 @@ room is left. Select enough offers and accept, then try buying the item again.
 
 Future gold gains repay the oldest loan first, shared equally between its remaining lenders.
 Interest is fixed on acceptance; gifts create no debt. **Death and resurrection do not erase debts.**
-Debts are saved with the run. Solo, Standard and Daily runs are unaffected.
+Debts are saved with the run. Hover your gold to see what is left to repay or collect; the loan panel works with a
+controller. Solo, Standard and Daily runs are unaffected.
 The merchant interface still needs in-game validation; see `docs/testing/step-5-checklist.md`.
+
+**Character Color** (pause menu, every mode): tint your character with a color overlay, or recolor only the parts close
+to its own color (the threshold sets how close); optionally color your map drawings too. Saved for you and shown to
+your co-op partners. It is cosmetic only.
 
 **Act 4, The Ending:** reaching Act 3 in a Standard run at Ascension 10 for the first time permanently
 unlocks Act 4, even if that run is lost. Once unlocked, it is available at every ascension level, including 0.

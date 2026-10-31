@@ -196,6 +196,42 @@
       "path": "assets/images/ui/topPanel/key_slots.png",
       "bytes": 2098,
       "sha256": "c6acff79560cbd34b2c6cd2d7177e31021fb42d00e6a3d7df93e8f6dae9e503d"
+    },
+    {
+      "source": "images/vfx/map/flame_1_0.png",
+      "path": "assets/images/vfx/map/flame_1_0.png",
+      "bytes": 2957,
+      "sha256": "03bf120013ece0068f781426f1a819693b434c8ef442403ff25875b068a3a946"
+    },
+    {
+      "source": "images/vfx/map/flame_1_1.png",
+      "path": "assets/images/vfx/map/flame_1_1.png",
+      "bytes": 3256,
+      "sha256": "2f1211dc86150f6fc123c6ec608339a18eb7ffbf975a1caf74180c6720cd5b90"
+    },
+    {
+      "source": "images/vfx/map/flame_1_2.png",
+      "path": "assets/images/vfx/map/flame_1_2.png",
+      "bytes": 3431,
+      "sha256": "bb53afc9f91cfb780b68abfe6f31a6bcbfabe4c161755d6879b404e6067d294d"
+    },
+    {
+      "source": "images/vfx/map/flame_1_3.png",
+      "path": "assets/images/vfx/map/flame_1_3.png",
+      "bytes": 3716,
+      "sha256": "ee059560591b92772e13b27b0c46b42a97d267c7c65ef7ee61e6cc039a34c4eb"
+    },
+    {
+      "source": "images/vfx/map/flame_1_4.png",
+      "path": "assets/images/vfx/map/flame_1_4.png",
+      "bytes": 3080,
+      "sha256": "62809b70c76ba40310b501d261df72a6a0d35ac7ae7d5dd87c36ca0ea0506d05"
+    },
+    {
+      "source": "images/vfx/map/flame_1_5.png",
+      "path": "assets/images/vfx/map/flame_1_5.png",
+      "bytes": 2070,
+      "sha256": "f9cde8be79270afa5bc2e840efc8e59e286a880a5f785c1fc6fa4ea3a8740aa8"
     }
   ],
   "localization": [

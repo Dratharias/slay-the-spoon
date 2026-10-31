@@ -109,6 +109,17 @@ public sealed class LoanLedger
 		return _entries.Where(e => e.Lender == lender).Sum(e => e.Owed);
 	}
 
+	/// <summary>What one player still has to repay (<paramref name="borrower"/>) or collect, per other player, by player index.</summary>
+	public IReadOnlyList<(int Other, int Amount)> Balances(int player, bool borrower)
+	{
+		return _entries.Where(e => (borrower ? e.Borrower : e.Lender) == player)
+			.GroupBy(e => borrower ? e.Lender : e.Borrower)
+			.Select(g => (g.Key, g.Sum(e => e.Owed)))
+			.Where(b => b.Item2 > 0)
+			.OrderBy(b => b.Key)
+			.ToList();
+	}
+
 	/// <summary>Four ints per entry (loan id, borrower, lender, owed), in order; fits an <c>int[]</c> saved property.</summary>
 	public int[] Encode()
 	{
