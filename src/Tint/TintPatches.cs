@@ -2,6 +2,8 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Runs;
@@ -36,5 +38,20 @@ internal static class TintMapLinePatch
 		if (isErasing) return;
 		if (CharacterTints.Run is { } run && LocalContext.GetMe(run) == player) CharacterTints.EnsureSent();
 		__result.DefaultColor = CharacterTints.MapColor(player, __result.DefaultColor);
+	}
+}
+
+/// <summary>
+/// A shared color is applied when the synchronizer would enqueue it, on every peer alike, so it takes no action id,
+/// no checksum and no place in the queue (see <see cref="TintAction"/>). The host still broadcasts it first.
+/// </summary>
+[HarmonyPatch(typeof(ActionQueueSet), nameof(ActionQueueSet.EnqueueWithoutSynchronizing))]
+internal static class TintApplyNowPatch
+{
+	private static bool Prefix(GameAction gameAction)
+	{
+		if (gameAction is not TintAction tint) return true;
+		tint.ApplyNow();
+		return false;
 	}
 }

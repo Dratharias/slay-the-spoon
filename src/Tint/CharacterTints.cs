@@ -164,14 +164,20 @@ public struct NetTint : INetAction, IPacketSerializable
 	public void Deserialize(PacketReader reader) => Code = reader.ReadInt(CharacterTint.Bits);
 }
 
-/// <summary>Cosmetic only; runs at any time, in or out of combat.</summary>
+/// <summary>
+/// Cosmetic only. It travels through the action synchronizer (mods cannot add network message types), but it never
+/// enters the action queue: <see cref="TintApplyNowPatch"/> applies it on arrival. Queued, it would take an action id and
+/// a post-action checksum at a moment that differs between peers (a desync when a color changed at a turn start), and
+/// when sent while a room loads it would sit in the paused queue that combat start waits on (no turn, no draw).
+/// </summary>
 public class TintAction(Player player, NetTint action) : GameAction
 {
 	public override ulong OwnerId => player.NetId;
 	public override GameActionType ActionType => GameActionType.Any;
+	internal void ApplyNow() => CharacterTints.Apply(player, action);
 	protected override Task ExecuteAction()
 	{
-		CharacterTints.Apply(player, action);
+		ApplyNow();
 		return Task.CompletedTask;
 	}
 	public override INetAction ToNetAction() => action;
