@@ -242,11 +242,13 @@ internal static class SapphireChestPatch
 		for (int waited = 0; ; waited += SwapPollMs)
 		{
 			var (relic, entry) = FindPickup(player, action);
-			bool wait = SapphireRevert.ShouldWait(Ledger.IsExpected(action.RelicId), entry != null, entry?.Plan != null);
+			// A null ledger run means AwardRelics has not run on this peer yet: the award is still coming.
+			bool wait = _ledgerRun == null
+				|| SapphireRevert.ShouldWait(Ledger.IsExpected(action.RelicId), entry != null, entry?.Plan != null);
 			if (!wait) return (relic, entry);
 			if (waited >= SwapWaitMs)
 			{
-				SpoonLog.Info($"act4: Sapphire swap {player.NetId} {action.RelicId}: pickup not finished after {SwapWaitMs} ms, refused");
+				SpoonLog.Error($"act4: WARNING Sapphire swap {player.NetId} {action.RelicId}: pickup not finished after {SwapWaitMs} ms, refused");
 				return (null, null);
 			}
 			await Task.Delay(SwapPollMs);
@@ -264,9 +266,10 @@ internal static class SapphireChestPatch
 	internal static async Task Swap(Player player, NetSapphireSwap action)
 	{
 		var run = player.RunState;
-		if (run != _ledgerRun || string.IsNullOrEmpty(action.RelicId)) return;
+		if ((_ledgerRun != null && run != _ledgerRun) || string.IsNullOrEmpty(action.RelicId)) return;
 		var (relic, entry) = await AwaitPickup(player, action);
-		if (relic == null) return;
+		// The run or room may have ended during the wait.
+		if (relic == null || run != _ledgerRun) return;
 		var act4 = SpoonAct4.Of(run);
 		var cards = entry?.Handles.ToDictionary(p => p.Value, p => p.Key);
 		var plan = SapphireRevert.SwapPlan(entry?.Plan, player.Relics.Contains(relic),

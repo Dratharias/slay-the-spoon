@@ -56,8 +56,16 @@ public static class SpoonConfigFile
 			// Temp file in the same directory, then a rename: a crash mid-write cannot truncate the unlock.
 			Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
 			string temp = FilePath + ".tmp";
-			File.WriteAllText(temp, json);
-			File.Move(temp, FilePath, overwrite: true);
+			try
+			{
+				File.WriteAllText(temp, json);
+				File.Move(temp, FilePath, overwrite: true);
+			}
+			catch
+			{
+				try { File.Delete(temp); } catch (Exception) { /* best effort */ }
+				throw;
+			}
 		}
 		catch (Exception e) when (e is IOException or UnauthorizedAccessException)
 		{

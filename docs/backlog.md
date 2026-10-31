@@ -18,6 +18,8 @@ Known gaps deferred from step 1's final review. Fixed when the author feels like
   Owner decisions (2026-10-30): the boss relics are activated by a Custom Run option; special event relics are imported
   but not implemented, and how to obtain them is decided later.
 - Act 4 keys (step 6 WP3), minors left after review:
+  - A co-op Sapphire swap waits up to 15 s for its pickup: a peer whose pickup never arrives refuses after the wait while
+    the others apply the swap (logged as a warning).
   - The Sapphire button position is hard-coded (650, 770); anchor it to the chest's relic row.
   - The Ruby icon comes from a postfix on the private `RestSiteOption.IconPath` getter, which the JIT may inline.
   - The Sapphire heal revert sets HP directly: no HP-lost entry in run history, no sound.

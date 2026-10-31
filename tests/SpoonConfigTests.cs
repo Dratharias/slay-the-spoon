@@ -115,4 +115,8 @@ public class SpoonConfigTests
 		Assert.Equal(System.Text.Json.JsonValueKind.Null, root.GetProperty("Nil").ValueKind);
 		Assert.True(SpoonConfig.ReadFlag(json, SpoonConfig.PreviewKey));
 	}
+
+	[Fact]
+	public void With_RefusesDuplicateKeys() =>
+		Assert.Null(SpoonConfig.With("{\"A\": 1, \"A\": 2}", SpoonConfig.PreviewKey, "True"));
 }

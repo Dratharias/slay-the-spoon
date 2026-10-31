@@ -93,13 +93,21 @@ public static class SpoonConfig
 				}
 				root = parsed;
 			}
-			catch (JsonException)
+			catch (Exception e) when (e is JsonException or ArgumentException)
 			{
 				return null;
 			}
 		}
-		root[key] = value;
-		return root.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
+		try
+		{
+			// The node parses lazily: a duplicate key in a hand-edited file only throws here.
+			root[key] = value;
+			return root.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
+		}
+		catch (ArgumentException)
+		{
+			return null;
+		}
 	}
 
 	/// <summary>True only for the exact value "True".</summary>
