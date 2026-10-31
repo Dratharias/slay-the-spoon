@@ -172,6 +172,12 @@ Read `README.md` for the player view and the spec for every decision.
   `PickupLedger`) is removed. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game:
   `docs/testing/sapphire-rematch-checklist.md`.
 
+## 0.12.1 (2026-10-31)
+
+- Sapphire Key shown from the chest's opening as one more slot (N players: N relics + the key; scene slots from
+  `treasure_room.tscn`, a fifth slot for 4 relics), dimmed until it is offered to the last player; solo: a choice from
+  the start. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game.
+
 ## Documents
 
 | Path | What |

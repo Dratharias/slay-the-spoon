@@ -14,13 +14,16 @@ namespace SlaySpoon.Act4;
 
 /// <summary>
 /// Chest UI for <see cref="ChestRematchPatch"/>: plays each intermediate round like the vanilla award (hands grab, fights
-/// over the relic), then frees the losers' hands for the rematch and shows the Sapphire Key to the last player. The
+/// over the relic), then frees the losers' hands for the rematch. The Sapphire Key shows as one more slot from the start
+/// and becomes clickable for the last player. The
 /// final award is the vanilla animation, queued after the rounds still playing.
 /// </summary>
 internal static class ChestRematchView
 {
 	private static readonly AccessTools.FieldRef<NTreasureRoomRelicCollection, List<NTreasureRoomRelicHolder>> Holders =
 		AccessTools.FieldRefAccess<NTreasureRoomRelicCollection, List<NTreasureRoomRelicHolder>>("_holdersInUse");
+	private static readonly AccessTools.FieldRef<NTreasureRoomRelicCollection, List<NTreasureRoomRelicHolder>> Multiplayer =
+		AccessTools.FieldRefAccess<NTreasureRoomRelicCollection, List<NTreasureRoomRelicHolder>>("_multiplayerHolders");
 	private static readonly AccessTools.FieldRef<NTreasureRoomRelicCollection, NHandImageCollection> Hands =
 		AccessTools.FieldRefAccess<NTreasureRoomRelicCollection, NHandImageCollection>("_hands");
 	private static readonly AccessTools.FieldRef<NTreasureRoomRelicCollection, Control> Backstop =
@@ -30,6 +33,12 @@ internal static class ChestRematchView
 	private static readonly Func<NTreasureRoomRelicCollection, List<RelicPickingResult>, Task> AnimateAwards =
 		AccessTools.MethodDelegate<Func<NTreasureRoomRelicCollection, List<RelicPickingResult>, Task>>(
 			AccessTools.Method(typeof(NTreasureRoomRelicCollection), "AnimateRelicAwards"));
+
+	// The chest scene has four multiplayer slots around the chest; with four relics the key takes this fifth one,
+	// from the collection's center (top right, clear of the right-hand slot).
+	private static readonly Vector2 FifthSlot = new(220f, -180f);
+	// Solo: from the right edge of the single relic.
+	private const float SoloGap = 120f;
 
 	private static NTreasureRoomRelicCollection? _collection;
 	private static Task _pending = Task.CompletedTask;
@@ -83,7 +92,7 @@ internal static class ChestRematchView
 		}
 	}
 
-	/// <summary>The relics are on screen once the chest opens: only then does the key show.</summary>
+	/// <summary>The relics are on screen once the chest opens: the key then takes one more slot beside them.</summary>
 	[HarmonyPatch(typeof(NTreasureRoomRelicCollection), nameof(NTreasureRoomRelicCollection.InitializeRelics))]
 	private static class OpenPatch
 	{
@@ -150,15 +159,31 @@ internal static class ChestRematchView
 		return true;
 	}
 
+	/// <summary>
+	/// Where the key sits: the first scene slot no relic uses (2 relics leave the left one, 3 the right one), the fifth
+	/// slot with 4 relics, and right of the relic in solo.
+	/// </summary>
+	private static Vector2 KeySlot(NTreasureRoomRelicCollection collection)
+	{
+		var used = Holders(collection).Where(h => h.Visible).Select(h => h.GetGlobalRect()).ToList();
+		if (used.Count == 1) return new Vector2(used[0].End.X + SoloGap, used[0].GetCenter().Y);
+		foreach (var holder in Multiplayer(collection).Where(h => !h.Visible))
+		{
+			var rect = holder.GetGlobalRect();
+			// With 2 relics the second one moves onto the right-hand slot, whose own holder stays hidden there.
+			if (used.All(u => !u.Intersects(rect))) return rect.GetCenter();
+		}
+		return collection.GetGlobalRect().GetCenter() + FifthSlot;
+	}
+
 	private static void Refresh()
 	{
 		if (_collection is not { } collection || !GodotObject.IsInstanceValid(collection)) return;
 		var me = LocalContext.GetMe(Run(collection));
-		bool open = _opened && ChestRematchPatch.IsRematchChest && !Busy && me != null;
-		bool offered = open && ChestRematchPatch.KeyOfferFor(me!) != null;
-		var beside = Holders(collection).Where(h => h.Visible && h.GetParent() is not NHandImage)
-			.OrderBy(h => h.GlobalPosition.X).LastOrDefault();
-		_key?.Show(offered, new LocString("merchant_room", "SPOON_SAPPHIRE_KEY_TIP").GetFormattedText(), beside);
+		bool shown = _opened && ChestRematchPatch.IsRematchChest && me != null;
+		bool offered = shown && !Busy && ChestRematchPatch.KeyOfferFor(me!) != null;
+		string tip = offered ? "SPOON_SAPPHIRE_KEY_TIP" : "SPOON_SAPPHIRE_KEY_WAIT_TIP";
+		_key?.Show(shown, offered, new LocString("merchant_room", tip).GetFormattedText());
 	}
 
 	private static void ShowLabel(string? key)

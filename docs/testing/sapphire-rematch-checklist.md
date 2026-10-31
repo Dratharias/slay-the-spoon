@@ -1,16 +1,22 @@
-# Sapphire chest rematch (0.12.0) — in-game checklist
+# Sapphire chest rematch (0.12.0, key slot 0.12.1) — in-game checklist
 
 Build, 398 xUnit tests and 74 Python tests pass. Nothing below has been tested in game yet.
 Applies to runs with Act 4 (unlocked Standard run, or the Custom Run "Act 4" option) while the team lacks the Sapphire.
 
 ## Solo
 
-- [ ] Opening a chest shows the Sapphire Key right of the relic (gem and "Take the Sapphire Key" button, EN/FR tooltip).
+- [ ] Opening a chest shows the Sapphire Key right of the relic as a choice from the start (gem and "Take the Sapphire
+      Key" button, EN/FR tooltip).
 - [ ] Clicking the gem (or the button with a controller) takes the key: top-bar Sapphire lights up, no relic is gained.
 - [ ] Taking the relic instead leaves the key; the next chest offers it again.
 - [ ] Skipping with the proceed button still works; once the key is held, chests are vanilla (no key shown).
 
 ## Co-op (two or more players)
+
+- [ ] Opening a chest shows the key as one more slot from the start: 2 players → 2 relics + key (key on the left),
+      3 → 3 + key (key on the right), 4 → 4 + key (top right, not overlapping a relic or the vote icons).
+- [ ] The key is dimmed with the "last player left" tooltip and cannot be clicked until only one player is left;
+      it then lights up, and only for that player.
 
 - [ ] Different relics in the first round: everyone gets their relic, no rematch, no key (design call, see backlog).
 - [ ] Two players vote the same relic: rock-paper-scissors as usual; the winner keeps the relic in hand, the loser's

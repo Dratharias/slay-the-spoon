@@ -12,8 +12,9 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   but not implemented, and how to obtain them is decided later.
 - Act 4 keys (step 6 WP3), minors left after review:
   - ~~A co-op Sapphire swap waits up to 15 s for its pickup.~~ 0.12.0: the swap is gone (chest rematch instead).
-  - ~~The Sapphire button position is hard-coded (650, 770).~~ 0.12.0: the key sits 120 px right of the rightmost relic
-    left in the chest; in a four-relic co-op row it may overlap the next hand or the screen edge.
+  - ~~The Sapphire button position is hard-coded (650, 770).~~ 0.12.1: the key takes a free slot of the chest scene
+    (left with 2 relics, right with 3); with 4 relics it uses a hand-picked fifth slot at (220, −180) from the chest
+    center, which may sit close to the right-hand relic or a hand. Solo: 120 px right of the relic.
   - The Ruby icon comes from a postfix on the private `RestSiteOption.IconPath` getter, which the JIT may inline.
   - `StandardCharacterSelectPatch` sets `Pending` for any game mode; `Act4UnlockPatch.Record` logs failures at info.
 - Act 4 keys (step 6 WP3), design calls made without the owner (change any of them):
@@ -160,6 +161,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Done in 0.12.0 (owner request 2026-10-31, replaces the swap): the rock-paper-scissors losers rematch for another relic
     until the last player chooses between the last relic and the Sapphire Key; once the key is held, the last relic goes
     to them automatically as in vanilla. Solo: relic or key. Checklist: `docs/testing/sapphire-rematch-checklist.md`.
+    0.12.1 (owner request): the key shows from the start as one more slot (N players: N relics + the key), dimmed
+    for everyone until it is offered to the last player; in solo it is a choice from the start.
 - ~~Strangle in co-op: also trigger on cards played by allies, not only its owner's.~~ Done in 0.10.2 for Strangle and Choke
   (same power), Custom Run co-op only so Standard/Daily stay vanilla (`StrangleRule`). Minor: the power's vanilla text
   still says "you play a card".
