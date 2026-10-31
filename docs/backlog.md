@@ -142,6 +142,29 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   allows; StS2 conventions apply to colorless cards and cross-character cards. Design calls above that chose StS2
   behavior for character cards are to be brought back to StS1.
 
+## Owner requests (2026-10-30), listed only, not started
+
+- New game mode: pick the starting relic among 10 random choices.
+- Act 4 keys, visuals:
+  - The Emerald key marker is barely visible on the map.
+  - Import the StS1 burning elite map icon and use it for the Emerald elite.
+  - The keys are too small in the top bar.
+  - The Sapphire swap button (plain "Swap for the Sapphire Key" label on a dark box) looks bad; redesign it.
+- Sapphire in the chest: show the Sapphire key in the chest as a clickable choice next to the relics. In co-op, a player
+  who loses the rock-paper-scissors while the key is still available chooses between the key and the relic instead of
+  receiving the relic automatically.
+- Strangle in co-op: also trigger on cards played by allies, not only its owner's.
+- StS1 powers show "NOPE" as their floating text when applied (seen on Metallicize; every StS1 buff does it).
+- Merchant Loans:
+  - The interest control also needs − buttons to lower the rate; interest ranges from 0 % (minimum) to 900 %.
+  - Rebuild the loan panel from StS2's standard menu widgets (the Custom Run rows with − / + steppers) instead of custom
+    controls, and make it usable with a gamepad if it is not already.
+  - Move the loan panel to the right side of the screen instead of the left.
+  - Hovering the gold in the top bar with an active debt or loan shows how much is left to repay or collect.
+- Character hue option: tint each character at 20 % opacity, player-chosen hue. Optionally tint the player's map
+  drawings too. Refinement: compute the character's dominant color and tint only pixels near it within a threshold
+  (e.g. turn the Silent's green toward turquoise at 70 % transparency); hue, threshold and opacity are player settings.
+
 ## Deep backlog priority (owner, 2026-10-30)
 
 - Character/Act 4 animations and in-game validation are deferred behind the remaining content work.
