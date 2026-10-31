@@ -1,6 +1,5 @@
 using Godot;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Config;
@@ -33,10 +32,12 @@ internal static class EmeraldMapMarkerPatch
 		var flames = new Control { MouseFilter = Control.MouseFilterEnum.Ignore };
 		__instance.AddChild(flames);
 		__instance.MoveChild(flames, 0);
+		// Godot's own loader, not PreloadManager.Cache: the game disposes the textures its cache loaded outside
+		// a preload at the next room boundary, and the flame tweens keep reusing these frames after it.
 		var frames = new Texture2D[6];
 		for (int i = 0; i < frames.Length; i++)
 		{
-			frames[i] = PreloadManager.Cache.GetTexture2D($"res://SlaySpoon/images/map/flame_{i}.png");
+			frames[i] = ResourceLoader.Load<Texture2D>($"res://SlaySpoon/images/map/flame_{i}.png");
 		}
 		for (int i = 0; i < FlameCount; i++)
 		{
@@ -46,7 +47,7 @@ internal static class EmeraldMapMarkerPatch
 		{
 			Texture = new AtlasTexture
 			{
-				Atlas = PreloadManager.Cache.GetTexture2D(KeySprites.Path(Act4Key.Emerald, large: true)),
+				Atlas = ResourceLoader.Load<Texture2D>(KeySprites.Path(Act4Key.Emerald, large: true)),
 				Region = new Rect2(70, 70, 116, 116),
 			},
 			MouseFilter = Control.MouseFilterEnum.Ignore,
@@ -88,6 +89,7 @@ internal static class EmeraldMapMarkerPatch
 		}
 		void Step(float t)
 		{
+			if (!GodotObject.IsInstanceValid(flame)) return;
 			flame.Texture = frames[Mathf.Min((int)(t * frames.Length), frames.Length - 1)];
 			flame.Position = start - new Vector2(size / 2f, size * 0.8f + t * size * 0.25f);
 			flame.SelfModulate = new Color(1, 1, 1, 0.9f * Mathf.Sin(Mathf.Pi * t));
