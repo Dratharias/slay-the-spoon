@@ -192,3 +192,6 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - Watcher relic plan: reuse native shared Cloak Clasp rather than duplicate it; Holy Water and Violet Lotus
   replace Archaic Tooth at Orobas when the Tooth's conditions fail. See `docs/review/character-relics.md`.
 - Bugs and in-game test results: the owner logs them here later.
+
+- **Dusty Tome in StS1-only (0.12.4, owner call 2026-11-01):** Darv's Dusty Tome crashed the game (null Ancient pick: the
+  StS1-only pool has no Ancient card). The Tome now reads the vanilla pool and gives a vanilla StS2 Ancient card. Not tested in game.

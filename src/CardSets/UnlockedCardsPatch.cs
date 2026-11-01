@@ -1,6 +1,7 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardLibrary;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Unlocks;
@@ -46,6 +47,19 @@ public static class UnlockedCardsPatch
 		{
 			_bypass--;
 		}
+	}
+
+	/// <summary>
+	/// Dusty Tome (Darv's offer) picks an Ancient card from the character's pool. No StS1 card is Ancient and the
+	/// StS1-only mode drops vanilla Ancients, so the pick came back null and crashed the event. The Tome reads the
+	/// vanilla pool instead (owner call, 2026-11-01): same RNG draw, same card as an unmodded run.
+	/// </summary>
+	[HarmonyPatch(typeof(DustyTome), nameof(DustyTome.SetupForPlayer))]
+	public static class DustyTomeBypass
+	{
+		public static void Prefix() => _bypass++;
+
+		public static void Finalizer() => _bypass--;
 	}
 
 	/// <summary>The card library shows vanilla unlocks, even when opened during a run.</summary>
