@@ -30,6 +30,8 @@ public abstract class Sts1EventRelic : RelicModel
 		ModelDb.Relic<Sts1Necronomicon>(),
 		ModelDb.Relic<Sts1Enchiridion>(),
 		ModelDb.Relic<Sts1NilrysCodex>(),
+		ModelDb.Relic<Sts1WarpedTongs>(),
+		ModelDb.Relic<Sts1SpiritPoop>(),
 	};
 }
 

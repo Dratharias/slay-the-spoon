@@ -39,6 +39,7 @@ RELICS = {
 # StS1 card portrait (1024Portraits) -> mod card model id, for the curses a relic hands out.
 CURSES = {
     "curse/necronomicurse": "sts1_necronomicurse",
+    "curse/pain": "sts1_pain",
 }
 CARD_SIZE = (250, 190)
 

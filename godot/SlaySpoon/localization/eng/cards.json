@@ -297,6 +297,8 @@
 	"STS1_OMNISCIENCE.title": "Omniscience",
 	"STS1_OUTMANEUVER.description": "Next turn, gain {Energy:energyIcons()}.",
 	"STS1_OUTMANEUVER.title": "Outmaneuver",
+	"STS1_PAIN.description": "While in your [gold]Hand[/gold], lose 1 HP whenever you play another card.",
+	"STS1_PAIN.title": "Pain",
 	"STS1_PANACEA.description": "Gain {ArtifactPower:diff()} [gold]Artifact[/gold].",
 	"STS1_PANACEA.title": "Panacea",
 	"STS1_PANACHE.description": "Every time you play 5 cards in a single turn, deal {Sts1PanachePower:diff()} damage to ALL enemies.",

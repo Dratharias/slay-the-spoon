@@ -41,4 +41,32 @@ public static class Sts1EventMath
 
 	public const int TomeTakeHpLoss = 10;
 	public const int TomeStopHpLoss = 3;
+
+	/// <summary>Pain: HP lost for each other card played while it is in hand.</summary>
+	public const int PainHpLoss = 1;
+
+	public const int BonfireHeal = 5;
+	public const int BonfireMaxHp = 10;
+
+	/// <summary>
+	/// Bonfire Spirits: the reward for an offered card, by its rarity name. StS1 rarities map as is; StS2's extra ones are
+	/// a builder call: Ancient counts as Rare, Status as Common, Event, Token and Quest as StS1's Special (heal 5).
+	/// </summary>
+	public static BonfireReward BonfireRewardFor(string rarity) => rarity switch
+	{
+		"Curse" => BonfireReward.SpiritPoop,
+		"Basic" => BonfireReward.Nothing,
+		"Uncommon" => BonfireReward.FullHeal,
+		"Rare" or "Ancient" => BonfireReward.MaxHpAndFullHeal,
+		_ => BonfireReward.Heal,
+	};
+}
+
+public enum BonfireReward
+{
+	SpiritPoop,
+	Nothing,
+	Heal,
+	FullHeal,
+	MaxHpAndFullHeal,
 }

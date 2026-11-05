@@ -38,10 +38,16 @@
 	"STS1_PURE_WATER.description": "Au début du combat, ajoutez {Cards} [gold]Miracle[/gold] à votre main.",
 	"STS1_PURE_WATER.flavor": "Filtrée dans un sable fin et sans aucune impureté.",
 	"STS1_PURE_WATER.title": "Eau pure",
+	"STS1_SPIRIT_POOP.description": "Désagréable.",
+	"STS1_SPIRIT_POOP.flavor": "Les restes carbonisés de votre offrande aux esprits.",
+	"STS1_SPIRIT_POOP.title": "Caca d'esprit",
 	"STS1_TEARDROP_LOCKET.description": "Commencez chaque combat en [gold]Calme[/gold].",
 	"STS1_TEARDROP_LOCKET.flavor": "Son possesseur aveugle, son contenu invisible.",
 	"STS1_TEARDROP_LOCKET.title": "Médaillon larme",
 	"STS1_VIOLET_LOTUS.description": "Lorsque vous quittez le [gold]Calme[/gold], gagnez [blue]1[/blue] Énergie supplémentaire.",
 	"STS1_VIOLET_LOTUS.flavor": "Les textes anciens décrivent que la surface des \"bassins de mana\" étaient jonchés de ces fleurs.",
-	"STS1_VIOLET_LOTUS.title": "Lotus violet"
+	"STS1_VIOLET_LOTUS.title": "Lotus violet",
+	"STS1_WARPED_TONGS.description": "Au début de chaque tour, [gold]Améliorez[/gold] une carte aléatoire de votre [gold]Main[/gold] pour le reste du combat.",
+	"STS1_WARPED_TONGS.flavor": "Les pinces maudites manifestent un désir profond de revenir là d'où elles ont été volées.",
+	"STS1_WARPED_TONGS.title": "Pinces déformées"
 }

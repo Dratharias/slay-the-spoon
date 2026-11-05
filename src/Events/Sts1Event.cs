@@ -26,6 +26,8 @@ public abstract class Sts1Event : EventModel
 		ModelDb.Event<Sts1ForgottenAltar>(),
 		ModelDb.Event<Sts1MoaiHead>(),
 		ModelDb.Event<Sts1CursedTome>(),
+		ModelDb.Event<Sts1AccursedBlacksmith>(),
+		ModelDb.Event<Sts1Bonfire>(),
 	};
 
 	/// <summary>StS1's art, converted by <c>tools/sts1/art.py --events</c> (card events) or <c>tools/sts1/event_art.py</c>.</summary>

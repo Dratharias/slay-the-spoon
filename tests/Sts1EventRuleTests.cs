@@ -13,6 +13,8 @@ public class Sts1EventRuleTests
 	[InlineData(Sts1EventKind.ForgottenAltar)]
 	[InlineData(Sts1EventKind.MoaiHead)]
 	[InlineData(Sts1EventKind.CursedTome)]
+	[InlineData(Sts1EventKind.AccursedBlacksmith)]
+	[InlineData(Sts1EventKind.Bonfire)]
 	public void Sts1Run_AllowsEveryEvent_WithoutRelic(Sts1EventKind kind)
 	{
 		Assert.True(Sts1EventRule.IsAllowed(kind, sts1Run: true, players: 2, souvenirOwners: 0));
@@ -26,6 +28,8 @@ public class Sts1EventRuleTests
 	[InlineData(Sts1EventKind.ForgottenAltar)]
 	[InlineData(Sts1EventKind.MoaiHead)]
 	[InlineData(Sts1EventKind.CursedTome)]
+	[InlineData(Sts1EventKind.AccursedBlacksmith)]
+	[InlineData(Sts1EventKind.Bonfire)]
 	public void NoRelicNoMode_AllowsNothing(Sts1EventKind kind)
 	{
 		Assert.False(Sts1EventRule.IsAllowed(kind, sts1Run: false, players: 1, souvenirOwners: 0));
@@ -38,6 +42,8 @@ public class Sts1EventRuleTests
 	[InlineData(Sts1EventKind.ForgottenAltar)]
 	[InlineData(Sts1EventKind.MoaiHead)]
 	[InlineData(Sts1EventKind.CursedTome)]
+	[InlineData(Sts1EventKind.AccursedBlacksmith)]
+	[InlineData(Sts1EventKind.Bonfire)]
 	public void OneOwner_AllowsAugmenterAndNest(Sts1EventKind kind)
 	{
 		Assert.True(Sts1EventRule.IsAllowed(kind, sts1Run: false, players: 3, souvenirOwners: 1));

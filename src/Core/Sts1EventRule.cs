@@ -13,6 +13,8 @@ public enum Sts1EventKind
 	ForgottenAltar,
 	MoaiHead,
 	CursedTome,
+	AccursedBlacksmith,
+	Bonfire,
 }
 
 /// <summary>

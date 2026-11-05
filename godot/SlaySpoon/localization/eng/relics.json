@@ -38,10 +38,16 @@
 	"STS1_PURE_WATER.description": "At the start of combat, add {Cards} [gold]Miracle[/gold] to your hand.",
 	"STS1_PURE_WATER.flavor": "Filtered through fine sand and free of impurities.",
 	"STS1_PURE_WATER.title": "Pure Water",
+	"STS1_SPIRIT_POOP.description": "It's unpleasant.",
+	"STS1_SPIRIT_POOP.flavor": "The charred remains of your offering to the spirits.",
+	"STS1_SPIRIT_POOP.title": "Spirit Poop",
 	"STS1_TEARDROP_LOCKET.description": "Start each combat in [gold]Calm[/gold].",
 	"STS1_TEARDROP_LOCKET.flavor": "Its owner blind, its contents unseen.",
 	"STS1_TEARDROP_LOCKET.title": "Teardrop Locket",
 	"STS1_VIOLET_LOTUS.description": "Whenever you leave [gold]Calm[/gold], gain [blue]1[/blue] additional Energy.",
 	"STS1_VIOLET_LOTUS.flavor": "The old texts describe that the surface of \"mana pools\" were littered with these flowers.",
-	"STS1_VIOLET_LOTUS.title": "Violet Lotus"
+	"STS1_VIOLET_LOTUS.title": "Violet Lotus",
+	"STS1_WARPED_TONGS.description": "At the start of your turn, [gold]Upgrade[/gold] a random card in your [gold]Hand[/gold] for the rest of combat.",
+	"STS1_WARPED_TONGS.flavor": "The cursed tongs emit a strong desire to return to where they were stolen from.",
+	"STS1_WARPED_TONGS.title": "Warped Tongs"
 }

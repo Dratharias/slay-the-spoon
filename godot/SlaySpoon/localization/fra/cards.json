@@ -297,6 +297,8 @@
 	"STS1_OMNISCIENCE.title": "Omniscience",
 	"STS1_OUTMANEUVER.description": "Au prochain tour, gagnez {Energy:energyIcons()}.",
 	"STS1_OUTMANEUVER.title": "Astucieux",
+	"STS1_PAIN.description": "Si vous l'avez en [gold]Main[/gold], perdez 1 PV par autre carte jouée.",
+	"STS1_PAIN.title": "Douleur",
 	"STS1_PANACEA.description": "Gagnez {ArtifactPower:diff()} d'[gold]Artéfact[/gold].",
 	"STS1_PANACEA.title": "Panacée",
 	"STS1_PANACHE.description": "Pour toutes les 5 cartes que vous jouez en un tour, infligez {Sts1PanachePower:diff()} dégâts à TOUS les ennemis.",

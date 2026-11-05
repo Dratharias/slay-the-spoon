@@ -37,4 +37,15 @@ public class Sts1EventMathTests
 	[Fact]
 	public void CursedTomeCostsSixteenHpToTake() =>
 		Assert.Equal(16, Enumerable.Range(1, 3).Sum(Sts1EventMath.TomePageHpLoss) + Sts1EventMath.TomeTakeHpLoss);
+
+	[Theory]
+	[InlineData("Curse", BonfireReward.SpiritPoop)]
+	[InlineData("Basic", BonfireReward.Nothing)]
+	[InlineData("Common", BonfireReward.Heal)]
+	[InlineData("Event", BonfireReward.Heal)]
+	[InlineData("Uncommon", BonfireReward.FullHeal)]
+	[InlineData("Rare", BonfireReward.MaxHpAndFullHeal)]
+	[InlineData("Ancient", BonfireReward.MaxHpAndFullHeal)]
+	public void BonfireRewardFollowsRarity(string rarity, BonfireReward reward) =>
+		Assert.Equal(reward, Sts1EventMath.BonfireRewardFor(rarity));
 }
