@@ -58,11 +58,13 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - Act 4 The Ending (step 6 WP4-6), minors left after review:
   - The Invincible clamp sits in `Sts1InvinciblePower`, not in the tested `HeartInvincibleRule`; it flashes inside the modify
     hook (vanilla flashes after modifying, and the overkill path can call the hook twice).
-  - `PoisonTicksDrainTheSameBudget` only exercises unblockable damage; `BlockedHitsAndExhaustedBudget` is vaguely named.
+  - ~~`PoisonTicksDrainTheSameBudget` only exercises unblockable damage; `BlockedHitsAndExhaustedBudget` is vaguely named.~~
+    `BlockedHitsDrainOnlyTheirHpLoss` added, the theory renamed `BudgetNeverGrowsNorGoesNegative` (2026-11-05).
   - ~~`Sts1InvinciblePower.AfterApplied` takes the turn cap from the current amount: a mid-turn re-apply would use the
     depleted value.~~ 0.12.15: the cap never drops on a re-apply.
-  - `EndingMoveBrain` tests are weak: they compare two brains or re-read getters instead of asserting an expected move
-    sequence. `EndingNumbers` tests miss the low side of some thresholds; ~~`HeartBuffRule.Extra` accepts a negative count~~ (throws since 0.12.15).
+  - ~~`EndingMoveBrain` tests are weak: they compare two brains or re-read getters instead of asserting an expected move
+    sequence. `EndingNumbers` tests miss the low side of some thresholds~~ (expected StS1 cycles for the three enemies and
+    both sides of every threshold tested, 2026-11-05); ~~`HeartBuffRule.Extra` accepts a negative count~~ (throws since 0.12.15).
   - `ending_art.py` ignores atlas `offset`/`orig` (fine for the three StS1 atlases, wrong for a trimmed one); its additive
     blend is untested and not Spine-exact; triangle edges are not antialiased; no grandparent or shear bone test.
   - Code-built monsters have no death animation length: their fade may be cut short.

@@ -33,4 +33,31 @@ public class EndingNumbersTests
 		Assert.Equal(40, EndingNumbers.HeartEcho(8)); Assert.Equal(45, EndingNumbers.HeartEcho(9));
 		Assert.Equal(1, EndingNumbers.HeartBeatOfDeath(9)); Assert.Equal(2, EndingNumbers.HeartBeatOfDeath(10));
 	}
+
+	/// <summary>Each value at A0, just below its threshold and at it.</summary>
+	[Theory]
+	[InlineData("ShieldHp", 8, 110, 125)] [InlineData("ShieldArtifact", 10, 1, 2)] [InlineData("ShieldBash", 9, 12, 14)]
+	[InlineData("ShieldSmash", 9, 34, 38)] [InlineData("SpearHp", 8, 160, 180)] [InlineData("SpearArtifact", 10, 1, 2)]
+	[InlineData("SpearBurnStrike", 9, 5, 6)] [InlineData("SpearSkewerHits", 9, 3, 4)] [InlineData("HeartHp", 8, 750, 800)]
+	[InlineData("HeartBeatOfDeath", 10, 1, 2)] [InlineData("HeartBloodShotHits", 9, 12, 15)] [InlineData("HeartEcho", 9, 40, 45)]
+	public void ThresholdsHoldOnBothSides(string name, int threshold, int below, int atOrAbove)
+	{
+		var f = typeof(EndingNumbers).GetMethod(name)!;
+		int At(int a) => (int)f.Invoke(null, [a])!;
+		Assert.Equal(below, At(0));
+		Assert.Equal(below, At(threshold - 1));
+		Assert.Equal(atOrAbove, At(threshold));
+		Assert.Equal(atOrAbove, At(10));
+	}
+
+	[Fact]
+	public void FlatValuesIgnoreAscension()
+	{
+		Assert.Equal(10, EndingNumbers.SpearSkewer(0)); Assert.Equal(2, EndingNumbers.HeartBloodShot(0));
+		Assert.False(EndingNumbers.SpearBurnsToDrawPile(0));
+		Assert.Null(EndingNumbers.ShieldSmashFixedBlock(0));
+		Assert.Equal(0, EndingNumbers.ShieldSmashBlock(0, []));
+		Assert.Equal(34, EndingNumbers.ShieldSmashBlock(9, [12, 34, 20]));
+		Assert.Equal(99, EndingNumbers.ShieldSmashBlock(10, [12]));
+	}
 }

@@ -35,6 +35,16 @@ public class HeartInvincibleRuleTests
 		Assert.Equal(0, HeartInvincibleRule.AfterHpLoss(left, 20));
 	}
 
+	/// <summary>A blockable hit may exceed the budget by the Block it meets; only the HP it removes drains the budget.</summary>
+	[Fact] public void BlockedHitsDrainOnlyTheirHpLoss()
+	{
+		Assert.Equal(70, HeartInvincibleRule.DamageCap(20, block: 50, unblockable: false));
+		// The 70 hit: 50 into Block, 20 into HP.
+		Assert.Equal(0, HeartInvincibleRule.AfterHpLoss(20, 20));
+		// A hit fully absorbed by Block leaves the budget whole.
+		Assert.Equal(20, HeartInvincibleRule.AfterHpLoss(20, 0));
+	}
+
 	/// <summary>The cap depends only on ascension and players: the signature carries no Monster HP percent.</summary>
 	[Fact] public void InvincibleBudgetIgnoresMonsterHpPercent()
 	{
@@ -45,7 +55,7 @@ public class HeartInvincibleRuleTests
 
 	[Fact] public void SoloCapIgnoresTheMultiplayerFactor() => Assert.Equal(300, HeartInvincibleRule.InitialCap(0, 1));
 
-	[Theory] [InlineData(30, 0, 30)] [InlineData(30, 40, 0)]
-	public void BlockedHitsAndExhaustedBudget(int left, int lost, int expected) =>
+	[Theory] [InlineData(30, 0, 30)] [InlineData(30, -5, 30)] [InlineData(30, 40, 0)] [InlineData(0, 10, 0)]
+	public void BudgetNeverGrowsNorGoesNegative(int left, int lost, int expected) =>
 		Assert.Equal(expected, HeartInvincibleRule.AfterHpLoss(left, lost));
 }
