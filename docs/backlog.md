@@ -122,8 +122,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Custom Run button: the static `_previous` relies on vanilla selecting child 0 on open; selecting the fallback while
     readied is unverified; tests hard-code modifier id strings.
   - Progress guards: ~~two classes are named `WatcherProgressPatch`~~ (the Saves one is `WatcherVanillaGuardsPatch`
-    since 0.12.13); the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
-    rebuilt per call; no log when the vanilla ascension cap applies; `VanillaCount` and `MaxAscensionFor` are untested
+    since 0.12.13); ~~the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
+    rebuilt per call~~ (both fixed in 0.12.14); no log when the vanilla ascension cap applies; `VanillaCount` and `MaxAscensionFor` are untested
     (game-bound).
   - Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.
   - Wave of the Hand applies Weak through a throwing choice context (`AfterBlockGained` gives none); harmless unless a

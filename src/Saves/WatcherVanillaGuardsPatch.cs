@@ -25,11 +25,14 @@ internal static class WatcherVanillaGuardsPatch
 	private static readonly MethodInfo GetMaxAscension = AccessTools.PropertyGetter(typeof(CharacterStats), nameof(CharacterStats.MaxAscension));
 	private static readonly MethodInfo MaxHelper = AccessTools.Method(typeof(WatcherVanillaGuardsPatch), nameof(MaxAscensionFor));
 
-	private static IEnumerable<string> VanillaIds() => new[]
+	// Built on first use, once ModelDb is ready.
+	private static readonly Lazy<string[]> VanillaIdList = new(() => new[]
 	{
 		ModelDb.GetId<Ironclad>().Entry, ModelDb.GetId<Silent>().Entry, ModelDb.GetId<Regent>().Entry,
 		ModelDb.GetId<Necrobinder>().Entry, ModelDb.GetId<Defect>().Entry,
-	};
+	});
+
+	private static IEnumerable<string> VanillaIds() => VanillaIdList.Value;
 
 	public static int VanillaCount(IReadOnlyDictionary<ModelId, CharacterStats> stats) =>
 		WatcherProgress.VanillaStatsCount(stats.Keys.Select(id => id.Entry), VanillaIds());
@@ -58,7 +61,8 @@ internal static class WatcherVanillaGuardsPatch
 					&& instruction.operand is MethodInfo { Name: "get_Count" })
 				{
 					rewritten++;
-					yield return new CodeInstruction(OpCodes.Call, CountHelper);
+					// Keep any branch target or exception block that pointed at the replaced call.
+					yield return new CodeInstruction(OpCodes.Call, CountHelper) { labels = instruction.labels, blocks = instruction.blocks };
 				}
 				else
 				{
@@ -95,7 +99,7 @@ internal static class WatcherVanillaGuardsPatch
 			if (instruction.operand is MethodInfo method && method == GetMaxAscension)
 			{
 				rewritten++;
-				yield return new CodeInstruction(OpCodes.Call, MaxHelper) { labels = instruction.labels };
+				yield return new CodeInstruction(OpCodes.Call, MaxHelper) { labels = instruction.labels, blocks = instruction.blocks };
 			}
 			else
 			{
