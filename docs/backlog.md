@@ -69,33 +69,43 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     blend is untested and not Spine-exact; triangle edges are not antialiased; no grandparent or shear bone test.
   - ~~Code-built monsters have no death animation length: their fade may be cut short~~ (1 s `DeathAnimLengthOverride`
     since 0.12.25; the length is a guess, unchecked in game).
-  - Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).
-  - Debilitate skips dead players: a player revived later in the fight never gets those debuffs or statuses. In co-op
-    the status intent shows 5, the per-player count.
-  - The Heart's status shuffles share its RNG with its move roll, so Blood Shots vs Echo on turn 2 depends on the
-    number of players and their draw piles (deterministic on every peer, seeds stay vanilla).
+  - ~~Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).~~ Kept (2026-11-05): Shield and
+    Spear are a real elite fight, and the count only lives in the modded profile, which never reaches the regular save.
+  - ~~Debilitate skips dead players: a player revived later in the fight never gets those debuffs or statuses. In co-op
+    the status intent shows 5, the per-player count.~~ Kept (2026-11-05): StS2 never applies powers or cards to a dead
+    creature, and vanilla multi-target intents show the per-player amount too.
+  - ~~The Heart's status shuffles share its RNG with its move roll, so Blood Shots vs Echo on turn 2 depends on the
+    number of players and their draw piles (deterministic on every peer, seeds stay vanilla).~~ Kept (2026-11-05): StS1
+    also draws both from the monster's one RNG; the result is deterministic on every peer.
   - ~~The Ending act's rooms are seeded from the caller's Rng seed in `EndingRoomsPatch` but from the run seed in
     `Sts1EndingAct.CreateForRun`~~: both use the run seed since 0.12.22 (the caller's seed only outside a run).
     `FillRooms` does not reset the ancient or visit counters (only called on a fresh act). No automated test covers the
     act model or its patches (game-bound; the checklist covers them).
-  - Visiting the act may add `STS1_ENDING_ACT` to the modded profile's discovered acts (not checked). If a later game
-    build fills in `CheckForDefeatedAllEnemiesAchievement`, its achievement lookup would throw for this act.
-  - The Ending map: with only three grid rows its four nodes sit far apart (check in game); after the start rest site
+  - ~~Visiting the act may add `STS1_ENDING_ACT` to the modded profile's discovered acts (not checked).~~ Checked
+    2026-11-05: `ProgressState.MarkActAsSeen` adds it, and with the mod removed the id is kept in
+    `_unknownDiscoveredActs` and written back, so the modded profile still loads. `CheckForDefeatedAllEnemiesAchievement`
+    is empty in v0.107.1; a later game build that fills it in needs a re-check (watch item, nothing to fix today).
+  - Kept as in-game checks (2026-11-05; `docs/testing/step-6-checklist.md`): the Ending map: with only three grid rows its four nodes sit far apart (check in game); after the start rest site
     the map marker is not drawn on it (vanilla skips the start row); Golden Compass bought in act 4 leaves
     `GoldenPathAct = 3` set (harmless). The `ModifyGeneratedMap` postfix discards late-listener edits on a fresh act 4
     map (none in vanilla; another mod's quest marks would be lost). If `ActModel.CreateMap` is inlined the prefix is dead
     and the postfix logs "replaced by the Ending map". Only the layout constants are unit-tested.
-  - Run history stores the Ending act's id: with the mod removed, history shows a placeholder act; run metrics
-    (`ActWinMetric`) would carry the mod's act id if the game uploads metrics for modded runs (not checked).
+  - ~~Run history stores the Ending act's id: with the mod removed, history shows a placeholder act; run metrics
+    (`ActWinMetric`) would carry the mod's act id if the game uploads metrics for modded runs (not checked).~~ Kept
+    (2026-11-05): the history must name the act the run visited; a placeholder after removing the mod is the game's own
+    handling of any unknown id, and metrics are the game's business.
   - ~~The `Act4Preview` cfg key is a no-op since the release~~: key, parameter and `Released` removed in 0.12.16.
     ~~`ModifierListPatch`'s `OfferedIn(Custom)` guard is always true at runtime (the list is Custom-only) and reads the
     pure list by string name.~~ 0.12.21: the guard and `CustomRunOptions` are gone; the Act 4 row is listed like the others.
-  - The Act 4 row in Custom Run has no icon (check how it renders).
-  - The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
-    in co-op (the power is game-bound).
+  - ~~The Act 4 row in Custom Run has no icon (check how it renders).~~ Checked 2026-11-05: `NRunModifierTickbox` draws
+    no icon for any modifier, vanilla included; only the top bar and the Daily screen read `ModifierModel.Icon`, and the
+    top bar shows the keys for `SpoonAct4` (`TopBarPercentPatch`).
+  - ~~The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
+    in co-op (the power is game-bound).~~ Kept (2026-11-05): the scaling maths is tested in `HeartInvincibleRule`; the
+    applied power needs a live combat, so it stays in `docs/testing/step-6-checklist.md`.
   - Killing the Heart logs two vanilla errors from `ProgressSaveManager.ObtainCharUnlockEpoch` (`Act 4 is not yet
     implemented.`, `EpochModel was not found :(`): it switches on the act index for the character epochs and has no act 4
-    case. Harmless (no epoch, no write); left alone because routing it to act 3 would hand out an epoch.
+    case. Harmless (no epoch, no write); left alone because routing it to act 3 would hand out an epoch. Kept (2026-11-05).
 - The Watcher (step 7), design calls made without the owner (change any of them):
   - She never enters `AllCharacters`: no Daily or co-op Standard Watcher. Since 0.12.36 (owner-approved character-relic
     work) she is selectable in solo Standard and in every Custom Run, and a solo Watcher run without a card set modifier
@@ -105,7 +115,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Her playtime goes into the modded profile; she never counts toward vanilla epochs.
   - Merchant, multiplayer hands and map marker borrow vanilla images until animation work; her FMOD sounds are silent
     or borrowed. Potion icons are borrowed vanilla icons (StS1 potions have no single image to cut).
-  - The Architect has no dialogue for her: no attack scene at the victory, and `GetArchitectAttackVfx` is unused for now.
+  - ~~The Architect has no dialogue for her: no attack scene at the victory, and `GetArchitectAttackVfx` is unused for now.~~
+    0.12.28: owner-approved dialogue (see "Design calls settled" below).
   - Discipline and Unraveling are not ported (StS1 never registers them). Cloak Clasp is not ported: she finds the
     native shared Cloak Clasp.
   - She may obtain Archaic Tooth through the vanilla rule (Prismatic Gem or a transform can put Bash, Neutralize, Unleash,
@@ -114,15 +125,17 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     the Spire Souvenir may skip her (`HasSts1Cards`), which is harmless since her pool has no StS2 versions.
   - Vault in co-op: an extra turn for the player who played it only.
   - Lesson Learned uses the combat card selection RNG and upgrades
-    its card directly when the kill ends the combat (no preview effect).
+    its card directly when the kill ends the combat (with vanilla's upgrade preview since 0.12.38).
   - Foreign Influence draws from the attack pools of the current card set (character pools only, 55/30/15 rarity roll on
     the combat card generation RNG), no colorless attacks. Owner-approved StS2 rule for cross-character generation.
 - The Watcher (step 7), minors left after review:
-  - Signature Move's playability and glow match StS1, but the game displays its generic unplayable message:
-    CardModel exposes only IsPlayable, with no per-card message override. A dialogue patch is deferred.
+  - ~~Signature Move's playability and glow match StS1, but the game displays its generic unplayable message~~: 0.12.38
+    `CantPlayMessagePatch` shows StS1's line (`<ID>.cantPlay`) for Signature Move, Clash, Grand Finale, Secret Technique
+    and Secret Weapon when their own condition blocks them.
   - ~~Duality's power has no `powers.json` text of its own~~: none needed, `TemporaryDexterityPower` takes its title from
     the relic and its description from vanilla `TEMPORARY_DEXTERITY_POWER` (checked 2026-11-05).
-  - Character shell: `OrbModel` takes the energy prefix from the pool title `sts1_watcher`; ~~`WatcherAssetPatch`'s Layer log
+  - Character shell: ~~`OrbModel` takes the energy prefix from the pool title `sts1_watcher`~~ (0.12.38: `OrbEnergyPrefixPatch`
+    gives her orbs the Necrobinder energy icon); ~~`WatcherAssetPatch`'s Layer log
     message is misleading when the node exists with another type~~ (0.12.19); ~~`NGameOverScreen` reads `CharacterStats[her id]`
     unguarded~~ (a prefix creates her stats entry first since 0.12.25; the checklist still covers first death and victory).
   - ~~Custom Run button: the static `_previous` relies on vanilla selecting child 0 on open~~: 0.12.36 rewrote
@@ -130,15 +143,18 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Progress guards: ~~two classes are named `WatcherProgressPatch`~~ (the Saves one is `WatcherVanillaGuardsPatch`
     since 0.12.13); ~~the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
     rebuilt per call~~ (both fixed in 0.12.14); ~~no log when the vanilla ascension cap applies~~ (logged once per value since 0.12.21); `VanillaCount` and `MaxAscensionFor` are untested
-    (game-bound).
-  - Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.
-  - Wave of the Hand applies Weak through a throwing choice context (`AfterBlockGained` gives none); harmless unless a
-    hook on Weak ever opens a choice.
+    (game-bound: they read `ModelDb` and the progress save; kept for the checklist, 2026-11-05).
+  - ~~Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.~~ Kept
+    (2026-11-05, fidelity rule): StS1 deals it as HP loss with no source.
+  - ~~Wave of the Hand applies Weak through a throwing choice context (`AfterBlockGained` gives none); harmless unless a
+    hook on Weak ever opens a choice.~~ Kept (2026-11-05): no vanilla or mod hook on Weak opens a choice.
   - ~~Mental Fortress, Empty Fist and Flurry of Blows show all three stance tips~~: they show StS1's generic Stance
     tip since 0.12.13, as in StS1.
   - ~~Spirit Shield shows no live Block~~ (in-combat Block preview since 0.12.25); Mark and the end-turn death effect share the Doom icon.
-  - Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.
-  - `LastCardPlayed` reset between combats (Sanctity) is unverified.
+  - ~~Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.~~ 0.12.38: it plays vanilla's
+    `NCardUpgradeVfx` for the local player, as `CardCmd.Upgrade` does.
+  - ~~`LastCardPlayed` reset between combats (Sanctity) is unverified.~~ Checked 2026-11-05: it reads
+    `CombatManager.History`, which `CombatManager` clears at combat start and end.
   - ~~Flurry/Weave and Sands of Time/Windmill Strike share small logic blocks that could be helpers on `Sts1WatcherCard`;
     Consecrate lacks a `<summary>`; mixed `ThrowIfNull` vs `Target!`.~~ 0.12.16 and 0.12.20: `ReturnFromDiscard` and
     `RetainedBy` on `Sts1WatcherCard`; every Watcher card checks its target with `ThrowIfNull`, as the other characters do.
@@ -146,10 +162,14 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     0.12.16: every IDE0005 hit in `src/` removed (one lint build with IDE0005 as a warning), the 8 empty overrides dropped.
   - Weak tests: pure-logic coverage of ~~`MantraTracker` keying~~ (`MantraTallies`, tested since 0.12.24), retain gating and
     Lesson Learned selection (both read game state: deck order and the synced run RNG); power tests are
-    mostly arithmetic and `WatcherPowerTextTests` greps source; ~~stale pytest name `test_pending_ports_never_enter_runtime`~~ (now `test_every_watcher_card_is_ported`); Task 9's tests were written after the code (no red run).
+    mostly arithmetic and `WatcherPowerTextTests` greps source; ~~stale pytest name `test_pending_ports_never_enter_runtime`~~ (now `test_every_watcher_card_is_ported`); Task 9's tests were written after the code (no red run). Kept (2026-11-05): what is left reads game state and
+    stays in `docs/testing/step-7-checklist.md`.
 - The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
   and in-game validation of everything in `docs/testing/step-7-checklist.md`. A "Deep backlog priority" section, if one
   exists on `main`, keeps its own wording; Watcher animations stay at the bottom of it.
+  Owner item, kept deferred (2026-11-05): StS2 ships the Spine 4.2 runtime and the StS1 skeletons are Spine 3.4.02
+  (`docs/review/act4-mechanics.md`), so animations need the skeletons converted or re-exported in the Spine editor,
+  then checked in game; the owner placed this at the bottom of the deep backlog and only they can play-test it.
 
 - Fidelity rule (owner, 2026-10-30): StS1 character cards and StS1 content follow StS1 behavior wherever StS2's engine
   allows; StS2 conventions apply to colorless cards and cross-character cards. Design calls above that chose StS2
@@ -176,8 +196,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     0.12.1 (owner request): the key shows from the start as one more slot (N players: N relics + the key), dimmed
     for everyone until it is offered to the last player; in solo it is a choice from the start.
 - ~~Strangle in co-op: also trigger on cards played by allies, not only its owner's.~~ Done in 0.10.2 for Strangle and Choke
-  (same power), Custom Run co-op only so Standard/Daily stay vanilla (`StrangleRule`). Minor: the power's vanilla text
-  still says "you play a card".
+  (same power), Custom Run co-op only so Standard/Daily stay vanilla (`StrangleRule`). ~~Minor: the power's vanilla text
+  still says "you play a card".~~ 0.12.38: "Whenever any player plays a card" there (`StrangleCoopTextPatch`).
 - ~~StS1 powers show "NOPE" as their floating text when applied (seen on Metallicize; every StS1 buff does it).~~ Done in
   0.10.2: "NOPE" is the game's missing-power image; the borrowed big-icon path is now seeded into the getter's cache field.
 - Merchant Loans:
@@ -196,14 +216,16 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     monster hue variants: a shader material on the combat body. The dominant color is the character's map drawing
     color. Minors: the map ping, rest site and merchant bodies are not tinted; lines already drawn keep their color;
     the tint replaces any normal material the character body had; co-op sync and the static Watcher body not tested.
+    Kept (2026-11-05): the request covers the combat body and map drawings; the rest are in-game checks.
 
 ## Deep backlog priority (owner, 2026-10-30)
 
 - Character/Act 4 animations and in-game validation are deferred behind the remaining content work.
-  Existing testing checklists remain pending; this priority change does not mark them passed.
+  Existing testing checklists remain pending; this priority change does not mark them passed. The content work is done
+  (1.0.0); both stay with the owner: in-game checks need their clicks, animations need the Spine conversion above.
 - Watcher relic plan: reuse native shared Cloak Clasp rather than duplicate it; Holy Water and Violet Lotus
   replace Archaic Tooth at Orobas when the Tooth's conditions fail. See `docs/review/character-relics.md`.
-- Bugs and in-game test results: the owner logs them here later.
+- Bugs and in-game test results: the owner logs them here later (none open beyond the crash report below).
 
 - **Dusty Tome in StS1-only (0.12.4, owner call 2026-11-01):** Darv's Dusty Tome crashed the game (null Ancient pick: the
   StS1-only pool has no Ancient card). The Tome now reads the vanilla pool and gives a vanilla StS2 Ancient card. Not tested in game.
@@ -256,15 +278,16 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   Block Return debuff icon not imported~~ (0.12.6); ~~Act 4 elite and Heart fights have no background; Act 4 second boss should heal 80 %~~ (0.12.7).
 - 2026-10-31 15:23 "crash on color change": the log shows a state divergence on leaving Infested Automaton (host Watcher,
   client Ironclad with Souvenir, 0.12.3, no TintAction queued), then the client was dropped. Cause not found: needs the
-  client's state dump (the host log only has its own).
+  client's state dump (the host log only has its own). Owner item (2026-11-05): no client log or dump exists on this
+  machine (only the host's renamed `.corrupt` saves); the next desync needs the client's `godot.log` from the friend.
 - 2026-11-01 Corpse Explosion "-90 AOE": its power deals target max HP × stacks to every other enemy when the target dies
-  (StS1 rule); three Knights died together. Looks intended unless players took damage.
+  (StS1 rule); three Knights died together. Looks intended unless players took damage. Settled: intended (owner, 2026-11-05, below).
 - Watcher: ~~head icon (owner call: crop it from the static sprite)~~ done in 0.12.11; ~~stance-change sound~~ done in 0.12.12 (with a screen-edge flash); ~~StS1's stance
   particles and aura~~ approximated in 0.12.18 (pulsing halo behind her plus rising Godot particles in the stance color,
   not StS1's exact effects); Spine animations are still missing.
 - ~~Artifact potion back in StS1 mode (owner call: StS1-only mode, every character). StS2 has none: port StS1's
   Ancient Potion (uncommon, gain 1 Artifact).~~ Done in 0.12.10.
-- Design calls settled with the owner (2026-11-05 Q&A; not implemented yet):
+- Design calls settled with the owner (2026-11-05 Q&A; all implemented by 0.12.37):
   - ~~Souvenir balance: a per-run lean rolled on the seed, 60/40 toward StS1 or StS2 cards; rarity odds unchanged;
     duplicates keep the version button.~~ Done in 0.12.29 (`OfferWeights`, `OfferWeightPatch`): the favored game's unique
     cards hold 60 % of the two games' unique share within the rolled rarity; duplicate slots keep their count share and

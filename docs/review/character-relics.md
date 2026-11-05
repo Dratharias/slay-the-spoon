@@ -95,6 +95,12 @@ Proposed first implementation slice: these three, using the existing character r
 
 ## Approved inactive ports — boss and starter upgrades
 
+> **Update (0.12.37, owner decision 2026-11-05):** the source is now decided. With the Custom Run modifier "StS1 Boss
+> Relics" (`SpoonBossRelics`), the act 2 and act 3 Ancients offer a chest of 3 boss relics drawn from the 11 Darv
+> natives, the 8 shared ports and the taker's character boss relics above (Holy Water and Violet Lotus for the Watcher);
+> see `src/Relics/BossChest.cs` and `docs/testing/boss-relics-checklist.md`. Without that modifier they stay out of every
+> acquisition path, as below. The `planned-port-inactive` rows in the tables above keep their original status name.
+
 **Owner decision (2026-10-30): port the eight missing boss relics, but leave them unused for now.** Implement their effects and assets without adding them to rewards, shops, events, Ancients, starting loadouts or random generation. Import approval does not approve an acquisition source. StS2's `RelicRarity` has no Boss member. There is no direct boss-tier registration equivalent. The missing boss relics are:
 
 | Character | Relic | StS1 effect | Acquisition issue |

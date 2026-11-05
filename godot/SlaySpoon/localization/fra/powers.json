@@ -1,4 +1,5 @@
 {
+	"SPOON_STRANGLE_COOP.smartDescription": "Lorsqu'un joueur joue une carte pendant ce tour, cet ennemi perd [blue]{Amount}[/blue] PV.",
 	"STS1_AMPLIFY_POWER.description": "Ce tour, votre prochain Pouvoir est joué une fois de plus.",
 	"STS1_AMPLIFY_POWER.smartDescription": "Ce tour, {Amount:plural:votre prochain Pouvoir est joué|vos [blue]{}[/blue] prochains Pouvoirs sont joués} une fois de plus.",
 	"STS1_AMPLIFY_POWER.title": "Amplification",

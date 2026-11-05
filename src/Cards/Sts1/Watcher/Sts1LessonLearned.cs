@@ -1,16 +1,20 @@
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands.Builders;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.ValueProps;
 using SlaySpoon.Core;
-using SlaySpoon.Watcher;
 using SlaySpoon.Watcher.Powers;
+using SlaySpoon.Watcher;
 
 namespace SlaySpoon.Cards.Sts1.Watcher;
 
@@ -56,7 +60,7 @@ public sealed class Sts1LessonLearned : Sts1WatcherCard
 	}
 
 	// CardCmd.Upgrade does nothing once the last enemy is dead and combat is ending, which is the usual case for a
-	// kill. In that case do what it does for a deck card (history entry, upgrade, finalize) without the guard or the preview.
+	// kill. In that case do what it does for a deck card (history entry, upgrade, finalize, upgrade preview) without the guard.
 	private void UpgradeDeckCard(CardModel card)
 	{
 		if (!CombatManager.Instance.IsEnding)
@@ -71,5 +75,9 @@ public sealed class Sts1LessonLearned : Sts1WatcherCard
 		Owner.RunState.CurrentMapPointHistoryEntry?.GetEntry(Owner.NetId).UpgradedCards.Add(card.Id);
 		card.UpgradeInternal();
 		card.FinalizeUpgradeInternal();
+		if (LocalContext.IsMine(card))
+		{
+			NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(NCardUpgradeVfx.Create(card));
+		}
 	}
 }

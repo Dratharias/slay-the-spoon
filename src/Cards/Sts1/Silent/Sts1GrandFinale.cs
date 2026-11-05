@@ -25,6 +25,8 @@ public sealed class Sts1GrandFinale : Sts1SilentCard
 
 	protected override bool IsPlayable => PileType.Draw.GetPile(Owner).Cards.Count == 0;
 
+	public override bool HasCantPlayMessage => true;
+
 	protected override bool ShouldGlowGoldInternal => IsPlayable;
 
 	public Sts1GrandFinale()

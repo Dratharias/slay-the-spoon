@@ -48,7 +48,12 @@ public class Sts1AssetsTests
 			foreach (string file in files)
 			{
 				string id = ModelIds.FromClassName(Path.GetFileNameWithoutExtension(file));
-				foreach (string key in new[] { id + ".title", id + ".description" })
+				List<string> keys = new() { id + ".title", id + ".description" };
+				if (File.ReadAllText(file).Contains("HasCantPlayMessage => true"))
+				{
+					keys.Add(id + ".cantPlay");
+				}
+				foreach (string key in keys)
 				{
 					if (!cards.TryGetValue(key, out string? text) || string.IsNullOrWhiteSpace(text))
 					{

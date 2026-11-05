@@ -22,6 +22,8 @@ public sealed class Sts1Clash : Sts1IroncladCard
 
 	protected override bool IsPlayable => CardPile.GetCards(Owner, PileType.Hand).All(c => c.Type == CardType.Attack);
 
+	public override bool HasCantPlayMessage => true;
+
 	protected override bool ShouldGlowGoldInternal => IsPlayable;
 
 	public Sts1Clash()

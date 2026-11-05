@@ -17,6 +17,8 @@ public sealed class Sts1SignatureMove : Sts1WatcherCard
 {
 	protected override bool IsPlayable => CardPile.GetCards(Owner, PileType.Hand).All(c => c == this || c.Type != CardType.Attack);
 
+	public override bool HasCantPlayMessage => true;
+
 	protected override bool ShouldGlowGoldInternal => IsPlayable;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]

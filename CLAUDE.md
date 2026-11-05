@@ -179,7 +179,7 @@ Read `README.md` for the player view and the spec for every decision.
   `treasure_room.tscn`, a fifth slot for 4 relics), dimmed until it is offered to the last player; solo: a choice from
   the start. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game.
 
-## Backlog wave 0.12.6–0.12.37 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
+## Backlog wave 0.12.6–0.12.38 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
 
 - Block Return icon; Ending fight backgrounds and heal; Sapphire Key selectable from the first chest round (several key
   voters fight for it); rematch losers point again; StS1 Ancient Potion (`src/Potions/Sts1/`, StS1-only runs, every
@@ -220,6 +220,11 @@ Read `README.md` for the player view and the spec for every decision.
   chest once every player has made their first choice; ties go to the vanilla rock-paper-scissors fight, losers get the
   unvoted relics. `Sts1InactiveBossRelic` is now `Sts1BossRelic`.
 - Build 0 warnings; 553 xUnit + 78 pytest pass. Not tested in game.
+- 0.12.38 (backlog close): StS1 can't-play lines (`src/Cards/CantPlayMessagePatch.cs`: the card `NCardPlay.CancelPlayCard` refused, `<ID>.cantPlay` in `cards.json`,
+  opt-in through `Sts1Card.HasCantPlayMessage`); Lesson Learned's end-of-combat upgrade preview; Watcher orb energy icon
+  (`OrbEnergyPrefixPatch`); Strangle/Choke co-op tooltip (`StrangleCoopTextPatch`). Every other backlog minor now carries
+  a disposition (done, checked, kept with a reason, or owner item). Build 0 warnings; 553 xUnit + 78 pytest pass.
+  Not tested in game: `docs/testing/backlog-close-checklist.md`.
 
 ## Documents
 

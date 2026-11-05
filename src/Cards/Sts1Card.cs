@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
 using SlaySpoon.Core;
@@ -23,6 +24,14 @@ public abstract class Sts1Card : CardModel
 
 	/// <summary>Folder under res://SlaySpoon/images/cards/ holding this character's portraits.</summary>
 	protected abstract string PortraitFolder { get; }
+
+	/// <summary>
+	/// True when the card has its own StS1 "can't play" line (key <c>&lt;ID&gt;.cantPlay</c> in the cards table), shown
+	/// instead of the generic one when its own condition blocks it (<see cref="CantPlayMessagePatch"/>).
+	/// </summary>
+	public virtual bool HasCantPlayMessage => false;
+
+	public LocString CantPlayMessage => new("cards", Id.Entry + ".cantPlay");
 
 	public override string PortraitPath =>
 		$"res://SlaySpoon/images/cards/{PortraitFolder}/{Id.Entry.ToLowerInvariant()}.png";

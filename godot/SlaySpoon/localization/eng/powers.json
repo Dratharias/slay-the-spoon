@@ -1,4 +1,5 @@
 {
+	"SPOON_STRANGLE_COOP.smartDescription": "Whenever any player plays a card this turn, this enemy loses [blue]{Amount}[/blue] HP.",
 	"STS1_AMPLIFY_POWER.description": "This turn, your next Power is played an extra time.",
 	"STS1_AMPLIFY_POWER.smartDescription": "Your next {Amount:plural:Power is|[blue]{}[/blue] Powers are} played an extra time this turn.",
 	"STS1_AMPLIFY_POWER.title": "Amplify",

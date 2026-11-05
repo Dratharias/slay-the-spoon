@@ -19,6 +19,8 @@ public sealed class Sts1SecretWeapon : Sts1ColorlessCard
 
 	protected override bool IsPlayable => PileType.Draw.GetPile(Owner).Cards.Any(c => c.Type == CardType.Attack);
 
+	public override bool HasCantPlayMessage => true;
+
 	public Sts1SecretWeapon()
 		: base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
 	{
