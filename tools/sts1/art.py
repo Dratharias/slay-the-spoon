@@ -4,6 +4,7 @@ Usage: python art.py --jar desktop-1.0.jar --sts1 data/sts1/ironclad.json
            --table data/duplicates/ironclad.json --out godot/SlaySpoon/images/cards/ironclad
        python art.py --jar desktop-1.0.jar --events godot/SlaySpoon/images/events
        python art.py --jar desktop-1.0.jar --watcher godot/SlaySpoon
+       python art.py --jar desktop-1.0.jar --powers godot/SlaySpoon/images/powers
 
 StS1's 1024Portraits are 500×380; StS2 draws card art from 250×190 atlas sprites (same aspect).
 Event art (step 3d) keeps StS1's 600×600 size.
@@ -221,16 +222,67 @@ def export_relics(jar: Path, out: Path) -> list:
     return written
 
 
+# StS1 power atlas region -> mod power ModelDb id (src/Core/Sts1PowerIcons.cs lists the same ids).
+POWERS = {"talk_to_hand": "sts1_block_return_power"}
+POWER_BIG = 128
+# Vanilla power atlas sprites are 64×64 frames (region plus margin).
+POWER_PACKED = (64, 64)
+
+
+def _atlas_props(atlas_text: str, name: str) -> dict[str, tuple[int, int]]:
+    """orig and offset of one region; ending_art.parse_atlas keeps only xy and size."""
+    lines = atlas_text.splitlines()
+    start = lines.index(name)
+    props = {}
+    for line in lines[start + 1:]:
+        if ":" not in line:
+            break
+        key, value = (v.strip() for v in line.split(":", 1))
+        if key in ("orig", "offset"):
+            props[key] = tuple(int(v) for v in value.split(","))
+    return props
+
+
+def export_powers(jar: Path, out: Path) -> list:
+    """Write <power id>.png (128×128, the big icon) and <power id>_packed.png (64×64) for POWERS; return the paths."""
+    written = []
+    with zipfile.ZipFile(jar) as z, tempfile.TemporaryDirectory() as tmp:
+        atlas_path = Path(tmp) / "powers.atlas"
+        atlas_path.write_bytes(z.read("powers/powers.atlas"))
+        text = atlas_path.read_text(encoding="utf-8")
+        regions = ending_art.parse_atlas(atlas_path)
+        page = None
+        for stem, model_id in sorted(POWERS.items()):
+            name = f"{POWER_BIG}/{stem}"
+            region = regions[name]
+            if page is None:
+                page = _open(z, "powers/" + region.page)
+            props = _atlas_props(text, name)
+            ow, oh = props.get("orig", (region.width, region.height))
+            dx, dy = props.get("offset", (0, 0))
+            # libGDX offsets count from the bottom-left corner of the untrimmed image.
+            canvas = Image.new("RGBA", (ow, oh), (0, 0, 0, 0))
+            canvas.alpha_composite(_region(page, region), (dx, oh - dy - region.height))
+            big = canvas.resize((POWER_BIG, POWER_BIG), Image.LANCZOS)
+            written.append(_save(big, out / f"{model_id}.png"))
+            written.append(_save(big.resize(POWER_PACKED, Image.LANCZOS), out / f"{model_id}_packed.png"))
+    return written
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--jar", type=Path, required=True)
     ap.add_argument("--events", type=Path)
     ap.add_argument("--relics", type=Path)
+    ap.add_argument("--powers", type=Path)
     ap.add_argument("--watcher", type=Path, help="the mod's PCK root (godot/SlaySpoon)")
     ap.add_argument("--sts1", type=Path)
     ap.add_argument("--table", type=Path)
     ap.add_argument("--out", type=Path)
     args = ap.parse_args()
+    if args.powers:
+        print(f"{len(export_powers(args.jar, args.powers))} power icons")
+        return
     if args.relics:
         print(f"{len(export_relics(args.jar, args.relics))} relic images")
         return

@@ -76,6 +76,7 @@ sts1-ending-art:
 # The Watcher's static visuals (setup pose, icons, orb layers, starter portraits) at the vanilla paths for sts1_watcher.
 sts1-watcher-art:
 	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --watcher godot/SlaySpoon
+	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --powers godot/SlaySpoon/images/powers
 
 # Colorless catalog first: no playable skeletons until namesakes and special cards are reviewed.
 sts1-colorless-data:

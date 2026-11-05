@@ -200,17 +200,27 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   Ending has no events or normal fights, so every co-op save taken after the third key was renamed `.corrupt` on reload
   (2026-10-31 14:40 and 15:24). `EndingRoomSetLoadPatch` reads missing lists as empty. Not tested in game.
 
-### Owner list, 2026-11-05 (triage; nothing below is done)
+- **Block Return icon (0.12.6):** Talk to the Hand's debuff showed the borrowed Thorns icon; it now shows StS1's
+  `talk_to_hand` icon (`art.py --powers`, `Sts1PowerIcons`). Other StS1 powers still borrow vanilla icons. Not tested in game.
+
+### Owner list, 2026-11-05 (triage; done items are marked with their version)
 
 - Bugs: Sapphire Key greyed out until the last player (owner wants it selectable at once, screenshot
-  `~/Pictures/Debug Slay the spoon/Saphire key.png`); rock-paper-scissors fingers wrong after a loss; Talk to the Hand's
-  Block Return debuff icon not imported; Act 4 elite and Heart fights have no background; Act 4 second boss should heal 80 %.
+  `~/Pictures/Debug Slay the spoon/Saphire key.png`); rock-paper-scissors fingers wrong after a loss; ~~Talk to the Hand's
+  Block Return debuff icon not imported~~ (0.12.6); Act 4 elite and Heart fights have no background; Act 4 second boss should heal 80 %.
 - 2026-10-31 15:23 "crash on color change": the log shows a state divergence on leaving Infested Automaton (host Watcher,
   client Ironclad with Souvenir, 0.12.3, no TintAction queued), then the client was dropped. Cause not found: needs the
   client's state dump (the host log only has its own).
 - 2026-11-01 Corpse Explosion "-90 AOE": its power deals target max HP × stacks to every other enemy when the target dies
   (StS1 rule); three Knights died together. Looks intended unless players took damage.
-- Watcher: head icon (owner draws it, or crop from the static sprite); stance-change animations and sound missing.
-- Artifact potion back in StS1 mode (to clarify: which potion, which pools).
-- Design: Souvenir reward balance (fewer commons; per-run lean toward one game's cards); campfire card trade/gift
-  option for 50 gold per taker; selected-card counter on Sealed Deck-style grids.
+- Watcher: head icon (owner call: crop it from the static sprite); stance-change animations and sound missing.
+- Artifact potion back in StS1 mode (owner call: StS1-only mode, every character). StS2 has none: port StS1's
+  Ancient Potion (uncommon, gain 1 Artifact).
+- Design, to discuss with the owner (do not implement yet): Souvenir reward balance (fewer commons; per-run lean
+  toward one game's cards); campfire card trade/gift option for 50 gold per taker (−50 each on a trade);
+  selected-card counter on Sealed Deck-style grids; Hybrid/Souvenir cross-character combos (2026-11-05, e.g. the
+  Silent's Terror, +99 Vulnerable, with the Ironclad's Dominate, Strength per Vulnerable): not forbidden, but rarer
+  as a pair.
+- 2026-11-05 screenshot `~/Pictures/Debug Slay the spoon/unknown relic.png`: The Specimen shows raw
+  `relics.STS1_THE_SPECIMEN.title/description` keys at a merchant. It comes from the uncommitted character-relic work
+  (never in a packaged build from `main`): its text must land in `relics.json` (EN/FR) before that tranche ships.

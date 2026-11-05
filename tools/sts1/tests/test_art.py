@@ -152,3 +152,27 @@ def test_watcher_locked_select_icon_is_grey(tmp_path):
     art.export_watcher(jar, tmp_path / "out")
     r, g, b, _ = Image.open(tmp_path / "out/images/packed/character_select/char_select_sts1_watcher_locked.png").getpixel((66, 97))
     assert r == g == b
+
+
+def test_power_icons_rebuild_the_untrimmed_frame(tmp_path):
+    jar = tmp_path / "game.jar"
+    page = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    page.paste(Image.new("RGBA", (10, 20), (255, 0, 0, 255)), (4, 4))
+    buf = io.BytesIO()
+    page.save(buf, "PNG")
+    atlas = (
+        "\npowers.png\nsize: 64,64\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\n"
+        "128/talk_to_hand\n  rotate: false\n  xy: 4, 4\n  size: 10, 20\n  orig: 128, 128\n"
+        "  offset: 30, 8\n  index: -1\n"
+    )
+    with zipfile.ZipFile(jar, "w") as z:
+        z.writestr("powers/powers.png", buf.getvalue())
+        z.writestr("powers/powers.atlas", atlas)
+    written = art.export_powers(jar, tmp_path / "out")
+    assert sorted(p.name for p in written) == ["sts1_block_return_power.png", "sts1_block_return_power_packed.png"]
+    big = Image.open(tmp_path / "out" / "sts1_block_return_power.png")
+    assert big.size == (128, 128)
+    # Bottom-left offset (30, 8): the 10×20 tile spans x 30..39, y 100..119 from the top.
+    assert big.getpixel((35, 110))[3] == 255
+    assert big.getpixel((35, 90))[3] == 0
+    assert Image.open(tmp_path / "out" / "sts1_block_return_power_packed.png").size == (64, 64)

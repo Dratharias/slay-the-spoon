@@ -1,5 +1,6 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Cards.Sts1.Powers;
 
@@ -19,6 +20,10 @@ public static class BorrowedIconPatch
 		{
 			__result = Source(borrowed).PackedIconPath;
 		}
+		else if (Sts1PowerIcons.Has(__instance.Id.Entry))
+		{
+			__result = Sts1PowerIcons.Packed(__instance.Id.Entry);
+		}
 	}
 
 	[HarmonyPrefix]
@@ -28,12 +33,16 @@ public static class BorrowedIconPatch
 		Seed(__instance);
 	}
 
-	/// <summary>Points a borrowed power's cached big-icon path at its source's icon.</summary>
+	/// <summary>Points a borrowed power's cached big-icon path at its source's icon, or an own-icon power's at its StS1 icon.</summary>
 	public static void Seed(PowerModel power)
 	{
 		if (power is IBorrowedIcon borrowed)
 		{
 			ResolvedBigIcon(power) = Source(borrowed).ResolvedBigIconPath;
+		}
+		else if (Sts1PowerIcons.Has(power.Id.Entry))
+		{
+			ResolvedBigIcon(power) = Sts1PowerIcons.Big(power.Id.Entry);
 		}
 	}
 
