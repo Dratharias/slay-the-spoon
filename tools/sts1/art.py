@@ -11,7 +11,7 @@ Event art (step 3d) keeps StS1's 600×600 size.
 
 --watcher (step 7) writes the Watcher's static visuals under the mod's PCK root, at the vanilla relative paths
 with the id sts1_watcher: the idle skeleton's setup pose (body.png), her corpse and eye frames as-is, the top bar
-icon and its outline, the character select icons, the map marker, the five energy orb layers and the starter card
+head icon (cut from a 2x render of that pose) and its outline, the character select icons, the map marker, the five energy orb layers and the starter card
 portraits. It prints one JSON line with the body's origin and the eye anchor, in body.png pixels.
 """
 import argparse
@@ -73,6 +73,10 @@ MAP_MARKER_SIZE = (49, 64)
 ORB_LAYER_SIZE = (256, 256)
 # StS1 purple orb layers, back to front, onto the Ironclad energy counter's Layer1..Layer5 (Layer2 and Layer3 spin).
 ORB_LAYERS = ["l1", "l2", "l3", "l4", "border"]
+# The top bar head: the idle setup pose rendered at HEAD_SCALE, then this box around her head, relative to the
+# ground point at that scale (left, top, right, bottom; y grows down).
+HEAD_SCALE = 2.0
+HEAD_BOX = (-68, -544, 72, -404)
 # The character select crop of watcherPortrait.jpg (1920×1200): her head, hands and staff head, 132:195.
 SELECT_CROP = (560, 40, 1305, 1141)
 # Mod card class -> StS1 portrait (the card constructor's image argument).
@@ -180,8 +184,12 @@ def export_watcher(jar: Path, out: Path) -> dict:
                 pages[region.page] = _open(z, eye_dir + region.page)
             _save(_region(pages[region.page], region), creature / f"eye_{name}.png")
 
+        # Vanilla top bar icons are the character's head, so cut hers from a sharper render of the idle pose.
+        hx, hy, _, _ = ending_art.render(idle / "skeleton.json", idle / "skeleton.atlas", idle / "head.png", scale=HEAD_SCALE)
+        left, top, right, bottom = HEAD_BOX
+        head = Image.open(idle / "head.png").convert("RGBA").crop((hx + left, hy + top, hx + right, hy + bottom))
+        icon = _fit(head, ICON_SIZE)
         button = _open(z, "images/ui/charSelect/watcherButton.png")
-        icon = _fit(button, ICON_SIZE)
         _save(icon, out / f"images/ui/top_panel/character_icon_{WATCHER_ID}.png")
         _save(_outline(icon), out / f"images/ui/top_panel/character_icon_{WATCHER_ID}_outline.png")
         _save(_fit(button, MAP_MARKER_SIZE), out / f"images/packed/map/icons/map_marker_{WATCHER_ID}.png")
