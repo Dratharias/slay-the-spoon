@@ -206,7 +206,7 @@ Read `README.md` for the player view and the spec for every decision.
 - 0.12.35: Starting Chest Custom Run modifier (`SpoonStartingChest`): a Neow option (like Draft's) plays the act's
   Spine chest opening (`src/Ui/ChestOpeningOverlay.cs`), then the vanilla synced "Choose a Relic" screen with 10 relics
   read from the player's grab bag (only the kept one leaves it). Not tested in game (overlay placement included).
-- Build 0 warnings; 505 xUnit + 78 pytest pass. `make workshop` staged 0.12.26 in this worktree. Not tested in game.
+- Build 0 warnings; 505 xUnit + 78 pytest pass. `make workshop` staged 0.12.35 in this worktree (not uploaded). Not tested in game.
 - Not merged into `main` yet: the main working copy's uncommitted character-relic work touches `src/Core/WatcherAssets.cs`,
   `tools/sts1/art.py` and `tools/sts1/tests/test_art.py`, which this branch also changes (fast-forward once that work is
   committed or set aside).
