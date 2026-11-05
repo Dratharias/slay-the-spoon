@@ -100,8 +100,8 @@ Read `README.md` for the player view and the spec for every decision.
   A Custom Run option bypasses this prerequisite. The unlock and the keys are implemented in WP3 (see below).
 - Co-op keys are team-wide (owner decision): one set for the team; a key any player collects counts for all.
   Ruby: one player gives up their rest-site action. Sapphire (0.12.0, replaces the 0.8.0 give-back swap): the
-  rock-paper-scissors losers of a chest rematch for the relics left until the last player chooses between the last relic
-  and the key (solo: relic or key); with the key held, chests are vanilla.
+  rock-paper-scissors losers of a chest rematch for the relics left; since 0.12.8 the key is one more choice from the
+  first round (key voters fight for it too; solo: relic or key); with the key held, chests are vanilla.
 - WP3 is implemented (0.8.0): team key state, permanent unlock, hidden Standard run flag, key sprites/top bar,
   Ruby Recall rest option, Emerald elite marker/buffs, and Sapphire chest-relic swap (EN/FR).
   Build: 0 warnings / 0 errors; tests: 223 xUnit and 52 pytest pass. In-game checks remain pending.

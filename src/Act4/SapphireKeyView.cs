@@ -10,8 +10,9 @@ namespace SlaySpoon.Act4;
 
 /// <summary>
 /// The Sapphire key sitting in the opened chest as one more slot beside the relics, shown to every player from the start.
-/// Only the player it is offered to can take it: the gem is then clickable, with the game's reward-alternative button
-/// under it for the controller; for the others it stays dimmed.
+/// Every player still choosing can vote for it: the gem is then clickable, with the game's reward-alternative button
+/// under it for the controller; it is dimmed only for players who are done or while a round plays, and glows once the
+/// local player voted for it.
 /// </summary>
 internal sealed class SapphireKeyView
 {
@@ -22,7 +23,6 @@ internal sealed class SapphireKeyView
 	private readonly Control _buttonHolder;
 	private readonly NCardRewardAlternativeButton _button;
 	private readonly Func<bool> _take;
-	private bool _taken;
 
 	private SapphireKeyView(Control room, Func<bool> take)
 	{
@@ -72,13 +72,16 @@ internal sealed class SapphireKeyView
 		if (GodotObject.IsInstanceValid(_holder)) _holder.GlobalPosition = globalCenter;
 	}
 
-	/// <summary>Shows the key while it is in the chest; only <paramref name="offered"/> makes it clickable.</summary>
-	public void Show(bool shown, bool offered, string tip)
+	/// <summary>
+	/// Shows the key while it is in the chest; only <paramref name="offered"/> makes it clickable, and
+	/// <paramref name="picked"/> marks the local vote.
+	/// </summary>
+	public void Show(bool shown, bool offered, bool picked, string tip)
 	{
 		if (!GodotObject.IsInstanceValid(_holder)) return;
-		_holder.Visible = shown && !_taken;
+		_holder.Visible = shown;
 		_gem.Disabled = !offered;
-		_gem.Modulate = offered ? Colors.White : new Color(0.6f, 0.6f, 0.6f, 0.75f);
+		_gem.Modulate = picked ? new Color(1.25f, 1.25f, 1.4f) : offered ? Colors.White : new Color(0.6f, 0.6f, 0.6f, 0.75f);
 		if (!offered) _gem.Scale = Vector2.One;
 		_buttonHolder.Visible = offered;
 		_gem.TooltipText = tip;
@@ -87,8 +90,6 @@ internal sealed class SapphireKeyView
 
 	private void Take()
 	{
-		if (_taken || !_holder.Visible || _gem.Disabled || !_take()) return;
-		_taken = true;
-		_holder.Visible = false;
+		if (_holder.Visible && !_gem.Disabled) _take();
 	}
 }

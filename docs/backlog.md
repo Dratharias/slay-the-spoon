@@ -159,7 +159,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   receiving the relic automatically.
   - 0.11.0, partial: the key shows in the opened chest, with a give-back swap after pickup.
   - Done in 0.12.0 (owner request 2026-10-31, replaces the swap): the rock-paper-scissors losers rematch for another relic
-    until the last player chooses between the last relic and the Sapphire Key; once the key is held, the last relic goes
+    until the last player chooses between the last relic and the Sapphire Key (0.12.8: any player may take the key from
+    the first round); once the key is held, the last relic goes
     to them automatically as in vanilla. Solo: relic or key. Checklist: `docs/testing/sapphire-rematch-checklist.md`.
     0.12.1 (owner request): the key shows from the start as one more slot (N players: N relics + the key), dimmed
     for everyone until it is offered to the last player; in solo it is a choice from the start.
@@ -208,10 +209,15 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   (size guessed from vanilla layer offsets, check edges and screen shake in game). Entering The Ending now heals like an
   act's Ancient (missing HP, 80 % of it under Weary Traveler; `EndingHealRule`). Not tested in game.
 
+- **Sapphire Key from the first round (0.12.8):** the key is no longer dimmed until the last player: every player still
+  choosing may vote for it while a relic is left. Several key voters play rock-paper-scissors for it on the chest's RNG
+  (no fight animation for the key yet); the losers vote again among the relics left. The gem glows while it is the local
+  vote and disappears once someone takes it. Not tested in game.
+
 ### Owner list, 2026-11-05 (triage; done items are marked with their version)
 
-- Bugs: Sapphire Key greyed out until the last player (owner wants it selectable at once, screenshot
-  `~/Pictures/Debug Slay the spoon/Saphire key.png`); rock-paper-scissors fingers wrong after a loss; ~~Talk to the Hand's
+- Bugs: ~~Sapphire Key greyed out until the last player (owner wants it selectable at once, screenshot
+  `~/Pictures/Debug Slay the spoon/Saphire key.png`)~~ (0.12.8); rock-paper-scissors fingers wrong after a loss; ~~Talk to the Hand's
   Block Return debuff icon not imported~~ (0.12.6); ~~Act 4 elite and Heart fights have no background; Act 4 second boss should heal 80 %~~ (0.12.7).
 - 2026-10-31 15:23 "crash on color change": the log shows a state divergence on leaving Infested Automaton (host Watcher,
   client Ironclad with Souvenir, 0.12.3, no TintAction queued), then the client was dropped. Cause not found: needs the

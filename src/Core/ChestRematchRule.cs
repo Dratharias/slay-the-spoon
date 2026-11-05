@@ -9,6 +9,8 @@ public sealed class RematchRound
 	public List<RematchAward> Awards { get; } = [];
 	/// <summary>The player who took the Sapphire Key this round.</summary>
 	public int? KeyTakenBy { get; internal set; }
+	/// <summary>True when several players voted for the key and fought for it.</summary>
+	public bool KeyFought { get; internal set; }
 	/// <summary>The relic the last player got without a choice (no key left to choose).</summary>
 	public RematchAward? Consolation { get; internal set; }
 	/// <summary>True when the chest is done: <see cref="ChestRematchRule.Remaining"/> then lists the relics nobody took.</summary>
@@ -18,8 +20,9 @@ public sealed class RematchRound
 /// <summary>
 /// Shared chest picking with rematches, for runs where the Sapphire Key is still to collect. Players vote for a relic;
 /// a relic with one voter goes to them, several voters fight (rock-paper-scissors) and the losers vote again among the
-/// relics left, instead of the vanilla random consolation prize. The last player left chooses between the relics left
-/// and the Sapphire Key. Players and relics are indexes; the key's vote index is <see cref="KeyIndex"/>.
+/// relics left, instead of the vanilla random consolation prize. The Sapphire Key is one more choice from the first
+/// round: whoever takes it gets no relic, and several key voters fight for it like for a relic. Players and relics are
+/// indexes; the key's vote index is <see cref="KeyIndex"/>.
 /// </summary>
 public sealed class ChestRematchRule
 {
@@ -43,8 +46,11 @@ public sealed class ChestRematchRule
 	public int Round { get; private set; } = 1;
 	public bool Finished { get; private set; }
 
-	/// <summary>The key is on offer to the last player left, while it is still in the chest.</summary>
-	public bool KeyOffered => !Finished && _keyAvailable && _active.Count == 1 && _remaining.Count > 0;
+	/// <summary>The key is still in the chest (nobody took it yet).</summary>
+	public bool KeyAvailable => _keyAvailable;
+
+	/// <summary>The key is on offer to every active player while it is in the chest and a relic is left to give up.</summary>
+	public bool KeyOffered => !Finished && _keyAvailable && _remaining.Count > 0;
 
 	public bool IsActive(int player) => !Finished && _active.Contains(player);
 
@@ -57,7 +63,8 @@ public sealed class ChestRematchRule
 
 	/// <summary>
 	/// Resolves a round once every active player voted. <paramref name="fight"/> gets the voters (in player order) and the
-	/// relic, and returns the winner; it is only called when several players voted for the same relic.
+	/// relic (or <see cref="KeyIndex"/>), and returns the winner; it is only called when several players voted for the
+	/// same choice.
 	/// </summary>
 	public RematchRound Resolve(IReadOnlyDictionary<int, int?> votes, Func<IReadOnlyList<int>, int, int> fight)
 	{
@@ -68,15 +75,15 @@ public sealed class ChestRematchRule
 
 		var round = new RematchRound();
 		var leaving = new List<int>();
-		foreach (int player in _active)
+		leaving.AddRange(_active.Where(p => votes[p] == null));
+		var keyVoters = _active.Where(p => votes[p] == KeyIndex).ToList();
+		if (keyVoters.Count > 0)
 		{
-			var vote = votes[player];
-			if (vote == null) leaving.Add(player);
-			else if (vote == KeyIndex)
-			{
-				round.KeyTakenBy = player;
-				leaving.Add(player);
-			}
+			int taker = keyVoters.Count == 1 ? keyVoters[0] : fight(keyVoters, KeyIndex);
+			if (!keyVoters.Contains(taker)) throw new InvalidOperationException($"Fight winner {taker} did not vote for the key.");
+			round.KeyTakenBy = taker;
+			round.KeyFought = keyVoters.Count > 1;
+			leaving.Add(taker);
 		}
 		foreach (int relic in _remaining.ToList())
 		{

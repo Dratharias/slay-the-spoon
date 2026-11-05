@@ -37,7 +37,6 @@ public class ChestRematchRuleTests
 	public void DistinctVotes_FinishInOneRoundWithoutTheKey()
 	{
 		var rule = new ChestRematchRule(2, 2, keyAvailable: true);
-		Assert.False(rule.KeyOffered);
 		var round = rule.Resolve(Votes((0, 1), (1, 0)), FirstWins);
 		Assert.True(round.Finished);
 		Assert.Null(round.KeyTakenBy);
@@ -81,8 +80,8 @@ public class ChestRematchRuleTests
 		var first = rule.Resolve(Votes((0, 2), (1, 2), (2, 2)), (voters, _) => voters[2]);
 		Assert.Equal([new RematchAward(2, 2, true)], first.Awards);
 		Assert.Equal([0, 1], rule.Active);
-		Assert.False(rule.KeyOffered);
-		Assert.Equal([0, 1], rule.Choices());
+		Assert.True(rule.KeyOffered);
+		Assert.Equal([0, 1, 3], rule.Choices());
 
 		var second = rule.Resolve(Votes((0, 0), (1, 0)), FirstWins);
 		Assert.Equal([new RematchAward(0, 0, true)], second.Awards);
@@ -112,7 +111,63 @@ public class ChestRematchRuleTests
 	{
 		var rule = new ChestRematchRule(2, 2, keyAvailable: true);
 		Assert.Throws<ArgumentException>(() => rule.Resolve(Votes((0, 0)), FirstWins));
-		Assert.Throws<ArgumentException>(() => rule.Resolve(Votes((0, 0), (1, rule.KeyIndex)), FirstWins));
+		Assert.Throws<ArgumentException>(() => rule.Resolve(Votes((0, 0), (1, rule.KeyIndex + 1)), FirstWins));
+	}
+
+	[Fact]
+	public void TheKey_IsVotableFromTheFirstRound()
+	{
+		var rule = new ChestRematchRule(3, 3, keyAvailable: true);
+		Assert.True(rule.KeyOffered);
+		Assert.True(rule.CanVote(1, rule.KeyIndex));
+		var round = rule.Resolve(Votes((0, 0), (1, rule.KeyIndex), (2, 2)), FirstWins);
+		Assert.Equal(1, round.KeyTakenBy);
+		Assert.False(round.KeyFought);
+		Assert.False(rule.KeyAvailable);
+		Assert.True(round.Finished);
+		Assert.Equal([1], rule.Remaining);
+	}
+
+	[Fact]
+	public void SeveralKeyVoters_FightAndTheLosersVoteAgain()
+	{
+		var rule = new ChestRematchRule(3, 3, keyAvailable: true);
+		var asked = new List<(int[], int)>();
+		var round = rule.Resolve(Votes((0, rule.KeyIndex), (1, rule.KeyIndex), (2, 0)),
+			(voters, choice) => { asked.Add((voters.ToArray(), choice)); return voters[1]; });
+		var (fighters, fought) = Assert.Single(asked);
+		Assert.Equal([0, 1], fighters);
+		Assert.Equal(rule.KeyIndex, fought);
+		Assert.Equal(1, round.KeyTakenBy);
+		Assert.True(round.KeyFought);
+		Assert.Equal([new RematchAward(2, 0, false)], round.Awards);
+		Assert.Null(round.Consolation);
+		Assert.False(round.Finished);
+		Assert.Equal([0], rule.Active);
+		Assert.Equal([1, 2], rule.Remaining);
+		Assert.Equal([1, 2], rule.Choices());
+	}
+
+	[Fact]
+	public void AKeyFightLoser_KeepsChoosingAmongTheRelicsLeft()
+	{
+		var rule = new ChestRematchRule(4, 4, keyAvailable: true);
+		var round = rule.Resolve(Votes((0, rule.KeyIndex), (1, rule.KeyIndex), (2, 0), (3, 1)), (voters, _) => voters[0]);
+		Assert.Equal(0, round.KeyTakenBy);
+		Assert.False(round.Finished);
+		Assert.Equal([1], rule.Active);
+		Assert.Equal([2, 3], rule.Remaining);
+		Assert.False(rule.KeyOffered);
+		Assert.False(rule.CanVote(1, rule.KeyIndex));
+		Assert.Equal([2, 3], rule.Choices());
+	}
+
+	[Fact]
+	public void AKeyFightWinnerWhoIsNotAVoter_Throws()
+	{
+		var rule = new ChestRematchRule(2, 2, keyAvailable: true);
+		Assert.Throws<InvalidOperationException>(() =>
+			rule.Resolve(Votes((0, rule.KeyIndex), (1, rule.KeyIndex)), (_, _) => 5));
 	}
 
 	[Fact]

@@ -14,16 +14,16 @@ using Vote = MegaCrit.Sts2.Core.Multiplayer.Game.TreasureRoomRelicSynchronizer.P
 namespace SlaySpoon.Act4;
 
 /// <summary>
-/// An intermediate rematch round, for the chest UI: each award with its relic index, the players who vote again, and
-/// whether the last of them may take the key.
+/// An intermediate rematch round, for the chest UI: each award with its relic index, who took the key this round, the
+/// players who vote again, and whether the key is still on offer to them.
 /// </summary>
-internal sealed record RematchRoundView(List<(RelicPickingResult Result, int Index)> Results, int Round,
+internal sealed record RematchRoundView(List<(RelicPickingResult Result, int Index)> Results, Player? KeyTaker, int Round,
 	List<Player> Rematch, bool KeyOffered);
 
 /// <summary>
 /// Sapphire chests (<see cref="ChestRematchRule"/>): while an Act 4 run still lacks the Sapphire Key, the shared chest
-/// replaces the vanilla consolation prize with rematch rounds, and the last player left may take the key instead of a
-/// relic. Votes still travel as the vanilla <see cref="PickRelicAction"/>, the key as the index past the last relic, and
+/// replaces the vanilla consolation prize with rematch rounds, and any player may take the key instead of a relic from
+/// the first round (several key voters play rock-paper-scissors for it, unanimated). Votes still travel as the vanilla <see cref="PickRelicAction"/>, the key as the index past the last relic, and
 /// every peer resolves the rounds in action-queue order with the chest's own <see cref="Rng"/>. Other chests stay vanilla.
 /// </summary>
 internal static class ChestRematchPatch
@@ -61,7 +61,7 @@ internal static class ChestRematchPatch
 
 	private static ChestRematchRule? RuleFor(TreasureRoomRelicSynchronizer sync) => _sync == sync ? _rule : null;
 
-	/// <summary>The key's vote index, while <paramref name="player"/> is the one it is offered to.</summary>
+	/// <summary>The key's vote index, while it is on offer to <paramref name="player"/>.</summary>
 	internal static int? KeyOfferFor(Player player)
 	{
 		if (_sync is not { } sync || _rule is not { KeyOffered: true } rule) return null;
@@ -70,6 +70,16 @@ internal static class ChestRematchPatch
 	}
 
 	internal static bool IsRematchChest => _rule is { Finished: false };
+
+	/// <summary>The key is still in the chest.</summary>
+	internal static bool KeyInChest => _rule is { Finished: false, KeyAvailable: true };
+
+	/// <summary>True while <paramref name="player"/>'s current vote (predicted or received) is the key.</summary>
+	internal static bool VotedForKey(Player player)
+	{
+		if (_sync is not { } sync || _rule is not { Finished: false } rule) return false;
+		return sync.GetPlayerVote(player) is { voteReceived: true } vote && vote.index == rule.KeyIndex;
+	}
 
 	private static void Clear()
 	{
@@ -152,8 +162,9 @@ internal static class ChestRematchPatch
 			var moves = Enum.GetValues<RelicPickingFightMove>();
 			var round = rule.Resolve(rule.Active.ToDictionary(p => p, p => votes[p].index), (voters, relic) =>
 			{
-				var fight = RelicPickingResult.GenerateRelicFight(voters.Select(p => players.Players[p]).ToList(), relics[relic],
-					() => rng.NextItem(moves));
+				// The key has no relic: the fight only needs one to fill its result, and the relic does not change the moves.
+				var fight = RelicPickingResult.GenerateRelicFight(voters.Select(p => players.Players[p]).ToList(),
+					relics[relic == rule.KeyIndex ? 0 : relic], () => rng.NextItem(moves));
 				fights[relic] = fight;
 				return players.GetPlayerSlotIndex(fight.player!);
 			});
@@ -167,7 +178,8 @@ internal static class ChestRematchPatch
 			{
 				var run = (IRunState)players;
 				bool taken = SpoonAct4.Of(run)?.Keys.Take(Act4Key.Sapphire) == true;
-				SpoonLog.Info($"act4: Sapphire Key {(taken ? "taken" : "already held")} by {players.Players[taker].NetId}");
+				SpoonLog.Info($"act4: Sapphire Key {(taken ? "taken" : "already held")} by {players.Players[taker].NetId}"
+					+ (round.KeyFought ? " (fight)" : ""));
 			}
 			SpoonLog.Info($"act4: Sapphire chest round {rule.Round - (round.Finished ? 0 : 1)}: "
 				+ string.Join(", ", round.Awards.Select(a => $"{players.Players[a.Player].NetId}<-{relics[a.Relic].Id}{(a.Fought ? " (fight)" : "")}")));
@@ -182,7 +194,8 @@ internal static class ChestRematchPatch
 				votes[p].index = null;
 				votes[p].voteReceived = false;
 			}
-			RoundResolved?.Invoke(new RematchRoundView(results, rule.Round,
+			RoundResolved?.Invoke(new RematchRoundView(results,
+				round.KeyTakenBy is { } keyTaker ? players.Players[keyTaker] : null, rule.Round,
 				rule.Active.Select(p => players.Players[p]).ToList(), rule.KeyOffered));
 			OfferChanged?.Invoke();
 			if (RunManager.Instance.IsSingleplayerOrFakeMultiplayer && players.Players.Count > 1)

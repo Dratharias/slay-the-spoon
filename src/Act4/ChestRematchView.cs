@@ -78,12 +78,16 @@ internal static class ChestRematchView
 
 			void OnRound(RematchRoundView round) => Chain(() => AnimateRound(__instance, round));
 			void OnOffer() => Refresh();
+			var sync = RunManager.Instance.TreasureRoomRelicSynchronizer;
 			ChestRematchPatch.RoundResolved += OnRound;
 			ChestRematchPatch.OfferChanged += OnOffer;
+			// The key shows the local vote: picked, or back to a choice after a lost key fight or a changed vote.
+			sync.VotesChanged += OnOffer;
 			__instance.TreeExiting += () =>
 			{
 				ChestRematchPatch.RoundResolved -= OnRound;
 				ChestRematchPatch.OfferChanged -= OnOffer;
+				sync.VotesChanged -= OnOffer;
 				_cts.Cancel();
 				if (_collection == __instance) _collection = null;
 				_key = null;
@@ -180,10 +184,11 @@ internal static class ChestRematchView
 	{
 		if (_collection is not { } collection || !GodotObject.IsInstanceValid(collection)) return;
 		var me = LocalContext.GetMe(Run(collection));
-		bool shown = _opened && ChestRematchPatch.IsRematchChest && me != null;
+		bool shown = _opened && ChestRematchPatch.KeyInChest && me != null;
 		bool offered = shown && !Busy && ChestRematchPatch.KeyOfferFor(me!) != null;
+		bool picked = offered && ChestRematchPatch.VotedForKey(me!);
 		string tip = offered ? "SPOON_SAPPHIRE_KEY_TIP" : "SPOON_SAPPHIRE_KEY_WAIT_TIP";
-		_key?.Show(shown, offered, new LocString("merchant_room", tip).GetFormattedText());
+		_key?.Show(shown, offered, picked, new LocString("merchant_room", tip).GetFormattedText());
 	}
 
 	private static void ShowLabel(string? key)
@@ -238,7 +243,7 @@ internal static class ChestRematchView
 		foreach (var (_, index) in round.Results) holders.First(h => h.Index == index).Disable();
 
 		// Winners keep their relic in hand; everyone else points again.
-		var winners = round.Results.Select(r => r.Result.player).ToHashSet();
+		var winners = round.Results.Select(r => r.Result.player).Append(round.KeyTaker).ToHashSet();
 		foreach (var player in run.Players.Where(p => !winners.Contains(p)))
 			if (hands.GetHand(player.NetId) is { } hand)
 			{
