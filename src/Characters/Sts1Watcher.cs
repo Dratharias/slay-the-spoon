@@ -12,8 +12,8 @@ namespace SlaySpoon.Characters;
 
 /// <summary>
 /// The Watcher, StS1's fourth character, as an StS2 character with static visuals. ModelDb discovers this class by
-/// reflection, but ModelDb.AllCharacters is a fixed list of the five vanilla characters, so she never shows in
-/// character select, Standard, Daily, random picks, unlocks or the compendium. Her own art replaces the paths the game
+/// reflection, but ModelDb.AllCharacters is a fixed list of the five vanilla characters, so dedicated patches add her to Custom and Standard solo selection without adding her to
+/// Daily, random picks, unlocks or the compendium. Her own art replaces the paths the game
 /// derives from the id where a virtual member allows it; <see cref="WatcherAssetPatch"/> covers the rest.
 /// </summary>
 public sealed class Sts1Watcher : CharacterModel

@@ -67,9 +67,11 @@ Current (0.10.0):
   co-op, players without the relic see their card option locked. Vampires needs every player to hold
   it. Augmenter can also give **Mutagenic Strength**, a relic ported from Slay the Spire 1.
 
-- **The Watcher:** Slay the Spire 1's Watcher is playable as a sixth character in a Custom Run, only while
-  **Slay the Spire 1 Cards** or **Spire Souvenir** is ticked (her button appears at the end of the character row;
-  unticking sends the selection back to the last vanilla character). She is never offered in Standard or Daily runs.
+- **The Watcher:** Slay the Spire 1's Watcher is always visible and selectable as a sixth character in a Custom Run,
+  on both host and client. She is also selectable in Standard solo. In either solo mode, choosing her implicitly enables the StS1 card set (including colorless
+  cards and StS1 event eligibility), even without ticking **Slay the Spire 1 Cards**. This also applies after resuming.
+  In co-op, the lobby modifiers still determine the shared card set; her own cards remain StS1.
+  Unticking modifiers never hides or deselects her. She is not offered in Daily or Standard co-op.
   She brings stances (Wrath, Calm, Divinity), Mantra and Scry, 71 cards plus her 4 starter cards and the cards they create, her
   relics and her three potions, with Slay the Spire 1 art and numbers. Her visuals are static images for now (no
   animation). Discipline and Unraveling, which Slay the Spire 1 never registered, are not ported. Holy Water and Violet

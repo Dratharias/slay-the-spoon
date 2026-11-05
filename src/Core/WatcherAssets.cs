@@ -38,6 +38,9 @@ public static class WatcherAssets
 
 	public const string CharacterSelectLockedIcon = Root + "packed/character_select/char_select_sts1_watcher_locked.png";
 
+	/// <summary>The StS1 character select portrait (1920x1200), shown full screen behind her select screen.</summary>
+	public const string CharacterSelectBackground = Root + "packed/character_select/char_select_bg_sts1_watcher.jpg";
+
 	public const string MapMarker = Root + "packed/map/icons/map_marker_sts1_watcher.png";
 
 	/// <summary>StS1's stance sound: the one-shot played on entering <paramref name="stance"/>, or the loop held while in it.</summary>
@@ -56,7 +59,7 @@ public static class WatcherAssets
 
 	public static IReadOnlyList<string> ModImages { get; } = new[]
 		{
-			Body, Corpse, EyeBase, EyeIris(Stance.Calm), EyeIris(Stance.Wrath), EyeIris(Stance.Divinity), TopBarIcon, TopBarIconOutline, CharacterSelectIcon, CharacterSelectLockedIcon, MapMarker,
+			Body, Corpse, EyeBase, EyeIris(Stance.Calm), EyeIris(Stance.Wrath), EyeIris(Stance.Divinity), TopBarIcon, TopBarIconOutline, CharacterSelectIcon, CharacterSelectLockedIcon, CharacterSelectBackground, MapMarker,
 		}
 		.Concat(OrbLayers)
 		.ToArray();
