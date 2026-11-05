@@ -168,13 +168,16 @@ public static class WatcherAssetPatch
 			}
 			for (int i = 0; i < WatcherAssets.OrbLayers.Count; i++)
 			{
-				if (__result.FindChild($"Layer{i + 1}", recursive: true, owned: false) is TextureRect layer)
+				Node? found = __result.FindChild($"Layer{i + 1}", recursive: true, owned: false);
+				if (found is TextureRect layer)
 				{
 					layer.Texture = PreloadManager.Cache.GetTexture2D(WatcherAssets.OrbLayers[i]);
 				}
 				else
 				{
-					SpoonLog.Error($"Watcher energy counter: no Layer{i + 1} in the donor scene");
+					SpoonLog.Error(found == null
+						? $"Watcher energy counter: no Layer{i + 1} in the donor scene"
+						: $"Watcher energy counter: Layer{i + 1} is a {found.GetType().Name}, not a TextureRect");
 				}
 			}
 		}

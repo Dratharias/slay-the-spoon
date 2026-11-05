@@ -117,8 +117,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     CardModel exposes only IsPlayable, with no per-card message override. A dialogue patch is deferred.
   - ~~Duality's power has no `powers.json` text of its own~~: none needed, `TemporaryDexterityPower` takes its title from
     the relic and its description from vanilla `TEMPORARY_DEXTERITY_POWER` (checked 2026-11-05).
-  - Character shell: `OrbModel` takes the energy prefix from the pool title `sts1_watcher`; `WatcherAssetPatch`'s Layer log
-    message is misleading when the node exists with another type; `NGameOverScreen` reads `CharacterStats[her id]`
+  - Character shell: `OrbModel` takes the energy prefix from the pool title `sts1_watcher`; ~~`WatcherAssetPatch`'s Layer log
+    message is misleading when the node exists with another type~~ (0.12.19); `NGameOverScreen` reads `CharacterStats[her id]`
     unguarded (the entry is created in memory, the checklist covers first death and victory).
   - Custom Run button: the static `_previous` relies on vanilla selecting child 0 on open; selecting the fallback while
     readied is unverified; tests hard-code modifier id strings.
