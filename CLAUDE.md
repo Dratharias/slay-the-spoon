@@ -225,6 +225,9 @@ Read `README.md` for the player view and the spec for every decision.
   (`OrbEnergyPrefixPatch`); Strangle/Choke co-op tooltip (`StrangleCoopTextPatch`). Every other backlog minor now carries
   a disposition (done, checked, kept with a reason, or owner item). Build 0 warnings; 553 xUnit + 78 pytest pass.
   Not tested in game: `docs/testing/backlog-close-checklist.md`.
+- **1.0.0 (2026-11-05, owner instruction "backlog empty → 1.0.0"):** version bump only, same code as 0.12.38.
+  `make workshop` staged `build/workshop/`; not uploaded, not installed. What remains is owner work: the in-game
+  checklists in `docs/testing/`, the Spine animations, the client log for the co-op crash report, text proofreading.
 
 ## Documents
 

@@ -3,6 +3,9 @@
 Remaining design decisions and deferred work after the 0.10.1 fix wave (2026-10-30).
 Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/fix-wave-checklist.md.
 
+**1.0.0 (2026-11-05):** every entry below is done, checked, kept with a reason, or an owner item (in-game checks,
+Spine animations, the co-op crash report's client log). New bugs and requests go at the end.
+
 - ~~StS1 character-specific relics (Ironclad, Silent, Defect, Watcher pools) that StS2 dropped, offered when a StS1 card
   set mode is active (owner request, 2026-10-29).~~ Done in 0.12.36: Champion Belt and Magic Flower (Ironclad) and The
   Specimen (Silent) join their pools as Rare relics in Custom Runs with a StS1 card set (`src/Relics/Sts1/`), with StS1
