@@ -74,8 +74,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     the status intent shows 5, the per-player count.
   - The Heart's status shuffles share its RNG with its move roll, so Blood Shots vs Echo on turn 2 depends on the
     number of players and their draw piles (deterministic on every peer, seeds stay vanilla).
-  - The Ending act's rooms are seeded from the caller's Rng seed in `EndingRoomsPatch` but from the run seed in
-    `Sts1EndingAct.CreateForRun`: the same result today (one elite, one boss), divergent if a list ever grows.
+  - ~~The Ending act's rooms are seeded from the caller's Rng seed in `EndingRoomsPatch` but from the run seed in
+    `Sts1EndingAct.CreateForRun`~~: both use the run seed since 0.12.22 (the caller's seed only outside a run).
     `FillRooms` does not reset the ancient or visit counters (only called on a fresh act). No automated test covers the
     act model or its patches (game-bound; the checklist covers them).
   - Visiting the act may add `STS1_ENDING_ACT` to the modded profile's discovered acts (not checked). If a later game
