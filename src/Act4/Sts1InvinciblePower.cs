@@ -21,7 +21,8 @@ public sealed class Sts1InvinciblePower : PowerModel, IBorrowedIcon
 
 	public override Task AfterApplied(Creature? applier, CardModel? cardSource)
 	{
-		_turnCap = Amount;
+		// A re-apply mid-turn sees the depleted amount: never lower the cap below what it already was.
+		_turnCap = Math.Max(_turnCap, Amount);
 		return Task.CompletedTask;
 	}
 

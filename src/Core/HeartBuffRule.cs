@@ -12,6 +12,7 @@ public static class HeartBuffRule
 
 	public static (HeartBuffKind Kind, int Amount) Extra(int buffsDone) => buffsDone switch
 	{
+		< 0 => throw new ArgumentOutOfRangeException(nameof(buffsDone), buffsDone, "buff count cannot be negative"),
 		0 => (HeartBuffKind.Artifact, 2),
 		1 => (HeartBuffKind.BeatOfDeath, 1),
 		2 => (HeartBuffKind.PainfulStabs, 1),
