@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Unlocks;
 using SlaySpoon.Cards;
 using SlaySpoon.Cards.Pools;
 using SlaySpoon.Config;
+using SlaySpoon.Characters;
 using SlaySpoon.Core;
 using SlaySpoon.Relics;
 
@@ -26,10 +27,12 @@ public static class CardSetPools
 		new(typeof(ColorlessCardPool), typeof(Sts1ColorlessCardPool), Sts1Matches.Colorless),
 	};
 
-	/// <summary>The run's card set mode, as ticked in Custom Run (none = StS2 only).</summary>
+	/// <summary>The explicit card set, or implicit StS1 mode for a solo Standard or Custom Run with the Watcher.</summary>
 	public static CardSetMode ModeOf(IRunState? run)
 	{
-		return run?.Modifiers.OfType<SpoonCardSet>().FirstOrDefault()?.Mode ?? CardSetMode.Sts2Only;
+		CardSetMode configured = run?.Modifiers.OfType<SpoonCardSet>().FirstOrDefault()?.Mode ?? CardSetMode.Sts2Only;
+		return WatcherRunRule.EffectiveMode(configured, run?.GameMode is GameMode.Custom or GameMode.Standard,
+			run?.Players.Count ?? 0, run?.Players.FirstOrDefault()?.Character is Sts1Watcher);
 	}
 
 	/// <summary>

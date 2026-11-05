@@ -192,6 +192,8 @@ def export_watcher(jar: Path, out: Path) -> dict:
         locked = ImageOps.grayscale(select).point(lambda v: v // 2).convert("RGBA")
         locked.putalpha(select.getchannel("A"))
         _save(locked, select_dir / f"char_select_{WATCHER_ID}_locked.png")
+        # Full-screen select background: the StS1 portrait bytes as they are (no recompression).
+        (select_dir / f"char_select_bg_{WATCHER_ID}.jpg").write_bytes(z.read("images/ui/charSelect/watcherPortrait.jpg"))
 
         orb_dir = out / "images/ui/combat/energy_counters" / WATCHER_ID
         for i, layer in enumerate(ORB_LAYERS, start=1):

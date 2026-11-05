@@ -142,6 +142,7 @@ def test_watcher_art_outputs(tmp_path):
         assert img.mode == "RGBA", rel
     body = Image.open(out / "images/creatures/sts1_watcher/body.png")
     assert (meta["body"]["width"], meta["body"]["height"]) == body.size
+    assert Image.open(out / "images/packed/character_select/char_select_bg_sts1_watcher.jpg").size == (1920, 1200)
     # The eye anchor sits 2 right of and 5 above the skeleton origin (Y up in skeleton space).
     assert meta["eye_anchor"] == (meta["body"]["origin_x"] + 2, meta["body"]["origin_y"] - 5)
 

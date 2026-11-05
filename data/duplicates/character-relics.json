@@ -1,0 +1,617 @@
+{
+  "audit_date": "2026-10-30",
+  "scope": "All 40 registered StS1 character-specific relics; inventory only, not runtime configuration",
+  "sts1_library_class_sha256": "b6bb2205d186df3c5f66c7797142cf29597028468951a48cee820ec3effe0f2f",
+  "relics": [
+    {
+      "character": "Silent",
+      "sts1_class": "HoveringKite",
+      "sts1_id": "HoveringKite",
+      "name_en": "Hovering Kite",
+      "name_fr": "Cerf-volant",
+      "sts1_tier": "BOSS",
+      "status": "planned-port-inactive",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "c410ea5b17831452e5113e26886feeda1c144013ed5b3b4356d2f6a7776f0953",
+      "sts2_source_sha256": null,
+      "acquisition": "Disabled; future source to be decided by owner. Custom Run option is a possibility, not an approved design."
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "NinjaScroll",
+      "sts1_id": "Ninja Scroll",
+      "name_en": "Ninja Scroll",
+      "name_fr": "Parchemin de ninja",
+      "sts1_tier": "UNCOMMON",
+      "status": "native",
+      "sts2_class": "NinjaScroll",
+      "sts2_pools": [
+        "SilentRelicPool"
+      ],
+      "sts2_rarity": "Shop",
+      "sts1_class_sha256": "69b739daa17a723567c0a4d7c19a3ae4ff88d66199e1b445321c5594babd4a18",
+      "sts2_source_sha256": "a210090a28ea97bbfb1941fb97e678226a62488e6b20225dc796e0ca78c95434"
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "PaperCrane",
+      "sts1_id": "Paper Crane",
+      "name_en": "Paper Krane",
+      "name_fr": "Grû en papier",
+      "sts1_tier": "UNCOMMON",
+      "status": "native",
+      "sts2_class": "PaperKrane",
+      "sts2_pools": [
+        "SilentRelicPool"
+      ],
+      "sts2_rarity": "Rare",
+      "sts1_class_sha256": "20a0e23aa5d1912c8fe9e437b3793535b851e62e55cb8dc3a9b46d2876ea3c42",
+      "sts2_source_sha256": "f1e5b7e31cdf642085e9e74cd13bbad2fef3babf50a88becc3e950158020bce9"
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "RingOfTheSerpent",
+      "sts1_id": "Ring of the Serpent",
+      "name_en": "Ring of the Serpent",
+      "name_fr": "Anneau du cobra",
+      "sts1_tier": "BOSS",
+      "status": "planned-port-inactive",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "0a44ab591e12499d981a561d42566495ca36d42f2b1574209c7419abda55d318",
+      "sts2_source_sha256": null,
+      "acquisition": "Disabled; future source to be decided by owner. Custom Run option is a possibility, not an approved design."
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "SnakeRing",
+      "sts1_id": "Ring of the Snake",
+      "name_en": "Ring of the Snake",
+      "name_fr": "Anneau du serpent",
+      "sts1_tier": "STARTER",
+      "status": "native",
+      "sts2_class": "RingOfTheSnake",
+      "sts2_pools": [
+        "SilentRelicPool"
+      ],
+      "sts2_rarity": "Starter",
+      "sts1_class_sha256": "e4eeb983a57aa5cf6c06795c2ac10f668cf80772c4ceb5b51af2eab3d3307d50",
+      "sts2_source_sha256": "d04b919c6c705750de44ffee82f435ee491509f12723508a3a9679d26eb62eee"
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "SneckoSkull",
+      "sts1_id": "Snake Skull",
+      "name_en": "Snecko Skull",
+      "name_fr": "Crâne de geckobra",
+      "sts1_tier": "COMMON",
+      "status": "native",
+      "sts2_class": "SneckoSkull",
+      "sts2_pools": [
+        "SilentRelicPool"
+      ],
+      "sts2_rarity": "Common",
+      "sts1_class_sha256": "4fea99e255acbb95d15815007fe2a61605e57322d47297bc12e9851337c7d973",
+      "sts2_source_sha256": "6aedb8cd861eb8870e9aa934b8d37ab9697382fcfc01faa972b7908fe8610b3e"
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "TheSpecimen",
+      "sts1_id": "The Specimen",
+      "name_en": "The Specimen",
+      "name_fr": "Le spécimen",
+      "sts1_tier": "RARE",
+      "status": "port-candidate",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "9a33e5a4f8a6d3109280ac3a249e90693b787f500ab00fd88a1d527eb8048109",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "Tingsha",
+      "sts1_id": "Tingsha",
+      "name_en": "Tingsha",
+      "name_fr": "Tingsha",
+      "sts1_tier": "RARE",
+      "status": "native",
+      "sts2_class": "Tingsha",
+      "sts2_pools": [
+        "SilentRelicPool"
+      ],
+      "sts2_rarity": "Uncommon",
+      "sts1_class_sha256": "4067b140bde194a36815b1ae25acdc541f5eb396a0c3f28f043a0a77be1c592c",
+      "sts2_source_sha256": "6229a87a90dd90e48a3af54bfbcc67424cf853f175760da6dc70dbb34ff800a7"
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "ToughBandages",
+      "sts1_id": "Tough Bandages",
+      "name_en": "Tough Bandages",
+      "name_fr": "Bandages rugueux",
+      "sts1_tier": "RARE",
+      "status": "native",
+      "sts2_class": "ToughBandages",
+      "sts2_pools": [
+        "SilentRelicPool"
+      ],
+      "sts2_rarity": "Rare",
+      "sts1_class_sha256": "7ae2f5737b9cef7dcc6e6437f4529dc6171fec6984710aa7725ef75423a4c7ff",
+      "sts2_source_sha256": "860aa8aff3813a08399488e6eadebcf486f5e02f19c1bf46dfb43f674867827d"
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "TwistedFunnel",
+      "sts1_id": "TwistedFunnel",
+      "name_en": "Twisted Funnel",
+      "name_fr": "Entonnoir torsadé",
+      "sts1_tier": "SHOP",
+      "status": "native",
+      "sts2_class": "TwistedFunnel",
+      "sts2_pools": [
+        "SilentRelicPool"
+      ],
+      "sts2_rarity": "Uncommon",
+      "sts1_class_sha256": "7e70aa848f92f62892cbebdf133ec831e7fb892b84f7c1ab16ec6791afebfb81",
+      "sts2_source_sha256": "eaae5c8f9234e708ef44e0d4c7f8fe106e4d7a0e9dd86572bb24c5520c0b3651"
+    },
+    {
+      "character": "Silent",
+      "sts1_class": "WristBlade",
+      "sts1_id": "WristBlade",
+      "name_en": "Wrist Blade",
+      "name_fr": "Poignard",
+      "sts1_tier": "BOSS",
+      "status": "planned-port-inactive",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "9b4188089e02b70669c1667b7d1d3a9b11fa60a8aa4e5d627024a0d74dace14b",
+      "sts2_source_sha256": null,
+      "acquisition": "Disabled; future source to be decided by owner. Custom Run option is a possibility, not an approved design."
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "BlackBlood",
+      "sts1_id": "Black Blood",
+      "name_en": "Black Blood",
+      "name_fr": "Sang noir",
+      "sts1_tier": "BOSS",
+      "status": "native-special",
+      "sts2_class": "BlackBlood",
+      "sts2_pools": [
+        "EventRelicPool"
+      ],
+      "sts2_rarity": "Starter",
+      "sts1_class_sha256": "65767ce5531eebd0df2fd00df2f3a48131430be3a83882764e186cb9532f5364",
+      "sts2_source_sha256": "18b5c5b3e1c93af8cd6a2f9c1b7be5122e991d6e195799c1c3ad7e72ce3e8833"
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "Brimstone",
+      "sts1_id": "Brimstone",
+      "name_en": "Brimstone",
+      "name_fr": "Soufre",
+      "sts1_tier": "SHOP",
+      "status": "native",
+      "sts2_class": "Brimstone",
+      "sts2_pools": [
+        "IroncladRelicPool"
+      ],
+      "sts2_rarity": "Shop",
+      "sts1_class_sha256": "10a81e4056fe235618549eaeddcd2f2ba08729b5889fd5f73bb516a72955d0b4",
+      "sts2_source_sha256": "c12ef310280c9a5c282bb18a96ac5d44c39b8dabdfe74041372eaab0b7c9724f"
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "BurningBlood",
+      "sts1_id": "Burning Blood",
+      "name_en": "Burning Blood",
+      "name_fr": "Sang ardent",
+      "sts1_tier": "STARTER",
+      "status": "native",
+      "sts2_class": "BurningBlood",
+      "sts2_pools": [
+        "IroncladRelicPool"
+      ],
+      "sts2_rarity": "Starter",
+      "sts1_class_sha256": "3810c46bfae43debd4bebb087f3b8624e5fdcf16b509459c13e3788046697732",
+      "sts2_source_sha256": "eefa04d6cee4b2da1245894fe1e4e1ed3ff0c36db8c8011264955870fb422410"
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "ChampionsBelt",
+      "sts1_id": "Champion Belt",
+      "name_en": "Champion Belt",
+      "name_fr": "Ceinture de champion",
+      "sts1_tier": "RARE",
+      "status": "port-candidate",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "23faad5f593d792817cbeec771213877ac75b465eee073b59b96f57cbf13618c",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "CharonsAshes",
+      "sts1_id": "Charon's Ashes",
+      "name_en": "Charon's Ashes",
+      "name_fr": "Cendres de charon",
+      "sts1_tier": "RARE",
+      "status": "native",
+      "sts2_class": "CharonsAshes",
+      "sts2_pools": [
+        "IroncladRelicPool"
+      ],
+      "sts2_rarity": "Rare",
+      "sts1_class_sha256": "c250de2f123c82b8017d51050a43c673baaa4939161b66c87cb402a2f7c71db2",
+      "sts2_source_sha256": "bfa45561895b6173f47913beb4924e93da111f85a6d8753dc365d87af75e785c"
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "MagicFlower",
+      "sts1_id": "Magic Flower",
+      "name_en": "Magic Flower",
+      "name_fr": "Fleur magique",
+      "sts1_tier": "RARE",
+      "status": "port-candidate",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "09233e55fecb5e5b146dbbcc31d6165d25ea6b80d5cc997028352af569a27001",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "MarkOfPain",
+      "sts1_id": "Mark of Pain",
+      "name_en": "Mark of Pain",
+      "name_fr": "Marque de douleur",
+      "sts1_tier": "BOSS",
+      "status": "planned-port-inactive",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "ba9f22220fc9aa45b252bf87851b7c8b16ed63718d31814760e3fda843cbc8d4",
+      "sts2_source_sha256": null,
+      "acquisition": "Disabled; future source to be decided by owner. Custom Run option is a possibility, not an approved design."
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "PaperFrog",
+      "sts1_id": "Paper Frog",
+      "name_en": "Paper Phrog",
+      "name_fr": "Grenouye en papier",
+      "sts1_tier": "UNCOMMON",
+      "status": "native",
+      "sts2_class": "PaperPhrog",
+      "sts2_pools": [
+        "IroncladRelicPool"
+      ],
+      "sts2_rarity": "Uncommon",
+      "sts1_class_sha256": "efbf1fbeaa776423e0515e98649d0276768036c70f7455c9636d852e9696ba7d",
+      "sts2_source_sha256": "4f469cd1ce7b9c2f9326dc06dae7b7b1ab9d7eb65b3816d9ad99c59fe3da8538"
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "RedSkull",
+      "sts1_id": "Red Skull",
+      "name_en": "Red Skull",
+      "name_fr": "Crâne rouge",
+      "sts1_tier": "COMMON",
+      "status": "native",
+      "sts2_class": "RedSkull",
+      "sts2_pools": [
+        "IroncladRelicPool"
+      ],
+      "sts2_rarity": "Common",
+      "sts1_class_sha256": "ea4d35bd87c3237d9387b56fbfee4512b2853a7319cd97ad0fcbf4999d9ee1b5",
+      "sts2_source_sha256": "cf57eb10a81ced7a20a845c53b1f58253fbf980f1b72f76243d57f1cbe165382"
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "RunicCube",
+      "sts1_id": "Runic Cube",
+      "name_en": "Runic Cube",
+      "name_fr": "Cube runique",
+      "sts1_tier": "BOSS",
+      "status": "planned-port-inactive",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "584edfa44046523134703227457c27fe525186e7cb36c8a76b0e4e59352e2426",
+      "sts2_source_sha256": null,
+      "acquisition": "Disabled; future source to be decided by owner. Custom Run option is a possibility, not an approved design."
+    },
+    {
+      "character": "Ironclad",
+      "sts1_class": "SelfFormingClay",
+      "sts1_id": "Self Forming Clay",
+      "name_en": "Self-Forming Clay",
+      "name_fr": "Argile autoformante",
+      "sts1_tier": "UNCOMMON",
+      "status": "native",
+      "sts2_class": "SelfFormingClay",
+      "sts2_pools": [
+        "IroncladRelicPool"
+      ],
+      "sts2_rarity": "Uncommon",
+      "sts1_class_sha256": "2050e424b86df594b43a457ae75486427b8a975d76912fec46c731ff8781030a",
+      "sts2_source_sha256": "19ee66ecf2f4fbfb2cf1f6c15323e86977d32dd894253d429fb4b927f7b8d5a7"
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "CrackedCore",
+      "sts1_id": "Cracked Core",
+      "name_en": "Cracked Core",
+      "name_fr": "Noyau fissuré",
+      "sts1_tier": "STARTER",
+      "status": "native",
+      "sts2_class": "CrackedCore",
+      "sts2_pools": [
+        "DefectRelicPool"
+      ],
+      "sts2_rarity": "Starter",
+      "sts1_class_sha256": "a95a19aa6c6f57146010b09f215cc152caa1f74703a077a3537eb307e3831ff4",
+      "sts2_source_sha256": "4bd7c31433fe8c1a4728779750ec51ca5d8283a8fdc156817f542e747c7f9146"
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "DataDisk",
+      "sts1_id": "DataDisk",
+      "name_en": "Data Disk",
+      "name_fr": "Disque dur",
+      "sts1_tier": "COMMON",
+      "status": "native",
+      "sts2_class": "DataDisk",
+      "sts2_pools": [
+        "DefectRelicPool"
+      ],
+      "sts2_rarity": "Common",
+      "sts1_class_sha256": "c7f0c20fb83cede7095710447b93cdf0f708c80ce137640a5d38f6cbb22dd334",
+      "sts2_source_sha256": "5ec796ec4d172dfb45e4352b9ad3e7ffc84427ea3b518604953f07f4a06333bf"
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "EmotionChip",
+      "sts1_id": "Emotion Chip",
+      "name_en": "Emotion Chip",
+      "name_fr": "Puce émotionnelle",
+      "sts1_tier": "RARE",
+      "status": "native",
+      "sts2_class": "EmotionChip",
+      "sts2_pools": [
+        "DefectRelicPool"
+      ],
+      "sts2_rarity": "Rare",
+      "sts1_class_sha256": "619d3398b75f8ba7ae7be9ee6be5ce529359c4d3cb024cb7d882cc0736375162",
+      "sts2_source_sha256": "a9b1bcde4c7db01ab0fb71901ba431023b38ccdf74a3bb42df995b860dcdbc67"
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "FrozenCore",
+      "sts1_id": "FrozenCore",
+      "name_en": "Frozen Core",
+      "name_fr": "Noyau gelé",
+      "sts1_tier": "BOSS",
+      "status": "planned-port-inactive",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "176f345faac2e81aadac9bc756374c2c0a52fbe82ae1757aea0dd2d3a0e4b526",
+      "sts2_source_sha256": null,
+      "acquisition": "Disabled; future source to be decided by owner. Custom Run option is a possibility, not an approved design."
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "GoldPlatedCables",
+      "sts1_id": "Cables",
+      "name_en": "Gold-Plated Cables",
+      "name_fr": "Cable plaqué-or",
+      "sts1_tier": "UNCOMMON",
+      "status": "native",
+      "sts2_class": "GoldPlatedCables",
+      "sts2_pools": [
+        "DefectRelicPool"
+      ],
+      "sts2_rarity": "Uncommon",
+      "sts1_class_sha256": "839e6bcbcac548079ae88d13fb8a053116c72a69dd3ddc7fb49d7aba97b7efe7",
+      "sts2_source_sha256": "c810d6025cb0b8d026b9f6aa8d7f728788b539fa570b4740fd6385b4e7ff80e8"
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "Inserter",
+      "sts1_id": "Inserter",
+      "name_en": "Inserter",
+      "name_fr": "Bras robotisé",
+      "sts1_tier": "BOSS",
+      "status": "planned-port-inactive",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "61c760fa732f5f33ce2998e898f09c05638aa73825b11ff591a8a0ce549181cf",
+      "sts2_source_sha256": null,
+      "acquisition": "Disabled; future source to be decided by owner. Custom Run option is a possibility, not an approved design."
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "NuclearBattery",
+      "sts1_id": "Nuclear Battery",
+      "name_en": "Nuclear Battery",
+      "name_fr": "Batterie nucléaire",
+      "sts1_tier": "BOSS",
+      "status": "planned-port-inactive",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "9ba7a04e076fbb615f0eab0be78a3ca4652f7ee5107d2938924c04aa9e37a7d7",
+      "sts2_source_sha256": null,
+      "acquisition": "Disabled; future source to be decided by owner. Custom Run option is a possibility, not an approved design."
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "RunicCapacitor",
+      "sts1_id": "Runic Capacitor",
+      "name_en": "Runic Capacitor",
+      "name_fr": "Condensateur runique",
+      "sts1_tier": "SHOP",
+      "status": "native",
+      "sts2_class": "RunicCapacitor",
+      "sts2_pools": [
+        "DefectRelicPool"
+      ],
+      "sts2_rarity": "Shop",
+      "sts1_class_sha256": "9c1841f6be5772f1e28814ed0b571efe89e438afe7974933432ea8d4186f8357",
+      "sts2_source_sha256": "d1f7f4244fab0b4ae9e34b66a32a0a66dfd09fe5e8002da272668766f9aaf045"
+    },
+    {
+      "character": "Defect",
+      "sts1_class": "SymbioticVirus",
+      "sts1_id": "Symbiotic Virus",
+      "name_en": "Symbiotic Virus",
+      "name_fr": "Virus symbiotique",
+      "sts1_tier": "UNCOMMON",
+      "status": "native",
+      "sts2_class": "SymbioticVirus",
+      "sts2_pools": [
+        "DefectRelicPool"
+      ],
+      "sts2_rarity": "Uncommon",
+      "sts1_class_sha256": "004a5a3f36f77b8d2137f57322c0c3f7912de48dfc1864bbd244b645a25e30dc",
+      "sts2_source_sha256": "af63b6a1383d875a53d8b7c9c387cfe176c14cd5fad36eb97ada8d9034429c31"
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "CloakClasp",
+      "sts1_id": "CloakClasp",
+      "name_en": "Cloak Clasp",
+      "name_fr": "Attache de Cape",
+      "sts1_tier": "RARE",
+      "status": "native-shared",
+      "sts2_class": "CloakClasp",
+      "sts2_pools": [
+        "SharedRelicPool"
+      ],
+      "sts2_rarity": "Rare",
+      "sts1_class_sha256": "6b422dcc0575d1ff32dec5e8dc5968ad597be248dccfc2d0b45b10f808bbe31c",
+      "sts2_source_sha256": "1b8e9638fab92d0ea0322f48e9c4e48fe10ae7f2fb6696b21932dc1d73995f0d"
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "Damaru",
+      "sts1_id": "Damaru",
+      "name_en": "Damaru",
+      "name_fr": "Damaru",
+      "sts1_tier": "COMMON",
+      "status": "watcher-work",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "dc89dcf7941f5afed52827ea58ff4e7947620b12f2564b1dd76ad1b0c80fd801",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "GoldenEye",
+      "sts1_id": "GoldenEye",
+      "name_en": "Golden Eye",
+      "name_fr": "Œil doré",
+      "sts1_tier": "RARE",
+      "status": "watcher-work",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "64f8aa8712469e784be7e3d071202b7618ba6ae2615ce765a9b39a3e05533c35",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "HolyWater",
+      "sts1_id": "HolyWater",
+      "name_en": "Holy Water",
+      "name_fr": "Eau bénite",
+      "sts1_tier": "BOSS",
+      "status": "watcher-work",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "e5ecc469f93bbf884089a566abf0fc23a965fb70bf23b120f73195f3ec255441",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "Melange",
+      "sts1_id": "Melange",
+      "name_en": "Melange",
+      "name_fr": "Mélange",
+      "sts1_tier": "SHOP",
+      "status": "watcher-work",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "df2129b615287a8fa8be6d72e6ca18838cf33b5d3aad29e5bb0161d508ba9144",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "PureWater",
+      "sts1_id": "PureWater",
+      "name_en": "Pure Water",
+      "name_fr": "Eau pure",
+      "sts1_tier": "STARTER",
+      "status": "watcher-work",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "527b0d4ce10e32db2b1a1e1bb2075c708a33db250dd43dbdf6efeb0fa000dc9e",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "VioletLotus",
+      "sts1_id": "VioletLotus",
+      "name_en": "Violet Lotus",
+      "name_fr": "Lotus violet",
+      "sts1_tier": "BOSS",
+      "status": "watcher-work",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "8cabdf905f37d692c0a2affe8ea318fbb0c8de3222586b90b95128d8080ac107",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "TeardropLocket",
+      "sts1_id": "TeardropLocket",
+      "name_en": "Teardrop Locket",
+      "name_fr": "Médaillon larme",
+      "sts1_tier": "UNCOMMON",
+      "status": "watcher-work",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "73ca6e32a0701eb8f24ddb8b349746dd482d64e96cec63443a70d1ffdee327e1",
+      "sts2_source_sha256": null
+    },
+    {
+      "character": "Watcher",
+      "sts1_class": "Duality",
+      "sts1_id": "Yang",
+      "name_en": "Duality",
+      "name_fr": "Dualité",
+      "sts1_tier": "UNCOMMON",
+      "status": "watcher-work",
+      "sts2_class": null,
+      "sts2_pools": [],
+      "sts2_rarity": null,
+      "sts1_class_sha256": "0c91ecf7c14fb5ec7ab1fc3952b2d8f1c99cc7ab1f212e5506a57c175a8da31b",
+      "sts2_source_sha256": null
+    }
+  ]
+}
