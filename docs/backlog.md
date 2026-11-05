@@ -88,8 +88,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Run history stores the Ending act's id: with the mod removed, history shows a placeholder act; run metrics
     (`ActWinMetric`) would carry the mod's act id if the game uploads metrics for modded runs (not checked).
   - ~~The `Act4Preview` cfg key is a no-op since the release~~: key, parameter and `Released` removed in 0.12.16.
-    `ModifierListPatch`'s `OfferedIn(Custom)` guard is always true at runtime (the list is Custom-only) and reads the
-    pure list by string name.
+    ~~`ModifierListPatch`'s `OfferedIn(Custom)` guard is always true at runtime (the list is Custom-only) and reads the
+    pure list by string name.~~ 0.12.21: the guard and `CustomRunOptions` are gone; the Act 4 row is listed like the others.
   - The Act 4 row in Custom Run has no icon (check how it renders).
   - The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
     in co-op (the power is game-bound).
@@ -127,7 +127,7 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     readied is unverified; tests hard-code modifier id strings.
   - Progress guards: ~~two classes are named `WatcherProgressPatch`~~ (the Saves one is `WatcherVanillaGuardsPatch`
     since 0.12.13); ~~the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
-    rebuilt per call~~ (both fixed in 0.12.14); no log when the vanilla ascension cap applies; `VanillaCount` and `MaxAscensionFor` are untested
+    rebuilt per call~~ (both fixed in 0.12.14); ~~no log when the vanilla ascension cap applies~~ (logged once per value since 0.12.21); `VanillaCount` and `MaxAscensionFor` are untested
     (game-bound).
   - Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.
   - Wave of the Hand applies Weak through a throwing choice context (`AfterBlockGained` gives none); harmless unless a

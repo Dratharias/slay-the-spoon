@@ -44,9 +44,18 @@ internal static class WatcherVanillaGuardsPatch
 			return stats.MaxAscension;
 		}
 		string watcher = ModelDb.GetId<Sts1Watcher>().Entry;
-		return WatcherAscension.Cap(SaveManager.Instance.Progress.CharacterStats
+		int cap = WatcherAscension.Cap(SaveManager.Instance.Progress.CharacterStats
 			.Where(pair => pair.Key.Entry != watcher).Select(pair => pair.Value.MaxAscension));
+		// Logged once per value: the getter runs on every lobby refresh.
+		if (cap != _loggedCap)
+		{
+			_loggedCap = cap;
+			SpoonLog.Info($"watcher: ascension capped at {cap} (best vanilla character)");
+		}
+		return cap;
 	}
+
+	private static int _loggedCap = -1;
 
 	[HarmonyPatch(typeof(ProgressSaveManager), "UpdateEpochsPostRun")]
 	private static class EpochCount
