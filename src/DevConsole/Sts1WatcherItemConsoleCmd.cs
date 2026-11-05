@@ -4,10 +4,14 @@ using MegaCrit.Sts2.Core.DevConsole.ConsoleCommands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using SlaySpoon.Characters.Pools;
+using SlaySpoon.Potions.Sts1;
 
 namespace SlaySpoon.DevConsole;
 
-/// <summary>The native item commands search global pools, which intentionally exclude the Watcher's items.</summary>
+/// <summary>
+/// The native item commands search global pools, which intentionally exclude the Watcher's items and the shared StS1
+/// potions (<c>sts1watcheritem potion STS1_ANCIENT_POTION</c>).
+/// </summary>
 public sealed class Sts1WatcherItemConsoleCmd : AbstractConsoleCmd
 {
 	public override string CmdName => "sts1watcheritem";
@@ -29,8 +33,9 @@ public sealed class Sts1WatcherItemConsoleCmd : AbstractConsoleCmd
 		}
 		if (args[0].Equals("potion", StringComparison.OrdinalIgnoreCase))
 		{
-			PotionModel? potion = ModelDb.PotionPool<Sts1WatcherPotionPool>().AllPotions.FirstOrDefault(p => p.Id.Entry == id);
-			if (potion == null) return new CmdResult(false, "Unknown Watcher potion.");
+			PotionModel? potion = ModelDb.PotionPool<Sts1WatcherPotionPool>().AllPotions
+				.Concat(ModelDb.PotionPool<Sts1PotionPool>().AllPotions).FirstOrDefault(p => p.Id.Entry == id);
+			if (potion == null) return new CmdResult(false, "Unknown Watcher or StS1 potion.");
 			return new CmdResult(PotionCmd.TryToProcure(potion.ToMutable(), issuingPlayer), true, "Requested " + id + " (requires a free potion slot).");
 		}
 		return new CmdResult(false, Args);

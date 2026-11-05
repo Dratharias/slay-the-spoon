@@ -1,6 +1,8 @@
 {
 	"STS1_AMBROSIA.description": "Enter [gold]Divinity[/gold].",
 	"STS1_AMBROSIA.title": "Ambrosia",
+	"STS1_ANCIENT_POTION.description": "Gain [blue]{ArtifactPower}[/blue] [gold]Artifact[/gold].",
+	"STS1_ANCIENT_POTION.title": "Ancient Potion",
 	"STS1_BOTTLED_MIRACLE.description": "Add {Cards} [gold]Miracles[/gold] to your hand.",
 	"STS1_BOTTLED_MIRACLE.title": "Bottled Miracle",
 	"STS1_STANCE_POTION.description": "Enter [gold]Calm[/gold] or [gold]Wrath[/gold].",

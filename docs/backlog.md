@@ -217,6 +217,13 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - **Rematch hands (0.12.9):** after a lost chest fight, the loser's hand kept its last rock, paper or scissors texture
   while voting again (vanilla never reopens a chest after a fight); it now points again. Not tested in game.
 
+- **Ancient Potion (0.12.10):** StS1's Ancient Potion (uncommon, gain 1 Artifact, may target an ally like StS2's
+  Dexterity Potion) joins every random potion source (`PotionFactory.GetPotionOptions`: rewards, merchant, in-combat
+  generation) in StS1-only runs, for every character. Hidden `Sts1PotionPool`, outside Standard, Daily, Hybrid and the
+  potion lab; console: `sts1watcheritem potion STS1_ANCIENT_POTION`. Image borrowed from Liquid Bronze (StS1 potions are
+  drawn from tinted shapes, not one image). Events that read the pools directly (The Legends Were True, Endless
+  Conveyor) do not offer it. Not tested in game.
+
 ### Owner list, 2026-11-05 (triage; done items are marked with their version)
 
 - Bugs: ~~Sapphire Key greyed out until the last player (owner wants it selectable at once, screenshot
@@ -228,8 +235,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - 2026-11-01 Corpse Explosion "-90 AOE": its power deals target max HP × stacks to every other enemy when the target dies
   (StS1 rule); three Knights died together. Looks intended unless players took damage.
 - Watcher: head icon (owner call: crop it from the static sprite); stance-change animations and sound missing.
-- Artifact potion back in StS1 mode (owner call: StS1-only mode, every character). StS2 has none: port StS1's
-  Ancient Potion (uncommon, gain 1 Artifact).
+- ~~Artifact potion back in StS1 mode (owner call: StS1-only mode, every character). StS2 has none: port StS1's
+  Ancient Potion (uncommon, gain 1 Artifact).~~ Done in 0.12.10.
 - Design, to discuss with the owner (do not implement yet): Souvenir reward balance (fewer commons; per-run lean
   toward one game's cards); campfire card trade/gift option for 50 gold per taker (−50 each on a trade);
   selected-card counter on Sealed Deck-style grids; Hybrid/Souvenir cross-character combos (2026-11-05, e.g. the

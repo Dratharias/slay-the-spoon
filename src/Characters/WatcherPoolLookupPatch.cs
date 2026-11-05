@@ -1,12 +1,13 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
 using SlaySpoon.Characters.Pools;
+using SlaySpoon.Potions.Sts1;
 
 namespace SlaySpoon.Characters;
 
 /// <summary>
 /// RelicModel.Pool and PotionModel.Pool search ModelDb.AllRelicPools / AllPotionPools, which are built from
-/// ModelDb.AllCharacters and so leave out the Watcher's pools: their First() would throw for her items (energy icons in
+/// ModelDb.AllCharacters and so leave out the Watcher's pools and the shared StS1 potion pool: their First() would throw for her items (energy icons in
 /// tooltips read it). Answer for her pools first.
 /// </summary>
 public static class WatcherPoolLookupPatch
@@ -31,13 +32,15 @@ public static class WatcherPoolLookupPatch
 	{
 		public static bool Prefix(PotionModel __instance, ref PotionPoolModel __result)
 		{
-			PotionPoolModel pool = ModelDb.PotionPool<Sts1WatcherPotionPool>();
-			if (!pool.AllPotionIds.Contains(__instance.Id))
+			foreach (PotionPoolModel pool in new PotionPoolModel[] { ModelDb.PotionPool<Sts1WatcherPotionPool>(), ModelDb.PotionPool<Sts1PotionPool>() })
 			{
-				return true;
+				if (pool.AllPotionIds.Contains(__instance.Id))
+				{
+					__result = pool;
+					return false;
+				}
 			}
-			__result = pool;
-			return false;
+			return true;
 		}
 	}
 }
