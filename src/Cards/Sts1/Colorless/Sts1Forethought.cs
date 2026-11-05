@@ -34,8 +34,4 @@ public sealed class Sts1Forethought : Sts1ColorlessCard
 			await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Bottom);
 		}
 	}
-
-	protected override void OnUpgrade()
-	{
-	}
 }

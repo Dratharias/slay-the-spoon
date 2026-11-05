@@ -42,8 +42,4 @@ public sealed class Sts1Blind : Sts1ColorlessCard
 			await PowerCmd.Apply<WeakPower>(choiceContext, enemy, amount, Owner.Creature, this);
 		}
 	}
-
-	protected override void OnUpgrade()
-	{
-	}
 }

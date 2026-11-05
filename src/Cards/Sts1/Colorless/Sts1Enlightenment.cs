@@ -32,8 +32,4 @@ public sealed class Sts1Enlightenment : Sts1ColorlessCard
 		}
 		return Task.CompletedTask;
 	}
-
-	protected override void OnUpgrade()
-	{
-	}
 }

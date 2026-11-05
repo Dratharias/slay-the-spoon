@@ -16,8 +16,7 @@ public class Act4UnlockRuleTests
 	[Fact]
 	public void InStandardRun_NeedsTheUnlockOnceReleased()
 	{
-		Assert.True(Act4Access.InStandardRun(true, false));
-		Assert.False(Act4Access.InStandardRun(false, false));
-		Assert.False(Act4Access.InStandardRun(false, true));
+		Assert.True(Act4Access.InStandardRun(true));
+		Assert.False(Act4Access.InStandardRun(false));
 	}
 }

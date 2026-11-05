@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Orbs;
 using MegaCrit.Sts2.Core.Models.Powers;
-using SlaySpoon.Cards.Sts1.Powers;
 using MegaCrit.Sts2.Core.Models.Cards;
 using SlaySpoon.Core;
 

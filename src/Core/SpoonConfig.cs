@@ -20,8 +20,6 @@ public static class SpoonConfig
 	/// <summary>The new file content, or null when the existing content is unreadable and must not be overwritten.</summary>
 	public static string? WriteSyncChoice(string? json, bool choice) => With(json, SyncKey, choice ? "True" : "False");
 
-	public const string PreviewKey = "Act4Preview";
-
 	public const string TintKey = "CharacterTint";
 
 	/// <summary>The permanent Act 4 unlock is per modded profile.</summary>

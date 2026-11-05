@@ -21,8 +21,7 @@ public static class StandardRunModifiers
 	/// <summary>The modifiers of the Standard run being started, parked between character select and NGame.</summary>
 	internal static List<ModifierModel> Pending = new();
 
-	internal static bool Wanted => Act4Access.InStandardRun(SpoonConfigFile.Act4Unlocked(Act4UnlockPatch.CurrentProfileId()),
-		SpoonConfigFile.Act4Preview);
+	internal static bool Wanted => Act4Access.InStandardRun(SpoonConfigFile.Act4Unlocked(Act4UnlockPatch.CurrentProfileId()));
 
 	internal static IReadOnlyList<ModifierModel> TakePending(IReadOnlyList<ModifierModel> modifiers)
 	{

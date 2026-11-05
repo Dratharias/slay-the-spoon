@@ -2,7 +2,6 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Runs;
-using SlaySpoon.Config;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Loans;

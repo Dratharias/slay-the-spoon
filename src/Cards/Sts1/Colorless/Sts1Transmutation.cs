@@ -38,8 +38,4 @@ public sealed class Sts1Transmutation : Sts1ColorlessCard
 			await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
 		}
 	}
-
-	protected override void OnUpgrade()
-	{
-	}
 }

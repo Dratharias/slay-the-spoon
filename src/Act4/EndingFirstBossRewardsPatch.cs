@@ -1,6 +1,5 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Map;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
 using SlaySpoon.Core;

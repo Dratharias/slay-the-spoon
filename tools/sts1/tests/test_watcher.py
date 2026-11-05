@@ -65,7 +65,7 @@ def test_relic_icons_include_small_large_and_outline(tmp_path):
         assert Image.open(path).size == ((256, 256) if '_large' in path.stem else (128, 128))
 
 
-def test_pending_ports_never_enter_runtime():
+def test_every_watcher_card_is_ported():
     # Every Watcher card is ported: no staged skeleton is left and no port throws.
     pending = list((ROOT / 'data/sts1/watcher-skeletons').glob('*.cs'))
     assert pending == []

@@ -42,8 +42,4 @@ public sealed class Sts1Trip : Sts1ColorlessCard
 			await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, amount, Owner.Creature, this);
 		}
 	}
-
-	protected override void OnUpgrade()
-	{
-	}
 }

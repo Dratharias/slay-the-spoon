@@ -83,7 +83,7 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     and the postfix logs "replaced by the Ending map". Only the layout constants are unit-tested.
   - Run history stores the Ending act's id: with the mod removed, history shows a placeholder act; run metrics
     (`ActWinMetric`) would carry the mod's act id if the game uploads metrics for modded runs (not checked).
-  - The `Act4Preview` cfg key is a no-op since the release (`Released || preview`); the key and the parameter can go.
+  - ~~The `Act4Preview` cfg key is a no-op since the release~~: key, parameter and `Released` removed in 0.12.16.
     `ModifierListPatch`'s `OfferedIn(Custom)` guard is always true at runtime (the list is Custom-only) and reads the
     pure list by string name.
   - The Act 4 row in Custom Run has no icon (check how it renders).
@@ -134,10 +134,11 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.
   - `LastCardPlayed` reset between combats (Sanctity) is unverified.
   - Flurry/Weave and Sands of Time/Windmill Strike share small logic blocks that could be helpers on `Sts1WatcherCard`;
-    Consecrate lacks a `<summary>`; mixed `ThrowIfNull` vs `Target!`.
-  - Unused `using` blocks in card and power files, empty `OnUpgrade` bodies, a stray blank line in Deus Ex Machina.
+    ~~Consecrate lacks a `<summary>`~~ (0.12.16); mixed `ThrowIfNull` vs `Target!`.
+  - ~~Unused `using` blocks in card and power files, empty `OnUpgrade` bodies, a stray blank line in Deus Ex Machina.~~
+    0.12.16: every IDE0005 hit in `src/` removed (one lint build with IDE0005 as a warning), the 8 empty overrides dropped.
   - Weak tests: pure-logic coverage of `MantraTracker` keying, retain gating and Lesson Learned selection; power tests are
-    mostly arithmetic and `WatcherPowerTextTests` greps source; stale pytest name `test_pending_ports_never_enter_runtime`; Task 9's tests were written after the code (no red run).
+    mostly arithmetic and `WatcherPowerTextTests` greps source; ~~stale pytest name `test_pending_ports_never_enter_runtime`~~ (now `test_every_watcher_card_is_ported`); Task 9's tests were written after the code (no red run).
 - The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
   and in-game validation of everything in `docs/testing/step-7-checklist.md`. A "Deep backlog priority" section, if one
   exists on `main`, keeps its own wording; Watcher animations stay at the bottom of it.

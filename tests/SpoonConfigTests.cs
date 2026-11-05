@@ -5,6 +5,8 @@ namespace SlaySpoon.Tests;
 
 public class SpoonConfigTests
 {
+	private const string FlagKey = "SomeFlag";
+
 	[Fact]
 	public void Missing_file_means_not_asked_yet()
 	{
@@ -61,28 +63,28 @@ public class SpoonConfigTests
 	[Fact]
 	public void With_RefusesToOverwriteUnreadableContent()
 	{
-		Assert.Null(SpoonConfig.With("{bad", SpoonConfig.PreviewKey, "True"));
+		Assert.Null(SpoonConfig.With("{bad", FlagKey, "True"));
 		Assert.Null(SpoonConfig.WriteSyncChoice("{bad", true));
-		Assert.Null(SpoonConfig.With("[1,2]", SpoonConfig.PreviewKey, "True"));
+		Assert.Null(SpoonConfig.With("[1,2]", FlagKey, "True"));
 	}
 
 	[Fact]
 	public void With_AcceptsBlankContent()
 	{
-		Assert.True(SpoonConfig.ReadFlag(SpoonConfig.With("", SpoonConfig.PreviewKey, "True"), SpoonConfig.PreviewKey));
+		Assert.True(SpoonConfig.ReadFlag(SpoonConfig.With("", FlagKey, "True"), FlagKey));
 	}
 
 	[Fact]
 	public void Read_AcceptsJsonBooleans()
 	{
-		Assert.True(SpoonConfig.ReadFlag("{\"Act4Preview\": true}", SpoonConfig.PreviewKey));
-		Assert.False(SpoonConfig.ReadFlag("{\"Act4Preview\": false}", SpoonConfig.PreviewKey));
+		Assert.True(SpoonConfig.ReadFlag("{\"SomeFlag\": true}", FlagKey));
+		Assert.False(SpoonConfig.ReadFlag("{\"SomeFlag\": false}", FlagKey));
 	}
 
 	[Fact]
 	public void With_KeepsUnknownKeys()
 	{
-		string json = SpoonConfig.With("{\"Other\": \"x\", \"N\": 3}", SpoonConfig.PreviewKey, "True")!;
+		string json = SpoonConfig.With("{\"Other\": \"x\", \"N\": 3}", FlagKey, "True")!;
 		Assert.Equal("x", SpoonConfig.Read(json)["Other"]);
 		Assert.Equal("3", SpoonConfig.Read(json)["N"]);
 	}
@@ -106,17 +108,17 @@ public class SpoonConfigTests
 	[Fact]
 	public void With_KeepsNonScalarValues()
 	{
-		string json = SpoonConfig.With("{\"List\": [1, 2], \"Obj\": {\"a\": true}, \"N\": 3, \"Nil\": null}", SpoonConfig.PreviewKey, "True")!;
+		string json = SpoonConfig.With("{\"List\": [1, 2], \"Obj\": {\"a\": true}, \"N\": 3, \"Nil\": null}", FlagKey, "True")!;
 		using var doc = System.Text.Json.JsonDocument.Parse(json);
 		var root = doc.RootElement;
 		Assert.Equal(2, root.GetProperty("List").GetArrayLength());
 		Assert.True(root.GetProperty("Obj").GetProperty("a").GetBoolean());
 		Assert.Equal(3, root.GetProperty("N").GetInt32());
 		Assert.Equal(System.Text.Json.JsonValueKind.Null, root.GetProperty("Nil").ValueKind);
-		Assert.True(SpoonConfig.ReadFlag(json, SpoonConfig.PreviewKey));
+		Assert.True(SpoonConfig.ReadFlag(json, FlagKey));
 	}
 
 	[Fact]
 	public void With_RefusesDuplicateKeys() =>
-		Assert.Null(SpoonConfig.With("{\"A\": 1, \"A\": 2}", SpoonConfig.PreviewKey, "True"));
+		Assert.Null(SpoonConfig.With("{\"A\": 1, \"A\": 2}", FlagKey, "True"));
 }

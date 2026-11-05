@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Potions;
 using SlaySpoon.Cards.Sts1.Powers;
 using SlaySpoon.Cards.Sts1.WatcherTokens;
-using SlaySpoon.Core;
 using SlaySpoon.Watcher;
 using SlaySpoon.Watcher.Powers;
 
