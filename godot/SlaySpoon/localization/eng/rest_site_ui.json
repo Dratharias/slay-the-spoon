@@ -1,4 +1,6 @@
 {
+  "OPTION_SPOON_GIFT.description": "Give a card from your deck to {HasTarget:{Name}|an ally}, who pays [gold]{Price} gold[/gold] for it.",
+  "OPTION_SPOON_GIFT.name": "Gift",
   "OPTION_SPOON_RUBY.description": "Take the [gold]Ruby Key[/gold] for the team. You give up resting or smithing here.",
   "OPTION_SPOON_RUBY.name": "Recall"
 }

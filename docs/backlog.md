@@ -268,8 +268,11 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     duplicates keep the version button.~~ Done in 0.12.29 (`OfferWeights`, `OfferWeightPatch`): the favored game's unique
     cards hold 60 % of the two games' unique share within the rolled rarity; duplicate slots keep their count share and
     their 50/50 version roll. Discovery-like distinct draws (`TakeRandom`) stay uniform.
-  - Campfire card trade/gift: a co-op rest-site option behind a Custom Run modifier; it uses the giver's rest-site
-    action; the receiver pays 50 gold, each player pays 50 on a trade.
+  - ~~Campfire card trade/gift: a co-op rest-site option behind a Custom Run modifier; it uses the giver's rest-site
+    action; the receiver pays 50 gold, each player pays 50 on a trade.~~ Done in 0.12.34 ("Campfire Gifts",
+    `src/Campfire/SpoonGiftRestSiteOption.cs`). Builder calls, for owner review: a trade is two gifts at the same fire
+    (each player gives and pays once); the receiver has no veto and only allies with 50 gold can be picked; curses
+    and Eternal cards cannot be given; the card keeps its upgrades and enchantment; Mend's icon is reused.
   - ~~Selected-card counter ("X / Y selected", EN/FR) on every multi-pick grid, vanilla modes included (display only).~~
     Done in 0.12.27 (`src/Ui/SelectionCounterPatch.cs`: "Selected: X / Y" under the prompt of the six grid screens).
   - ~~Cross-game combos: a hand-picked pair list, weight ×0.5 when a card would complete a pair the team holds. Pairs

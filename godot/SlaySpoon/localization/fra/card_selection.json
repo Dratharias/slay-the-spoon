@@ -4,5 +4,6 @@
 	"SPOON_SCRY_TIP.title": "Regard",
 	"SPOON_SELECTED_COUNT": "Sélection : {Selected} / {Max}",
 	"SPOON_STANCE_TIP.description": "Vous ne pouvez adopter qu'une seule Position à la fois.",
-	"SPOON_STANCE_TIP.title": "Position"
+	"SPOON_STANCE_TIP.title": "Position",
+	"SPOON_TO_GIFT": "Choisir une carte à [gold]Donner[/gold]."
 }

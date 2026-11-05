@@ -16,5 +16,8 @@
   "SPOON_MERCHANT_LOANS.description": "Co-op only. A player short of gold at the merchant can ask the others for it. Each of them can lend it, at up to 900% interest, or give it. Every gold the borrower gains afterwards repays their lenders, in equal shares, until the debt is paid. Debts survive death and resurrection until repaid or the run ends.",
   "SPOON_MERCHANT_LOANS.short": "Loans",
   "SPOON_ACT4.title": "Act 4",
-  "SPOON_ACT4.description": "The way to the Heart is open: find the Ruby, Emerald and Sapphire keys."
+  "SPOON_ACT4.description": "The way to the Heart is open: find the Ruby, Emerald and Sapphire keys.",
+  "SPOON_CAMPFIRE_GIFT.title": "Campfire Gifts",
+  "SPOON_CAMPFIRE_GIFT.description": "Co-op only. At a rest site, a player can spend their action to give a card from their deck to an ally, who pays 50 gold for it. To trade, both give a card at the same fire. Curses can't be given.",
+  "SPOON_CAMPFIRE_GIFT.short": "Gifts"
 }
