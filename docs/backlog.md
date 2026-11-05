@@ -157,7 +157,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 
 ## Owner requests (2026-10-30)
 
-- New game mode: pick the starting relic among 10 random choices.
+- ~~New game mode: pick the starting relic among 10 random choices.~~ Done in 0.12.35 as the Custom Run modifier
+  Starting Chest (`SpoonStartingChest`, see its entry above).
 - Act 4 keys, visuals:
   - ~~The Emerald key marker is barely visible on the map.~~ ~~Import the StS1 burning elite map icon.~~ Done in 0.11.0:
     StS1's six map flame frames, tinted green, burn behind the node, with the emerald gem beside it.
