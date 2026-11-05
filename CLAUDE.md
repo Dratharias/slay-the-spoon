@@ -231,6 +231,13 @@ Read `README.md` for the player view and the spec for every decision.
 - **1.0.0 (2026-11-05, owner instruction "backlog empty → 1.0.0"):** version bump only, same code as 0.12.38.
   `make workshop` staged `build/workshop/`; not uploaded, not installed. What remains is owner work: the in-game
   checklists in `docs/testing/`, the Spine animations, the client log for the co-op crash report, text proofreading.
+- **1.0.1 (2026-11-05):** BaseLib is a manifest and Workshop dependency; Spine animations for the Ending monsters and the
+  Watcher (`src/Spine/`, `make sts1-spine`); load fix: Harmony applies any method named `Prefix`, `Postfix`,
+  `Transpiler`, `Finalizer` or `Prepare` in a patch class as a patch, so helpers need other names; the Watcher's Random
+  transpiler also accepts BaseLib's `GetRandomEligibleCharacters` in place of `ModelDb.AllCharacters`. Tint at the rest
+  site, merchant and map ping; Heart status shuffles on their own RNG; Shield and Spear out of the 15-elite epoch;
+  `InvincibleBudget` and `WatcherAscension.LimitFor` in Core with tests. The 1.0.0 Workshop staging had the load bug:
+  never upload it. Build 0 warnings; 560 xUnit + 91 pytest pass. In-game checks: `docs/testing/spine-checklist.md`.
 
 ## Documents
 

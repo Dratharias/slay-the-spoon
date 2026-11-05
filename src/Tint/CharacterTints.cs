@@ -28,8 +28,7 @@ public static class CharacterTints
 	private const string ShaderPath = "res://SlaySpoon/shaders/character_tint.gdshader";
 
 	private static readonly Dictionary<ulong, CharacterTint> Shared = new();
-	private static readonly List<NCreature> Live = [];
-	private static readonly Dictionary<NCreature, Material?> Originals = new();
+	private static readonly List<Target> Live = [];
 	private static IRunState? _sentRun;
 	private static Shader? _shader;
 
@@ -80,23 +79,53 @@ public static class CharacterTints
 		_sentRun = null;
 	}
 
-	/// <summary>Tracks a player creature node and colors it now and on every change.</summary>
-	internal static void Track(NCreature creature)
+	/// <summary>A tinted node: how to find its player and read or set its body material.</summary>
+	private sealed class Target(Node owner, Func<Player?> player, Func<Material?> get, Action<Material?> set)
 	{
-		Live.Add(creature);
-		creature.TreeExiting += () =>
+		public readonly Node Owner = owner;
+		public readonly Func<Player?> Player = player;
+		public readonly Func<Material?> Get = get;
+		public readonly Action<Material?> Set = set;
+		public bool Saved;
+		public Material? Original;
+	}
+
+	/// <summary>Tracks a player creature node and colors it now and on every change.</summary>
+	internal static void Track(NCreature creature) => Add(new Target(creature, () => creature.Entity?.Player,
+		() => creature.Visuals is not { } v ? null : v.SpineBody is { } spine ? spine.GetNormalMaterial() : v.GetCurrentBody().Material,
+		material => { if (creature.Visuals is { } v) SetMaterial(v, material); }));
+
+	/// <summary>
+	/// Tracks a rest site or merchant character: its Spine bodies (direct SpineSprite children) and the Watcher's static
+	/// body take the color.
+	/// </summary>
+	internal static void TrackBodies(Node2D owner, Player player) => Add(new Target(owner, () => player,
+		() => Bodies(owner).Select(b => b.GetClass() == MegaSprite.spineClassName ? new MegaSprite(b).GetNormalMaterial() : b.Material)
+			.FirstOrDefault(),
+		material =>
 		{
-			Live.Remove(creature);
-			Originals.Remove(creature);
-		};
-		Paint(creature);
+			foreach (var body in Bodies(owner))
+			{
+				if (body.GetClass() == MegaSprite.spineClassName) new MegaSprite(body).SetNormalMaterial(material!);
+				else SetStaticMaterial(body, material);
+			}
+		}));
+
+	private static IEnumerable<Node2D> Bodies(Node owner) => owner.GetChildren().OfType<Node2D>()
+		.Where(n => n.GetClass() == MegaSprite.spineClassName || n.Name == Characters.WatcherAssetPatch.BodyNodeName);
+
+	private static void Add(Target target)
+	{
+		Live.Add(target);
+		target.Owner.TreeExiting += () => Live.Remove(target);
+		Paint(target);
 	}
 
 	private static void RefreshAll()
 	{
-		foreach (var creature in Live.ToArray())
+		foreach (var target in Live.ToArray())
 		{
-			if (GodotObject.IsInstanceValid(creature)) Paint(creature);
+			if (GodotObject.IsInstanceValid(target.Owner)) Paint(target);
 		}
 		Changed?.Invoke();
 	}
@@ -104,29 +133,36 @@ public static class CharacterTints
 	/// <summary>Raised after any player's color changes (map lines already drawn keep their color).</summary>
 	public static event Action? Changed;
 
-	private static void Paint(NCreature creature)
+	private static void Paint(Target target)
 	{
-		if (creature.Entity?.Player is not { } player || creature.Visuals is not { } visuals) return;
+		if (target.Player() is not { } player) return;
 		var tint = For(player);
-		var spine = visuals.SpineBody;
-		var body = visuals.GetCurrentBody();
-		Material? current = spine != null ? spine.GetNormalMaterial() : body.Material;
+		Material? current = target.Get();
 		if (!tint.Active)
 		{
-			if (Originals.Remove(creature, out var original)) SetMaterial(visuals, original);
+			if (target.Saved)
+			{
+				target.Saved = false;
+				target.Set(target.Original);
+				target.Original = null;
+			}
 			return;
 		}
-		if (!Originals.ContainsKey(creature)) Originals[creature] = current;
+		if (!target.Saved)
+		{
+			target.Saved = true;
+			target.Original = current;
+		}
 		var material = current as ShaderMaterial;
 		if (material?.Shader != (_shader ??= GD.Load<Shader>(ShaderPath)))
 		{
 			material = new ShaderMaterial { Shader = _shader };
-			SetMaterial(visuals, material);
+			target.Set(material);
 		}
 		var c = player.Character.MapDrawingColor;
-		var target = TintMath.Pure(tint.Hue / 360f);
+		var hue = TintMath.Pure(tint.Hue / 360f);
 		material.SetShaderParameter("mode", (int)tint.Mode);
-		material.SetShaderParameter("target_color", new Vector3(target.R, target.G, target.B));
+		material.SetShaderParameter("target_color", new Vector3(hue.R, hue.G, hue.B));
 		material.SetShaderParameter("target_hue", tint.Hue / 360f);
 		material.SetShaderParameter("source_hue", TintMath.HueOf(c.R, c.G, c.B));
 		material.SetShaderParameter("threshold", tint.Threshold / 360f);
@@ -151,8 +187,12 @@ public static class CharacterTints
 			}
 			return;
 		}
-		// Static bodies (the Watcher): the body's sprites take the body's material.
-		var body = visuals.GetCurrentBody();
+		SetStaticMaterial(visuals.GetCurrentBody(), material);
+	}
+
+	/// <summary>Static bodies (the Watcher): the body's sprites take the body's material.</summary>
+	private static void SetStaticMaterial(CanvasItem body, Material? material)
+	{
 		body.Material = material;
 		foreach (var item in body.FindChildren("*", owned: false).OfType<CanvasItem>())
 		{

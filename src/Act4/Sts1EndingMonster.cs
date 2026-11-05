@@ -22,6 +22,7 @@ namespace SlaySpoon.Act4;
 public abstract class Sts1EndingMonster : MonsterModel, IEndingMonster
 {
 	private Rng? _endingRng;
+	private Rng? _shuffleRng;
 
 	public abstract string TexturePath { get; }
 	public abstract Vector2 Origin { get; }
@@ -56,10 +57,17 @@ public abstract class Sts1EndingMonster : MonsterModel, IEndingMonster
 	/// <summary>Built once per combat from the run seed and the monster id, so every peer rolls the same values.</summary>
 	protected Rng EndingRng => _endingRng ??= new Rng(CombatState.RunState.Rng.Seed, "SlaySpoon.Ending." + Id.Entry);
 
+	/// <summary>
+	/// Draw pile positions for shuffled-in statuses, on a stream of their own: the move roll on <see cref="EndingRng"/>
+	/// then never depends on the number of players or the size of their draw piles.
+	/// </summary>
+	protected Rng ShuffleRng => _shuffleRng ??= new Rng(CombatState.RunState.Rng.Seed, "SlaySpoon.Ending.Shuffle." + Id.Entry);
+
 	public override async Task AfterAddedToRoom()
 	{
 		await base.AfterAddedToRoom();
 		_ = EndingRng;
+		_ = ShuffleRng;
 	}
 
 	/// <summary>

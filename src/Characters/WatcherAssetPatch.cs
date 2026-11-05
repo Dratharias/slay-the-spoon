@@ -208,7 +208,7 @@ public static class WatcherAssetPatch
 	[HarmonyPatch(typeof(NRestSiteCharacter), nameof(NRestSiteCharacter.Create))]
 	public static class RestSitePatch
 	{
-		internal const string BodyName = "Sts1WatcherBody";
+		internal const string BodyName = BodyNodeName;
 
 		/// <summary>Feet at the bottom of the donor's hitbox, in the root's space; size close to the donor's.</summary>
 		private static readonly Vector2 Feet = new(-32f, 250f);
@@ -274,10 +274,13 @@ public static class WatcherAssetPatch
 				{
 					spine.Visible = false;
 				}
-				visuals[i].AddChild(Body("Sts1WatcherBody", Scale));
+				visuals[i].AddChild(Body(BodyNodeName, Scale));
 			}
 		}
 	}
+
+	/// <summary>Her static body at the rest site and the merchant.</summary>
+	internal const string BodyNodeName = "Sts1WatcherBody";
 
 	internal const string CorpseName = "Sts1WatcherCorpse";
 

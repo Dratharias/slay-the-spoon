@@ -76,7 +76,7 @@ public sealed class Sts1CorruptHeart : Sts1EndingMonster
 				CombatState.CreateCard<Burn>(owner),
 				CombatState.CreateCard<MegaCrit.Sts2.Core.Models.Cards.Void>(owner),
 			];
-			await EndingDrawPile.ShuffleIn(owner, cards, EndingRng);
+			await EndingDrawPile.ShuffleIn(owner, cards, ShuffleRng);
 		}
 	}
 

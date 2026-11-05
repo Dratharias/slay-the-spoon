@@ -73,14 +73,14 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     blend is untested and not Spine-exact; triangle edges are not antialiased; no grandparent or shear bone test.
   - ~~Code-built monsters have no death animation length: their fade may be cut short~~ (1 s `DeathAnimLengthOverride`
     since 0.12.25; the length is a guess, unchecked in game).
-  - ~~Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).~~ Kept (2026-11-05): Shield and
-    Spear are a real elite fight, and the count only lives in the modded profile, which never reaches the regular save.
+  - ~~Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).~~ Fixed in 1.0.1:
+    `EndingEliteEpochPatch` removes Shield and Spear from `GetEliteEncounters`, as the boss epoch already skips the Heart.
   - ~~Debilitate skips dead players: a player revived later in the fight never gets those debuffs or statuses. In co-op
-    the status intent shows 5, the per-player count.~~ Kept (2026-11-05): StS2 never applies powers or cards to a dead
-    creature, and vanilla multi-target intents show the per-player amount too.
+    the status intent shows 5, the per-player count.~~ Owner call (2026-11-05): a revived player
+    catches up on nothing, as in vanilla StS2; multi-target intents show the per-player amount in vanilla too.
   - ~~The Heart's status shuffles share its RNG with its move roll, so Blood Shots vs Echo on turn 2 depends on the
-    number of players and their draw piles (deterministic on every peer, seeds stay vanilla).~~ Kept (2026-11-05): StS1
-    also draws both from the monster's one RNG; the result is deterministic on every peer.
+    number of players and their draw piles (deterministic on every peer, seeds stay vanilla).~~ Fixed in 1.0.1: the
+    shuffles use their own `ShuffleRng` stream (`Sts1EndingMonster`), so the move roll no longer depends on the players.
   - ~~The Ending act's rooms are seeded from the caller's Rng seed in `EndingRoomsPatch` but from the run seed in
     `Sts1EndingAct.CreateForRun`~~: both use the run seed since 0.12.22 (the caller's seed only outside a run).
     `FillRooms` does not reset the ancient or visit counters (only called on a fresh act). No automated test covers the
@@ -105,8 +105,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     no icon for any modifier, vanilla included; only the top bar and the Daily screen read `ModifierModel.Icon`, and the
     top bar shows the keys for `SpoonAct4` (`TopBarPercentPatch`).
   - ~~The Invincible budget test only checks `InitialCap`'s signature; nothing tests that the applied power is not scaled
-    in co-op (the power is game-bound).~~ Kept (2026-11-05): the scaling maths is tested in `HeartInvincibleRule`; the
-    applied power needs a live combat, so it stays in `docs/testing/step-6-checklist.md`.
+    in co-op (the power is game-bound).~~ Fixed in 1.0.1: the power's budget lives in
+    `HeartInvincibleRule.InvincibleBudget`, tested for co-op (cap not scaled twice) and for a mid-turn re-apply.
   - Killing the Heart logs two vanilla errors from `ProgressSaveManager.ObtainCharUnlockEpoch` (`Act 4 is not yet
     implemented.`, `EpochModel was not found :(`): it switches on the act index for the character epochs and has no act 4
     case. Harmless (no epoch, no write); left alone because routing it to act 3 would hand out an epoch. Kept (2026-11-05).
@@ -146,12 +146,13 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     `WatcherButtonPatch` (always visible, no `_previous` fallback); its selection checks are in `docs/testing/watcher-selection.md`.
   - Progress guards: ~~two classes are named `WatcherProgressPatch`~~ (the Saves one is `WatcherVanillaGuardsPatch`
     since 0.12.13); ~~the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
-    rebuilt per call~~ (both fixed in 0.12.14); ~~no log when the vanilla ascension cap applies~~ (logged once per value since 0.12.21); `VanillaCount` and `MaxAscensionFor` are untested
-    (game-bound: they read `ModelDb` and the progress save; kept for the checklist, 2026-11-05).
+    rebuilt per call~~ (both fixed in 0.12.14); ~~no log when the vanilla ascension cap applies~~ (logged once per value since 0.12.21); ~~`VanillaCount` and `MaxAscensionFor` are untested~~
+    (1.0.1: both delegate to `WatcherProgress.VanillaStatsCount` and `WatcherAscension.LimitFor`, tested).
   - ~~Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.~~ Kept
     (2026-11-05, fidelity rule): StS1 deals it as HP loss with no source.
   - ~~Wave of the Hand applies Weak through a throwing choice context (`AfterBlockGained` gives none); harmless unless a
-    hook on Weak ever opens a choice.~~ Kept (2026-11-05): no vanilla or mod hook on Weak opens a choice.
+    hook on Weak ever opens a choice.~~ Kept (2026-11-05): vanilla `JuggernautPower` applies from this hook the same way, and no hook on Weak opens a
+    choice (comment in the power).
   - ~~Mental Fortress, Empty Fist and Flurry of Blows show all three stance tips~~: they show StS1's generic Stance
     tip since 0.12.13, as in StS1.
   - ~~Spirit Shield shows no live Block~~ (in-combat Block preview since 0.12.25); Mark and the end-turn death effect share the Doom icon.
@@ -224,9 +225,10 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   - Done in 0.11.0 (`src/Tint/`): pause menu "Character Color" (Off / Color overlay / Dominant color only; hue, strength,
     threshold, map drawings), saved in the mod cfg, shared in co-op through the action queue. Applied like StS2's own
     monster hue variants: a shader material on the combat body. The dominant color is the character's map drawing
-    color. Minors: the map ping, rest site and merchant bodies are not tinted; lines already drawn keep their color;
+    color. Minors: ~~the map ping, rest site and merchant bodies are not tinted~~ (tinted since 1.0.1: `TintRestSitePatch`,
+    `TintMerchantPatch`, `TintMapPingPatch`, which follows the map-lines option); lines already drawn keep their color;
     the tint replaces any normal material the character body had; co-op sync and the static Watcher body not tested.
-    Kept (2026-11-05): the request covers the combat body and map drawings; the rest are in-game checks.
+    The rest are in-game checks (`docs/testing/fix-wave-checklist.md`).
 
 ## Deep backlog priority (owner, 2026-10-30)
 
@@ -290,6 +292,12 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   client Ironclad with Souvenir, 0.12.3, no TintAction queued), then the client was dropped. Cause not found: needs the
   client's state dump (the host log only has its own). Owner item (2026-11-05): no client log or dump exists on this
   machine (only the host's renamed `.corrupt` saves); the next desync needs the client's `godot.log` from the friend.
+  Re-analysis (1.0.1, 2026-11-05): the host's logs from that day are rotated out (oldest kept: 2026-11-01, a later
+  session with no divergence). The 15:23 `.corrupt` save stops before the fight: act 2, modifiers Sealed Deck, Spire
+  Souvenir and Act 4; host Watcher (8 HP after the Decimillipede elite, Wave of the Hand and Deus Ex Machina from a
+  transform), client Ironclad; last rooms elite, treasure, rest site (both healed). The divergent combat is not in any
+  file on this machine, so no cause can be named; nothing in the save points at the tint (no tint state is saved).
+  Closed on this side: a new report needs both peers' `godot.log` from the same session.
 - 2026-11-01 Corpse Explosion "-90 AOE": its power deals target max HP × stacks to every other enemy when the target dies
   (StS1 rule); three Knights died together. Looks intended unless players took damage. Settled: intended (owner, 2026-11-05, below).
 - Watcher: ~~head icon (owner call: crop it from the static sprite)~~ done in 0.12.11; ~~stance-change sound~~ done in 0.12.12 (with a screen-edge flash); ~~StS1's stance
