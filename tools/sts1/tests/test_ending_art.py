@@ -78,6 +78,27 @@ def test_rotated_atlas_region_uvs():
     assert ending_art.region_uv(square, (1, 1)) == (7, 7)
 
 
+def test_untrimmed_region_fills_its_attachment():
+    root = ending_art.bone_world(skel([{"name": "root"}]))["root"]
+    att = {"width": 10, "height": 20}
+    full = ending_art.Region("r", "p", False, 0, 0, 10, 20, 10, 20, 0, 0)
+    assert ending_art._region_world(root, att, full) == ending_art._region_world(root, att)
+    expected = [(-5, -10), (-5, 10), (5, 10), (5, -10)]
+    assert all(approx(c, e) for c, e in zip(ending_art._region_world(root, att), expected, strict=True))
+
+
+def test_trimmed_region_covers_only_its_packed_area(tmp_path):
+    atlas = tmp_path / "t.atlas"
+    atlas.write_text("page.png\nsize: 64,64\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\n"
+                     "trimmed\n  rotate: false\n  xy: 1, 1\n  size: 6, 4\n  orig: 10, 20\n  offset: 2, 3\n  index: -1\n")
+    region = ending_art.parse_atlas(atlas)["trimmed"]
+    assert (region.orig_width, region.orig_height, region.offset_x, region.offset_y) == (10, 20, 2, 3)
+    root = ending_art.bone_world(skel([{"name": "root"}]))["root"]
+    # Attachment drawn at twice the image size: the packed 6×4 area starts 2 right and 3 up from the bottom-left.
+    corners = ending_art._region_world(root, {"width": 20, "height": 40}, region)
+    assert all(approx(c, e) for c, e in zip(corners, [(-6, -14), (-6, -6), (6, -6), (6, -14)], strict=True))
+
+
 def test_render_is_deterministic(tmp_path):
     a, b = tmp_path / "a.png", tmp_path / "b.png"
     ending_art.render(SKELETON, ATLAS, a)

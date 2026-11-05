@@ -66,7 +66,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - ~~`EndingMoveBrain` tests are weak: they compare two brains or re-read getters instead of asserting an expected move
     sequence. `EndingNumbers` tests miss the low side of some thresholds~~ (expected StS1 cycles for the three enemies and
     both sides of every threshold tested, 2026-11-05); ~~`HeartBuffRule.Extra` accepts a negative count~~ (throws since 0.12.15).
-  - `ending_art.py` ignores atlas `offset`/`orig` (fine for the three StS1 atlases, wrong for a trimmed one); its additive
+  - ~~`ending_art.py` ignores atlas `offset`/`orig`~~ (region attachments honor them since 2026-11-05; meshes keep the
+    packed area, as the Spine 3.4 runtime does; the three StS1 sprites render byte-identical); its additive
     blend is untested and not Spine-exact; triangle edges are not antialiased; no grandparent or shear bone test.
   - Code-built monsters have no death animation length: their fade may be cut short.
   - Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).

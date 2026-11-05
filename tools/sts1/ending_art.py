@@ -152,10 +152,19 @@ class Region:
     y: int
     width: int   # unrotated (as drawn) size
     height: int
+    # Whitespace trimmed by the packer: the full image size, and the packed area's offset from its bottom-left.
+    orig_width: int | None = None
+    orig_height: int | None = None
+    offset_x: int = 0
+    offset_y: int = 0
 
 
 def parse_atlas(path: Path) -> dict[str, Region]:
-    """libGDX/Spine 3.4 text atlas: pages separated by blank lines, regions with indented properties."""
+    """libGDX/Spine 3.4 text atlas: pages separated by blank lines, regions with indented properties.
+
+    Mesh attachments keep their UVs over the packed area, as the Spine 3.4 runtime does (it ignores trimming for
+    meshes); region attachments honor ``orig`` and ``offset``.
+    """""
     regions: dict[str, Region] = {}
     page = None
     current = None
@@ -181,6 +190,10 @@ def parse_atlas(path: Path) -> dict[str, Region]:
             current.x, current.y = (int(v) for v in value.split(","))
         elif key == "size":
             current.width, current.height = (int(v) for v in value.split(","))
+        elif key == "orig":
+            current.orig_width, current.orig_height = (int(v) for v in value.split(","))
+        elif key == "offset":
+            current.offset_x, current.offset_y = (int(v) for v in value.split(","))
     return regions
 
 
@@ -199,13 +212,22 @@ def _color(hex_rgba: str | None) -> tuple[float, float, float, float]:
     return tuple(int(hex_rgba[i: i + 2], 16) / 255 for i in range(0, 8, 2))
 
 
-def _region_world(bone: Bone, att: dict) -> list[tuple[float, float]]:
-    """Corners BL, TL, TR, BR of a region attachment, in world space."""
+def _region_world(bone: Bone, att: dict, region: Region | None = None) -> list[tuple[float, float]]:
+    """Corners BL, TL, TR, BR of a region attachment, in world space.
+
+    A trimmed region covers only its packed area of the attachment's full rectangle, as Spine's
+    RegionAttachment.updateOffset places it: offsets count from the bottom-left of the original image.
+    """
     w, h = att["width"] * att.get("scaleX", 1.0), att["height"] * att.get("scaleY", 1.0)
     cos, sin = _cos(att.get("rotation", 0.0)), _sin(att.get("rotation", 0.0))
     ox, oy = att.get("x", 0.0), att.get("y", 0.0)
+    x0, y0, x1, y1 = -w / 2, -h / 2, w / 2, h / 2
+    if region is not None and region.orig_width and region.orig_height:
+        sx, sy = w / region.orig_width, h / region.orig_height
+        x0, y0 = -w / 2 + region.offset_x * sx, -h / 2 + region.offset_y * sy
+        x1, y1 = x0 + region.width * sx, y0 + region.height * sy
     corners = []
-    for lx, ly in [(-w / 2, -h / 2), (-w / 2, h / 2), (w / 2, h / 2), (w / 2, -h / 2)]:
+    for lx, ly in [(x0, y0), (x0, y1), (x1, y1), (x1, y0)]:
         corners.append(bone.to_world(lx * cos - ly * sin + ox, lx * sin + ly * cos + oy))
     return corners
 
@@ -229,7 +251,7 @@ def _parts(skeleton: dict, regions: dict[str, Region]) -> list[dict]:
         region = regions[att.get("path", name)]
         bone = world[slot["bone"]]
         if kind == "region":
-            verts = _region_world(bone, att)
+            verts = _region_world(bone, att, region)
             uvs = [region_uv(region, uv) for uv in [(0, 1), (0, 0), (1, 0), (1, 1)]]
             triangles = [(0, 1, 2), (2, 3, 0)]
         else:
