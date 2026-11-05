@@ -15,6 +15,7 @@ public enum Sts1EventKind
 	CursedTome,
 	AccursedBlacksmith,
 	Bonfire,
+	MindBloom,
 }
 
 /// <summary>
@@ -32,7 +33,7 @@ public static class Sts1EventRule
 
 	/// <summary>
 	/// The event may appear in a run of <paramref name="players"/> players, <paramref name="souvenirOwners"/> of whom
-	/// hold the Spire Souvenir. Vampires replaces every Strike, so it waits until every player holds the relic.
+	/// hold the Spire Souvenir. Vampires replaces every Strike and Mind Bloom is a team vote, so they wait until every player holds the relic.
 	/// </summary>
 	public static bool IsAllowed(Sts1EventKind kind, bool sts1Run, int players, int souvenirOwners)
 	{
@@ -40,7 +41,7 @@ public static class Sts1EventRule
 		{
 			return true;
 		}
-		return kind == Sts1EventKind.Vampires
+		return kind is Sts1EventKind.Vampires or Sts1EventKind.MindBloom
 			? players > 0 && souvenirOwners == players
 			: souvenirOwners > 0;
 	}

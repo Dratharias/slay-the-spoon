@@ -285,7 +285,11 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     Necronomicon, Enchiridion, Nilry's Codex; Necronomicurse in a hidden curse pool; the book is obtained directly
     instead of StS1's reward screen; the Codex asks at the end-of-turn flush, like Well-Laid Plans), then ~~Accursed Blacksmith + Bonfire~~ (0.12.32: Warped Tongs, Spirit Poop, Pain in the
     hidden curse pool, not Eternal; builder calls: Bonfire counts Ancient as Rare, Status as Common, Event/Token/Quest as
-    Special (heal 5); Leave shows only when no card can be offered), then Mind Bloom.
+    Special (heal 5); Leave shows only when no card can be offered), then ~~Mind Bloom~~ (0.12.33: `src/Events/Sts1MindBloom.cs`, Mark of
+    the Bloom blocks every `CreatureCmd.Heal` except a co-op resurrection; builder calls: the event is shared (StS2
+    enters event combats for the whole team), so the team votes and a Souvenir run needs every player to hold the relic;
+    I am War fights a random StS2 act 1 boss with StS2's boss rewards plus a Rare relic, instead of StS1's 50 gold +
+    Rare relic; I am Healthy is left out, since StS1 only offers it past floor 40).
   - StS1 boss relics (Custom Run option): the act 2 and act 3 Ancients gain an option "Choose a boss relic among 3"
     that replaces the Ancient's own pick. In co-op the players who take it share a chest of 3 with rock-paper-scissors,
     otherwise like a regular StS2 chest. Neow does not offer it.

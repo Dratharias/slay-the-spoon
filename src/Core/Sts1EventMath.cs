@@ -52,6 +52,9 @@ public static class Sts1EventMath
 	/// Bonfire Spirits: the reward for an offered card, by its rarity name. StS1 rarities map as is; StS2's extra ones are
 	/// a builder call: Ancient counts as Rare, Status as Common, Event, Token and Quest as StS1's Special (heal 5).
 	/// </summary>
+	public const int MindBloomGold = 999;
+	public const int MindBloomNormalities = 2;
+
 	public static BonfireReward BonfireRewardFor(string rarity) => rarity switch
 	{
 		"Curse" => BonfireReward.SpiritPoop,

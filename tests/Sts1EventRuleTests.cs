@@ -15,6 +15,7 @@ public class Sts1EventRuleTests
 	[InlineData(Sts1EventKind.CursedTome)]
 	[InlineData(Sts1EventKind.AccursedBlacksmith)]
 	[InlineData(Sts1EventKind.Bonfire)]
+	[InlineData(Sts1EventKind.MindBloom)]
 	public void Sts1Run_AllowsEveryEvent_WithoutRelic(Sts1EventKind kind)
 	{
 		Assert.True(Sts1EventRule.IsAllowed(kind, sts1Run: true, players: 2, souvenirOwners: 0));
@@ -30,6 +31,7 @@ public class Sts1EventRuleTests
 	[InlineData(Sts1EventKind.CursedTome)]
 	[InlineData(Sts1EventKind.AccursedBlacksmith)]
 	[InlineData(Sts1EventKind.Bonfire)]
+	[InlineData(Sts1EventKind.MindBloom)]
 	public void NoRelicNoMode_AllowsNothing(Sts1EventKind kind)
 	{
 		Assert.False(Sts1EventRule.IsAllowed(kind, sts1Run: false, players: 1, souvenirOwners: 0));
@@ -55,6 +57,8 @@ public class Sts1EventRuleTests
 		Assert.False(Sts1EventRule.IsAllowed(Sts1EventKind.Vampires, sts1Run: false, players: 3, souvenirOwners: 2));
 		Assert.True(Sts1EventRule.IsAllowed(Sts1EventKind.Vampires, sts1Run: false, players: 3, souvenirOwners: 3));
 		Assert.True(Sts1EventRule.IsAllowed(Sts1EventKind.Vampires, sts1Run: false, players: 1, souvenirOwners: 1));
+		Assert.False(Sts1EventRule.IsAllowed(Sts1EventKind.MindBloom, sts1Run: false, players: 2, souvenirOwners: 1));
+		Assert.True(Sts1EventRule.IsAllowed(Sts1EventKind.MindBloom, sts1Run: false, players: 2, souvenirOwners: 2));
 	}
 
 	[Fact]

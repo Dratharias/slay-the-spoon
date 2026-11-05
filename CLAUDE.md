@@ -179,7 +179,7 @@ Read `README.md` for the player view and the spec for every decision.
   `treasure_room.tscn`, a fifth slot for 4 relics), dimmed until it is offered to the last player; solo: a choice from
   the start. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game.
 
-## Backlog wave 0.12.6–0.12.32 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
+## Backlog wave 0.12.6–0.12.33 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
 
 - Block Return icon; Ending fight backgrounds and heal; Sapphire Key selectable from the first chest round (several key
   voters fight for it); rematch losers point again; StS1 Ancient Potion (`src/Potions/Sts1/`, StS1-only runs, every
@@ -199,7 +199,8 @@ Read `README.md` for the player view and the spec for every decision.
 - 0.12.31: StS1 Cursed Tome with its three books (Necronomicon, Enchiridion, Nilry's Codex) and the Necronomicurse
   (`src/Cards/Sts1/Curses/`, hidden `Sts1CurseCardPool`).
 - 0.12.32: StS1 Ominous Forge (Warped Tongs, Pain curse) and Bonfire Spirits (Spirit Poop; reward by offered card rarity).
-- Build 0 warnings; 493 xUnit + 78 pytest pass. `make workshop` staged 0.12.26 in this worktree. Not tested in game.
+- 0.12.33: StS1 Mind Bloom (shared event: act 1 boss fight, 999 gold + 2 Normality, or upgrade all + Mark of the Bloom).
+- Build 0 warnings; 495 xUnit + 78 pytest pass. `make workshop` staged 0.12.26 in this worktree. Not tested in game.
 - Not merged into `main` yet: the main working copy's uncommitted character-relic work touches `src/Core/WatcherAssets.cs`,
   `tools/sts1/art.py` and `tools/sts1/tests/test_art.py`, which this branch also changes (fast-forward once that work is
   committed or set aside).
