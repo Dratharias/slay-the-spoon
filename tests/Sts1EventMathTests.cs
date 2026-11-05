@@ -26,4 +26,15 @@ public class Sts1EventMathTests
 
 	[Fact]
 	public void MoaiNeverTakesTheLastPoint() => Assert.Equal(0, Sts1EventMath.MoaiMaxHpLoss(1));
+
+	[Theory]
+	[InlineData(1, false)]
+	[InlineData(2, true)]
+	[InlineData(3, true)]
+	public void NecronomiconNeedsTwoEnergy(int paid, bool triggers) =>
+		Assert.Equal(triggers, Sts1EventMath.NecronomiconTriggers(paid));
+
+	[Fact]
+	public void CursedTomeCostsSixteenHpToTake() =>
+		Assert.Equal(16, Enumerable.Range(1, 3).Sum(Sts1EventMath.TomePageHpLoss) + Sts1EventMath.TomeTakeHpLoss);
 }

@@ -4,7 +4,7 @@ Usage: python event_art.py --jar desktop-1.0.jar --out godot/SlaySpoon
 
 Writes images/events/<event model id>.png (StS1's 600×600 portraits, as art.py --events does for the card events)
 and images/relics/events/<relic model id>{,_outline,_large}.png. StS1 ships no large art for some special relics:
-those get the icon upscaled 2× instead.
+those get the icon upscaled 2× instead. Relic-granted curses get their 250×190 portrait in images/cards/curses/.
 """
 import argparse
 import io
@@ -36,6 +36,12 @@ RELICS = {
     "bloom": "sts1_mark_of_the_bloom",
 }
 
+# StS1 card portrait (1024Portraits) -> mod card model id, for the curses a relic hands out.
+CURSES = {
+    "curse/necronomicurse": "sts1_necronomicurse",
+}
+CARD_SIZE = (250, 190)
+
 
 def _read(z: zipfile.ZipFile, name: str) -> Image.Image:
     return Image.open(io.BytesIO(z.read(name))).convert("RGBA")
@@ -62,6 +68,9 @@ def export(jar: Path, out: Path) -> list:
             large_name = f"images/largeRelics/{stem}.png"
             large = _read(z, large_name) if large_name in names else icon.resize((icon.width * 2, icon.height * 2), Image.LANCZOS)
             written.append(_save(large, Path(f"{base}_large.png")))
+        for portrait, model_id in sorted(CURSES.items()):
+            img = _read(z, f"images/1024Portraits/{portrait}.png").resize(CARD_SIZE, Image.LANCZOS)
+            written.append(_save(img, out / "images/cards/curses" / f"{model_id}.png"))
     return written
 
 

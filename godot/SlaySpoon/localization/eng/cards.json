@@ -286,6 +286,8 @@
 	"STS1_MIND_BLAST.title": "Mind Blast",
 	"STS1_MIRACLE.description": "Gain {Energy:energyIcons()}.",
 	"STS1_MIRACLE.title": "Miracle",
+	"STS1_NECRONOMICURSE.description": "There is no escape from this Curse.\nWhen [gold]Exhausted[/gold], add a copy to your [gold]Hand[/gold].",
+	"STS1_NECRONOMICURSE.title": "Necronomicurse",
 	"STS1_NIRVANA.description": "Whenever you Scry, gain {Magic:diff()} [gold]Block[/gold].",
 	"STS1_NIRVANA.title": "Nirvana",
 	"STS1_OMEGA.description": "At the end of your turn, deal {Magic:diff()} damage to ALL enemies.",

@@ -27,6 +27,9 @@ public abstract class Sts1EventRelic : RelicModel
 	{
 		ModelDb.Relic<Sts1GoldenIdol>(),
 		ModelDb.Relic<Sts1BloodyIdol>(),
+		ModelDb.Relic<Sts1Necronomicon>(),
+		ModelDb.Relic<Sts1Enchiridion>(),
+		ModelDb.Relic<Sts1NilrysCodex>(),
 	};
 }
 

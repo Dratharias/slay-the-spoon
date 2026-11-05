@@ -30,4 +30,15 @@ public static class Sts1EventMath
 	public static int MoaiMaxHpLoss(int maxHp) => Math.Min(Round(maxHp * 0.125m), Math.Max(0, maxHp - 1));
 
 	public const int MoaiGold = 333;
+
+	/// <summary>Necronomicon: an Attack that costs at least this much (or an X cost paid with as much) plays twice.</summary>
+	public const int NecronomiconCost = 2;
+
+	public static bool NecronomiconTriggers(int energyPaid) => energyPaid >= NecronomiconCost;
+
+	/// <summary>Cursed Tome: HP lost on each page turned (1, 2, 3), then on taking the book or closing it.</summary>
+	public static int TomePageHpLoss(int page) => page;
+
+	public const int TomeTakeHpLoss = 10;
+	public const int TomeStopHpLoss = 3;
 }

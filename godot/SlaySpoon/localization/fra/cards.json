@@ -286,6 +286,8 @@
 	"STS1_MIND_BLAST.title": "Déflagration mentale",
 	"STS1_MIRACLE.description": "Gagnez {Energy:energyIcons()}.",
 	"STS1_MIRACLE.title": "Miracle",
+	"STS1_NECRONOMICURSE.description": "Personne n'échappe à cette Malédiction.\nQuand elle est [gold]Épuisée[/gold], ajoutez-en une copie à votre [gold]Main[/gold].",
+	"STS1_NECRONOMICURSE.title": "Malédiction fatale",
 	"STS1_NIRVANA.description": "Lorsque vous Scrutez, gagnez {Magic:diff()} d'[gold]Armure[/gold].",
 	"STS1_NIRVANA.title": "Nirvana",
 	"STS1_OMEGA.description": "À la fin de votre tour, infligez {Magic:diff()} dégâts à TOUS les ennemis.",

@@ -12,6 +12,7 @@ public enum Sts1EventKind
 	GoldenIdolEvent,
 	ForgottenAltar,
 	MoaiHead,
+	CursedTome,
 }
 
 /// <summary>
