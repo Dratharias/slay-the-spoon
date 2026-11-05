@@ -2,6 +2,7 @@
 	"SPOON_SCRY": "Regard : choisissez les cartes à défausser. La carte de gauche sera piochée en premier.",
 	"SPOON_SCRY_TIP.description": "Regardez les cartes du dessus de votre pioche. Vous pouvez en défausser.",
 	"SPOON_SCRY_TIP.title": "Regard",
+	"SPOON_SELECTED_COUNT": "Sélection : {Selected} / {Max}",
 	"SPOON_STANCE_TIP.description": "Vous ne pouvez adopter qu'une seule Position à la fois.",
 	"SPOON_STANCE_TIP.title": "Position"
 }

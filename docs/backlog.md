@@ -268,7 +268,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     duplicates keep the version button.
   - Campfire card trade/gift: a co-op rest-site option behind a Custom Run modifier; it uses the giver's rest-site
     action; the receiver pays 50 gold, each player pays 50 on a trade.
-  - Selected-card counter ("X / Y selected", EN/FR) on every multi-pick grid, vanilla modes included (display only).
+  - ~~Selected-card counter ("X / Y selected", EN/FR) on every multi-pick grid, vanilla modes included (display only).~~
+    Done in 0.12.27 (`src/Ui/SelectionCounterPatch.cs`: "Selected: X / Y" under the prompt of the six grid screens).
   - Cross-game combos: a hand-picked pair list, weight ×0.5 when a card would complete a pair the team holds. Pairs
     kept (team-wide): Terror + Dominate, Terror + Bully, Choke + Flurry of Blows; see `docs/review/hybrid-combos.md`.
   - Starting relic "treasure chest" mode: a Custom Run modifier; at run start each player opens their own chest of 10
