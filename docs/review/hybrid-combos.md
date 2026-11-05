@@ -2,7 +2,8 @@
 
 Owner decision (2026-11-05): cross-game combos stay possible but are rarer as a pair. A card that would complete a
 listed pair already held by the team (any player's deck, co-op included) has its offer weight multiplied by 0.5 in
-card rewards, merchants and random generation. The list lives in a JSON file once validated; nothing is implemented yet.
+card rewards, merchants and random generation. Implemented in 0.12.29: the list is `OfferWeights.ComboPairs`
+(`src/Core/OfferWeights.cs`), applied by `src/CardSets/OfferWeightPatch.cs`; keep both in step with this page.
 
 Reviewed with the owner on 2026-11-05: ticked pairs are kept, the others dropped. Add new pairs at the bottom.
 

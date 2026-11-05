@@ -264,14 +264,17 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - ~~Artifact potion back in StS1 mode (owner call: StS1-only mode, every character). StS2 has none: port StS1's
   Ancient Potion (uncommon, gain 1 Artifact).~~ Done in 0.12.10.
 - Design calls settled with the owner (2026-11-05 Q&A; not implemented yet):
-  - Souvenir balance: a per-run lean rolled on the seed, 60/40 toward StS1 or StS2 cards; rarity odds unchanged;
-    duplicates keep the version button.
+  - ~~Souvenir balance: a per-run lean rolled on the seed, 60/40 toward StS1 or StS2 cards; rarity odds unchanged;
+    duplicates keep the version button.~~ Done in 0.12.29 (`OfferWeights`, `OfferWeightPatch`): the favored game's unique
+    cards hold 60 % of the two games' unique share within the rolled rarity; duplicate slots keep their count share and
+    their 50/50 version roll. Discovery-like distinct draws (`TakeRandom`) stay uniform.
   - Campfire card trade/gift: a co-op rest-site option behind a Custom Run modifier; it uses the giver's rest-site
     action; the receiver pays 50 gold, each player pays 50 on a trade.
   - ~~Selected-card counter ("X / Y selected", EN/FR) on every multi-pick grid, vanilla modes included (display only).~~
     Done in 0.12.27 (`src/Ui/SelectionCounterPatch.cs`: "Selected: X / Y" under the prompt of the six grid screens).
-  - Cross-game combos: a hand-picked pair list, weight ×0.5 when a card would complete a pair the team holds. Pairs
-    kept (team-wide): Terror + Dominate, Terror + Bully, Choke + Flurry of Blows; see `docs/review/hybrid-combos.md`.
+  - ~~Cross-game combos: a hand-picked pair list, weight ×0.5 when a card would complete a pair the team holds. Pairs
+    kept (team-wide): Terror + Dominate, Terror + Bully, Choke + Flurry of Blows; see `docs/review/hybrid-combos.md`.~~
+    Done in 0.12.29 (same patch; rewards, merchants, Calamity-like generation and transforms).
   - Starting relic "treasure chest" mode: a Custom Run modifier; at run start each player opens their own chest of 10
     relics (common, uncommon and rare from their pools, rolled on the seed) with the vanilla chest scene and opening
     animation, and keeps one; no rock-paper-scissors; the starter relic stays and Neow is unchanged.
