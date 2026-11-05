@@ -69,7 +69,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - ~~`ending_art.py` ignores atlas `offset`/`orig`~~ (region attachments honor them since 2026-11-05; meshes keep the
     packed area, as the Spine 3.4 runtime does; the three StS1 sprites render byte-identical); its additive
     blend is untested and not Spine-exact; triangle edges are not antialiased; no grandparent or shear bone test.
-  - Code-built monsters have no death animation length: their fade may be cut short.
+  - ~~Code-built monsters have no death animation length: their fade may be cut short~~ (1 s `DeathAnimLengthOverride`
+    since 0.12.25; the length is a guess, unchecked in game).
   - Mod elite wins count toward the vanilla 15-elite epoch check (modded profile only).
   - Debilitate skips dead players: a player revived later in the fight never gets those debuffs or statuses. In co-op
     the status intent shows 5, the per-player count.
@@ -122,10 +123,11 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - ~~Duality's power has no `powers.json` text of its own~~: none needed, `TemporaryDexterityPower` takes its title from
     the relic and its description from vanilla `TEMPORARY_DEXTERITY_POWER` (checked 2026-11-05).
   - Character shell: `OrbModel` takes the energy prefix from the pool title `sts1_watcher`; ~~`WatcherAssetPatch`'s Layer log
-    message is misleading when the node exists with another type~~ (0.12.19); `NGameOverScreen` reads `CharacterStats[her id]`
-    unguarded (the entry is created in memory, the checklist covers first death and victory).
+    message is misleading when the node exists with another type~~ (0.12.19); ~~`NGameOverScreen` reads `CharacterStats[her id]`
+    unguarded~~ (a prefix creates her stats entry first since 0.12.25; the checklist still covers first death and victory).
   - Custom Run button: the static `_previous` relies on vanilla selecting child 0 on open; selecting the fallback while
-    readied is unverified; tests hard-code modifier id strings.
+    readied is unverified; tests hard-code modifier id strings. Deferred: `WatcherButtonPatch.cs` and those tests are
+    part of the uncommitted character-relic work in the main working copy, so a fix there would conflict with it.
   - Progress guards: ~~two classes are named `WatcherProgressPatch`~~ (the Saves one is `WatcherVanillaGuardsPatch`
     since 0.12.13); ~~the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
     rebuilt per call~~ (both fixed in 0.12.14); ~~no log when the vanilla ascension cap applies~~ (logged once per value since 0.12.21); `VanillaCount` and `MaxAscensionFor` are untested
@@ -135,7 +137,7 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     hook on Weak ever opens a choice.
   - ~~Mental Fortress, Empty Fist and Flurry of Blows show all three stance tips~~: they show StS1's generic Stance
     tip since 0.12.13, as in StS1.
-  - Spirit Shield shows no live Block; Mark and the end-turn death effect share the Doom icon.
+  - ~~Spirit Shield shows no live Block~~ (in-combat Block preview since 0.12.25); Mark and the end-turn death effect share the Doom icon.
   - Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.
   - `LastCardPlayed` reset between combats (Sanctity) is unverified.
   - ~~Flurry/Weave and Sands of Time/Windmill Strike share small logic blocks that could be helpers on `Sts1WatcherCard`;

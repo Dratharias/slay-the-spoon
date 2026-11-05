@@ -398,7 +398,7 @@
 	"STS1_SMITE.title": "Gifle",
 	"STS1_SNEAKY_STRIKE.description": "Infligez {Damage:diff()} dégâts.\nSi vous avez défaussé une carte ce tour, gagnez {Energy:energyIcons()}.",
 	"STS1_SNEAKY_STRIKE.title": "Frappe sournoise",
-	"STS1_SPIRIT_SHIELD.description": "Gagnez {Magic:diff()} d'[gold]Armure[/gold] pour chaque carte dans votre main.",
+	"STS1_SPIRIT_SHIELD.description": "Gagnez {Magic:diff()} d'[gold]Armure[/gold] pour chaque carte dans votre main.{InCombat:\n(Gagnez {CalculatedBlock:diff()} d'[gold]Armure[/gold])|}",
 	"STS1_SPIRIT_SHIELD.title": "Bouclier spirituel",
 	"STS1_SPOT_WEAKNESS.description": "Si l'ennemi compte attaquer, gagnez {StrengthPower:diff()} de [gold]Force[/gold].",
 	"STS1_SPOT_WEAKNESS.title": "Prescience",

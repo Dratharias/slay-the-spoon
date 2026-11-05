@@ -398,7 +398,7 @@
 	"STS1_SMITE.title": "Smite",
 	"STS1_SNEAKY_STRIKE.description": "Deal {Damage:diff()} damage.\nIf you discarded a card this turn, gain {Energy:energyIcons()}.",
 	"STS1_SNEAKY_STRIKE.title": "Sneaky Strike",
-	"STS1_SPIRIT_SHIELD.description": "Gain {Magic:diff()} [gold]Block[/gold] for each card in your hand.",
+	"STS1_SPIRIT_SHIELD.description": "Gain {Magic:diff()} [gold]Block[/gold] for each card in your hand.{InCombat:\n(Gain {CalculatedBlock:diff()} [gold]Block[/gold])|}",
 	"STS1_SPIRIT_SHIELD.title": "Spirit Shield",
 	"STS1_SPOT_WEAKNESS.description": "If the enemy intends to attack, gain {StrengthPower:diff()} [gold]Strength[/gold].",
 	"STS1_SPOT_WEAKNESS.title": "Spot Weakness",

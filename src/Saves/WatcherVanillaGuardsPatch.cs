@@ -1,7 +1,9 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Screens.GameOverScreen;
 using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Saves;
@@ -98,6 +100,31 @@ internal static class WatcherVanillaGuardsPatch
 	{
 		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) =>
 			ReplaceMaxAscension(instructions, "StartRunLobby.SetSingleplayerAscensionAfterCharacterChanged");
+	}
+
+	/// <summary>
+	/// The game-over screen indexes <c>CharacterStats</c> directly when saving badges. Her entry normally exists by then
+	/// (the run's progress update creates it), but a missing one would throw on her first death or victory, so it is
+	/// created first, in memory, in the modded profile only. Vanilla characters are untouched.
+	/// </summary>
+	[HarmonyPatch(typeof(NGameOverScreen), "SaveBadgesToProgress")]
+	private static class GameOverStats
+	{
+		private static readonly AccessTools.FieldRef<NGameOverScreen, Player> LocalPlayer =
+			AccessTools.FieldRefAccess<NGameOverScreen, Player>("_localPlayer");
+
+		private static void Prefix(NGameOverScreen __instance)
+		{
+			try
+			{
+				if (LocalPlayer(__instance)?.Character is Sts1Watcher watcher)
+					SaveManager.Instance.Progress.GetOrCreateCharacterStats(watcher.Id);
+			}
+			catch (Exception e)
+			{
+				SpoonLog.Error($"watcher: game-over stats guard failed: {e}");
+			}
+		}
 	}
 
 	private static IEnumerable<CodeInstruction> ReplaceMaxAscension(IEnumerable<CodeInstruction> instructions, string where)

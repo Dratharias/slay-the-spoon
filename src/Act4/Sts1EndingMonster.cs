@@ -34,6 +34,13 @@ public abstract class Sts1EndingMonster : MonsterModel, IEndingMonster
 	/// <summary>No FMOD event exists for these monsters (the run history screen would try to play it).</summary>
 	public override bool HasDeathSfx => false;
 
+	/// <summary>
+	/// No Spine animator, so vanilla would start the death fade at once and the combat UI would wait for no death
+	/// length. One second holds the corpse before the fade, as vanilla's 0.5 s tail after a Spine death does, and gives
+	/// the reward screen a length to wait for.
+	/// </summary>
+	public override float DeathAnimLengthOverride => 1f;
+
 	protected static int Ascension => EndingAscension.Current;
 
 	/// <summary>Built once per combat from the run seed and the monster id, so every peer rolls the same values.</summary>
