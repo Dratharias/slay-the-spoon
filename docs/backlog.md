@@ -203,11 +203,16 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - **Block Return icon (0.12.6):** Talk to the Hand's debuff showed the borrowed Thorns icon; it now shows StS1's
   `talk_to_hand` icon (`art.py --powers`, `Sts1PowerIcons`). Other StS1 powers still borrow vanilla icons. Not tested in game.
 
+- **Ending combat background and heal (0.12.7):** the StS1 combat background was a full-rect child of the combat room's
+  zero-size `BgContainer`, so the elite and Heart fights showed none; it is now a fixed box centred on that origin
+  (size guessed from vanilla layer offsets, check edges and screen shake in game). Entering The Ending now heals like an
+  act's Ancient (missing HP, 80 % of it under Weary Traveler; `EndingHealRule`). Not tested in game.
+
 ### Owner list, 2026-11-05 (triage; done items are marked with their version)
 
 - Bugs: Sapphire Key greyed out until the last player (owner wants it selectable at once, screenshot
   `~/Pictures/Debug Slay the spoon/Saphire key.png`); rock-paper-scissors fingers wrong after a loss; ~~Talk to the Hand's
-  Block Return debuff icon not imported~~ (0.12.6); Act 4 elite and Heart fights have no background; Act 4 second boss should heal 80 %.
+  Block Return debuff icon not imported~~ (0.12.6); ~~Act 4 elite and Heart fights have no background; Act 4 second boss should heal 80 %~~ (0.12.7).
 - 2026-10-31 15:23 "crash on color change": the log shows a state divergence on leaving Infested Automaton (host Watcher,
   client Ironclad with Souvenir, 0.12.3, no TintAction queued), then the client was dropped. Cause not found: needs the
   client's state dump (the host log only has its own).

@@ -23,14 +23,24 @@ internal static class EndingBackgroundPatch
 		return image;
 	}
 
+	// The combat room's BgContainer is a zero-size Control at the screen centre, and vanilla layers draw around its
+	// origin: a full-rect child there has no size and showed nothing. Centre a fixed box on that origin instead, wider
+	// than the 1920×1080 view so screen shake keeps the edges hidden (combat_bg.jpg is 1920×1136).
+	internal const float CombatHalfWidth = 1100f, CombatHalfHeight = 651f;
+
 	[HarmonyPatch(typeof(NCombatBackground), nameof(NCombatBackground.Create))]
 	[HarmonyPrefix]
 	private static bool Combat(ref NCombatBackground __result)
 	{
 		if (Act4Routing.CurrentRun()?.Act is not Sts1EndingAct) return true;
 		__result = new NCombatBackground { MouseFilter = Control.MouseFilterEnum.Ignore };
-		__result.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
-		__result.AddChild(Image("combat_bg"));
+		TextureRect image = Image("combat_bg");
+		image.SetAnchorsPreset(Control.LayoutPreset.TopLeft);
+		image.OffsetLeft = -CombatHalfWidth;
+		image.OffsetTop = -CombatHalfHeight;
+		image.OffsetRight = CombatHalfWidth;
+		image.OffsetBottom = CombatHalfHeight;
+		__result.AddChild(image);
 		return false;
 	}
 

@@ -12,6 +12,7 @@ using SlaySpoon.Cards.Sts1.Powers;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using SlaySpoon.Core;
+using MegaCrit.Sts2.Core.Entities.Ascension;
 
 namespace SlaySpoon.Config;
 
@@ -26,6 +27,20 @@ public sealed class SpoonAct4 : ModifierModel
 	private Act4Keys _keys = new();
 
 	public Act4Keys Keys => _keys;
+
+	/// <summary>The Ending has no Ancient: heal every player as one would (<see cref="EndingHealRule"/>).</summary>
+	/// <remarks>EnterAct runs on every peer at the same logical point and never on a save reload, like CursedRun's hook.</remarks>
+	public override async Task AfterActEntered()
+	{
+		if (RunState.Act is not Sts1EndingAct) return;
+		bool weary = RunManager.Instance.HasAscension(AscensionLevel.WearyTraveler);
+		foreach (Player player in RunState.Players)
+		{
+			decimal amount = EndingHealRule.Amount(player.Creature.MaxHp, player.Creature.CurrentHp, weary);
+			if (amount > 0) await CreatureCmd.Heal(player.Creature, amount, playAnim: false);
+		}
+		SpoonLog.Info($"act4: The Ending heal (weary traveler: {weary})");
+	}
 
 	public override Task AfterMapGenerated(ActMap map, int actIndex)
 	{
