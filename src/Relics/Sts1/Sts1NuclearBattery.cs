@@ -21,7 +21,7 @@ public sealed class Sts1NuclearBattery : Sts1InactiveBossRelic
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[] { HoverTipFactory.FromOrb<PlasmaOrb>() };
 	public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
-	 if (!participants.Contains(Owner.Creature) || Owner.PlayerCombatState.TurnNumber > 1) return;
+	 if (!participants.Contains(Owner.Creature) || Owner.PlayerCombatState is not { TurnNumber: <= 1 }) return;
 	 Flash();
 	 await OrbCmd.Channel<PlasmaOrb>(choiceContext, Owner);
 	}

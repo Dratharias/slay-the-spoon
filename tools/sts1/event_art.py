@@ -3,7 +3,7 @@
 Usage: python event_art.py --jar desktop-1.0.jar --out godot/SlaySpoon
 
 Writes images/events/<event model id>.png (StS1's 600×600 portraits, as art.py --events does for the card events)
-and images/relics/events/<relic model id>{,_outline,_large}.png. StS1 ships no large art for some special relics:
+and images/relics/{events,sts1}/<relic model id>{,_outline,_large}.png. StS1 ships no large art for some special relics:
 those get the icon upscaled 2× instead. Relic-granted curses get their 250×190 portrait in images/cards/curses/.
 """
 import argparse
@@ -36,6 +36,29 @@ RELICS = {
     "bloom": "sts1_mark_of_the_bloom",
 }
 
+# StS1 relic image stem -> mod relic model id, for the character and boss relics (images/relics/sts1/).
+STS1_RELICS = {
+    "championBelt": "sts1_champion_belt",
+    "magicFlower": "sts1_magic_flower",
+    "the_specimen": "sts1_the_specimen",
+    "mark_of_pain": "sts1_mark_of_pain",
+    "runicCube": "sts1_runic_cube",
+    "kite": "sts1_hovering_kite",
+    "serpent_ring": "sts1_ring_of_the_serpent",
+    "wBlade": "sts1_wrist_blade",
+    "frozenOrb": "sts1_frozen_core",
+    "inserter": "sts1_inserter",
+    "battery": "sts1_nuclear_battery",
+    "crown": "sts1_busted_crown",
+    "coffeeDripper": "sts1_coffee_dripper",
+    "cursedKey": "sts1_cursed_key",
+    "burnHammer": "sts1_fusion_hammer",
+    "runicDome": "sts1_runic_dome",
+    "bark": "sts1_sacred_bark",
+    "collar": "sts1_slavers_collar",
+    "tinyHouse": "sts1_tiny_house",
+}
+
 # StS1 card portrait (1024Portraits) -> mod card model id, for the curses a relic hands out.
 CURSES = {
     "curse/necronomicurse": "sts1_necronomicurse",
@@ -61,8 +84,9 @@ def export(jar: Path, out: Path) -> list:
         names = set(z.namelist())
         for name, model_id in sorted(EVENTS.items()):
             written.append(_save(_read(z, f"images/events/{name}.jpg"), out / "images/events" / f"{model_id}.png"))
-        for stem, model_id in sorted(RELICS.items()):
-            base = out / "images/relics/events" / model_id
+        relics = [(s, m, "events") for s, m in RELICS.items()] + [(s, m, "sts1") for s, m in STS1_RELICS.items()]
+        for stem, model_id, folder in sorted(relics):
+            base = out / "images/relics" / folder / model_id
             icon = _read(z, f"images/relics/{stem}.png")
             written.append(_save(icon, Path(f"{base}.png")))
             written.append(_save(_read(z, f"images/relics/outline/{stem}.png"), Path(f"{base}_outline.png")))

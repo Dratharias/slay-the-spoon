@@ -3,13 +3,12 @@
 Remaining design decisions and deferred work after the 0.10.1 fix wave (2026-10-30).
 Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/fix-wave-checklist.md.
 
-- StS1 character-specific relics (Ironclad, Silent, Defect, Watcher pools) that StS2 dropped, offered when a StS1 card
-  set mode is active (owner request, 2026-10-29). Inventory completed 2026-10-30:
-  `docs/review/character-relics.md` and `data/duplicates/character-relics.json`.
-  First slice in progress, uncommitted in the main working copy: Champion Belt, Magic Flower, The Specimen.
-  This work is outside the fix wave and is not included in its Workshop package.
-  Owner decisions (2026-10-30): the boss relics are activated by a Custom Run option; special event relics are imported
-  but not implemented. Their acquisition was settled on 2026-11-05 (see "Design calls settled" below).
+- ~~StS1 character-specific relics (Ironclad, Silent, Defect, Watcher pools) that StS2 dropped, offered when a StS1 card
+  set mode is active (owner request, 2026-10-29).~~ Done in 0.12.36: Champion Belt and Magic Flower (Ironclad) and The
+  Specimen (Silent) join their pools as Rare relics in Custom Runs with a StS1 card set (`src/Relics/Sts1/`), with StS1
+  art (`tools/sts1/event_art.py`, `images/relics/sts1/`) and EN/FR text. Inventory: `docs/review/character-relics.md`
+  and `data/duplicates/character-relics.json`. The boss relics are ported too; their Custom Run option is the entry
+  under "Design calls settled" below. Special event relics stay imported without implementation (owner, 2026-10-30).
 - Act 4 keys (step 6 WP3), minors left after review:
   - ~~A co-op Sapphire swap waits up to 15 s for its pickup.~~ 0.12.0: the swap is gone (chest rematch instead).
   - ~~The Sapphire button position is hard-coded (650, 770).~~ 0.12.1: the key takes a free slot of the chest scene
@@ -98,7 +97,9 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     implemented.`, `EpochModel was not found :(`): it switches on the act index for the character epochs and has no act 4
     case. Harmless (no epoch, no write); left alone because routing it to act 3 would hand out an epoch.
 - The Watcher (step 7), design calls made without the owner (change any of them):
-  - She never enters `AllCharacters`: no Standard, Daily or random-character Watcher.
+  - She never enters `AllCharacters`: no Daily or co-op Standard Watcher. Since 0.12.36 (owner-approved character-relic
+    work) she is selectable in solo Standard and in every Custom Run, and a solo Watcher run without a card set modifier
+    uses StS1 cards (`WatcherRunRule`); random picks include her in solo Standard only. Checks: `docs/testing/watcher-selection.md`.
   - Spire Souvenir: she has no StS2 cards, so "Hybrid" for her is her StS1 pool plus Hybrid colorless.
   - Solo ascension is capped by the highest ascension the player has on any vanilla character.
   - Her playtime goes into the modded profile; she never counts toward vanilla epochs.
@@ -124,9 +125,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Character shell: `OrbModel` takes the energy prefix from the pool title `sts1_watcher`; ~~`WatcherAssetPatch`'s Layer log
     message is misleading when the node exists with another type~~ (0.12.19); ~~`NGameOverScreen` reads `CharacterStats[her id]`
     unguarded~~ (a prefix creates her stats entry first since 0.12.25; the checklist still covers first death and victory).
-  - Custom Run button: the static `_previous` relies on vanilla selecting child 0 on open; selecting the fallback while
-    readied is unverified; tests hard-code modifier id strings. Deferred: `WatcherButtonPatch.cs` and those tests are
-    part of the uncommitted character-relic work in the main working copy, so a fix there would conflict with it.
+  - ~~Custom Run button: the static `_previous` relies on vanilla selecting child 0 on open~~: 0.12.36 rewrote
+    `WatcherButtonPatch` (always visible, no `_previous` fallback); its selection checks are in `docs/testing/watcher-selection.md`.
   - Progress guards: ~~two classes are named `WatcherProgressPatch`~~ (the Saves one is `WatcherVanillaGuardsPatch`
     since 0.12.13); ~~the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
     rebuilt per call~~ (both fixed in 0.12.14); ~~no log when the vanilla ascension cap applies~~ (logged once per value since 0.12.21); `VanillaCount` and `MaxAscensionFor` are untested
@@ -315,6 +315,6 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     the 13 StS1 cards whose StS2 namesake is an event or colorless card stay in their character pool in every mode.
   - Every "design call made without the owner" listed above is validated as is (owner, 2026-11-05); revisit one only
     when an in-game test shows a problem. The fidelity rule still wins over them.
-- 2026-11-05 screenshot `~/Pictures/Debug Slay the spoon/unknown relic.png`: The Specimen shows raw
-  `relics.STS1_THE_SPECIMEN.title/description` keys at a merchant. It comes from the uncommitted character-relic work
-  (never in a packaged build from `main`): its text must land in `relics.json` (EN/FR) before that tranche ships.
+- ~~2026-11-05 screenshot `~/Pictures/Debug Slay the spoon/unknown relic.png`: The Specimen shows raw
+  `relics.STS1_THE_SPECIMEN.title/description` keys at a merchant.~~ 0.12.36: every StS1 relic has EN/FR text and art,
+  checked by `tests/Sts1RelicTests.cs`.

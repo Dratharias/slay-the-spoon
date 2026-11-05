@@ -8,10 +8,10 @@ namespace SlaySpoon.Relics.Sts1;
 
 public abstract class Sts1Relic : RelicModel
 {
-	private string ArtRoot => $"res://SlaySpoon/images/relics/{Id.Entry.ToLowerInvariant()}";
+	private string ArtRoot => $"res://SlaySpoon/images/relics/sts1/{Id.Entry.ToLowerInvariant()}";
 	public override string PackedIconPath => ArtRoot + ".png";
 	protected override string PackedIconOutlinePath => ArtRoot + "_outline.png";
-	protected override string BigIconPath => ArtRoot + "_big.png";
+	protected override string BigIconPath => ArtRoot + "_large.png";
 	public override RelicRarity Rarity => RelicRarity.Rare;
 	public override bool IsAllowed(IRunState runState) => Offered(runState);
 	internal static bool Offered(IRunState run) => Sts1RelicRule.Offered(run.GameMode == GameMode.Custom,

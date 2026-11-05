@@ -179,7 +179,7 @@ Read `README.md` for the player view and the spec for every decision.
   `treasure_room.tscn`, a fifth slot for 4 relics), dimmed until it is offered to the last player; solo: a choice from
   the start. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game.
 
-## Backlog wave 0.12.6–0.12.35 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
+## Backlog wave 0.12.6–0.12.36 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
 
 - Block Return icon; Ending fight backgrounds and heal; Sapphire Key selectable from the first chest round (several key
   voters fight for it); rematch losers point again; StS1 Ancient Potion (`src/Potions/Sts1/`, StS1-only runs, every
@@ -206,10 +206,15 @@ Read `README.md` for the player view and the spec for every decision.
 - 0.12.35: Starting Chest Custom Run modifier (`SpoonStartingChest`): a Neow option (like Draft's) plays the act's
   Spine chest opening (`src/Ui/ChestOpeningOverlay.cs`), then the vanilla synced "Choose a Relic" screen with 10 relics
   read from the player's grab bag (only the kept one leaves it). Not tested in game (overlay placement included).
-- Build 0 warnings; 505 xUnit + 78 pytest pass. `make workshop` staged 0.12.35 in this worktree (not uploaded). Not tested in game.
-- Not merged into `main` yet: the main working copy's uncommitted character-relic work touches `src/Core/WatcherAssets.cs`,
-  `tools/sts1/art.py` and `tools/sts1/tests/test_art.py`, which this branch also changes (fast-forward once that work is
-  committed or set aside).
+- 0.12.36: the owner's character-relic and Watcher-selection work (committed as found, branch `character-relics`) is
+  finished: Champion Belt, Magic Flower (Ironclad) and The Specimen (Silent) are Rare pool relics in Custom Runs with a
+  StS1 card set; 19 StS1 relics ported in `src/Relics/Sts1/` (3 character, 16 boss: the 8 character boss relics plus
+  Busted Crown, Coffee Dripper, Cursed Key, Fusion Hammer, Runic Dome, Sacred Bark, Slaver's Collar, Tiny House), art in
+  `images/relics/sts1/`, EN/FR text, `tests/Sts1RelicTests.cs`. Sacred Bark scales the holder's potion vars in the
+  `PotionModel.DynamicVars` getter; Runic Dome hides intents on the holder's screen only. The Watcher is selectable in
+  solo Standard and every Custom Run (`WatcherRunRule`: a solo Watcher run uses StS1 cards), an owner-approved
+  Standard exception.
+- Build 0 warnings; 534 xUnit + 78 pytest pass. Not tested in game.
 
 ## Documents
 
@@ -232,7 +237,7 @@ Read `README.md` for the player view and the spec for every decision.
   `godot/SlaySpoon/localization/eng/` and `.../fra/`.
 - The mod must **never write the regular (unmodded) save**. Progress sync only reads it.
 - Standard and Daily modes remain available; never lock the modes themselves.
-  Daily stays vanilla. Standard exceptions are Spire Souvenir and the approved Act 4 unlock
+  Daily stays vanilla. Standard exceptions are Spire Souvenir, the approved Act 4 unlock and the solo Watcher (0.12.36)
   documented above. Lobby activation options live in Custom Run.
 - Bug reports are not support requests (see README). Don't promise fixes.
 - Never commit decompiled game code.

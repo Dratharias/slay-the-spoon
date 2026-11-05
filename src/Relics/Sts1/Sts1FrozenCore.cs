@@ -28,7 +28,8 @@ public sealed class Sts1FrozenCore : Sts1InactiveBossRelic
 	public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 	 if (!participants.Contains(Owner.Creature)) return;
-	 var queue = Owner.PlayerCombatState.OrbQueue;
+	 if (Owner.PlayerCombatState is not { } state) return;
+	 var queue = state.OrbQueue;
 	 if (queue.Orbs.Count >= queue.Capacity) return;
 	 Flash();
 	 await OrbCmd.Channel<FrostOrb>(choiceContext, Owner);
