@@ -1,16 +1,23 @@
 namespace SlaySpoon.Core;
 
-/// <summary>The StS1 events that hand out event-only StS1 cards (step 3d plan).</summary>
+/// <summary>
+/// The StS1 events the mod ports: the three that hand out event-only StS1 cards (step 3d plan), then the ones that hand
+/// out StS1 special relics (backlog wave). The enum name, prefixed with <c>Sts1</c>, is the event's class name.
+/// </summary>
 public enum Sts1EventKind
 {
 	Vampires,
 	Augmenter,
 	Nest,
+	GoldenIdolEvent,
+	ForgottenAltar,
+	MoaiHead,
 }
 
 /// <summary>
-/// When the StS1 card events may appear, and who may take their card. They exist only where StS1 cards are in play:
-/// a StS1-only run, or players holding the Spire Souvenir.
+/// When the StS1 events may appear, and who may take their card. They exist only where StS1 cards are in play:
+/// a StS1-only run, or players holding the Spire Souvenir. The relic events follow the same rule and, like the card
+/// events, appear in act 2 only (owner decision: "ported like Vampires and Augmenter, act 2 injection").
 /// </summary>
 public static class Sts1EventRule
 {

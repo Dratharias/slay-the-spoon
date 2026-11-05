@@ -64,6 +64,7 @@ sts1-data:
 			--relations unique,same-sts1,duplicate || exit 1; \
 	done
 	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --events godot/SlaySpoon/images/events
+	$(TOOLS) python tools/sts1/event_art.py --jar /sts1.jar --out godot/SlaySpoon
 
 # Stage Act 4 source assets/text for conversion; this does not enable a playable act.
 sts1-act4-data:

@@ -179,7 +179,7 @@ Read `README.md` for the player view and the spec for every decision.
   `treasure_room.tscn`, a fifth slot for 4 relics), dimmed until it is offered to the last player; solo: a choice from
   the start. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game.
 
-## Backlog wave 0.12.6–0.12.29 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
+## Backlog wave 0.12.6–0.12.30 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
 
 - Block Return icon; Ending fight backgrounds and heal; Sapphire Key selectable from the first chest round (several key
   voters fight for it); rematch losers point again; StS1 Ancient Potion (`src/Potions/Sts1/`, StS1-only runs, every
@@ -194,7 +194,9 @@ Read `README.md` for the player view and the spec for every decision.
 - 0.12.28: the Architect talks to the Watcher (`src/Watcher/ArchitectDialoguePatch.cs`, `ancients.json`; owner proofreads).
 - 0.12.29: weighted card draws (`src/Core/OfferWeights.cs`, `src/CardSets/OfferWeightPatch.cs`): Souvenir lean 60/40 on the
   seed and the combo pairs ×0.5; one draw on the same RNG, vanilla draw when weights are equal.
-- Build 0 warnings; 457 xUnit + 78 pytest pass. `make workshop` staged 0.12.26 in this worktree. Not tested in game.
+- 0.12.30: StS1 events Golden Idol, Forgotten Altar and Moai Head (act 2 injection, `Sts1EventRule`), with the Golden
+  Idol and Bloody Idol relics (`src/Relics/Events/`, event relic pool postfix); art from `tools/sts1/event_art.py`.
+- Build 0 warnings; 473 xUnit + 78 pytest pass. `make workshop` staged 0.12.26 in this worktree. Not tested in game.
 - Not merged into `main` yet: the main working copy's uncommitted character-relic work touches `src/Core/WatcherAssets.cs`,
   `tools/sts1/art.py` and `tools/sts1/tests/test_art.py`, which this branch also changes (fast-forward once that work is
   committed or set aside).

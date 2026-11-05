@@ -279,7 +279,9 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     relics (common, uncommon and rare from their pools, rolled on the seed) with the vanilla chest scene and opening
     animation, and keeps one; no rock-paper-scissors; the starter relic stays and Neow is unchanged.
   - StS1 special event relics come from their own StS1 events, ported like Vampires and Augmenter (act 2 injection).
-    Order: Golden Idol + Forgotten Altar + Moai Head, then Cursed Tome, then Accursed Blacksmith + Bonfire, then
+    Order: ~~Golden Idol + Forgotten Altar + Moai Head~~ (0.12.30: `src/Events/Sts1GoldenIdolEvent.cs`,
+    `Sts1ForgottenAltar.cs`, `Sts1MoaiHead.cs`; relics in `src/Relics/Events/`; StS1 base values, no A15 raises;
+    Forgotten Altar's Humanity option is left out), then Cursed Tome, then Accursed Blacksmith + Bonfire, then
     Mind Bloom.
   - StS1 boss relics (Custom Run option): the act 2 and act 3 Ancients gain an option "Choose a boss relic among 3"
     that replaces the Ancient's own pick. In co-op the players who take it share a chest of 3 with rock-paper-scissors,
