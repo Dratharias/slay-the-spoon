@@ -11,13 +11,14 @@ namespace SlaySpoon.Characters;
 /// <c>sts1_watcher_energy_icon.png</c>). A Watcher holding an orb would show a missing image: the getter reads the
 /// pool's energy color instead for her pool.
 /// </summary>
+// Harmony treats any method named Prefix, Postfix, Transpiler, Finalizer or Prepare as a patch: helpers need other names.
 [HarmonyPatch(typeof(OrbModel), nameof(OrbModel.HoverTips), MethodType.Getter)]
 public static class OrbEnergyPrefixPatch
 {
 	private static readonly System.Reflection.MethodInfo TitleGetter =
 		AccessTools.PropertyGetter(typeof(CardPoolModel), nameof(CardPoolModel.Title));
 
-	public static string Prefix(CardPoolModel pool) => pool is Sts1WatcherCardPool ? pool.EnergyColorName : pool.Title;
+	public static string EnergyIconPrefix(CardPoolModel pool) => pool is Sts1WatcherCardPool ? pool.EnergyColorName : pool.Title;
 
 	private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 	{
@@ -27,7 +28,7 @@ public static class OrbEnergyPrefixPatch
 			if (instruction.Calls(TitleGetter))
 			{
 				replaced++;
-				yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(OrbEnergyPrefixPatch), nameof(Prefix)))
+				yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(OrbEnergyPrefixPatch), nameof(EnergyIconPrefix)))
 					.WithLabels(instruction.labels).WithBlocks(instruction.blocks);
 				continue;
 			}
