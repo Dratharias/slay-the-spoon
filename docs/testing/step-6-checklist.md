@@ -105,7 +105,7 @@ Reach the fight with the vanilla console: `fight STS1_CORRUPT_HEART_BOSS`.
 ## The Ending act (WP4-6 Task 6)
 
 - [ ] The log at startup shows `Ending act id: STS1_ENDING_ACT` and `Ending act self-check: ModelDb.GetById<ActModel>(STS1_ENDING_ACT) found`.
-- [ ] In act 4, the act banner reads "The Ending" (French: "La fin").
+- [ ] In act 4, the act banner reads "The Ending" (French: "La Fin").
 - [ ] Act 4's music, ambience, map (backgrounds and dot colors), rest site background, combat backgrounds and chest are Glory's.
 
 ## The Ending map (WP4-6 Task 7)

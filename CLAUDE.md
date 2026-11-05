@@ -49,7 +49,7 @@ Read `README.md` for the player view and the spec for every decision.
   - seven event-only classes (Apotheosis, Apparition, Bite, Enlightenment, JAX, Metamorphosis, Ritual Dagger)
     live in a hidden event pool, outside ordinary pools (32 ordinary cards); vanilla event grants are patched;
     Bite, JAX and Ritual Dagger have console access only;
-  - Massive Scroll falls back to ordinary allowed cards when its co-op-only filter leaves none (builder default pending feedback);
+  - Massive Scroll falls back to ordinary allowed cards when its co-op-only filter leaves none (owner-approved 2026-11-05);
   - Ritual Dagger reuses The Scythe's saved property names; Sadistic Nature reuses vanilla `SleightOfFleshPower`;
   - build: 0 warnings / 0 errors; tests: 83 xUnit and 35 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3c-checklist.md` remains unchecked.
@@ -178,7 +178,7 @@ Read `README.md` for the player view and the spec for every decision.
   `treasure_room.tscn`, a fifth slot for 4 relics), dimmed until it is offered to the last player; solo: a choice from
   the start. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game.
 
-## Backlog wave 0.12.6–0.12.25 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
+## Backlog wave 0.12.6–0.12.26 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
 
 - Block Return icon; Ending fight backgrounds and heal; Sapphire Key selectable from the first chest round (several key
   voters fight for it); rematch losers point again; StS1 Ancient Potion (`src/Potions/Sts1/`, StS1-only runs, every
@@ -187,7 +187,9 @@ Read `README.md` for the player view and the spec for every decision.
 - Cleanups: unused usings, the `Act4Preview` key and `CustomRunOptions` removed; Invincible clamp in
   `HeartInvincibleRule`; Ending rooms seeded from the run seed on both paths; `ending_art.py` honors trimmed regions.
 - 0.12.25: Watcher game-over stats guard, Spirit Shield in-combat Block preview, 1 s death length for Ending monsters.
-- Build 0 warnings; 434 xUnit + 78 pytest pass. `make workshop` staged 0.12.25 in this worktree. Not tested in game.
+- 0.12.26: French act 4 title "La Fin". Remaining design calls settled with the owner (2026-11-05 Q&A), listed in
+  `docs/backlog.md` under "Design calls settled"; combo pairs in `docs/review/hybrid-combos.md`.
+- Build 0 warnings; 434 xUnit + 78 pytest pass. `make workshop` staged 0.12.26 in this worktree. Not tested in game.
 - Not merged into `main` yet: the main working copy's uncommitted character-relic work touches `src/Core/WatcherAssets.cs`,
   `tools/sts1/art.py` and `tools/sts1/tests/test_art.py`, which this branch also changes (fast-forward once that work is
   committed or set aside).

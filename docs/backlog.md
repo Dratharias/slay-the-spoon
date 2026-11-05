@@ -9,7 +9,7 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   First slice in progress, uncommitted in the main working copy: Champion Belt, Magic Flower, The Specimen.
   This work is outside the fix wave and is not included in its Workshop package.
   Owner decisions (2026-10-30): the boss relics are activated by a Custom Run option; special event relics are imported
-  but not implemented, and how to obtain them is decided later.
+  but not implemented. Their acquisition was settled on 2026-11-05 (see "Design calls settled" below).
 - Act 4 keys (step 6 WP3), minors left after review:
   - ~~A co-op Sapphire swap waits up to 15 s for its pickup.~~ 0.12.0: the swap is gone (chest rematch instead).
   - ~~The Sapphire button position is hard-coded (650, 770).~~ 0.12.1: the key takes a free slot of the chest scene
@@ -54,8 +54,7 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     past the top of the screen, as in StS1 (no camera zoom added). Intents sit 60 px above the hitbox (estimate).
   - Blood Shots and Echo use vanilla's blunt hit effect; StS1's Blood Shot and Vice Crush effects and sounds are not ported.
   - The Heart's English/French loss lines are the builder's own wording.
-  - The act's French title is StS1's "La fin"; StS2's French act titles capitalize the noun ("La Gloire"), so "La Fin"
-    would match the game's style.
+  - ~~The act's French title is StS1's "La fin"~~: "La Fin", StS2's style (owner call 2026-11-05, 0.12.26).
 - Act 4 The Ending (step 6 WP4-6), minors left after review:
   - ~~The Invincible clamp sits in `Sts1InvinciblePower`, not in the tested `HeartInvincibleRule`; it flashes inside the modify
     hook~~ 0.12.23: `HeartInvincibleRule.ClampHpLoss` (tested); the flash moved to `AfterModifyingHpLostAfterOsty`, as Intangible.
@@ -264,11 +263,30 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   not StS1's exact effects); Spine animations are still missing.
 - ~~Artifact potion back in StS1 mode (owner call: StS1-only mode, every character). StS2 has none: port StS1's
   Ancient Potion (uncommon, gain 1 Artifact).~~ Done in 0.12.10.
-- Design, to discuss with the owner (do not implement yet): Souvenir reward balance (fewer commons; per-run lean
-  toward one game's cards); campfire card trade/gift option for 50 gold per taker (−50 each on a trade);
-  selected-card counter on Sealed Deck-style grids; Hybrid/Souvenir cross-character combos (2026-11-05, e.g. the
-  Silent's Terror, +99 Vulnerable, with the Ironclad's Dominate, Strength per Vulnerable): not forbidden, but rarer
-  as a pair.
+- Design calls settled with the owner (2026-11-05 Q&A; not implemented yet):
+  - Souvenir balance: a per-run lean rolled on the seed, 60/40 toward StS1 or StS2 cards; rarity odds unchanged;
+    duplicates keep the version button.
+  - Campfire card trade/gift: a co-op rest-site option behind a Custom Run modifier; it uses the giver's rest-site
+    action; the receiver pays 50 gold, each player pays 50 on a trade.
+  - Selected-card counter ("X / Y selected", EN/FR) on every multi-pick grid, vanilla modes included (display only).
+  - Cross-game combos: a hand-picked pair list, weight ×0.5 when a card would complete a pair the team holds. Pairs
+    kept (team-wide): Terror + Dominate, Terror + Bully, Choke + Flurry of Blows; see `docs/review/hybrid-combos.md`.
+  - Starting relic "treasure chest" mode: a Custom Run modifier; at run start each player opens their own chest of 10
+    relics (common, uncommon and rare from their pools, rolled on the seed) with the vanilla chest scene and opening
+    animation, and keeps one; no rock-paper-scissors; the starter relic stays and Neow is unchanged.
+  - StS1 special event relics come from their own StS1 events, ported like Vampires and Augmenter (act 2 injection).
+    Order: Golden Idol + Forgotten Altar + Moai Head, then Cursed Tome, then Accursed Blacksmith + Bonfire, then
+    Mind Bloom.
+  - StS1 boss relics (Custom Run option): the act 2 and act 3 Ancients gain an option "Choose a boss relic among 3"
+    that replaces the Ancient's own pick. In co-op the players who take it share a chest of 3 with rock-paper-scissors,
+    otherwise like a regular StS2 chest. Neow does not offer it.
+  - Massive Scroll keeps its fallback to ordinary allowed cards when the co-op filter leaves none.
+  - Corpse Explosion keeps StS1's rule (target max HP × stacks to every other enemy, chains included): the "−90 AOE"
+    report is intended.
+  - The Architect gets a short EN/FR dialogue for the Watcher, in the tone of "you do not really exist" (a nod to
+    Slay the Spoon being a mod), reusing a vanilla character's attack effect; the owner proofreads the text.
+  - Every "design call made without the owner" listed above is validated as is (owner, 2026-11-05); revisit one only
+    when an in-game test shows a problem. The fidelity rule still wins over them.
 - 2026-11-05 screenshot `~/Pictures/Debug Slay the spoon/unknown relic.png`: The Specimen shows raw
   `relics.STS1_THE_SPECIMEN.title/description` keys at a merchant. It comes from the uncommitted character-relic work
   (never in a packaged build from `main`): its text must land in `relics.json` (EN/FR) before that tranche ships.
