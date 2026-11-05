@@ -256,7 +256,7 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/Watcher/` | The Watcher's mechanics: stance powers and `StanceCmd` (Wrath, Calm, Divinity, energy on exit), Mantra, `ScryCmd`, last-card tracking, the static stance eye, her powers in `Powers/`; the numbers live in `src/Core/` (`StanceMath`, `ScryMath`) |
 | `src/Cards/Sts1/Watcher/`, `WatcherTokens/` | One class per ported Watcher card, and the hidden generated cards (Miracle, Insight, Smite, Safety, Through Violence, Expunger, Beta, Omega) outside every reward source |
 | `src/CustomRunUi/WatcherButtonPatch.cs` | Her Custom Run character button (shown only while a StS1 card set is ticked, fallback to the last vanilla pick when unticked, guarded against init failures) |
-| `src/Saves/WatcherProgressPatch.cs` | Progress guards: she never counts toward vanilla epochs, solo ascension cap from the best vanilla character |
+| `src/Saves/WatcherVanillaGuardsPatch.cs` | Progress guards: she never counts toward vanilla epochs, solo ascension cap from the best vanilla character |
 | `tools/sts1/` | Python (Podman image `slayspoon-tools`): `extract.py` → `data/sts1/`, `match.py` → `data/duplicates/` + review page, `art.py` → portraits, `codegen.py` → card skeletons + text. Codegen never overwrites a ported card |
 | `godot/SlaySpoon/` | Packed into the PCK. Localization tables merge into the game's (`res://SlaySpoon/localization/<lang>/<table>.json`) |
 

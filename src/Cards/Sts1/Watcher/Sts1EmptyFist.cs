@@ -20,7 +20,7 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Empty Fist: damage, then leave the current stance.</summary>
 public sealed class Sts1EmptyFist : Sts1WatcherCard
 {
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => WatcherTips.Stances();
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[] { WatcherTips.Stance() };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{

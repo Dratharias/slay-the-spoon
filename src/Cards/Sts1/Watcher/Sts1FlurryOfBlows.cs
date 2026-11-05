@@ -20,7 +20,7 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Flurry of Blows: comes back from the discard pile whenever its owner changes stance.</summary>
 public sealed class Sts1FlurryOfBlows : Sts1WatcherCard, IStanceListener
 {
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => WatcherTips.Stances();
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[] { WatcherTips.Stance() };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{

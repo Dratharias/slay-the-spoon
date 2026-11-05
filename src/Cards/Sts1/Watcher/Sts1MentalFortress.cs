@@ -23,7 +23,7 @@ namespace SlaySpoon.Cards.Sts1.Watcher;
 /// <summary>StS1 Mental Fortress: Gain Block whenever the owner changes stance.</summary>
 public sealed class Sts1MentalFortress : Sts1WatcherCard
 {
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => WatcherTips.Stances();
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[] { WatcherTips.Stance() };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 	{

@@ -18,12 +18,12 @@ namespace SlaySpoon.Saves;
 /// character's <c>MaxAscension</c>, always 0 for her: for her it reads the best vanilla character's instead.
 /// Nothing is written to either profile.
 /// </summary>
-internal static class WatcherProgressPatch
+internal static class WatcherVanillaGuardsPatch
 {
 	private static readonly MethodInfo GetCharacterStats = AccessTools.PropertyGetter(typeof(ProgressState), nameof(ProgressState.CharacterStats));
-	private static readonly MethodInfo CountHelper = AccessTools.Method(typeof(WatcherProgressPatch), nameof(VanillaCount));
+	private static readonly MethodInfo CountHelper = AccessTools.Method(typeof(WatcherVanillaGuardsPatch), nameof(VanillaCount));
 	private static readonly MethodInfo GetMaxAscension = AccessTools.PropertyGetter(typeof(CharacterStats), nameof(CharacterStats.MaxAscension));
-	private static readonly MethodInfo MaxHelper = AccessTools.Method(typeof(WatcherProgressPatch), nameof(MaxAscensionFor));
+	private static readonly MethodInfo MaxHelper = AccessTools.Method(typeof(WatcherVanillaGuardsPatch), nameof(MaxAscensionFor));
 
 	private static IEnumerable<string> VanillaIds() => new[]
 	{

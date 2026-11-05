@@ -114,21 +114,22 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - The Watcher (step 7), minors left after review:
   - Signature Move's playability and glow match StS1, but the game displays its generic unplayable message:
     CardModel exposes only IsPlayable, with no per-card message override. A dialogue patch is deferred.
-  - Duality's power has no `powers.json` text of its own (it extends vanilla `TemporaryDexterityPower`).
+  - ~~Duality's power has no `powers.json` text of its own~~: none needed, `TemporaryDexterityPower` takes its title from
+    the relic and its description from vanilla `TEMPORARY_DEXTERITY_POWER` (checked 2026-11-05).
   - Character shell: `OrbModel` takes the energy prefix from the pool title `sts1_watcher`; `WatcherAssetPatch`'s Layer log
     message is misleading when the node exists with another type; `NGameOverScreen` reads `CharacterStats[her id]`
     unguarded (the entry is created in memory, the checklist covers first death and victory).
   - Custom Run button: the static `_previous` relies on vanilla selecting child 0 on open; selecting the fallback while
     readied is unverified; tests hard-code modifier id strings.
-  - Progress guards: two classes are named `WatcherProgressPatch` (Characters and Saves; rename the Saves one, e.g.
-    `WatcherVanillaGuardsPatch`); the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
+  - Progress guards: ~~two classes are named `WatcherProgressPatch`~~ (the Saves one is `WatcherVanillaGuardsPatch`
+    since 0.12.13); the epoch-count transpiler drops the labels of the replaced `get_Count`; `VanillaIds()` is
     rebuilt per call; no log when the vanilla ascension cap applies; `VanillaCount` and `MaxAscensionFor` are untested
     (game-bound).
   - Mark and Pressure Points HP loss has no dealer (matches StS1); "on kill by player" effects see no killer.
   - Wave of the Hand applies Weak through a throwing choice context (`AfterBlockGained` gives none); harmless unless a
     hook on Weak ever opens a choice.
-  - Mental Fortress, Empty Fist and Flurry of Blows show all three stance tips (Calm, Wrath, Divinity), not only the
-    stances they name.
+  - ~~Mental Fortress, Empty Fist and Flurry of Blows show all three stance tips~~: they show StS1's generic Stance
+    tip since 0.12.13, as in StS1.
   - Spirit Shield shows no live Block; Mark and the end-turn death effect share the Doom icon.
   - Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.
   - `LastCardPlayed` reset between combats (Sanctity) is unverified.

@@ -1,5 +1,7 @@
 {
 	"SPOON_SCRY": "Scry: choose any cards to discard. The leftmost card is drawn next.",
 	"SPOON_SCRY_TIP.description": "Look at the top cards of your draw pile. You may discard any of them.",
-	"SPOON_SCRY_TIP.title": "Scry"
+	"SPOON_SCRY_TIP.title": "Scry",
+	"SPOON_STANCE_TIP.description": "You can only have one Stance at a time.",
+	"SPOON_STANCE_TIP.title": "Stance"
 }
