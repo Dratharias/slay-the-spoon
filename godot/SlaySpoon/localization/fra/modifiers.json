@@ -19,5 +19,10 @@
   "SPOON_ACT4.description": "Le chemin du Cœur est ouvert : trouvez les clés de rubis, d'émeraude et de saphir.",
   "SPOON_CAMPFIRE_GIFT.title": "Cadeaux au feu de camp",
   "SPOON_CAMPFIRE_GIFT.description": "En coopération seulement. À un feu de camp, un joueur peut utiliser son action pour donner une carte de son deck à un allié, qui la paie 50 pièces d'or. Pour échanger, chacun donne une carte au même feu. Les malédictions ne peuvent pas être données.",
-  "SPOON_CAMPFIRE_GIFT.short": "Cadeaux"
+  "SPOON_CAMPFIRE_GIFT.short": "Cadeaux",
+  "SPOON_STARTING_CHEST.title": "Coffre de départ",
+  "SPOON_STARTING_CHEST.description": "Chez Neow, chaque joueur ouvre un coffre de 10 reliques communes, peu communes et rares de son propre bassin, et en garde une. La relique de départ reste.",
+  "SPOON_STARTING_CHEST.short": "Coffre",
+  "SPOON_STARTING_CHEST.neow_title": "Ouvrir le coffre",
+  "SPOON_STARTING_CHEST.neow_description": "Choisissez [gold]1[/gold] relique parmi [blue]10[/blue]."
 }

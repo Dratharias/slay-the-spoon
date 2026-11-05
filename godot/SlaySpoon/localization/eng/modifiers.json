@@ -19,5 +19,10 @@
   "SPOON_ACT4.description": "The way to the Heart is open: find the Ruby, Emerald and Sapphire keys.",
   "SPOON_CAMPFIRE_GIFT.title": "Campfire Gifts",
   "SPOON_CAMPFIRE_GIFT.description": "Co-op only. At a rest site, a player can spend their action to give a card from their deck to an ally, who pays 50 gold for it. To trade, both give a card at the same fire. Curses can't be given.",
-  "SPOON_CAMPFIRE_GIFT.short": "Gifts"
+  "SPOON_CAMPFIRE_GIFT.short": "Gifts",
+  "SPOON_STARTING_CHEST.title": "Starting Chest",
+  "SPOON_STARTING_CHEST.description": "At Neow, each player opens a chest of 10 common, uncommon and rare relics from their own pool and keeps one. The starting relic stays.",
+  "SPOON_STARTING_CHEST.short": "Chest",
+  "SPOON_STARTING_CHEST.neow_title": "Open the Chest",
+  "SPOON_STARTING_CHEST.neow_description": "Choose [gold]1[/gold] of [blue]10[/blue] relics."
 }

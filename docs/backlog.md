@@ -278,9 +278,14 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - ~~Cross-game combos: a hand-picked pair list, weight ×0.5 when a card would complete a pair the team holds. Pairs
     kept (team-wide): Terror + Dominate, Terror + Bully, Choke + Flurry of Blows; see `docs/review/hybrid-combos.md`.~~
     Done in 0.12.29 (same patch; rewards, merchants, Calamity-like generation and transforms).
-  - Starting relic "treasure chest" mode: a Custom Run modifier; at run start each player opens their own chest of 10
+  - ~~Starting relic "treasure chest" mode: a Custom Run modifier; at run start each player opens their own chest of 10
     relics (common, uncommon and rare from their pools, rolled on the seed) with the vanilla chest scene and opening
-    animation, and keeps one; no rock-paper-scissors; the starter relic stays and Neow is unchanged.
+    animation, and keeps one; no rock-paper-scissors; the starter relic stays and Neow is unchanged.~~ Done in 0.12.35
+    ("Starting Chest", `src/Config/StartingChestModifier.cs`). Owner call (2026-11-05): the vanilla "Choose a Relic"
+    screen after the act's Spine chest opening, not the treasure room scene. Builder calls, for owner review: the chest
+    is a Neow option like Draft's, so Neow offers its blessings too only with Neow's Blessings ticked; rarities roll
+    as vanilla chests (50/33/17 %), on a per-player stream named after the modifier; the 9 relics not kept stay in the
+    bag; the screen's Skip keeps nothing; relics Neow refuses (`IsAllowedAtNeow`) are left out.
   - StS1 special event relics come from their own StS1 events, ported like Vampires and Augmenter (act 2 injection).
     Order: ~~Golden Idol + Forgotten Altar + Moai Head~~ (0.12.30: `src/Events/Sts1GoldenIdolEvent.cs`,
     `Sts1ForgottenAltar.cs`, `Sts1MoaiHead.cs`; relics in `src/Relics/Events/`; StS1 base values, no A15 raises;
