@@ -284,8 +284,10 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Massive Scroll keeps its fallback to ordinary allowed cards when the co-op filter leaves none.
   - Corpse Explosion keeps StS1's rule (target max HP × stacks to every other enemy, chains included): the "−90 AOE"
     report is intended.
-  - The Architect gets a short EN/FR dialogue for the Watcher, in the tone of "you do not really exist" (a nod to
-    Slay the Spoon being a mod), reusing a vanilla character's attack effect; the owner proofreads the text.
+  - ~~The Architect gets a short EN/FR dialogue for the Watcher, in the tone of "you do not really exist" (a nod to
+    Slay the Spoon being a mod), reusing a vanilla character's attack effect~~. Done in 0.12.28
+    (`src/Watcher/ArchitectDialoguePatch.cs`, two repeating dialogues in `localization/{eng,fra}/ancients.json`).
+    The owner still proofreads the text.
   - Duplicate tables (`docs/review/*-duplicates.md`) approved; doubtful cases settled: Discovery, Jack of All Trades,
     Secret Technique and Secret Weapon use the StS2 card in every mode (`Sts1Relation.Retired` since 0.12.26, classes
     kept for old saves); keyword-only duplicates keep the version choice; each version keeps its own game's rarity;
