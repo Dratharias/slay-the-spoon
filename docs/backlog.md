@@ -214,10 +214,13 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   (no fight animation for the key yet); the losers vote again among the relics left. The gem glows while it is the local
   vote and disappears once someone takes it. Not tested in game.
 
+- **Rematch hands (0.12.9):** after a lost chest fight, the loser's hand kept its last rock, paper or scissors texture
+  while voting again (vanilla never reopens a chest after a fight); it now points again. Not tested in game.
+
 ### Owner list, 2026-11-05 (triage; done items are marked with their version)
 
 - Bugs: ~~Sapphire Key greyed out until the last player (owner wants it selectable at once, screenshot
-  `~/Pictures/Debug Slay the spoon/Saphire key.png`)~~ (0.12.8); rock-paper-scissors fingers wrong after a loss; ~~Talk to the Hand's
+  `~/Pictures/Debug Slay the spoon/Saphire key.png`)~~ (0.12.8); ~~rock-paper-scissors fingers wrong after a loss~~ (0.12.9); ~~Talk to the Hand's
   Block Return debuff icon not imported~~ (0.12.6); ~~Act 4 elite and Heart fights have no background; Act 4 second boss should heal 80 %~~ (0.12.7).
 - 2026-10-31 15:23 "crash on color change": the log shows a state divergence on leaving Infested Automaton (host Watcher,
   client Ironclad with Souvenir, 0.12.3, no TintAction queued), then the client was dropped. Cause not found: needs the

@@ -30,6 +30,8 @@ internal static class ChestRematchView
 		AccessTools.FieldRefAccess<NTreasureRoomRelicCollection, Control>("_fightBackstop");
 	private static readonly AccessTools.FieldRef<NTreasureRoomRelicCollection, IRunState> Run =
 		AccessTools.FieldRefAccess<NTreasureRoomRelicCollection, IRunState>("_runState");
+	private static readonly AccessTools.FieldRef<NHandImage, TextureRect> HandTexture =
+		AccessTools.FieldRefAccess<NHandImage, TextureRect>("_textureRect");
 	private static readonly Func<NTreasureRoomRelicCollection, List<RelicPickingResult>, Task> AnimateAwards =
 		AccessTools.MethodDelegate<Func<NTreasureRoomRelicCollection, List<RelicPickingResult>, Task>>(
 			AccessTools.Method(typeof(NTreasureRoomRelicCollection), "AnimateRelicAwards"));
@@ -242,12 +244,14 @@ internal static class ChestRematchView
 		await Task.WhenAll(grabs);
 		foreach (var (_, index) in round.Results) holders.First(h => h.Index == index).Disable();
 
-		// Winners keep their relic in hand; everyone else points again.
+		// Winners keep their relic in hand; everyone else points again. Vanilla never reopens a chest after a fight, so a
+		// loser's hand still shows its last rock, paper or scissors: put the pointing finger back.
 		var winners = round.Results.Select(r => r.Result.player).Append(round.KeyTaker).ToHashSet();
 		foreach (var player in run.Players.Where(p => !winners.Contains(p)))
 			if (hands.GetHand(player.NetId) is { } hand)
 			{
 				hand.SetFrozenForRelicAwards(false);
+				HandTexture(hand).Texture = player.Character.ArmPointingTexture;
 				if (LocalContext.IsMe(player)) hand.Modulate = Colors.White;
 			}
 
