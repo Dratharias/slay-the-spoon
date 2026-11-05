@@ -16,7 +16,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1WristBlade : Sts1InactiveBossRelic
+public sealed class Sts1WristBlade : Sts1BossRelic
 {
 	public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{

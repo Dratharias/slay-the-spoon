@@ -15,7 +15,7 @@ public sealed class Sts1HolyWater : Sts1WatcherRelic
 {
 	public override bool HasUponPickupEffect => true;
 	public override RelicRarity Rarity => RelicRarity.Event;
-	// Orobas fallback only: excluded from all random rewards, pools and shops.
+	// Orobas fallback and the StS1 boss chest only: excluded from all random rewards, pools and shops.
 	public override bool IsAllowed(IRunState runState) => false;
 	public override bool IsAllowedInShops => false;
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new CardsVar(3) };

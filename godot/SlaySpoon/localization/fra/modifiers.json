@@ -24,5 +24,19 @@
   "SPOON_STARTING_CHEST.description": "Chez Neow, chaque joueur ouvre un coffre de 10 reliques communes, peu communes et rares de son propre bassin, et en garde une. La relique de départ reste.",
   "SPOON_STARTING_CHEST.short": "Coffre",
   "SPOON_STARTING_CHEST.neow_title": "Ouvrir le coffre",
-  "SPOON_STARTING_CHEST.neow_description": "Choisissez [gold]1[/gold] relique parmi [blue]10[/blue]."
+  "SPOON_STARTING_CHEST.neow_description": "Choisissez [gold]1[/gold] relique parmi [blue]10[/blue].",
+  "SPOON_BOSS_RELICS.title": "Reliques de boss de StS1",
+  "SPOON_BOSS_RELICS.description": "Les Anciens des actes 2 et 3 offrent un choix de plus : un coffre de 3 reliques de boss de Slay the Spire au lieu de leur propre cadeau. En coopération, les joueurs qui le choisissent partagent le coffre, et pierre-feuille-ciseaux départage les égalités, comme pour un coffre ordinaire.",
+  "SPOON_BOSS_RELICS.short": "Boss",
+  "SPOON_BOSS_RELICS.option_title": "Ouvrir le coffre du boss",
+  "SPOON_BOSS_RELICS.option_description": "Choisissez [gold]1[/gold] relique de boss parmi [blue]3[/blue] au lieu de ce cadeau.",
+  "SPOON_BOSS_RELICS.option_description_coop": "Choisissez [gold]1[/gold] relique de boss parmi [blue]3[/blue] au lieu de ce cadeau. Le coffre est partagé avec les autres joueurs qui l'ouvrent.",
+  "SPOON_BOSS_RELICS.waiting": "Le coffre reste fermé tant que tous les joueurs n'ont pas fait leur choix.",
+  "SPOON_BOSS_RELICS.only": "Vous prenez [gold]{Relic}[/gold].",
+  "SPOON_BOSS_RELICS.won": "Vous gagnez à pierre-feuille-ciseaux et prenez [gold]{Relic}[/gold].",
+  "SPOON_BOSS_RELICS.consolation": "Vous perdez à pierre-feuille-ciseaux. Il vous reste [gold]{Relic}[/gold].",
+  "SPOON_BOSS_RELICS.lost": "Vous perdez à pierre-feuille-ciseaux, et le coffre est vide.",
+  "SPOON_BOSS_RELICS.skipped": "Vous refermez le coffre sans relique.",
+  "SPOON_BOSS_RELICS.none": "Le coffre est vide : vous possédez déjà toutes les reliques de boss qu'il pourrait contenir.",
+  "SPOON_BOSS_RELICS.empty": "Le coffre est vide."
 }

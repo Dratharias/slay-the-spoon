@@ -27,7 +27,7 @@ public static class Sts1RelicPools
 }
 
 [HarmonyPatch(typeof(EventRelicPool), "GenerateAllRelics")]
-public static class Sts1InactiveRelicPool
+public static class Sts1BossRelicPool
 {
 	public static void Postfix(ref IEnumerable<RelicModel> __result) => __result = __result.Concat(new RelicModel[]
 	{

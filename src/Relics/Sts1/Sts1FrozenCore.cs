@@ -16,7 +16,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1FrozenCore : Sts1InactiveBossRelic
+public sealed class Sts1FrozenCore : Sts1BossRelic
 {
 	public override bool HasUponPickupEffect => true;
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[] { HoverTipFactory.FromOrb<FrostOrb>() };

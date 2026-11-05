@@ -41,7 +41,7 @@ public static class TopBarPercentPatch
 					_ => StsColors.cream,
 				});
 				break;
-			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing or SpoonCampfireGift or SpoonStartingChest:
+			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing or SpoonCampfireGift or SpoonStartingChest or SpoonBossRelics:
 				ReplaceIcon(__instance, new LocString("modifiers", Modifier(__instance).Id.Entry + ".short").GetFormattedText(), StsColors.cream);
 				break;
 			case SpoonMerchantLoans loans:

@@ -16,7 +16,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1RingOfTheSerpent : Sts1InactiveBossRelic
+public sealed class Sts1RingOfTheSerpent : Sts1BossRelic
 {
 	public override bool HasUponPickupEffect => true;
 	public override async Task AfterObtained()

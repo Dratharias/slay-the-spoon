@@ -16,7 +16,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1RunicCube : Sts1InactiveBossRelic
+public sealed class Sts1RunicCube : Sts1BossRelic
 {
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{

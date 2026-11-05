@@ -7,7 +7,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1SacredBark : Sts1InactiveBossRelic { }
+public sealed class Sts1SacredBark : Sts1BossRelic { }
 
 /// <summary>
 /// StS2 has no potion potency hook. Every numeric potion var is read from <see cref="PotionModel.DynamicVars"/>, for

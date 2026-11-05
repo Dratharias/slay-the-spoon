@@ -18,8 +18,11 @@ public abstract class Sts1Relic : RelicModel
 		run.Modifiers.Any(m => m is SpoonCardSetSts1Only), run.Modifiers.Any(m => m is SpoonSpireSouvenirModifier));
 }
 
-/// <summary>Imported effects only. No source grants these relics until the owner designs their activation.</summary>
-public abstract class Sts1InactiveBossRelic : Sts1Relic
+/// <summary>
+/// StS1 boss relics. Only the StS1 Boss Relics Custom Run option grants them (<see cref="SlaySpoon.Relics.BossChest"/>);
+/// they stay out of every grab bag, shop and random source.
+/// </summary>
+public abstract class Sts1BossRelic : Sts1Relic
 {
 	// StS2 has no Boss rarity. Event keeps these out of ordinary grab bags without inventing a new rarity.
 	public override RelicRarity Rarity => RelicRarity.Event;

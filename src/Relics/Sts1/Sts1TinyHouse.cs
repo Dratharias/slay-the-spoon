@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1TinyHouse : Sts1InactiveBossRelic
+public sealed class Sts1TinyHouse : Sts1BossRelic
 {
 	public override bool HasUponPickupEffect => true;
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new GoldVar(50), new MaxHpVar(5m) };

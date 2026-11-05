@@ -17,7 +17,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1HoveringKite : Sts1InactiveBossRelic
+public sealed class Sts1HoveringKite : Sts1BossRelic
 {
 	private bool _triggered;
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new EnergyVar(1) };

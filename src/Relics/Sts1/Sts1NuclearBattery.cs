@@ -16,7 +16,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1NuclearBattery : Sts1InactiveBossRelic
+public sealed class Sts1NuclearBattery : Sts1BossRelic
 {
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new[] { HoverTipFactory.FromOrb<PlasmaOrb>() };
 	public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)

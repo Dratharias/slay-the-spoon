@@ -24,5 +24,19 @@
   "SPOON_STARTING_CHEST.description": "At Neow, each player opens a chest of 10 common, uncommon and rare relics from their own pool and keeps one. The starting relic stays.",
   "SPOON_STARTING_CHEST.short": "Chest",
   "SPOON_STARTING_CHEST.neow_title": "Open the Chest",
-  "SPOON_STARTING_CHEST.neow_description": "Choose [gold]1[/gold] of [blue]10[/blue] relics."
+  "SPOON_STARTING_CHEST.neow_description": "Choose [gold]1[/gold] of [blue]10[/blue] relics.",
+  "SPOON_BOSS_RELICS.title": "StS1 Boss Relics",
+  "SPOON_BOSS_RELICS.description": "The act 2 and act 3 Ancients offer one more choice: a chest of 3 Slay the Spire boss relics instead of their own gift. In co-op, the players who choose it share the chest, and rock-paper-scissors settles ties, as with a regular chest.",
+  "SPOON_BOSS_RELICS.short": "Boss",
+  "SPOON_BOSS_RELICS.option_title": "Open the Boss Chest",
+  "SPOON_BOSS_RELICS.option_description": "Choose [gold]1[/gold] of [blue]3[/blue] boss relics instead of this gift.",
+  "SPOON_BOSS_RELICS.option_description_coop": "Choose [gold]1[/gold] of [blue]3[/blue] boss relics instead of this gift. The chest is shared with the other players who open it.",
+  "SPOON_BOSS_RELICS.waiting": "The chest stays shut until every player has made their choice.",
+  "SPOON_BOSS_RELICS.only": "You take [gold]{Relic}[/gold].",
+  "SPOON_BOSS_RELICS.won": "You win the rock-paper-scissors and take [gold]{Relic}[/gold].",
+  "SPOON_BOSS_RELICS.consolation": "You lose the rock-paper-scissors. [gold]{Relic}[/gold] is left for you.",
+  "SPOON_BOSS_RELICS.lost": "You lose the rock-paper-scissors, and the chest is empty.",
+  "SPOON_BOSS_RELICS.skipped": "You close the chest without a relic.",
+  "SPOON_BOSS_RELICS.none": "The chest is empty: you already own every boss relic it could hold.",
+  "SPOON_BOSS_RELICS.empty": "The chest is empty."
 }

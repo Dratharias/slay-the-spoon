@@ -179,7 +179,7 @@ Read `README.md` for the player view and the spec for every decision.
   `treasure_room.tscn`, a fifth slot for 4 relics), dimmed until it is offered to the last player; solo: a choice from
   the start. Build 0 warnings; 398 xUnit + 74 pytest pass. Not tested in game.
 
-## Backlog wave 0.12.6–0.12.36 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
+## Backlog wave 0.12.6–0.12.37 (2026-11-05, branch `backlog-wave`, worktree `../slay-the-spoon-wave`)
 
 - Block Return icon; Ending fight backgrounds and heal; Sapphire Key selectable from the first chest round (several key
   voters fight for it); rematch losers point again; StS1 Ancient Potion (`src/Potions/Sts1/`, StS1-only runs, every
@@ -214,7 +214,12 @@ Read `README.md` for the player view and the spec for every decision.
   `PotionModel.DynamicVars` getter; Runic Dome hides intents on the holder's screen only. The Watcher is selectable in
   solo Standard and every Custom Run (`WatcherRunRule`: a solo Watcher run uses StS1 cards), an owner-approved
   Standard exception.
-- Build 0 warnings; 534 xUnit + 78 pytest pass. Not tested in game.
+- 0.12.37: Custom Run option "StS1 Boss Relics" (`SpoonBossRelics`): the act 2 and act 3 Ancients offer a boss chest of
+  3 (`src/Relics/BossChest.cs`, rule `src/Core/BossChestRule.cs`): Darv's 11 natives with Darv's rules, the 8 shared
+  ports and the takers' character boss relics (only when every taker plays that character). Co-op takers share the
+  chest once every player has made their first choice; ties go to the vanilla rock-paper-scissors fight, losers get the
+  unvoted relics. `Sts1InactiveBossRelic` is now `Sts1BossRelic`.
+- Build 0 warnings; 553 xUnit + 78 pytest pass. Not tested in game.
 
 ## Documents
 

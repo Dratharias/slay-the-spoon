@@ -17,7 +17,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1MarkOfPain : Sts1InactiveBossRelic
+public sealed class Sts1MarkOfPain : Sts1BossRelic
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new EnergyVar(1), new CardsVar(2) };
 	public override decimal ModifyMaxEnergy(Player player, decimal amount) => player == Owner ? amount + DynamicVars.Energy.IntValue : amount;

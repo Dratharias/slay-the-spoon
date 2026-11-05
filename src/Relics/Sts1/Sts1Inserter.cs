@@ -16,7 +16,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Relics.Sts1;
 
-public sealed class Sts1Inserter : Sts1InactiveBossRelic
+public sealed class Sts1Inserter : Sts1BossRelic
 {
 	private int _turnsSeen;
 	[SavedProperty]

@@ -7,7 +7,7 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   set mode is active (owner request, 2026-10-29).~~ Done in 0.12.36: Champion Belt and Magic Flower (Ironclad) and The
   Specimen (Silent) join their pools as Rare relics in Custom Runs with a StS1 card set (`src/Relics/Sts1/`), with StS1
   art (`tools/sts1/event_art.py`, `images/relics/sts1/`) and EN/FR text. Inventory: `docs/review/character-relics.md`
-  and `data/duplicates/character-relics.json`. The boss relics are ported too; their Custom Run option is the entry
+  and `data/duplicates/character-relics.json`. The boss relics are ported too; their Custom Run option (0.12.37) is the entry
   under "Design calls settled" below. Special event relics stay imported without implementation (owner, 2026-10-30).
 - Act 4 keys (step 6 WP3), minors left after review:
   - ~~A co-op Sapphire swap waits up to 15 s for its pickup.~~ 0.12.0: the swap is gone (chest rematch instead).
@@ -299,9 +299,14 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     enters event combats for the whole team), so the team votes and a Souvenir run needs every player to hold the relic;
     I am War fights a random StS2 act 1 boss with StS2's boss rewards plus a Rare relic, instead of StS1's 50 gold +
     Rare relic; I am Healthy is left out, since StS1 only offers it past floor 40).
-  - StS1 boss relics (Custom Run option): the act 2 and act 3 Ancients gain an option "Choose a boss relic among 3"
+  - ~~StS1 boss relics (Custom Run option): the act 2 and act 3 Ancients gain an option "Choose a boss relic among 3"
     that replaces the Ancient's own pick. In co-op the players who take it share a chest of 3 with rock-paper-scissors,
-    otherwise like a regular StS2 chest. Neow does not offer it.
+    otherwise like a regular StS2 chest. Neow does not offer it.~~ Done in 0.12.37: modifier `SpoonBossRelics`,
+    `src/Relics/BossChest.cs`, rule `src/Core/BossChestRule.cs`. Pool: the 11 Darv natives (Darv's act and Pandora's
+    Box rules), the 8 shared ports, and the character boss relics. Builder calls: the chest opens once every player has
+    made their first choice at the Ancient; character boss relics enter a shared chest only when every taker plays that
+    character; relics a taker already owns are left out; the result is told on the Ancient's last page, without the
+    treasure room's rock-paper-scissors animation. Checklist: `docs/testing/boss-relics-checklist.md`.
   - Massive Scroll keeps its fallback to ordinary allowed cards when the co-op filter leaves none.
   - Corpse Explosion keeps StS1's rule (target max HP × stacks to every other enemy, chains included): the "−90 AOE"
     report is intended.
