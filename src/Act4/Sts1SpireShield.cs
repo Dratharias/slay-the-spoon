@@ -1,4 +1,5 @@
 using Godot;
+using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -7,6 +8,7 @@ using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
 using SlaySpoon.Core;
+using SlaySpoon.Spine;
 
 namespace SlaySpoon.Act4;
 
@@ -14,6 +16,13 @@ namespace SlaySpoon.Act4;
 public sealed class Sts1SpireShield : Sts1EndingMonster
 {
 	public override string TexturePath => "res://SlaySpoon/images/ending/shield.png";
+	public override string SpineKey => Sts1Spine.Shield;
+
+	/// <summary>StS1 plays a separate swing for Smash ("old_attack", converted as attack_smash).</summary>
+	private const string SmashTrigger = "SpoonSmash";
+
+	protected override IReadOnlyDictionary<string, string> SpineTriggers { get; } =
+		new Dictionary<string, string> { [SmashTrigger] = "attack_smash" };
 	public override Vector2 Origin => new(127, 271);
 	public override Vector2 Size => new(304, 295);
 
@@ -41,6 +50,7 @@ public sealed class Sts1SpireShield : Sts1EndingMonster
 	private async Task BashMove(IReadOnlyList<Creature> targets)
 	{
 		var attack = await DamageCmd.Attack(EndingNumbers.ShieldBash(Ascension)).FromMonster(this)
+			.WithAttackerAnim(CreatureAnimator.attackTrigger, 0.35f)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(null);
 		foreach (Creature player in PlayersHit(attack))
@@ -76,6 +86,7 @@ public sealed class Sts1SpireShield : Sts1EndingMonster
 		try
 		{
 			await DamageCmd.Attack(EndingNumbers.ShieldSmash(Ascension)).FromMonster(this)
+				.WithAttackerAnim(SmashTrigger, 0.5f)
 				.WithHitFx("vfx/vfx_attack_blunt").Execute(null);
 			int block = EndingNumbers.ShieldSmashBlock(Ascension, _smashHits);
 			if (block > 0) await CreatureCmd.GainBlock(Creature, block, ValueProp.Move, null);

@@ -1,6 +1,7 @@
 using System.Reflection;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -12,6 +13,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
 using SlaySpoon.Act4;
 using SlaySpoon.Core;
+using SlaySpoon.Spine;
 
 namespace SlaySpoon.Characters;
 
@@ -106,17 +108,32 @@ public static class WatcherAssetPatch
 
 	internal static Vector2 BodyOrigin => new(WatcherAssets.BodyOriginX, WatcherAssets.BodyOriginY);
 
-	/// <summary>A plain sprite of the idle pose, its ground point at the node's origin.</summary>
-	internal static Sprite2D Body(string name, float scale) => new()
+	/// <summary>
+	/// Her skeleton playing its idle loop outside combat (no animator there), or a plain sprite of the idle pose if it
+	/// fails to load; either way the ground point is at the node's origin.
+	/// </summary>
+	internal static Node2D Body(string name, float scale)
 	{
-		Name = name,
-		Texture = PreloadManager.Cache.GetTexture2D(WatcherAssets.Body),
-		Centered = false,
-		Offset = -BodyOrigin,
-		Scale = new Vector2(scale, scale),
-	};
+		if (Sts1Spine.CreateSprite(Sts1Spine.Watcher, name) is { } spine)
+		{
+			spine.Scale = new Vector2(scale, scale);
+			Sts1Spine.Play(spine, "idle_loop", loop: true);
+			return spine;
+		}
+		return new Sprite2D
+		{
+			Name = name,
+			Texture = PreloadManager.Cache.GetTexture2D(WatcherAssets.Body),
+			Centered = false,
+			Offset = -BodyOrigin,
+			Scale = new Vector2(scale, scale),
+		};
+	}
 
-	/// <summary>Combat, the game over screen and the fake merchant: a static sprite with no Spine animator.</summary>
+	/// <summary>
+	/// Combat, the game over screen and the fake merchant: her StS1 skeleton (Idle and Hit, animated by
+	/// <see cref="Sts1Watcher.GenerateAnimator"/>), or the static idle pose if it fails to load.
+	/// </summary>
 	[HarmonyPatch(typeof(CharacterModel), nameof(CharacterModel.CreateVisuals))]
 	public static class CreateVisualsPatch
 	{
@@ -127,7 +144,8 @@ public static class WatcherAssetPatch
 				return true;
 			}
 			__result = EndingVisuals.Create(WatcherAssets.Body, BodyOrigin,
-				new Rect2(WatcherAssets.HitboxX, WatcherAssets.HitboxY, WatcherAssets.HitboxWidth, WatcherAssets.HitboxHeight));
+				new Rect2(WatcherAssets.HitboxX, WatcherAssets.HitboxY, WatcherAssets.HitboxWidth, WatcherAssets.HitboxHeight),
+				Sts1Spine.Watcher);
 			return false;
 		}
 	}
@@ -208,7 +226,7 @@ public static class WatcherAssetPatch
 				__result.RemoveChild(child);
 				child.QueueFree();
 			}
-			Sprite2D body = Body(BodyName, Scale);
+			Node2D body = Body(BodyName, Scale);
 			body.Position = Feet;
 			__result.AddChild(body);
 			__result.MoveChild(body, 0);
@@ -221,7 +239,7 @@ public static class WatcherAssetPatch
 	{
 		public static void Postfix(NRestSiteCharacter __instance)
 		{
-			if (__instance.GetNodeOrNull<Sprite2D>(RestSitePatch.BodyName) is { } body)
+			if (__instance.GetNodeOrNull<Node2D>(RestSitePatch.BodyName) is { } body)
 			{
 				body.Scale = new Vector2(-body.Scale.X, body.Scale.Y);
 				body.Position = new Vector2(-body.Position.X, body.Position.Y);
@@ -261,9 +279,12 @@ public static class WatcherAssetPatch
 		}
 	}
 
+	internal const string CorpseName = "Sts1WatcherCorpse";
+
 	/// <summary>
-	/// With no Spine animator, NCreature plays no death sound or animation for a player: show StS1's corpse instead and
-	/// play the death sound; a co-op revive brings the idle pose back.
+	/// StS1 swaps her body for a corpse image when she dies. A Spine body is hidden and the corpse added beside it
+	/// (vanilla already played the death sound, as for any Spine player); a static body takes the corpse texture and
+	/// the death sound is played here, since NCreature plays none without an animator. A co-op revive brings her back.
 	/// </summary>
 	[HarmonyPatch(typeof(NCreature), nameof(NCreature.StartDeathAnim))]
 	public static class DeathPatch
@@ -271,7 +292,27 @@ public static class WatcherAssetPatch
 		public static void Postfix(NCreature __instance)
 		{
 			Player? player = __instance.Entity.Player;
-			if (player?.Character is not Sts1Watcher || __instance.Body is not Sprite2D body)
+			if (player?.Character is not Sts1Watcher)
+			{
+				return;
+			}
+			if (__instance.Visuals.SpineBody is { } spine)
+			{
+				if (__instance.Visuals.GetNodeOrNull(CorpseName) != null) return;
+				__instance.Body.Visible = false;
+				var corpse = new Sprite2D
+				{
+					Name = CorpseName,
+					Texture = PreloadManager.Cache.GetTexture2D(WatcherAssets.Corpse),
+					Centered = false,
+					Offset = -new Vector2(WatcherAssets.CorpseOriginX, WatcherAssets.CorpseOriginY),
+					Material = spine.GetNormalMaterial(),
+				};
+				__instance.Visuals.AddChild(corpse);
+				__instance.Visuals.MoveChild(corpse, __instance.Body.GetIndex() + 1);
+				return;
+			}
+			if (__instance.Body is not Sprite2D body)
 			{
 				return;
 			}
@@ -290,7 +331,18 @@ public static class WatcherAssetPatch
 	{
 		public static void Postfix(NCreature __instance)
 		{
-			if (__instance.Entity.Player?.Character is not Sts1Watcher || __instance.Body is not Sprite2D body)
+			if (__instance.Entity.Player?.Character is not Sts1Watcher)
+			{
+				return;
+			}
+			if (__instance.Visuals.SpineBody != null)
+			{
+				__instance.Visuals.GetNodeOrNull(CorpseName)?.QueueFree();
+				__instance.Body.Visible = true;
+				__instance.SetAnimationTrigger(CreatureAnimator.idleTrigger);
+				return;
+			}
+			if (__instance.Body is not Sprite2D body)
 			{
 				return;
 			}

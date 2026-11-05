@@ -1,4 +1,6 @@
 using Godot;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -9,6 +11,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Random;
 using SlaySpoon.Core;
+using SlaySpoon.Spine;
 
 namespace SlaySpoon.Act4;
 
@@ -26,6 +29,13 @@ public abstract class Sts1EndingMonster : MonsterModel, IEndingMonster
 	/// <summary>The whole sprite by default; a monster whose sprite reaches far above its body narrows it.</summary>
 	public virtual Rect2 Hitbox => new(-Origin, Size);
 
+	public abstract string SpineKey { get; }
+
+	/// <summary>Triggers of this monster's own (trigger -> one-shot animation), beside the vanilla ones.</summary>
+	protected virtual IReadOnlyDictionary<string, string>? SpineTriggers => null;
+
+	public override CreatureAnimator GenerateAnimator(MegaSprite controller) => Sts1Spine.Animator(controller, SpineTriggers);
+
 	/// <summary>A real vanilla scene, so asset preloading succeeds; <see cref="EndingVisuals"/> builds the node instead.</summary>
 	protected override string VisualsPath => SceneHelper.GetScenePath("creature_visuals/fallback");
 
@@ -35,9 +45,9 @@ public abstract class Sts1EndingMonster : MonsterModel, IEndingMonster
 	public override bool HasDeathSfx => false;
 
 	/// <summary>
-	/// No Spine animator, so vanilla would start the death fade at once and the combat UI would wait for no death
-	/// length. One second holds the corpse before the fade, as vanilla's 0.5 s tail after a Spine death does, and gives
-	/// the reward screen a length to wait for.
+	/// StS1 has no death animation for these monsters (Dead plays hurt once, or nothing for the Heart), so the length
+	/// would be the current animation's. One second holds the body before the fade, as vanilla's 0.5 s tail after a
+	/// Spine death does, and gives the reward screen a length to wait for.
 	/// </summary>
 	public override float DeathAnimLengthOverride => 1f;
 

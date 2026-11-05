@@ -1,4 +1,5 @@
 using Godot;
+using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -8,6 +9,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using SlaySpoon.Core;
+using SlaySpoon.Spine;
 
 namespace SlaySpoon.Act4;
 
@@ -18,6 +20,7 @@ namespace SlaySpoon.Act4;
 public sealed class Sts1SpireSpear : Sts1EndingMonster
 {
 	public override string TexturePath => "res://SlaySpoon/images/ending/spear.png";
+	public override string SpineKey => Sts1Spine.Spear;
 	public override Vector2 Origin => new(270, 284);
 	public override Vector2 Size => new(437, 316);
 
@@ -50,6 +53,7 @@ public sealed class Sts1SpireSpear : Sts1EndingMonster
 	{
 		var attack = await DamageCmd.Attack(EndingNumbers.SpearBurnStrike(Ascension)).FromMonster(this)
 			.WithHitCount(EndingNumbers.SpearBurnStrikeHits)
+			.WithAttackerAnim(CreatureAnimator.attackTrigger, 0.15f) // StS1 waits 0.15 s after each thrust
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(null);
 		// StS1 A18: MakeTempCardInDrawPileAction(..., randomSpot: false), so the Burns go on top of the draw pile.
@@ -70,6 +74,7 @@ public sealed class Sts1SpireSpear : Sts1EndingMonster
 	{
 		await DamageCmd.Attack(EndingNumbers.SpearSkewer(Ascension)).FromMonster(this)
 			.WithHitCount(EndingNumbers.SpearSkewerHits(Ascension))
+			.WithAttackerAnim(CreatureAnimator.attackTrigger, 0.05f)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(null);
 	}

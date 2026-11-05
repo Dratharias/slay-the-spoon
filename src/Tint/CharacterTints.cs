@@ -1,5 +1,6 @@
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -137,6 +138,17 @@ public static class CharacterTints
 		if (visuals.SpineBody is { } spine)
 		{
 			spine.SetNormalMaterial(material!);
+			// The Watcher's staff eye is a second skeleton under her body.
+			Node2D current = visuals.GetCurrentBody();
+			foreach (Node child in current.GetChildren())
+			{
+				if (child.GetClass() == MegaSprite.spineClassName) new MegaSprite(child).SetNormalMaterial(material!);
+			}
+			// Her corpse sprite replaces the hidden body on death (WatcherAssetPatch).
+			if (visuals.GetNodeOrNull<CanvasItem>(Characters.WatcherAssetPatch.CorpseName) is { } corpse)
+			{
+				corpse.Material = material;
+			}
 			return;
 		}
 		// Static bodies (the Watcher): the body's sprites take the body's material.

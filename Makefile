@@ -26,7 +26,7 @@ TOOLS     := nice -n 19 podman run --rm \
 	-v "$(STS2_LOC)":/sts2loc:ro \
 	-w /repo localhost/slayspoon-tools
 
-.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts1-act4-data sts1-ending-art sts1-watcher-art sts2-loc workshop workshop-upload
+.PHONY: build test up down restart clean mp tools-image sts1-data sts1-colorless-data sts1-act4-data sts1-ending-art sts1-watcher-art sts1-spine sts2-loc workshop workshop-upload
 
 build:
 	$(DOTNET) dotnet build src -c Release -p:Sts2DataDir=/sts2 -o /repo/build/dll --nologo -v quiet
@@ -78,6 +78,10 @@ sts1-ending-art:
 sts1-watcher-art:
 	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --watcher godot/SlaySpoon
 	$(TOOLS) python tools/sts1/art.py --jar /sts1.jar --powers godot/SlaySpoon/images/powers
+
+# StS1 Spine skeletons (Ending monsters, the Watcher and her staff eye) converted to Spine 4.2.
+sts1-spine:
+	$(TOOLS) python tools/sts1/spine_assets.py --jar /sts1.jar --out godot/SlaySpoon/spine
 
 # Colorless catalog first: no playable skeletons until namesakes and special cards are reviewed.
 sts1-colorless-data:

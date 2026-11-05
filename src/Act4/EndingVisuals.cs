@@ -3,6 +3,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Combat;
+using SlaySpoon.Spine;
 
 namespace SlaySpoon.Act4;
 
@@ -15,23 +16,27 @@ public interface IEndingMonster
 	Vector2 Size { get; }
 	/// <summary>Hover and health-bar box relative to the ground point; intents sit above it.</summary>
 	Rect2 Hitbox { get; }
+	/// <summary>The converted StS1 skeleton (<see cref="Sts1Spine"/>) to animate instead of the sprite, if any.</summary>
+	string? SpineKey { get; }
 }
 
 /// <summary>
-/// Builds the creature visuals of an <see cref="IEndingMonster"/> in code. The body is a plain Sprite2D, not a
-/// SpineSprite, so the creature has no Spine animator: attacks and hurt play no animation, death uses the
-/// hitbox-sized fade.
+/// Builds the creature visuals of an <see cref="IEndingMonster"/> in code. The body is the creature's StS1 skeleton as a
+/// SpineSprite when it loads (NCreatureVisuals then wraps it and NCreature builds the model's animator), else a plain
+/// Sprite2D of the setup pose with no animation.
 /// </summary>
 [HarmonyPatch(typeof(MonsterModel), nameof(MonsterModel.CreateVisuals))]
 public static class EndingVisuals
 {
 	private const float IntentGap = 60f;
 
-	public static NCreatureVisuals Create(string texturePath, Vector2 origin, Rect2 hitbox)
+	public static NCreatureVisuals Create(string texturePath, Vector2 origin, Rect2 hitbox, string? spineKey = null)
 	{
 		var root = new NCreatureVisuals { Name = "EndingVisuals" };
-		// Offset rather than position, so a horizontal flip of the body mirrors around the ground point.
-		Add(root, new Sprite2D
+		// The skeleton root is the ground point. The sprite uses an offset rather than a position, so a horizontal flip
+		// of the body mirrors around the ground point.
+		Node2D? spine = spineKey == null ? null : Sts1Spine.CreateSprite(spineKey, "Visuals");
+		Add(root, spine ?? new Sprite2D
 		{
 			Name = "Visuals",
 			Texture = PreloadManager.Cache.GetTexture2D(texturePath),
@@ -63,7 +68,7 @@ public static class EndingVisuals
 	private static bool Prefix(MonsterModel __instance, ref NCreatureVisuals __result)
 	{
 		if (__instance is not IEndingMonster monster) return true;
-		__result = Create(monster.TexturePath, monster.Origin, monster.Hitbox);
+		__result = Create(monster.TexturePath, monster.Origin, monster.Hitbox, monster.SpineKey);
 		return false;
 	}
 }

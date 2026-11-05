@@ -4,7 +4,7 @@ Remaining design decisions and deferred work after the 0.10.1 fix wave (2026-10-
 Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/fix-wave-checklist.md.
 
 **1.0.0 (2026-11-05):** every entry below is done, checked, kept with a reason, or an owner item (in-game checks,
-Spine animations, the co-op crash report's client log). New bugs and requests go at the end.
+the co-op crash report's client log; Spine animations are done in 1.0.1). New bugs and requests go at the end.
 
 - ~~StS1 character-specific relics (Ironclad, Silent, Defect, Watcher pools) that StS2 dropped, offered when a StS1 card
   set mode is active (owner request, 2026-10-29).~~ Done in 0.12.36: Champion Belt and Magic Flower (Ironclad) and The
@@ -31,7 +31,8 @@ Spine animations, the co-op crash report's client log). New bugs and requests go
   - Emerald elite buff: Strength act+2, +25 max HP, Metallicize 2·act+4, Regenerate 2·act+3 (one of them, rolled).
   - The cfg holding the permanent unlock is never overwritten when unreadable; bool and number values are accepted.
 - Act 4 The Ending (step 6 WP4-6), design calls made without the owner (change any of them):
-  - Static sprites rendered from the StS1 setup pose, not animations.
+  - ~~Static sprites rendered from the StS1 setup pose, not animations.~~ 1.0.1: the Spear, the Shield and the Heart
+    play their StS1 Spine skeletons (converted to 4.2 by `make sts1-spine`); the static sprites stay as the fallback.
   - Monster visuals and the elite slot layout are built in code, not as scenes.
   - The Ending is added to the run when the team takes its last key; only the second act 3 boss at A10 gives rewards
     (the single boss below A10 still rewards), per owner decision.
@@ -167,12 +168,18 @@ Spine animations, the co-op crash report's client log). New bugs and requests go
     Lesson Learned selection (both read game state: deck order and the synced run RNG); power tests are
     mostly arithmetic and `WatcherPowerTextTests` greps source; ~~stale pytest name `test_pending_ports_never_enter_runtime`~~ (now `test_every_watcher_card_is_ported`); Task 9's tests were written after the code (no red run). Kept (2026-11-05): what is left reads game state and
     stays in `docs/testing/step-7-checklist.md`.
-- The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
+- ~~The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
   and in-game validation of everything in `docs/testing/step-7-checklist.md`. A "Deep backlog priority" section, if one
   exists on `main`, keeps its own wording; Watcher animations stay at the bottom of it.
   Owner item, kept deferred (2026-11-05): StS2 ships the Spine 4.2 runtime and the StS1 skeletons are Spine 3.4.02
   (`docs/review/act4-mechanics.md`), so animations need the skeletons converted or re-exported in the Spine editor,
-  then checked in game; the owner placed this at the bottom of the deep backlog and only they can play-test it.
+  then checked in game; the owner placed this at the bottom of the deep backlog and only they can play-test it.~~
+  Done in 1.0.1: `tools/sts1/spine34to42.py` converts the 3.4 JSON to 4.2 (unsupported input is refused),
+  `tools/sts1/spine_assets.py` exports her body and staff eye (and the three Ending monsters) into
+  `godot/SlaySpoon/spine/`, and `src/Spine/Sts1Spine.cs` loads them at runtime. Combat, rest site and merchant use her
+  skeleton (Idle at 0.7, Hit); the eye skeleton follows the body's `eye_anchor` bone and plays None/Calm/Wrath/Divinity;
+  her corpse sprite replaces the body on death. Multiplayer hands and the map marker have no StS1 skeleton and keep
+  their images. In-game checks: `docs/testing/spine-checklist.md`.
 
 - Fidelity rule (owner, 2026-10-30): StS1 character cards and StS1 content follow StS1 behavior wherever StS2's engine
   allows; StS2 conventions apply to colorless cards and cross-character cards. Design calls above that chose StS2
@@ -225,7 +232,7 @@ Spine animations, the co-op crash report's client log). New bugs and requests go
 
 - Character/Act 4 animations and in-game validation are deferred behind the remaining content work.
   Existing testing checklists remain pending; this priority change does not mark them passed. The content work is done
-  (1.0.0); both stay with the owner: in-game checks need their clicks, animations need the Spine conversion above.
+  (1.0.0); both stay with the owner: in-game checks need their clicks, the Spine conversion is done (1.0.1).
 - Watcher relic plan: reuse native shared Cloak Clasp rather than duplicate it; Holy Water and Violet Lotus
   replace Archaic Tooth at Orobas when the Tooth's conditions fail. See `docs/review/character-relics.md`.
 - Bugs and in-game test results: the owner logs them here later (none open beyond the crash report below).
@@ -287,7 +294,7 @@ Spine animations, the co-op crash report's client log). New bugs and requests go
   (StS1 rule); three Knights died together. Looks intended unless players took damage. Settled: intended (owner, 2026-11-05, below).
 - Watcher: ~~head icon (owner call: crop it from the static sprite)~~ done in 0.12.11; ~~stance-change sound~~ done in 0.12.12 (with a screen-edge flash); ~~StS1's stance
   particles and aura~~ approximated in 0.12.18 (pulsing halo behind her plus rising Godot particles in the stance color,
-  not StS1's exact effects); Spine animations are still missing.
+  not StS1's exact effects); ~~Spine animations are still missing~~ (done in 1.0.1, above).
 - ~~Artifact potion back in StS1 mode (owner call: StS1-only mode, every character). StS2 has none: port StS1's
   Ancient Potion (uncommon, gain 1 Artifact).~~ Done in 0.12.10.
 - Design calls settled with the owner (2026-11-05 Q&A; all implemented by 0.12.37):

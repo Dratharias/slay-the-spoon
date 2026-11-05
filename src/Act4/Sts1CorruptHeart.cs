@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using SlaySpoon.Core;
+using SlaySpoon.Spine;
 
 namespace SlaySpoon.Act4;
 
@@ -15,6 +16,7 @@ namespace SlaySpoon.Act4;
 public sealed class Sts1CorruptHeart : Sts1EndingMonster
 {
 	public override string TexturePath => "res://SlaySpoon/images/ending/heart.png";
+	public override string SpineKey => Sts1Spine.Heart;
 	public override Vector2 Origin => new(189, 830);
 	public override Vector2 Size => new(560, 877);
 
