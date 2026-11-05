@@ -57,8 +57,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - The act's French title is StS1's "La fin"; StS2's French act titles capitalize the noun ("La Gloire"), so "La Fin"
     would match the game's style.
 - Act 4 The Ending (step 6 WP4-6), minors left after review:
-  - The Invincible clamp sits in `Sts1InvinciblePower`, not in the tested `HeartInvincibleRule`; it flashes inside the modify
-    hook (vanilla flashes after modifying, and the overkill path can call the hook twice).
+  - ~~The Invincible clamp sits in `Sts1InvinciblePower`, not in the tested `HeartInvincibleRule`; it flashes inside the modify
+    hook~~ 0.12.23: `HeartInvincibleRule.ClampHpLoss` (tested); the flash moved to `AfterModifyingHpLostAfterOsty`, as Intangible.
   - ~~`PoisonTicksDrainTheSameBudget` only exercises unblockable damage; `BlockedHitsAndExhaustedBudget` is vaguely named.~~
     `BlockedHitsDrainOnlyTheirHpLoss` added, the theory renamed `BudgetNeverGrowsNorGoesNegative` (2026-11-05).
   - ~~`Sts1InvinciblePower.AfterApplied` takes the turn cap from the current amount: a mid-turn re-apply would use the

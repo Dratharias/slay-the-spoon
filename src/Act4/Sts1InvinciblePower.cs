@@ -37,11 +37,14 @@ public sealed class Sts1InvinciblePower : PowerModel, IBorrowedIcon
 	public override decimal ModifyDamageCap(Creature? target, ValueProp props, Creature? dealer, CardModel? cardSource) =>
 		target == Owner ? HeartInvincibleRule.DamageCap(Amount, Owner.Block, props.HasFlag(ValueProp.Unblockable)) : decimal.MaxValue;
 
-	public override decimal ModifyHpLostAfterOsty(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+	public override decimal ModifyHpLostAfterOsty(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource) =>
+		target == Owner ? HeartInvincibleRule.ClampHpLoss(amount, Amount) : amount;
+
+	// Vanilla calls this only on the modifiers that changed the amount, once per hit (as Intangible flashes).
+	public override Task AfterModifyingHpLostAfterOsty()
 	{
-		if (target != Owner || amount <= Amount) return amount;
 		Flash();
-		return Amount;
+		return Task.CompletedTask;
 	}
 
 	public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result,

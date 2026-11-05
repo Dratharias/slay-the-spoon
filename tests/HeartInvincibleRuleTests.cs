@@ -53,6 +53,10 @@ public class HeartInvincibleRuleTests
 		Assert.Equal(2, typeof(HeartInvincibleRule).GetMethod(nameof(HeartInvincibleRule.InitialCap))!.GetParameters().Length);
 	}
 
+	[Theory] [InlineData(10, 30, 10)] [InlineData(30, 30, 30)] [InlineData(45, 30, 30)] [InlineData(45, 0, 0)] [InlineData(45, -5, 0)]
+	public void HpLossIsClampedToTheBudgetLeft(int amount, int remaining, int expected) =>
+		Assert.Equal(expected, HeartInvincibleRule.ClampHpLoss(amount, remaining));
+
 	[Fact] public void SoloCapIgnoresTheMultiplayerFactor() => Assert.Equal(300, HeartInvincibleRule.InitialCap(0, 1));
 
 	[Theory] [InlineData(30, 0, 30)] [InlineData(30, -5, 30)] [InlineData(30, 40, 0)] [InlineData(0, 10, 0)]
