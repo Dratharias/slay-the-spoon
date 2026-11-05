@@ -16,7 +16,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     (left with 2 relics, right with 3); with 4 relics it uses a hand-picked fifth slot at (220, −180) from the chest
     center, which may sit close to the right-hand relic or a hand. Solo: 120 px right of the relic.
   - The Ruby icon comes from a postfix on the private `RestSiteOption.IconPath` getter, which the JIT may inline.
-  - `StandardCharacterSelectPatch` sets `Pending` for any game mode; `Act4UnlockPatch.Record` logs failures at info.
+  - ~~`StandardCharacterSelectPatch` sets `Pending` for any game mode~~: `NCharacterSelectScreen` only builds Standard
+    lobbies (checked 2026-11-05); ~~`Act4UnlockPatch.Record` logs failures at info~~ (error with the stack since 0.12.17).
 - Act 4 keys (step 6 WP3), design calls made without the owner (change any of them):
   - Sapphire chest rematch (0.12.0): only while the run has Act 4 and the team lacks the Sapphire; other chests stay
     vanilla (random consolation prize). The key is offered only to the last player left, so when every player wins a

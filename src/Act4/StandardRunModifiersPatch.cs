@@ -56,7 +56,8 @@ public static class StandardRunLobbyPatch
 	}
 }
 
-/// <summary>Standard character select refuses modifiers; park them and pass an empty list.</summary>
+/// <summary>Standard character select refuses modifiers; park them and pass an empty list. The screen only ever builds
+/// Standard lobbies, so no game mode check is needed here.</summary>
 [HarmonyPatch(typeof(NCharacterSelectScreen), nameof(NCharacterSelectScreen.BeginRun))]
 public static class StandardCharacterSelectPatch
 {

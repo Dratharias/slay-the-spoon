@@ -46,7 +46,7 @@ public static class Act4UnlockPatch
 		catch (Exception e)
 		{
 			// Never break a run over a convenience record.
-			SpoonLog.Info($"act4: unlock check skipped: {e.Message}");
+			SpoonLog.Error($"act4: unlock check failed: {e}");
 		}
 	}
 }
