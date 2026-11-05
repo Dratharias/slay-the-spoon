@@ -195,3 +195,22 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 
 - **Dusty Tome in StS1-only (0.12.4, owner call 2026-11-01):** Darv's Dusty Tome crashed the game (null Ancient pick: the
   StS1-only pool has no Ancient card). The Tome now reads the vanilla pool and gives a vanilla StS2 Ancient card. Not tested in game.
+
+- **Act 4 saves unloadable (0.12.5):** the save writer drops empty id lists and `RoomSet.FromSave` then reads null; the
+  Ending has no events or normal fights, so every co-op save taken after the third key was renamed `.corrupt` on reload
+  (2026-10-31 14:40 and 15:24). `EndingRoomSetLoadPatch` reads missing lists as empty. Not tested in game.
+
+### Owner list, 2026-11-05 (triage; nothing below is done)
+
+- Bugs: Sapphire Key greyed out until the last player (owner wants it selectable at once, screenshot
+  `~/Pictures/Debug Slay the spoon/Saphire key.png`); rock-paper-scissors fingers wrong after a loss; Talk to the Hand's
+  Block Return debuff icon not imported; Act 4 elite and Heart fights have no background; Act 4 second boss should heal 80 %.
+- 2026-10-31 15:23 "crash on color change": the log shows a state divergence on leaving Infested Automaton (host Watcher,
+  client Ironclad with Souvenir, 0.12.3, no TintAction queued), then the client was dropped. Cause not found: needs the
+  client's state dump (the host log only has its own).
+- 2026-11-01 Corpse Explosion "-90 AOE": its power deals target max HP × stacks to every other enemy when the target dies
+  (StS1 rule); three Knights died together. Looks intended unless players took damage.
+- Watcher: head icon (owner draws it, or crop from the static sprite); stance-change animations and sound missing.
+- Artifact potion back in StS1 mode (to clarify: which potion, which pools).
+- Design: Souvenir reward balance (fewer commons; per-run lean toward one game's cards); campfire card trade/gift
+  option for 50 gold per taker; selected-card counter on Sealed Deck-style grids.
