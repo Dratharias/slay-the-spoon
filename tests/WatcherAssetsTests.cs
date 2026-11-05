@@ -42,6 +42,17 @@ public class WatcherAssetsTests
 	}
 
 	[Fact]
+	public void EveryStanceSound_Exists()
+	{
+		Assert.Equal(6, WatcherAssets.StanceSounds.Count);
+		foreach (string path in WatcherAssets.StanceSounds)
+		{
+			string file = Path.Combine(Repo, "godot", path["res://".Length..]);
+			Assert.True(File.Exists(file), "missing " + file);
+		}
+	}
+
+	[Fact]
 	public void OrbLayers_AreTheFiveEnergyCounterLayers()
 	{
 		Assert.Equal(5, WatcherAssets.OrbLayers.Count);

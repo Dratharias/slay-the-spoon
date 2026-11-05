@@ -40,6 +40,15 @@ public static class WatcherAssets
 
 	public const string MapMarker = Root + "packed/map/icons/map_marker_sts1_watcher.png";
 
+	/// <summary>StS1's stance sound: the one-shot played on entering <paramref name="stance"/>, or the loop held while in it.</summary>
+	public static string StanceSound(Stance stance, bool loop) =>
+		"res://SlaySpoon/audio/watcher/stance_" + stance.ToString().ToLowerInvariant() + (loop ? "_loop" : "") + ".ogg";
+
+	/// <summary>Every stance sound; Neutral has none.</summary>
+	public static IReadOnlyList<string> StanceSounds { get; } = new[] { Stance.Calm, Stance.Wrath, Stance.Divinity }
+		.SelectMany(s => new[] { StanceSound(s, false), StanceSound(s, true) })
+		.ToArray();
+
 	/// <summary>Textures for the vanilla energy counter's Layer1..Layer5, in that order.</summary>
 	public static readonly IReadOnlyList<string> OrbLayers = Enumerable.Range(1, 5)
 		.Select(i => $"{Root}ui/combat/energy_counters/sts1_watcher/sts1_watcher_orb_layer_{i}.png")

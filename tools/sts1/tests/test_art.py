@@ -109,6 +109,8 @@ def make_watcher_jar(path):
             z.writestr(f"images/ui/topPanel/purple/{layer}.png", _png((128, 128)))
         for portrait in art.WATCHER_STARTER_PORTRAITS.values():
             z.writestr(f"images/1024Portraits/{portrait}.png", _png((500, 380)))
+        for sound in art.WATCHER_STANCE_SOUNDS:
+            z.writestr(f"audio/sound/watcher/{sound}.ogg", sound.encode())
 
 
 # Sizes of the vanilla Ironclad counterparts, read from the StS2 PCK's .ctex headers.
@@ -127,6 +129,17 @@ WATCHER_SIZES = {
     "images/cards/watcher/sts1_eruption.png": (250, 190),
     "images/cards/watcher/sts1_vigilance.png": (250, 190),
 }
+
+
+def test_watcher_stance_sounds_are_copied(tmp_path):
+    jar = tmp_path / "game.jar"
+    make_watcher_jar(jar)
+    out = tmp_path / "SlaySpoon"
+    art.export_watcher(jar, out)
+    written = sorted(p.name for p in (out / "audio/watcher").iterdir())
+    assert written == sorted(f"stance_{s}{loop}.ogg" for s in ("calm", "wrath", "divinity") for loop in ("", "_loop"))
+    for source, target in art.WATCHER_STANCE_SOUNDS.items():
+        assert (out / f"audio/watcher/{target}.ogg").read_bytes() == source.encode()
 
 
 def test_watcher_art_outputs(tmp_path):

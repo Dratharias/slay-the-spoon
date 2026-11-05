@@ -56,8 +56,10 @@ public static class StanceEyePatch
 	[HarmonyPostfix]
 	public static void RestoreEye(NCreature __instance)
 	{
-		if (__instance.Entity.Player?.Character is Sts1Watcher && __instance.Body is Sprite2D body)
-			ShowBody(body, StanceCmd.Current(__instance.Entity));
+		if (__instance.Entity.Player?.Character is not Sts1Watcher) return;
+		Stance stance = StanceCmd.Current(__instance.Entity);
+		if (__instance.Body is Sprite2D body) ShowBody(body, stance);
+		StanceFx.Restore(__instance, stance);
 	}
 
 	private static Node2D Create(Sprite2D body)
@@ -80,6 +82,7 @@ public static class StanceEyePatch
 	[HarmonyPostfix]
 	public static void HideOnDeath(NCreature __instance)
 	{
+		StanceFx.Died(__instance);
 		if (__instance.Body is Sprite2D body && body.GetNodeOrNull<Node2D>(NodeName) is { } eye)
 		{
 			eye.Visible = false;

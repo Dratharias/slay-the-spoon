@@ -61,6 +61,7 @@ public static class StanceCmd
 			await PlayerCmd.GainEnergy(enterEnergy, player);
 		}
 		StanceEyePatch.Show(creature, Current(creature));
+		StanceFx.Entered(creature, Current(creature));
 		foreach (IStanceListener listener in Listeners(player))
 		{
 			await listener.AfterStanceChanged(choiceContext, player, from, stance);

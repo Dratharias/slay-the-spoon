@@ -217,6 +217,12 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
 - **Rematch hands (0.12.9):** after a lost chest fight, the loser's hand kept its last rock, paper or scissors texture
   while voting again (vanilla never reopens a chest after a fight); it now points again. Not tested in game.
 
+- **Watcher stance feedback (0.12.12):** entering Calm, Wrath or Divinity plays StS1's enter sound and holds its loop
+  (Oggs copied from the jar by `make sts1-watcher-art` into `audio/watcher/`), plus StS1's colored screen-edge flash
+  (sky, scarlet, pink). Godot players on her creature node, at the game's squared Master x SFX volume, updated when
+  the sliders move; the loop stops on Neutral, death and combat end. In co-op every client hears every Watcher's
+  stance (StS1 was solo-only). Not tested in game.
+
 - **Watcher head icon (0.12.11):** the top-bar and stats icon (and its outline) is now her head, cut from a 2x render
   of the StS1 idle skeleton (`tools/sts1/art.py`, `HEAD_BOX` around the ground point) instead of the shrunken
   character-select button, which still feeds the map marker. Not tested in game.
@@ -238,7 +244,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   client's state dump (the host log only has its own).
 - 2026-11-01 Corpse Explosion "-90 AOE": its power deals target max HP × stacks to every other enemy when the target dies
   (StS1 rule); three Knights died together. Looks intended unless players took damage.
-- Watcher: ~~head icon (owner call: crop it from the static sprite)~~ done in 0.12.11; stance-change animations and sound missing.
+- Watcher: ~~head icon (owner call: crop it from the static sprite)~~ done in 0.12.11; ~~stance-change sound~~ done in 0.12.12 (with a screen-edge flash); StS1's stance
+  particles and aura (`StanceAuraEffect`, `*ParticleEffect`) and Spine animations are still missing.
 - ~~Artifact potion back in StS1 mode (owner call: StS1-only mode, every character). StS2 has none: port StS1's
   Ancient Potion (uncommon, gain 1 Artifact).~~ Done in 0.12.10.
 - Design, to discuss with the owner (do not implement yet): Souvenir reward balance (fewer commons; per-run lean

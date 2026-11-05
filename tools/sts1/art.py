@@ -210,7 +210,21 @@ def export_watcher(jar: Path, out: Path) -> dict:
         for cls, portrait_name in WATCHER_STARTER_PORTRAITS.items():
             img = _open(z, f"images/1024Portraits/{portrait_name}.png").resize(SIZE, Image.LANCZOS)
             _save(img, out / "images/cards/watcher" / f"{match.slug(cls).lower()}.png")
+
+        audio = out / "audio/watcher"
+        audio.mkdir(parents=True, exist_ok=True)
+        for source, target in WATCHER_STANCE_SOUNDS.items():
+            (audio / f"{target}.ogg").write_bytes(z.read(f"audio/sound/watcher/{source}.ogg"))
     return meta
+
+
+# StS1 stance sounds (SoundMaster keys STANCE_ENTER_* and STANCE_LOOP_*) -> audio/watcher/<name>.ogg
+# (src/Core/WatcherAssets.cs builds the same paths).
+WATCHER_STANCE_SOUNDS = {
+    "STS_SFX_Watcher-Calm_v2": "stance_calm", "STS_SFX_Watcher-CalmLoop_v2": "stance_calm_loop",
+    "STS_SFX_Watcher-Wrath_v2": "stance_wrath", "STS_SFX_Watcher-WrathLoop_v2": "stance_wrath_loop",
+    "STS_SFX_Watcher-Divinity_v3": "stance_divinity", "STS_SFX_Watcher-DivinityLoop_v2": "stance_divinity_loop",
+}
 
 
 WATCHER_RELICS = {
