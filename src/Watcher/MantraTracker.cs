@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using MegaCrit.Sts2.Core.Entities.Players;
 using SlaySpoon.Core;
 
@@ -10,16 +9,15 @@ namespace SlaySpoon.Watcher;
 /// </summary>
 public static class MantraTracker
 {
-	private static readonly ConditionalWeakTable<PlayerCombatState, MantraTally> Tallies = new();
+	private static readonly MantraTallies<PlayerCombatState> Tallies = new();
 
-	public static int Gained(Player player) =>
-		player.PlayerCombatState is { } combat && Tallies.TryGetValue(combat, out MantraTally? tally) ? tally.Total : 0;
+	public static int Gained(Player player) => player.PlayerCombatState is { } combat ? Tallies.Gained(combat) : 0;
 
 	public static void Record(Player player, int amount)
 	{
 		if (player.PlayerCombatState is { } combat)
 		{
-			Tallies.GetOrCreateValue(combat).Add(amount);
+			Tallies.Record(combat, amount);
 		}
 	}
 }

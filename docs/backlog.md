@@ -143,7 +143,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     `RetainedBy` on `Sts1WatcherCard`; every Watcher card checks its target with `ThrowIfNull`, as the other characters do.
   - ~~Unused `using` blocks in card and power files, empty `OnUpgrade` bodies, a stray blank line in Deus Ex Machina.~~
     0.12.16: every IDE0005 hit in `src/` removed (one lint build with IDE0005 as a warning), the 8 empty overrides dropped.
-  - Weak tests: pure-logic coverage of `MantraTracker` keying, retain gating and Lesson Learned selection; power tests are
+  - Weak tests: pure-logic coverage of ~~`MantraTracker` keying~~ (`MantraTallies`, tested since 0.12.24), retain gating and
+    Lesson Learned selection (both read game state: deck order and the synced run RNG); power tests are
     mostly arithmetic and `WatcherPowerTextTests` greps source; ~~stale pytest name `test_pending_ports_never_enter_runtime`~~ (now `test_every_watcher_card_is_ported`); Task 9's tests were written after the code (no red run).
 - The Watcher (step 7), deep backlog: Spine animations for her (combat, rest site, merchant, multiplayer hands, map marker)
   and in-game validation of everything in `docs/testing/step-7-checklist.md`. A "Deep backlog priority" section, if one
