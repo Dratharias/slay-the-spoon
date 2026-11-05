@@ -26,14 +26,14 @@ Read `README.md` for the player view and the spec for every decision.
   - Hybrid: a duplicate is one slot; created cards come out as a random version; card rewards
     have a synced swap button (hidden reward alternatives, `src/CardSets/RewardSwapPatch.cs`).
   - Not tested in game: `docs/testing/step-2b-checklist.md`.
-  - The owner still has to review `docs/review/ironclad-duplicates.md`.
+  - `docs/review/ironclad-duplicates.md` approved by the owner (2026-11-05).
 - **Step 3a is done and merged into `main`** (was branch `step-3`; plan `docs/superpowers/plans/2026-10-29-step-3a-silent.md`, version 0.3.0):
   - tooling handles several characters (`make sts1-data` writes per-character data and review pages);
   - the Silent StS1 pool and the Spire Souvenir in the Silent relic pool;
   - 37 Silent cards in `src/Cards/Sts1/Silent/` (23 unique, 9 StS1 namesakes kept, 5 duplicates),
     plus Clash, Dual Wield, Entrench and Shockwave for the Ironclad (their StS2 versions are outside its pool).
   - Namesakes take StS2's French title (StS1's own French names collide: its Outmaneuver is "Tacticien").
-  - Not tested in game: `docs/testing/step-3a-checklist.md`. The owner still has to review `docs/review/silent-duplicates.md`.
+  - Not tested in game: `docs/testing/step-3a-checklist.md`. `docs/review/silent-duplicates.md` approved (2026-11-05).
 - **Step 3b is implemented and merged into `main`** (plan `docs/superpowers/plans/2026-10-29-step-3b-defect.md`, version 0.4.0):
   - 38 Defect cards (24 unique, 10 StS1 namesakes kept, 4 duplicates), the Defect pool and Spire Souvenir eligibility;
   - 12 attacks, 20 skills and 6 Powers, with EN/FR text and StS1 portraits;
@@ -41,10 +41,11 @@ Read `README.md` for the player view and the spec for every decision.
   - Electrodynamics changes Lightning targeting only for its holder; Lock-On scopes its marker per target;
   - build: 0 warnings / 0 errors; tests: 61 xUnit and 32 pytest pass, including `NoUnportedCards`;
   - not installed or tested in game: `docs/testing/step-3b-checklist.md` remains unchecked, especially save/reload and co-op;
-  - the owner still has to review `docs/review/defect-duplicates.md` (classifications stay draft).
+  - `docs/review/defect-duplicates.md` approved by the owner (2026-11-05);
 - **Step 3c is implemented and merged into `main`** (plan `docs/superpowers/plans/2026-10-29-step-3c-colorless.md`, version 0.5.0):
   - 39 StS1 colorless cards cataloged; 31 custom classes in `src/Cards/Sts1/Colorless/` (6 attacks, 22 skills,
-    3 Powers) and 8 native cards reused; all 22 namesakes still draft for owner review (`docs/review/colorless-duplicates.md`);
+    3 Powers) and 8 native cards reused; namesakes approved 2026-11-05 (`docs/review/colorless-duplicates.md`): Discovery, Jack of All Trades,
+    Secret Technique and Secret Weapon are `Retired` (the StS2 card in every mode; classes kept for old saves);
   - the colorless pool follows the mode for all five characters; the Souvenir holder gets Hybrid colorless;
   - seven event-only classes (Apotheosis, Apparition, Bite, Enlightenment, JAX, Metamorphosis, Ritual Dagger)
     live in a hidden event pool, outside ordinary pools (32 ordinary cards); vanilla event grants are patched;
@@ -187,9 +188,9 @@ Read `README.md` for the player view and the spec for every decision.
 - Cleanups: unused usings, the `Act4Preview` key and `CustomRunOptions` removed; Invincible clamp in
   `HeartInvincibleRule`; Ending rooms seeded from the run seed on both paths; `ending_art.py` honors trimmed regions.
 - 0.12.25: Watcher game-over stats guard, Spirit Shield in-combat Block preview, 1 s death length for Ending monsters.
-- 0.12.26: French act 4 title "La Fin". Remaining design calls settled with the owner (2026-11-05 Q&A), listed in
+- 0.12.26: French act 4 title "La Fin"; four colorless namesakes retired (StS2 card in every mode). Remaining design calls settled with the owner (2026-11-05 Q&A), listed in
   `docs/backlog.md` under "Design calls settled"; combo pairs in `docs/review/hybrid-combos.md`.
-- Build 0 warnings; 434 xUnit + 78 pytest pass. `make workshop` staged 0.12.26 in this worktree. Not tested in game.
+- Build 0 warnings; 438 xUnit + 78 pytest pass. `make workshop` staged 0.12.26 in this worktree. Not tested in game.
 - Not merged into `main` yet: the main working copy's uncommitted character-relic work touches `src/Core/WatcherAssets.cs`,
   `tools/sts1/art.py` and `tools/sts1/tests/test_art.py`, which this branch also changes (fast-forward once that work is
   committed or set aside).

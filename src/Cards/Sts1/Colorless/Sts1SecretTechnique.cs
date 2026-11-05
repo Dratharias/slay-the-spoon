@@ -10,7 +10,8 @@ namespace SlaySpoon.Cards.Sts1.Colorless;
 /// <summary>StS1 Secret Technique: unplayable without a matching card in the draw pile; the upgrade removes Exhaust.</summary>
 public sealed class Sts1SecretTechnique : Sts1ColorlessCard
 {
-	public override Sts1Relation Relation => Sts1Relation.Duplicate;
+	/// <summary>Retired (owner, 2026-11-05): the StS2 card serves every mode; kept for old saves.</summary>
+	public override Sts1Relation Relation => Sts1Relation.Retired;
 
 	public override Type Sts2Counterpart => typeof(MegaCrit.Sts2.Core.Models.Cards.SecretTechnique);
 

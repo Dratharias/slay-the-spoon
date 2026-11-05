@@ -14,6 +14,18 @@ public class CardSetComposerTests
 		new("STS1_RAMPAGE", "RAMPAGE", Sts1Relation.SameKeepSts1),
 	};
 
+	[Theory]
+	[InlineData(CardSetMode.Sts1Only)]
+	[InlineData(CardSetMode.Hybrid)]
+	public void Compose_RetiredClassNeverEntersAndItsNamesakeStays(CardSetMode mode)
+	{
+		Sts1Entry[] sts1 = Sts1.Append(new Sts1Entry("STS1_ANGER", "ANGER", Sts1Relation.Retired)).ToArray();
+		IReadOnlyList<string> pool = CardSetComposer.Compose(mode, Vanilla, Matched, sts1);
+		Assert.DoesNotContain("STS1_ANGER", pool);
+		Assert.Contains("ANGER", pool);
+		Assert.Equal(CardSetComposer.Compose(mode, Vanilla, Matched, Sts1), pool);
+	}
+
 	[Fact]
 	public void Compose_Sts2Only_ReturnsVanillaUnchanged()
 	{

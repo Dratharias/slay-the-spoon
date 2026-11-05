@@ -12,4 +12,9 @@ public enum Sts1Relation
 	SameKeepSts1,
 	/// <summary>Different effect: both versions exist.</summary>
 	Duplicate,
+	/// <summary>
+	/// Reclassified "same, StS2 weaker or equal" after release: the vanilla card serves every mode. The class stays so
+	/// that runs and decks saved with it still load, but no pool, generation or version swap offers it.
+	/// </summary>
+	Retired,
 }

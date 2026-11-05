@@ -16,7 +16,7 @@ public static class ColorlessCardRules
 
 	/// <summary>A direct event grant has no ordinary pool slot; select its version explicitly.</summary>
 	public static bool UseSts1EventVersion(CardSetMode mode, Sts1Relation relation, bool roll) =>
-		mode == CardSetMode.Sts1Only ||
+		relation != Sts1Relation.Retired && (mode == CardSetMode.Sts1Only ||
 		(mode == CardSetMode.Hybrid && (relation == Sts1Relation.SameKeepSts1 ||
-			(relation == Sts1Relation.Duplicate && roll)));
+			(relation == Sts1Relation.Duplicate && roll))));
 }

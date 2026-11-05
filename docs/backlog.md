@@ -285,6 +285,10 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
     report is intended.
   - The Architect gets a short EN/FR dialogue for the Watcher, in the tone of "you do not really exist" (a nod to
     Slay the Spoon being a mod), reusing a vanilla character's attack effect; the owner proofreads the text.
+  - Duplicate tables (`docs/review/*-duplicates.md`) approved; doubtful cases settled: Discovery, Jack of All Trades,
+    Secret Technique and Secret Weapon use the StS2 card in every mode (`Sts1Relation.Retired` since 0.12.26, classes
+    kept for old saves); keyword-only duplicates keep the version choice; each version keeps its own game's rarity;
+    the 13 StS1 cards whose StS2 namesake is an event or colorless card stay in their character pool in every mode.
   - Every "design call made without the owner" listed above is validated as is (owner, 2026-11-05); revisit one only
     when an in-game test shows a problem. The fidelity rule still wins over them.
 - 2026-11-05 screenshot `~/Pictures/Debug Slay the spoon/unknown relic.png`: The Specimen shows raw

@@ -15,6 +15,8 @@ public static class CardSetComposer
 	public static IReadOnlyList<string> Compose(CardSetMode mode, IReadOnlyList<string> vanilla,
 		IReadOnlyCollection<string> matchedSts2, IReadOnlyList<Sts1Entry> sts1)
 	{
+		// Retired classes only exist for old saves: their namesake plays as the vanilla card.
+		sts1 = sts1.Where(e => e.Relation != Sts1Relation.Retired).ToList();
 		switch (mode)
 		{
 			case CardSetMode.Sts1Only when sts1.Count > 0:

@@ -3,14 +3,14 @@
   "sts1": "AThousandCuts",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Accuracy",
   "sts2": "Accuracy",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect and numbers (Shivs +4, +2 upgraded).",
   "checked": true
  },
@@ -18,7 +18,7 @@
   "sts1": "Acrobatics",
   "sts2": "Acrobatics",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (draw 3 +1, discard 1); only the rarity differs.",
   "checked": true
  },
@@ -26,7 +26,7 @@
   "sts1": "Adrenaline",
   "sts2": "Adrenaline",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: 1 energy (2 upgraded), draw 2, Exhaust.",
   "checked": true
  },
@@ -34,7 +34,7 @@
   "sts1": "AfterImage",
   "sts2": "Afterimage",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: 1 Block per card played; upgrade adds Innate in both.",
   "checked": true
  },
@@ -42,7 +42,7 @@
   "sts1": "Alchemize",
   "sts2": "Alchemize",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: random potion, Exhaust, upgrade cost 1 → 0. StS2's Alchemize is a colorless card, outside the Silent pool, so the StS1 card is kept for StS1-only and Hybrid.",
   "checked": true
  },
@@ -50,14 +50,14 @@
   "sts1": "AllOutAttack",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Backflip",
   "sts2": "Backflip",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (5 Block +3, draw 2).",
   "checked": true
  },
@@ -65,7 +65,7 @@
   "sts1": "Backstab",
   "sts2": "Backstab",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (11 damage +4, Innate, Exhaust).",
   "checked": true
  },
@@ -73,14 +73,14 @@
   "sts1": "Bane",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "BladeDance",
   "sts2": "BladeDance",
   "relation": "duplicate",
-  "draft": true,
+  "draft": false,
   "note": "Different keyword: StS2's Blade Dance exhausts, StS1's doesn't.",
   "checked": true
  },
@@ -88,7 +88,7 @@
   "sts1": "Blur",
   "sts2": "Blur",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (5 Block +3, Block kept one turn).",
   "checked": true
  },
@@ -96,7 +96,7 @@
   "sts1": "BouncingFlask",
   "sts2": "BouncingFlask",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: 3 Poison to a random enemy 3 times (4 upgraded).",
   "checked": true
  },
@@ -104,7 +104,7 @@
   "sts1": "BulletTime",
   "sts2": "BulletTime",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: hand costs 0 this turn, no more draws; upgrade cost 3 → 2.",
   "checked": true
  },
@@ -112,7 +112,7 @@
   "sts1": "Burst",
   "sts2": "Burst",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: next Skill played twice (2 Skills upgraded).",
   "checked": true
  },
@@ -120,7 +120,7 @@
   "sts1": "CalculatedGamble",
   "sts2": "CalculatedGamble",
   "relation": "duplicate",
-  "draft": true,
+  "draft": false,
   "note": "Different upgrade: StS1 loses Exhaust, StS2 keeps Exhaust and gains Retain.",
   "checked": true
  },
@@ -128,7 +128,7 @@
   "sts1": "Caltrops",
   "sts2": "Caltrops",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (3 Thorns +2). StS2's card is an Event card, outside the Silent pool, so the StS1 card is kept for StS1-only and Hybrid.",
   "checked": true
  },
@@ -136,21 +136,21 @@
   "sts1": "Catalyst",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Choke",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "CloakAndDagger",
   "sts2": "CloakAndDagger",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (6 Block, 1 Shiv +1).",
   "checked": true
  },
@@ -158,28 +158,28 @@
   "sts1": "Concentrate",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "CorpseExplosion",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "CripplingPoison",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "DaggerSpray",
   "sts2": "DaggerSpray",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (4 damage twice to all, +2).",
   "checked": true
  },
@@ -187,7 +187,7 @@
   "sts1": "DaggerThrow",
   "sts2": "DaggerThrow",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (9 damage +3, draw 1, discard 1).",
   "checked": true
  },
@@ -195,7 +195,7 @@
   "sts1": "Dash",
   "sts2": "Dash",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (10 Block, 10 damage, +3 each).",
   "checked": true
  },
@@ -203,7 +203,7 @@
   "sts1": "DeadlyPoison",
   "sts2": "DeadlyPoison",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (5 Poison +2).",
   "checked": true
  },
@@ -211,7 +211,7 @@
   "sts1": "Defend_Green",
   "sts2": "DefendSilent",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (5 Block +3).",
   "checked": true
  },
@@ -219,7 +219,7 @@
   "sts1": "Deflect",
   "sts2": "Deflect",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (4 Block +3).",
   "checked": true
  },
@@ -227,14 +227,14 @@
   "sts1": "DieDieDie",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Distraction",
   "sts2": "Distraction",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Same effect (random Skill free this turn, Exhaust, upgrade cost 1 → 0). StS2's card is an Event card, outside the Silent pool, so the StS1 card is kept for StS1-only and Hybrid.",
   "checked": true
  },
@@ -242,7 +242,7 @@
   "sts1": "DodgeAndRoll",
   "sts2": "DodgeAndRoll",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (4 Block now and next turn, +2).",
   "checked": true
  },
@@ -250,21 +250,21 @@
   "sts1": "Doppelganger",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "EndlessAgony",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Envenom",
   "sts2": "Envenom",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Numbers only, StS1 weaker upgraded: cost 1 for 1 Poison vs cost 2 for 2 Poison.",
   "checked": true
  },
@@ -272,7 +272,7 @@
   "sts1": "EscapePlan",
   "sts2": "EscapePlan",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (draw 1, 3 Block +2 if it is a Skill).",
   "checked": true
  },
@@ -280,14 +280,14 @@
   "sts1": "Eviscerate",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Expertise",
   "sts2": "Expertise",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (draw up to 6, 7 upgraded).",
   "checked": true
  },
@@ -295,7 +295,7 @@
   "sts1": "Finisher",
   "sts2": "Finisher",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect and numbers: 6 damage (+2) per other Attack played this turn.",
   "checked": true
  },
@@ -303,7 +303,7 @@
   "sts1": "Flechettes",
   "sts2": "Flechettes",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Numbers only, StS1 weaker: 4 damage (+2) per Skill vs 5 (+2).",
   "checked": true
  },
@@ -311,14 +311,14 @@
   "sts1": "FlyingKnee",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Footwork",
   "sts2": "Footwork",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (2 Dexterity +1).",
   "checked": true
  },
@@ -326,14 +326,14 @@
   "sts1": "GlassKnife",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "GrandFinale",
   "sts2": "GrandFinale",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Numbers only, StS1 weaker: 50 damage (+10) vs 60 (+15).",
   "checked": true
  },
@@ -341,14 +341,14 @@
   "sts1": "HeelHook",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "InfiniteBlades",
   "sts2": "InfiniteBlades",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: a Shiv each turn; upgrade adds Innate in both.",
   "checked": true
  },
@@ -356,7 +356,7 @@
   "sts1": "LegSweep",
   "sts2": "LegSweep",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (2 Weak +1, 11 Block +3).",
   "checked": true
  },
@@ -364,7 +364,7 @@
   "sts1": "Malaise",
   "sts2": "Malaise",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: X Strength loss and X Weak (X+1 upgraded), Exhaust.",
   "checked": true
  },
@@ -372,14 +372,14 @@
   "sts1": "MasterfulStab",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Neutralize",
   "sts2": "Neutralize",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (3 damage +1, 1 Weak +1).",
   "checked": true
  },
@@ -387,7 +387,7 @@
   "sts1": "Nightmare",
   "sts2": "Nightmare",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: 3 copies next turn, Exhaust, upgrade cost 3 → 2.",
   "checked": true
  },
@@ -395,7 +395,7 @@
   "sts1": "NoxiousFumes",
   "sts2": "NoxiousFumes",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (2 Poison to all each turn, +1).",
   "checked": true
  },
@@ -403,7 +403,7 @@
   "sts1": "Outmaneuver",
   "sts2": "Outmaneuver",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (2 energy next turn, +1). StS2's card is an Event card, outside the Silent pool, so the StS1 card is kept for StS1-only and Hybrid.",
   "checked": true
  },
@@ -411,14 +411,14 @@
   "sts1": "PhantasmalKiller",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "PiercingWail",
   "sts2": "PiercingWail",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (all enemies -6 Strength this turn, +2, Exhaust).",
   "checked": true
  },
@@ -426,7 +426,7 @@
   "sts1": "PoisonedStab",
   "sts2": "PoisonedStab",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (6 damage +2, 3 Poison +1).",
   "checked": true
  },
@@ -434,7 +434,7 @@
   "sts1": "Predator",
   "sts2": "Predator",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (15 damage +5, draw 2 more next turn); only the rarity differs.",
   "checked": true
  },
@@ -442,7 +442,7 @@
   "sts1": "Prepared",
   "sts2": "Prepared",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (draw 1, discard 1; 2 and 2 upgraded).",
   "checked": true
  },
@@ -450,14 +450,14 @@
   "sts1": "QuickSlash",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Reflex",
   "sts2": "Reflex",
   "relation": "duplicate",
-  "draft": true,
+  "draft": false,
   "note": "Different effect: StS1 is Unplayable and draws when discarded; StS2 costs 3 and is Sly (played for free when discarded).",
   "checked": true
  },
@@ -465,21 +465,21 @@
   "sts1": "RiddleWithHoles",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Setup",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "Skewer",
   "sts2": "Skewer",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Numbers only, StS1 weaker: 7 damage (+3) X times vs 8 (+3).",
   "checked": true
  },
@@ -487,7 +487,7 @@
   "sts1": "Slice",
   "sts2": "Slice",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (6 damage +3).",
   "checked": true
  },
@@ -495,14 +495,14 @@
   "sts1": "SneakyStrike",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "StormOfSteel",
   "sts2": "StormOfSteel",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: discard hand, a Shiv per card (Shiv+ upgraded).",
   "checked": true
  },
@@ -510,7 +510,7 @@
   "sts1": "Strike_Green",
   "sts2": "StrikeSilent",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (6 damage +3).",
   "checked": true
  },
@@ -518,7 +518,7 @@
   "sts1": "SuckerPunch",
   "sts2": "SuckerPunch",
   "relation": "same-sts1",
-  "draft": true,
+  "draft": false,
   "note": "Numbers only, StS1 weaker: 7 damage (+2) vs 8 (+2), 1 Weak (+1) in both.",
   "checked": true
  },
@@ -526,7 +526,7 @@
   "sts1": "Survivor",
   "sts2": "Survivor",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (8 Block +3, discard 1).",
   "checked": true
  },
@@ -534,7 +534,7 @@
   "sts1": "Tactician",
   "sts2": "Tactician",
   "relation": "duplicate",
-  "draft": true,
+  "draft": false,
   "note": "Different effect: StS1 is Unplayable and gives energy when discarded; StS2 costs 3 and is Sly.",
   "checked": true
  },
@@ -542,14 +542,14 @@
   "sts1": "Terror",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "ToolsOfTheTrade",
   "sts2": "ToolsOfTheTrade",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same effect: draw 1, discard 1 each turn; upgrade cost 1 → 0.",
   "checked": true
  },
@@ -557,14 +557,14 @@
   "sts1": "Unload",
   "sts2": null,
   "relation": "unique",
-  "draft": true,
+  "draft": false,
   "note": ""
  },
  {
   "sts1": "WellLaidPlans",
   "sts2": "WellLaidPlans",
   "relation": "same-sts2",
-  "draft": true,
+  "draft": false,
   "note": "Same numbers (Retain 1 card, 2 upgraded).",
   "checked": true
  },
@@ -572,7 +572,7 @@
   "sts1": "WraithForm",
   "sts2": "WraithForm",
   "relation": "duplicate",
-  "draft": true,
+  "draft": false,
   "note": "Different trigger: StS1 loses Dexterity at the end of your turn, StS2 at the start. StS2's is an Ancient card, StS1's a Rare.",
   "checked": true
  }

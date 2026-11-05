@@ -40,6 +40,8 @@ public class ColorlessCardRulesTests
 	[InlineData(CardSetMode.Hybrid, Sts1Relation.SameKeepSts1, false, true)]
 	[InlineData(CardSetMode.Hybrid, Sts1Relation.Duplicate, false, false)]
 	[InlineData(CardSetMode.Hybrid, Sts1Relation.Duplicate, true, true)]
+	[InlineData(CardSetMode.Sts1Only, Sts1Relation.Retired, true, false)]
+	[InlineData(CardSetMode.Hybrid, Sts1Relation.Retired, true, false)]
 	public void DirectGrantsRespectModeAndNamesakeRelation(CardSetMode mode, Sts1Relation relation,
 		bool roll, bool expected) =>
 		Assert.Equal(expected, ColorlessCardRules.UseSts1EventVersion(mode, relation, roll));
