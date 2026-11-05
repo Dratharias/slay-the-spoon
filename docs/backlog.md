@@ -297,7 +297,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   Souvenir and Act 4; host Watcher (8 HP after the Decimillipede elite, Wave of the Hand and Deus Ex Machina from a
   transform), client Ironclad; last rooms elite, treasure, rest site (both healed). The divergent combat is not in any
   file on this machine, so no cause can be named; nothing in the save points at the tint (no tint state is saved).
-  Closed on this side: a new report needs both peers' `godot.log` from the same session.
+  Dropped by the owner (2026-11-05): the day's game patch changes the ground anyway; a new report needs both peers'
+  `godot.log` from the same session.
 - 2026-11-01 Corpse Explosion "-90 AOE": its power deals target max HP × stacks to every other enemy when the target dies
   (StS1 rule); three Knights died together. Looks intended unless players took damage. Settled: intended (owner, 2026-11-05, below).
 - Watcher: ~~head icon (owner call: crop it from the static sprite)~~ done in 0.12.11; ~~stance-change sound~~ done in 0.12.12 (with a screen-edge flash); ~~StS1's stance
