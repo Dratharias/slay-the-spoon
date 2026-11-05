@@ -41,13 +41,13 @@ internal static class WatcherVanillaGuardsPatch
 
 	public static int MaxAscensionFor(CharacterStats stats)
 	{
-		if (stats.Id != ModelDb.GetId<Sts1Watcher>())
+		string watcher = ModelDb.GetId<Sts1Watcher>().Entry;
+		if (stats.Id.Entry != watcher)
 		{
 			return stats.MaxAscension;
 		}
-		string watcher = ModelDb.GetId<Sts1Watcher>().Entry;
-		int cap = WatcherAscension.Cap(SaveManager.Instance.Progress.CharacterStats
-			.Where(pair => pair.Key.Entry != watcher).Select(pair => pair.Value.MaxAscension));
+		int cap = WatcherAscension.LimitFor(stats.Id.Entry, stats.MaxAscension, watcher,
+			SaveManager.Instance.Progress.CharacterStats.Select(pair => (pair.Key.Entry, pair.Value.MaxAscension)));
 		// Logged once per value: the getter runs on every lobby refresh.
 		if (cap != _loggedCap)
 		{

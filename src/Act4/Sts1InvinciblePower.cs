@@ -14,23 +14,23 @@ namespace SlaySpoon.Act4;
 public sealed class Sts1InvinciblePower : PowerModel, IBorrowedIcon
 {
 	// Not saved: StS2 restarts the combat when a save loads, so AfterApplied runs again.
-	private int _turnCap;
+	private readonly InvincibleBudget _budget = new();
 	public override PowerType Type => PowerType.Buff;
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public Type IconSource => typeof(HardToKillPower);
 
 	public override Task AfterApplied(Creature? applier, CardModel? cardSource)
 	{
-		// A re-apply mid-turn sees the depleted amount: never lower the cap below what it already was.
-		_turnCap = Math.Max(_turnCap, Amount);
+		// A re-apply mid-turn sees the depleted amount: the budget never lowers its cap.
+		_budget.Applied(Amount);
 		return Task.CompletedTask;
 	}
 
 	/// <summary>Sets the budget the power refills to each enemy turn, independent of the amount left when applied.</summary>
 	public void SetTurnCap(int cap)
 	{
-		_turnCap = cap;
-		SetAmount(cap);
+		_budget.SetCap(cap);
+		SetAmount(_budget.Remaining);
 	}
 
 	// Intent previews and block loss only; the authoritative clamp is ModifyHpLostAfterOsty.
@@ -50,14 +50,22 @@ public sealed class Sts1InvinciblePower : PowerModel, IBorrowedIcon
 	public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result,
 		ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
-		if (target == Owner) SetAmount(HeartInvincibleRule.AfterHpLoss(Amount, result.UnblockedDamage));
+		if (target == Owner)
+		{
+			_budget.Hit(result.UnblockedDamage);
+			SetAmount(_budget.Remaining);
+		}
 		return Task.CompletedTask;
 	}
 
 	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side,
 		IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
-		if (side == Owner.Side) SetAmount(_turnCap);
+		if (side == Owner.Side)
+		{
+			_budget.TurnStart();
+			SetAmount(_budget.Remaining);
+		}
 		return Task.CompletedTask;
 	}
 }

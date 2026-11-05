@@ -26,6 +26,7 @@ public sealed class Sts1WaveOfTheHandPower : PowerModel, IBorrowedIcon
 			return;
 		}
 		Flash();
+		// AfterBlockGained gives no choice context; vanilla JuggernautPower applies from this hook the same way.
 		await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), CombatState.HittableEnemies.ToList(), Amount, Owner, null);
 	}
 

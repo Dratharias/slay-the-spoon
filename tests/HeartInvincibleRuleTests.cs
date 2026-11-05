@@ -62,4 +62,31 @@ public class HeartInvincibleRuleTests
 	[Theory] [InlineData(30, 0, 30)] [InlineData(30, -5, 30)] [InlineData(30, 40, 0)] [InlineData(0, 10, 0)]
 	public void BudgetNeverGrowsNorGoesNegative(int left, int lost, int expected) =>
 		Assert.Equal(expected, HeartInvincibleRule.AfterHpLoss(left, lost));
+
+	/// <summary>Co-op: a hook that scales the applied amount must not change the shared budget once the cap is set.</summary>
+	[Theory]
+	[InlineData(0, 2)] [InlineData(10, 2)] [InlineData(10, 4)]
+	public void CoopCapIsNotScaledTwice(int ascension, int players)
+	{
+		int cap = HeartInvincibleRule.InitialCap(ascension, players);
+		var budget = new InvincibleBudget();
+		budget.Applied((int)(cap * 1.3m));
+		budget.SetCap(cap);
+		Assert.Equal(cap, budget.Remaining);
+		budget.Hit(cap - 10);
+		Assert.Equal(10, budget.Remaining);
+		budget.TurnStart();
+		Assert.Equal(cap, budget.Remaining);
+	}
+
+	[Fact]
+	public void ReapplyMidTurnKeepsTheCap()
+	{
+		var budget = new InvincibleBudget();
+		budget.SetCap(300);
+		budget.Hit(250);
+		budget.Applied(50);
+		budget.TurnStart();
+		Assert.Equal(300, budget.Remaining);
+	}
 }

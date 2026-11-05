@@ -31,4 +31,24 @@ public class WatcherProgressTests
 	{
 		Assert.Equal(0, WatcherAscension.Cap(Array.Empty<int>()));
 	}
+
+	[Fact]
+	public void LimitFor_VanillaCharacterKeepsItsOwnMax()
+	{
+		var stats = new[] { ("IRONCLAD", 7), ("STS1_WATCHER", 0), ("SILENT", 3) };
+		Assert.Equal(3, WatcherAscension.LimitFor("SILENT", 3, "STS1_WATCHER", stats));
+	}
+
+	[Fact]
+	public void LimitFor_WatcherTakesTheBestOtherCharacter()
+	{
+		var stats = new[] { ("IRONCLAD", 7), ("STS1_WATCHER", 12), ("SILENT", 3) };
+		Assert.Equal(7, WatcherAscension.LimitFor("STS1_WATCHER", 12, "STS1_WATCHER", stats));
+	}
+
+	[Fact]
+	public void LimitFor_WatcherAloneIsZero()
+	{
+		Assert.Equal(0, WatcherAscension.LimitFor("STS1_WATCHER", 5, "STS1_WATCHER", new[] { ("STS1_WATCHER", 5) }));
+	}
 }

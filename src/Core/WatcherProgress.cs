@@ -22,4 +22,11 @@ public static class WatcherAscension
 {
 	/// <summary>The highest of the vanilla characters' max ascensions, 0 when there are none.</summary>
 	public static int Cap(IEnumerable<int> vanillaMaxAscensions) => vanillaMaxAscensions.DefaultIfEmpty(0).Max();
+
+	/// <summary>
+	/// The ascension limit the lobby reads for <paramref name="characterId"/>: a vanilla character's own max ascension,
+	/// or, for the Watcher, the <see cref="Cap"/> over every other entry of <paramref name="allStats"/> (id, max).
+	/// </summary>
+	public static int LimitFor(string characterId, int ownMax, string watcherId, IEnumerable<(string Id, int Max)> allStats) =>
+		characterId != watcherId ? ownMax : Cap(allStats.Where(s => s.Id != watcherId).Select(s => s.Max));
 }
