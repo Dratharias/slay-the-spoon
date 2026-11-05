@@ -1,8 +1,8 @@
 {
   "SLAY_SPOON_SYNC.title": "Slay the Spoon",
-  "SLAY_SPOON_SYNC.body": "With mods active, Slay the Spire 2 uses a separate profile that starts with nothing unlocked.\n\nCopy your regular progress into it on every launch? Your regular save is only read, never changed. Progress made only in modded runs is replaced at the next launch.\n\nTo change your answer later, delete mod_configs/SlaySpoon.cfg in the game's user folder.",
+  "SLAY_SPOON_SYNC.body": "Mods use a separate profile with nothing unlocked at first.\n\nCopy your regular progress into it on every launch? Your regular save stays untouched. Progress unique to modded runs will be overwritten at the next launch.\n\nTo change this choice, delete mod_configs/SlaySpoon.cfg in the game’s user folder.",
   "SLAY_SPOON_SYNC.yes": "Use my progress",
-  "SLAY_SPOON_SYNC.no": "Keep separate",
+  "SLAY_SPOON_SYNC.no": "Keep a separate profile",
   "SPOON_TINT.button": "Character Color",
   "SPOON_TINT.title": "Character Color",
   "SPOON_TINT.mode": "Mode: {Mode}",
@@ -12,8 +12,8 @@
   "SPOON_TINT.hue": "Hue: {Hue}°",
   "SPOON_TINT.strength": "Strength: {Strength}%",
   "SPOON_TINT.threshold": "Threshold: {Threshold}°",
-  "SPOON_TINT.map_on": "Map drawings: colored",
-  "SPOON_TINT.map_off": "Map drawings: character color",
-  "SPOON_TINT.help": "Your color shows on your character and, when you choose, on your map drawings. Co-op partners see it too. Dominant color only recolors the parts close to your character's own color (the threshold sets how close).",
+  "SPOON_TINT.map_on": "Map drawings: custom color",
+  "SPOON_TINT.map_off": "Map drawings: original color",
+  "SPOON_TINT.help": "Allies see your color too. “Dominant color only” limits the tint to areas close to the original color. Increase the threshold to recolor more areas.",
   "SPOON_TINT.close": "Close"
 }

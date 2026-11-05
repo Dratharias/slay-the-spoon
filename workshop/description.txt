@@ -1,29 +1,41 @@
-[b]Alpha, friends only.[/b] Not tested much in game yet: expect bugs, and keep your saves backed up.
+[b]Friends-only alpha.[/b] Limited in-game testing. Expect bugs and back up your saves.
 
-Slay the Spoon brings Slay the Spire 1 cards into Slay the Spire 2 and adds run options that the lobby host sets in the [b]Custom Run[/b] screen. Every player in a co-op lobby needs the same version of the mod.
+Slay the Spoon adds Slay the Spire 1 content and new options to Slay the Spire 2. English and French. All co-op players need the same mod version.
 
-[b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url][/b] (3.4.7 or later). Steam offers to subscribe to it with this item.
+[b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 or later.[/b]
 
-[h2]Features[/h2]
+[h2]Custom Run options[/h2]
 [list]
-[*][b]Monster HP[/b] and [b]Monster Damage[/b] options in Custom Run, 25% to 500%, synced in co-op and kept in saves.
-[*][b]Slay the Spire 1 Cards[/b]: rewards, shops and card generation offer Slay the Spire 1 cards instead of Slay the Spire 2 ones.
-[*][b]Spire Souvenir[/b]: a relic that lets its owner find cards from both games. A Custom Run option gives it at the start.
-[*]Slay the Spire 1 cards for the Ironclad, the Silent and the Defect, and colorless cards for every character, with their original art and numbers.
-[*][b]Neow's Blessings[/b]: brings back Neow's usual starting choice in Custom Runs.
-[*][b]The Watcher[/b] as a sixth character (Custom Run, with a Slay the Spire 1 card option ticked).
-[*]Slay the Spire 1 events (Vampires, Augmenter, The Nest) can appear in act 2.
-[*][b]Act 4, The Ending[/b]: collect the Ruby, Emerald and Sapphire keys to face the Corrupt Heart. Unlocked by reaching act 3 at Ascension 10, or with a Custom Run option.
-[*][b]Merchant Loans[/b] (co-op Custom Run): ask your allies for gold at the merchant, with or without interest.
-[*][b]Character Color[/b] (pause menu): tint your character and your map drawings; co-op partners see it.
-[*]Optional one-way copy of your regular progress into the modded profile. Your regular save is only read, never written.
+[*][b]Monster HP and Damage[/b]: adjust each from 25% to 500%.
+[*][b]Slay the Spire 1 Cards[/b]: use the original game's cards for the Ironclad, Silent, Defect and Watcher, plus colorless cards for everyone.
+[*][b]Spire Souvenir[/b]: start with a relic that mixes cards from both games. Choose between versions of differing cards in rewards.
+[*][b]Neow's Blessings[/b]: restore Neow's usual blessings.
+[*][b]Starting Chest[/b]: choose 1 of 10 relics at Neow and keep your starting relic.
+[*][b]StS1 Boss Relics[/b]: choose from a shared chest of 3 boss relics instead of the Ancient's gift in acts 2 and 3.
+[*][b]Act 4[/b]: collect the three keys to face the Corrupt Heart.
+[*][b]Merchant Loans[/b] (co-op): give allies gold or lend it at 0–900% interest. Their gold gains repay you.
+[*][b]Campfire Gifts[/b] (co-op): spend your rest site action to give an ally a card. They pay 50 gold. No curses.
 [/list]
 
-Standard and Daily runs stay vanilla, except that the Spire Souvenir can drop in Standard runs and Act 4 opens there once unlocked.
+[h2]Also included[/h2]
+[list]
+[*][b]The Watcher[/b]: playable in solo Standard Runs and all Custom Runs.
+[*]Slay the Spire 1 events in act 2: Vampires, Augmenter and The Nest.
+[*][b]Character Color[/b]: tint your character and map drawings from the pause menu. Visible to co-op partners.
+[*]Optional progress copy from your regular profile to the modded profile on every launch. Replaces modded-only progress; leaves your regular save untouched.
+[/list]
 
-English and French.
+In Standard Runs, the Spire Souvenir can drop and Act 4 unlocks after reaching act 3 at Ascension 10 or higher. Daily Runs are unchanged.
 
 [h2]Français[/h2]
-[b]Alpha, amis seulement.[/b] Le mod ajoute les cartes de Slay the Spire 1 à Slay the Spire 2 et des options de partie personnalisée réglées par l'hôte : PV et dégâts des monstres, cartes de Slay the Spire 1 seulement, relique Souvenir de la Tour, Bénédictions de Neow, la gardienne (Watcher), l’acte 4 et le Cœur corrompu, les prêts chez le marchand et la couleur du personnage. Tous les joueurs d'une partie en coop doivent avoir la même version. Nécessite BaseLib (3.4.7 ou plus).
+[b]Alpha réservée aux amis.[/b] Peu testée en jeu : prévoyez des bugs et sauvegardez vos parties. Nécessite BaseLib 3.4.7 ou plus et la même version du mod pour tous les joueurs.
 
-[i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome, but fixes are not promised.[/i]
+En partie personnalisée : PV et dégâts des monstres de 25 à 500 %, cartes de Slay the Spire 1, mélange des deux jeux avec le Souvenir de la Tour, bénédictions de Neow, coffre de départ, reliques de boss et acte 4. En coopération : dons ou prêts d’or chez le marchand et cartes offertes au feu de camp pour 50 pièces d’or payées par l’allié.
+
+La Gardienne est jouable en partie standard solo et dans toutes les parties personnalisées. Le mod ajoute aussi trois événements de Slay the Spire 1 à l’acte 2 et une couleur de personnage personnalisable.
+
+La copie facultative de progression vers le profil avec mods écrase sa progression à chaque lancement, sans toucher à la sauvegarde habituelle.
+
+En partie standard, le Souvenir de la Tour peut apparaître et l’acte 4 se débloque en atteignant l’acte 3 à l’Ascension 10 ou plus. Les défis quotidiens restent inchangés.
+
+[i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes are not guaranteed.[/i]

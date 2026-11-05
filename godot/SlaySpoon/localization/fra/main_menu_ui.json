@@ -1,8 +1,8 @@
 {
   "SLAY_SPOON_SYNC.title": "Slay the Spoon",
-  "SLAY_SPOON_SYNC.body": "Avec des mods actifs, Slay the Spire 2 utilise un profil séparé où rien n'est débloqué.\n\nCopier ta progression normale dans ce profil à chaque lancement ? Ta sauvegarde normale est seulement lue, jamais modifiée. La progression faite uniquement en parties moddées est remplacée au lancement suivant.\n\nPour changer d'avis plus tard, supprime mod_configs/SlaySpoon.cfg dans le dossier utilisateur du jeu.",
+  "SLAY_SPOON_SYNC.body": "Les mods utilisent un profil séparé, sans déblocages au départ.\n\nY copier votre progression habituelle à chaque lancement ? Votre sauvegarde habituelle reste intacte. La progression propre aux parties avec mods sera écrasée au lancement suivant.\n\nPour changer ce choix, supprimez mod_configs/SlaySpoon.cfg dans le dossier utilisateur du jeu.",
   "SLAY_SPOON_SYNC.yes": "Utiliser ma progression",
-  "SLAY_SPOON_SYNC.no": "Garder séparé",
+  "SLAY_SPOON_SYNC.no": "Conserver un profil séparé",
   "SPOON_TINT.button": "Couleur du personnage",
   "SPOON_TINT.title": "Couleur du personnage",
   "SPOON_TINT.mode": "Mode : {Mode}",
@@ -12,8 +12,8 @@
   "SPOON_TINT.hue": "Teinte : {Hue}°",
   "SPOON_TINT.strength": "Intensité : {Strength} %",
   "SPOON_TINT.threshold": "Seuil : {Threshold}°",
-  "SPOON_TINT.map_on": "Dessins sur la carte : colorés",
-  "SPOON_TINT.map_off": "Dessins sur la carte : couleur du personnage",
-  "SPOON_TINT.help": "Votre couleur s’applique à votre personnage et, si vous le voulez, à vos dessins sur la carte. Vos partenaires en coop la voient aussi. « Couleur dominante seulement » ne recolore que les parties proches de la couleur de votre personnage (le seuil règle cette proximité).",
+  "SPOON_TINT.map_on": "Dessins sur la carte : couleur personnalisée",
+  "SPOON_TINT.map_off": "Dessins sur la carte : couleur d’origine",
+  "SPOON_TINT.help": "Vos alliés voient aussi votre couleur. « Couleur dominante seulement » limite la teinte aux zones proches de la couleur d’origine. Augmentez le seuil pour recolorer davantage de zones.",
   "SPOON_TINT.close": "Fermer"
 }
