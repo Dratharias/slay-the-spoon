@@ -13,6 +13,8 @@ IMAGE=docker.io/steamcmd/steamcmd:latest
 STAGE="$REPO/build/mods/SlaySpoon"
 OUT="$REPO/build/workshop"
 ID_FILE="$REPO/workshop/published-file-id"
+# Workshop items subscribers need too (Steam "Required items"), one id per line: BaseLib (3737335127).
+REQUIRED_FILE="$REPO/workshop/required-items"
 CARDS="$REPO/godot/SlaySpoon/images/cards"
 
 for f in SlaySpoon.json SlaySpoon.dll SlaySpoon.pck; do
@@ -68,4 +70,10 @@ NEW_ID="$(sed -n 's/.*"publishedfileid"[[:space:]]*"\([0-9]*\)".*/\1/p' "$OUT/it
 if [[ -n "$NEW_ID" && "$NEW_ID" != 0 ]]; then
 	echo "$NEW_ID" > "$ID_FILE"
 	echo "Workshop item: https://steamcommunity.com/sharedfiles/filedetails/?id=$NEW_ID"
+	# SteamCMD cannot set required items: map them through the Steam client (must be running, same account).
+	mapfile -t REQUIRED < <(grep -o '^[0-9]\+' "$REQUIRED_FILE")
+	if (( ${#REQUIRED[@]} )); then
+		python3 -I "$REPO/tools/workshop_dependency.py" "$NEW_ID" "${REQUIRED[@]}" \
+			|| echo "Required items not set: add them on the item page (Add/Remove Required Items)." >&2
+	fi
 fi

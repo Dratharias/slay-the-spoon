@@ -2,6 +2,8 @@
 
 Slay the Spoon brings Slay the Spire 1 cards into Slay the Spire 2 and adds run options that the lobby host sets in the [b]Custom Run[/b] screen. Every player in a co-op lobby needs the same version of the mod.
 
+[b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url][/b] (3.4.7 or later). Steam offers to subscribe to it with this item.
+
 [h2]Features[/h2]
 [list]
 [*][b]Monster HP[/b] and [b]Monster Damage[/b] options in Custom Run, 25% to 500%, synced in co-op and kept in saves.
@@ -22,6 +24,6 @@ Standard and Daily runs stay vanilla, except that the Spire Souvenir can drop in
 English and French.
 
 [h2]Français[/h2]
-[b]Alpha, amis seulement.[/b] Le mod ajoute les cartes de Slay the Spire 1 à Slay the Spire 2 et des options de partie personnalisée réglées par l'hôte : PV et dégâts des monstres, cartes de Slay the Spire 1 seulement, relique Souvenir de la Tour, Bénédictions de Neow, la gardienne (Watcher), l’acte 4 et le Cœur corrompu, les prêts chez le marchand et la couleur du personnage. Tous les joueurs d'une partie en coop doivent avoir la même version.
+[b]Alpha, amis seulement.[/b] Le mod ajoute les cartes de Slay the Spire 1 à Slay the Spire 2 et des options de partie personnalisée réglées par l'hôte : PV et dégâts des monstres, cartes de Slay the Spire 1 seulement, relique Souvenir de la Tour, Bénédictions de Neow, la gardienne (Watcher), l’acte 4 et le Cœur corrompu, les prêts chez le marchand et la couleur du personnage. Tous les joueurs d'une partie en coop doivent avoir la même version. Nécessite BaseLib (3.4.7 ou plus).
 
 [i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome, but fixes are not promised.[/i]

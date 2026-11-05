@@ -134,8 +134,12 @@ English and French. Other game languages show the English text.
 
 Every player in a co-op lobby needs the same version of the mod.
 
-- Steam Workshop: a friends-only alpha.
-- Manually: copy the `SlaySpoon` folder (containing `SlaySpoon.json`, `SlaySpoon.dll`,
+Slay the Spoon requires [BaseLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127)
+3.4.7 or later (declared in `SlaySpoon.json`; the game refuses to load the mod without it).
+
+- Steam Workshop: a friends-only alpha. BaseLib is a required item: subscribing to Slay the Spoon
+  offers to subscribe to it too.
+- Manually: install BaseLib, then copy the `SlaySpoon` folder (containing `SlaySpoon.json`, `SlaySpoon.dll`,
   `SlaySpoon.pck`) into `<Slay the Spire 2>/mods/`, then start the game and accept mod loading.
 
 ## Build

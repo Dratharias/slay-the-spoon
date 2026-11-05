@@ -71,6 +71,9 @@ Read `README.md` for the player view and the spec for every decision.
 - **Steam Workshop:** `make workshop` stages `build/workshop/` (content, preview, `item.vdf`; visibility friends only);
   `make workshop-upload` runs SteamCMD in Podman and needs the owner's Steam login, so only the owner runs it, in a terminal.
   The first upload stores the item id in `workshop/published-file-id` (commit it). A local `mods/SlaySpoon` disables the Workshop copy.
+  BaseLib (Workshop 3737335127, ≥ 3.4.7) is a manifest dependency (`mod/SlaySpoon.json`) and a Steam required item:
+  after an upload, `tools/workshop_dependency.py` maps `workshop/required-items` through the game's `libsteam_api.so`
+  (Steam client running, logged in as the owner; fallback: "Add/Remove Required Items" on the item page).
 - **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
   pushed only when the owner says so. The same goes for the Steam Workshop upload.
 
