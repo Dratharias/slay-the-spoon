@@ -29,7 +29,8 @@ public sealed class Sts1FlurryOfBlows : Sts1WatcherCard, IStanceListener
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target!)
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt").Execute(choiceContext);
 	}
 
@@ -38,11 +39,5 @@ public sealed class Sts1FlurryOfBlows : Sts1WatcherCard, IStanceListener
 		DynamicVars.Damage.UpgradeValueBy(2m);
 	}
 
-	public async Task AfterStanceChanged(PlayerChoiceContext choiceContext, Player player, Stance from, Stance to)
-	{
-		if (player == Owner && Pile?.Type == PileType.Discard)
-		{
-			await CardPileCmd.Add(this, PileType.Hand);
-		}
-	}
+	public Task AfterStanceChanged(PlayerChoiceContext choiceContext, Player player, Stance from, Stance to) => ReturnFromDiscard(player);
 }

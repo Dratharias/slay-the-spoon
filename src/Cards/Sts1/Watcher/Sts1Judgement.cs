@@ -30,7 +30,8 @@ public sealed class Sts1Judgement : Sts1WatcherCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		Creature target = cardPlay.Target!;
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		Creature target = cardPlay.Target;
 		if (target.IsAlive && WatcherSkillMath.JudgementKills(target.CurrentHp, DynamicVars["Magic"].IntValue))
 		{
 			await CreatureCmd.Kill(target);

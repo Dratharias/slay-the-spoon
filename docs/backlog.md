@@ -15,7 +15,8 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - ~~The Sapphire button position is hard-coded (650, 770).~~ 0.12.1: the key takes a free slot of the chest scene
     (left with 2 relics, right with 3); with 4 relics it uses a hand-picked fifth slot at (220, −180) from the chest
     center, which may sit close to the right-hand relic or a hand. Solo: 120 px right of the relic.
-  - The Ruby icon comes from a postfix on the private `RestSiteOption.IconPath` getter, which the JIT may inline.
+  - ~~The Ruby icon comes from a postfix on the private `RestSiteOption.IconPath` getter, which the JIT may inline.~~
+    0.12.20: the public `Icon` getter is patched too.
   - ~~`StandardCharacterSelectPatch` sets `Pending` for any game mode~~: `NCharacterSelectScreen` only builds Standard
     lobbies (checked 2026-11-05); ~~`Act4UnlockPatch.Record` logs failures at info~~ (error with the stack since 0.12.17).
 - Act 4 keys (step 6 WP3), design calls made without the owner (change any of them):
@@ -136,8 +137,9 @@ Completed work is recorded in CLAUDE.md; in-game checks remain in docs/testing/f
   - Spirit Shield shows no live Block; Mark and the end-turn death effect share the Doom icon.
   - Lesson Learned's combat-ending upgrade shows no card-upgrade preview effect.
   - `LastCardPlayed` reset between combats (Sanctity) is unverified.
-  - Flurry/Weave and Sands of Time/Windmill Strike share small logic blocks that could be helpers on `Sts1WatcherCard`;
-    ~~Consecrate lacks a `<summary>`~~ (0.12.16); mixed `ThrowIfNull` vs `Target!`.
+  - ~~Flurry/Weave and Sands of Time/Windmill Strike share small logic blocks that could be helpers on `Sts1WatcherCard`;
+    Consecrate lacks a `<summary>`; mixed `ThrowIfNull` vs `Target!`.~~ 0.12.16 and 0.12.20: `ReturnFromDiscard` and
+    `RetainedBy` on `Sts1WatcherCard`; every Watcher card checks its target with `ThrowIfNull`, as the other characters do.
   - ~~Unused `using` blocks in card and power files, empty `OnUpgrade` bodies, a stray blank line in Deus Ex Machina.~~
     0.12.16: every IDE0005 hit in `src/` removed (one lint build with IDE0005 as a warning), the 8 empty overrides dropped.
   - Weak tests: pure-logic coverage of `MantraTracker` keying, retain gating and Lesson Learned selection; power tests are

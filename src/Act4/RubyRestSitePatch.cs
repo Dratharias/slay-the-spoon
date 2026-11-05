@@ -1,4 +1,6 @@
+using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.Nodes.RestSite;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
@@ -6,6 +8,10 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Act4;
 
+/// <summary>
+/// The Ruby option's icon. The private <c>IconPath</c> getter is small enough for the JIT to inline into <c>Icon</c>,
+/// which would skip its postfix, so the public <c>Icon</c> getter is patched as well; either patch alone is enough.
+/// </summary>
 [HarmonyPatch(typeof(RestSiteOption), "get_IconPath")]
 internal static class RubyRestSiteIconPatch
 {
@@ -13,6 +19,17 @@ internal static class RubyRestSiteIconPatch
 	{
 		if (__instance is Sts1RubyRestSiteOption)
 			__result = KeySprites.Path(Act4Key.Ruby, large: true);
+	}
+}
+
+[HarmonyPatch(typeof(RestSiteOption), nameof(RestSiteOption.Icon), MethodType.Getter)]
+internal static class RubyRestSiteTexturePatch
+{
+	private static bool Prefix(RestSiteOption __instance, ref Texture2D __result)
+	{
+		if (__instance is not Sts1RubyRestSiteOption) return true;
+		__result = PreloadManager.Cache.GetTexture2D(KeySprites.Path(Act4Key.Ruby, large: true));
+		return false;
 	}
 }
 

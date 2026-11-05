@@ -29,7 +29,8 @@ public sealed class Sts1SandsOfTime : Sts1WatcherCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target!)
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt").Execute(choiceContext);
 	}
 
@@ -41,7 +42,7 @@ public sealed class Sts1SandsOfTime : Sts1WatcherCard
 	public override Task AfterFlush(PlayerChoiceContext choiceContext, Player player, IReadOnlyCollection<CardModel> flushedCards, IReadOnlyCollection<CardModel> retainedCards)
 	{
 		// Only a card the owner kept through this flush counts; a modifier on the combat copy never touches the deck card.
-		if (player == Owner && retainedCards.Contains(this) && !EnergyCost.CostsX && EnergyCost.GetWithModifiers(CostModifiers.Local) > 0)
+		if (RetainedBy(player, retainedCards) && !EnergyCost.CostsX && EnergyCost.GetWithModifiers(CostModifiers.Local) > 0)
 		{
 			EnergyCost.AddThisCombat(-1);
 		}

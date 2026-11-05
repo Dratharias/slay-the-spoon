@@ -34,7 +34,8 @@ public sealed class Sts1PressurePoints : Sts1WatcherCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await PowerCmd.Apply<Sts1MarkPower>(choiceContext, cardPlay.Target!, DynamicVars["Magic"].BaseValue, Owner.Creature, this);
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		await PowerCmd.Apply<Sts1MarkPower>(choiceContext, cardPlay.Target, DynamicVars["Magic"].BaseValue, Owner.Creature, this);
 		await Sts1MarkPower.TriggerAll(choiceContext, CombatState!.Enemies);
 	}
 

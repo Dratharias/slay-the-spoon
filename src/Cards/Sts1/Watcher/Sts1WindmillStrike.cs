@@ -34,7 +34,8 @@ public sealed class Sts1WindmillStrike : Sts1WatcherCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target!)
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt").Execute(choiceContext);
 	}
 
@@ -47,7 +48,7 @@ public sealed class Sts1WindmillStrike : Sts1WatcherCard
 	public override Task AfterFlush(PlayerChoiceContext choiceContext, Player player, IReadOnlyCollection<CardModel> flushedCards, IReadOnlyCollection<CardModel> retainedCards)
 	{
 		// Only a card the owner kept through this flush grows. The deck card is untouched, so the growth ends with the combat.
-		if (player == Owner && retainedCards.Contains(this))
+		if (RetainedBy(player, retainedCards))
 		{
 			decimal growth = DynamicVars["Magic"].BaseValue;
 			_gained += growth;
