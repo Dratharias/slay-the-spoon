@@ -1,6 +1,20 @@
 {
-  "OPTION_SPOON_GIFT.description": "Give a card from your deck to {HasTarget:{Name}|an ally}, who pays [gold]{Price} gold[/gold] for it.",
-  "OPTION_SPOON_GIFT.name": "Gift",
+  "OPTION_SPOON_GIFT.description": "Offer a card to {HasTarget:{Name}|an ally} for [gold]0–999 gold[/gold], with credit available.",
+  "OPTION_SPOON_GIFT.name": "Sell",
   "OPTION_SPOON_RUBY.description": "Take the [gold]Ruby Key[/gold] for the team. You give up resting or smithing here.",
-  "OPTION_SPOON_RUBY.name": "Recall"
+  "OPTION_SPOON_RUBY.name": "Recall",
+  "SPOON_SALE.title": "Card Sale",
+  "SPOON_SALE.price_label": "Price (gold)",
+  "SPOON_SALE.rate_label": "Interest on credit (%)",
+  "SPOON_SALE.price": "Price: {Amount} gold",
+  "SPOON_SALE.paid_now": "Pay now: {Amount} gold",
+  "SPOON_SALE.rate": "Interest: {Amount}%",
+  "SPOON_SALE.debt": "Debt, including interest: {Amount} gold",
+  "SPOON_SALE.credit": "Any missing gold is lent at the chosen rate. At 0 gold, the card is a gift.",
+  "SPOON_SALE.repayment": "Gold you earn repays the seller. Death does not erase the debt.",
+  "SPOON_SALE.offer": "Offer",
+  "SPOON_SALE.accept": "Buy",
+  "SPOON_SALE.decline": "Decline",
+  "SPOON_SALE.cancel": "Cancel",
+  "SPOON_SALE.waiting": "Waiting for the buyer."
 }

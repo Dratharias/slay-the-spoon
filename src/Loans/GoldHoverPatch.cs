@@ -14,16 +14,16 @@ internal static class GoldHoverPatch
 	private static bool Prefix(NTopBarGold __instance)
 	{
 		var run = MerchantLoans.Run;
-		if (MerchantLoans.ModifierOf(run) is not { } loans || MerchantLoans.Me(run) is not { } me) return true;
+		if (MerchantLoans.LedgerOf(run) is not { } ledger || MerchantLoans.Me(run) is not { } me) return true;
 		int index = MerchantLoans.IndexOf(me);
 		var lines = new List<string>();
-		foreach (var (other, amount) in loans.Ledger.Balances(index, borrower: true)) lines.Add(Line("hover_owe", run!, other, amount));
-		foreach (var (other, amount) in loans.Ledger.Balances(index, borrower: false)) lines.Add(Line("hover_owed", run!, other, amount));
+		foreach (var (other, amount) in ledger.Balances(index, borrower: true)) lines.Add(Line("hover_owe", run!, other, amount));
+		foreach (var (other, amount) in ledger.Balances(index, borrower: false)) lines.Add(Line("hover_owed", run!, other, amount));
 		if (lines.Count == 0) return true;
 		var tips = new IHoverTip[]
 		{
 			new HoverTip(new LocString("static_hover_tips", "MONEY_POUCH.title"), new LocString("static_hover_tips", "MONEY_POUCH.description")),
-			new HoverTip(LoanPanel.Loc("title"), string.Join("\n", lines)),
+			new HoverTip(LoanPanel.Loc("debts_title"), string.Join("\n", lines)),
 		};
 		NHoverTipSet.CreateAndShow(__instance, tips)?.SetGlobalPosition(__instance.GlobalPosition + new Vector2(0f, __instance.Size.Y + 20f));
 		return false;

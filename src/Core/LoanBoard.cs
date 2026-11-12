@@ -17,8 +17,11 @@ public sealed class LoanBoard
 	private sealed class OpenRequest
 	{
 		public int Missing;
+		public int Revision;
 		public readonly List<LoanOffer> Offers = new();
 	}
+
+	private int _revision;
 
 	private readonly List<int> _borrowers = new();
 	private readonly Dictionary<int, OpenRequest> _requests = new();
@@ -28,6 +31,13 @@ public sealed class LoanBoard
 	public IReadOnlyList<int> Borrowers => _borrowers;
 
 	public bool HasRequest(int borrower) => _requests.ContainsKey(borrower);
+
+	public int Revision(int borrower) => _requests.TryGetValue(borrower, out var request) ? request.Revision : 0;
+
+	/// <summary>Validate the exact board shown at confirmation, before moving any held gold.</summary>
+	public bool CanAccept(int borrower, int revision, int lenders) =>
+		_requests.TryGetValue(borrower, out var request) && request.Revision == revision
+		&& request.Offers.Where(o => (lenders & (1 << o.Lender)) != 0).Sum(o => (long)o.Amount) >= request.Missing;
 
 	public int Missing(int borrower) => _requests.TryGetValue(borrower, out OpenRequest? request) ? request.Missing : 0;
 
@@ -43,7 +53,7 @@ public sealed class LoanBoard
 		if (missing > 0)
 		{
 			_borrowers.Add(borrower);
-			_requests[borrower] = new OpenRequest { Missing = missing };
+			_requests[borrower] = new OpenRequest { Missing = missing, Revision = ++_revision };
 		}
 		Changed?.Invoke();
 	}
@@ -54,6 +64,7 @@ public sealed class LoanBoard
 		{
 			return;
 		}
+		request.Revision = ++_revision;
 		offer = offer with { RatePercent = offer.Gift ? 0 : Math.Clamp(offer.RatePercent, 0, MaxRate) };
 		int index = request.Offers.FindIndex(o => o.Lender == offer.Lender);
 		if (offer.Amount <= 0)

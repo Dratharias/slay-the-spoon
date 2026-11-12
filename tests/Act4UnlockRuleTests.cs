@@ -13,6 +13,14 @@ public class Act4UnlockRuleTests
 	[InlineData(true, 10, 3, true)]   // later acts too
 	public void ShouldUnlock(bool standard, int ascension, int actIndex, bool expected) => Assert.Equal(expected, Act4UnlockRule.ShouldUnlock(standard, ascension, actIndex));
 
+	[Theory]
+	[InlineData(0, false)]
+	[InlineData(4, false)]
+	[InlineData(5, true)]
+	[InlineData(10, true)]
+	public void UnlocksWithAscensionFiveAvailable(int maximum, bool expected) =>
+		Assert.Equal(expected, Act4UnlockRule.ShouldUnlock(maximum));
+
 	[Fact]
 	public void InStandardRun_NeedsTheUnlockOnceReleased()
 	{

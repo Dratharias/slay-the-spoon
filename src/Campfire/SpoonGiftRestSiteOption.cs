@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Gold;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.GameActions;
@@ -24,11 +24,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Campfire;
 
-/// <summary>
-/// Campfire Gifts: spend this player's rest action to move a deck card into an ally's deck; the ally pays
-/// <see cref="CampfireGiftRule.Price"/> gold. The card pick goes through the vanilla deck selector (synchronized), the
-/// ally pick through Mend's targeting and one synchronized player choice. Cancelling either step keeps the action.
-/// </summary>
+/// <summary>Spend the seller's rest action only after an ally accepts a synchronized card sale.</summary>
 public sealed class SpoonGiftRestSiteOption(Player owner) : RestSiteOption(owner)
 {
 	public const string Id = "SPOON_GIFT";
@@ -51,7 +47,6 @@ public sealed class SpoonGiftRestSiteOption(Player owner) : RestSiteOption(owner
 				_description = base.Description;
 				_description.Add("HasTarget", variable: false);
 				_description.Add("Name", "");
-				_description.Add("Price", CampfireGiftRule.Price);
 			}
 			return _description;
 		}
@@ -60,7 +55,7 @@ public sealed class SpoonGiftRestSiteOption(Player owner) : RestSiteOption(owner
 	public override bool IsEnabled => Giftable(Owner).Any() && Owner.RunState.Players.Any(p => CanReceive(p));
 
 	private bool CanReceive(Player? player) =>
-		player != null && CampfireGiftRule.CanReceive(player == Owner, !player.Creature.IsDead, player.Gold);
+		player != null && CampfireGiftRule.CanReceive(player == Owner, !player.Creature.IsDead);
 
 	private static IEnumerable<CardModel> Giftable(Player player) =>
 		PileType.Deck.GetPile(player).Cards.Where(IsGiftable);
@@ -69,6 +64,10 @@ public sealed class SpoonGiftRestSiteOption(Player owner) : RestSiteOption(owner
 
 	public override async Task<bool> OnSelect()
 	{
+		// Reserve only the seller's choices: an ally may be choosing another rest action concurrently.
+		uint saleId = RunManager.Instance.PlayerChoiceSynchronizer.ReserveChoiceId(Owner);
+		Task<bool> result = CampfireSales.WaitForResult(Owner, saleId);
+
 		var prompt = new LocString("card_selection", "SPOON_TO_GIFT");
 		var prefs = new CardSelectorPrefs(prompt, 1) { Cancelable = true };
 		CardModel? card = (await CardSelectCmd.FromDeckGeneric(Owner, prefs, IsGiftable)).FirstOrDefault();
@@ -76,7 +75,7 @@ public sealed class SpoonGiftRestSiteOption(Player owner) : RestSiteOption(owner
 
 		uint choiceId = RunManager.Instance.PlayerChoiceSynchronizer.ReserveChoiceId(Owner);
 		Player? target;
-		if (LocalContext.IsMe(Owner))
+		if (LocalContext.IsMe(Owner) && RunManager.Instance.NetService.Type != NetGameType.Replay)
 		{
 			target = await PickAlly();
 			RunManager.Instance.PlayerChoiceSynchronizer.SyncLocalChoice(Owner, choiceId, PlayerChoiceResult.FromPlayerId(target?.NetId));
@@ -88,19 +87,23 @@ public sealed class SpoonGiftRestSiteOption(Player owner) : RestSiteOption(owner
 		}
 		Description.Add("HasTarget", variable: false);
 		NRestSiteRoom.Instance?.GetButtonForOption(this)?.RefreshTextState();
-		// Every peer runs this with the same choices; a target that can no longer pay cancels on all of them.
-		if (!CanReceive(target) || card.Pile?.Type != PileType.Deck) return false;
+		if (target == null) return false;
 
-		var copy = CardModel.FromSerializable(card.ToSerializable());
-		await CardPileCmd.RemoveFromDeck(card);
-		target!.RunState.AddCard(copy, target);
-		await CardPileCmd.Add(copy, PileType.Deck);
-		await PlayerCmd.LoseGold(CampfireGiftRule.Price, target, GoldLossType.Spent);
-		SpoonLog.Info($"campfire: {Owner.NetId} gave {copy.Id.Entry} to {target.NetId} for {CampfireGiftRule.Price} gold");
-		return true;
+		if (LocalContext.IsMe(Owner) && RunManager.Instance.NetService.Type != NetGameType.Replay)
+		{
+			var terms = await CampfireSalePanel.ChooseTerms(Owner, target!, card);
+			CampfireSales.Send(Owner, new NetCampfireSaleAction {
+				Kind = terms.HasValue ? CampfireSaleKind.Offer : CampfireSaleKind.Cancel,
+				Seller = Owner.RunState.Players.ToList().IndexOf(Owner), SaleId = saleId,
+				Buyer = Owner.RunState.Players.ToList().IndexOf(target!),
+				Card = PileType.Deck.GetPile(Owner).Cards.ToList().IndexOf(card),
+				Price = terms?.Price ?? 0, Rate = terms?.Rate ?? 0,
+				Cash = Math.Min(terms?.Price ?? 0, Math.Max(0, target!.Gold)) });
+		}
+		return await result;
 	}
 
-	/// <summary>Mend's targeting, limited to allies who can pay.</summary>
+	/// <summary>Mend's targeting, limited to living allies; purchases can be financed.</summary>
 	private async Task<Player?> PickAlly()
 	{
 		if (NRestSiteRoom.Instance is not { } room || room.GetButtonForOption(this) is not { } button) return null;

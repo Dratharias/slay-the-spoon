@@ -94,7 +94,9 @@ public static class SpoonWidgets
 		{
 			foreach (Node child in node.GetChildren())
 			{
-				if (child is Control { FocusMode: Control.FocusModeEnum.All } control) found.Add(control);
+				if (child is Control { FocusMode: Control.FocusModeEnum.All } control
+					&& control.IsVisibleInTree() && control is not BaseButton { Disabled: true })
+					found.Add(control);
 				Walk(child);
 			}
 		}

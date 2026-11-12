@@ -16,7 +16,7 @@ namespace SlaySpoon.Act4;
 /// </summary>
 internal sealed class SapphireKeyView
 {
-	private const float GemSize = 132f;
+	private const float GemSize = 88f;
 
 	private readonly Control _holder;
 	private readonly TextureButton _gem;
@@ -57,6 +57,9 @@ internal sealed class SapphireKeyView
 		_button.Connect(NClickableControl.SignalName.Released, Callable.From<NButton>(_ => Take()));
 
 		room.AddChild(_holder);
+		// The reward button scene carries screen-relative offsets; reset them inside this slot.
+		_button.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.TopLeft);
+		_button.Position = new Vector2(-_button.Size.X / 2f, 0);
 
 		// A slow bob, like a relic waiting in the chest.
 		var bob = _gem.CreateTween().SetLoops();

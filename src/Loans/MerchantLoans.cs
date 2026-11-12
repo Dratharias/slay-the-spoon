@@ -28,6 +28,9 @@ public static class MerchantLoans
 
 	/// <summary>Raised after the debts change (loan taken, repayment).</summary>
 	public static event Action? Changed;
+	public static event Action<int, string, int, int>? Receipt;
+	private static void Notify(int player, string key, int amount = 0, int debt = 0) =>
+		Receipt?.Invoke(player, key, amount, debt);
 
 	public static IRunState? Run => State(RunManager.Instance);
 
@@ -35,6 +38,10 @@ public static class MerchantLoans
 	{
 		return run?.Modifiers.OfType<SpoonMerchantLoans>().FirstOrDefault();
 	}
+
+	/// <summary>Both options share one debt queue when enabled together; campfire credit also works on its own.</summary>
+	public static LoanLedger? LedgerOf(IRunState? run) => ModifierOf(run)?.Ledger
+		?? run?.Modifiers.OfType<SpoonCampfireGift>().FirstOrDefault()?.Ledger;
 
 	/// <summary>Loans need the modifier and someone to borrow from.</summary>
 	public static bool IsActive(IRunState? run)
@@ -92,17 +99,31 @@ public static class MerchantLoans
 			case LoanActionKind.Request:
 				RefundAll(run, me);
 				Board.Request(me, action.Amount);
+				Notify(me, "request_sent");
 				break;
 			case LoanActionKind.Cancel:
 				RefundAll(run, me);
 				Board.Cancel(me);
+				Notify(me, "request_cancelled");
 				break;
 			case LoanActionKind.Offer:
 				int before = OfferOf(action.Borrower, me);
+				if (!Board.HasRequest(action.Borrower) || action.Borrower == me
+					|| action.Amount < 0 || action.Amount > (long)sender.Gold + before)
+				{
+					Notify(me, "offer_rejected");
+					return;
+				}
 				Board.Offer(action.Borrower, new LoanOffer(me, action.Amount, action.RatePercent, action.Gift));
 				sender.Gold -= OfferOf(action.Borrower, me) - before;
+				Notify(me, action.Amount == 0 ? "offer_withdrawn" : "offer_sent", action.Amount);
 				break;
 			case LoanActionKind.Accept:
+				if (!Board.CanAccept(me, action.Revision, action.Lenders))
+				{
+					Notify(me, "terms_changed");
+					return;
+				}
 				Accept(run, sender, me, action.Lenders);
 				break;
 		}
@@ -126,9 +147,9 @@ public static class MerchantLoans
 		}
 	}
 
-	public static void LedgerChanged(SpoonMerchantLoans modifier, string why)
+	public static void LedgerChanged(LoanLedger ledger, string why)
 	{
-		SpoonLog.Info($"loans: {why}; ledger [{string.Join(",", modifier.FurCoatCoordCols)}]");
+		SpoonLog.Info($"loans: {why}; ledger [{string.Join(",", ledger.Encode())}]");
 		Changed?.Invoke();
 	}
 
@@ -159,9 +180,14 @@ public static class MerchantLoans
 		var shares = transfers.Where(t => !t.Gift).Select(t => (t.Lender, LoanLedger.Owed(t.Amount, t.RatePercent))).ToList();
 		if (ModifierOf(run) is { } modifier && modifier.Ledger.AddLoan(borrowerIndex, shares) != 0)
 		{
-			LedgerChanged(modifier, $"{NameOf(borrower)} borrowed "
+			LedgerChanged(modifier.Ledger, $"{NameOf(borrower)} borrowed "
 				+ string.Join(", ", transfers.Where(t => !t.Gift).Select(t => $"{t.Amount} at {t.RatePercent}% from player {t.Lender}")));
 		}
+		Notify(borrowerIndex, transfers.All(t => t.Gift) ? "gift_received" : "loan_received",
+			transfers.Sum(t => t.Amount), shares.Sum(s => s.Item2));
+		foreach (var transfer in transfers)
+			Notify(transfer.Lender, transfer.Gift ? "gift_delivered" : "loan_delivered", transfer.Amount,
+				transfer.Gift ? 0 : LoanLedger.Owed(transfer.Amount, transfer.RatePercent));
 	}
 
 	private static int OfferOf(int borrower, int lender)

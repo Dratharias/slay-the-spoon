@@ -1,0 +1,21 @@
+Version 1.0.4
+
+Français
+- Marchand : accès direct aux prêts et dons depuis le tapis, en complément de la demande lors d’un achat trop cher.
+- Fenêtres de commerce agrandies, réglages espacés et boutons toujours accessibles : annulation rouge à gauche, validation verte à droite.
+- Case « Donner cette somme », sans intérêts ni remboursement. Offres à accepter individuellement, décochées par défaut.
+- Confirmation des transactions, montant réellement reçu et protection contre les offres modifiées pendant l’acceptation.
+- Une fenêtre fermée reste fermée lors des mises à jour. Échap et Annuler ont le même effet.
+- Ventes de cartes au feu de camp, avec crédit pour la somme manquante et accord de l’acheteur.
+- Acte 4 activé par défaut en partie standard dès l’Ascension 5 débloquée ; placement du choix de la clé de saphir corrigé.
+
+English
+- Merchant: open loans and gifts directly from the rug, alongside the prompt after an unaffordable purchase.
+- Larger trade windows, spaced controls and persistent actions: red cancellation on the left, green confirmation on the right.
+- Gift checkbox with no interest or repayment. Offers require individual acceptance and start unchecked.
+- Transaction feedback, actual received amounts and protection against offers changing during acceptance.
+- Dismissed windows stay closed on updates. Escape and Cancel behave consistently.
+- Campfire card sales with credit for any shortfall and buyer consent.
+- Act 4 enabled by default in Standard runs once Ascension 5 is unlocked; Sapphire Key choice placement corrected.
+
+All co-op players must use version 1.0.4.

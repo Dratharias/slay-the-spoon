@@ -105,6 +105,7 @@ internal static class ChestRematchView
 		private static void Postfix(NTreasureRoomRelicCollection __instance)
 		{
 			if (__instance != _collection) return;
+			_key?.Place(KeySlot(__instance));
 			_opened = true;
 			Refresh();
 		}

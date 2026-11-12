@@ -17,17 +17,17 @@ public static class LoanRepaymentPatch
 {
 	public static void Postfix(IRunState runState, Player player, ref decimal __result)
 	{
-		if (__result < 1m || !MerchantLoans.IsActive(runState) || MerchantLoans.ModifierOf(runState) is not { } modifier)
+		if (__result < 1m || MerchantLoans.LedgerOf(runState) is not { } ledger)
 		{
 			return;
 		}
 		int borrower = MerchantLoans.IndexOf(player);
-		if (borrower < 0 || modifier.Ledger.DebtOf(borrower) == 0)
+		if (borrower < 0 || ledger.DebtOf(borrower) == 0)
 		{
 			return;
 		}
 		int gained = (int)__result;
-		(int kept, IReadOnlyList<LoanPayment> payments) = modifier.Ledger.Repay(borrower, gained);
+		(int kept, IReadOnlyList<LoanPayment> payments) = ledger.Repay(borrower, gained);
 		foreach (LoanPayment payment in payments)
 		{
 			if (MerchantLoans.PlayerAt(runState, payment.Lender) is { } lender)
@@ -40,7 +40,7 @@ public static class LoanRepaymentPatch
 			}
 		}
 		__result = kept + (__result - gained);
-		MerchantLoans.LedgerChanged(modifier, $"{MerchantLoans.NameOf(player)} gained {gained}, kept {kept}, repaid "
+		MerchantLoans.LedgerChanged(ledger, $"{MerchantLoans.NameOf(player)} gained {gained}, kept {kept}, repaid "
 			+ string.Join(", ", payments.Select(p => $"{p.Amount} to player {p.Lender}")));
 	}
 }

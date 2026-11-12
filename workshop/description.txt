@@ -14,7 +14,7 @@ Slay the Spoon adds Slay the Spire 1 content and new options to Slay the Spire 2
 [*][b]StS1 Boss Relics[/b]: choose from a shared chest of 3 boss relics instead of the Ancient's gift in acts 2 and 3.
 [*][b]Act 4[/b]: collect the three keys to face the Corrupt Heart.
 [*][b]Merchant Loans[/b] (co-op): give allies gold or lend it at 0–900% interest. Their gold gains repay you.
-[*][b]Campfire Gifts[/b] (co-op): spend your rest site action to give an ally a card. They pay 50 gold. No curses.
+[*][b]Campfire Sales[/b] (co-op): offer an ally a card for 0–999 gold. Any shortfall becomes a loan at 0–900% interest. The buyer must accept. No curses.
 [/list]
 
 [h2]Also included[/h2]
@@ -25,17 +25,17 @@ Slay the Spoon adds Slay the Spire 1 content and new options to Slay the Spire 2
 [*]Optional progress copy from your regular profile to the modded profile on every launch. Replaces modded-only progress; leaves your regular save untouched.
 [/list]
 
-In Standard Runs, the Spire Souvenir can drop and Act 4 unlocks after reaching act 3 at Ascension 10 or higher. Daily Runs are unchanged.
+In Standard Runs, the Spire Souvenir can drop and Act 4 is enabled by default once Ascension 5 is unlocked with any character. Daily Runs are unchanged.
 
 [h2]Français[/h2]
 [b]Alpha réservée aux amis.[/b] Peu testée en jeu : prévoyez des bugs et sauvegardez vos parties. Nécessite BaseLib 3.4.7 ou plus et la même version du mod pour tous les joueurs.
 
-En partie personnalisée : PV et dégâts des monstres de 25 à 500 %, cartes de Slay the Spire 1, mélange des deux jeux avec le Souvenir de la Tour, bénédictions de Neow, coffre de départ, reliques de boss et acte 4. En coopération : dons ou prêts d’or chez le marchand et cartes offertes au feu de camp pour 50 pièces d’or payées par l’allié.
+En partie personnalisée : PV et dégâts des monstres de 25 à 500 %, cartes de Slay the Spire 1, mélange des deux jeux avec le Souvenir de la Tour, bénédictions de Neow, coffre de départ, reliques de boss et acte 4. En coopération : dons ou prêts d’or chez le marchand et ventes de cartes au feu de camp à 0–999 pièces d’or, avec crédit à 0–900 % d’intérêt et accord de l’acheteur.
 
 La Gardienne est jouable en partie standard solo et dans toutes les parties personnalisées. Le mod ajoute aussi trois événements de Slay the Spire 1 à l’acte 2 et une couleur de personnage personnalisable.
 
 La copie facultative de progression vers le profil avec mods écrase sa progression à chaque lancement, sans toucher à la sauvegarde habituelle.
 
-En partie standard, le Souvenir de la Tour peut apparaître et l’acte 4 se débloque en atteignant l’acte 3 à l’Ascension 10 ou plus. Les défis quotidiens restent inchangés.
+En partie standard, le Souvenir de la Tour peut apparaître et l’acte 4 est activé par défaut dès que l’Ascension 5 est débloquée avec un personnage. Les défis quotidiens restent inchangés.
 
 [i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes are not guaranteed.[/i]

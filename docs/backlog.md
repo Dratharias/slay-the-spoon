@@ -311,11 +311,11 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     duplicates keep the version button.~~ Done in 0.12.29 (`OfferWeights`, `OfferWeightPatch`): the favored game's unique
     cards hold 60 % of the two games' unique share within the rolled rarity; duplicate slots keep their count share and
     their 50/50 version roll. Discovery-like distinct draws (`TakeRandom`) stay uniform.
-  - ~~Campfire card trade/gift: a co-op rest-site option behind a Custom Run modifier; it uses the giver's rest-site
-    action; the receiver pays 50 gold, each player pays 50 on a trade.~~ Done in 0.12.34 ("Campfire Gifts",
-    `src/Campfire/SpoonGiftRestSiteOption.cs`). Builder calls, for owner review: a trade is two gifts at the same fire
-    (each player gives and pays once); the receiver has no veto and only allies with 50 gold can be picked; curses
-    and Eternal cards cannot be given; the card keeps its upgrades and enchantment; Mend's icon is reused.
+  - Campfire Sales replaces the fixed 50-gold gift: the seller sets 0–999 gold and 0–900% interest;
+    the buyer accepts or declines. Available gold goes to the seller, and only the shortfall incurs interest.
+    Debts share the merchant repayment ledger (or the campfire modifier's saved ledger when loans are disabled).
+    Curses and unremovable cards stay; upgrades and enchantments transfer. Only a completed sale spends the
+    seller's rest action. Native popups replace the custom loan/sale panels. In-game validation remains pending.
   - ~~Selected-card counter ("X / Y selected", EN/FR) on every multi-pick grid, vanilla modes included (display only).~~
     Done in 0.12.27 (`src/Ui/SelectionCounterPatch.cs`: "Selected: X / Y" under the prompt of the six grid screens).
   - ~~Cross-game combos: a hand-picked pair list, weight ×0.5 when a card would complete a pair the team holds. Pairs

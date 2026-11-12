@@ -1,5 +1,5 @@
 using Godot;
-using MegaCrit.Sts2.Core.ControllerInput;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
@@ -15,14 +15,26 @@ namespace SlaySpoon.Loans;
 /// </summary>
 public sealed class LoanPanel
 {
-	private readonly PanelContainer _panel = new() { Name = "SpoonLoans" };
-	private readonly VBoxContainer _rows = new();
+	private NativeTradePopup? _popup;
+	private VBoxContainer _rows = null!;
 	private readonly Player _me;
 	private readonly Dictionary<int, (int Amount, int Rate)> _drafts = new();
 	private readonly Dictionary<(int Borrower, int Lender), bool> _picked = new();
+	private readonly Dictionary<(int Borrower, int Lender), LoanOffer> _seenOffers = new();
 	private bool _queued;
 	private bool _closed;
 	private bool _wasVisible;
+	private bool _dismissed = true;
+	private bool _requestEditor;
+	private int _selectedBorrower = -1;
+	private bool _pending;
+	private bool _userDismissed;
+	private readonly HashSet<int> _knownRequests = new();
+	private string? _status;
+	private VBoxContainer _footer = null!;
+	private int _requestAmount = 100;
+	private readonly Dictionary<int, bool> _gifts = new();
+	private readonly NPopupYesNoButton _open;
 
 	public static LocString Loc(string key) => new("merchant_room", "SLAY_SPOON_LOANS." + key);
 	private static string Text(string key) => Loc(key).GetFormattedText();
@@ -36,30 +48,68 @@ public sealed class LoanPanel
 	public LoanPanel(NMerchantRoom room)
 	{
 		_me = MerchantLoans.Me(MerchantLoans.Run)!;
-		room.AddChild(_panel);
-		// Right side, clear of the merchant's card shelves; grows leftwards.
-		_panel.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.TopRight);
-		_panel.GrowHorizontal = Control.GrowDirection.Begin;
-		_panel.OffsetRight = -20;
-		_panel.OffsetTop = 150;
-		_panel.CustomMinimumSize = new Vector2(460, 0);
-		_panel.AddThemeStyleboxOverride("panel", SpoonWidgets.PanelStyle());
-		var scroll = new ScrollContainer { CustomMinimumSize = new Vector2(460, 440),
-			HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
-		_panel.AddChild(scroll);
-		scroll.AddChild(_rows);
-		_rows.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-		_rows.AddThemeConstantOverride("separation", 8);
-		MerchantLoans.Board.Changed += Schedule;
+		_open = NativeTradePopup.Button(room.Inventory, Text("title"), () => { _requestEditor = MerchantLoans.Board.Borrowers.Count == 0; _userDismissed = false; _dismissed = false; Schedule(); });
+		_open.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.TopRight);
+		_open.Position += new Vector2(-340, 40);
+		MerchantLoans.Board.Changed += OnBoardChanged;
+		MerchantLoans.Receipt += OnReceipt;
 		_me.GoldChanged += Schedule;
 		room.TreeExiting += () =>
 		{
 			_closed = true;
-			MerchantLoans.Board.Changed -= Schedule;
+			_popup?.Close();
+			MerchantLoans.Board.Changed -= OnBoardChanged;
+			MerchantLoans.Receipt -= OnReceipt;
 			_me.GoldChanged -= Schedule;
 			// Held gold is refunded by LoanBoardRoomExitPatch in synchronized room order.
 		};
 		Refresh();
+	}
+
+	private void OnBoardChanged()
+	{
+		var borrowers = MerchantLoans.Board.Borrowers;
+		bool newRequest = borrowers.Any(b => !_knownRequests.Contains(b));
+		_knownRequests.Clear();
+		_knownRequests.UnionWith(borrowers);
+		if (newRequest && !_userDismissed) _dismissed = false;
+		Schedule();
+	}
+
+	private void OnReceipt(int player, string key, int amount, int debt)
+	{
+		if (player != MerchantLoans.IndexOf(_me)) return;
+		if (key != "gift_delivered" && key != "loan_delivered") _pending = false;
+		var loc = Loc(key);
+		loc.Add("Amount", amount);
+		loc.Add("Debt", debt);
+		_status = loc.GetFormattedText();
+		if (key == "request_sent") { _selectedBorrower = player; _requestEditor = false; _dismissed = false; }
+		Schedule();
+	}
+
+	private void Send(NetLoanAction action)
+	{
+		if (_pending) return;
+		_pending = true;
+		_status = Text("sending");
+		MerchantLoans.Send(action);
+		Schedule();
+	}
+
+	private void Cancel()
+	{
+		if (_pending) return;
+		if (_selectedBorrower == MerchantLoans.IndexOf(_me) && MerchantLoans.Board.HasRequest(_selectedBorrower))
+			Send(new NetLoanAction { Kind = LoanActionKind.Cancel });
+		Dismiss();
+	}
+
+	private void Dismiss()
+	{
+		_userDismissed = true;
+		_dismissed = true;
+		_popup?.Close();
 	}
 
 	private void Schedule()
@@ -69,45 +119,90 @@ public sealed class LoanPanel
 		Callable.From(() => { _queued = false; if (!_closed) Refresh(); }).CallDeferred();
 	}
 
-	private static void Label(Control parent, string text)
-	{
-		var label = new Label { Text = text, AutowrapMode = TextServer.AutowrapMode.WordSmart,
-			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
-		label.AddThemeFontSizeOverride("font_size", 20);
-		parent.AddChild(label);
-	}
+	private static void Label(Control parent, string text) => NativeTradePopup.Label(parent, text);
 
-	private static Button Button(Control parent, string text, Action action, bool disabled = false) =>
-		SpoonWidgets.Button(parent, text, action, disabled);
+	private NPopupYesNoButton Button(Control parent, string text, Action action, bool disabled = false) =>
+		NativeTradePopup.Button(parent, text, action, disabled || _pending, text != Text("cancel") && text != Text("withdraw"));
 
 	private void Refresh()
 	{
-		var focusables = Focusables();
-		int focused = focusables.FindIndex(c => c.HasFocus());
-		foreach (Node child in _rows.GetChildren()) { _rows.RemoveChild(child); child.QueueFree(); }
 		var board = MerchantLoans.Board;
-		_panel.Visible = board.Borrowers.Count > 0;
-		foreach (int stale in _drafts.Keys.Where(b => !board.HasRequest(b)).ToArray()) _drafts.Remove(stale);
+		_open.Visible = true;
+		_open.SetText(Text("title") + (board.Borrowers.Count > 0 ? " (" + board.Borrowers.Count + ")" : ""));
+		_open.TooltipText = _status ?? Text("rules");
+		foreach (int stale in _drafts.Keys.Where(b => !board.HasRequest(b)).ToArray()) { _drafts.Remove(stale); _gifts.Remove(stale); }
 		foreach (var stale in _picked.Keys.Where(k => !board.OffersFor(k.Borrower).Any(o => o.Lender == k.Lender)).ToArray())
-			_picked.Remove(stale);
-		bool appeared = _panel.Visible && !_wasVisible;
-		_wasVisible = _panel.Visible;
-		if (!_panel.Visible) return;
-		Label(_rows, Text("title"));
-		Label(_rows, Text("rules"));
-		int me = MerchantLoans.IndexOf(_me);
-		foreach (int borrower in board.Borrowers.ToArray())
+			{ _picked.Remove(stale); _seenOffers.Remove(stale); }
+		if (_dismissed)
 		{
-			if (MerchantLoans.PlayerAt(_me.RunState, borrower) is not { } player) continue;
-			_rows.AddChild(new HSeparator());
-			Label(_rows, MerchantLoans.NameOf(player) + " — " + Number("missing", board.Missing(borrower)));
-			if (borrower == me) OwnRequest(borrower);
-			else OtherRequest(borrower, me);
+			_popup?.Close();
+			_wasVisible = false;
+			return;
 		}
-		SpoonWidgets.RestoreFocus(_rows, focused, appeared);
+		bool appeared = !_wasVisible || _popup == null || _popup.IsClosed;
+		if (_popup == null || _popup.IsClosed)
+		{
+			_popup = NativeTradePopup.Open(Text("title"));
+			if (_popup == null) return;
+			_rows = _popup.Rows;
+			_footer = _popup.Footer;
+			_popup.Cancel = Cancel;
+		}
+		_wasVisible = true;
+		int focused = Focusables().FindIndex(c => c.HasFocus());
+		foreach (Node child in _footer.GetChildren()) { _footer.RemoveChild(child); child.QueueFree(); }
+		foreach (Node child in _rows.GetChildren()) { _rows.RemoveChild(child); child.QueueFree(); }
+		Label(_rows, Text("rules"));
+		if (_status != null) Label(_footer, _status);
+		int me = MerchantLoans.IndexOf(_me);
+		if (board.HasRequest(me)) _requestEditor = false;
+		if (!board.HasRequest(_selectedBorrower))
+			_selectedBorrower = board.HasRequest(me) ? me : board.Borrowers.FirstOrDefault(-1);
+		if (board.Borrowers.Count > 1 || (_requestEditor && board.Borrowers.Count > 0))
+		{
+			foreach (int borrower in board.Borrowers)
+			{
+				int selected = borrower;
+				SpoonWidgets.Button(_rows, MerchantLoans.NameOf(MerchantLoans.PlayerAt(_me.RunState, borrower)!),
+					() => { _selectedBorrower = selected; _requestEditor = false; Schedule(); },
+					_pending || (!_requestEditor && selected == _selectedBorrower));
+			}
+		}
+		if (!board.HasRequest(me) && !_requestEditor && board.Borrowers.Count > 0)
+			SpoonWidgets.Button(_rows, Text("request_title"), () => { _requestEditor = true; Schedule(); }, _pending);
+		if (!_requestEditor && board.HasRequest(_selectedBorrower)
+			&& MerchantLoans.PlayerAt(_me.RunState, _selectedBorrower) is { } player)
+		{
+			Label(_rows, MerchantLoans.NameOf(player) + " — " + Number("missing", board.Missing(_selectedBorrower)));
+			if (_selectedBorrower == me) OwnRequest(me);
+			else OtherRequest(_selectedBorrower, me);
+		}
+
+		if (!board.HasRequest(me) && (_requestEditor || (board.Borrowers.Count == 0 && _status == null)))
+		{
+			Label(_rows, Text("request_title"));
+			NPopupYesNoButton? ask = null;
+			NativeTradePopup.Slider(_rows, Text("amount_label"), _requestAmount,
+				Math.Min(65535, Math.Max(1000, _me.RunState.Players.Where(p => p != _me).Sum(p => Math.Max(0, p.Gold)))),
+				next =>
+				{
+					_requestAmount = next;
+					if (ask != null) { if (next > 0 && !_pending) ask.Enable(); else ask.Disable(); }
+				});
+			var actions = NativeTradePopup.Actions(_footer);
+			Button(actions, Text("cancel"), Cancel);
+			ask = Button(actions, Text("ask"), () =>
+			{
+				if (_requestAmount > 0) Send(new NetLoanAction { Kind = LoanActionKind.Request, Amount = _requestAmount });
+			}, _requestAmount <= 0);
+		}
+		else if (!board.HasRequest(me) && board.Borrowers.Count == 0)
+			Button(_footer, Text("cancel"), Cancel);
+
+		SpoonWidgets.RestoreFocus(_popup, focused, appeared);
 	}
 
-	private List<Control> Focusables() => SpoonWidgets.Focusables(_rows);
+	private List<Control> Focusables() => SpoonWidgets.Focusables(_popup!);
 
 	private void OwnRequest(int borrower)
 	{
@@ -117,23 +212,17 @@ public sealed class LoanPanel
 		foreach (var offer in offers)
 		{
 			var key = (borrower, offer.Lender);
-			bool picked = !_picked.TryGetValue(key, out bool saved) || saved;
+			// Changed terms require fresh consent, even when the lender stays the same.
+			if (!_seenOffers.TryGetValue(key, out var previous) || previous != offer) _picked[key] = false;
+			_seenOffers[key] = offer;
+			bool picked = _picked.TryGetValue(key, out bool saved) && saved;
 			if (picked) { mask |= 1 << offer.Lender; total += offer.Amount; }
 			string name = MerchantLoans.NameOf(MerchantLoans.PlayerAt(_me.RunState, offer.Lender)!);
 			string details = offer.Gift ? Text("gift") : Number("rate", offer.RatePercent);
-			var toggle = new CheckButton { Text = name + ": " + Number("gold", offer.Amount) + " · " + details,
-				ButtonPressed = picked, FocusMode = Control.FocusModeEnum.All };
-			toggle.AddThemeFontSizeOverride("font_size", 18);
-			_rows.AddChild(toggle);
-			toggle.Toggled += value => { _picked[key] = value; Schedule(); };
-			toggle.GuiInput += input =>
-			{
-				if (!input.IsActionPressed(MegaInput.select)) return;
-				toggle.AcceptEvent();
-				toggle.ButtonPressed = !toggle.ButtonPressed;
-			};
+			Label(_rows, name + ": " + Number("gold", offer.Amount) + " · " + details);
+			NativeTradePopup.Checkbox(_rows, Text("accept"), picked, value => { _picked[key] = value; Schedule(); });
 		}
-		Label(_rows, Number("selected", total));
+		Label(_rows, Number("selected", Math.Min(total, board.Missing(borrower))));
 		// Preview the actual principal taken, including partial final offers.
 		int need = board.Missing(borrower), debt = 0;
 		foreach (var offer in offers.Where(o => (mask & (1 << o.Lender)) != 0))
@@ -143,11 +232,11 @@ public sealed class LoanPanel
 			need -= taken;
 		}
 		Label(_rows, Number("debt", debt));
-		var buttons = new HBoxContainer();
-		_rows.AddChild(buttons);
-		Button(buttons, Text("accept"), () => MerchantLoans.Send(new NetLoanAction {
-			Kind = LoanActionKind.Accept, Lenders = mask }), total < board.Missing(borrower));
-		Button(buttons, Text("cancel"), () => MerchantLoans.Send(new NetLoanAction { Kind = LoanActionKind.Cancel }));
+		var buttons = NativeTradePopup.Actions(_footer);
+		int revision = board.Revision(borrower);
+		Button(buttons, Text("cancel"), Cancel);
+		Button(buttons, Text("accept"), () => Send(new NetLoanAction {
+			Kind = LoanActionKind.Accept, Lenders = mask, Revision = revision }), total < board.Missing(borrower));
 	}
 
 	private void OtherRequest(int borrower, int me)
@@ -155,32 +244,37 @@ public sealed class LoanPanel
 		var board = MerchantLoans.Board;
 		var offers = board.OffersFor(borrower);
 		var own = offers.FirstOrDefault(o => o.Lender == me);
-		int available = Math.Max(0, _me.Gold + (own?.Amount ?? 0));
+		int available = (int)Math.Clamp((long)_me.Gold + (own?.Amount ?? 0), 0, 65535);
 		if (!_drafts.TryGetValue(borrower, out var draft))
 			draft = (Math.Min(available, Math.Max(0, board.Missing(borrower) - offers.Sum(o => o.Amount))), 0);
 		draft.Amount = Math.Clamp(draft.Amount, 0, available);
 		_drafts[borrower] = draft;
-		Stepper(Number("amount", draft.Amount), delta =>
+		bool gift = _gifts.TryGetValue(borrower, out bool savedGift) ? savedGift : own?.Gift == true;
+		NativeTradePopup.Checkbox(_rows, Text("give_sum"), gift, value => { _gifts[borrower] = value; Schedule(); });
+		NPopupYesNoButton? accept = null;
+		var debtLabel = NativeTradePopup.Label(_rows, Number("debt", LoanLedger.Owed(draft.Amount, draft.Rate)));
+		debtLabel.Visible = !gift;
+		NativeTradePopup.Slider(_rows, Text("amount_label"), draft.Amount, available, next =>
 		{
-			_drafts[borrower] = (delta == 0 ? 0 : Math.Clamp(draft.Amount + delta, 0, available), draft.Rate);
-			Schedule();
+			var current = _drafts[borrower];
+			_drafts[borrower] = (next, current.Rate);
+			if (accept != null) { if (next > 0 && !_pending) accept.Enable(); else accept.Disable(); }
+			debtLabel.Text = Number("debt", LoanLedger.Owed(next, current.Rate));
 		});
-		Stepper(Number("rate", draft.Rate), delta =>
+		if (!gift) NativeTradePopup.Slider(_rows, Text("rate_label"), draft.Rate, LoanBoard.MaxRate, next =>
 		{
-			_drafts[borrower] = (draft.Amount, delta == 0 ? 0 : Math.Clamp(draft.Rate + delta, 0, LoanBoard.MaxRate));
-			Schedule();
-		}, 1, 10, 100);
-		Label(_rows, Number("debt", LoanLedger.Owed(draft.Amount, draft.Rate)));
+			var current = _drafts[borrower];
+			_drafts[borrower] = (current.Amount, next);
+			debtLabel.Text = Number("debt", LoanLedger.Owed(current.Amount, next));
+		});
 		if (own != null) Label(_rows, Number("held", own.Amount));
-		var buttons = new HBoxContainer();
-		_rows.AddChild(buttons);
-		void Offer(bool gift, int amount) => MerchantLoans.Send(new NetLoanAction {
-			Kind = LoanActionKind.Offer, Borrower = borrower, Amount = amount, RatePercent = draft.Rate, Gift = gift });
-		Button(buttons, Text("lend"), () => Offer(false, draft.Amount), draft.Amount <= 0);
-		Button(buttons, Text("give"), () => Offer(true, draft.Amount), draft.Amount <= 0);
-		Button(buttons, Text("withdraw"), () => Offer(false, 0), own == null);
+
+		var buttons = NativeTradePopup.Actions(_footer);
+		void Offer(bool gift, int amount) => Send(new NetLoanAction {
+			Kind = LoanActionKind.Offer, Borrower = borrower, Amount = amount, RatePercent = _drafts[borrower].Rate, Gift = gift });
+		if (own != null) Button(buttons, Text("withdraw"), () => Offer(false, 0));
+		Button(buttons, Text("cancel"), Cancel);
+		accept = Button(buttons, Text("accept"), () => { if (_drafts[borrower].Amount > 0) Offer(gift, _drafts[borrower].Amount); }, draft.Amount <= 0);
 	}
 
-	private void Stepper(string title, Action<int> change, params int[] steps) =>
-		SpoonWidgets.Stepper(_rows, title, Text("reset"), change, steps);
 }

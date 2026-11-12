@@ -164,4 +164,55 @@ public class LoanBoardTests
 		Assert.Equal(5, changes);
 		Assert.Empty(board.Borrowers);
 	}
+
+	[Fact]
+	public void Acceptance_rejects_changed_terms_without_closing_or_moving_offers()
+	{
+		var board = WithRequest(40);
+		board.Offer(Borrower, new LoanOffer(1, 40, 0, true));
+		int shown = board.Revision(Borrower);
+		Assert.True(board.CanAccept(Borrower, shown, 1 << 1));
+		board.Offer(Borrower, new LoanOffer(1, 40, 900, false));
+		Assert.False(board.CanAccept(Borrower, shown, 1 << 1));
+		Assert.True(board.HasRequest(Borrower));
+		Assert.Equal(40, board.OffersFor(Borrower).Single().Amount);
+	}
+
+	[Fact]
+	public void Acceptance_requires_enough_selected_gold_and_a_live_request()
+	{
+		var board = WithRequest(40);
+		board.Offer(Borrower, new LoanOffer(1, 20, 0, false));
+		board.Offer(Borrower, new LoanOffer(2, 30, 0, true));
+		int shown = board.Revision(Borrower);
+		Assert.False(board.CanAccept(Borrower, shown, 0));
+		Assert.False(board.CanAccept(Borrower, shown, 1 << 1));
+		Assert.True(board.CanAccept(Borrower, shown, (1 << 1) | (1 << 2)));
+		board.Cancel(Borrower);
+		Assert.False(board.CanAccept(Borrower, shown, 6));
+	}
+
+	[Fact]
+	public void Recreated_request_cannot_reuse_an_old_acceptance()
+	{
+		var board = WithRequest(40);
+		board.Offer(Borrower, new LoanOffer(1, 40, 0, false));
+		int shown = board.Revision(Borrower);
+		board.Clear();
+		board.Request(Borrower, 40);
+		board.Offer(Borrower, new LoanOffer(1, 40, 0, false));
+		Assert.False(board.CanAccept(Borrower, shown, 2));
+		Assert.True(board.CanAccept(Borrower, board.Revision(Borrower), 2));
+	}
+
+	[Fact]
+	public void Another_borrowers_offer_does_not_invalidate_acceptance()
+	{
+		var board = WithRequest(40);
+		board.Offer(Borrower, new LoanOffer(1, 40, 0, false));
+		int shown = board.Revision(Borrower);
+		board.Request(2, 20);
+		board.Offer(2, new LoanOffer(1, 20, 0, false));
+		Assert.True(board.CanAccept(Borrower, shown, 2));
+	}
 }

@@ -1,16 +1,22 @@
 namespace SlaySpoon.Core;
 
-/// <summary>
-/// Campfire Gifts (Custom Run, co-op): a player spends their rest-site action to give a deck card to an ally, who pays
-/// <see cref="Price"/> gold for it. A trade is two gifts at the same fire, so each player pays the price once.
-/// </summary>
+/// <summary>Campfire sales keep the original modifier ID for existing saves.</summary>
 public static class CampfireGiftRule
 {
-	public const int Price = 50;
+	public const int MaxPrice = 999;
+	public const int MaxRate = LoanBoard.MaxRate;
 
-	/// <summary>An ally can receive while alive, able to pay, and not the giver.</summary>
-	public static bool CanReceive(bool isGiver, bool alive, int gold) => !isGiver && alive && gold >= Price;
+	public static bool CanReceive(bool isSeller, bool alive) => !isSeller && alive;
 
-	/// <summary>Curses cannot be gifted: the receiver would pay to take one (builder call). Eternal cards stay too.</summary>
 	public static bool CanGift(string cardType, bool removable) => removable && cardType != "Curse";
+
+	public static bool ValidTerms(int price, int rate) => price is >= 0 and <= MaxPrice && rate is >= 0 and <= MaxRate;
+
+	/// <summary>Interest applies only to the unpaid price, using the merchant's simple-interest rounding.</summary>
+	public static (int PaidNow, int Debt) Payment(int price, int rate, int gold)
+	{
+		if (!ValidTerms(price, rate)) throw new ArgumentOutOfRangeException(nameof(price));
+		int paid = Math.Min(price, Math.Max(0, gold));
+		return (paid, LoanLedger.Owed(price - paid, rate));
+	}
 }

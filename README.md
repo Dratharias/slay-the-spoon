@@ -108,8 +108,8 @@ The merchant interface still needs in-game validation; see `docs/testing/step-5-
 to its own color (the threshold sets how close); optionally color your map drawings too. Saved for you and shown to
 your co-op partners. It is cosmetic only.
 
-**Act 4, The Ending:** reaching Act 3 in a Standard run at Ascension 10 for the first time permanently
-unlocks Act 4, even if that run is lost. Once unlocked, it is available at every ascension level, including 0.
+**Act 4, The Ending:** unlocking Ascension 5 with any character enables Act 4 by default in Standard runs
+at every ascension level, including 0. Profiles with the earlier permanent unlock retain access.
 Collect the Ruby, Emerald and Sapphire keys (one set for the whole team in co-op); with all three, the Act 3 boss
 gives its rewards and the run continues into The Ending: a rest site, a merchant, the Spire Shield and Spear, then
 the Corrupt Heart. Without all keys the run ends after Act 3 as usual. A Custom Run option, "Act 4", turns on the

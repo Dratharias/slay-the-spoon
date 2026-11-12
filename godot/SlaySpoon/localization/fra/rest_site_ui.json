@@ -1,6 +1,20 @@
 {
-  "OPTION_SPOON_GIFT.description": "Donnez une carte de votre deck à {HasTarget:{Name}|un allié}, qui la paie [gold]{Price} pièces d’or[/gold].",
-  "OPTION_SPOON_GIFT.name": "Cadeau",
+  "OPTION_SPOON_GIFT.description": "Proposez une carte à {HasTarget:{Name}|un allié} pour [gold]0–999 pièces d’or[/gold], avec crédit possible.",
+  "OPTION_SPOON_GIFT.name": "Vendre",
   "OPTION_SPOON_RUBY.description": "Prenez la [gold]clé de rubis[/gold] pour l’équipe. Vous renoncez à vous reposer ou à forger ici.",
-  "OPTION_SPOON_RUBY.name": "Rappel"
+  "OPTION_SPOON_RUBY.name": "Rappel",
+  "SPOON_SALE.title": "Vente de carte",
+  "SPOON_SALE.price_label": "Prix (or)",
+  "SPOON_SALE.rate_label": "Intérêt sur le crédit (%)",
+  "SPOON_SALE.price": "Prix : {Amount} pièces d’or",
+  "SPOON_SALE.paid_now": "À payer maintenant : {Amount} pièces d’or",
+  "SPOON_SALE.rate": "Intérêt : {Amount} %",
+  "SPOON_SALE.debt": "Dette, intérêts compris : {Amount} pièces d’or",
+  "SPOON_SALE.credit": "L’or manquant est prêté au taux choisi. À 0 pièce, la carte est offerte.",
+  "SPOON_SALE.repayment": "Vos gains remboursent le vendeur. La mort n’efface pas la dette.",
+  "SPOON_SALE.offer": "Proposer",
+  "SPOON_SALE.accept": "Acheter",
+  "SPOON_SALE.decline": "Refuser",
+  "SPOON_SALE.cancel": "Annuler",
+  "SPOON_SALE.waiting": "En attente de l’acheteur."
 }

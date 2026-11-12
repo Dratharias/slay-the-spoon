@@ -31,6 +31,7 @@ public struct NetLoanAction : INetAction, IPacketSerializable
 	public bool Gift;
 	/// <summary>Bit i set: player i's offer is taken.</summary>
 	public int Lenders;
+	public int Revision;
 
 	public GameAction ToGameAction(Player player)
 	{
@@ -45,6 +46,7 @@ public struct NetLoanAction : INetAction, IPacketSerializable
 		writer.WriteInt(Math.Clamp(RatePercent, 0, LoanBoard.MaxRate), 10);
 		writer.WriteBool(Gift);
 		writer.WriteInt(Lenders & 0xFF, 8);
+		writer.WriteInt(Revision, 32);
 	}
 
 	public void Deserialize(PacketReader reader)
@@ -55,6 +57,7 @@ public struct NetLoanAction : INetAction, IPacketSerializable
 		RatePercent = reader.ReadInt(10);
 		Gift = reader.ReadBool();
 		Lenders = reader.ReadInt(8);
+		Revision = reader.ReadInt(32);
 	}
 
 	public override string ToString()

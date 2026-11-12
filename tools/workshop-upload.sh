@@ -41,6 +41,10 @@ rm "$OUT/row1.png" "$OUT/row2.png" "$OUT/title.png"
 # VDF strings: escape backslashes and double quotes.
 vdf_escape() { sed -e 's/\\/\\\\/g' -e 's/"/\\"/g'; }
 DESCRIPTION="$(vdf_escape < "$REPO/workshop/description.txt")"
+CHANGENOTE="Version $VERSION"
+if [[ -f "$REPO/workshop/changelog-$VERSION.txt" ]]; then
+	CHANGENOTE="$(vdf_escape < "$REPO/workshop/changelog-$VERSION.txt")"
+fi
 cat > "$OUT/item.vdf" <<EOF
 "workshopitem"
 {
@@ -51,7 +55,7 @@ cat > "$OUT/item.vdf" <<EOF
 	"visibility" "$VISIBILITY"
 	"title" "Slay the Spoon (alpha)"
 	"description" "$DESCRIPTION"
-	"changenote" "Version $VERSION"
+	"changenote" "$CHANGENOTE"
 }
 EOF
 if [[ "$PUBLISHED_ID" == 0 ]]; then ITEM="new item"; else ITEM="item $PUBLISHED_ID"; fi
