@@ -215,4 +215,28 @@ public class LoanBoardTests
 		board.Offer(2, new LoanOffer(1, 20, 0, false));
 		Assert.True(board.CanAccept(Borrower, shown, 2));
 	}
+
+	[Fact]
+	public void Unpicked_offer_changes_do_not_invalidate_acceptance()
+	{
+		var board = WithRequest(40);
+		board.Offer(Borrower, new LoanOffer(1, 40, 0, false));
+		int shown = board.Revision(Borrower);
+		board.Offer(Borrower, new LoanOffer(2, 10, 50, false));
+		board.Offer(Borrower, new LoanOffer(2, 20, 90, false));
+		Assert.True(board.CanAccept(Borrower, shown, 1 << 1));
+		Assert.False(board.CanAccept(Borrower, shown, (1 << 1) | (1 << 2)));
+	}
+
+	[Fact]
+	public void Withdrawn_picked_offer_rejects_acceptance()
+	{
+		var board = WithRequest(40);
+		board.Offer(Borrower, new LoanOffer(1, 40, 0, false));
+		board.Offer(Borrower, new LoanOffer(2, 40, 0, false));
+		int shown = board.Revision(Borrower);
+		board.Offer(Borrower, new LoanOffer(2, 0, 0, false));
+		Assert.False(board.CanAccept(Borrower, shown, (1 << 1) | (1 << 2)));
+		Assert.True(board.CanAccept(Borrower, shown, 1 << 1));
+	}
 }

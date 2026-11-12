@@ -1,3 +1,4 @@
+using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
@@ -62,7 +63,7 @@ public static class CampfireSales
 					|| action.Card < 0 || action.Card >= deck.Count
 					|| !CampfireGiftRule.CanGift(deck[action.Card].Type.ToString(), deck[action.Card].IsRemovable))
 				{
-					Finish(pending, false);
+					Fail(pending, "failed", seller, buyer);
 					return;
 				}
 				var payment = CampfireGiftRule.Payment(action.Price, action.Rate, action.Cash);
@@ -70,13 +71,25 @@ public static class CampfireSales
 					action.Price, action.Rate, payment.PaidNow, payment.Debt);
 				if (RunManager.Instance.NetService.Type != NetGameType.Replay
 					&& (LocalContext.IsMe(seller) || LocalContext.IsMe(buyer)))
+				{
 					pending.Panel = CampfireSalePanel.ShowOffer(pending.Offer);
+					// A buyer who cannot see the offer declines it, so the seller's rest action never waits forever.
+					if (pending.Panel == null && LocalContext.IsMe(buyer))
+					{
+						var declined = new NetCampfireSaleAction { Kind = CampfireSaleKind.Decline,
+							Seller = action.Seller, SaleId = action.SaleId };
+						Callable.From(() => Send(buyer, declined)).CallDeferred();
+					}
+				}
 				break;
 			case CampfireSaleKind.Cancel:
 				if (sender == seller) Finish(pending, false);
 				break;
 			case CampfireSaleKind.Decline:
-				if (pending.Offer?.Buyer == sender) Finish(pending, false);
+				if (pending.Offer?.Buyer != sender) return;
+				Finish(pending, false);
+				if (LocalContext.IsMe(seller) && RunManager.Instance.NetService.Type != NetGameType.Replay)
+					CampfireSalePanel.ShowNotice("declined");
 				break;
 			case CampfireSaleKind.Accept:
 				if (pending.Offer is not { } sale || sale.Buyer != sender) return;
@@ -86,29 +99,49 @@ public static class CampfireSales
 					|| !CampfireGiftRule.CanGift(sale.Card.Type.ToString(), sale.Card.IsRemovable)
 					|| MerchantLoans.LedgerOf(run) is not { } ledger)
 				{
-					Finish(pending, false);
+					Fail(pending, sender.Gold < sale.PaidNow ? "failed_gold" : "failed", seller, sender);
 					return;
 				}
 				pending.Resolving = true;
-				pending.Panel?.Close();
-				var copy = CardModel.FromSerializable(sale.Card.ToSerializable());
-				// Plain gold transfers match merchant loans: neither relics nor debt hooks alter a sale's price.
-				sender.Gold -= sale.PaidNow;
-				seller.Gold += sale.PaidNow;
-				ledger.AddLoan(MerchantLoans.IndexOf(sender), [(action.Seller, sale.Debt)]);
-				MerchantLoans.LedgerChanged(ledger, $"campfire sale {sale.Price}, paid {sale.PaidNow}, debt {sale.Debt}");
-				await CardPileCmd.RemoveFromDeck(sale.Card);
-				run.AddCard(copy, sender);
-				await CardPileCmd.Add(copy, PileType.Deck);
-				SpoonLog.Info($"campfire: {seller.NetId} sold {copy.Id.Entry} to {sender.NetId} for {sale.Price}, debt {sale.Debt}");
-				Finish(pending, true);
+				pending.Panel?.Dismiss();
+				bool sold = false;
+				try
+				{
+					// The card moves first: if a deck command throws, no gold or debt has changed hands.
+					var copy = CardModel.FromSerializable(sale.Card.ToSerializable());
+					await CardPileCmd.RemoveFromDeck(sale.Card);
+					run.AddCard(copy, sender);
+					await CardPileCmd.Add(copy, PileType.Deck);
+					// Plain gold transfers match merchant loans: neither relics nor debt hooks alter a sale's price.
+					sender.Gold -= sale.PaidNow;
+					seller.Gold += sale.PaidNow;
+					ledger.AddLoan(MerchantLoans.IndexOf(sender), [(action.Seller, sale.Debt)]);
+					MerchantLoans.LedgerChanged(ledger, $"campfire sale {sale.Price}, paid {sale.PaidNow}, debt {sale.Debt}");
+					SpoonLog.Info($"campfire: {seller.NetId} sold {copy.Id.Entry} to {sender.NetId} for {sale.Price}, debt {sale.Debt}");
+					sold = true;
+				}
+				finally
+				{
+					// Always release the seller's rest action, even when a deck command throws.
+					Finish(pending, sold);
+				}
 				break;
 		}
 	}
 
+	/// <summary>Ends the sale and tells both players why it fell through.</summary>
+	private static void Fail(Pending pending, string reason, Player seller, Player? buyer)
+	{
+		Finish(pending, false);
+		SpoonLog.Info($"campfire: sale by {seller.NetId} failed ({reason})");
+		if (RunManager.Instance.NetService.Type != NetGameType.Replay
+			&& (LocalContext.IsMe(seller) || (buyer != null && LocalContext.IsMe(buyer))))
+			CampfireSalePanel.ShowNotice(reason);
+	}
+
 	private static void Finish(Pending pending, bool sold)
 	{
-		pending.Panel?.Close();
+		pending.Panel?.Dismiss();
 		pending.Panel = null;
 		pending.Result.TrySetResult(sold);
 	}

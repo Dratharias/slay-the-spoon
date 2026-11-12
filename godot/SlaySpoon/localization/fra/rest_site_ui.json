@@ -16,5 +16,9 @@
   "SPOON_SALE.accept": "Acheter",
   "SPOON_SALE.decline": "Refuser",
   "SPOON_SALE.cancel": "Annuler",
-  "SPOON_SALE.waiting": "En attente de l’acheteur."
+  "SPOON_SALE.waiting": "En attente de l’acheteur.",
+  "SPOON_SALE.declined": "L’acheteur a refusé l’offre.",
+  "SPOON_SALE.failed": "La vente n’a pas eu lieu : la carte ou l’un des joueurs n’est plus disponible.",
+  "SPOON_SALE.failed_gold": "La vente n’a pas eu lieu : l’acheteur n’a plus l’or à payer maintenant.",
+  "SPOON_SALE.ok": "OK"
 }

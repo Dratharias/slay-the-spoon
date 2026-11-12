@@ -77,12 +77,12 @@ public static class MerchantLoans
 		return PlatformUtil.GetPlayerNameRaw(RunManager.Instance.NetService.Platform, player.NetId);
 	}
 
-	public static void Send(NetLoanAction action)
+	/// <summary>Queues the action; false when there is no local player to send it as.</summary>
+	public static bool Send(NetLoanAction action)
 	{
-		if (Me(Run) is { } me)
-		{
-			RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new LoanAction(me, action));
-		}
+		if (Me(Run) is not { } me) return false;
+		RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new LoanAction(me, action));
+		return true;
 	}
 
 	public static void Apply(Player sender, NetLoanAction action)

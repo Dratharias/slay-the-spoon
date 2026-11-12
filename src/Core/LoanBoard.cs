@@ -17,8 +17,10 @@ public sealed class LoanBoard
 	private sealed class OpenRequest
 	{
 		public int Missing;
-		public int Revision;
+		public int Opened;
 		public readonly List<LoanOffer> Offers = new();
+		/// <summary>Board revision at which each lender last set their offer.</summary>
+		public readonly Dictionary<int, int> Stamps = new();
 	}
 
 	private int _revision;
@@ -32,12 +34,21 @@ public sealed class LoanBoard
 
 	public bool HasRequest(int borrower) => _requests.ContainsKey(borrower);
 
-	public int Revision(int borrower) => _requests.TryGetValue(borrower, out var request) ? request.Revision : 0;
+	/// <summary>The board revision the borrower sees; an acceptance carries it back.</summary>
+	public int Revision(int borrower) => _requests.ContainsKey(borrower) ? _revision : 0;
 
-	/// <summary>Validate the exact board shown at confirmation, before moving any held gold.</summary>
-	public bool CanAccept(int borrower, int revision, int lenders) =>
-		_requests.TryGetValue(borrower, out var request) && request.Revision == revision
-		&& request.Offers.Where(o => (lenders & (1 << o.Lender)) != 0).Sum(o => (long)o.Amount) >= request.Missing;
+	/// <summary>
+	/// Validate the picked offers shown at confirmation, before moving any held gold: the request is the one shown and
+	/// no picked offer changed or left since. Offers the borrower did not pick may change freely.
+	/// </summary>
+	public bool CanAccept(int borrower, int revision, int lenders)
+	{
+		if (!_requests.TryGetValue(borrower, out var request) || request.Opened > revision) return false;
+		var picked = request.Offers.Where(o => (lenders & (1 << o.Lender)) != 0).ToList();
+		int pickedMask = picked.Aggregate(0, (mask, o) => mask | (1 << o.Lender));
+		return pickedMask == lenders && picked.All(o => request.Stamps[o.Lender] <= revision)
+			&& picked.Sum(o => (long)o.Amount) >= request.Missing;
+	}
 
 	public int Missing(int borrower) => _requests.TryGetValue(borrower, out OpenRequest? request) ? request.Missing : 0;
 
@@ -53,7 +64,7 @@ public sealed class LoanBoard
 		if (missing > 0)
 		{
 			_borrowers.Add(borrower);
-			_requests[borrower] = new OpenRequest { Missing = missing, Revision = ++_revision };
+			_requests[borrower] = new OpenRequest { Missing = missing, Opened = ++_revision };
 		}
 		Changed?.Invoke();
 	}
@@ -64,7 +75,7 @@ public sealed class LoanBoard
 		{
 			return;
 		}
-		request.Revision = ++_revision;
+		request.Stamps[offer.Lender] = ++_revision;
 		offer = offer with { RatePercent = offer.Gift ? 0 : Math.Clamp(offer.RatePercent, 0, MaxRate) };
 		int index = request.Offers.FindIndex(o => o.Lender == offer.Lender);
 		if (offer.Amount <= 0)

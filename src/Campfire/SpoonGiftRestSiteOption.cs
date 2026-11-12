@@ -21,6 +21,7 @@ using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 using MegaCrit.Sts2.Core.Platform;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Core;
+using SlaySpoon.Loans;
 
 namespace SlaySpoon.Campfire;
 
@@ -94,8 +95,8 @@ public sealed class SpoonGiftRestSiteOption(Player owner) : RestSiteOption(owner
 			var terms = await CampfireSalePanel.ChooseTerms(Owner, target!, card);
 			CampfireSales.Send(Owner, new NetCampfireSaleAction {
 				Kind = terms.HasValue ? CampfireSaleKind.Offer : CampfireSaleKind.Cancel,
-				Seller = Owner.RunState.Players.ToList().IndexOf(Owner), SaleId = saleId,
-				Buyer = Owner.RunState.Players.ToList().IndexOf(target!),
+				Seller = MerchantLoans.IndexOf(Owner), SaleId = saleId,
+				Buyer = MerchantLoans.IndexOf(target!),
 				Card = PileType.Deck.GetPile(Owner).Cards.ToList().IndexOf(card),
 				Price = terms?.Price ?? 0, Rate = terms?.Rate ?? 0,
 				Cash = Math.Min(terms?.Price ?? 0, Math.Max(0, target!.Gold)) });

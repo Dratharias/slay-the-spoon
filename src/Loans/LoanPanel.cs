@@ -88,22 +88,29 @@ public sealed class LoanPanel
 		Schedule();
 	}
 
+	private int _sendToken;
+
 	private void Send(NetLoanAction action)
 	{
-		if (_pending) return;
+		if (_pending || !MerchantLoans.Send(action)) return;
 		_pending = true;
 		_status = Text("sending");
-		MerchantLoans.Send(action);
+		// A dropped action never gets a receipt: unlock the buttons again rather than freeze the panel.
+		int token = ++_sendToken;
+		_open.GetTree()?.CreateTimer(10).Connect(SceneTreeTimer.SignalName.Timeout, Callable.From(() =>
+		{
+			if (_closed || !_pending || token != _sendToken) return;
+			_pending = false;
+			_status = null;
+			Schedule();
+		}));
 		Schedule();
 	}
 
-	private void Cancel()
-	{
-		if (_pending) return;
-		if (_selectedBorrower == MerchantLoans.IndexOf(_me) && MerchantLoans.Board.HasRequest(_selectedBorrower))
-			Send(new NetLoanAction { Kind = LoanActionKind.Cancel });
-		Dismiss();
-	}
+	/// <summary>Escape and Cancel only close the window; withdrawing a request has its own button.</summary>
+	private void Cancel() => Dismiss();
+
+	private void WithdrawRequest() => Send(new NetLoanAction { Kind = LoanActionKind.Cancel });
 
 	private void Dismiss()
 	{
@@ -121,8 +128,8 @@ public sealed class LoanPanel
 
 	private static void Label(Control parent, string text) => NativeTradePopup.Label(parent, text);
 
-	private NPopupYesNoButton Button(Control parent, string text, Action action, bool disabled = false) =>
-		NativeTradePopup.Button(parent, text, action, disabled || _pending, text != Text("cancel") && text != Text("withdraw"));
+	private NPopupYesNoButton Button(Control parent, string text, Action action, bool disabled = false, bool positive = true) =>
+		NativeTradePopup.Button(parent, text, action, disabled || _pending, positive);
 
 	private void Refresh()
 	{
@@ -147,6 +154,9 @@ public sealed class LoanPanel
 			_rows = _popup.Rows;
 			_footer = _popup.Footer;
 			_popup.Cancel = Cancel;
+			var opened = _popup;
+			// Closed from outside (overlay stack cleared): stay closed until the player or a new request reopens it.
+			opened.Closed += () => { if (opened == _popup) _dismissed = true; };
 		}
 		_wasVisible = true;
 		int focused = Focusables().FindIndex(c => c.HasFocus());
@@ -190,14 +200,14 @@ public sealed class LoanPanel
 					if (ask != null) { if (next > 0 && !_pending) ask.Enable(); else ask.Disable(); }
 				});
 			var actions = NativeTradePopup.Actions(_footer);
-			Button(actions, Text("cancel"), Cancel);
+			Button(actions, Text("cancel"), Cancel, positive: false);
 			ask = Button(actions, Text("ask"), () =>
 			{
 				if (_requestAmount > 0) Send(new NetLoanAction { Kind = LoanActionKind.Request, Amount = _requestAmount });
 			}, _requestAmount <= 0);
 		}
 		else if (!board.HasRequest(me) && board.Borrowers.Count == 0)
-			Button(_footer, Text("cancel"), Cancel);
+			Button(_footer, Text("cancel"), Cancel, positive: false);
 
 		SpoonWidgets.RestoreFocus(_popup, focused, appeared);
 	}
@@ -234,7 +244,8 @@ public sealed class LoanPanel
 		Label(_rows, Number("debt", debt));
 		var buttons = NativeTradePopup.Actions(_footer);
 		int revision = board.Revision(borrower);
-		Button(buttons, Text("cancel"), Cancel);
+		Button(buttons, Text("withdraw"), WithdrawRequest, positive: false);
+		Button(buttons, Text("close"), Cancel, positive: false);
 		Button(buttons, Text("accept"), () => Send(new NetLoanAction {
 			Kind = LoanActionKind.Accept, Lenders = mask, Revision = revision }), total < board.Missing(borrower));
 	}
@@ -272,8 +283,8 @@ public sealed class LoanPanel
 		var buttons = NativeTradePopup.Actions(_footer);
 		void Offer(bool gift, int amount) => Send(new NetLoanAction {
 			Kind = LoanActionKind.Offer, Borrower = borrower, Amount = amount, RatePercent = _drafts[borrower].Rate, Gift = gift });
-		if (own != null) Button(buttons, Text("withdraw"), () => Offer(false, 0));
-		Button(buttons, Text("cancel"), Cancel);
+		if (own != null) Button(buttons, Text("withdraw"), () => Offer(false, 0), positive: false);
+		Button(buttons, Text("cancel"), Cancel, positive: false);
 		accept = Button(buttons, Text("accept"), () => { if (_drafts[borrower].Amount > 0) Offer(gift, _drafts[borrower].Amount); }, draft.Amount <= 0);
 	}
 
