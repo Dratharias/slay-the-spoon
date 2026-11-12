@@ -75,7 +75,10 @@ Read `README.md` for the player view and the spec for every decision.
   after an upload, `tools/workshop_dependency.py` maps `workshop/required-items` through the game's `libsteam_api.so`
   (Steam client running, logged in as the owner; fallback: "Add/Remove Required Items" on the item page).
 - **1.0.4 (2026-11-12)** is on `main`: merchant trade windows, campfire card sales, Act 4 by default once
-  Ascension 5 is unlocked (`docs/testing/release-1.0.4.md`). **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
+  Ascension 5 is unlocked (`docs/testing/release-1.0.4.md`).
+- **1.0.5 (2026-11-12)** is on `main`: code-review fixes for loans and campfire sales (Escape only closes, Withdraw
+  cancels a request; Accept rejected only when a picked offer changed; sales always end and explain failures).
+  Not tested in game: "Review fixes" in `docs/testing/release-1.0.4.md`. **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
   pushed only when the owner says so. The same goes for the Steam Workshop upload.
 
 ## Step 5 status (2026-10-29)
