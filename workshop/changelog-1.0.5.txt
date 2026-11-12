@@ -1,0 +1,19 @@
+Version 1.0.5
+
+Français
+- Prêts : Échap et Fermer ferment seulement la fenêtre ; le bouton Retirer annule votre demande.
+- Prêts : seule une modification d’une offre cochée oblige à accepter de nouveau.
+- Prêts : la fenêtre ne reste plus bloquée en attente et ne se rouvre plus d’elle-même après un achat.
+- Ventes au feu de camp : une vente se termine toujours, même si une fenêtre se ferme ou ne s’ouvre pas ; la carte change de main avant l’or.
+- Ventes au feu de camp : un message explique un refus ou une vente qui échoue.
+- Manette : le curseur ne se pose plus sur un bouton désactivé.
+
+English
+- Loans: Escape and Close only close the window; the Withdraw button cancels your request.
+- Loans: only a change to an offer you ticked requires accepting again.
+- Loans: the window no longer stays stuck waiting, and no longer reopens by itself after a purchase.
+- Campfire sales: a sale always ends, even when a window closes or fails to open; the card moves before the gold.
+- Campfire sales: a message explains a declined or failed sale.
+- Controller: focus no longer lands on a disabled button.
+
+All co-op players must use version 1.0.5.
