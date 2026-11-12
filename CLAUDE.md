@@ -74,7 +74,8 @@ Read `README.md` for the player view and the spec for every decision.
   BaseLib (Workshop 3737335127, ≥ 3.4.7) is a manifest dependency (`mod/SlaySpoon.json`) and a Steam required item:
   after an upload, `tools/workshop_dependency.py` maps `workshop/required-items` through the game's `libsteam_api.so`
   (Steam client running, logged in as the owner; fallback: "Add/Remove Required Items" on the item page).
-- **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
+- **1.0.4 (2026-11-12)** is on `main`: merchant trade windows, campfire card sales, Act 4 by default once
+  Ascension 5 is unlocked (`docs/testing/release-1.0.4.md`). **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
   pushed only when the owner says so. The same goes for the Steam Workshop upload.
 
 ## Step 5 status (2026-10-29)
@@ -142,9 +143,7 @@ Read `README.md` for the player view and the spec for every decision.
   Tooth slot for the Watcher only, selected with the owner's event RNG; other sources stay excluded.
 - Final review: source-level comparison with local StS1/StS2; 0 build warnings/errors; **408 xUnit + 74 pytest pass**.
   `make workshop` succeeds; PCK resource references, EN/FR tables, version and staged DLL/PCK/JSON were verified.
-- Workshop package: `../slay-the-spoon-fixes/build/workshop/`, item `3829630403`. **Staged only, not uploaded or installed.**
-  Publish from that worktree while the main working copy contains the separate uncommitted character-relic work;
-  rebuilding in the main working copy would include its untracked C# files through the SDK glob.
+- Workshop item `3829630403`. All step/fix worktrees and branches were merged into `main` and removed (2026-11-12).
 - In-game validation remains deferred in `docs/testing/fix-wave-checklist.md`; no unchecked item is marked passed.
   Review notes: `docs/review/ending-fix-wave.md`, `watcher-fix-wave.md`, `orobas-fix-wave.md` and `fix-wave-final.md`.
 - Remaining decisions, preview gaps and co-op exceptions stay in `docs/backlog.md`. Character relics are the next
