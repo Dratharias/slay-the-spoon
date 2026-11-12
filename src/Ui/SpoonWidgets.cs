@@ -1,6 +1,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.ControllerInput;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 
 namespace SlaySpoon.Ui;
 
@@ -95,7 +96,8 @@ public static class SpoonWidgets
 			foreach (Node child in node.GetChildren())
 			{
 				if (child is Control { FocusMode: Control.FocusModeEnum.All } control
-					&& control.IsVisibleInTree() && control is not BaseButton { Disabled: true })
+					&& control.IsVisibleInTree() && control is not BaseButton { Disabled: true }
+					&& control is not NClickableControl { IsEnabled: false })
 					found.Add(control);
 				Walk(child);
 			}

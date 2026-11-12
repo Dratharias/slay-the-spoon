@@ -32,7 +32,12 @@ public sealed class CampfireSalePanel
 	{
 		_popup = popup;
 		_popup.ReservePreviewColumn(300);
-		_popup.Closed += () => _terms.TrySetResult(null);
+		_popup.Closed += () =>
+		{
+			_terms.TrySetResult(null);
+			// Closed from outside without an answer: answer for the player so the sale cannot hang.
+			if (_offer != null) Reply(LocalContext.IsMe(_offer.Buyer) ? CampfireSaleKind.Decline : CampfireSaleKind.Cancel);
+		};
 		NativeTradePopup.Label(_popup.Rows, MerchantLoans.NameOf(seller) + " → " + MerchantLoans.NameOf(buyer));
 		// The game's card node keeps its art, upgrades and enchantment visible beside the native popup.
 		if (NCard.Create(card) is { } visual)
@@ -92,11 +97,28 @@ public sealed class CampfireSalePanel
 
 	private void Reply(CampfireSaleKind kind)
 	{
-		if (_sent || _offer == null || _popup.IsClosed) return;
+		if (_sent || _offer == null) return;
 		_sent = true;
 		CampfireSales.Send(LocalContext.IsMe(_offer.Buyer) ? _offer.Buyer : _offer.Seller, new NetCampfireSaleAction {
 			Kind = kind, Seller = MerchantLoans.IndexOf(_offer.Seller), SaleId = _offer.Id });
 	}
 
 	public void Close() => _popup.Close();
+
+	/// <summary>Closes an offer the sale already settled, without sending an answer.</summary>
+	public void Dismiss()
+	{
+		_sent = true;
+		_popup.Close();
+	}
+
+	/// <summary>A short message with one button, for a sale that ended without the player's own answer.</summary>
+	public static void ShowNotice(string key)
+	{
+		if (NativeTradePopup.Open(Text("title")) is not { } popup) return;
+		NativeTradePopup.Label(popup.Rows, Text(key));
+		NativeTradePopup.Button(NativeTradePopup.Actions(popup.Footer), Text("ok"), popup.Close);
+		popup.Cancel = popup.Close;
+		SpoonWidgets.RestoreFocus(popup, -1, true);
+	}
 }
