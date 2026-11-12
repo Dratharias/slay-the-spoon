@@ -365,3 +365,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
 - ~~2026-11-05 screenshot `~/Pictures/Debug Slay the spoon/unknown relic.png`: The Specimen shows raw
   `relics.STS1_THE_SPECIMEN.title/description` keys at a merchant.~~ 0.12.36: every StS1 relic has EN/FR text and art,
   checked by `tests/Sts1RelicTests.cs`.
+
+- **Code review 1.0.4 → 1.0.5 (2026-11-12):** every finding fixed in 1.0.5 except one cleanup, kept: `SpoonCampfireGift`
+  copies `SpoonMerchantLoans`' ledger field, `DeepCloneFields` override and saved-property decode/fallback almost line
+  for line (`src/Config/CampfireGiftModifier.cs`). A shared base (e.g. `LedgerModifier`) would keep the two in sync;
+  no player-visible effect, so it waits for the next change to either ledger.
