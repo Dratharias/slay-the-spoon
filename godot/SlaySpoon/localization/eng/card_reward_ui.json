@@ -12,5 +12,16 @@
 	"OPTION_SPOON_REROLL_7.name": "Reroll (7)",
 	"OPTION_SPOON_REROLL_8.name": "Reroll (8)",
 	"OPTION_SPOON_REROLL_9.name": "Reroll (9)",
-	"OPTION_SPOON_REROLL_10.name": "Reroll (10)"
+	"OPTION_SPOON_REROLL_10.name": "Reroll (10)",
+	"SPOON_FOLIE.title": "Folie à deux",
+	"SPOON_FOLIE.choose": "Bid on a head.",
+	"SPOON_FOLIE.bid": "Bid",
+	"SPOON_FOLIE.waiting": "Waiting for the others…",
+	"SPOON_FOLIE.won": "{Name} takes it",
+	"SPOON_FOLIE.consolation": "{Name} takes it (consolation)",
+	"SPOON_FOLIE.lost": "Lost",
+	"SPOON_FOLIE.continue": "Continue",
+	"SPOON_FOLIE.move_rock": "Rock",
+	"SPOON_FOLIE.move_paper": "Paper",
+	"SPOON_FOLIE.move_scissors": "Scissors"
 }

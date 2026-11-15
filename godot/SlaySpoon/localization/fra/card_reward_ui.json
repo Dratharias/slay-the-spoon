@@ -12,5 +12,16 @@
 	"OPTION_SPOON_REROLL_7.name": "Nouveau tirage (7)",
 	"OPTION_SPOON_REROLL_8.name": "Nouveau tirage (8)",
 	"OPTION_SPOON_REROLL_9.name": "Nouveau tirage (9)",
-	"OPTION_SPOON_REROLL_10.name": "Nouveau tirage (10)"
+	"OPTION_SPOON_REROLL_10.name": "Nouveau tirage (10)",
+	"SPOON_FOLIE.title": "Folie à deux",
+	"SPOON_FOLIE.choose": "Misez sur une tête.",
+	"SPOON_FOLIE.bid": "Miser",
+	"SPOON_FOLIE.waiting": "En attente des autres…",
+	"SPOON_FOLIE.won": "{Name} l’emporte",
+	"SPOON_FOLIE.consolation": "{Name} l’emporte (consolation)",
+	"SPOON_FOLIE.lost": "Perdue",
+	"SPOON_FOLIE.continue": "Continuer",
+	"SPOON_FOLIE.move_rock": "Pierre",
+	"SPOON_FOLIE.move_paper": "Papier",
+	"SPOON_FOLIE.move_scissors": "Ciseaux"
 }

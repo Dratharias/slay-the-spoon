@@ -111,6 +111,12 @@ public abstract class SpoonMatriochka : SpoonPercentModifier
 		bool mirror = room is MerchantRoom && IsFirstMerchant();
 		if (!offers && !mirror)
 			return Task.CompletedTask;
+		// Rule 7: with Folie à deux, the floor's rewards go through one chest.
+		if (SpoonFolieADeux.IsActive(RunState))
+		{
+			TaskHelper.RunSafely(Folie.FolieRewards.OfferFloors(RunState, mirror, offers));
+			return Task.CompletedTask;
+		}
 		foreach (Player player in RunState.Players)
 			TaskHelper.RunSafely(MatriochkaRewards.OfferFloor(player, mirror, offers));
 		return Task.CompletedTask;
