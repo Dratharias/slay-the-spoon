@@ -375,3 +375,7 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   ties are fought with the vanilla rock-paper-scissors; fourth host card (Standard + hidden flag, a new Standard
   exception) and a Custom Run checkbox. Design agreed: `docs/superpowers/specs/2026-11-14-folie-a-deux-design.md`.
   Not planned yet.
+
+- **Matriochka (owner request, 2026-11-14):** Custom Run modifier: Hoarder, an unskippable card reward on every floor,
+  Dolly's Mirror from the first merchant, forced Doll Room with Bing Bong, forced Reflections "Shatter" in act 3.
+  Design: `docs/superpowers/specs/2026-11-14-matriochka-design.md`.
