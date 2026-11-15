@@ -1,4 +1,6 @@
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.RestSite;
+using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Spoon;
@@ -20,5 +22,17 @@ public sealed class SpoonSpoon : ModifierModel
 	{
 		foreach (Player player in runState.Players)
 			player.Deck.AddInternal(runState.CreateCard<SpoonSpoonful>(player));
+
+		// The Max HP relics join every grab bag (players in order, then the shared one) on one seeded Rng.
+		var rng = new Rng(runState.Rng.Seed, "SlaySpoon.Spoon.Relics");
+		foreach (Player player in runState.Players)
+			SpoonRelics.AddTo(player.RelicGrabBag, rng);
+		SpoonRelics.AddTo(runState.SharedRelicGrabBag, rng);
+	}
+
+	public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
+	{
+		options.Add(new SpoonFeastRestSiteOption(player));
+		return true;
 	}
 }

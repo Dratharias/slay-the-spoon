@@ -10,7 +10,7 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Act4;
 
 /// <summary>
-/// The Ruby, Campfire Gift and King Midas Reopen options' icons. The private <c>IconPath</c> getter is small enough for the JIT to inline into <c>Icon</c>,
+/// The Ruby, Campfire Gift, King Midas Reopen and Spoon Feast options' icons. The private <c>IconPath</c> getter is small enough for the JIT to inline into <c>Icon</c>,
 /// which would skip its postfix, so the public <c>Icon</c> getter is patched as well; either patch alone is enough.
 /// </summary>
 [HarmonyPatch(typeof(RestSiteOption), "get_IconPath")]
@@ -24,6 +24,8 @@ internal static class RubyRestSiteIconPatch
 			__result = SpoonGiftRestSiteOption.IconImage;
 		else if (__instance is Midas.MawBankRestSiteOption)
 			__result = Midas.MawBankRestSiteOption.IconImage;
+		else if (__instance is Spoon.SpoonFeastRestSiteOption)
+			__result = Spoon.SpoonFeastRestSiteOption.IconImage;
 	}
 }
 
@@ -37,6 +39,7 @@ internal static class RubyRestSiteTexturePatch
 			Sts1RubyRestSiteOption => KeySprites.Path(Act4Key.Ruby, large: true),
 			SpoonGiftRestSiteOption => SpoonGiftRestSiteOption.IconImage,
 			Midas.MawBankRestSiteOption => Midas.MawBankRestSiteOption.IconImage,
+			Spoon.SpoonFeastRestSiteOption => Spoon.SpoonFeastRestSiteOption.IconImage,
 			_ => null,
 		};
 		if (path == null) return true;
