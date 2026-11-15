@@ -38,5 +38,11 @@
   "SPOON_BOSS_RELICS.lost": "You lose at rock-paper-scissors, and the chest is empty.",
   "SPOON_BOSS_RELICS.skipped": "You close the chest without a relic.",
   "SPOON_BOSS_RELICS.none": "You already own every available boss relic.",
-  "SPOON_BOSS_RELICS.empty": "The chest is empty."
+  "SPOON_BOSS_RELICS.empty": "The chest is empty.",
+  "SPOON_MATRIOCHKA.title": "Matriochka",
+  "SPOON_MATRIOCHKA.description": "Hoard everything. Every floor brings cards.",
+  "SPOON_MATRIOCHKA.short": "Matr.",
+  "SPOON_FOLIE_A_DEUX.title": "Folie à deux",
+  "SPOON_FOLIE_A_DEUX.description": "Every card is up for grabs. Even yours.",
+  "SPOON_FOLIE_A_DEUX.short": "Folie"
 }
