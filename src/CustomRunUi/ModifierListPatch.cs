@@ -27,6 +27,7 @@ public static class ModifierListPatch
 			ModelDb.Modifier<SpoonStartingChest>().ToMutable(),
 			ModelDb.Modifier<SpoonBossRelics>().ToMutable(),
 			ModelDb.Modifier<SpoonMatriochka>().ToMutable(),
+			ModelDb.Modifier<SpoonFolieADeux>().ToMutable(),
 			ModelDb.Modifier<SpoonAct4>().ToMutable(),
 		};
 		__result = __result.Concat(ours);

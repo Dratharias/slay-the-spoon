@@ -53,7 +53,7 @@ public static class NeowBlessingPatch
 
 	private static int VisibleCount(IReadOnlyCollection<ModifierModel> modifiers)
 	{
-		return NeowRule.VisibleModifierCount(modifiers.Count, modifiers.Count(m => m is SpoonAct4),
+		return NeowRule.VisibleModifierCount(modifiers.Count, modifiers.Count(m => m is SpoonAct4 or SpoonFolieADeux),
 			modifiers.Any(m => m is SpoonNeowBlessing),
 			modifiers.Any(HasNeowOption), ForceBlessings);
 	}

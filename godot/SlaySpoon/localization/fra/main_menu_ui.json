@@ -15,5 +15,8 @@
   "SPOON_TINT.map_on": "Dessins sur la carte : couleur personnalisée",
   "SPOON_TINT.map_off": "Dessins sur la carte : couleur d’origine",
   "SPOON_TINT.help": "Vos alliés voient aussi votre couleur. « Couleur dominante seulement » limite la teinte aux zones proches de la couleur d’origine. Augmentez le seuil pour recolorer davantage de zones.",
-  "SPOON_TINT.close": "Fermer"
+  "SPOON_TINT.close": "Fermer",
+  "SPOON_FOLIE_MP.title": "Folie à deux",
+  "SPOON_FOLIE_MP.description": "Disputez-vous chaque carte.",
+  "SPOON_FOLIE_MP.LOCKED.description": "Disputez-vous chaque carte."
 }

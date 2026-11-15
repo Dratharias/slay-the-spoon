@@ -15,5 +15,8 @@
   "SPOON_TINT.map_on": "Map drawings: custom color",
   "SPOON_TINT.map_off": "Map drawings: original color",
   "SPOON_TINT.help": "Allies see your color too. “Dominant color only” limits the tint to areas close to the original color. Increase the threshold to recolor more areas.",
-  "SPOON_TINT.close": "Close"
+  "SPOON_TINT.close": "Close",
+  "SPOON_FOLIE_MP.title": "Folie à deux",
+  "SPOON_FOLIE_MP.description": "Fight over every card.",
+  "SPOON_FOLIE_MP.LOCKED.description": "Fight over every card."
 }
