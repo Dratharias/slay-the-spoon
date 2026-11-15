@@ -44,5 +44,8 @@
   "SPOON_MATRIOCHKA.short": "Matr.",
   "SPOON_FOLIE_A_DEUX.title": "Folie à deux",
   "SPOON_FOLIE_A_DEUX.description": "Chaque carte se dispute. Même les vôtres.",
-  "SPOON_FOLIE_A_DEUX.short": "Folie"
+  "SPOON_FOLIE_A_DEUX.short": "Folie",
+  "SPOON_ROI_MIDAS.title": "Roi Midas",
+  "SPOON_ROI_MIDAS.description": "Départ fortuné. Aucune carte gratuite, chaque feu se paie.",
+  "SPOON_ROI_MIDAS.short": "Midas"
 }

@@ -32,7 +32,7 @@ public static class ChooseACardSwapPatch
 	public static bool Prefix(PlayerChoiceContext context, IReadOnlyList<CardModel> cards, Player player, bool canSkip,
 		ref Task<CardModel?> __result)
 	{
-		if (CardSelectCmd.Selector != null || cards.Count is < 1 or > 3
+		if (CardSelectCmd.Selector != null || Midas.MidasCardPicks.Blocks(player) || cards.Count is < 1 or > 3
 			|| !cards.Any(c => VersionSwap.PartnerOf(c) != null))
 		{
 			return true;

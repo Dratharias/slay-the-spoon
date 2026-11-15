@@ -391,3 +391,11 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   reward rerolls per act set with the row's −/+ (0–10, default 3, per player); not tested in game:
   `docs/testing/two-modes-checklist.md`. Builder calls: non-combat rooms give their reward when the room is entered (the spec says when it ends);
   rerolls are counted per player.
+
+- **King Midas (owner request, 2026-11-14):** Custom Run modifier `SpoonRoiMidas`: the gold relics at start, no card
+  rewards, gold events only (gold options only), paid and repeatable rest site actions (50 + 50 per action at the same
+  fire), Maw Bank "Reopen" at rest sites. Design: `docs/superpowers/specs/2026-11-14-roi-midas-design.md`. Implemented
+  in 1.2.0 (branch `two-modes`); not tested in game: `docs/testing/roi-midas-checklist.md`.
+  - Minor: the per-fire paid count is not saved; a reload mid rest site resets the price to 50.
+  - Builder call: Endless Conveyor and Trial are left out (their gold is random); Matriochka is mutually exclusive.
+  - To check: vanilla events drawn again after a visit (repeats allowed) may carry one-time assumptions.

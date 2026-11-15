@@ -358,3 +358,15 @@ Read `README.md` for the player view and the spec for every decision.
   `ISaveStore` (Steam cloud).
 - **Game text:** vanilla texts and keys can be grepped straight from `SlayTheSpire2.pck`
   (`grep -a -o '"KEY": *"[^"]*"'`). Use this to match the game's wording in English and French.
+
+## 1.2.0 — King Midas (2026-11-14, branch `two-modes`)
+
+- **King Midas** (`SpoonRoiMidas`, Custom Run only, spec `docs/superpowers/specs/2026-11-14-roi-midas-design.md`):
+  11 gold relics at run start (pickup gold and Greed applied by hand in `AfterRunCreated`, removed from every grab bag);
+  card rewards removed in `TryModifyRewardsLate` and out-of-combat picks blocked (`src/Midas/MidasCardPicks.cs`,
+  `Priority.First` prefixes; Neow kept); "?" events drawn from the gold list on a seed+floor `Rng`
+  (`src/Midas/MidasEvents.cs`), non-gold options dropped by a `SetEventState` prefix; rest site options cost
+  50 + 50 per paid action at the same fire and come back after each one (`src/Midas/MidasRestSite.cs`, a
+  `RestSiteSynchronizer.ChooseOption` prefix/postfix), Maw Bank "Reopen" while the bank is broken. Rules in
+  `src/Core/MidasRule.cs`. Mutually exclusive with Matriochka (every reroll value).
+- Build 0 warnings; 603 xUnit + 91 pytest pass. Not tested in game: `docs/testing/roi-midas-checklist.md`.

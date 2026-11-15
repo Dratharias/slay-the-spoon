@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
+using SlaySpoon.Config;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Events;
@@ -17,7 +18,8 @@ public static class EventInjectionPatch
 	public static void Postfix(IRunState runState, EventModel currentEvent, ref EventModel __result)
 	{
 		// Another hook (Lantern Key) already chose this room's event.
-		if (!ReferenceEquals(__result, currentEvent) || runState is not RunState run || run.CurrentActIndex != Sts1EventRule.ActIndex)
+		// King Midas draws its own gold events.
+		if (SpoonRoiMidas.IsActive(runState) || !ReferenceEquals(__result, currentEvent) || runState is not RunState run || run.CurrentActIndex != Sts1EventRule.ActIndex)
 		{
 			return;
 		}

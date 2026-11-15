@@ -44,5 +44,8 @@
   "SPOON_MATRIOCHKA.short": "Matr.",
   "SPOON_FOLIE_A_DEUX.title": "Folie à deux",
   "SPOON_FOLIE_A_DEUX.description": "Every card is up for grabs. Even yours.",
-  "SPOON_FOLIE_A_DEUX.short": "Folie"
+  "SPOON_FOLIE_A_DEUX.short": "Folie",
+  "SPOON_ROI_MIDAS.title": "King Midas",
+  "SPOON_ROI_MIDAS.description": "Start rich. No free cards; every fire costs gold.",
+  "SPOON_ROI_MIDAS.short": "Midas"
 }

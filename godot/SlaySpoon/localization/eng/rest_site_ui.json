@@ -20,5 +20,8 @@
   "SPOON_SALE.declined": "The buyer declined the offer.",
   "SPOON_SALE.failed": "The sale fell through: the card or one of the players is no longer available.",
   "SPOON_SALE.failed_gold": "The sale fell through: the buyer no longer has the gold to pay now.",
-  "SPOON_SALE.ok": "OK"
+  "SPOON_SALE.ok": "OK",
+  "OPTION_SPOON_MIDAS_BANK.name": "Reopen",
+  "OPTION_SPOON_MIDAS_BANK.description": "Your [gold]Maw Bank[/gold] works again.",
+  "SPOON_MIDAS.price": "Costs [gold]{Gold} gold[/gold]."
 }
