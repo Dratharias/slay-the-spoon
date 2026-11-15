@@ -22,7 +22,10 @@ with a card reward the player cannot skip on every floor, a free Dolly's Mirror,
 5. **Reflections forced in act 3.** Every node on the map row just before the final rest-site row becomes the
    Reflections event *(builder call: the whole row, so every path meets it)*; "Shatter" (duplicate the deck, gain Bad
    Luck) is the only option. In co-op, every player shatters.
-6. **With Folie à deux** also ticked, the mandatory rewards are bid on; the winner must take a card.
+6. **Rerolls.** Each player may reroll card rewards a number of times per act (owner, 2026-11-14: 3 by default, set
+   with the row's −/+ from 0 to 10). The vanilla reroll button (Driftwood's) shows the rerolls left; the count resets
+   each act and is saved with the run.
+7. **With Folie à deux** also ticked, the mandatory rewards are bid on; the winner must take a card.
 
 Custom Run only, solo and co-op. Daily and Standard untouched.
 

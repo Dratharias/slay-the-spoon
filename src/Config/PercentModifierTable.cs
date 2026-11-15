@@ -6,7 +6,7 @@ namespace SlaySpoon.Config;
 /// <summary>Maps (family, percent) to the concrete modifier class.</summary>
 public static class PercentModifierTable
 {
-	private static readonly Type[] Families = { typeof(SpoonMonsterHp), typeof(SpoonMonsterDamage) };
+	private static readonly Type[] Families = { typeof(SpoonMonsterHp), typeof(SpoonMonsterDamage), typeof(SpoonMatriochka) };
 
 	private static readonly Dictionary<(Type Family, int Percent), Type> Types = BuildTable();
 
@@ -24,7 +24,8 @@ public static class PercentModifierTable
 	{
 		foreach (Type family in Families)
 		{
-			int[] missing = ScalingMath.AllPercents.Where(p => !Types.ContainsKey((family, p))).ToArray();
+			IReadOnlyList<int> values = family == typeof(SpoonMatriochka) ? MatriochkaRule.AllRerolls : ScalingMath.AllPercents;
+			int[] missing = values.Where(p => !Types.ContainsKey((family, p))).ToArray();
 			if (missing.Length > 0)
 			{
 				throw new InvalidOperationException($"{family.Name} has no class for: {string.Join(", ", missing)}");
@@ -32,7 +33,7 @@ public static class PercentModifierTable
 		}
 		int hp = Types.Keys.Count(k => k.Family == typeof(SpoonMonsterHp));
 		int damage = Types.Keys.Count(k => k.Family == typeof(SpoonMonsterDamage));
-		SpoonLog.Info($"percent modifiers: hp={hp} damage={damage}");
+		SpoonLog.Info($"percent modifiers: hp={hp} damage={damage} matriochka={Types.Keys.Count(k => k.Family == typeof(SpoonMatriochka))}");
 	}
 
 	private static Dictionary<(Type, int), Type> BuildTable()

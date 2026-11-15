@@ -40,7 +40,7 @@
   "SPOON_BOSS_RELICS.none": "You already own every available boss relic.",
   "SPOON_BOSS_RELICS.empty": "The chest is empty.",
   "SPOON_MATRIOCHKA.title": "Matriochka",
-  "SPOON_MATRIOCHKA.description": "Hoard everything. Every floor brings cards.",
+  "SPOON_MATRIOCHKA.description": "Hoard everything. Every floor brings cards. Rerolls per act: {Percent}.",
   "SPOON_MATRIOCHKA.short": "Matr.",
   "SPOON_FOLIE_A_DEUX.title": "Folie à deux",
   "SPOON_FOLIE_A_DEUX.description": "Every card is up for grabs. Even yours.",

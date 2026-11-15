@@ -3,6 +3,14 @@ namespace SlaySpoon.Core;
 /// <summary>Pure rules of the Matriochka modifier (see docs/superpowers/specs/2026-11-14-matriochka-design.md).</summary>
 public static class MatriochkaRule
 {
+	/// <summary>Card reward rerolls per player per act: the Custom Run row's −/+ value.</summary>
+	public const int DefaultRerolls = 3;
+	public const int MaxRerolls = 10;
+	public static IReadOnlyList<int> AllRerolls { get; } = Enumerable.Range(0, MaxRerolls + 1).ToList();
+	/// <summary>Card reward option id showing the rerolls left ("OPTION_SPOON_REROLL_3.name").</summary>
+	public static string RerollOptionId(int left) => $"SPOON_REROLL_{Math.Clamp(left, 1, MaxRerolls)}";
+	public static int StepRerolls(int rerolls, int direction) => Math.Clamp(rerolls + Math.Sign(direction), 0, MaxRerolls);
+
 	/// <summary>0-based act index whose first event becomes the Doll Room.</summary>
 	public const int DollRoomAct = 1;
 
@@ -25,5 +33,47 @@ public static class MatriochkaRule
 				return row > 0 ? row - 1 : null;
 		}
 		return null;
+	}
+}
+
+/// <summary>
+/// Matriochka's card reward rerolls: each player has the row's value per act. Saved as
+/// <c>[act index, used by player 0, used by player 1, ...]</c>; a new act starts everyone at zero.
+/// </summary>
+public sealed class MatriochkaRerolls
+{
+	private int _act;
+	private int[] _used = Array.Empty<int>();
+
+	public int Remaining(int player, int act, int perAct) =>
+		act != _act || player < 0 || player >= _used.Length ? perAct : Math.Max(0, perAct - _used[player]);
+
+	/// <summary>Spends one reroll; false when the player has none left this act.</summary>
+	public bool Use(int player, int act, int perAct, int playerCount)
+	{
+		if (player < 0 || Remaining(player, act, perAct) <= 0)
+			return false;
+		if (act != _act)
+		{
+			_act = act;
+			_used = Array.Empty<int>();
+		}
+		if (_used.Length < Math.Max(playerCount, player + 1))
+			Array.Resize(ref _used, Math.Max(playerCount, player + 1));
+		_used[player]++;
+		return true;
+	}
+
+	public int[] Encode() => _used.Length == 0 ? Array.Empty<int>() : new[] { _act }.Concat(_used).ToArray();
+
+	public static MatriochkaRerolls Decode(int[]? data)
+	{
+		var rerolls = new MatriochkaRerolls();
+		if (data is { Length: > 1 })
+		{
+			rerolls._act = data[0];
+			rerolls._used = data.Skip(1).Select(u => Math.Max(u, 0)).ToArray();
+		}
+		return rerolls;
 	}
 }

@@ -40,7 +40,7 @@
   "SPOON_BOSS_RELICS.none": "Vous possédez déjà toutes les reliques de boss disponibles.",
   "SPOON_BOSS_RELICS.empty": "Le coffre est vide.",
   "SPOON_MATRIOCHKA.title": "Matriochka",
-  "SPOON_MATRIOCHKA.description": "Accumulez tout. Chaque étage apporte des cartes.",
+  "SPOON_MATRIOCHKA.description": "Accumulez tout. Chaque étage apporte des cartes. Relances par acte : {Percent}.",
   "SPOON_MATRIOCHKA.short": "Matr.",
   "SPOON_FOLIE_A_DEUX.title": "Folie à deux",
   "SPOON_FOLIE_A_DEUX.description": "Chaque carte se dispute. Même les vôtres.",

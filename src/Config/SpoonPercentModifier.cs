@@ -21,6 +21,9 @@ public abstract class SpoonPercentModifier : ModifierModel
 		return int.Parse(type.Name.Substring(type.BaseType!.Name.Length));
 	}
 
+	/// <summary>The family member value one stepper press away (clamped to the family's grid).</summary>
+	public virtual int Step(int direction) => Core.ScalingMath.Step(Percent, direction);
+
 	/// <summary>Localization key shared by every member of the family.</summary>
 	protected abstract string FamilyKey { get; }
 

@@ -2,5 +2,15 @@
 	"OPTION_SPOON_SWAP.name": "Swap version",
 	"SPOON_SWAP_SHORT_TO_STS1.name": "StS1 version",
 	"SPOON_SWAP_SHORT_TO_STS2.name": "StS2 version",
-	"SPOON_CHOOSE_VERSION_HEADER": "Choose a Version"
+	"SPOON_CHOOSE_VERSION_HEADER": "Choose a Version",
+	"OPTION_SPOON_REROLL_1.name": "Reroll (1)",
+	"OPTION_SPOON_REROLL_2.name": "Reroll (2)",
+	"OPTION_SPOON_REROLL_3.name": "Reroll (3)",
+	"OPTION_SPOON_REROLL_4.name": "Reroll (4)",
+	"OPTION_SPOON_REROLL_5.name": "Reroll (5)",
+	"OPTION_SPOON_REROLL_6.name": "Reroll (6)",
+	"OPTION_SPOON_REROLL_7.name": "Reroll (7)",
+	"OPTION_SPOON_REROLL_8.name": "Reroll (8)",
+	"OPTION_SPOON_REROLL_9.name": "Reroll (9)",
+	"OPTION_SPOON_REROLL_10.name": "Reroll (10)"
 }

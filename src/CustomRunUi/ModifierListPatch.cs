@@ -1,8 +1,8 @@
 using HarmonyLib;
+using SlaySpoon.Core;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
 using SlaySpoon.Config;
-using SlaySpoon.Core;
 
 namespace SlaySpoon.CustomRunUi;
 
@@ -26,7 +26,7 @@ public static class ModifierListPatch
 			ModelDb.Modifier<SpoonCampfireGift>().ToMutable(),
 			ModelDb.Modifier<SpoonStartingChest>().ToMutable(),
 			ModelDb.Modifier<SpoonBossRelics>().ToMutable(),
-			ModelDb.Modifier<SpoonMatriochka>().ToMutable(),
+			PercentModifierTable.CanonicalFor(typeof(SpoonMatriochka), MatriochkaRule.DefaultRerolls).ToMutable(),
 			ModelDb.Modifier<SpoonFolieADeux>().ToMutable(),
 			ModelDb.Modifier<SpoonAct4>().ToMutable(),
 		};

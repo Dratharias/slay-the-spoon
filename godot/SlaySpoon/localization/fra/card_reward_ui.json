@@ -2,5 +2,15 @@
 	"OPTION_SPOON_SWAP.name": "Changer de version",
 	"SPOON_SWAP_SHORT_TO_STS1.name": "Version StS1",
 	"SPOON_SWAP_SHORT_TO_STS2.name": "Version StS2",
-	"SPOON_CHOOSE_VERSION_HEADER": "Choisissez une version"
+	"SPOON_CHOOSE_VERSION_HEADER": "Choisissez une version",
+	"OPTION_SPOON_REROLL_1.name": "Nouveau tirage (1)",
+	"OPTION_SPOON_REROLL_2.name": "Nouveau tirage (2)",
+	"OPTION_SPOON_REROLL_3.name": "Nouveau tirage (3)",
+	"OPTION_SPOON_REROLL_4.name": "Nouveau tirage (4)",
+	"OPTION_SPOON_REROLL_5.name": "Nouveau tirage (5)",
+	"OPTION_SPOON_REROLL_6.name": "Nouveau tirage (6)",
+	"OPTION_SPOON_REROLL_7.name": "Nouveau tirage (7)",
+	"OPTION_SPOON_REROLL_8.name": "Nouveau tirage (8)",
+	"OPTION_SPOON_REROLL_9.name": "Nouveau tirage (9)",
+	"OPTION_SPOON_REROLL_10.name": "Nouveau tirage (10)"
 }

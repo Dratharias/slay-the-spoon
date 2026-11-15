@@ -33,6 +33,9 @@ public static class TopBarPercentPatch
 	{
 		switch (Modifier(__instance))
 		{
+			case SpoonMatriochka:
+				ReplaceIcon(__instance, new LocString("modifiers", SpoonMatriochka.LocKey + ".short").GetFormattedText(), StsColors.cream);
+				break;
 			case SpoonPercentModifier percent:
 				ReplaceIcon(__instance, percent.Percent + "%", ScalingMath.Tone(percent.Percent) switch
 				{
@@ -41,7 +44,7 @@ public static class TopBarPercentPatch
 					_ => StsColors.cream,
 				});
 				break;
-			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing or SpoonCampfireGift or SpoonStartingChest or SpoonBossRelics or SpoonMatriochka or SpoonFolieADeux:
+			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing or SpoonCampfireGift or SpoonStartingChest or SpoonBossRelics or SpoonFolieADeux:
 				ReplaceIcon(__instance, new LocString("modifiers", Modifier(__instance).Id.Entry + ".short").GetFormattedText(), StsColors.cream);
 				break;
 			case SpoonMerchantLoans loans:

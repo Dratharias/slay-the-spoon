@@ -125,7 +125,7 @@ public static class PercentStepper
 		{
 			return;
 		}
-		int next = ScalingMath.Step(current.Percent, direction);
+		int next = current.Step(direction);
 		if (next == current.Percent)
 		{
 			return;
