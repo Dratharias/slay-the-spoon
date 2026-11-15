@@ -47,5 +47,7 @@
   "SPOON_FOLIE_A_DEUX.short": "Folie",
   "SPOON_ROI_MIDAS.title": "King Midas",
   "SPOON_ROI_MIDAS.description": "Start rich. No free cards; every fire costs gold.",
-  "SPOON_ROI_MIDAS.short": "Midas"
+  "SPOON_ROI_MIDAS.short": "Midas",
+  "SPOON_SPOON.title": "Spoon",
+  "SPOON_SPOON.description": "Grow your max HP. At 300, the Spoon awaits after act 3."
 }

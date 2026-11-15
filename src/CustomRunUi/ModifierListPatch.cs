@@ -29,6 +29,7 @@ public static class ModifierListPatch
 			PercentModifierTable.CanonicalFor(typeof(SpoonMatriochka), MatriochkaRule.DefaultRerolls).ToMutable(),
 			ModelDb.Modifier<SpoonFolieADeux>().ToMutable(),
 			ModelDb.Modifier<SpoonRoiMidas>().ToMutable(),
+			ModelDb.Modifier<SpoonSpoon>().ToMutable(),
 			ModelDb.Modifier<SpoonAct4>().ToMutable(),
 		};
 		__result = __result.Concat(ours);
