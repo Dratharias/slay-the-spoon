@@ -45,7 +45,9 @@ helping from the side. **Non-goals:** a complex boss (no minions, no phases), St
    - With The Ending (Act 4 run, all three keys): act 3 → **Spoon (act 4)** → **The Ending (act 5)**. The Spoon
      goes in front of The Ending even when The Ending was appended earlier.
    - Nobody at 300: no Spoon; the run ends as it does today (victory, or The Ending).
-5. **The fight.** Fighters are the players with 300+ max HP when the act is inserted; the others are supporters.
+5. **The fight.** Fighters are the players with 300+ max HP when the Spoon fight starts; the others are supporters.
+   *(Builder call: max HP cannot drop between the act 3 boss and the Spoon, so this keeps everyone who qualified, adds
+   anyone the act 3 boss rewards push past 300, and needs no saved state: a reload restarts the fight from the room.)*
    - The Spoon never targets a supporter and a supporter cannot take damage from it.
    - A supporter's damage to the Spoon is nullified, but their debuffs apply (for example Uppercut's Weak and
      Vulnerable). Supporters play their deck normally otherwise. *(Builder proposal, not contradicted by the owner:)*
@@ -53,11 +55,9 @@ helping from the side. **Non-goals:** a complex boss (no minions, no phases), St
      summons and thorns; only pure debuffs (Weak, Vulnerable, Strength loss and the like) get through.
    - **Bouchée** ("Mouthful") attacks remove max HP as well as HP, and every point of max HP eaten heals the Spoon
      by that much.
-   - Every max HP change during this fight is undone after it (losses and gifts alike); max HP gained from
-     Spoonful kills in this fight is also undone, since only the Spoon could be killed. *(Builder call.)*
-   - *(Builder proposal, not contradicted by the owner:)* current HP comes back with the max HP: a player whose
-     max HP dropped by 100 (Bouchée) or who gave 15 (Becquée) gets that HP back too; ordinary damage stays. This
-     matters when The Ending follows.
+   - **Nothing is given back** (owner, 2026-11-14, replacing the earlier "rendus après le combat": "a la victoire
+     contre la cuillère, les pv mangés et donnés restent perdus"). Max HP eaten by Bouchée and max HP given with
+     Becquée stay lost after a win; a loss ends the run anyway. No max HP or HP bookkeeping is kept for the fight.
 6. **The gift card.** Every supporter gets a combat-only card "Spoon-Feed" ("Becquée"): cost 1, choose a fighter
    (Mend's ally targeting); the supporter loses 5 max HP and the fighter gains 5. Retained, not exhausted.
    *(Numbers: builder proposal accepted by the owner.)*
