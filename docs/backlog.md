@@ -370,3 +370,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   copies `SpoonMerchantLoans`' ledger field, `DeepCloneFields` override and saved-property decode/fallback almost line
   for line (`src/Config/CampfireGiftModifier.cs`). A shared base (e.g. `LedgerModifier`) would keep the two in sync;
   no player-visible effect, so it waits for the next change to either ledger.
+
+- **Folie à deux (owner request, 2026-11-14):** new multiplayer mode where every card reward is bid on at a chest and
+  ties are fought with the vanilla rock-paper-scissors; fourth host card (Standard + hidden flag, a new Standard
+  exception) and a Custom Run checkbox. Design agreed: `docs/superpowers/specs/2026-11-14-folie-a-deux-design.md`.
+  Not planned yet.
