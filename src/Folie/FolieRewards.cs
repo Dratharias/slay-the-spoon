@@ -25,7 +25,7 @@ public static class FolieRewards
 		AccessTools.MethodDelegate<Func<CardReward, CardCreationOptions>>(AccessTools.PropertyGetter(typeof(CardReward), "RerollOptions"));
 
 	/// <summary>Runs the chest over the sets' card rewards and moves them to their winners. Solo or no stake: nothing.</summary>
-	public static async Task Redistribute(IRunState run, IReadOnlyList<RewardsSet> sets)
+	public static async Task Redistribute(IRunState run, string key, IReadOnlyList<RewardsSet> sets)
 	{
 		var living = sets.Where(s => !s.Player.Creature.IsDead).ToList();
 		if (living.Count < 2) return;
@@ -36,7 +36,7 @@ public static class FolieRewards
 			.ToList();
 		if (stakes.Count == 0) return;
 		var bidders = living.Select(s => s.Player).ToList();
-		FolieOutcome outcome = await FolieChest.Run(run, bidders,
+		FolieOutcome outcome = await FolieChest.Run(run, key, bidders,
 			stakes.Select(x => new FolieStake(x.set.Player, x.reward.Cards.ToList())).ToList(), consolation: false);
 
 		for (int s = 0; s < stakes.Count; s++)
@@ -74,7 +74,8 @@ public static class FolieRewards
 		var sets = new List<RewardsSet>();
 		foreach (Player player in room.CombatState.Players)
 			sets.Add(await RewardsCmd.GenerateForRoomEnd(player, room));
-		await RedistributeSafely(room.CombatState.Players[0].RunState, sets);
+		IRunState run = room.CombatState.Players[0].RunState;
+		await RedistributeSafely(run, $"combat_{run.TotalFloor}", sets);
 		foreach (RewardsSet set in sets)
 			_ = TaskHelper.RunSafely(set.Offer());
 	}
@@ -85,7 +86,7 @@ public static class FolieRewards
 		var sets = new List<RewardsSet>();
 		foreach (Player player in run.Players)
 			sets.Add(await RewardsCmd.GenerateForRoomEnd(player, room));
-		await RedistributeSafely(run, sets);
+		await RedistributeSafely(run, $"treasure_{run.TotalFloor}", sets);
 		Task? local = null;
 		foreach (RewardsSet set in sets)
 		{
@@ -113,16 +114,16 @@ public static class FolieRewards
 			await set.GenerateWithoutOffering();
 			sets.Add(set);
 		}
-		await RedistributeSafely(run, sets);
+		await RedistributeSafely(run, $"floor_{run.TotalFloor}", sets);
 		foreach (RewardsSet set in sets)
 			_ = TaskHelper.RunSafely(set.Offer());
 	}
 
-	private static async Task RedistributeSafely(IRunState run, IReadOnlyList<RewardsSet> sets)
+	private static async Task RedistributeSafely(IRunState run, string key, IReadOnlyList<RewardsSet> sets)
 	{
 		try
 		{
-			await Redistribute(run, sets);
+			await Redistribute(run, key, sets);
 		}
 		catch (Exception e)
 		{
