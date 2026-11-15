@@ -30,13 +30,13 @@ public static class SpoonRule
 		Enumerable.Range(0, maxHps.Count).Where(i => maxHps[i] >= Threshold).ToList();
 
 	public static decimal DamageMultiplier(int players, int teamMaxHp) =>
-		teamMaxHp <= 0 ? 1m : (decimal)Threshold * players / teamMaxHp;
+		teamMaxHp <= 0 || players <= 0 ? 1m : (decimal)Threshold * players / teamMaxHp;
 
 	public static int ScaledDamage(int baseDamage, int players, int teamMaxHp)
 	{
 		if (baseDamage <= 0) return 0;
-		if (teamMaxHp <= 0) return baseDamage;
-		return Math.Max(1, (int)Math.Floor(baseDamage * DamageMultiplier(players, teamMaxHp)));
+		if (teamMaxHp <= 0 || players <= 0) return baseDamage;
+		return (int)Math.Max(1L, (long)baseDamage * Threshold * players / teamMaxHp);
 	}
 
 	public static int BossHp(int fighters, int players) =>
@@ -46,5 +46,5 @@ public static class SpoonRule
 	public static SpoonMove Move(int turn) => turn % 3 == 2 ? SpoonMove.Ladle : SpoonMove.Bouchee;
 
 	public static int JuiceSlot(int potionCount, bool hasJuice, int roll) =>
-		hasJuice || potionCount <= 0 ? -1 : roll % potionCount;
+		hasJuice || potionCount <= 0 ? -1 : ((roll % potionCount) + potionCount) % potionCount;
 }

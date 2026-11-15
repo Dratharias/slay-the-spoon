@@ -40,6 +40,9 @@ public class SpoonRuleTests
 	[InlineData(30, 1, 100000, 1)]
 	[InlineData(0, 1, 300, 0)]
 	[InlineData(50, 1, 0, 50)]
+	[InlineData(50, 0, 600, 50)]
+	[InlineData(30, 1, 900, 10)]
+	[InlineData(60, 1, 900, 20)]
 	public void ScaledDamage(int b, int p, int hp, int expected) => Assert.Equal(expected, SpoonRule.ScaledDamage(b, p, hp));
 
 	[Fact]
@@ -72,5 +75,6 @@ public class SpoonRuleTests
 		Assert.Equal(-1, SpoonRule.JuiceSlot(3, true, 5));
 		Assert.Equal(-1, SpoonRule.JuiceSlot(0, false, 5));
 		Assert.Equal(2, SpoonRule.JuiceSlot(3, false, 5));
+		Assert.Equal(1, SpoonRule.JuiceSlot(3, false, -5));
 	}
 }
