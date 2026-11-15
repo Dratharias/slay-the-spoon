@@ -93,6 +93,14 @@ Current (0.10.0):
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
   `sts1event STS1_NEST` (or `STS1_VAMPIRES`, `STS1_AUGMENTER`) opens a Slay the Spire 1 event.
 
+**Folie à deux** (co-op): a fourth card on the multiplayer host screen starts a Standard run with it; Custom Runs have it
+as a checkbox. Every card reward goes into a chest: each player bids on one head, rock-paper-scissors settles ties, and
+an unclaimed head is lost. Draft and Sealed Deck hand every player one head. Solo runs are unaffected.
+
+**Matriochka** (Custom Run): Hoarder, a card reward you cannot skip on every floor, and a few dolls along the way.
+The row's − / + sets the card reward rerolls each player gets per act (3 by default).
+Both modes still need in-game validation; see `docs/testing/two-modes-checklist.md`.
+
 **Merchant Loans** (co-op Custom Runs): enable the modifier in the lobby. If a merchant purchase
 fails for lack of gold, choose **Ask** to open a request. Other players can lend gold at 0–900%
 interest or give it. Offers reserve the lender's gold until accepted, withdrawn, cancelled, or the

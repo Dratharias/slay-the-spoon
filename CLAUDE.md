@@ -241,6 +241,20 @@ Read `README.md` for the player view and the spec for every decision.
   `InvincibleBudget` and `WatcherAscension.LimitFor` in Core with tests. The 1.0.0 Workshop staging had the load bug:
   never upload it. Build 0 warnings; 560 xUnit + 91 pytest pass. In-game checks: `docs/testing/spine-checklist.md`.
 
+## 1.1.0 — two modes (2026-11-14, branch `two-modes`)
+
+- **Folie à deux** (`SpoonFolieADeux`, spec `docs/superpowers/specs/2026-11-14-folie-a-deux-design.md`): a fourth
+  multiplayer host card (Madness art) starts a Standard run with the hidden flag (new Standard exception); Custom Run
+  checkbox. Every card reward is bid on in a chest (`src/Folie/`): `FolieChest` (bids as the mod's own
+  `FolieBidMessage`, keyed by a chest name the same on every client; fights through vanilla
+  `RelicPickingResult.GenerateRelicFight` on a key-seeded `Rng`), `FolieChestOverlay` (view), `FolieRewards` (combat,
+  treasure, Matriochka floors), `FolieCustomRewards` (`RewardsCmd.OfferCustom`), `FolieNeow` + `FolieRendezvous` (Draft
+  rounds and Sealed Deck with consolation). Rules in `src/Core/FolieRule.cs`. Event "choose a card" screens are not bid on.
+- **Matriochka** (`SpoonMatriochka`, spec `docs/superpowers/specs/2026-11-14-matriochka-design.md`): Hoarder,
+  unskippable card reward every floor, Dolly's Mirror at the first merchant, Doll Room (Bing Bong), act 3 Reflections
+  row (Shatter); rerolls per act from the row's −/+ (0–10, default 3). Rules in `src/Core/MatriochkaRule.cs`.
+- Build 0 warnings; 594 xUnit + 91 pytest pass. Not tested in game: `docs/testing/two-modes-checklist.md`.
+
 ## Documents
 
 | Path | What |

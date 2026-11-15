@@ -374,8 +374,19 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
 - **Folie à deux (owner request, 2026-11-14):** new multiplayer mode where every card reward is bid on at a chest and
   ties are fought with the vanilla rock-paper-scissors; fourth host card (Standard + hidden flag, a new Standard
   exception) and a Custom Run checkbox. Design agreed: `docs/superpowers/specs/2026-11-14-folie-a-deux-design.md`.
-  Not planned yet.
+  Implemented in 1.1.0 (branch `two-modes`); not tested in game: `docs/testing/two-modes-checklist.md`. Known gaps:
+  - Event single-card choices (a "choose 1 of 3" screen inside an event, not a card reward) are not bid on yet; only
+    card rewards are (combat, treasure, Matriochka floors, `RewardsCmd.OfferCustom` from events and relics, Draft,
+    Sealed Deck).
+  - Bids travel as the mod's own `FolieBidMessage` keyed by the chest, not through the vanilla treasure-room
+    synchronizer; a chest interrupted by a reload is replayed from scratch.
+  - A chest over another player's event pops over whatever screen the bidder is on; a winner of another player's
+    custom reward gets a separate reward screen. Both need in-game checking.
+  - The chest view is built from plain controls (heads, names, scaled card visuals), not the vanilla chest scene.
 
 - **Matriochka (owner request, 2026-11-14):** Custom Run modifier: Hoarder, an unskippable card reward on every floor,
   Dolly's Mirror from the first merchant, forced Doll Room with Bing Bong, forced Reflections "Shatter" in act 3.
-  Design: `docs/superpowers/specs/2026-11-14-matriochka-design.md`.
+  Design: `docs/superpowers/specs/2026-11-14-matriochka-design.md`. Implemented in 1.1.0 (branch `two-modes`), with card
+  reward rerolls per act set with the row's −/+ (0–10, default 3, per player); not tested in game:
+  `docs/testing/two-modes-checklist.md`. Builder calls: non-combat rooms give their reward when the room is entered (the spec says when it ends);
+  rerolls are counted per player.
