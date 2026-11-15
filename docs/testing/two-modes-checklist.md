@@ -3,7 +3,7 @@
 Nothing here has been tested in game. Co-op first: every chest must resolve the same way on both screens.
 Use `make mp` for two local instances (both write to the same `godot.log`; grep `[SlaySpoon] folie:` for the bids
 and awards of each chest, keyed `combat_<floor>`, `treasure_<floor>`, `floor_<floor>`, `draft_<n>`, `sealed`,
-`custom_<player>_<floor>_<n>`).
+`custom_<player>_<floor>_<n>`, `pick_<player>_<floor>_<n>`).
 
 ## Folie à deux — launch
 
@@ -27,6 +27,10 @@ and awards of each chest, keyed `combat_<floor>`, `treasure_<floor>`, `floor_<fl
 - [ ] Treasure rooms with extra card rewards (e.g. relic effects) go through a chest too.
 - [ ] Event or relic card rewards (`RewardsCmd.OfferCustom`): a one-head chest pops up on every screen, even over
       another player's event; the winner gets a reward screen of their own. Check the overlay does not get stuck.
+- [ ] Event card picks (Brain Leech "Share Knowledge", Room Full of Cheese "Gorge") and relic picks (Massive Scroll,
+      Hefty Tablet, Lead Paperweight, Sea Glass): the owner picks first, then a one-head chest; the winner's deck gets
+      the cards; nobody bidding means the pick is lost. Combat picks (Attack Potion, Discovery) open no chest.
+- [ ] Hybrid run: the version the owner chose is the one at stake.
 - [ ] A dead player does not bid and does not block the chest.
 - [ ] Save and reload in the middle of a chest: the run resumes without a desync (the chest may replay).
 - [ ] Continue button and the 6 s auto-close both close the chest.

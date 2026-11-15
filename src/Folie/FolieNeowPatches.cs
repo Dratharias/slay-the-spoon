@@ -55,7 +55,17 @@ public static class FolieNeow
 			RequireManualConfirmation = true,
 			Comparison = (a, b) => CompareSealed(a, b),
 		};
-		var picked = (await CardSelectCmd.FromSimpleGridForRewards(new BlockingPlayerChoiceContext(), source, player, prefs)).ToList();
+		Task<IEnumerable<CardModel>> pick;
+		FolieCardPicks.Bypass = true;
+		try
+		{
+			pick = CardSelectCmd.FromSimpleGridForRewards(new BlockingPlayerChoiceContext(), source, player, prefs);
+		}
+		finally
+		{
+			FolieCardPicks.Bypass = false;
+		}
+		var picked = (await pick).ToList();
 		var award = await FolieRendezvous.Join(run, "sealed", player, picked, picked, consolation: true);
 		if (award is { Tag: List<CardModel> deck })
 		{

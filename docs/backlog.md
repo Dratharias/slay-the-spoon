@@ -375,9 +375,10 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   ties are fought with the vanilla rock-paper-scissors; fourth host card (Standard + hidden flag, a new Standard
   exception) and a Custom Run checkbox. Design agreed: `docs/superpowers/specs/2026-11-14-folie-a-deux-design.md`.
   Implemented in 1.1.0 (branch `two-modes`); not tested in game: `docs/testing/two-modes-checklist.md`. Known gaps:
-  - Event single-card choices (a "choose 1 of 3" screen inside an event, not a card reward) are not bid on yet; only
-    card rewards are (combat, treasure, Matriochka floors, `RewardsCmd.OfferCustom` from events and relics, Draft,
-    Sealed Deck).
+  - Card picks outside combat that are not card rewards (Brain Leech, Room Full of Cheese, Massive Scroll, Hefty
+    Tablet, Lead Paperweight, Sea Glass) are bid on after the owner picks (`src/Folie/FolieCardPicks.cs`). The source's
+    own "add to deck" then puts the cards in the winner's deck, so its preview plays on the owner's side; combat picks
+    (potions, Discovery, Toolbox) stay vanilla.
   - Bids travel as the mod's own `FolieBidMessage` keyed by the chest, not through the vanilla treasure-room
     synchronizer; a chest interrupted by a reload is replayed from scratch.
   - A chest over another player's event pops over whatever screen the bidder is on; a winner of another player's

@@ -20,7 +20,7 @@ public static class FolieCustomRewards
 		AccessTools.FieldRefAccess<RewardsSet, bool>("_isGenerated");
 
 	private static int _floor = -1;
-	private static readonly Dictionary<ulong, int> Counts = new();
+	private static readonly Dictionary<(ulong, string), int> Counts = new();
 
 	public static async Task Offer(Player player, List<Reward> rewards)
 	{
@@ -38,7 +38,7 @@ public static class FolieCustomRewards
 		Player? winner = player;
 		try
 		{
-			FolieOutcome outcome = await FolieChest.Run(run, NextKey(run, player), living,
+			FolieOutcome outcome = await FolieChest.Run(run, NextKey(run, player, "custom"), living,
 				[new FolieStake(player, stake.Cards.ToList())], consolation: false);
 			winner = outcome.Awards.Select(a => (FolieAward?)a).FirstOrDefault() is { } a ? living[a.Player] : null;
 		}
@@ -64,16 +64,16 @@ public static class FolieCustomRewards
 	}
 
 	/// <summary>The owner's slot, the floor and the rank of this offer for that owner on the floor: the same on every client.</summary>
-	private static string NextKey(IRunState run, Player player)
+	internal static string NextKey(IRunState run, Player player, string kind)
 	{
 		if (_floor != run.TotalFloor)
 		{
 			_floor = run.TotalFloor;
 			Counts.Clear();
 		}
-		int n = Counts.GetValueOrDefault(player.NetId);
-		Counts[player.NetId] = n + 1;
-		return $"custom_{player.NetId}_{run.TotalFloor}_{n}";
+		int n = Counts.GetValueOrDefault((player.NetId, kind));
+		Counts[(player.NetId, kind)] = n + 1;
+		return $"{kind}_{player.NetId}_{run.TotalFloor}_{n}";
 	}
 }
 

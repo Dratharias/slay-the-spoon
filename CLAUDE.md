@@ -249,7 +249,8 @@ Read `README.md` for the player view and the spec for every decision.
   `FolieBidMessage`, keyed by a chest name the same on every client; fights through vanilla
   `RelicPickingResult.GenerateRelicFight` on a key-seeded `Rng`), `FolieChestOverlay` (view), `FolieRewards` (combat,
   treasure, Matriochka floors), `FolieCustomRewards` (`RewardsCmd.OfferCustom`), `FolieNeow` + `FolieRendezvous` (Draft
-  rounds and Sealed Deck with consolation). Rules in `src/Core/FolieRule.cs`. Event "choose a card" screens are not bid on.
+  rounds and Sealed Deck with consolation), `FolieCardPicks` (out-of-combat picks from events and relics: the owner picks,
+  then a one-head chest; `FromSimpleGridForRewards` / `FromChooseACardScreen` postfixes at `Priority.Last`). Rules in `src/Core/FolieRule.cs`.
 - **Matriochka** (`SpoonMatriochka`, spec `docs/superpowers/specs/2026-11-14-matriochka-design.md`): Hoarder,
   unskippable card reward every floor, Dolly's Mirror at the first merchant, Doll Room (Bing Bong), act 3 Reflections
   row (Shatter); rerolls per act from the row's −/+ (0–10, default 3). Rules in `src/Core/MatriochkaRule.cs`.
