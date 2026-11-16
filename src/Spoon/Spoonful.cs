@@ -21,9 +21,6 @@ public sealed class SpoonSpoonful : SpoonCard
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Fatal)];
 
-	// Placeholder until the Spoon drawings exist.
-	public override string PortraitPath => ModelDb.Card<Feed>().PortraitPath;
-
 	public SpoonSpoonful()
 		: base(1, CardType.Attack, TargetType.AnyEnemy)
 	{

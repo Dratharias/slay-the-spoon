@@ -14,4 +14,6 @@ public abstract class SpoonCard : CardModel
 	public override CardPoolModel Pool => ModelDb.CardPool<SpoonCardPool>();
 
 	public override CardPoolModel VisualCardPool => Pool;
+
+	public override string PortraitPath => $"res://SlaySpoon/images/cards/spoon/{Id.Entry.ToLowerInvariant()}.png";
 }

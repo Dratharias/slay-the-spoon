@@ -37,4 +37,28 @@ public class SpoonTextTests
 		foreach (string part in new[] { "title", "description" })
 			Assert.True(mods.TryGetValue($"SPOON_SPOON.{part}", out string? v) && v.Length > 0, $"{lang} modifiers SPOON_SPOON.{part}");
 	}
+
+	[Theory]
+	[InlineData("eng")]
+	[InlineData("fra")]
+	public void Boss_has_text(string lang)
+	{
+		Dictionary<string, string> monsters = Table(lang, "monsters");
+		foreach (string key in new[] { "SPOON_MONSTER.name", "SPOON_MONSTER.moves.BOUCHEE.title", "SPOON_MONSTER.moves.LADLE.title" })
+			Assert.True(monsters.TryGetValue(key, out string? v) && v.Length > 0, $"{lang} monsters {key}");
+		Dictionary<string, string> encounters = Table(lang, "encounters");
+		foreach (string key in new[] { "SPOON_BOSS.title", "SPOON_BOSS.loss" })
+			Assert.True(encounters.TryGetValue(key, out string? v) && v.Length > 0, $"{lang} encounters {key}");
+	}
+
+	[Fact]
+	public void Spoon_art_exists()
+	{
+		foreach (string path in new[]
+		{
+			"images/spoon/spoon.png", "images/spoon/spoon_boss.png", "images/spoon/spoon_boss_outline.png",
+			"images/cards/spoon/spoon_spoonful.png", "images/cards/spoon/spoon_spoon_feed.png",
+		})
+			Assert.True(File.Exists(Path.Combine(Repo(), "godot/SlaySpoon", path)), path);
+	}
 }

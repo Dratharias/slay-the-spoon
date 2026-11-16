@@ -11,6 +11,5 @@ public sealed class SpoonCardPool : CardPoolModel
 	public override string CardFrameMaterialPath => "card_frame_colorless";
 	public override Color DeckEntryCardColor => Colors.White;
 	public override bool IsColorless => true;
-	// Spoon-Feed joins this list in a later task.
-	protected override CardModel[] GenerateAllCards() => [ModelDb.Card<SpoonSpoonful>()];
+	protected override CardModel[] GenerateAllCards() => [ModelDb.Card<SpoonSpoonful>(), ModelDb.Card<SpoonSpoonFeed>()];
 }

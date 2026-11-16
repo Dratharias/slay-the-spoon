@@ -30,7 +30,8 @@ public abstract class Sts1EndingMonster : MonsterModel, IEndingMonster
 	/// <summary>The whole sprite by default; a monster whose sprite reaches far above its body narrows it.</summary>
 	public virtual Rect2 Hitbox => new(-Origin, Size);
 
-	public abstract string SpineKey { get; }
+	/// <summary>The <see cref="Sts1Spine"/> skeleton key; null keeps the static sprite (no animator is built then).</summary>
+	public abstract string? SpineKey { get; }
 
 	/// <summary>Triggers of this monster's own (trigger -> one-shot animation), beside the vanilla ones.</summary>
 	protected virtual IReadOnlyDictionary<string, string>? SpineTriggers => null;

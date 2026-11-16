@@ -39,6 +39,31 @@ public static class SpoonRule
 		return (int)Math.Max(1L, (long)baseDamage * Threshold * players / teamMaxHp);
 	}
 
+	/// <summary>
+	/// Multiplier for the running damage amount in a multiplicative damage hook, so that the game's truncation of
+	/// <c>amount × factor</c> gives <see cref="ScaledDamage"/> for an integer amount (at least 1 when amount is positive).
+	/// Decimal division can land a hair under an exact integer product; the nudge is far below the smallest real
+	/// fractional step (1 / teamMaxHp), so it never lifts a non-integer product past the next integer.
+	/// </summary>
+	public static decimal DamageFactor(decimal amount, int players, int teamMaxHp)
+	{
+		if (amount <= 0m) return 1m;
+		decimal factor = DamageMultiplier(players, teamMaxHp) + FactorNudge;
+		return amount * factor < 1m ? 1m / amount + FactorNudge : factor;
+	}
+
+	private const decimal FactorNudge = 0.00000000000000000001m;
+
+	/// <summary>
+	/// The fighters of a Spoon fight: the players at <see cref="Threshold"/>+ max HP, or every player when none qualifies
+	/// (a fight started without the act's insertion rule, such as from the console), so the boss never has 0 HP.
+	/// </summary>
+	public static IReadOnlyList<int> FightersAtFight(IReadOnlyList<int> maxHps)
+	{
+		IReadOnlyList<int> fighters = Fighters(maxHps);
+		return fighters.Count > 0 ? fighters : Enumerable.Range(0, maxHps.Count).ToList();
+	}
+
 	public static int BossHp(int fighters, int players) =>
 		players <= 0 ? HpPerFighter : (HpPerFighter * fighters + players - 1) / players;
 

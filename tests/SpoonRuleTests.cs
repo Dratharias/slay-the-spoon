@@ -77,4 +77,30 @@ public class SpoonRuleTests
 		Assert.Equal(2, SpoonRule.JuiceSlot(3, false, 5));
 		Assert.Equal(1, SpoonRule.JuiceSlot(3, false, -5));
 	}
+
+	[Fact]
+	public void DamageFactorTruncatesToScaledDamage()
+	{
+		for (int players = 1; players <= 4; players++)
+			for (int team = 1; team <= 2400 * players; team += players == 1 ? 1 : 7)
+				for (int amount = 1; amount <= 160; amount += 3)
+				{
+					decimal factor = SpoonRule.DamageFactor(amount, players, team);
+					Assert.Equal(SpoonRule.ScaledDamage(amount, players, team), (int)(amount * factor));
+				}
+	}
+
+	[Fact]
+	public void DamageFactorLeavesNothingAndInvalidTeamsAlone()
+	{
+		Assert.Equal(1m, SpoonRule.DamageFactor(0m, 1, 300));
+		Assert.Equal(30, (int)(30m * SpoonRule.DamageFactor(30m, 2, 0)));
+	}
+
+	[Fact]
+	public void FightersAtFightFallsBackToEveryone()
+	{
+		Assert.Equal([1], SpoonRule.FightersAtFight([120, 300, 299]));
+		Assert.Equal([0, 1], SpoonRule.FightersAtFight([120, 80]));
+	}
 }
