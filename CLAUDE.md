@@ -407,3 +407,8 @@ Read `README.md` for the player view and the spec for every decision.
   vanilla spreads any map over 2325 px, so a 3-row act was as tall as a 15-room one. A `NMapScreen.SetMap` postfix gives
   the rows Glory's spacing (2325 / 13), keeps Glory's boss gap, redraws the paths, sets `_distY`; scroll top follows the
   boss. View only. 706 xUnit + 91 pytest pass. Not tested in game.
+- **1.3.2 (balance, owner 2026-11-16):** growth from hits no longer gives Strength (`StrengthFor(maxHp, start, grown)`; a
+  play test had 200+ hits from the growth → Strength loop); Appetite 5 %/stack; Banquet also hits for 12; the kit is
+  one of each of five spoons every cycle (new Stolen Spoonful: steals 3 Appetite, which the player keeps at +5 % damage
+  until the Spoon takes 1 back per gain) plus a random extra per 5 cards from 25 (seeded `Rng`); Wooden Spoon deals 10 %
+  of max HP. 717 xUnit + 91 pytest pass. Not tested in game.

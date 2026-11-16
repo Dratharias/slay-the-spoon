@@ -19,8 +19,8 @@ public abstract class SpoonCutleryCard : SpoonCard
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
-	protected SpoonCutleryCard(int cost, TargetType target)
-		: base(cost, CardType.Skill, target)
+	protected SpoonCutleryCard(int cost, TargetType target, CardType type = CardType.Skill)
+		: base(cost, type, target)
 	{
 	}
 
@@ -54,7 +54,10 @@ public sealed class SpoonTeaspoon : SpoonCutleryCard
 		DynamicVars[AppetiteKey].UpgradeValueBy(SpoonRule.TeaspoonAppetiteUpgraded - SpoonRule.TeaspoonAppetite);
 }
 
-/// <summary>Wooden Spoon: the Spoon's next Appetite gain (2 upgraded) does nothing.</summary>
+/// <summary>
+/// Wooden Spoon: deal 10 % of your max HP (owner, 2026-11-16), then the Spoon's next Appetite gain (2 upgraded) does
+/// nothing.
+/// </summary>
 public sealed class SpoonWoodenSpoon : SpoonCutleryCard
 {
 	private const string SatedKey = "Sated";
@@ -62,13 +65,21 @@ public sealed class SpoonWoodenSpoon : SpoonCutleryCard
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar(SatedKey, 1m)];
 
 	public SpoonWoodenSpoon()
-		: base(1, TargetType.AnyEnemy)
+		: base(1, TargetType.AnyEnemy, CardType.Attack)
 	{
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		if (SpoonOf(cardPlay) is not { } spoon) return;
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		int damage = SpoonRule.WoodenDamage(Owner.Creature.MaxHp);
+		if (damage > 0)
+		{
+			await DamageCmd.Attack(damage).FromCard(this).Targeting(cardPlay.Target)
+				.WithHitFx("vfx/vfx_attack_blunt")
+				.Execute(choiceContext);
+		}
+		if (SpoonOf(cardPlay) is not { } spoon || !spoon.Creature.IsAlive) return;
 		await PowerCmd.Apply<SpoonSatedPower>(choiceContext, spoon.Creature, DynamicVars[SatedKey].BaseValue, Owner.Creature, this);
 	}
 
@@ -119,4 +130,36 @@ public sealed class SpoonMelonBaller : SpoonCutleryCard
 	}
 
 	protected override void OnUpgrade() => DynamicVars.MaxHp.UpgradeValueBy(SpoonRule.BallerMaxHpUpgraded - SpoonRule.BallerMaxHp);
+}
+
+/// <summary>
+/// Stolen Spoonful, the kit's Spoonful copy (owner, 2026-11-16): deal 10 (12 upgraded) and steal up to 3 Appetite from
+/// the Spoon; the player keeps it for the fight (+5 % damage per stack) until the Spoon takes it back, 1 per gain.
+/// </summary>
+public sealed class SpoonStolenSpoonful : SpoonCutleryCard
+{
+	private const string AppetiteKey = "Appetite";
+
+	protected override IEnumerable<DynamicVar> CanonicalVars =>
+		[new DamageVar(10m, ValueProp.Move), new DynamicVar(AppetiteKey, SpoonRule.AppetiteBite)];
+
+	public SpoonStolenSpoonful()
+		: base(1, TargetType.AnyEnemy, CardType.Attack)
+	{
+	}
+
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	{
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+			.WithHitFx("vfx/vfx_bite", null, "blunt_attack.mp3")
+			.Execute(choiceContext);
+		if (SpoonOf(cardPlay) is not { } spoon || spoon.Creature.GetPower<SpoonAppetitePower>() is not { } appetite) return;
+		int stolen = Math.Min(DynamicVars[AppetiteKey].IntValue, appetite.Amount);
+		if (stolen <= 0) return;
+		await PowerCmd.ModifyAmount(choiceContext, appetite, -stolen, Owner.Creature, this);
+		await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, Owner.Creature, stolen, Owner.Creature, this);
+	}
+
+	protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2m);
 }

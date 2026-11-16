@@ -54,15 +54,15 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
       the draw pile with the vanilla card preview (log: `spoon: set the table for a N-card deck`). Intents: debuff + status.
 - [ ] Mouthful: 35 base damage; the Spoon gains Block equal to the HP its hit took past Block (none when fully blocked).
       Intents: attack + defend. No max HP eaten.
-- [ ] Banquet: Vulnerable 2 on every fighter; each fighter loses 10 max HP (not a hit: no Block, no on-hit reactions)
+- [ ] Banquet (1.3.2): a light 12 damage hit (attack intent shown with the debuff and heal), then Vulnerable 2 on every fighter; each fighter loses 10 max HP (not a hit: no Block, no on-hit reactions)
       unless Skimmed; the Spoon heals 60 solo, 70 / 80 / 90 with 2 / 3 / 4 players (log: `spoon: Banquet ate ... healed`).
 - [ ] Ladle Smash: 55 base damage. No Strength from turns passing.
 - [ ] Growth: HP lost past Block raises the Spoon's max HP by as much (its HP does not rise).
-- [ ] Strength follows max HP: (max HP − start max HP) / 5, rounded toward zero; it goes negative when Melon Baller
-      takes it below its start (log: `spoon: max HP ... Strength from max HP S`). A player's Strength debuff on the
+- [ ] Strength follows max HP: (max HP − max HP grown from hits − start max HP) / 5, rounded toward zero (1.3.2:
+      growth no longer gives Strength, no more 200+ hits); it goes negative when Melon Baller takes it below its start (log: `spoon: max HP ... Strength from max HP S`). A player's Strength debuff on the
       Spoon (Disarm, Malaise...) stays applied after the Spoon's own Strength changes.
 - [ ] No max HP scaling: the Mouthful intent reads 35 + Strength (times Appetite) whatever the players' max HP.
-- [ ] Appetite: +2 after each move (none before the first hit), +10 % damage per stack in the intent; a Spoonful played
+- [ ] Appetite: +2 after each move (none before the first hit), +5 % damage per stack in the intent (1.3.2); a Spoonful played
       on the Spoon removes 3 (flash); a supporter's Spoonful removes 3 too while dealing 0. EN/FR tooltip reads well.
 - [ ] Animations (`SpoonMotion`, tweens on the static sprite, pivot at the handle tip): slow idle sway; Mouthful leans
       back and swoops at the players, the hit lands at the bottom, then it rises back up; Ladle Smash rises and slams
@@ -84,17 +84,21 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 
 ## Cutlery (combat-only, Exhaust)
 
-- [ ] Kit by deck size at each Sets the Table: ≤ 9 cards: 1 Teaspoon; 10–14: + Wooden Spoon; 15–19: 2 Teaspoons +
-      Wooden Spoon; 20–24: + Skimmer; 25–29: + Melon Baller; 30+: 4 Teaspoons, + 2 per further 15 cards.
+- [ ] Kit at each Sets the Table (1.3.2): one each of Teaspoon, Wooden Spoon, Skimmer, Melon Baller and Stolen Spoonful;
+      from 25 cards, 1 extra random kit spoon, + 1 per further 5 cards (25: +1, 30: +2). Log:
+      `spoon: set the table for a N-card deck: Teaspoon 1, Wooden 1, ...`; co-op clients deal the same extras.
 - [ ] Every cycle adds a new kit: unplayed cutlery piles up in the draw/discard piles. Nothing reaches the deck after
       the fight; the cards never appear in rewards, the merchant or random generation.
 - [ ] Teaspoon (0, targets the Spoon): removes 2 Appetite (3 upgraded), draws 1. With less Appetite, removes what is there.
-- [ ] Wooden Spoon (1, targets the Spoon): Sated 1 (2 upgraded): the next Appetite gain is skipped per stack
+- [ ] Wooden Spoon (1, attack, targets the Spoon): deals 10 % of the player's max HP (35 at 350), then Sated 1 (2 upgraded): the next Appetite gain is skipped per stack
       (log: `spoon: Sated, no Appetite this move`); Sated shows with its tooltip (EN/FR).
 - [ ] Skimmer (1, self): 6 Block (9 upgraded) and Skimmed: the next Banquet eats none of this player's max HP; Skimmed
       ends after the Spoon's next move.
 - [ ] Melon Baller (2, targets the Spoon): takes 12 max HP (15 upgraded) from the Spoon, never below 1, and the player
       gains them (with the heal of a vanilla max HP gain); the Spoon's Strength drops accordingly.
+- [ ] Stolen Spoonful (1, attack, targets the Spoon): 10 damage (12 upgraded), steals up to 3 Appetite: the Spoon loses
+      it and the player gains Appetite (+5 % damage per stack for the fight). At each Appetite gain the Spoon takes 1 back
+      from each player holding some (its gain is 2 + what it took back). EN/FR tooltip reads well on both.
 - [ ] A supporter's cutlery works too (they are targetable on the Spoon even though the supporter deals it no damage).
 - [ ] Portraits (Pixabay placeholders) and EN/FR titles and descriptions read well, Banquet named in gold.
 - [ ] Co-op: every client sees the same kits, the same Sated/Skimmed state and the same Spoon max HP.

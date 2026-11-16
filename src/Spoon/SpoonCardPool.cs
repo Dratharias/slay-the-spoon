@@ -15,5 +15,6 @@ public sealed class SpoonCardPool : CardPoolModel
 	[
 		ModelDb.Card<SpoonSpoonful>(), ModelDb.Card<SpoonSpoonFeed>(), ModelDb.Card<SpoonTeaspoon>(),
 		ModelDb.Card<SpoonWoodenSpoon>(), ModelDb.Card<SpoonSkimmer>(), ModelDb.Card<SpoonMelonBaller>(),
+		ModelDb.Card<SpoonStolenSpoonful>(),
 	];
 }

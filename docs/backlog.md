@@ -480,3 +480,5 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
       off the exact product when both apply.
     - Final review: the Feast and Spoon-Feed texts hardcode 5 instead of reading `SpoonRule.FeastMaxHp` / `GiftMaxHp`.
     - Final review: the Spoon act has no entry heal like The Ending's; its row-0 rest site covers it.
+    - 1.3.2: Stolen Spoonful's portrait is a copy of Spoonful's (drawing list); its Appetite texts hardcode 5 %, 2, 1
+      and 3 like the other Spoon texts.

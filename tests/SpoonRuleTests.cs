@@ -34,8 +34,8 @@ public class SpoonRuleTests
 
 	[Theory]
 	[InlineData(0, 1.0)]
-	[InlineData(1, 1.1)]
-	[InlineData(5, 1.5)]
+	[InlineData(1, 1.05)]
+	[InlineData(5, 1.25)]
 	[InlineData(-2, 1.0)]
 	public void AppetiteMultiplier(int stacks, double expected) =>
 		Assert.Equal((decimal)expected, SpoonRule.AppetiteMultiplier(stacks));
@@ -64,13 +64,16 @@ public class SpoonRuleTests
 	public void CycleOfFour(int turn, SpoonRule.SpoonMove move) => Assert.Equal(move, SpoonRule.Move(turn));
 
 	[Theory]
-	[InlineData(2000, 2000, 0)]
-	[InlineData(2009, 2000, 1)]
-	[InlineData(2010, 2000, 2)]
-	[InlineData(1996, 2000, 0)]
-	[InlineData(1995, 2000, -1)]
-	[InlineData(1985, 2000, -3)]
-	public void StrengthFollowsMaxHp(int hp, int start, int expected) => Assert.Equal(expected, SpoonRule.StrengthFor(hp, start));
+	[InlineData(2000, 2000, 0, 0)]
+	[InlineData(2009, 2000, 0, 1)]
+	[InlineData(2010, 2000, 0, 2)]
+	[InlineData(1996, 2000, 0, 0)]
+	[InlineData(1995, 2000, 0, -1)]
+	[InlineData(1985, 2000, 0, -3)]
+	[InlineData(2324, 2000, 324, 0)]
+	[InlineData(2312, 2000, 324, -2)]
+	public void StrengthFollowsMaxHpButNotGrowth(int hp, int start, int grown, int expected) =>
+		Assert.Equal(expected, SpoonRule.StrengthFor(hp, start, grown));
 
 	[Theory]
 	[InlineData(1, 60)]
@@ -90,18 +93,40 @@ public class SpoonRuleTests
 	public void BallerTakeHonoursTheUpgrade() => Assert.Equal(15, SpoonRule.BallerTake(2000, 15));
 
 	[Theory]
-	[InlineData(0, 1, false, false, false)]
-	[InlineData(9, 1, false, false, false)]
-	[InlineData(10, 1, true, false, false)]
-	[InlineData(15, 2, true, false, false)]
-	[InlineData(20, 2, true, true, false)]
-	[InlineData(25, 2, true, true, true)]
-	[InlineData(30, 4, true, true, true)]
-	[InlineData(44, 4, true, true, true)]
-	[InlineData(45, 6, true, true, true)]
-	[InlineData(60, 8, true, true, true)]
-	public void KitBySize(int deck, int tea, bool wood, bool skim, bool baller) =>
-		Assert.Equal(new SpoonRule.Kit(tea, wood, skim, baller), SpoonRule.KitFor(deck));
+	[InlineData(0, 0)]
+	[InlineData(20, 0)]
+	[InlineData(24, 0)]
+	[InlineData(25, 1)]
+	[InlineData(29, 1)]
+	[InlineData(30, 2)]
+	[InlineData(45, 5)]
+	public void ExtraSpoonsFromTwentyFive(int deck, int extra) => Assert.Equal(extra, SpoonRule.ExtraSpoons(deck));
+
+	[Fact]
+	public void KitHasOneOfEachOfTheFiveSpoons() =>
+		Assert.Equal(5, Enum.GetValues<SpoonRule.Cutlery>().Distinct().Count());
+
+	[Theory]
+	[InlineData(0, SpoonRule.Cutlery.Teaspoon)]
+	[InlineData(4, SpoonRule.Cutlery.StolenSpoonful)]
+	[InlineData(7, SpoonRule.Cutlery.Skimmer)]
+	[InlineData(-1, SpoonRule.Cutlery.StolenSpoonful)]
+	public void ExtraPickCoversTheKit(int roll, SpoonRule.Cutlery expected) => Assert.Equal(expected, SpoonRule.ExtraPick(roll));
+
+	[Theory]
+	[InlineData(350, 35)]
+	[InlineData(304, 30)]
+	[InlineData(9, 0)]
+	public void WoodenSpoonHitsTenPercentOfMaxHp(int maxHp, int damage) => Assert.Equal(damage, SpoonRule.WoodenDamage(maxHp));
+
+	[Theory]
+	[InlineData(0, 0)]
+	[InlineData(1, 1)]
+	[InlineData(6, 1)]
+	public void SpoonTakesOneAppetiteBackPerGain(int playerStacks, int taken) => Assert.Equal(taken, SpoonRule.StolenBack(playerStacks));
+
+	[Fact]
+	public void BanquetHitsLightly() => Assert.InRange(SpoonRule.BanquetDamage, 1, SpoonRule.BoucheeDamage / 2);
 
 	[Fact]
 	public void ExtraRelicsTable()

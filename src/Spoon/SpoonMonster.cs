@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.ValueProps;
 using SlaySpoon.Act4;
 using SlaySpoon.Core;
@@ -56,8 +57,11 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	/// <summary>Not saved: StS2 restarts the combat when a save loads, and the fighters are chosen again then.</summary>
 	private HashSet<Player>? _fighters;
 
-	/// <summary>Max HP grown this fight, for the sprite's size. Not saved, like the fighters.</summary>
+	/// <summary>Max HP grown this fight, for the sprite's size and left out of Strength. Not saved, like the fighters.</summary>
 	private int _grown;
+
+	/// <summary>How many times it set the table this fight; names the kit extras' Rng.</summary>
+	private int _tablesSet;
 
 	/// <summary>Max HP at fight start, the Strength reference.</summary>
 	private int _startMaxHp;
@@ -121,7 +125,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		{
 			[SpoonRule.SpoonMove.SetTable] = new("SET_TABLE_MOVE", SetTableMove, new DebuffIntent(), new StatusIntent(1)),
 			[SpoonRule.SpoonMove.Bouchee] = new("BOUCHEE_MOVE", BoucheeMove, new SingleAttackIntent(SpoonRule.BoucheeDamage), new DefendIntent()),
-			[SpoonRule.SpoonMove.Banquet] = new("BANQUET_MOVE", BanquetMove, new DebuffIntent(true), new HealIntent()),
+			[SpoonRule.SpoonMove.Banquet] = new("BANQUET_MOVE", BanquetMove, new SingleAttackIntent(SpoonRule.BanquetDamage), new DebuffIntent(true), new HealIntent()),
 			[SpoonRule.SpoonMove.Ladle] = new("LADLE_MOVE", LadleMove, new SingleAttackIntent(SpoonRule.LadleDamage)),
 		};
 		return BuildMachine(new EndingMoveBrain<SpoonRule.SpoonMove>((turn, _, _) => SpoonRule.Move(turn), SpoonRule.SpoonMove.SetTable), moves);
@@ -153,21 +157,36 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	private IEnumerable<Creature> LivingFighters() =>
 		CombatState.Players.Where(p => IsFighter(p) && p.Creature.IsAlive).Select(p => p.Creature).ToList();
 
-	/// <summary>Sets the table: Frail on the fighters, and every living player's kit shuffled into their draw pile.</summary>
+	/// <summary>
+	/// Sets the table: Frail on the fighters, and every living player's kit shuffled into their draw pile: one of each of
+	/// the five spoons, plus <see cref="SpoonRule.ExtraSpoons"/> random ones for a 25+ card deck. The extras come from an
+	/// Rng named after the run seed, the cycle and the player's slot, so every co-op client draws the same.
+	/// </summary>
 	private async Task SetTableMove(IReadOnlyList<Creature> targets)
 	{
 		await AnimateAsync(m => m.SetTableAsync());
 		var context = new ThrowingPlayerChoiceContext();
 		await PowerCmd.Apply<FrailPower>(context, LivingFighters(), SpoonRule.FrailAmount, Creature, null);
-		foreach (Player player in CombatState.Players.ToList())
+		_tablesSet++;
+		IReadOnlyList<Player> players = CombatState.Players.ToList();
+		for (int slot = 0; slot < players.Count; slot++)
 		{
+			Player player = players[slot];
 			if (player.Creature.IsDead) continue;
-			SpoonRule.Kit kit = SpoonRule.KitFor(player.Deck.Cards.Count);
-			await Deal<SpoonTeaspoon>(player, kit.Teaspoons);
-			if (kit.Wooden) await Deal<SpoonWoodenSpoon>(player, 1);
-			if (kit.Skimmer) await Deal<SpoonSkimmer>(player, 1);
-			if (kit.Baller) await Deal<SpoonMelonBaller>(player, 1);
-			SpoonLog.Info($"spoon: set the table for a {player.Deck.Cards.Count}-card deck: {kit}");
+			var counts = Enum.GetValues<SpoonRule.Cutlery>().ToDictionary(c => c, _ => 1);
+			int deck = player.Deck.Cards.Count;
+			int extras = SpoonRule.ExtraSpoons(deck);
+			if (extras > 0)
+			{
+				var rng = new Rng(player.RunState.Rng.Seed, $"SlaySpoon.Spoon.Kit{_tablesSet}.{slot}");
+				for (int i = 0; i < extras; i++) counts[SpoonRule.ExtraPick(rng.NextInt(counts.Count))]++;
+			}
+			await Deal<SpoonTeaspoon>(player, counts[SpoonRule.Cutlery.Teaspoon]);
+			await Deal<SpoonWoodenSpoon>(player, counts[SpoonRule.Cutlery.Wooden]);
+			await Deal<SpoonSkimmer>(player, counts[SpoonRule.Cutlery.Skimmer]);
+			await Deal<SpoonMelonBaller>(player, counts[SpoonRule.Cutlery.Baller]);
+			await Deal<SpoonStolenSpoonful>(player, counts[SpoonRule.Cutlery.StolenSpoonful]);
+			SpoonLog.Info($"spoon: set the table for a {deck}-card deck: {string.Join(", ", counts.Select(c => $"{c.Key} {c.Value}"))}");
 		}
 		Animate(m => m.Recover());
 		await AfterMove();
@@ -193,10 +212,17 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		await AfterMove();
 	}
 
-	/// <summary>Banquet: Vulnerable on the fighters, each loses max HP unless Skimmed (lost, not gained), then it heals.</summary>
+	/// <summary>
+	/// Banquet: a light hit (owner, 2026-11-16), Vulnerable on the fighters, each loses max HP unless Skimmed (lost, not
+	/// gained), then it heals.
+	/// </summary>
 	private async Task BanquetMove(IReadOnlyList<Creature> targets)
 	{
 		await AnimateAsync(m => m.BanquetAsync());
+		AttackCommand attack = await DamageCmd.Attack(SpoonRule.BanquetDamage).FromMonster(this)
+			.WithHitFx("vfx/vfx_bite")
+			.Execute(null);
+		await Grow(Unblocked(attack));
 		var context = new ThrowingPlayerChoiceContext();
 		List<Creature> fighters = LivingFighters().ToList();
 		await PowerCmd.Apply<VulnerablePower>(context, fighters, SpoonRule.VulnerableAmount, Creature, null);
@@ -243,7 +269,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	internal async Task SyncStrength()
 	{
 		if (!Creature.IsAlive || _startMaxHp <= 0) return;
-		int target = SpoonRule.StrengthFor(Creature.MaxHp, _startMaxHp);
+		int target = SpoonRule.StrengthFor(Creature.MaxHp, _startMaxHp, _grown);
 		int delta = target - _strengthGiven;
 		if (delta == 0) return;
 		_strengthGiven = target;
@@ -251,7 +277,10 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		SpoonLog.Info($"spoon: max HP {Creature.MaxHp} (start {_startMaxHp}), Strength from max HP {target}");
 	}
 
-	/// <summary>+<see cref="SpoonRule.AppetitePerMove"/> after each move, so its first hit is at base; a Sated stack cancels one gain.</summary>
+	/// <summary>
+	/// +<see cref="SpoonRule.AppetitePerMove"/> after each move, so its first hit is at base; a Sated stack cancels one
+	/// gain. Each gain also takes <see cref="SpoonRule.StolenBack"/> Appetite back from every player holding some.
+	/// </summary>
 	private async Task GainAppetite()
 	{
 		if (!Creature.IsAlive) return;
@@ -262,11 +291,21 @@ public sealed class SpoonMonster : Sts1EndingMonster
 			SpoonLog.Info("spoon: Sated, no Appetite this move");
 			return;
 		}
-		await PowerCmd.Apply<SpoonAppetitePower>(context, Creature, SpoonRule.AppetitePerMove, Creature, null);
+		int gain = SpoonRule.AppetitePerMove;
+		foreach (Player player in CombatState.Players.ToList())
+		{
+			if (player.Creature.GetPower<SpoonAppetitePower>() is not { } held) continue;
+			int taken = SpoonRule.StolenBack(held.Amount);
+			if (taken <= 0) continue;
+			await PowerCmd.ModifyAmount(context, held, -taken, Creature, null);
+			gain += taken;
+		}
+		await PowerCmd.Apply<SpoonAppetitePower>(context, Creature, gain, Creature, null);
 	}
 
 	/// <summary>
-	/// The HP its hits took from players past their Block becomes its max HP (SetMaxHp: no heal), then Strength follows.
+	/// The HP its hits took from players past their Block becomes its max HP (SetMaxHp: no heal). Growth gives no
+	/// Strength (<see cref="SpoonRule.StrengthFor"/>).
 	/// </summary>
 	private async Task Grow(int unblocked)
 	{
@@ -275,7 +314,6 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		_grown += unblocked;
 		Animate(m => m.Grow(_grown));
 		SpoonLog.Info($"spoon: grew {unblocked} max HP (now {Creature.MaxHp})");
-		await SyncStrength();
 	}
 
 	/// <summary>

@@ -25,6 +25,8 @@ countering one of the Spoon's mechanics, handed out by the Spoon itself so ignor
    the Spoon doesn't gain them, *builder call*), then it heals 60 + 10 per player past the first (60, 70, 80, 90).
 4. **Ladle Smash**: 55 damage (*builder call*).
 
+1.3.2 (owner, 2026-11-16): Feast also deals a light hit (owner: "dégâts légers"), 12 damage (*builder call*).
+
 Unchanged: supporters are never targeted and deal it nothing; growth on unblocked damage (that much max HP, no heal).
 
 ## Strength from max HP
@@ -33,34 +35,36 @@ Strength = (max HP − max HP at fight start) / 5, truncated toward zero, negati
 per 5 max HP and vice versa"). Recomputed whenever its max HP changes. Replaces "+1 per 10 grown". The team max HP
 damage ratio stays removed.
 
+1.3.2 (owner, 2026-11-16): the max HP grown from its hits no longer counts. Growth fed Strength, which fed bigger hits
+and more growth (a play test reached 200+ per hit). Only the max HP it loses (Melon Baller) changes its Strength.
+
 ## Appetite and Spoonful
 
-Appetite is unchanged: +2 after each of the Spoon's moves, +10 % damage per stack. Spoonful stays the normal deck card
-that manages it (the fifth spoon, owner): each one played on the Spoon removes 3.
+Appetite: +2 after each of the Spoon's moves, +5 % damage per stack (1.3.2, was 10 %). Spoonful stays the normal deck
+card that manages it: each one played on the Spoon removes 3.
+
+1.3.2: players can hold Appetite too (same power, +5 % damage per stack, fight only), taken with the kit's Stolen
+Spoonful. Each time the Spoon gains Appetite it takes 1 back from every player holding some.
 
 ## The cutlery (Exhaust, combat-only, `SpoonCard`s outside every card source)
 
 | Card | Cost | Effect |
 |---|---|---|
 | Teaspoon (Cuillère à café) | 0 | Remove 2 Appetite. Draw 1. |
-| Wooden Spoon (Cuillère en bois) | 1 | Prevents the Spoon's next Appetite gain. |
+| Wooden Spoon (Cuillère en bois) | 1 | 1.3.2: an attack dealing 10 % of your max HP; prevents the Spoon's next Appetite gain. |
 | Skimmer (Écumoire) | 1 | Gain 6 Block (*builder call*). This turn, Feast eats none of your max HP. |
 | Melon Baller (Cuillère parisienne) | 2 | Take 12 max HP from the Spoon (fixed: no damage, no Strength); you gain them. |
+| Stolen Spoonful (Cuillerée volée) | 1 | 1.3.2: an attack, 10 damage (12 upgraded); steal up to 3 Appetite from the Spoon. |
 
 Targeted like vanilla cards (owner): Teaspoon, Wooden Spoon and Melon Baller target the Spoon, Skimmer the player.
 "This turn" for the Skimmer means until the end of the Spoon's next turn. Played on the Spoon (Wooden Spoon, Melon
 Baller, Teaspoon target it); a supporter's copy works too.
 
-## Kit by deck size (cards in the player's deck at fight start)
+## Kit (1.3.2, owner, 2026-11-16)
 
-| Deck | Kit |
-|---|---|
-| ≤ 9 | 1 Teaspoon |
-| 10–14 | 1 Teaspoon, Wooden Spoon |
-| 15–19 | 2 Teaspoons, Wooden Spoon |
-| 20–24 | + Skimmer |
-| 25–29 | + Melon Baller |
-| 30+ | + 2 Teaspoons (4 in all), and 2 more per further 15 cards (*builder call*) |
+Every Sets the Table gives each living player one of each of the five spoons. From 25 cards in the deck, 1 extra kit
+spoon at random, plus 1 per further 5 cards (25 → +1, 30 → +2). The extras come from an `Rng` named after the run seed,
+the cycle and the player's slot, so co-op clients agree (*builder call*). This replaces the 1.3.0 table by deck size.
 
 Every number not marked as the owner's is tuned during balancing (owner, 2026-11-16).
 
