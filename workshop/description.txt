@@ -6,7 +6,7 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 
 [h2]Party modes[/h2]
 [list]
-[*][b]Spoon[/b]: max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up (300 solo, 550 for two, 750 for three, 900 for four), something hungry waits after act 3. Bring cutlery.
+[*][b]Spoon[/b]: max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up, something hungry waits after act 3. Bring cutlery.
 [*][b]Folie à deux[/b]: every card is up for grabs. Even yours.
 [*][b]Matriochka[/b]: hoard everything. Every floor brings cards.
 [*][b]King Midas[/b]: start rich. No free cards; every fire costs gold.
@@ -34,7 +34,7 @@ Daily Runs stay vanilla. Your regular save is never written; an optional copy br
 Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer. Cochez ce que vous voulez en partie personnalisée.
 
 [list]
-[*][b]Cuillère[/b] : les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuillerée, festoyez aux feux de camp, buvez le jus de fruit du marchand. Si l'équipe cumule assez de PV max (300 en solo, 550 à deux, 750 à trois, 900 à quatre), quelque chose d'affamé attend après l'acte 3. Apportez vos couverts.
+[*][b]Cuillère[/b] : les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuillerée, festoyez aux feux de camp, buvez le jus de fruit du marchand. Si l'équipe cumule assez de PV max, quelque chose d'affamé attend après l'acte 3. Apportez vos couverts.
 [*][b]Folie à deux[/b] : chaque carte se dispute. Même les vôtres.
 [*][b]Matriochka[/b] : accumulez tout. Chaque étage apporte des cartes.
 [*][b]Roi Midas[/b] : départ fortuné. Aucune carte gratuite, chaque feu se paie.
