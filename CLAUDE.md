@@ -403,3 +403,6 @@ Read `README.md` for the player view and the spec for every decision.
   (max HP − start) / 5, applied by delta (`SyncStrength`). Cards in `src/Spoon/SpoonCutlery.cs` (Teaspoon, Wooden Spoon,
   Skimmer, Melon Baller; Pixabay portraits), powers Sated/Skimmed, tweens `SetTableAsync`/`BanquetAsync`. Build 0
   warnings; 702 xUnit + 91 pytest pass. Not tested in game.
+- **1.3.1:** the Spoon and Ending map screens at half height (`src/Core/AppendedMapHeight.cs`, `src/Act4/AppendedMapHeightPatch.cs`:
+  `NMapScreen.SetMap` postfix moves the points, redraws the paths, halves `_distY`; scroll top clamped). View only.
+  705 xUnit + 91 pytest pass. Not tested in game.

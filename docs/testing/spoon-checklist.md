@@ -37,6 +37,9 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] The Spoon with The Ending behind it: ordinary boss rewards, then The Ending starts.
 - [ ] The Ending already appended earlier: the Spoon still goes in front of it.
 - [ ] Map: the Spoon map screen is laid out correctly (rest site, then the boss), no NaN/blank layout.
+- [ ] 1.3.1: the Spoon and Ending map screens are half as tall (points pulled toward the start), the dotted paths join
+      the moved points, traveled paths are colored, scrolling stops just above the boss, and selecting a point
+      scrolls to the current row. Other acts' maps are unchanged.
 - [ ] Winged Boots and the Flight modifier on the Spoon map: no softlock, no charge spent.
 - [ ] The floor counter in the act (known cosmetic skip) and the act title "The Spoon" / "La Cuillère" read well.
 - [ ] Save and reload at the Spoon rest site and at the boss room: the act and fighter set are restored; reload at the room restarts the fight.
