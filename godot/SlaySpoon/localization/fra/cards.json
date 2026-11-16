@@ -1,5 +1,5 @@
 {
-	"SPOON_SPOONFUL.description": "Infligez {Damage:diff()} dégâts.\n[gold]Coup de grâce[/gold] : augmentez vos PV Max de {MaxHp:diff()}.",
+	"SPOON_SPOONFUL.description": "Infligez {Damage:diff()} dégâts.\n[gold]Coup de grâce[/gold] : augmentez vos PV Max de {MaxHp:diff()}.\nSur la Cuillère : retirez {Appetite:diff()} d'[gold]Appétit[/gold].",
 	"SPOON_SPOONFUL.title": "Cuillerée",
 	"SPOON_SPOON_FEED.description": "Perdez jusqu'à [blue]5[/blue] PV max, en gardant au moins [blue]1[/blue].\nUn combattant gagne ce que vous perdez.",
 	"SPOON_SPOON_FEED.title": "Becquée",

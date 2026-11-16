@@ -7,15 +7,19 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Spoon;
 
-/// <summary>Feed that stays: Retain, Innate and Eternal (no Exhaust), so it can be neither removed nor transformed.</summary>
+/// <summary>
+/// Feed that stays: Retain, Innate and Eternal (no Exhaust), so it can be neither removed nor transformed. Played on the
+/// Spoon it also removes Appetite (<see cref="SpoonAppetitePower"/>); the Appetite var is for its text.
+/// </summary>
 public sealed class SpoonSpoonful : SpoonCard
 {
 	public override bool CanBeGeneratedInCombat => false;
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10m, ValueProp.Move), new MaxHpVar(3m)];
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10m, ValueProp.Move), new MaxHpVar(3m), new DynamicVar("Appetite", SpoonRule.AppetiteBite)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Innate, CardKeyword.Eternal];
 
