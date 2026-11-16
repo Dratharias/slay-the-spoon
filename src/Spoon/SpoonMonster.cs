@@ -19,7 +19,8 @@ namespace SlaySpoon.Spoon;
 /// <summary>
 /// The Spoon (docs/superpowers/specs/2026-11-14-spoon-design.md §5): the Spoon act's only monster. It fights the
 /// players who reached 300 max HP (the fighters); the others support them with Spoon-Feed and cannot hurt it or be
-/// hurt by it. Its damage scales with the team's total max HP, and Mouthful eats max HP to heal it.
+/// hurt by it. Its damage scales with the team's total max HP, and Mouthful eats max HP to heal it. It grows on the HP its
+/// hits take past Block: that much max HP (without healing), and 1 Strength per 10 max HP grown (owner, 2026-11-16).
 /// </summary>
 public sealed class SpoonMonster : Sts1EndingMonster
 {
@@ -52,6 +53,9 @@ public sealed class SpoonMonster : Sts1EndingMonster
 
 	/// <summary>Not saved: StS2 restarts the combat when a save loads, and the fighters are chosen again then.</summary>
 	private HashSet<Player>? _fighters;
+
+	/// <summary>Max HP grown this fight, for the Strength remainder. Not saved, like the fighters.</summary>
+	private int _grown;
 
 	/// <summary>Set while the supporters are killed after the last fighter, so their own deaths don't recurse.</summary>
 	private bool _losing;
@@ -108,6 +112,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		AttackCommand attack = await DamageCmd.Attack(SpoonRule.BoucheeDamage).FromMonster(this)
 			.WithHitFx("vfx/vfx_bite")
 			.Execute(null);
+		await Grow(attack);
 		var context = new ThrowingPlayerChoiceContext();
 		int eaten = 0;
 		foreach (Creature fighter in PlayersHit(attack))
@@ -118,20 +123,32 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		}
 		if (eaten > 0 && Creature.IsAlive) await CreatureCmd.Heal(Creature, eaten);
 		SpoonLog.Info($"spoon: Mouthful ate {eaten} max HP");
-		await GainStrength();
 	}
 
 	private async Task LadleMove(IReadOnlyList<Creature> targets)
 	{
-		await DamageCmd.Attack(SpoonRule.LadleDamage).FromMonster(this)
+		AttackCommand attack = await DamageCmd.Attack(SpoonRule.LadleDamage).FromMonster(this)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(null);
-		await GainStrength();
+		await Grow(attack);
 	}
 
-	/// <summary>Once per turn, after the move, so the first attack hits at its base number.</summary>
-	private Task GainStrength() =>
-		PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, SpoonRule.StrengthPerTurn, Creature, null);
+	/// <summary>
+	/// The HP the hit took from players past their Block becomes the Spoon's max HP (SetMaxHp: no heal, unlike GainMaxHp;
+	/// only the max HP Mouthful eats heals it), with 1 Strength per <see cref="SpoonRule.MaxHpPerStrength"/> grown.
+	/// </summary>
+	private async Task Grow(AttackCommand attack)
+	{
+		if (!Creature.IsAlive) return;
+		int unblocked = attack.Results.SelectMany(hit => hit).Where(r => r.Receiver.IsPlayer).Sum(r => r.UnblockedDamage);
+		if (unblocked <= 0) return;
+		await CreatureCmd.SetMaxHp(Creature, Creature.MaxHp + unblocked);
+		int strength = SpoonRule.StrengthFromGrowth(_grown, unblocked);
+		_grown += unblocked;
+		if (strength > 0)
+			await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, strength, Creature, null);
+		SpoonLog.Info($"spoon: grew {unblocked} max HP (now {Creature.MaxHp}), +{strength} Strength");
+	}
 
 	/// <summary>
 	/// The Spoon's hits on a fighter scale with the team's total max HP (Strength already added: additive hooks run

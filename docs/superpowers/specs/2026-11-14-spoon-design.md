@@ -71,7 +71,7 @@ helping from the side. **Non-goals:** a complex boss (no minions, no phases), St
 
 Accepted as a proposal by the owner ("à ajuster une fois en jeu"):
 
-- About 1500 HP per fighter, through StS2's multiplayer formula counting fighters only, with act 3 boss factors
+- About 2000 HP per fighter (owner, 2026-11-16, was 1500), through StS2's multiplayer formula counting fighters only, with act 3 boss factors
   (as Act 4 does: `Act4MultiplayerScalingPatch`). Monster HP / Monster Damage modifiers apply as everywhere.
 - **Damage relative to the team's max HP** (owner, 2026-11-14: "la cuillère fait des dégâts relatif aux max hp,
   plus on en as, moins elle est forte", then "cumulatif sur la team" / "on additionne toute l'équipe"). Each hit is
@@ -81,8 +81,13 @@ Accepted as a proposal by the owner ("à ajuster une fois en jeu"):
   600 takes half. Duo: 600 in total takes the base (for example a fighter at 320 and a supporter at 280). Bouchée eats
   max HP, so the Spoon gets stronger as the fight drags on; a Becquée gift moves max HP inside the team and leaves the
   total, and the damage, unchanged. Intents show the scaled number.
-- Moves: **Bouchée**: 30 base damage and 10 max HP eaten; **Coup de louche** ("Ladle Smash"): 50 base damage; gains
-  3 Strength every turn (Strength adds to the base before the max HP scaling). Move order is a builder call (a simple
+- Moves: **Bouchée**: 40 base damage and 10 max HP eaten; **Coup de louche** ("Ladle Smash"): 70 base damage
+  (raised from 30 and 50 with the growth rule below; builder numbers, tuned after play).
+- **Growth (owner, 2026-11-16, replaces "+3 Strength every turn", which reached 24 Strength by turn 9 in the first
+  test and left no energy for anything but Block):** the Spoon gains as much max HP as the HP its hits take from players
+  past their Block (no heal from it), and 1 Strength per 10 max HP gained over the fight (remainders carried over).
+  It heals only by the max HP Bouchée eats. Fully blocked hits make it grow nothing. Strength adds to the base before
+  the max HP scaling. Move order is a builder call (a simple
   fixed or alternating cycle; no minions).
 
 ## Art (owner, later)

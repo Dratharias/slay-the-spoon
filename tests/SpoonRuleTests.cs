@@ -49,11 +49,23 @@ public class SpoonRuleTests
 	public void DamageMultiplier() => Assert.Equal(0.5m, SpoonRule.DamageMultiplier(1, 600));
 
 	[Theory]
-	[InlineData(1, 1, 1500)]
-	[InlineData(1, 2, 750)]
-	[InlineData(2, 2, 1500)]
-	[InlineData(1, 3, 500)]
+	[InlineData(1, 1, 2000)]
+	[InlineData(1, 2, 1000)]
+	[InlineData(2, 2, 2000)]
+	[InlineData(1, 3, 667)]
 	public void BossHp(int f, int p, int expected) => Assert.Equal(expected, SpoonRule.BossHp(f, p));
+
+	[Theory]
+	[InlineData(0, 0, 0)]
+	[InlineData(0, 9, 0)]
+	[InlineData(0, 10, 1)]
+	[InlineData(0, 44, 4)]
+	[InlineData(44, 6, 1)]
+	[InlineData(9, 1, 1)]
+	[InlineData(15, 24, 2)]
+	[InlineData(20, -5, 0)]
+	public void StrengthFromGrowth(int before, int gained, int expected) =>
+		Assert.Equal(expected, SpoonRule.StrengthFromGrowth(before, gained));
 
 	[Fact]
 	public void MoveCycles() =>

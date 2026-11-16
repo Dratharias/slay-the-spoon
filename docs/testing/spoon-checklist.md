@@ -45,9 +45,11 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 ## The fight
 
 - [ ] Fighters are the players with 300+ max HP when the fight starts; the others are supporters.
-- [ ] Spoon HP is about 1500 per fighter (counts fighters only); Monster HP / Monster Damage modifiers apply.
-- [ ] Mouthful: 30 base damage, eats 10 max HP per fighter hit, the Spoon heals by the max HP that dropped.
-- [ ] Ladle Smash: 50 base damage. Strength grows by 3 after each move; the first hit is at base.
+- [ ] Spoon HP is about 2000 per fighter (counts fighters only); Monster HP / Monster Damage modifiers apply.
+- [ ] Mouthful: 40 base damage, eats 10 max HP per fighter hit, the Spoon heals by the max HP that dropped.
+- [ ] Ladle Smash: 70 base damage. No Strength from turns passing.
+- [ ] Growth: HP lost past Block raises the Spoon's max HP by as much (its HP does not rise), and every 10 max HP gained
+      gives 1 Strength (log: `spoon: grew N max HP ... +S Strength`). A fully blocked hit gives nothing.
 - [ ] Damage is scaled by the team's total max HP: solo 300 takes the base, solo 600 takes half; duo 600 in total takes the base.
 - [ ] Intents show the scaled number per player; a supporter sees 0, a fighter sees the scaled hit.
 - [ ] Mouthful's debuff-style intent reads well (it stands for the max HP loss).

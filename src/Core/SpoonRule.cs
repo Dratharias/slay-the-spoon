@@ -6,8 +6,8 @@ namespace SlaySpoon.Core;
 /// </summary>
 public static class SpoonRule
 {
-	public const int Threshold = 300, FeastMaxHp = 5, GiftMaxHp = 5, HpPerFighter = 1500, BoucheeDamage = 30,
-		BoucheeMaxHp = 10, LadleDamage = 50, StrengthPerTurn = 3;
+	public const int Threshold = 300, FeastMaxHp = 5, GiftMaxHp = 5, HpPerFighter = 2000, BoucheeDamage = 40,
+		BoucheeMaxHp = 10, LadleDamage = 70, MaxHpPerStrength = 10;
 
 	public enum SpoonMove { Bouchee, Ladle }
 
@@ -84,6 +84,13 @@ public static class SpoonRule
 	/// <summary>The max HP a fighter gains from Spoon-Feed: what the giver actually lost, never more than the gift.</summary>
 	public static int GiftTransferred(int ownerMaxHpBefore, int ownerMaxHpAfter) =>
 		Math.Clamp(ownerMaxHpBefore - ownerMaxHpAfter, 0, GiftMaxHp);
+
+	/// <summary>
+	/// Strength the Spoon gains when its max HP grows by <paramref name="gained"/> after <paramref name="grownBefore"/>
+	/// earlier in the fight (owner, 2026-11-16): 1 per <see cref="MaxHpPerStrength"/> in total, remainders carried over.
+	/// </summary>
+	public static int StrengthFromGrowth(int grownBefore, int gained) =>
+		gained <= 0 ? 0 : (grownBefore + gained) / MaxHpPerStrength - grownBefore / MaxHpPerStrength;
 
 	public static int JuiceSlot(int potionCount, bool hasJuice, int roll) =>
 		hasJuice || potionCount <= 0 ? -1 : ((roll % potionCount) + potionCount) % potionCount;
