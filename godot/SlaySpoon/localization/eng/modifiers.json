@@ -49,5 +49,6 @@
   "SPOON_ROI_MIDAS.description": "Start rich. No free cards; every fire costs gold.",
   "SPOON_ROI_MIDAS.short": "Midas",
   "SPOON_SPOON.title": "Spoon",
-  "SPOON_SPOON.description": "Grow your max HP. At 300, the Spoon awaits after act 3."
+  "SPOON_SPOON.description": "Grow your max HP. At 300, the Spoon awaits after act 3.",
+  "SPOON_SPOON.short": "Spoon"
 }

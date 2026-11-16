@@ -23,8 +23,9 @@ public sealed class SpoonSpoonFeed : SpoonCard
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
-	/// <summary>Only while a fighter is alive to receive it.</summary>
-	protected override bool IsPlayable => SpoonFight.Fighters(CombatState).Any(c => c.IsAlive);
+	/// <summary>Only while a fighter is alive to receive it and the giver has more max HP than the gift.</summary>
+	protected override bool IsPlayable =>
+		SpoonRule.CanGift(Owner.Creature.MaxHp) && SpoonFight.Fighters(CombatState).Any(c => c.IsAlive);
 
 	public SpoonSpoonFeed()
 		: base(1, CardType.Skill, TargetType.AnyAlly)
@@ -34,9 +35,12 @@ public sealed class SpoonSpoonFeed : SpoonCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		decimal amount = DynamicVars.MaxHp.BaseValue;
-		await CreatureCmd.LoseMaxHp(choiceContext, Owner.Creature, amount, true);
-		if (cardPlay.Target.IsAlive) await CreatureCmd.GainMaxHp(cardPlay.Target, amount);
+		if (!SpoonRule.CanGift(Owner.Creature.MaxHp)) return;
+		int before = Owner.Creature.MaxHp;
+		await CreatureCmd.LoseMaxHp(choiceContext, Owner.Creature, DynamicVars.MaxHp.BaseValue, true);
+		// The fighter gains what the giver actually lost, so the gift never creates max HP.
+		int transferred = SpoonRule.GiftTransferred(before, Owner.Creature.MaxHp);
+		if (transferred > 0 && cardPlay.Target.IsAlive) await CreatureCmd.GainMaxHp(cardPlay.Target, transferred);
 	}
 }
 

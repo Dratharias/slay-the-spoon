@@ -70,6 +70,16 @@ public static class SpoonRule
 	/// <summary>Bouchée, Bouchée, Ladle, repeating (turn is zero-based).</summary>
 	public static SpoonMove Move(int turn) => turn % 3 == 2 ? SpoonMove.Ladle : SpoonMove.Bouchee;
 
+	/// <summary>
+	/// Spoon-Feed is playable only while the giver keeps at least 1 max HP after the gift: vanilla LoseMaxHp floors max
+	/// HP at 1, so a smaller pool would hand out max HP the giver never had.
+	/// </summary>
+	public static bool CanGift(int ownerMaxHp) => ownerMaxHp > GiftMaxHp;
+
+	/// <summary>The max HP a fighter gains from Spoon-Feed: what the giver actually lost, never more than the gift.</summary>
+	public static int GiftTransferred(int ownerMaxHpBefore, int ownerMaxHpAfter) =>
+		Math.Clamp(ownerMaxHpBefore - ownerMaxHpAfter, 0, GiftMaxHp);
+
 	public static int JuiceSlot(int potionCount, bool hasJuice, int roll) =>
 		hasJuice || potionCount <= 0 ? -1 : ((roll % potionCount) + potionCount) % potionCount;
 }

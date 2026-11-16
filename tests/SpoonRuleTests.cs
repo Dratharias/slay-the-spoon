@@ -69,6 +69,24 @@ public class SpoonRuleTests
 		Assert.All(SpoonRule.ExtraRelics, r => Assert.Contains(r.Deque, new[] { "Common", "Uncommon", "Rare" }));
 	}
 
+	[Theory]
+	[InlineData(1, false)]
+	[InlineData(5, false)]
+	[InlineData(6, true)]
+	[InlineData(300, true)]
+	public void CanGiftNeedsMoreMaxHpThanTheGift(int ownerMaxHp, bool expected) =>
+		Assert.Equal(expected, SpoonRule.CanGift(ownerMaxHp));
+
+	[Theory]
+	[InlineData(300, 295, 5)]
+	[InlineData(6, 1, 5)]
+	[InlineData(3, 1, 2)]
+	[InlineData(10, 10, 0)]
+	[InlineData(10, 12, 0)]
+	[InlineData(20, 5, 5)]
+	public void GiftTransfersWhatTheGiverLost(int before, int after, int expected) =>
+		Assert.Equal(expected, SpoonRule.GiftTransferred(before, after));
+
 	[Fact]
 	public void JuiceSlot()
 	{
