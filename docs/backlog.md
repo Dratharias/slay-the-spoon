@@ -430,6 +430,10 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     attribution required): "teaspoon" https://pixabay.com/photos/teaspoon-554065/ (spoon sprite, boss icon and outline,
     card portraits) and "exclusive banquet" https://pixabay.com/photos/exclusive-banquet-1812772/ (combat background,
     card portrait backgrounds). They are placeholders to replace with drawings.
+    Cutlery portraits (2026-11-16, same license): Teaspoon https://pixabay.com/photos/spoon-blueberries-teaspoon-1567331/,
+    Wooden Spoon https://pixabay.com/photos/wooden-spoon-wood-cook-spoon-4647800/, Skimmer (cropped from)
+    https://pixabay.com/photos/kitchen-utensils-help-cook-cutlery-5142006/, Melon Baller
+    https://pixabay.com/photos/melon-aqueous-red-fruit-marbles-4230629/.
   - **Decision log:** the act is appended like The Ending, not a second combat in the boss room or a map node;
     Spoon-Feed numbers (5 max HP) and the 300 threshold accepted by the owner; nothing eaten or given is returned after
     a win; losing to the Spoon is a defeat; boss numbers (about 1500 HP per fighter, Bouchée 30 + 10 max HP eaten,
