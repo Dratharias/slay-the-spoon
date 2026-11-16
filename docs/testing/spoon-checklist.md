@@ -36,7 +36,7 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] The Ending already appended earlier: the Spoon still goes in front of it.
 - [ ] Map: the Spoon map screen is laid out correctly (rest site, then the boss), no NaN/blank layout.
 - [ ] Winged Boots and the Flight modifier on the Spoon map: no softlock, no charge spent.
-- [ ] The floor counter in the act (known cosmetic skip) and the act title "The Spoon" / "La Cuillere" read well.
+- [ ] The floor counter in the act (known cosmetic skip) and the act title "The Spoon" / "La Cuillère" read well.
 - [ ] Save and reload at the Spoon rest site and at the boss room: the act and fighter set are restored; reload at the room restarts the fight.
 - [ ] Open design call: Act 4 run missing only the Ruby key: Ruby Recall at the Spoon rest site (see `docs/backlog.md`).
 
@@ -76,5 +76,5 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Boss map icon and its outline show on the map and the fight start screen.
 - [ ] Combat background shows in the Spoon fight; the rest site uses the Ending's campfire background.
 - [ ] Card portraits for Spoonful and Spoon-Feed show in hand, deck view and card library without a missing-image mark.
-- [ ] Text: every name (Spoonful / Cuillere, Spoon-Feed / Becquee, The Spoon / La Cuillere, Bouchee, Coup de louche)
+- [ ] Text: every name (Spoonful / Cuillerée, Spoon-Feed / Becquée, The Spoon / La Cuillère, Bouchée, Coup de louche)
       reads right in EN and FR; the owner proofreads.

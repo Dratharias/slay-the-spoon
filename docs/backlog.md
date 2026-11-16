@@ -419,7 +419,7 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     card portrait backgrounds). They are placeholders to replace with drawings.
   - **Decision log:** the act is appended like The Ending, not a second combat in the boss room or a map node;
     Spoon-Feed numbers (5 max HP) and the 300 threshold accepted by the owner; nothing eaten or given is returned after
-    a win; losing to the Spoon is a defeat; boss numbers (about 1500 HP per fighter, Bouchee 30 + 10 max HP eaten,
+    a win; losing to the Spoon is a defeat; boss numbers (about 1500 HP per fighter, Bouchée 30 + 10 max HP eaten,
     Coup de louche 50, +3 Strength per move) are a starting point, tuned after play; Spoon damage is scaled by the team's
     total max HP (`base x 300 x players / team max HP`); a run where nobody reaches 300 has no Spoon.
   - **Owner design call (open, ask the owner):** in an Act 4 run missing only the Ruby key, the Spoon act's rest site
