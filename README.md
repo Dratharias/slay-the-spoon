@@ -106,6 +106,10 @@ The Courier and more). No card rewards anywhere: cards come from the merchant. E
 is its only way out. Rest site actions cost gold (50, then 50 more each time at the same fire) and can be repeated; a
 broken Maw Bank can be reopened there. Not with Matriochka. Not tested in game: `docs/testing/roi-midas-checklist.md`.
 
+**Spoon** (Custom Run): everyone starts with a Spoonful, and max HP becomes the currency of the run: more max HP relics
+in the draws, a Feast at every rest site, Fruit Juice at every merchant. Reach 300 max HP and something wants to feed on
+you after the last boss. The others can only help from the side. Not tested in game: `docs/testing/spoon-checklist.md`.
+
 **Merchant Loans** (co-op Custom Runs): enable the modifier in the lobby. If a merchant purchase
 fails for lack of gold, choose **Ask** to open a request. Other players can lend gold at 0–900%
 interest or give it. Offers reserve the lender's gold until accepted, withdrawn, cancelled, or the

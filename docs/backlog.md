@@ -399,3 +399,46 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   - Minor: the per-fire paid count is not saved; a reload mid rest site resets the price to 50.
   - Builder call: Endless Conveyor and Trial are left out (their gold is random); Matriochka is mutually exclusive.
   - To check: vanilla events drawn again after a visit (repeats allowed) may carry one-time assumptions.
+
+- **Spoon (owner request, 2026-11-14):** Custom Run modifier `SpoonSpoon`: the Spoonful card (a Feed copy that stays),
+  max HP relics in the normal draws, the Feast rest site option, Fruit Juice at every merchant, and a one-room Spoon act
+  after the last act 3 boss when a player has 300+ max HP (before The Ending when it follows). Design:
+  `docs/superpowers/specs/2026-11-14-spoon-design.md`. Implemented in 1.3.0 (branch `two-modes`); not tested in game:
+  `docs/testing/spoon-checklist.md`.
+  - **Drawing list (owner, later; every drawing is a placeholder today):**
+    1. The Spoon combat sprite: PNG, transparent, about 600x900 px, facing left (`images/spoon/spoon.png`). Open.
+    2. The Spoon map boss icon: PNG 512x512 plus the same shape as an outline (`spoon_boss.png`,
+       `spoon_boss_outline.png`). Open.
+    3. Spoon act combat background: JPG 1920x1136 (`images/spoon/combat_bg.jpg`; optional). Open.
+    4. Spoon-Feed card portrait: PNG 250x190 (`images/cards/spoon/spoon_spoon_feed.png`; optional). Open.
+    5. Spoonful card portrait: same (`images/cards/spoon/spoon_spoonful.png`; optional). Open.
+    Animations are out of scope (static sprite).
+  - **Art sources:** the placeholder art comes from two Pixabay photos under the Pixabay Content License (free use, no
+    attribution required): "teaspoon" https://pixabay.com/photos/teaspoon-554065/ (spoon sprite, boss icon and outline,
+    card portraits) and "exclusive banquet" https://pixabay.com/photos/exclusive-banquet-1812772/ (combat background,
+    card portrait backgrounds). They are placeholders to replace with drawings.
+  - **Decision log:** the act is appended like The Ending, not a second combat in the boss room or a map node;
+    Spoon-Feed numbers (5 max HP) and the 300 threshold accepted by the owner; nothing eaten or given is returned after
+    a win; losing to the Spoon is a defeat; boss numbers (about 1500 HP per fighter, Bouchee 30 + 10 max HP eaten,
+    Coup de louche 50, +3 Strength per move) are a starting point, tuned after play; Spoon damage is scaled by the team's
+    total max HP (`base x 300 x players / team max HP`); a run where nobody reaches 300 has no Spoon.
+  - **Owner design call (open, ask the owner):** in an Act 4 run missing only the Ruby key, the Spoon act's rest site
+    offers Ruby Recall, a 4th chance at the Ruby key, which then appends The Ending after the Spoon. Keep it, or hide
+    Ruby Recall at the Spoon rest site?
+  - **Deferred minors (all open; the final review may settle some):**
+    - T2: no top-bar icon or short text for `SpoonSpoon` (the default modifier icon shows, like King Midas).
+    - T3: relics added to the grab bags are not re-added when a refreshing bag re-reads its relics by rarity.
+    - T4: the floor counter skips a number in the Spoon act (the empty grid row; cosmetic).
+    - T4: free travel (Winged Boots, Flight) on the Spoon map is handled by `SpoonMapTravelPatch`; check it in game.
+    - T5: Pressure Points played by a supporter still fires the marks a fighter applied (dealer-less); fix: skip
+      `TriggerAll` when `SpoonFight.IsSupporter(owner)`.
+    - T5: Spoon-Feed can create max HP: a supporter under 6 max HP loses less than 5 (`LoseMaxHp` floors at 1) while the
+      fighter gains 5; fix: give the amount that actually dropped.
+    - T5: skipping `HauntPower.AfterCardPlayed` for a supporter also skips its `Rng.CombatTargets` draw (deterministic,
+      but the vanilla stream use differs).
+    - T5: the Spoon's move-roll stream is named `SlaySpoon.Ending.SPOON_MONSTER` (naming only).
+    - T5: the Spoon-Feed arrow can rest on a supporter or a summon; the play is refused silently (UX).
+    - T5: `SpoonMonster`'s fighter and damage hooks are not gated on `SpoonSpoon.IsActive` (matters for a
+      console-spawned Spoon only).
+    - T5: the `GetPossibleTargets` postfix relies on the private method not being inlined; accepted, because the
+      multiplicative hook zeroes a stray hit anyway.

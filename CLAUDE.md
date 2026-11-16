@@ -370,3 +370,24 @@ Read `README.md` for the player view and the spec for every decision.
   `RestSiteSynchronizer.ChooseOption` prefix/postfix), Maw Bank "Reopen" while the bank is broken. Rules in
   `src/Core/MidasRule.cs`. Mutually exclusive with Matriochka (every reroll value).
 - Build 0 warnings; 603 xUnit + 91 pytest pass. Not tested in game: `docs/testing/roi-midas-checklist.md`.
+
+## 1.3.0 — Spoon (2026-11-16, branch `two-modes`)
+
+- **Spoon** (`SpoonSpoon`, Custom Run only, spec `docs/superpowers/specs/2026-11-14-spoon-design.md`): max HP as the
+  run's currency. Every player starts with a Spoonful (`src/Spoon/Spoonful.cs`: a Feed copy, Retain + Innate + Eternal,
+  no Exhaust; hidden `SpoonCardPool`); 12 max HP relics added to the grab bags on a `SlaySpoon.Spoon.Relics` `Rng`
+  (`SpoonRelics`); "Feast" rest option (+5 max HP, `SpoonFeastRestSiteOption`); Fruit Juice replaces one merchant potion
+  slot (`SpoonMerchantPatch`).
+- **The Spoon act** (`src/Spoon/SpoonAct.cs`, `SpoonRouting`, `SpoonActMap`; `IAppendedAct` shared with the Ending):
+  inserted from `AfterCombatVictory` after the last act 3 boss when a player has 300+ max HP, in front of The Ending
+  (`EndingRouteRule.ShouldAppend` takes `spoonPresent`). One rest site then the boss; `SpoonMapTravelPatch` keeps free
+  travel from softlocking the empty grid.
+- **The fight** (`SpoonMonster`, `SpoonFight`, `SpoonFeed`, `SpoonPowerBlockPatch`; rules in `src/Core/SpoonRule.cs`):
+  fighters = players at 300+ max HP, the rest are supporters. Mouthful (30, eats 10 max HP and heals) and Ladle Smash (50),
+  +3 Strength per move, damage scaled by the team's total max HP, 0 on supporters; supporter damage to the Spoon is
+  nullified (hits, listed damaging powers, Haunt, Judgement) and the Spoon only targets fighters (`GetPossibleTargets`
+  postfix); supporters get Spoon-Feed (5 max HP to a fighter); defeat when every fighter is dead.
+- Art is placeholder (Pixabay photos, sources in `docs/backlog.md`, which also lists the drawing list, the open design
+  call about Ruby Recall at the Spoon rest site and the deferred minors).
+- Build 0 warnings; 636 xUnit + 91 pytest pass; `make workshop` stages 1.3.0. Not tested in game:
+  `docs/testing/spoon-checklist.md`.
