@@ -50,6 +50,9 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Ladle Smash: 70 base damage. No Strength from turns passing.
 - [ ] Growth: HP lost past Block raises the Spoon's max HP by as much (its HP does not rise), and every 10 max HP gained
       gives 1 Strength (log: `spoon: grew N max HP ... +S Strength`). A fully blocked hit gives nothing.
+- [ ] No max HP scaling: the Mouthful intent reads 40 + Strength (times Appetite) whatever the players' max HP.
+- [ ] Appetite: +2 after each move (none before the first hit), +10 % damage per stack in the intent; a Spoonful played
+      on the Spoon removes 3 (flash); a supporter's Spoonful removes 3 too while dealing 0. EN/FR tooltip reads well.
 - [ ] Animations (`SpoonMotion`, tweens on the static sprite, pivot at the handle tip): slow idle sway; Mouthful leans
       back and swoops at the players, the hit lands at the bottom, then it rises back up; Ladle Smash rises and slams
       with a squash; a short recoil when hit; it swells a little as it grows (at most 1.2×); on death it tips over and

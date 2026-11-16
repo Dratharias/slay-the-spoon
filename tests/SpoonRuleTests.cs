@@ -33,20 +33,19 @@ public class SpoonRuleTests
 		Assert.Equal([0, 2], SpoonRule.Fighters([300, 299, 450]));
 
 	[Theory]
-	[InlineData(50, 1, 300, 50)]
-	[InlineData(50, 1, 600, 25)]
-	[InlineData(50, 1, 400, 37)]
-	[InlineData(50, 2, 600, 50)]
-	[InlineData(30, 1, 100000, 1)]
-	[InlineData(0, 1, 300, 0)]
-	[InlineData(50, 1, 0, 50)]
-	[InlineData(50, 0, 600, 50)]
-	[InlineData(30, 1, 900, 10)]
-	[InlineData(60, 1, 900, 20)]
-	public void ScaledDamage(int b, int p, int hp, int expected) => Assert.Equal(expected, SpoonRule.ScaledDamage(b, p, hp));
+	[InlineData(0, 1.0)]
+	[InlineData(1, 1.1)]
+	[InlineData(5, 1.5)]
+	[InlineData(-2, 1.0)]
+	public void AppetiteMultiplier(int stacks, double expected) =>
+		Assert.Equal((decimal)expected, SpoonRule.AppetiteMultiplier(stacks));
 
-	[Fact]
-	public void DamageMultiplier() => Assert.Equal(0.5m, SpoonRule.DamageMultiplier(1, 600));
+	[Theory]
+	[InlineData(0, 0)]
+	[InlineData(2, 2)]
+	[InlineData(3, 3)]
+	[InlineData(7, 3)]
+	public void SpoonfulEatsAppetite(int stacks, int expected) => Assert.Equal(expected, SpoonRule.AppetiteRemoved(stacks));
 
 	[Theory]
 	[InlineData(1, 1, 2000)]
@@ -125,25 +124,6 @@ public class SpoonRuleTests
 		Assert.Equal(-1, SpoonRule.JuiceSlot(0, false, 5));
 		Assert.Equal(2, SpoonRule.JuiceSlot(3, false, 5));
 		Assert.Equal(1, SpoonRule.JuiceSlot(3, false, -5));
-	}
-
-	[Fact]
-	public void DamageFactorTruncatesToScaledDamage()
-	{
-		for (int players = 1; players <= 4; players++)
-			for (int team = 1; team <= 2400 * players; team += players == 1 ? 1 : 7)
-				for (int amount = 1; amount <= 160; amount += 3)
-				{
-					decimal factor = SpoonRule.DamageFactor(amount, players, team);
-					Assert.Equal(SpoonRule.ScaledDamage(amount, players, team), (int)(amount * factor));
-				}
-	}
-
-	[Fact]
-	public void DamageFactorLeavesNothingAndInvalidTeamsAlone()
-	{
-		Assert.Equal(1m, SpoonRule.DamageFactor(0m, 1, 300));
-		Assert.Equal(30, (int)(30m * SpoonRule.DamageFactor(30m, 2, 0)));
 	}
 
 	[Fact]

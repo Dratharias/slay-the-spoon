@@ -140,5 +140,8 @@
 	"STS1_WRATH_NEXT_TURN_POWER.title": "Colère latente",
 	"STS1_WRATH_STANCE_POWER.description": "Vos cartes Attaque infligent deux fois plus de dégâts. Les attaques ennemies vous infligent deux fois plus de dégâts.",
 	"STS1_WRATH_STANCE_POWER.smartDescription": "Vos cartes Attaque infligent deux fois plus de dégâts. Les attaques ennemies vous infligent deux fois plus de dégâts.",
-	"STS1_WRATH_STANCE_POWER.title": "Colère"
+	"STS1_WRATH_STANCE_POWER.title": "Colère",
+	"SPOON_APPETITE_POWER.description": "Inflige [blue]10 %[/blue] de dégâts en plus par cumul. En gagne [blue]2[/blue] après chaque action. Chaque [gold]Cuillerée[/gold] jouée sur elle en retire [blue]3[/blue].",
+	"SPOON_APPETITE_POWER.smartDescription": "Inflige [blue]{Amount}0 %[/blue] de dégâts en plus. En gagne [blue]2[/blue] après chaque action. Chaque [gold]Cuillerée[/gold] jouée sur elle en retire [blue]3[/blue].",
+	"SPOON_APPETITE_POWER.title": "Appétit"
 }

@@ -19,7 +19,7 @@ namespace SlaySpoon.Spoon;
 /// <summary>
 /// The Spoon (docs/superpowers/specs/2026-11-14-spoon-design.md §5): the Spoon act's only monster. It fights the
 /// players who reached 300 max HP (the fighters); the others support them with Spoon-Feed and cannot hurt it or be
-/// hurt by it. Its damage scales with the team's total max HP, and Mouthful eats max HP to heal it. It grows on the HP its
+/// hurt by it. Its hits grow with Appetite, which Spoonful eats away, and Mouthful eats max HP to heal it. It grows on the HP its
 /// hits take past Block: that much max HP (without healing), and 1 Strength per 10 max HP grown (owner, 2026-11-16).
 /// </summary>
 public sealed class SpoonMonster : Sts1EndingMonster
@@ -144,6 +144,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 			.Execute(null);
 		Animate(m => m.Recover());
 		await Grow(attack);
+		await GainAppetite();
 		var context = new ThrowingPlayerChoiceContext();
 		int eaten = 0;
 		foreach (Creature fighter in PlayersHit(attack))
@@ -164,7 +165,13 @@ public sealed class SpoonMonster : Sts1EndingMonster
 			.Execute(null);
 		Animate(m => m.Recover());
 		await Grow(attack);
+		await GainAppetite();
 	}
+
+	/// <summary>After each move, so its first hit is at base.</summary>
+	private Task GainAppetite() => Creature.IsAlive
+		? PowerCmd.Apply<SpoonAppetitePower>(new ThrowingPlayerChoiceContext(), Creature, SpoonRule.AppetitePerMove, Creature, null)
+		: Task.CompletedTask;
 
 	/// <summary>
 	/// The HP the hit took from players past their Block becomes the Spoon's max HP (SetMaxHp: no heal, unlike GainMaxHp;
@@ -185,19 +192,14 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	}
 
 	/// <summary>
-	/// The Spoon's hits on a fighter scale with the team's total max HP (Strength already added: additive hooks run
-	/// first); it never damages a supporter; a supporter's damage to it, their summons' included, is nothing.
+	/// It never damages a supporter; a supporter's damage to it, their summons' included, is nothing. Its own hits are
+	/// base + Strength, times Appetite (<see cref="SpoonAppetitePower"/>); the team's max HP no longer scales them
+	/// (owner, 2026-11-16).
 	/// </summary>
 	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
 		if (target == null || CombatState == null) return 1m;
-		if (dealer == Creature && SpoonFight.OwnerOf(target) is { } victim)
-		{
-			if (!IsFighter(victim)) return 0m;
-			if (!target.IsPlayer) return 1m;
-			IReadOnlyList<Player> players = CombatState.Players;
-			return SpoonRule.DamageFactor(amount, players.Count, players.Sum(p => p.Creature.MaxHp));
-		}
+		if (dealer == Creature && SpoonFight.OwnerOf(target) is { } victim && !IsFighter(victim)) return 0m;
 		if (target == Creature && dealer != null && SpoonFight.OwnerOf(dealer) is { } attacker && !IsFighter(attacker)) return 0m;
 		return 1m;
 	}

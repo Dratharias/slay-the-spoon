@@ -73,14 +73,12 @@ Accepted as a proposal by the owner ("à ajuster une fois en jeu"):
 
 - About 2000 HP per fighter (owner, 2026-11-16, was 1500), through StS2's multiplayer formula counting fighters only, with act 3 boss factors
   (as Act 4 does: `Act4MultiplayerScalingPatch`). Monster HP / Monster Damage modifiers apply as everywhere.
-- **Damage relative to the team's max HP** (owner, 2026-11-14: "la cuillère fait des dégâts relatif aux max hp,
-  plus on en as, moins elle est forte", then "cumulatif sur la team" / "on additionne toute l'équipe"). Each hit is
-  scaled by the sum of every player's current max HP, supporters included:
-  `damage = base × (300 × players) / teamMaxHp`, rounded down, at least 1. *(Builder call: the reference grows with the
-  player count, so a solo run reads `base × 300 / maxHp` and co-op is not trivial.)* Solo: 300 max HP takes the base,
-  600 takes half. Duo: 600 in total takes the base (for example a fighter at 320 and a supporter at 280). Bouchée eats
-  max HP, so the Spoon gets stronger as the fight drags on; a Becquée gift moves max HP inside the team and leaves the
-  total, and the damage, unchanged. Intents show the scaled number.
+- **Damage (owner, 2026-11-16, replaces the scaling by the team's max HP, which with Strength and the heal stacked
+  three ways):** each hit is base + Strength, times Appetite. Strength comes only from growth (below); the players' max
+  HP no longer changes the damage. Intents show the result.
+- **Appetite** (`SpoonAppetitePower`, owner idea 2026-11-16): +2 after each move, +10 % damage per stack; every
+  Spoonful played on the Spoon removes 3, a supporter's included (their damage is nothing, the feeding counts). It
+  pushes the players to play Spoonful. Numbers are builder proposals, tuned after play.
 - Moves: **Bouchée**: 40 base damage and 10 max HP eaten; **Coup de louche** ("Ladle Smash"): 70 base damage
   (raised from 30 and 50 with the growth rule below; builder numbers, tuned after play).
 - **Growth (owner, 2026-11-16, replaces "+3 Strength every turn", which reached 24 Strength by turn 9 in the first

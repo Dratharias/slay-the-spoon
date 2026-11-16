@@ -7,7 +7,8 @@ namespace SlaySpoon.Core;
 public static class SpoonRule
 {
 	public const int Threshold = 300, FeastMaxHp = 5, GiftMaxHp = 5, HpPerFighter = 2000, BoucheeDamage = 40,
-		BoucheeMaxHp = 10, LadleDamage = 70, MaxHpPerStrength = 10;
+		BoucheeMaxHp = 10, LadleDamage = 70, MaxHpPerStrength = 10,
+		AppetitePerMove = 2, AppetiteBite = 3, AppetitePercent = 10;
 
 	public enum SpoonMove { Bouchee, Ladle }
 
@@ -29,30 +30,11 @@ public static class SpoonRule
 	public static IReadOnlyList<int> Fighters(IReadOnlyList<int> maxHps) =>
 		Enumerable.Range(0, maxHps.Count).Where(i => maxHps[i] >= Threshold).ToList();
 
-	public static decimal DamageMultiplier(int players, int teamMaxHp) =>
-		teamMaxHp <= 0 || players <= 0 ? 1m : (decimal)Threshold * players / teamMaxHp;
+	/// <summary>Each Appetite stack adds <see cref="AppetitePercent"/> % to the Spoon's damage (owner idea, 2026-11-16).</summary>
+	public static decimal AppetiteMultiplier(int stacks) => 1m + Math.Max(0, stacks) * AppetitePercent / 100m;
 
-	public static int ScaledDamage(int baseDamage, int players, int teamMaxHp)
-	{
-		if (baseDamage <= 0) return 0;
-		if (teamMaxHp <= 0 || players <= 0) return baseDamage;
-		return (int)Math.Max(1L, (long)baseDamage * Threshold * players / teamMaxHp);
-	}
-
-	/// <summary>
-	/// Multiplier for the running damage amount in a multiplicative damage hook, so that the game's truncation of
-	/// <c>amount × factor</c> gives <see cref="ScaledDamage"/> for an integer amount (at least 1 when amount is positive).
-	/// Decimal division can land a hair under an exact integer product; the nudge is far below the smallest real
-	/// fractional step (1 / teamMaxHp), so it never lifts a non-integer product past the next integer.
-	/// </summary>
-	public static decimal DamageFactor(decimal amount, int players, int teamMaxHp)
-	{
-		if (amount <= 0m) return 1m;
-		decimal factor = DamageMultiplier(players, teamMaxHp) + FactorNudge;
-		return amount * factor < 1m ? 1m / amount + FactorNudge : factor;
-	}
-
-	private const decimal FactorNudge = 0.00000000000000000001m;
+	/// <summary>The Appetite a Spoonful played on the Spoon removes: <see cref="AppetiteBite"/>, or what is left.</summary>
+	public static int AppetiteRemoved(int stacks) => Math.Clamp(stacks, 0, AppetiteBite);
 
 	/// <summary>
 	/// The fighters of a Spoon fight: the players at <see cref="Threshold"/>+ max HP, or every player when none qualifies
