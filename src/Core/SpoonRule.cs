@@ -23,22 +23,19 @@ public static class SpoonRule
 	/// <remarks>Stolen Spoonful left the kit (owner, 2026-11-16): the deck Spoonful becomes it for the Spoon fight.</remarks>
 	public enum Cutlery { Teaspoon, Wooden, Skimmer, Baller }
 
-	/// <summary>Event and Ancient relics that join the ordinary deques, by id entry, with the deque name.</summary>
-	public static readonly IReadOnlyList<(string Entry, string Deque)> ExtraRelics =
+	/// <summary>
+	/// The 12 max HP relics every player starts a Spoon run with (owner, 2026-11-16; they were ordinary draws before), by id
+	/// entry, with the max HP their pickup effect gives (0: the relic grows max HP later instead). Removed from every grab bag.
+	/// </summary>
+	public static readonly IReadOnlyList<(string Entry, int PickupMaxHp)> StartRelics =
 	[
-		("LOOMING_FRUIT", "Rare"), ("BIG_MUSHROOM", "Rare"), ("NUTRITIOUS_OYSTER", "Uncommon"),
-		("STONE_HUMIDIFIER", "Uncommon"), ("DARKSTONE_PERIAPT", "Uncommon"), ("CHOSEN_CHEESE", "Uncommon"),
-		("FAKE_MANGO", "Common"),
+		("STRAWBERRY", 7), ("PEAR", 10), ("MANGO", 14), ("FAKE_MANGO", 3), ("LEES_WAFFLE", 7), ("NUTRITIOUS_OYSTER", 11),
+		("BIG_MUSHROOM", 20), ("LOOMING_FRUIT", 31), ("DRAGON_FRUIT", 0), ("DARKSTONE_PERIAPT", 0), ("CHOSEN_CHEESE", 0),
+		("STONE_HUMIDIFIER", 0),
 	];
 
-	/// <summary>Shop base price for promoted relics, using their Spoon grab-bag tier.</summary>
-	public static int? ExtraRelicPrice(string entry) => ExtraRelics.FirstOrDefault(r => r.Entry == entry).Deque switch
-	{
-		"Common" => 175,
-		"Uncommon" => 225,
-		"Rare" => 275,
-		_ => null,
-	};
+	/// <summary>Max HP the starting relics add at run start.</summary>
+	public static int StartRelicMaxHp => StartRelics.Sum(r => r.PickupMaxHp);
 
 	/// <summary>
 	/// The team's summed max HP the Spoon needs (owner, 2026-11-16: no more supporters, everyone fights): 300 solo, then

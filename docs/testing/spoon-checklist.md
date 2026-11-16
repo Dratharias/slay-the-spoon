@@ -15,16 +15,18 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 
 ## Max HP economy
 
-- [ ] The 12 relics (Big Mushroom, Darkstone Periapt, Fake Mango, Chosen Cheese, Dragon Fruit, Lee's Waffle, Looming
-      Fruit, Nutritious Oyster, Stone Humidifier, Mango, Pear, Strawberry) can come out of chests, elites, the merchant,
-      events and Ancients, and each can be taken.
+- [ ] Every player starts with the 12 relics (Big Mushroom, Darkstone Periapt, Fake Mango, Chosen Cheese, Dragon Fruit,
+      Lee's Waffle, Looming Fruit, Nutritious Oyster, Stone Humidifier, Mango, Pear, Strawberry), at full HP with
+      +103 max HP over the character's base; none of them comes out of a chest, elite or merchant afterwards.
+- [ ] Neow (Nutritious Oyster, Stone Humidifier) and events (Hungry for Mushrooms, Room Full of Cheese, Trash Heap,
+      Fake Merchant, Nonupeipe) may still give a second copy; taking it works and gives its effect again.
 - [ ] Every rest site has a "Feast" option: +5 max HP, spends the rest action like Rest or Smith. Co-op: each player's own.
 - [ ] Ruby Recall and Feast both fit on the rest site list.
 - [ ] Every merchant sells Fruit Juice (+5 max HP) at its usual price, in one potion slot; the layout is otherwise vanilla.
 - [ ] Bought, the Fruit Juice is gone like any shop potion.
 - [ ] Merchant prices in a Spoon run match the same seed without Spoon, apart from the Juice slot (cards, other
-      potions and removal cost; relic offers may differ, since the max HP relics join the grab bags).
-- [ ] Seeds stay vanilla: the same seed with the modifier off gives the same map and rewards (beyond the added relics).
+      potions and removal cost; relic offers may differ, since the max HP relics leave the grab bags).
+- [ ] Seeds stay vanilla: the same seed with the modifier off gives the same map and rewards (beyond the removed relics).
 
 ## The Spoon act
 

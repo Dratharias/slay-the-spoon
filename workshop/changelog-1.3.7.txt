@@ -7,3 +7,4 @@
 - Slay the Spoon: a mode card on the solo and multiplayer host screens starts a Standard run in Spoon mode; the Custom Run option is renamed Slay the Spoon.
 - The Spire Souvenir now works for the Necrobinder and the Regent too (colorless cards from both games).
 - Shorter Custom Run descriptions.
+- Slay the Spoon: every player starts with the 12 max HP relics instead of finding them in the draws.

@@ -155,3 +155,10 @@ The mode is named "Slay the Spoon" in both languages. A "Slay the Spoon" card on
 starts a Standard run carrying `SpoonSpoon` (a Standard exception, like Folie à deux); the Custom Run checkbox stays.
 Menu text: "Dinner is served. The Spoon is waiting." / "À table, la Cuillère vous attend." Builder call: Neow treats
 the flag as hidden, like Folie à deux, so both entry points get Neow's usual options.
+
+## Amendment 1.3.7: max HP relics at the start (owner, 2026-11-16)
+
+Supersedes rule 3. Every player starts with the 12 max HP relics, like King Midas's gold relics, and they leave every
+grab bag. Their pickup max HP (103 in all) is applied by hand at run creation, then the player is at full HP (Lee's
+Waffle). Big Mushroom's size and the growing relics (Darkstone Periapt, Chosen Cheese, Dragon Fruit, Stone Humidifier)
+work as in vanilla. The promoted relic prices and the seeded grab bag insertion are removed. The thresholds stay.

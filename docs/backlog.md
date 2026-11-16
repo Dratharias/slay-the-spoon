@@ -453,8 +453,12 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     - ~~T2: no top-bar icon or short text for `SpoonSpoon` (the default modifier icon shows, like King Midas).~~ Done in
       the 1.3.0 review fix wave: `SPOON_SPOON.short` ("Spoon" / "Cuill.") shows in the top bar, and King Midas shows its
       short text too.
-    - T3: relics added to the grab bags are not re-added when a refreshing bag re-reads its relics by rarity.
-    - T3: `SpoonRelics.AddTo` skips a missing relic id or an unknown deque name silently (no log line).
+    - ~~T3: relics added to the grab bags are not re-added when a refreshing bag re-reads its relics by rarity.~~ Gone in
+      1.3.7: the 12 relics are given at the start and leave the grab bags.
+    - ~~T3: `SpoonRelics.AddTo` skips a missing relic id or an unknown deque name silently (no log line).~~ Gone in 1.3.7.
+    - 1.3.7 builder call: with the 12 relics from the start, Neow (Nutritious Oyster, Stone Humidifier) and vanilla
+      events (Hungry for Mushrooms, Room Full of Cheese, Trash Heap, Fake Merchant, Nonupeipe) can still give a second
+      copy; kept, since more max HP fits the mode. A missing relic id is skipped silently at the start grant.
     - T4: the floor counter skips a number in the Spoon act (the empty grid row; cosmetic).
     - T4: `SpoonAct.BaseNumberOfRooms` is 1, which multiplayer reads as 0 (continue-run info only).
     - T4: `EndingGeneratedMapPatch` builds a throwaway fixed map just to compare map types, and its log line says

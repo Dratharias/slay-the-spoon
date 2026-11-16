@@ -120,7 +120,7 @@ is its only way out. Rest site actions cost gold (50, then 50 more each time at 
 broken Maw Bank can be reopened there. Not with Matriochka. Not tested in game: `docs/testing/roi-midas-checklist.md`.
 
 **Slay the Spoon** (a card on the solo and multiplayer host screens, or a Custom Run checkbox): max HP becomes the currency of the run. Everyone starts with a Spoonful, a Retain card that
-kills to feed: a fatal blow with it raises your max HP. Max HP relics are added to the draws, every rest site offers a
+kills to feed: a fatal blow with it raises your max HP. Everyone also starts with the 12 max HP relics, every rest site offers a
 Feast (+5 max HP), and every merchant sells Fruit Juice. When the team's max HP adds up to **300 solo, 550 for two, 750
 for three or 900 for four**, a Spoon act is inserted after the last act 3 boss: one rest site, then the Spoon. Every
 player fights it.

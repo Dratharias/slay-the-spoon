@@ -13,18 +13,6 @@ public class SpoonRuleTests
 	public void GrowthKeepsAllUnblockedDamage(int damage, int expected) =>
 		Assert.Equal(expected, SpoonRule.GrowthFromDamage(damage));
 
-	[Theory]
-	[InlineData("LOOMING_FRUIT", 275)]
-	[InlineData("BIG_MUSHROOM", 275)]
-	[InlineData("NUTRITIOUS_OYSTER", 225)]
-	[InlineData("STONE_HUMIDIFIER", 225)]
-	[InlineData("DARKSTONE_PERIAPT", 225)]
-	[InlineData("CHOSEN_CHEESE", 225)]
-	[InlineData("FAKE_MANGO", 175)]
-	[InlineData("ANCHOR", null)]
-	public void PromotedRelicsHaveOrdinaryTierPrices(string entry, int? expected) =>
-		Assert.Equal(expected, SpoonRule.ExtraRelicPrice(entry));
-
 	[Fact]
 	public void ShouldInsertWhenEverythingLines_Up() =>
 		Assert.True(SpoonRule.ShouldInsert(true, true, true, [470, 80], false));
@@ -205,10 +193,10 @@ public class SpoonRuleTests
 	public void BanquetHitsLightly() => Assert.InRange(SpoonRule.BanquetDamage, 1, SpoonRule.BoucheeDamage / 2);
 
 	[Fact]
-	public void ExtraRelicsTable()
+	public void TwelveDistinctStartRelics()
 	{
-		Assert.Equal(7, SpoonRule.ExtraRelics.Select(r => r.Entry).Distinct().Count());
-		Assert.All(SpoonRule.ExtraRelics, r => Assert.Contains(r.Deque, new[] { "Common", "Uncommon", "Rare" }));
+		Assert.Equal(12, SpoonRule.StartRelics.Select(r => r.Entry).Distinct().Count());
+		Assert.Equal(103, SpoonRule.StartRelicMaxHp);
 	}
 
 	[Fact]

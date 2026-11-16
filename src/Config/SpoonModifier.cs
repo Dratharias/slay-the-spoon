@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.RestSite;
-using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
@@ -15,7 +14,7 @@ namespace SlaySpoon.Config;
 
 /// <summary>
 /// Spoon (Custom Run, docs/superpowers/specs/2026-11-14-spoon-design.md): grow your max HP with Spoonful; at 300 the Spoon
-/// awaits after act 3. Later tasks add the relics, the merchant, the Feast and the fight.
+/// awaits after act 3. Every player starts with the 12 max HP relics.
 /// </summary>
 public sealed class SpoonSpoon : ModifierModel
 {
@@ -29,11 +28,27 @@ public sealed class SpoonSpoon : ModifierModel
 		foreach (Player player in runState.Players)
 			player.Deck.AddInternal(runState.CreateCard<SpoonSpoonful>(player));
 
-		// The Max HP relics join every grab bag (players in order, then the shared one) on one seeded Rng.
-		var rng = new Rng(runState.Rng.Seed, "SlaySpoon.Spoon.Relics");
+		// The 12 max HP relics from the start (owner, 2026-11-16), like King Midas's gold relics: taken out of every grab bag,
+		// pickup max HP applied by hand (AfterObtained does not run for relics added at creation), then full HP (Lee's Waffle).
+		var relics = SpoonRule.StartRelics
+			.Select(r => (Relic: ModelDb.AllRelics.FirstOrDefault(m => m.Id.Entry == r.Entry), r.PickupMaxHp))
+			.Where(r => r.Relic != null).ToList();
 		foreach (Player player in runState.Players)
-			SpoonRelics.AddTo(player.RelicGrabBag, rng);
-		SpoonRelics.AddTo(runState.SharedRelicGrabBag, rng);
+		{
+			int gain = 0;
+			foreach (var (canonical, pickup) in relics)
+			{
+				player.RelicGrabBag.Remove(canonical!);
+				if (player.Relics.Any(r => r.Id == canonical!.Id)) continue;
+				player.AddRelicInternal(canonical!.ToMutable());
+				gain += pickup;
+			}
+			Creature creature = player.Creature;
+			creature.SetMaxHpInternal(creature.MaxHp + gain);
+			creature.SetCurrentHpInternal(creature.MaxHp);
+		}
+		foreach (var (canonical, _) in relics)
+			runState.SharedRelicGrabBag.Remove(canonical!);
 	}
 
 	// Before vanilla sets the win time and saves the run, on every co-op peer at the same point.
