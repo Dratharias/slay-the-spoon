@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Core;
+using SlaySpoon.Spoon;
 
 namespace SlaySpoon.Act4;
 
@@ -35,10 +36,15 @@ internal static class AppendedMapHeightPatch
 	/// <summary>Vanilla's traveled-path tick scale (<c>_tickTraveledScale</c>).</summary>
 	private static readonly Vector2 TraveledScale = Vector2.One * 1.2f;
 
-	/// <summary>The top scroll limit of the appended map last laid out (one map screen at a time).</summary>
+	/// <summary>The top scroll limit of the map last laid out (one map screen at a time); vanilla for other acts.</summary>
 	private static float _scrollTop = AppendedMapHeight.VanillaScrollTop;
 
-	private static bool Appended(NMapScreen screen) => Run(screen)?.Act is IAppendedAct;
+	/// <summary>
+	/// Keyed on the map itself: on a new run <c>SetMap</c> runs before <c>NMapScreen.Initialize</c> hands the screen
+	/// the new run state, so the screen's <c>_runState</c> still held the previous run (in game, 1.3.1: points left at
+	/// vanilla height while the scroll was clamped).
+	/// </summary>
+	private static bool Appended(ActMap map) => map is SpoonActMap or EndingActMap;
 
 	[HarmonyPatch(typeof(NMapScreen), nameof(NMapScreen.SetMap))]
 	[HarmonyPostfix]
@@ -46,7 +52,8 @@ internal static class AppendedMapHeightPatch
 	{
 		try
 		{
-			if (!Appended(__instance)) return;
+			_scrollTop = AppendedMapHeight.VanillaScrollTop;
+			if (!Appended(map)) return;
 			Dictionary<MapCoord, NMapPoint> points = Points(__instance);
 			float vanillaDist = DistY(__instance);
 			int rowCount = map.GetRowCount();
@@ -67,7 +74,8 @@ internal static class AppendedMapHeightPatch
 			DrawPaths(__instance, points[map.StartingMapPoint.coord], map.StartingMapPoint);
 			DrawPaths(__instance, points[map.BossMapPoint.coord], map.BossMapPoint);
 
-			RunState run = Run(__instance);
+			RunState? run = Run(__instance);
+			if (run == null || run.Map != map) return;
 			IReadOnlyList<MapCoord> visited = run.VisitedMapCoords;
 			for (int i = 0; i < visited.Count - 1; i++)
 			{
@@ -90,7 +98,7 @@ internal static class AppendedMapHeightPatch
 	[HarmonyPrefix]
 	private static void ClampTop(NMapScreen __instance)
 	{
-		if (!Appended(__instance)) return;
+		if (_scrollTop >= AppendedMapHeight.VanillaScrollTop) return; // vanilla acts keep their elastic overscroll
 		ref Vector2 target = ref TargetDragPos(__instance);
 		if (target.Y > _scrollTop) target = new Vector2(target.X, _scrollTop);
 	}
