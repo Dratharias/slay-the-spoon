@@ -6,11 +6,23 @@ namespace SlaySpoon.Core;
 /// </summary>
 public static class SpoonRule
 {
-	public const int Threshold = 300, FeastMaxHp = 5, GiftMaxHp = 5, HpPerFighter = 2000, BoucheeDamage = 40,
-		BoucheeMaxHp = 10, LadleDamage = 70, MaxHpPerStrength = 10,
+	public const int Threshold = 300, FeastMaxHp = 5, GiftMaxHp = 5, HpPerFighter = 2000,
 		AppetitePerMove = 2, AppetiteBite = 3, AppetitePercent = 10;
 
-	public enum SpoonMove { Bouchee, Ladle }
+	/// <summary>The fight's numbers (docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md); tuned during balancing.</summary>
+	public const int BoucheeDamage = 35, LadleDamage = 55, BanquetMaxHp = 10, FrailAmount = 2, VulnerableAmount = 2,
+		BanquetHealBase = 60, BanquetHealPerPlayer = 10, MaxHpPerStrength = 5,
+		TeaspoonAppetite = 2, TeaspoonAppetiteUpgraded = 3, SkimmerBlock = 6, SkimmerBlockUpgraded = 9,
+		BallerMaxHp = 12, BallerMaxHpUpgraded = 15;
+
+	/// <summary>The 4-turn cycle: sets the table (Frail and the cutlery), Mouthful, Banquet, Ladle Smash.</summary>
+	public enum SpoonMove { SetTable, Bouchee, Banquet, Ladle }
+
+	/// <summary>The cutlery one player gets each cycle.</summary>
+	public readonly record struct Kit(int Teaspoons, bool Wooden, bool Skimmer, bool Baller)
+	{
+		public int Count => Teaspoons + (Wooden ? 1 : 0) + (Skimmer ? 1 : 0) + (Baller ? 1 : 0);
+	}
 
 	/// <summary>Event and Ancient relics that join the ordinary deques, by id entry, with the deque name.</summary>
 	public static readonly IReadOnlyList<(string Entry, string Deque)> ExtraRelics =
@@ -49,8 +61,30 @@ public static class SpoonRule
 	public static int BossHp(int fighters, int players) =>
 		players <= 0 ? HpPerFighter : (HpPerFighter * fighters + players - 1) / players;
 
-	/// <summary>Bouchée, Bouchée, Ladle, repeating (turn is zero-based).</summary>
-	public static SpoonMove Move(int turn) => turn % 3 == 2 ? SpoonMove.Ladle : SpoonMove.Bouchee;
+	/// <summary>SetTable, Bouchée, Banquet, Ladle, repeating (turn is zero-based).</summary>
+	public static SpoonMove Move(int turn) => (SpoonMove)(((turn % 4) + 4) % 4);
+
+	/// <summary>
+	/// The Spoon's Strength follows its max HP: 1 per <see cref="MaxHpPerStrength"/> above its max HP at fight start,
+	/// minus 1 per as many below, truncated toward zero (owner, 2026-11-16).
+	/// </summary>
+	public static int StrengthFor(int maxHp, int startMaxHp) => (maxHp - startMaxHp) / MaxHpPerStrength;
+
+	/// <summary>Banquet heals 60, plus 10 per player past the first (owner: 60, 70, 80, 90).</summary>
+	public static int BanquetHeal(int players) => BanquetHealBase + BanquetHealPerPlayer * Math.Max(0, players - 1);
+
+	/// <summary>The max HP a Melon Baller takes: its amount, leaving the Spoon at least 1.</summary>
+	public static int BallerTake(int spoonMaxHp, int amount = BallerMaxHp) => Math.Clamp(amount, 0, Math.Max(0, spoonMaxHp - 1));
+
+	/// <summary>
+	/// The kit by deck size (owner table): ≤ 9 one Teaspoon; 10 + Wooden Spoon; 15 two Teaspoons; 20 + Skimmer;
+	/// 25 + Melon Baller; 30 four Teaspoons, then 2 more per further 15 cards (builder call).
+	/// </summary>
+	public static Kit KitFor(int deckSize)
+	{
+		int teaspoons = deckSize >= 30 ? 4 + 2 * ((deckSize - 30) / 15) : deckSize >= 15 ? 2 : 1;
+		return new Kit(teaspoons, deckSize >= 10, deckSize >= 20, deckSize >= 25);
+	}
 
 	/// <summary>
 	/// Spoon-Feed is playable while the giver has more than 1 max HP (owner decision 2026-11-16): it gives down to 1 max HP.

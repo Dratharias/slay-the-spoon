@@ -55,23 +55,53 @@ public class SpoonRuleTests
 	public void BossHp(int f, int p, int expected) => Assert.Equal(expected, SpoonRule.BossHp(f, p));
 
 	[Theory]
-	[InlineData(0, 0, 0)]
-	[InlineData(0, 9, 0)]
-	[InlineData(0, 10, 1)]
-	[InlineData(0, 44, 4)]
-	[InlineData(44, 6, 1)]
-	[InlineData(9, 1, 1)]
-	[InlineData(15, 24, 2)]
-	[InlineData(20, -5, 0)]
-	public void StrengthFromGrowth(int before, int gained, int expected) =>
-		Assert.Equal(expected, SpoonRule.StrengthFromGrowth(before, gained));
+	[InlineData(0, SpoonRule.SpoonMove.SetTable)]
+	[InlineData(1, SpoonRule.SpoonMove.Bouchee)]
+	[InlineData(2, SpoonRule.SpoonMove.Banquet)]
+	[InlineData(3, SpoonRule.SpoonMove.Ladle)]
+	[InlineData(4, SpoonRule.SpoonMove.SetTable)]
+	[InlineData(7, SpoonRule.SpoonMove.Ladle)]
+	public void CycleOfFour(int turn, SpoonRule.SpoonMove move) => Assert.Equal(move, SpoonRule.Move(turn));
+
+	[Theory]
+	[InlineData(2000, 2000, 0)]
+	[InlineData(2009, 2000, 1)]
+	[InlineData(2010, 2000, 2)]
+	[InlineData(1996, 2000, 0)]
+	[InlineData(1995, 2000, -1)]
+	[InlineData(1985, 2000, -3)]
+	public void StrengthFollowsMaxHp(int hp, int start, int expected) => Assert.Equal(expected, SpoonRule.StrengthFor(hp, start));
+
+	[Theory]
+	[InlineData(1, 60)]
+	[InlineData(2, 70)]
+	[InlineData(3, 80)]
+	[InlineData(4, 90)]
+	public void BanquetHealByPlayers(int players, int heal) => Assert.Equal(heal, SpoonRule.BanquetHeal(players));
+
+	[Theory]
+	[InlineData(2000, 12)]
+	[InlineData(13, 12)]
+	[InlineData(10, 9)]
+	[InlineData(1, 0)]
+	public void BallerTakeIsCapped(int hp, int take) => Assert.Equal(take, SpoonRule.BallerTake(hp));
 
 	[Fact]
-	public void MoveCycles() =>
-		Assert.Equal(
-			[SpoonRule.SpoonMove.Bouchee, SpoonRule.SpoonMove.Bouchee, SpoonRule.SpoonMove.Ladle,
-			 SpoonRule.SpoonMove.Bouchee, SpoonRule.SpoonMove.Bouchee, SpoonRule.SpoonMove.Ladle],
-			Enumerable.Range(0, 6).Select(SpoonRule.Move).ToList());
+	public void BallerTakeHonoursTheUpgrade() => Assert.Equal(15, SpoonRule.BallerTake(2000, 15));
+
+	[Theory]
+	[InlineData(0, 1, false, false, false)]
+	[InlineData(9, 1, false, false, false)]
+	[InlineData(10, 1, true, false, false)]
+	[InlineData(15, 2, true, false, false)]
+	[InlineData(20, 2, true, true, false)]
+	[InlineData(25, 2, true, true, true)]
+	[InlineData(30, 4, true, true, true)]
+	[InlineData(44, 4, true, true, true)]
+	[InlineData(45, 6, true, true, true)]
+	[InlineData(60, 8, true, true, true)]
+	public void KitBySize(int deck, int tea, bool wood, bool skim, bool baller) =>
+		Assert.Equal(new SpoonRule.Kit(tea, wood, skim, baller), SpoonRule.KitFor(deck));
 
 	[Fact]
 	public void ExtraRelicsTable()
