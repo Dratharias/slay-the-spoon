@@ -14,5 +14,7 @@
 	"STS1_SPIRE_SPEAR.moves.BURN_STRIKE.title": "Burn Strike",
 	"STS1_SPIRE_SPEAR.moves.PIERCER.title": "Piercer",
 	"STS1_SPIRE_SPEAR.moves.SKEWER.title": "Skewer",
-	"STS1_SPIRE_SPEAR.name": "Spire Spear"
+	"STS1_SPIRE_SPEAR.name": "Spire Spear",
+	"SPOON_MONSTER.moves.SET_TABLE.title": "Sets the Table",
+	"SPOON_MONSTER.moves.BANQUET.title": "Banquet"
 }

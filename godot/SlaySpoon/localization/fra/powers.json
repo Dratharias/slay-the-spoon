@@ -143,5 +143,11 @@
 	"STS1_WRATH_STANCE_POWER.title": "Colère",
 	"SPOON_APPETITE_POWER.description": "Inflige [blue]10 %[/blue] de dégâts en plus par cumul. En gagne [blue]2[/blue] après chaque action. Chaque [gold]Cuillerée[/gold] jouée sur elle en retire [blue]3[/blue].",
 	"SPOON_APPETITE_POWER.smartDescription": "Inflige [blue]{Amount}0 %[/blue] de dégâts en plus. En gagne [blue]2[/blue] après chaque action. Chaque [gold]Cuillerée[/gold] jouée sur elle en retire [blue]3[/blue].",
-	"SPOON_APPETITE_POWER.title": "Appétit"
+	"SPOON_APPETITE_POWER.title": "Appétit",
+	"SPOON_SATED_POWER.title": "Rassasiée",
+	"SPOON_SATED_POWER.description": "Chaque cumul annule un gain d'[gold]Appétit[/gold].",
+	"SPOON_SATED_POWER.smartDescription": "Ses [blue]{Amount}[/blue] prochains gains d'[gold]Appétit[/gold] sont annulés.",
+	"SPOON_SKIMMED_POWER.title": "Écumé",
+	"SPOON_SKIMMED_POWER.description": "Ce tour-ci, le [gold]Banquet[/gold] ne mange aucun de vos PV max.",
+	"SPOON_SKIMMED_POWER.smartDescription": "Ce tour-ci, le [gold]Banquet[/gold] ne mange aucun de vos PV max."
 }

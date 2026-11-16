@@ -78,6 +78,50 @@ internal sealed class SpoonMotion
 		await _body.ToSignal(t, Tween.SignalName.Finished);
 	}
 
+	/// <summary>
+	/// Sets the table: hops up and taps the bowl down three times, tilting left and right like cutlery set in place.
+	/// Returns on the last tap (the kit is dealt then).
+	/// </summary>
+	public async Task SetTableAsync()
+	{
+		if (StartAction() is not { } t) return;
+		t.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+		foreach (float side in new[] { -1f, 1f, -1f })
+		{
+			t.TweenProperty(_body, "position", _restPosition + new Vector2(side * 20f, -45f), 0.14);
+			t.Parallel().TweenProperty(_body, "rotation", Mathf.DegToRad(side * 12f), 0.14);
+			t.TweenProperty(_body, "position", _restPosition + new Vector2(side * 30f, 0f), 0.08)
+				.SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
+			t.Parallel().TweenProperty(_body, "scale", new Vector2(_size * 1.06f, _size * 0.94f), 0.08);
+			t.TweenProperty(_body, "scale", RestScale, 0.06);
+		}
+		await _body.ToSignal(t, Tween.SignalName.Finished);
+	}
+
+	/// <summary>
+	/// Banquet: leans back with the bowl up, swells in three gulps, then shudders. Returns after the last gulp (the max
+	/// HP is eaten and the heal lands then).
+	/// </summary>
+	public async Task BanquetAsync()
+	{
+		if (StartAction() is not { } t) return;
+		t.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+		t.TweenProperty(_body, "rotation", Mathf.DegToRad(24f), 0.35);
+		t.Parallel().TweenProperty(_body, "position", _restPosition + new Vector2(20f, -20f), 0.35);
+		for (int gulp = 1; gulp <= 3; gulp++)
+		{
+			float swell = 1f + gulp * 0.05f;
+			t.TweenProperty(_body, "scale", new Vector2(_size * swell, _size * (2f - swell)), 0.1)
+				.SetTrans(Tween.TransitionType.Sine);
+			t.TweenProperty(_body, "scale", new Vector2(_size * (2f - swell * 0.98f), _size * swell), 0.12)
+				.SetTrans(Tween.TransitionType.Sine);
+		}
+		t.TweenProperty(_body, "rotation", Mathf.DegToRad(18f), 0.05);
+		t.TweenProperty(_body, "rotation", Mathf.DegToRad(28f), 0.05);
+		t.TweenProperty(_body, "rotation", Mathf.DegToRad(22f), 0.05);
+		await _body.ToSignal(t, Tween.SignalName.Finished);
+	}
+
 	/// <summary>The "relevé": back upright with a small overshoot, then the idle again.</summary>
 	public void Recover()
 	{

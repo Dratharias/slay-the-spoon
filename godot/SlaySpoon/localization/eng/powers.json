@@ -143,5 +143,11 @@
 	"STS1_WRATH_STANCE_POWER.title": "Wrath",
 	"SPOON_APPETITE_POWER.description": "Deals [blue]10%[/blue] more damage per stack. Gains [blue]2[/blue] after each move. Each [gold]Spoonful[/gold] played on it removes [blue]3[/blue].",
 	"SPOON_APPETITE_POWER.smartDescription": "Deals [blue]{Amount}0%[/blue] more damage. Gains [blue]2[/blue] after each move. Each [gold]Spoonful[/gold] played on it removes [blue]3[/blue].",
-	"SPOON_APPETITE_POWER.title": "Appetite"
+	"SPOON_APPETITE_POWER.title": "Appetite",
+	"SPOON_SATED_POWER.title": "Sated",
+	"SPOON_SATED_POWER.description": "Each stack cancels one [gold]Appetite[/gold] gain.",
+	"SPOON_SATED_POWER.smartDescription": "Its next [blue]{Amount}[/blue] [gold]Appetite[/gold] gains do nothing.",
+	"SPOON_SKIMMED_POWER.title": "Skimmed",
+	"SPOON_SKIMMED_POWER.description": "This turn, [gold]Banquet[/gold] eats none of your Max HP.",
+	"SPOON_SKIMMED_POWER.smartDescription": "This turn, [gold]Banquet[/gold] eats none of your Max HP."
 }

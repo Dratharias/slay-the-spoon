@@ -19,8 +19,10 @@ namespace SlaySpoon.Spoon;
 /// <summary>
 /// The Spoon (docs/superpowers/specs/2026-11-14-spoon-design.md §5): the Spoon act's only monster. It fights the
 /// players who reached 300 max HP (the fighters); the others support them with Spoon-Feed and cannot hurt it or be
-/// hurt by it. Its hits grow with Appetite, which Spoonful eats away, and Mouthful eats max HP to heal it. It grows on the HP its
-/// hits take past Block: that much max HP (without healing), and 1 Strength per 10 max HP grown (owner, 2026-11-16).
+/// hurt by it. It plays a 4-turn cycle (docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md): sets the table (Frail,
+/// and the cutlery kit into every player's draw pile), Mouthful (Block from the HP it took), Banquet (Vulnerable, eats max
+/// HP, heals) and Ladle Smash. Its hits grow with Appetite. It grows on the HP its hits take past Block (that much max HP,
+/// without healing), and its Strength follows its max HP against the start (<see cref="SpoonRule.StrengthFor"/>).
 /// </summary>
 public sealed class SpoonMonster : Sts1EndingMonster
 {
@@ -54,8 +56,17 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	/// <summary>Not saved: StS2 restarts the combat when a save loads, and the fighters are chosen again then.</summary>
 	private HashSet<Player>? _fighters;
 
-	/// <summary>Max HP grown this fight, for the Strength remainder. Not saved, like the fighters.</summary>
+	/// <summary>Max HP grown this fight, for the sprite's size. Not saved, like the fighters.</summary>
 	private int _grown;
+
+	/// <summary>Max HP at fight start, the Strength reference.</summary>
+	private int _startMaxHp;
+
+	/// <summary>
+	/// The Strength this monster gave itself from max HP. <see cref="SyncStrength"/> applies only the difference, so
+	/// Strength the players take away (or anything else changes) is kept, and its own share never drifts.
+	/// </summary>
+	private int _strengthGiven;
 
 	/// <summary>The sprite's tweens (<see cref="SpoonMotion"/>), found once the creature node exists.</summary>
 	private SpoonMotion? _motion;
@@ -108,10 +119,12 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	{
 		var moves = new Dictionary<SpoonRule.SpoonMove, MoveState>
 		{
-			[SpoonRule.SpoonMove.Bouchee] = new("BOUCHEE_MOVE", BoucheeMove, new SingleAttackIntent(SpoonRule.BoucheeDamage), new DebuffIntent()),
+			[SpoonRule.SpoonMove.SetTable] = new("SET_TABLE_MOVE", SetTableMove, new DebuffIntent(), new StatusIntent(1)),
+			[SpoonRule.SpoonMove.Bouchee] = new("BOUCHEE_MOVE", BoucheeMove, new SingleAttackIntent(SpoonRule.BoucheeDamage), new DefendIntent()),
+			[SpoonRule.SpoonMove.Banquet] = new("BANQUET_MOVE", BanquetMove, new DebuffIntent(true), new HealIntent()),
 			[SpoonRule.SpoonMove.Ladle] = new("LADLE_MOVE", LadleMove, new SingleAttackIntent(SpoonRule.LadleDamage)),
 		};
-		return BuildMachine(new EndingMoveBrain<SpoonRule.SpoonMove>((turn, _, _) => SpoonRule.Move(turn), SpoonRule.SpoonMove.Bouchee), moves);
+		return BuildMachine(new EndingMoveBrain<SpoonRule.SpoonMove>((turn, _, _) => SpoonRule.Move(turn), SpoonRule.SpoonMove.SetTable), moves);
 	}
 
 	public override async Task AfterAddedToRoom()
@@ -127,6 +140,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	public override async Task BeforeCombatStart()
 	{
 		await base.BeforeCombatStart();
+		_startMaxHp = Creature.MaxHp;
 		Animate(m => m.Idle());
 		foreach (Player player in CombatState.Players)
 		{
@@ -136,6 +150,35 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		}
 	}
 
+	private IEnumerable<Creature> LivingFighters() =>
+		CombatState.Players.Where(p => IsFighter(p) && p.Creature.IsAlive).Select(p => p.Creature).ToList();
+
+	/// <summary>Sets the table: Frail on the fighters, and every living player's kit shuffled into their draw pile.</summary>
+	private async Task SetTableMove(IReadOnlyList<Creature> targets)
+	{
+		await AnimateAsync(m => m.SetTableAsync());
+		var context = new ThrowingPlayerChoiceContext();
+		await PowerCmd.Apply<FrailPower>(context, LivingFighters(), SpoonRule.FrailAmount, Creature, null);
+		foreach (Player player in CombatState.Players.ToList())
+		{
+			if (player.Creature.IsDead) continue;
+			SpoonRule.Kit kit = SpoonRule.KitFor(player.Deck.Cards.Count);
+			await Deal<SpoonTeaspoon>(player, kit.Teaspoons);
+			if (kit.Wooden) await Deal<SpoonWoodenSpoon>(player, 1);
+			if (kit.Skimmer) await Deal<SpoonSkimmer>(player, 1);
+			if (kit.Baller) await Deal<SpoonMelonBaller>(player, 1);
+			SpoonLog.Info($"spoon: set the table for a {player.Deck.Cards.Count}-card deck: {kit}");
+		}
+		Animate(m => m.Recover());
+		await AfterMove();
+	}
+
+	private static Task Deal<T>(Player player, int count) where T : CardModel =>
+		count > 0
+			? CardPileCmd.AddToCombatAndPreview<T>(player.Creature, PileType.Draw, count, null, CardPilePosition.Random)
+			: Task.CompletedTask;
+
+	/// <summary>Mouthful: a bite, and Block equal to the HP it took past the players' Block.</summary>
 	private async Task BoucheeMove(IReadOnlyList<Creature> targets)
 	{
 		await AnimateAsync(m => m.SwoopAsync());
@@ -143,18 +186,33 @@ public sealed class SpoonMonster : Sts1EndingMonster
 			.WithHitFx("vfx/vfx_bite")
 			.Execute(null);
 		Animate(m => m.Recover());
-		await Grow(attack);
-		await GainAppetite();
+		int unblocked = Unblocked(attack);
+		if (unblocked > 0 && Creature.IsAlive)
+			await CreatureCmd.GainBlock(Creature, unblocked, ValueProp.Unpowered, null);
+		await Grow(unblocked);
+		await AfterMove();
+	}
+
+	/// <summary>Banquet: Vulnerable on the fighters, each loses max HP unless Skimmed (lost, not gained), then it heals.</summary>
+	private async Task BanquetMove(IReadOnlyList<Creature> targets)
+	{
+		await AnimateAsync(m => m.BanquetAsync());
 		var context = new ThrowingPlayerChoiceContext();
+		List<Creature> fighters = LivingFighters().ToList();
+		await PowerCmd.Apply<VulnerablePower>(context, fighters, SpoonRule.VulnerableAmount, Creature, null);
 		int eaten = 0;
-		foreach (Creature fighter in PlayersHit(attack))
+		foreach (Creature fighter in fighters)
 		{
+			if (!fighter.IsAlive || fighter.GetPower<SpoonSkimmedPower>() != null) continue;
 			int before = fighter.MaxHp;
-			await CreatureCmd.LoseMaxHp(context, fighter, SpoonRule.BoucheeMaxHp, false);
+			await CreatureCmd.LoseMaxHp(context, fighter, SpoonRule.BanquetMaxHp, false);
 			eaten += Math.Max(0, before - fighter.MaxHp);
 		}
-		if (eaten > 0 && Creature.IsAlive) await CreatureCmd.Heal(Creature, eaten);
-		SpoonLog.Info($"spoon: Mouthful ate {eaten} max HP");
+		int heal = SpoonRule.BanquetHeal(CombatState.Players.Count);
+		if (Creature.IsAlive) await CreatureCmd.Heal(Creature, heal);
+		Animate(m => m.Recover());
+		SpoonLog.Info($"spoon: Banquet ate {eaten} max HP, healed {heal}");
+		await AfterMove();
 	}
 
 	private async Task LadleMove(IReadOnlyList<Creature> targets)
@@ -164,31 +222,60 @@ public sealed class SpoonMonster : Sts1EndingMonster
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(null);
 		Animate(m => m.Recover());
-		await Grow(attack);
-		await GainAppetite();
+		await Grow(Unblocked(attack));
+		await AfterMove();
 	}
 
-	/// <summary>After each move, so its first hit is at base.</summary>
-	private Task GainAppetite() => Creature.IsAlive
-		? PowerCmd.Apply<SpoonAppetitePower>(new ThrowingPlayerChoiceContext(), Creature, SpoonRule.AppetitePerMove, Creature, null)
-		: Task.CompletedTask;
+	private static int Unblocked(AttackCommand attack) =>
+		attack.Results.SelectMany(hit => hit).Where(r => r.Receiver.IsPlayer).Sum(r => r.UnblockedDamage);
 
-	/// <summary>
-	/// The HP the hit took from players past their Block becomes the Spoon's max HP (SetMaxHp: no heal, unlike GainMaxHp;
-	/// only the max HP Mouthful eats heals it), with 1 Strength per <see cref="SpoonRule.MaxHpPerStrength"/> grown.
-	/// </summary>
-	private async Task Grow(AttackCommand attack)
+	/// <summary>After every move: Appetite (unless Sated), then the players' Skimmed ends.</summary>
+	private async Task AfterMove()
+	{
+		await GainAppetite();
+		foreach (Player player in CombatState.Players.ToList())
+		{
+			if (player.Creature.GetPower<SpoonSkimmedPower>() is { } skimmed) await PowerCmd.Remove(skimmed);
+		}
+	}
+
+	/// <summary>Strength = <see cref="SpoonRule.StrengthFor"/>; only the change since the last sync is applied.</summary>
+	internal async Task SyncStrength()
+	{
+		if (!Creature.IsAlive || _startMaxHp <= 0) return;
+		int target = SpoonRule.StrengthFor(Creature.MaxHp, _startMaxHp);
+		int delta = target - _strengthGiven;
+		if (delta == 0) return;
+		_strengthGiven = target;
+		await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, delta, Creature, null);
+		SpoonLog.Info($"spoon: max HP {Creature.MaxHp} (start {_startMaxHp}), Strength from max HP {target}");
+	}
+
+	/// <summary>+<see cref="SpoonRule.AppetitePerMove"/> after each move, so its first hit is at base; a Sated stack cancels one gain.</summary>
+	private async Task GainAppetite()
 	{
 		if (!Creature.IsAlive) return;
-		int unblocked = attack.Results.SelectMany(hit => hit).Where(r => r.Receiver.IsPlayer).Sum(r => r.UnblockedDamage);
-		if (unblocked <= 0) return;
+		var context = new ThrowingPlayerChoiceContext();
+		if (Creature.GetPower<SpoonSatedPower>() is { Amount: > 0 } sated)
+		{
+			await PowerCmd.ModifyAmount(context, sated, -1, null, null);
+			SpoonLog.Info("spoon: Sated, no Appetite this move");
+			return;
+		}
+		await PowerCmd.Apply<SpoonAppetitePower>(context, Creature, SpoonRule.AppetitePerMove, Creature, null);
+	}
+
+	/// <summary>
+	/// The HP its hits took from players past their Block becomes its max HP (SetMaxHp: no heal), then Strength follows.
+	/// </summary>
+	private async Task Grow(int unblocked)
+	{
+		if (!Creature.IsAlive || unblocked <= 0) return;
 		await CreatureCmd.SetMaxHp(Creature, Creature.MaxHp + unblocked);
-		int strength = SpoonRule.StrengthFromGrowth(_grown, unblocked);
 		_grown += unblocked;
 		Animate(m => m.Grow(_grown));
-		if (strength > 0)
-			await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, strength, Creature, null);
-		SpoonLog.Info($"spoon: grew {unblocked} max HP (now {Creature.MaxHp}), +{strength} Strength");
+		SpoonLog.Info($"spoon: grew {unblocked} max HP (now {Creature.MaxHp})");
+		await SyncStrength();
 	}
 
 	/// <summary>

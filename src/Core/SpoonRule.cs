@@ -101,13 +101,6 @@ public static class SpoonRule
 	public static int GiftTransferred(int ownerMaxHpBefore, int ownerMaxHpAfter) =>
 		Math.Clamp(ownerMaxHpBefore - ownerMaxHpAfter, 0, GiftMaxHp);
 
-	/// <summary>
-	/// Strength the Spoon gains when its max HP grows by <paramref name="gained"/> after <paramref name="grownBefore"/>
-	/// earlier in the fight (owner, 2026-11-16): 1 per <see cref="MaxHpPerStrength"/> in total, remainders carried over.
-	/// </summary>
-	public static int StrengthFromGrowth(int grownBefore, int gained) =>
-		gained <= 0 ? 0 : (grownBefore + gained) / MaxHpPerStrength - grownBefore / MaxHpPerStrength;
-
 	public static int JuiceSlot(int potionCount, bool hasJuice, int roll) =>
 		hasJuice || potionCount <= 0 ? -1 : ((roll % potionCount) + potionCount) % potionCount;
 }

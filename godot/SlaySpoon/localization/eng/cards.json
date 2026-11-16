@@ -487,5 +487,13 @@
 	"STS1_WRAITH_FORM.description": "Gain {IntangiblePower:diff()} [gold]Intangible[/gold].\nAt the end of your turn, lose {Sts1WraithFormPower:diff()} [gold]Dexterity[/gold].",
 	"STS1_WRAITH_FORM.title": "Wraith Form",
 	"STS1_WREATH_OF_FLAME.description": "Your next Attack deals {Magic:diff()} additional damage.",
-	"STS1_WREATH_OF_FLAME.title": "Wreath of Flame"
+	"STS1_WREATH_OF_FLAME.title": "Wreath of Flame",
+	"SPOON_TEASPOON.title": "Teaspoon",
+	"SPOON_TEASPOON.description": "Remove {Appetite:diff()} [gold]Appetite[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+	"SPOON_WOODEN_SPOON.title": "Wooden Spoon",
+	"SPOON_WOODEN_SPOON.description": "Cancel the Spoon's next {Sated:diff()} [gold]Appetite[/gold] {Sated:plural:gain|gains}.",
+	"SPOON_SKIMMER.title": "Skimmer",
+	"SPOON_SKIMMER.description": "Gain {Block:diff()} [gold]Block[/gold].\nThis turn, [gold]Banquet[/gold] eats none of your Max HP.",
+	"SPOON_MELON_BALLER.title": "Melon Baller",
+	"SPOON_MELON_BALLER.description": "Take {MaxHp:diff()} Max HP from the Spoon."
 }
