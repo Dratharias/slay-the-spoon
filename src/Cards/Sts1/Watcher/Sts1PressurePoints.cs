@@ -36,11 +36,7 @@ public sealed class Sts1PressurePoints : Sts1WatcherCard
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await PowerCmd.Apply<Sts1MarkPower>(choiceContext, cardPlay.Target, DynamicVars["Magic"].BaseValue, Owner.Creature, this);
-		// A Spoon fight supporter's marks never hurt the Spoon (its damage is nullified, spec §5), even marks a
-		// fighter put there; every other enemy, and every other fight, triggers as usual.
-		bool supporter = SlaySpoon.Spoon.SpoonFight.IsSupporter(Owner.Creature);
-		await Sts1MarkPower.TriggerAll(choiceContext,
-			CombatState!.Enemies.Where(e => !(supporter && e.Monster is SlaySpoon.Spoon.SpoonMonster)));
+		await Sts1MarkPower.TriggerAll(choiceContext, CombatState!.Enemies);
 	}
 
 	protected override void OnUpgrade()

@@ -32,9 +32,7 @@ public sealed class Sts1Judgement : Sts1WatcherCard
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		Creature target = cardPlay.Target;
-		// A Spoon fight supporter's Judgement does nothing to the Spoon (its damage is nullified, spec §5).
-		if (target.IsAlive && WatcherSkillMath.JudgementKills(target.CurrentHp, DynamicVars["Magic"].IntValue)
-			&& !SlaySpoon.Spoon.SpoonFight.IsSupporter(Owner.Creature))
+		if (target.IsAlive && WatcherSkillMath.JudgementKills(target.CurrentHp, DynamicVars["Magic"].IntValue))
 		{
 			await CreatureCmd.Kill(target);
 		}

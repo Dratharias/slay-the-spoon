@@ -8,8 +8,8 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// Inserts the Spoon act after act 3 (before The Ending when present) when the last act 3 boss dies and a player has
-/// 300 max HP or more (spec rule 4). From then on vanilla reads the act count: the act 3 boss is an ordinary boss
+/// Inserts the Spoon act after act 3 (before The Ending when present) when the last act 3 boss dies and the team's max HP
+/// adds up to <see cref="SpoonRule.TeamThreshold"/> (spec rule 4, owner 2026-11-16). From then on vanilla reads the act count: the act 3 boss is an ordinary boss
 /// (rewards, no win time, its reward screen enters the Spoon act); the Spoon is the final boss when it is last, or an
 /// ordinary boss in front of The Ending (spec rule 7).
 /// </summary>

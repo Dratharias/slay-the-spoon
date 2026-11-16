@@ -23,7 +23,7 @@ public class SpoonTextTests
 	public void Cards_have_text(string lang)
 	{
 		Dictionary<string, string> cards = Table(lang, "cards");
-		foreach (string id in new[] { "SPOON_SPOONFUL", "SPOON_SPOON_FEED", "SPOON_TEASPOON", "SPOON_WOODEN_SPOON", "SPOON_SKIMMER", "SPOON_MELON_BALLER", "SPOON_STOLEN_SPOONFUL" })
+		foreach (string id in new[] { "SPOON_SPOONFUL", "SPOON_TEASPOON", "SPOON_WOODEN_SPOON", "SPOON_SKIMMER", "SPOON_MELON_BALLER", "SPOON_STOLEN_SPOONFUL" })
 			foreach (string part in new[] { "title", "description" })
 				Assert.True(cards.TryGetValue($"{id}.{part}", out string? v) && v.Length > 0, $"{lang} cards {id}.{part}");
 	}
@@ -69,7 +69,7 @@ public class SpoonTextTests
 		foreach (string path in new[]
 		{
 			"images/spoon/spoon.png", "images/spoon/spoon_boss.png", "images/spoon/spoon_boss_outline.png",
-			"images/cards/spoon/spoon_spoonful.png", "images/cards/spoon/spoon_spoon_feed.png",
+			"images/cards/spoon/spoon_spoonful.png",
 			"images/cards/spoon/spoon_teaspoon.png", "images/cards/spoon/spoon_wooden_spoon.png",
 			"images/cards/spoon/spoon_skimmer.png", "images/cards/spoon/spoon_melon_baller.png",
 			"images/cards/spoon/spoon_stolen_spoonful.png",

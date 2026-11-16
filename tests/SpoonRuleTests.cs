@@ -27,12 +27,34 @@ public class SpoonRuleTests
 
 	[Fact]
 	public void ShouldInsertWhenEverythingLines_Up() =>
-		Assert.True(SpoonRule.ShouldInsert(true, true, true, [310, 80], false));
+		Assert.True(SpoonRule.ShouldInsert(true, true, true, [470, 80], false));
+
+	[Theory]
+	[InlineData(1, 300)]
+	[InlineData(2, 550)]
+	[InlineData(3, 750)]
+	[InlineData(4, 900)]
+	[InlineData(0, 300)]
+	[InlineData(5, 900)]
+	public void TeamThresholdByPlayerCount(int players, int threshold) =>
+		Assert.Equal(threshold, SpoonRule.TeamThreshold(players));
+
+	[Theory]
+	[InlineData(new[] { 300 }, true)]
+	[InlineData(new[] { 299 }, false)]
+	[InlineData(new[] { 275, 275 }, true)]
+	[InlineData(new[] { 500, 49 }, false)]
+	[InlineData(new[] { 250, 250, 250 }, true)]
+	[InlineData(new[] { 225, 225, 225, 224 }, false)]
+	[InlineData(new[] { 400, 200, 150, 150 }, true)]
+	public void TeamReachesTheThresholdTogether(int[] maxHps, bool expected) =>
+		Assert.Equal(expected, SpoonRule.ShouldInsert(true, true, true, maxHps, false));
 
 	[Fact]
 	public void ShouldNotInsertOtherwise()
 	{
 		Assert.False(SpoonRule.ShouldInsert(true, true, true, [299, 250], false));
+		Assert.False(SpoonRule.ShouldInsert(true, true, true, [299], false));
 		Assert.False(SpoonRule.ShouldInsert(true, true, false, [310], false));
 		Assert.False(SpoonRule.ShouldInsert(false, true, true, [310], false));
 		Assert.False(SpoonRule.ShouldInsert(true, true, true, [310], true));
@@ -47,10 +69,6 @@ public class SpoonRuleTests
 		Assert.Equal(-1, SpoonRule.InsertIndex(4, false));
 		Assert.Equal(-1, SpoonRule.InsertIndex(5, true));
 	}
-
-	[Fact]
-	public void FightersAreThoseAtThreshold() =>
-		Assert.Equal([0, 2], SpoonRule.Fighters([300, 299, 450]));
 
 	[Theory]
 	[InlineData(0, 1.0)]
@@ -82,13 +100,6 @@ public class SpoonRuleTests
 	[InlineData(4, 8)]
 	[InlineData(0, 2)]
 	public void AppetiteGainScalesWithPlayers(int players, int gain) => Assert.Equal(gain, SpoonRule.AppetiteGain(players));
-
-	[Theory]
-	[InlineData(1, 1, 1200)]
-	[InlineData(1, 2, 600)]
-	[InlineData(2, 2, 1200)]
-	[InlineData(1, 3, 400)]
-	public void BossHp(int f, int p, int expected) => Assert.Equal(expected, SpoonRule.BossHp(f, p));
 
 	[Theory]
 	[InlineData(0, SpoonRule.SpoonMove.SetTable)]
@@ -200,43 +211,6 @@ public class SpoonRuleTests
 		Assert.All(SpoonRule.ExtraRelics, r => Assert.Contains(r.Deque, new[] { "Common", "Uncommon", "Rare" }));
 	}
 
-	[Theory]
-	[InlineData(0, false)]
-	[InlineData(1, false)]
-	[InlineData(2, true)]
-	[InlineData(5, true)]
-	[InlineData(300, true)]
-	public void CanGiftWhileTheGiverHasMoreThanOneMaxHp(int ownerMaxHp, bool expected) =>
-		Assert.Equal(expected, SpoonRule.CanGift(ownerMaxHp));
-
-	[Theory]
-	[InlineData(0, 0)]
-	[InlineData(1, 0)]
-	[InlineData(2, 1)]
-	[InlineData(5, 4)]
-	[InlineData(6, 5)]
-	[InlineData(300, 5)]
-	public void GiftAmountLeavesTheGiverOneMaxHp(int ownerMaxHp, int expected) =>
-		Assert.Equal(expected, SpoonRule.GiftAmount(ownerMaxHp));
-
-	[Theory]
-	[InlineData(2)]
-	[InlineData(3)]
-	[InlineData(6)]
-	[InlineData(300)]
-	public void GiftNeverDropsTheGiverBelowOneMaxHp(int ownerMaxHp) =>
-		Assert.Equal(Math.Max(1, ownerMaxHp - SpoonRule.GiftMaxHp), ownerMaxHp - SpoonRule.GiftAmount(ownerMaxHp));
-
-	[Theory]
-	[InlineData(300, 295, 5)]
-	[InlineData(6, 1, 5)]
-	[InlineData(3, 1, 2)]
-	[InlineData(10, 10, 0)]
-	[InlineData(10, 12, 0)]
-	[InlineData(20, 5, 5)]
-	public void GiftTransfersWhatTheGiverLost(int before, int after, int expected) =>
-		Assert.Equal(expected, SpoonRule.GiftTransferred(before, after));
-
 	[Fact]
 	public void JuiceSlot()
 	{
@@ -244,12 +218,5 @@ public class SpoonRuleTests
 		Assert.Equal(-1, SpoonRule.JuiceSlot(0, false, 5));
 		Assert.Equal(2, SpoonRule.JuiceSlot(3, false, 5));
 		Assert.Equal(1, SpoonRule.JuiceSlot(3, false, -5));
-	}
-
-	[Fact]
-	public void FightersAtFightFallsBackToEveryone()
-	{
-		Assert.Equal([1], SpoonRule.FightersAtFight([120, 300, 299]));
-		Assert.Equal([0, 1], SpoonRule.FightersAtFight([120, 80]));
 	}
 }

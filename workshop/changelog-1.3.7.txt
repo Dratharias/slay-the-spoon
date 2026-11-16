@@ -1,0 +1,5 @@
+1.3.7 — Spoon for the whole team
+
+- No more supporters: every player fights the Spoon. Spoon-Feed is gone.
+- The Spoon act opens on the team's total max HP: 300 solo, 550 for two, 750 for three, 900 for four.
+- New Workshop preview and description.

@@ -13,7 +13,7 @@ public sealed class SpoonCardPool : CardPoolModel
 	public override bool IsColorless => true;
 	protected override CardModel[] GenerateAllCards() =>
 	[
-		ModelDb.Card<SpoonSpoonful>(), ModelDb.Card<SpoonSpoonFeed>(), ModelDb.Card<SpoonTeaspoon>(),
+		ModelDb.Card<SpoonSpoonful>(), ModelDb.Card<SpoonTeaspoon>(),
 		ModelDb.Card<SpoonWoodenSpoon>(), ModelDb.Card<SpoonSkimmer>(), ModelDb.Card<SpoonMelonBaller>(),
 		ModelDb.Card<SpoonStolenSpoonful>(),
 	];

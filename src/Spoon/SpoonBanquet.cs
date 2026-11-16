@@ -18,8 +18,7 @@ internal sealed class SpoonBanquetIntent : SingleAttackIntent
 	public override int GetTotalDamage(IEnumerable<Creature> targets, Creature owner)
 	{
 		var player = LocalContext.GetMe(owner.CombatState);
-		return player != null && (owner.Monster is SpoonMonster spoon && !spoon.IsFighter(player) ||
-			player.Creature.GetPower<SpoonSkimmedPower>() != null) ? 0 : SpoonRule.BanquetDamage;
+		return player?.Creature.GetPower<SpoonSkimmedPower>() != null ? 0 : SpoonRule.BanquetDamage;
 	}
 
 	protected override LocString GetIntentDescription(IEnumerable<Creature> targets, Creature owner)

@@ -1,7 +1,7 @@
 # Spoon (1.3.0) — in-game checklist
 
 Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a quick Spoon fight, the console
-`sts1`-style spawning is not supported: reach the act 3 boss with 300+ max HP (give max HP with Fruit Juice and Feast).
+`sts1`-style spawning is not supported: reach the act 3 boss with the team's max HP at the threshold (300 solo, 550/750/900 for 2/3/4 players) (give max HP with Fruit Juice and Feast).
 
 ## Setup and Spoonful
 
@@ -28,10 +28,10 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 
 ## The Spoon act
 
-- [ ] Act 3 boss dies with a player at 300+ max HP: the Spoon act follows (rest site, merchant halfway, then the boss). Log line "Spoon act inserted".
+- [ ] Act 3 boss dies with the team's summed max HP at 300 / 550 / 750 / 900 (1–4 players): the Spoon act follows (rest site, merchant halfway, then the boss). Log line "Spoon act inserted".
 - [ ] A10: only the second act 3 boss leads to the Spoon; the first one behaves as before.
-- [ ] Nobody at 300 (max HP 299): no Spoon, the run ends as vanilla (victory, or The Ending).
-- [ ] Co-op: one 300+ player is enough; every client enters the Spoon act.
+- [ ] Team total one short (299 solo, 549 for two): no Spoon, the run ends as vanilla (victory, or The Ending).
+- [ ] Co-op: the sum counts, however it is split (e.g. 500 + 50 for two); every client enters the Spoon act.
 - [ ] Act 4 run with all three keys: act 3, then the Spoon (act 4), then The Ending (act 5).
 - [ ] The Spoon is the final boss without The Ending: its death wins the run (Architect, then victory screen).
 - [ ] The Spoon with The Ending behind it: ordinary boss rewards, then The Ending starts.
@@ -47,10 +47,10 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 
 ## The fight
 
-- [ ] Fighters are the players with 300+ max HP when the fight starts; the others are supporters.
-- [ ] Spoon HP is about 2000 per fighter (counts fighters only); Monster HP / Monster Damage modifiers apply.
+- [ ] Every player fights (1.3.7: no more supporters). Spoon HP is 1200 solo, 1200 × players × 1.3 in co-op (vanilla scaling, act 3 boss factor);
+      Monster HP / Monster Damage modifiers apply. Log: `spoon: fight starts, N player(s), HP ...`.
 - [ ] The cycle (2026-11-16 cutlery spec) repeats every 4 turns: Sets the Table, Mouthful, Banquet, Ladle Smash.
-- [ ] Sets the Table: Frail 2 on every living fighter; each living player (supporters too) gets their kit shuffled into
+- [ ] Sets the Table: Frail 2 on every living player; each living player gets their kit shuffled into
       the draw pile with the vanilla card preview (log: `spoon: set the table for a N-card deck`). Intents: debuff + status.
 - [ ] Mouthful: 35 base damage; the Spoon gains Block equal to the HP its hit took past Block (none when fully blocked).
       Intents: attack + defend. No max HP eaten.
@@ -64,26 +64,18 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
       growth no longer gives Strength, no more 200+ hits); it goes negative when Melon Baller takes it below its start (log: `spoon: max HP ... Strength from max HP S`). A player's Strength debuff on the
       Spoon (Disarm, Malaise...) stays applied after the Spoon's own Strength changes.
 - [ ] No max HP scaling: the Mouthful intent reads 35 + Strength (times Appetite) whatever the players' max HP.
-- [ ] Appetite: gained only after Sets the Table, 2 per living player (supporters included: 2 solo, 8 at 4 players), +5 %
+- [ ] Appetite: gained only after Sets the Table, 2 per living player (2 solo, 8 at 4 players), +5 %
       damage per stack in the intent; it goes negative (−5 % per stack, never below 0 damage), for the Spoon and the
-      players. A Spoonful played on the Spoon removes 1 (2 upgraded) even at 0 (→ −1); a supporter's Spoonful removes it too while dealing 0. EN/FR tooltip reads well.
+      players. A Spoonful played on the Spoon removes 1 (2 upgraded) even at 0 (→ −1). EN/FR tooltip reads well.
 - [ ] Animations (`SpoonMotion`, tweens on the static sprite, pivot at the handle tip): slow idle sway; Mouthful leans
       back and swoops at the players, the hit lands at the bottom, then it rises back up; Ladle Smash rises and slams
       with a squash; a short recoil when hit; it swells a little as it grows (at most 1.2×); on death it tips over and
       fades. Sets the Table hops and taps three times, tilting left and right; Banquet leans back and swells in three
       gulps, then shudders. No error line `spoon: animation failed` in the log.
-- [ ] Intents show the scaled number per player; a supporter sees 0, a fighter sees the scaled hit.
-- [ ] The Spoon never targets a supporter and a supporter takes no damage from it (no on-hit reactions either).
-- [ ] Supporter damage to the Spoon is nullified: attacks, Poison, Doom, Demise, Constrict, Strangle, Disintegration,
-      Magic Bomb, Corpse Explosion, Mark, Haunt, Judgement, orbs, summons (Osty), thorns, Combust, Fire Breathing,
-      A Thousand Cuts, Panache.
-- [ ] Supporter debuffs still apply (Uppercut's Weak and Vulnerable, Strength loss).
-- [ ] A fighter's damage works normally, including Poison and Doom.
-- [ ] Pressure Points by a supporter on a Spoon a fighter marked: the Spoon takes no damage (fixed in the review wave).
-- [ ] Max HP eaten and given stay lost after a win; nothing is returned.
-- [ ] Save and reload during the Spoon fight (solo and co-op): fighters, supporters, Spoon-Feed and the boss HP come back.
-- [ ] Defeat: every fighter dead while supporters live ends the run (game-over screen), also in co-op with one fighter.
-- [ ] Solo at 300+: the player is the fighter and there are no supporters; Spoon-Feed is not given.
+- [ ] Every player's damage works normally, including Poison, Doom, Mark (Pressure Points) and Judgement.
+- [ ] Max HP eaten stays lost after a win; nothing is returned.
+- [ ] Save and reload during the Spoon fight (solo and co-op): the boss HP and the Stolen Spoonfuls come back.
+- [ ] Defeat: every player dead ends the run (vanilla game-over screen).
 
 ## Cutlery (combat-only, Exhaust)
 
@@ -105,22 +97,8 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
       Retain, no Exhaust, 10 damage (12 upgraded), steals 1 Appetite (2 upgraded) that the player keeps. After a move that
       pierced a player's Block the Spoon takes 1 from that player, even below 0. After the fight the deck still holds
       the Spoonful.
-- [ ] A supporter's cutlery works too (they are targetable on the Spoon even though the supporter deals it no damage).
 - [ ] Portraits (Pixabay placeholders) and EN/FR titles and descriptions read well, Banquet named in gold.
 - [ ] Co-op: every client sees the same kits, the same Sated/Skimmed state and the same Spoon max HP.
-
-## Spoon-Feed
-
-- [ ] Each supporter gets one Spoon-Feed at combat start (cost 1, Skill, Retain, not exhausted); fighters get none.
-- [ ] Targeting: the arrow can only land on a living fighter; with the arrow on a supporter the play is refused (known UX gap).
-- [ ] Play: the supporter loses 5 max HP, the fighter gains 5; the team's total, and the damage, stay the same.
-- [ ] A supporter with 2 to 5 max HP: Spoon-Feed gives all but 1 max HP (e.g. 3 max HP gives 2); the supporter stays
-  alive at 1 max HP and 1 HP, and the fighter gains exactly what the supporter lost.
-- [ ] A supporter with 1 max HP: Spoon-Feed is unplayable (refused like other unplayable cards).
-- [ ] A supporter with 6+ max HP: the supporter loses 5 and the fighter gains 5.
-- [ ] Text (EN/FR) says "up to 5" and "keeping at least 1".
-- [ ] Not playable when no fighter is alive. The card cannot be upgraded and is not added to the deck after the fight.
-- [ ] Spoon-Feed portrait (placeholder) shows.
 
 ## Art
 
@@ -128,8 +106,8 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Hitbox: clicking and targeting the Spoon works; intents sit above it and are not clipped (top at -700, intents at -760).
 - [ ] Boss map icon and its outline show on the map and the fight start screen.
 - [ ] Combat background shows in the Spoon fight; the rest site uses the Ending's campfire background.
-- [ ] Card portraits for Spoonful and Spoon-Feed show in hand, deck view and card library without a missing-image mark.
-- [ ] Text: every name (Spoonful / Cuillerée, Spoon-Feed / Becquée, The Spoon / La Cuillère, Bouchée, Coup de louche)
+- [ ] Card portraits for Spoonful and the cutlery show in hand, deck view and card library without a missing-image mark.
+- [ ] Text: every name (Spoonful / Cuillerée, The Spoon / La Cuillère, Bouchée, Coup de louche)
       reads right in EN and FR; the owner proofreads.
 
 ## Main-menu test start ("Test: The Spoon")
@@ -179,7 +157,7 @@ Automated validation: build without warnings; 742 xUnit and 91 pytest tests pass
       8 current HP before its separate 10 max HP loss (which can additionally clamp current HP).
 - [ ] Skimmer played before an earlier move persists until Banquet, prevents both losses, then expires.
       Banquet still applies Vulnerable and heals. Melon Baller costs 1 energy.
-- [ ] Banquet intent and tooltip show 8 unprotected and 0 protected, without attack scaling; supporters take no loss.
+- [ ] Banquet intent and tooltip show 8 unprotected and 0 protected, without attack scaling.
 - [ ] Other attacks retain normal damage modifiers, prevention and pet redirection. Test co-op and save/reload.
 
 ## 1.3.4 short-map boss visibility
@@ -203,9 +181,17 @@ an inlined vanilla getter that looked up nonexistent mod IDs in the vanilla atla
 ## 1.3.6 publication
 
 Owner approved the balance after play-testing. Attack hits now steal one Appetite even when fully blocked;
-only actual fighters are eligible, once per player per move. A Banquet canceled by Skimmed never hits.
+once per player per move. A Banquet canceled by Skimmed never hits.
 The test menu/launcher/deck and install-detection helper were removed; legacy run flags and progress guards remain.
 
 - [ ] Fully block Mouthful/Ladle: lose 1 Appetite, boss gains 1; max HP growth/theft still require HP damage.
-- [ ] Sets the Table steals none; a Skimmed Banquet steals none from its protected player; supporters are excluded.
+- [ ] Sets the Table steals none; a Skimmed Banquet steals none from its protected player.
 - [ ] Main menu has no test entry, including a local install. Existing test saves can still reload.
+
+## 1.3.7 team threshold, no supporters (owner, 2026-11-16)
+
+- [ ] Solo: 300 max HP opens the Spoon act, 299 does not.
+- [ ] Two players: 550 summed opens it (e.g. 300 + 250), 549 does not. Three: 750. Four: 900.
+- [ ] Every player is targeted by the Spoon's attacks, Frail, Banquet and Vulnerable; nobody gets Spoon-Feed (removed).
+- [ ] Co-op Spoon HP is 1200 × players × 1.3 (vanilla scaling); the intent numbers match each player's own Appetite/Strength state.
+- [ ] An old save in the Spoon fight with a pre-1.3.7 layout still loads (Spoon-Feed was never a deck card).

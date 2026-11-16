@@ -127,3 +127,16 @@ Animations are out of scope (static sprite, as the Ending monsters started).
 - How the 12 relics enter the draws (pool and rarity for the Event and Ancient ones; Shop ones already sell at the
   merchant) is the builder's call, without moving vanilla RNG.
 - Compatible with every other mod modifier (King Midas included: Spoonful is a starting card, not a reward).
+
+## Amendment 1.3.7: team threshold, no supporters (owner, 2026-11-16)
+
+Supersedes rules 4–6 and every supporter line above. Everyone plays normally: there are no fighters or supporters, and
+Spoon-Feed is removed. The Spoon act is inserted when the team's **summed** max HP reaches 300 (solo), 550 (2 players),
+750 (3) or 900 (4) (`SpoonRule.TeamThreshold`). The Spoon has 1200 HP before the vanilla multiplayer scaling, which
+multiplies it by the player count and the act 3 boss factor; its attacks, Frail, Banquet and Vulnerable reach every
+living player. The fight is lost when every player is dead (vanilla).
+
+Why these numbers (owner's, builder-checked): only fatal Spoonfuls split between players in co-op (one kill, one
+Spoonful trigger); rest sites, relics, Fruit Juice and merchants stay per player. A solo run gets roughly 50 max HP from
+Spoonful kills, so each extra player costs everyone about 10–15 of it. The per-player average falls 300 → 275 → 250 →
+225, slightly more than that loss: a little generous, which the owner prefers for friends.

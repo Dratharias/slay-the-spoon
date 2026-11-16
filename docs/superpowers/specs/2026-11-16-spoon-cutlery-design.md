@@ -96,3 +96,7 @@ modifiers. Skimmed alone cancels this loss and the existing 10 max HP loss. Skim
 Banquet and is consumed then. Banquet still applies Vulnerable and heals when countered. Its intent reports
 8 (0 for a protected local player or a supporter). Damage/death events still use the normal command path.
 The Melon Baller costs 1 energy instead of 2, with its 12/15 max HP transfer unchanged.
+
+## 1.3.7 (owner, 2026-11-16)
+
+Supporters are gone (see `2026-11-14-spoon-design.md`, amendment 1.3.7): "fighter" above means every living player.

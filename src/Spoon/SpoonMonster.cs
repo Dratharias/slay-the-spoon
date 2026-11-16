@@ -18,9 +18,9 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// The Spoon (docs/superpowers/specs/2026-11-14-spoon-design.md §5): the Spoon act's only monster. It fights the
-/// players who reached 300 max HP (the fighters); the others support them with Spoon-Feed and cannot hurt it or be
-/// hurt by it. It plays a 4-turn cycle (docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md): sets the table (Frail,
+/// The Spoon (docs/superpowers/specs/2026-11-14-spoon-design.md §5): the Spoon act's only monster. Every player fights
+/// it (owner, 2026-11-16: no more supporters; the team reaches the act together, <see cref="SpoonRule.TeamThreshold"/>).
+/// It plays a 4-turn cycle (docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md): sets the table (Frail,
 /// and the cutlery kit into every player's draw pile), Mouthful (Block from the HP it took), Banquet (Vulnerable, eats max
 /// HP, heals) and Ladle Smash. Its hits grow with Appetite. It grows by the HP its hits take past Block (max HP,
 /// without healing), and its Strength follows its max HP against the start (<see cref="SpoonRule.StrengthFor"/>).
@@ -39,25 +39,13 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	public override Rect2 Hitbox => new(-100, -467, 200, 473);
 
 	/// <summary>
-	/// <see cref="SpoonRule.BossHp"/> for the fighters of the run. The creature reads this before the combat state exists,
-	/// so it comes from the run's players (their max HP cannot change between here and <see cref="AfterAddedToRoom"/>).
+	/// <see cref="SpoonRule.HpPerPlayer"/>; in co-op the vanilla scaling multiplies it by the player count and the act 3 boss factor.
 	/// </summary>
-	public override int MinInitialHp
-	{
-		get
-		{
-			if (Act4Routing.CurrentRun() is not { } run || run.Players.Count == 0) return SpoonRule.HpPerFighter;
-			List<int> maxHps = run.Players.Select(p => p.Creature.MaxHp).ToList();
-			return SpoonRule.BossHp(SpoonRule.FightersAtFight(maxHps).Count, maxHps.Count);
-		}
-	}
+	public override int MinInitialHp => SpoonRule.HpPerPlayer;
 
 	public override int MaxInitialHp => MinInitialHp;
 
-	/// <summary>Not saved: StS2 restarts the combat when a save loads, and the fighters are chosen again then.</summary>
-	private HashSet<Player>? _fighters;
-
-	/// <summary>Max HP grown this fight, for the sprite's size. Not saved, like the fighters.</summary>
+	/// <summary>Max HP grown this fight, for the sprite's size. Not saved: StS2 restarts the combat when a save loads.</summary>
 	private int _grown;
 
 	/// <summary>Max HP stolen by Ladle Smash, also used for the sprite's size.</summary>
@@ -103,25 +91,6 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		}
 	}
 
-	/// <summary>Set while the supporters are killed after the last fighter, so their own deaths don't recurse.</summary>
-	private bool _losing;
-
-	private static readonly Func<Creature, bool, int, Task> KillWithoutWinCheck =
-		AccessTools.MethodDelegate<Func<Creature, bool, int, Task>>(
-			AccessTools.Method(typeof(CreatureCmd), "KillWithoutCheckingWinCondition"));
-
-	internal bool IsFighter(Player player) => FighterSet().Contains(player);
-
-	private HashSet<Player> FighterSet()
-	{
-		if (_fighters != null) return _fighters;
-		IReadOnlyList<Player> players = CombatState.Players;
-		IReadOnlyList<int> indexes = SpoonRule.FightersAtFight(players.Select(p => p.Creature.MaxHp).ToList());
-		_fighters = indexes.Select(i => players[i]).ToHashSet();
-		SpoonLog.Info($"spoon: fight starts, fighters {string.Join(", ", indexes)} of {players.Count} players, HP {Creature.MaxHp}");
-		return _fighters;
-	}
-
 	protected override MonsterMoveStateMachine GenerateMoveStateMachine()
 	{
 		var moves = new Dictionary<SpoonRule.SpoonMove, MoveState>
@@ -137,24 +106,18 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	public override async Task AfterAddedToRoom()
 	{
 		await base.AfterAddedToRoom();
-		_ = FighterSet();
+		SpoonLog.Info($"spoon: fight starts, {CombatState.Players.Count} player(s), HP {Creature.MaxHp}");
 	}
 
 	/// <summary>
-	/// One Spoon-Feed in each supporter's hand. Here rather than in <see cref="AfterAddedToRoom"/>: generated cards are
-	/// only added once the combat is in progress. Combat-only: a generated card never reaches the deck.
+	/// Turns the Spoonfuls into Stolen Spoonfuls. Here rather than in <see cref="AfterAddedToRoom"/>: the combat piles only
+	/// exist once the combat is in progress.
 	/// </summary>
 	public override async Task BeforeCombatStart()
 	{
 		await base.BeforeCombatStart();
 		_startMaxHp = Creature.MaxHp;
 		Animate(m => m.Idle());
-		foreach (Player player in CombatState.Players)
-		{
-			if (IsFighter(player) || player.Creature.IsDead) continue;
-			CardModel card = CombatState.CreateCard<SpoonSpoonFeed>(player);
-			await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);
-		}
 		await TransformSpoonfuls();
 	}
 
@@ -178,11 +141,11 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		}
 	}
 
-	private IEnumerable<Creature> LivingFighters() =>
-		CombatState.Players.Where(p => IsFighter(p) && p.Creature.IsAlive).Select(p => p.Creature).ToList();
+	private IEnumerable<Creature> LivingPlayers() =>
+		CombatState.Players.Where(p => p.Creature.IsAlive).Select(p => p.Creature).ToList();
 
 	/// <summary>
-	/// Sets the table: Frail on the fighters, and every living player's kit shuffled into their draw pile: one of each of
+	/// Sets the table: Frail on every living player, and every living player's kit shuffled into their draw pile: one of each of
 	/// the four spoons, plus <see cref="SpoonRule.ExtraSpoons"/> random ones for a 25+ card deck. The extras come from an
 	/// Rng named after the run seed, the cycle and the player's slot, so every co-op client draws the same.
 	/// </summary>
@@ -190,7 +153,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	{
 		await AnimateAsync(m => m.SetTableAsync());
 		var context = new ThrowingPlayerChoiceContext();
-		await PowerCmd.Apply<FrailPower>(context, LivingFighters(), SpoonRule.FrailAmount, Creature, null);
+		await PowerCmd.Apply<FrailPower>(context, LivingPlayers(), SpoonRule.FrailAmount, Creature, null);
 		_tablesSet++;
 		IReadOnlyList<Player> players = CombatState.Players.ToList();
 		for (int slot = 0; slot < players.Count; slot++)
@@ -242,34 +205,34 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	{
 		await AnimateAsync(m => m.BanquetAsync());
 		var context = new ThrowingPlayerChoiceContext();
-		List<Creature> fighters = LivingFighters().ToList();
+		List<Creature> eaters = LivingPlayers().ToList();
 		int eaten = 0;
 		int unblocked = 0;
-		foreach (Creature fighter in fighters)
+		foreach (Creature target in eaters)
 		{
-			if (!fighter.IsAlive) continue;
-			if (fighter.GetPower<SpoonSkimmedPower>() is { } skimmed)
+			if (!target.IsAlive) continue;
+			if (target.GetPower<SpoonSkimmedPower>() is { } skimmed)
 			{
 				await PowerCmd.Remove(skimmed);
 				continue;
 			}
-			BanquetTarget = fighter;
+			BanquetTarget = target;
 			try
 			{
-				var results = await CreatureCmd.Damage(context, fighter, SpoonRule.BanquetDamage,
+				var results = await CreatureCmd.Damage(context, target, SpoonRule.BanquetDamage,
 					ValueProp.Unblockable | ValueProp.Unpowered, Creature, null);
 				int lost = results.Sum(r => r.UnblockedDamage);
 				unblocked += lost;
-				_pierced[fighter] = lost;
+				_pierced[target] = lost;
 			}
 			finally { BanquetTarget = null; }
-			if (!fighter.IsAlive || !Creature.IsAlive) continue;
-			int before = fighter.MaxHp;
-			await CreatureCmd.LoseMaxHp(context, fighter, SpoonRule.BanquetMaxHp, false);
-			eaten += Math.Max(0, before - fighter.MaxHp);
+			if (!target.IsAlive || !Creature.IsAlive) continue;
+			int before = target.MaxHp;
+			await CreatureCmd.LoseMaxHp(context, target, SpoonRule.BanquetMaxHp, false);
+			eaten += Math.Max(0, before - target.MaxHp);
 		}
 		await Grow(unblocked);
-		await PowerCmd.Apply<VulnerablePower>(context, fighters.Where(f => f.IsAlive).ToList(),
+		await PowerCmd.Apply<VulnerablePower>(context, eaters.Where(f => f.IsAlive).ToList(),
 			SpoonRule.VulnerableAmount, Creature, null);
 		int heal = SpoonRule.BanquetHeal(CombatState.Players.Count);
 		if (Creature.IsAlive) await CreatureCmd.Heal(Creature, heal);
@@ -367,7 +330,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		int gain = tableSet ? SpoonRule.AppetiteGain(CombatState.Players.Count(p => p.Creature.IsAlive)) : 0;
 		foreach (Player player in CombatState.Players.ToList())
 		{
-			if (!player.Creature.IsAlive || !IsFighter(player)) continue;
+			if (!player.Creature.IsAlive) continue;
 			int taken = SpoonRule.StolenBack(_pierced.ContainsKey(player.Creature));
 			if (taken <= 0) continue;
 			await PowerCmd.Apply<SpoonAppetitePower>(context, player.Creature, -taken, Creature, null);
@@ -392,19 +355,6 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		await SyncStrength();
 	}
 
-	/// <summary>
-	/// It never damages a supporter; a supporter's damage to it, their summons' included, is nothing. Its own hits are
-	/// base + Strength, times Appetite (<see cref="SpoonAppetitePower"/>); the team's max HP no longer scales them
-	/// (owner, 2026-11-16).
-	/// </summary>
-	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
-	{
-		if (target == null || CombatState == null) return 1m;
-		if (dealer == Creature && SpoonFight.OwnerOf(target) is { } victim && !IsFighter(victim)) return 0m;
-		if (target == Creature && dealer != null && SpoonFight.OwnerOf(dealer) is { } attacker && !IsFighter(attacker)) return 0m;
-		return 1m;
-	}
-
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result,
 		ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
@@ -412,25 +362,9 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		if (target == Creature && result.UnblockedDamage > 0 && Creature.IsAlive) Animate(m => m.Recoil());
 	}
 
-	/// <summary>
-	/// The fight is lost once every fighter is dead, even with supporters alive: they are killed (forced) here, inside the
-	/// last fighter's death, so the vanilla kill that is running ends the combat and shows the game over once. The public
-	/// Kill would run its own game over check as well.
-	/// </summary>
 	public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
 	{
 		await base.AfterDeath(choiceContext, creature, wasRemovalPrevented, deathAnimLength);
 		if (creature == Creature && !wasRemovalPrevented) Animate(m => m.Topple());
-		if (_losing || wasRemovalPrevented || !creature.IsPlayer || CombatState == null) return;
-		IReadOnlyList<Player> players = CombatState.Players;
-		if (players.Any(p => IsFighter(p) && p.Creature.IsAlive)) return;
-		List<Creature> supporters = players.Where(p => !IsFighter(p) && p.Creature.IsAlive).Select(p => p.Creature).ToList();
-		if (supporters.Count == 0) return;
-		_losing = true;
-		SpoonLog.Info($"spoon: every fighter is dead, the {supporters.Count} supporter(s) fall with them");
-		foreach (Creature supporter in supporters)
-		{
-			await KillWithoutWinCheck(supporter, true, 0);
-		}
 	}
 }

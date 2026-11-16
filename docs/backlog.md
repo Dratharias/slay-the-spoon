@@ -410,7 +410,7 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     2. The Spoon map boss icon: PNG 512x512 plus the same shape as an outline (`spoon_boss.png`,
        `spoon_boss_outline.png`). Open.
     3. Spoon act combat background: JPG 1920x1136 (`images/spoon/combat_bg.jpg`; optional). Open.
-    4. Spoon-Feed card portrait: PNG 250x190 (`images/cards/spoon/spoon_spoon_feed.png`; optional). Open.
+    4. ~~Spoon-Feed card portrait~~: the card is gone (1.3.7).
     5. Spoonful card portrait: same (`images/cards/spoon/spoon_spoonful.png`; optional). Open.
     Animations: light tweens on the static sprite (`src/Spoon/SpoonMotion.cs`, owner request 2026-11-16: rotations,
     swoop and rise); a drawn replacement sprite keeps them if its ground point stays at the handle tip.
@@ -443,6 +443,9 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     while the supporter has more than 1 max HP and gives min(5, max HP - 1) (`SpoonRule.GiftAmount`); the supporter
     never drops below 1 max HP, so vanilla `LoseMaxHp`'s damage step (unblockable, unpowered) leaves at least 1 HP, and
     the fighter gains exactly what was lost.
+    Owner decision 2026-11-16 (1.3.7, replaces fighters, supporters and Spoon-Feed): everyone fights; the act needs the
+    team's summed max HP at 300 / 550 / 750 / 900 for 1–4 players (`SpoonRule.TeamThreshold`). Spec amendment in
+    `2026-11-14-spoon-design.md`.
   - **Owner design call (open, ask the owner):** in an Act 4 run missing only the Ruby key, the Spoon act's rest site
     offers Ruby Recall, a 4th chance at the Ruby key, which then appends The Ending after the Spoon. Keep it, or hide
     Ruby Recall at the Spoon rest site?
@@ -465,20 +468,20 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
       Superseded by the owner decision of 2026-11-16 (decision log above).
     - ~~Final review: the Fruit Juice merchant entry drew `PlayerRng.Shops` once more (`CalcCost`).~~ Done in the 1.3.0
       review fix wave: `SpoonJuiceCostPatch` prices the Juice from the mod's `SlaySpoon.Spoon.Juice_*` stream.
-    - T5: skipping `HauntPower.AfterCardPlayed` for a supporter also skips its `Rng.CombatTargets` draw (deterministic,
-      but the vanilla stream use differs).
+    - ~~T5: skipping `HauntPower.AfterCardPlayed` for a supporter also skips its `Rng.CombatTargets` draw (deterministic,
+      but the vanilla stream use differs).~~ Gone with the supporters (1.3.7).
     - T5: the Spoon's move-roll stream is named `SlaySpoon.Ending.SPOON_MONSTER` (naming only).
-    - T5: the Spoon-Feed arrow can rest on a supporter or a summon; the play is refused silently (UX).
-    - T5: `SpoonMonster`'s fighter and damage hooks are not gated on `SpoonSpoon.IsActive` (matters for a
+    - ~~T5: the Spoon-Feed arrow can rest on a supporter or a summon; the play is refused silently (UX).~~ Gone with the supporters (1.3.7).
+    - T5: `SpoonMonster`'s hooks are not gated on `SpoonSpoon.IsActive` (matters for a
       console-spawned Spoon only).
-    - T5: the `GetPossibleTargets` postfix relies on the private method not being inlined; accepted, because the
-      multiplicative hook zeroes a stray hit anyway.
+    - ~~T5: the `GetPossibleTargets` postfix relies on the private method not being inlined; accepted, because the
+      multiplicative hook zeroes a stray hit anyway.~~ Gone with the supporters (1.3.7).
     - Final review: `SpoonMonster`'s hooks gate on the monster, not on `SpoonSpoon.IsActive` (see T5 above; console
       spawn only).
     - Final review: fighter pets (Osty) keep vanilla damage; the team-max-HP formula scales damage to players only.
     - Final review: `SpoonRule.DamageFactor` and the Monster Damage % modifier each truncate, so a hit can land ±1 HP
       off the exact product when both apply.
-    - Final review: the Feast and Spoon-Feed texts hardcode 5 instead of reading `SpoonRule.FeastMaxHp` / `GiftMaxHp`.
+    - Final review: the Feast text hardcodes 5 instead of reading `SpoonRule.FeastMaxHp` (Spoon-Feed is gone, 1.3.7).
     - Final review: the Spoon act has no entry heal like The Ending's; its row-0 rest site covers it.
     - 1.3.2: Stolen Spoonful's portrait is a copy of Spoonful's (drawing list); its Appetite texts hardcode 5 %, 2, 1
       and 3 like the other Spoon texts.
