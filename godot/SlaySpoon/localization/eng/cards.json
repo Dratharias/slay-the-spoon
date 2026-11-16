@@ -491,7 +491,7 @@
 	"SPOON_TEASPOON.title": "Teaspoon",
 	"SPOON_TEASPOON.description": "Remove {Appetite:diff()} [gold]Appetite[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
 	"SPOON_WOODEN_SPOON.title": "Wooden Spoon",
-	"SPOON_WOODEN_SPOON.description": "Deal damage equal to [blue]10%[/blue] of your Max HP.\nCancel the Spoon's next {Sated:diff()} [gold]Appetite[/gold] {Sated:plural:gain|gains}.",
+	"SPOON_WOODEN_SPOON.description": "Deal [blue]10%[/blue] of your Max HP as damage.\nThe Spoon's [gold]Appetite[/gold] does nothing for {Sated:diff()} {Sated:plural:turn|turns}.",
 	"SPOON_SKIMMER.title": "Skimmer",
 	"SPOON_SKIMMER.description": "Gain {Block:diff()} [gold]Block[/gold].\nThis turn, [gold]Banquet[/gold] eats none of your Max HP.",
 	"SPOON_MELON_BALLER.title": "Melon Baller",

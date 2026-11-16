@@ -145,8 +145,8 @@
 	"SPOON_APPETITE_POWER.smartDescription": "Inflige [blue]5 %[/blue] de dégâts en plus par cumul ([blue]{Amount}[/blue]). La Cuillère en gagne [blue]2[/blue] après chaque action et en reprend [blue]1[/blue] à chaque joueur qui en a. Chaque [gold]Cuillerée[/gold] jouée sur elle en retire [blue]3[/blue].",
 	"SPOON_APPETITE_POWER.title": "Appétit",
 	"SPOON_SATED_POWER.title": "Rassasiée",
-	"SPOON_SATED_POWER.description": "Chaque cumul annule un gain d'[gold]Appétit[/gold].",
-	"SPOON_SATED_POWER.smartDescription": "Ses [blue]{Amount}[/blue] prochains gains d'[gold]Appétit[/gold] sont annulés.",
+	"SPOON_SATED_POWER.description": "Son [gold]Appétit[/gold] est sans effet : elle frappe avec ses dégâts normaux. Dure un tour par cumul.",
+	"SPOON_SATED_POWER.smartDescription": "Son [gold]Appétit[/gold] est sans effet {Amount:plural:à son prochain tour|pendant ses [blue]{}[/blue] prochains tours} : elle frappe avec ses dégâts normaux.",
 	"SPOON_SKIMMED_POWER.title": "Écumé",
 	"SPOON_SKIMMED_POWER.description": "Ce tour-ci, le [gold]Banquet[/gold] ne mange aucun de vos PV max.",
 	"SPOON_SKIMMED_POWER.smartDescription": "Ce tour-ci, le [gold]Banquet[/gold] ne mange aucun de vos PV max."

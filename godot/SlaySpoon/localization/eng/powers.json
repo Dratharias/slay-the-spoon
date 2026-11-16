@@ -145,8 +145,8 @@
 	"SPOON_APPETITE_POWER.smartDescription": "Deals [blue]5%[/blue] more damage per stack ([blue]{Amount}[/blue]). The Spoon gains [blue]2[/blue] after each move and takes [blue]1[/blue] back from each player who has some. Each [gold]Spoonful[/gold] played on it removes [blue]3[/blue].",
 	"SPOON_APPETITE_POWER.title": "Appetite",
 	"SPOON_SATED_POWER.title": "Sated",
-	"SPOON_SATED_POWER.description": "Each stack cancels one [gold]Appetite[/gold] gain.",
-	"SPOON_SATED_POWER.smartDescription": "Its next [blue]{Amount}[/blue] [gold]Appetite[/gold] gains do nothing.",
+	"SPOON_SATED_POWER.description": "Its [gold]Appetite[/gold] does nothing: it hits for its normal damage. Lasts one turn per stack.",
+	"SPOON_SATED_POWER.smartDescription": "Its [gold]Appetite[/gold] does nothing {Amount:plural:on its next turn|for its next [blue]{}[/blue] turns}: it hits for its normal damage.",
 	"SPOON_SKIMMED_POWER.title": "Skimmed",
 	"SPOON_SKIMMED_POWER.description": "This turn, [gold]Banquet[/gold] eats none of your Max HP.",
 	"SPOON_SKIMMED_POWER.smartDescription": "This turn, [gold]Banquet[/gold] eats none of your Max HP."

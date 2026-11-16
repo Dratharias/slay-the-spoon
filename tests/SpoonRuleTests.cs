@@ -41,6 +41,12 @@ public class SpoonRuleTests
 		Assert.Equal((decimal)expected, SpoonRule.AppetiteMultiplier(stacks));
 
 	[Theory]
+	[InlineData(0)]
+	[InlineData(4)]
+	[InlineData(12)]
+	public void SatedSpoonHitsAtBase(int stacks) => Assert.Equal(1m, SpoonRule.AppetiteMultiplier(stacks, sated: true));
+
+	[Theory]
 	[InlineData(0, 0)]
 	[InlineData(2, 2)]
 	[InlineData(3, 3)]

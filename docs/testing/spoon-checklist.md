@@ -90,8 +90,9 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Every cycle adds a new kit: unplayed cutlery piles up in the draw/discard piles. Nothing reaches the deck after
       the fight; the cards never appear in rewards, the merchant or random generation.
 - [ ] Teaspoon (0, targets the Spoon): removes 2 Appetite (3 upgraded), draws 1. With less Appetite, removes what is there.
-- [ ] Wooden Spoon (1, attack, targets the Spoon): deals 10 % of the player's max HP (35 at 350), then Sated 1 (2 upgraded): the next Appetite gain is skipped per stack
-      (log: `spoon: Sated, no Appetite this move`); Sated shows with its tooltip (EN/FR).
+- [ ] Wooden Spoon (1, attack, targets the Spoon): deals 10 % of the player's max HP (35 at 350), then Sated 1 (2 upgraded): the Spoon's
+      Appetite adds no damage on its next turn (2 upgraded), the intent shows its normal damage, the stacks stay and it
+      still gains Appetite after the move (log: `spoon: Sated turn spent`); Sated shows with its tooltip (EN/FR).
 - [ ] Skimmer (1, self): 6 Block (9 upgraded) and Skimmed: the next Banquet eats none of this player's max HP; Skimmed
       ends after the Spoon's next move.
 - [ ] Melon Baller (2, targets the Spoon): takes 12 max HP (15 upgraded) from the Spoon, never below 1, and the player

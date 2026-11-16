@@ -25,7 +25,7 @@ public sealed class SpoonAppetitePower : PowerModel, IBorrowedIcon
 	public Type IconSource => typeof(RavenousPower);
 
 	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource) =>
-		dealer == Owner ? SpoonRule.AppetiteMultiplier(Amount) : 1m;
+		dealer == Owner ? SpoonRule.AppetiteMultiplier(Amount, Owner.GetPower<SpoonSatedPower>() is { Amount: > 0 }) : 1m;
 
 	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{

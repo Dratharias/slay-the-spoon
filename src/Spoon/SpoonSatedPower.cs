@@ -6,8 +6,9 @@ using SlaySpoon.Cards.Sts1.Powers;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// Sated (Wooden Spoon, cutlery spec): on the Spoon, each stack cancels one of its Appetite gains. SpoonMonster reads and
-/// spends it after each move.
+/// Sated (Wooden Spoon, cutlery spec): while the Spoon holds it, its Appetite adds no damage, so its next turn hits at
+/// base (owner, 2026-11-16); the stacks are kept. Each stack lasts one of its turns: SpoonMonster spends one after each
+/// move.
 /// </summary>
 public sealed class SpoonSatedPower : PowerModel, IBorrowedIcon
 {

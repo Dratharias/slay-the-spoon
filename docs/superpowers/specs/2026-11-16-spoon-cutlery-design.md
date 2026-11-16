@@ -51,7 +51,7 @@ Spoonful. Each time the Spoon gains Appetite it takes 1 back from every player h
 | Card | Cost | Effect |
 |---|---|---|
 | Teaspoon (Cuillère à café) | 0 | Remove 2 Appetite. Draw 1. |
-| Wooden Spoon (Cuillère en bois) | 1 | 1.3.2: an attack dealing 10 % of your max HP; prevents the Spoon's next Appetite gain. |
+| Wooden Spoon (Cuillère en bois) | 1 | 1.3.2: an attack dealing 10 % of your max HP; the Spoon's Appetite does nothing on its next turn (normal damage; stacks kept, gain still happens). |
 | Skimmer (Écumoire) | 1 | Gain 6 Block (*builder call*). This turn, Feast eats none of your max HP. |
 | Melon Baller (Cuillère parisienne) | 2 | Take 12 max HP from the Spoon (fixed: no damage, no Strength); you gain them. |
 | Stolen Spoonful (Cuillerée volée) | 1 | 1.3.2: an attack, 10 damage (12 upgraded); steal up to 3 Appetite from the Spoon. |

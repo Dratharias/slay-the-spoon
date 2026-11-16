@@ -255,7 +255,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	private static int Unblocked(AttackCommand attack) =>
 		attack.Results.SelectMany(hit => hit).Where(r => r.Receiver.IsPlayer).Sum(r => r.UnblockedDamage);
 
-	/// <summary>After every move: Appetite (unless Sated), then the players' Skimmed ends.</summary>
+	/// <summary>After every move: one Sated turn is spent, Appetite is gained, then the players' Skimmed ends.</summary>
 	private async Task AfterMove()
 	{
 		await GainAppetite();
@@ -278,8 +278,8 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	}
 
 	/// <summary>
-	/// +<see cref="SpoonRule.AppetitePerMove"/> after each move, so its first hit is at base; a Sated stack cancels one
-	/// gain. Each gain also takes <see cref="SpoonRule.StolenBack"/> Appetite back from every player holding some.
+	/// +<see cref="SpoonRule.AppetitePerMove"/> after each move, so its first hit is at base. A Sated stack (its Appetite
+	/// did nothing this turn) is spent first; the gain still happens. Each gain also takes <see cref="SpoonRule.StolenBack"/> Appetite back from every player holding some.
 	/// </summary>
 	private async Task GainAppetite()
 	{
@@ -288,8 +288,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		if (Creature.GetPower<SpoonSatedPower>() is { Amount: > 0 } sated)
 		{
 			await PowerCmd.ModifyAmount(context, sated, -1, null, null);
-			SpoonLog.Info("spoon: Sated, no Appetite this move");
-			return;
+			SpoonLog.Info("spoon: Sated turn spent, Appetite did nothing this move");
 		}
 		int gain = SpoonRule.AppetitePerMove;
 		foreach (Player player in CombatState.Players.ToList())

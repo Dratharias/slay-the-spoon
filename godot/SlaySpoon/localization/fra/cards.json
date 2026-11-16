@@ -491,7 +491,7 @@
 	"SPOON_TEASPOON.title": "Cuillère à café",
 	"SPOON_TEASPOON.description": "Retirez {Appetite:diff()} d'[gold]Appétit[/gold].\nPiochez {Cards:diff()} {Cards:plural:carte|cartes}.",
 	"SPOON_WOODEN_SPOON.title": "Cuillère en bois",
-	"SPOON_WOODEN_SPOON.description": "Infligez des dégâts égaux à [blue]10 %[/blue] de vos PV max.\nAnnulez {Sated:diff()} {Sated:plural:gain|gains} d'[gold]Appétit[/gold] de la Cuillère.",
+	"SPOON_WOODEN_SPOON.description": "Infligez [blue]10 %[/blue] de vos PV max en dégâts.\nL'[gold]Appétit[/gold] de la Cuillère est sans effet pendant {Sated:diff()} {Sated:plural:tour|tours}.",
 	"SPOON_SKIMMER.title": "Écumoire",
 	"SPOON_SKIMMER.description": "Gagnez {Block:diff()} d'[gold]Armure[/gold].\nCe tour-ci, le [gold]Banquet[/gold] ne mange aucun de vos PV max.",
 	"SPOON_MELON_BALLER.title": "Cuillère parisienne",

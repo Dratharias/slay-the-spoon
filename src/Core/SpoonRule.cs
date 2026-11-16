@@ -39,8 +39,12 @@ public static class SpoonRule
 	public static IReadOnlyList<int> Fighters(IReadOnlyList<int> maxHps) =>
 		Enumerable.Range(0, maxHps.Count).Where(i => maxHps[i] >= Threshold).ToList();
 
-	/// <summary>Each Appetite stack adds <see cref="AppetitePercent"/> % to the Spoon's damage (owner idea, 2026-11-16).</summary>
-	public static decimal AppetiteMultiplier(int stacks) => 1m + Math.Max(0, stacks) * AppetitePercent / 100m;
+	/// <summary>
+	/// Each Appetite stack adds <see cref="AppetitePercent"/> % to the Spoon's damage (owner idea, 2026-11-16). While
+	/// Sated (Wooden Spoon) its Appetite does nothing: its next turn hits at base (owner, 2026-11-16).
+	/// </summary>
+	public static decimal AppetiteMultiplier(int stacks, bool sated = false) =>
+		sated ? 1m : 1m + Math.Max(0, stacks) * AppetitePercent / 100m;
 
 	/// <summary>The Appetite a Spoonful played on the Spoon removes: <see cref="AppetiteBite"/>, or what is left.</summary>
 	public static int AppetiteRemoved(int stacks) => Math.Clamp(stacks, 0, AppetiteBite);
