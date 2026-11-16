@@ -8,10 +8,11 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Act4;
 
 /// <summary>
-/// Halves the map screen's height for the appended acts (<see cref="AppendedMapHeight"/>): after vanilla
-/// <c>SetMap</c> lays the points out, each point moves toward the bottom, the dotted paths are drawn again between the
-/// new positions (traveled ones recolored as vanilla does), and <c>_distY</c> shrinks so "scroll to the current row"
-/// still lands on it. The scroll's top limit shrinks with it. Only the view changes: no map data, seed or save.
+/// Fits the map screen's height to the appended acts' few rows (<see cref="AppendedMapHeight"/>): after vanilla
+/// <c>SetMap</c> lays the points out, each row moves to act 3's spacing and the boss to act 3's gap above the last row,
+/// the dotted paths are drawn again between the new positions (traveled ones recolored as vanilla does), and
+/// <c>_distY</c> takes the new spacing so "scroll to the current row" still lands on it. The scroll's top limit
+/// follows the boss. Only the view changes: no map data, seed or save.
 /// </summary>
 [HarmonyPatch]
 internal static class AppendedMapHeightPatch
@@ -34,6 +35,9 @@ internal static class AppendedMapHeightPatch
 	/// <summary>Vanilla's traveled-path tick scale (<c>_tickTraveledScale</c>).</summary>
 	private static readonly Vector2 TraveledScale = Vector2.One * 1.2f;
 
+	/// <summary>The top scroll limit of the appended map last laid out (one map screen at a time).</summary>
+	private static float _scrollTop = AppendedMapHeight.VanillaScrollTop;
+
 	private static bool Appended(NMapScreen screen) => Run(screen)?.Act is IAppendedAct;
 
 	[HarmonyPatch(typeof(NMapScreen), nameof(NMapScreen.SetMap))]
@@ -44,13 +48,18 @@ internal static class AppendedMapHeightPatch
 		{
 			if (!Appended(__instance)) return;
 			Dictionary<MapCoord, NMapPoint> points = Points(__instance);
-			foreach (NMapPoint node in points.Values.Distinct())
+			float vanillaDist = DistY(__instance);
+			int rowCount = map.GetRowCount();
+			foreach ((MapCoord coord, NMapPoint node) in points)
 			{
 				Vector2 position = node.Position;
-				position.Y = AppendedMapHeight.Compress(position.Y);
+				position.Y = coord == map.BossMapPoint.coord
+					? AppendedMapHeight.BossY(rowCount)
+					: AppendedMapHeight.PointY(position.Y, coord.row, vanillaDist);
 				node.Position = position;
 			}
-			DistY(__instance) *= AppendedMapHeight.Factor;
+			DistY(__instance) = AppendedMapHeight.RowSpacing;
+			_scrollTop = AppendedMapHeight.ScrollTop(rowCount);
 
 			Paths(__instance).Clear();
 			foreach (Node tick in PathsContainer(__instance).GetChildren()) tick.QueueFree();
@@ -76,13 +85,13 @@ internal static class AppendedMapHeightPatch
 		}
 	}
 
-	/// <summary>Vanilla eases a released drag back under 1800; the shorter map stops at <see cref="AppendedMapHeight.ScrollTop"/>.</summary>
+	/// <summary>Vanilla eases a released drag back under 1800; the shorter map stops at its own top (<see cref="AppendedMapHeight.ScrollTop"/>).</summary>
 	[HarmonyPatch(typeof(NMapScreen), "UpdateScrollPosition")]
 	[HarmonyPrefix]
 	private static void ClampTop(NMapScreen __instance)
 	{
 		if (!Appended(__instance)) return;
 		ref Vector2 target = ref TargetDragPos(__instance);
-		if (target.Y > AppendedMapHeight.ScrollTop) target = new Vector2(target.X, AppendedMapHeight.ScrollTop);
+		if (target.Y > _scrollTop) target = new Vector2(target.X, _scrollTop);
 	}
 }
