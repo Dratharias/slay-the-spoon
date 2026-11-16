@@ -43,7 +43,8 @@ and more growth (a play test reached 200+ per hit). Only the max HP it loses (Me
 ## Appetite and Spoonful
 
 Appetite: +2 after each of the Spoon's moves, +5 % damage per stack (1.3.2, was 10 %). Spoonful stays the normal deck
-card that manages it: each one played on the Spoon removes 3.
+card that manages it: each one played on the Spoon removes 3. Owner nerf (2026-11-16, later): it removes 1 (2
+upgraded) and is no longer Innate.
 
 1.3.2: players can hold Appetite too (same power, +5 % damage per stack, fight only), taken with the kit's Stolen
 Spoonful. Each time the Spoon gains Appetite it takes 1 back from every player holding some whose Block that move pierced

@@ -12,16 +12,19 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// Feed that stays: Retain, Innate and Eternal (no Exhaust), so it can be neither removed nor transformed. Played on the
-/// Spoon it also removes <see cref="SpoonRule.AppetiteBite"/> Appetite, below zero too (<see cref="SpoonAppetitePower"/>).
+/// Feed that stays: Retain and Eternal (no Exhaust), so it can be neither removed nor transformed. Played on the Spoon it
+/// also removes <see cref="SpoonRule.SpoonfulAppetite"/> Appetite (2 upgraded), below zero too
+/// (<see cref="SpoonAppetitePower"/>). Nerfed by the owner (2026-11-16): it was Innate and removed 3.
 /// </summary>
 public sealed class SpoonSpoonful : SpoonCard
 {
+	private const string AppetiteKey = "Appetite";
+
 	public override bool CanBeGeneratedInCombat => false;
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10m, ValueProp.Move), new MaxHpVar(3m), new DynamicVar("Appetite", SpoonRule.AppetiteBite)];
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10m, ValueProp.Move), new MaxHpVar(3m), new DynamicVar(AppetiteKey, SpoonRule.SpoonfulAppetite)];
 
-	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Innate, CardKeyword.Eternal];
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Eternal];
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Fatal)];
 
@@ -40,12 +43,13 @@ public sealed class SpoonSpoonful : SpoonCard
 		if (shouldTriggerFatal && attackCommand.Results.SelectMany(r => r).Any(r => r.WasTargetKilled))
 			await CreatureCmd.GainMaxHp(Owner.Creature, DynamicVars.MaxHp.IntValue);
 		if (cardPlay.Target.Monster is SpoonMonster spoon && spoon.Creature.IsAlive)
-			await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, spoon.Creature, -SpoonRule.AppetiteBite, Owner.Creature, this);
+			await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, spoon.Creature, -DynamicVars[AppetiteKey].IntValue, Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()
 	{
 		DynamicVars.Damage.UpgradeValueBy(2m);
 		DynamicVars.MaxHp.UpgradeValueBy(1m);
+		DynamicVars[AppetiteKey].UpgradeValueBy(SpoonRule.SpoonfulAppetiteUpgraded - SpoonRule.SpoonfulAppetite);
 	}
 }

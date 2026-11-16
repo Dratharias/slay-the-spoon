@@ -7,7 +7,7 @@ namespace SlaySpoon.Core;
 public static class SpoonRule
 {
 	public const int Threshold = 300, FeastMaxHp = 5, GiftMaxHp = 5, HpPerFighter = 2000,
-		AppetitePerMove = 2, AppetiteBite = 3, AppetitePercent = 5, AppetiteStolenBack = 1;
+		AppetitePerMove = 2, AppetiteBite = 3, SpoonfulAppetite = 1, SpoonfulAppetiteUpgraded = 2, AppetitePercent = 5, AppetiteStolenBack = 1;
 
 	/// <summary>The fight's numbers (docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md); tuned during balancing.</summary>
 	public const int BoucheeDamage = 35, LadleDamage = 55, BanquetDamage = 12, BanquetMaxHp = 10, FrailAmount = 2, VulnerableAmount = 2,

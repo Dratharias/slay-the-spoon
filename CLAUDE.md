@@ -374,7 +374,7 @@ Read `README.md` for the player view and the spec for every decision.
 ## 1.3.0 — Spoon (2026-11-16, branch `two-modes`)
 
 - **Spoon** (`SpoonSpoon`, Custom Run only, spec `docs/superpowers/specs/2026-11-14-spoon-design.md`): max HP as the
-  run's currency. Every player starts with a Spoonful (`src/Spoon/Spoonful.cs`: a Feed copy, Retain + Innate + Eternal,
+  run's currency. Every player starts with a Spoonful (`src/Spoon/Spoonful.cs`: a Feed copy, Retain + Eternal (Innate dropped 2026-11-16),
   no Exhaust; hidden `SpoonCardPool`); 12 max HP relics added to the grab bags on a `SlaySpoon.Spoon.Relics` `Rng`
   (`SpoonRelics`); "Feast" rest option (+5 max HP, `SpoonFeastRestSiteOption`); Fruit Juice replaces one merchant potion
   slot (`SpoonMerchantPatch`).

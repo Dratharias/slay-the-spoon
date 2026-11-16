@@ -7,7 +7,7 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 
 - [ ] Custom Run shows the "Spoon" checkbox with its short text (EN and FR). Standard and Daily stay vanilla.
 - [ ] Run start: every player (all five characters) has one Spoonful in the deck: cost 1, Attack, 10 damage, Fatal +3 max HP.
-- [ ] Spoonful has Retain and Innate, is not exhausted when played, and shows no card frame or portrait glitch.
+- [ ] Spoonful has Retain (no longer Innate, owner nerf 2026-11-16), is not exhausted when played, and shows no card frame or portrait glitch.
 - [ ] Upgrade: +2 damage and +1 max HP. It can be upgraded at the rest site and by events.
 - [ ] It cannot be removed (merchant, events) or transformed. Vanilla Feed still appears in Ironclad rewards.
 - [ ] Spoonful portrait (placeholder) shows.
@@ -66,7 +66,7 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] No max HP scaling: the Mouthful intent reads 35 + Strength (times Appetite) whatever the players' max HP.
 - [ ] Appetite: gained only after Sets the Table, 2 per living player (supporters included: 2 solo, 8 at 4 players), +5 %
       damage per stack in the intent; it goes negative (−5 % per stack, never below 0 damage), for the Spoon and the
-      players. A Spoonful played on the Spoon removes 3 even at 0 (→ −3); a supporter's Spoonful removes 3 too while dealing 0. EN/FR tooltip reads well.
+      players. A Spoonful played on the Spoon removes 1 (2 upgraded) even at 0 (→ −1); a supporter's Spoonful removes it too while dealing 0. EN/FR tooltip reads well.
 - [ ] Animations (`SpoonMotion`, tweens on the static sprite, pivot at the handle tip): slow idle sway; Mouthful leans
       back and swoops at the players, the hit lands at the bottom, then it rises back up; Ladle Smash rises and slams
       with a squash; a short recoil when hit; it swells a little as it grows (at most 1.2×); on death it tips over and
