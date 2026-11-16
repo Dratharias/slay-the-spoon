@@ -12,9 +12,10 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// The Spoon's Appetite (owner idea, 2026-11-16): it gains <see cref="SpoonRule.AppetitePerMove"/> after each move,
-/// each stack adds <see cref="SpoonRule.AppetitePercent"/> % to its damage, and every Spoonful played on it removes
-/// <see cref="SpoonRule.AppetiteBite"/>, a supporter's included (their damage is nothing, the feeding still counts).
+/// Appetite (owner idea, 2026-11-16): each stack adds <see cref="SpoonRule.AppetitePercent"/> % to its holder's damage,
+/// and it can go negative (<see cref="SpoonRule.AppetiteMultiplier"/>). The Spoon gains
+/// <see cref="SpoonRule.AppetitePerMove"/> after Sets the Table; the cards that remove it apply a negative amount, so
+/// they work even while it holds none.
 /// </summary>
 public sealed class SpoonAppetitePower : PowerModel, IBorrowedIcon
 {
@@ -22,17 +23,10 @@ public sealed class SpoonAppetitePower : PowerModel, IBorrowedIcon
 
 	public override PowerStackType StackType => PowerStackType.Counter;
 
+	public override bool AllowNegative => true;
+
 	public Type IconSource => typeof(RavenousPower);
 
 	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource) =>
 		dealer == Owner ? SpoonRule.AppetiteMultiplier(Amount, Owner.GetPower<SpoonSatedPower>() is { Amount: > 0 }) : 1m;
-
-	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{
-		if (cardPlay.Card is not SpoonSpoonful || cardPlay.Target != Owner) return;
-		int removed = SpoonRule.AppetiteRemoved(Amount);
-		if (removed <= 0) return;
-		Flash();
-		await PowerCmd.ModifyAmount(choiceContext, this, -removed, null, cardPlay.Card);
-	}
 }

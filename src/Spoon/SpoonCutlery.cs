@@ -42,11 +42,8 @@ public sealed class SpoonTeaspoon : SpoonCutleryCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		if (SpoonOf(cardPlay) is { } spoon && spoon.Creature.GetPower<SpoonAppetitePower>() is { } appetite)
-		{
-			int removed = Math.Min(DynamicVars[AppetiteKey].IntValue, appetite.Amount);
-			if (removed > 0) await PowerCmd.ModifyAmount(choiceContext, appetite, -removed, Owner.Creature, this);
-		}
+		if (SpoonOf(cardPlay) is { } spoon && spoon.Creature.IsAlive)
+			await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, spoon.Creature, -DynamicVars[AppetiteKey].IntValue, Owner.Creature, this);
 		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
 	}
 
@@ -154,10 +151,9 @@ public sealed class SpoonStolenSpoonful : SpoonCutleryCard
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_bite", null, "blunt_attack.mp3")
 			.Execute(choiceContext);
-		if (SpoonOf(cardPlay) is not { } spoon || spoon.Creature.GetPower<SpoonAppetitePower>() is not { } appetite) return;
-		int stolen = Math.Min(DynamicVars[AppetiteKey].IntValue, appetite.Amount);
-		if (stolen <= 0) return;
-		await PowerCmd.ModifyAmount(choiceContext, appetite, -stolen, Owner.Creature, this);
+		if (SpoonOf(cardPlay) is not { } spoon || !spoon.Creature.IsAlive) return;
+		int stolen = DynamicVars[AppetiteKey].IntValue;
+		await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, spoon.Creature, -stolen, Owner.Creature, this);
 		await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, Owner.Creature, stolen, Owner.Creature, this);
 	}
 

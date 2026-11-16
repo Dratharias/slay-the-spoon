@@ -24,8 +24,8 @@ countering one of the Spoon's mechanics, handed out by the Spoon itself so ignor
 3. **Feast**: Vulnerable 2 on every fighter (*builder call*), each fighter loses 10 max HP without an attack (lost,
    the Spoon doesn't gain them, *builder call*), then it heals 60 + 10 per player past the first (60, 70, 80, 90).
 4. **Ladle Smash**: 55 damage (*builder call*). Owner, 2026-11-16: it also steals max HP from each living player hit,
-   a quarter of its raw damage (before Block, rounded down, the player keeps at least 1); the Spoon gains them as growth
-   (no Strength).
+   a quarter of the damage past their Block (rounded down, the player keeps at least 1; all blocked steals nothing); the
+   Spoon gains them and 1 Strength per 5 stolen (owner, 2026-11-16).
 
 1.3.2 (owner, 2026-11-16): Feast also deals a light hit (owner: "dégâts légers"), 12 damage (*builder call*).
 
@@ -48,6 +48,11 @@ card that manages it: each one played on the Spoon removes 3.
 1.3.2: players can hold Appetite too (same power, +5 % damage per stack, fight only), taken with the kit's Stolen
 Spoonful. Each time the Spoon gains Appetite it takes 1 back from every player holding some whose Block that move pierced
 (owner, 2026-11-16; otherwise only its usual +2).
+
+Owner, 2026-11-16 (later): the Spoon gains Appetite only after Sets the Table (turn 1 of the cycle), 2 per living
+player, supporters included, since they get the kit too. Appetite can be negative for the Spoon and the players
+(−5 % damage per stack, never below 0); the removing cards always remove their full amount. After a move that
+pierced a player's Block it takes 1 from that player, below 0 too.
 
 ## The cutlery (Exhaust, combat-only, `SpoonCard`s outside every card source)
 

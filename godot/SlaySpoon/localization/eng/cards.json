@@ -497,5 +497,5 @@
 	"SPOON_MELON_BALLER.title": "Melon Baller",
 	"SPOON_MELON_BALLER.description": "Take {MaxHp:diff()} Max HP from the Spoon.",
 	"SPOON_STOLEN_SPOONFUL.title": "Stolen Spoonful",
-	"SPOON_STOLEN_SPOONFUL.description": "Deal {Damage:diff()} damage.\nSteal up to {Appetite:diff()} [gold]Appetite[/gold] from the Spoon."
+	"SPOON_STOLEN_SPOONFUL.description": "Deal {Damage:diff()} damage.\nSteal {Appetite:diff()} [gold]Appetite[/gold] from the Spoon."
 }

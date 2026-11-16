@@ -41,14 +41,21 @@ public static class SpoonRule
 		Enumerable.Range(0, maxHps.Count).Where(i => maxHps[i] >= Threshold).ToList();
 
 	/// <summary>
-	/// Each Appetite stack adds <see cref="AppetitePercent"/> % to the Spoon's damage (owner idea, 2026-11-16). While
-	/// Sated (Wooden Spoon) its Appetite does nothing: its next turn hits at base (owner, 2026-11-16).
+	/// Each Appetite stack adds <see cref="AppetitePercent"/> % to its holder's damage (owner idea, 2026-11-16). Appetite
+	/// can be negative, for the Spoon and the players (owner, 2026-11-16): each negative stack takes 5 % off, down to no
+	/// damage. While Sated (Wooden Spoon) the Spoon's Appetite does nothing: its next turn hits at base.
 	/// </summary>
 	public static decimal AppetiteMultiplier(int stacks, bool sated = false) =>
-		sated ? 1m : 1m + Math.Max(0, stacks) * AppetitePercent / 100m;
+		sated ? 1m : Math.Max(0m, 1m + stacks * AppetitePercent / 100m);
 
-	/// <summary>The Appetite a Spoonful played on the Spoon removes: <see cref="AppetiteBite"/>, or what is left.</summary>
-	public static int AppetiteRemoved(int stacks) => Math.Clamp(stacks, 0, AppetiteBite);
+	/// <summary>The Spoon gains <see cref="AppetitePerMove"/> Appetite only after its turn 1, Sets the Table (owner, 2026-11-16).</summary>
+	public static bool GainsAppetite(SpoonMove move) => move == SpoonMove.SetTable;
+
+	/// <summary>
+	/// That gain: <see cref="AppetitePerMove"/> per living player, supporters included, since every player gets the
+	/// cutlery that removes it (owner, 2026-11-16: it must grow faster with more players).
+	/// </summary>
+	public static int AppetiteGain(int livingPlayers) => AppetitePerMove * Math.Max(1, livingPlayers);
 
 	/// <summary>
 	/// The fighters of a Spoon fight: the players at <see cref="Threshold"/>+ max HP, or every player when none qualifies
@@ -69,7 +76,8 @@ public static class SpoonRule
 	/// <summary>
 	/// The Spoon's Strength follows its max HP: 1 per <see cref="MaxHpPerStrength"/> above its max HP at fight start,
 	/// minus 1 per as many below, truncated toward zero (owner, 2026-11-16). The max HP it grew from its hits does not
-	/// count (owner, 2026-11-16: growth fed Strength, which fed growth, up to 200+ hits), so only what it lost does.
+	/// count (owner, 2026-11-16: growth fed Strength, which fed growth, up to 200+ hits). What it loses (Melon Baller)
+	/// and the max HP Ladle Smash steals (1 Strength per 5 stolen, owner, 2026-11-16) do.
 	/// </summary>
 	public static int StrengthFor(int maxHp, int startMaxHp, int grown = 0) => (maxHp - grown - startMaxHp) / MaxHpPerStrength;
 
@@ -94,18 +102,17 @@ public static class SpoonRule
 	public static int WoodenDamage(int maxHp) => Math.Max(0, maxHp) * WoodenMaxHpPercent / 100;
 
 	/// <summary>
-	/// The Appetite the Spoon takes back from a player after a move: only when that move's hits pierced their Block
-	/// (owner, 2026-11-16), 1 or what they have. Its +2 gain happens either way.
+	/// The Appetite the Spoon takes from a player after a move whose hits pierced their Block (owner, 2026-11-16); the
+	/// player may go negative.
 	/// </summary>
-	public static int StolenBack(int unblocked, int playerStacks) =>
-		unblocked <= 0 ? 0 : Math.Clamp(playerStacks, 0, AppetiteStolenBack);
+	public static int StolenBack(int unblocked) => unblocked <= 0 ? 0 : AppetiteStolenBack;
 
 	/// <summary>
-	/// Ladle Smash steals max HP (owner, 2026-11-16): a quarter of its raw damage on a player (before Block), rounded
-	/// down, leaving them at least 1 max HP.
+	/// Ladle Smash steals max HP (owner, 2026-11-16): a quarter of the damage it dealt past a player's Block, rounded
+	/// down, leaving them at least 1 max HP. Blocking it all steals nothing.
 	/// </summary>
-	public static int LadleMaxHpSteal(int rawDamage, int playerMaxHp) =>
-		Math.Clamp(Math.Max(0, rawDamage) / LadleStealDivisor, 0, Math.Max(0, playerMaxHp - 1));
+	public static int LadleMaxHpSteal(int unblocked, int playerMaxHp) =>
+		Math.Clamp(Math.Max(0, unblocked) / LadleStealDivisor, 0, Math.Max(0, playerMaxHp - 1));
 
 	/// <summary>
 	/// Spoon-Feed is playable while the giver has more than 1 max HP (owner decision 2026-11-16): it gives down to 1 max HP.

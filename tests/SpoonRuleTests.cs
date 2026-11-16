@@ -36,7 +36,9 @@ public class SpoonRuleTests
 	[InlineData(0, 1.0)]
 	[InlineData(1, 1.05)]
 	[InlineData(5, 1.25)]
-	[InlineData(-2, 1.0)]
+	[InlineData(-2, 0.9)]
+	[InlineData(-20, 0.0)]
+	[InlineData(-30, 0.0)]
 	public void AppetiteMultiplier(int stacks, double expected) =>
 		Assert.Equal((decimal)expected, SpoonRule.AppetiteMultiplier(stacks));
 
@@ -47,11 +49,19 @@ public class SpoonRuleTests
 	public void SatedSpoonHitsAtBase(int stacks) => Assert.Equal(1m, SpoonRule.AppetiteMultiplier(stacks, sated: true));
 
 	[Theory]
-	[InlineData(0, 0)]
-	[InlineData(2, 2)]
-	[InlineData(3, 3)]
-	[InlineData(7, 3)]
-	public void SpoonfulEatsAppetite(int stacks, int expected) => Assert.Equal(expected, SpoonRule.AppetiteRemoved(stacks));
+	[InlineData(SpoonRule.SpoonMove.SetTable, true)]
+	[InlineData(SpoonRule.SpoonMove.Bouchee, false)]
+	[InlineData(SpoonRule.SpoonMove.Banquet, false)]
+	[InlineData(SpoonRule.SpoonMove.Ladle, false)]
+	public void AppetiteGrowsOnlyOnTurnOne(SpoonRule.SpoonMove move, bool gains) =>
+		Assert.Equal(gains, SpoonRule.GainsAppetite(move));
+
+	[Theory]
+	[InlineData(1, 2)]
+	[InlineData(2, 4)]
+	[InlineData(4, 8)]
+	[InlineData(0, 2)]
+	public void AppetiteGainScalesWithPlayers(int players, int gain) => Assert.Equal(gain, SpoonRule.AppetiteGain(players));
 
 	[Theory]
 	[InlineData(1, 1, 2000)]
@@ -78,6 +88,7 @@ public class SpoonRuleTests
 	[InlineData(1985, 2000, 0, -3)]
 	[InlineData(2324, 2000, 324, 0)]
 	[InlineData(2312, 2000, 324, -2)]
+	[InlineData(2128, 2000, 100, 5)]
 	public void StrengthFollowsMaxHpButNotGrowth(int hp, int start, int grown, int expected) =>
 		Assert.Equal(expected, SpoonRule.StrengthFor(hp, start, grown));
 
@@ -126,21 +137,20 @@ public class SpoonRuleTests
 	public void WoodenSpoonHitsTenPercentOfMaxHp(int maxHp, int damage) => Assert.Equal(damage, SpoonRule.WoodenDamage(maxHp));
 
 	[Theory]
-	[InlineData(0, 3, 0)]
-	[InlineData(5, 0, 0)]
-	[InlineData(5, 1, 1)]
-	[InlineData(1, 6, 1)]
-	public void SpoonTakesAppetiteBackOnlyWhenItPiercesBlock(int unblocked, int playerStacks, int taken) =>
-		Assert.Equal(taken, SpoonRule.StolenBack(unblocked, playerStacks));
+	[InlineData(0, 0)]
+	[InlineData(5, 1)]
+	[InlineData(1, 1)]
+	public void SpoonTakesAppetiteBackOnlyWhenItPiercesBlock(int unblocked, int taken) =>
+		Assert.Equal(taken, SpoonRule.StolenBack(unblocked));
 
 	[Theory]
-	[InlineData(55, 350, 13)]
-	[InlineData(80, 350, 20)]
+	[InlineData(115, 350, 28)]
+	[InlineData(0, 350, 0)]
 	[InlineData(3, 350, 0)]
 	[InlineData(80, 10, 9)]
 	[InlineData(80, 1, 0)]
-	public void LadleStealsAQuarterOfItsRawDamageAsMaxHp(int raw, int maxHp, int stolen) =>
-		Assert.Equal(stolen, SpoonRule.LadleMaxHpSteal(raw, maxHp));
+	public void LadleStealsAQuarterOfThePiercingDamageAsMaxHp(int unblocked, int maxHp, int stolen) =>
+		Assert.Equal(stolen, SpoonRule.LadleMaxHpSteal(unblocked, maxHp));
 
 	[Fact]
 	public void BanquetHitsLightly() => Assert.InRange(SpoonRule.BanquetDamage, 1, SpoonRule.BoucheeDamage / 2);

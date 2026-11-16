@@ -13,7 +13,7 @@ namespace SlaySpoon.Spoon;
 
 /// <summary>
 /// Feed that stays: Retain, Innate and Eternal (no Exhaust), so it can be neither removed nor transformed. Played on the
-/// Spoon it also removes Appetite (<see cref="SpoonAppetitePower"/>); the Appetite var is for its text.
+/// Spoon it also removes <see cref="SpoonRule.AppetiteBite"/> Appetite, below zero too (<see cref="SpoonAppetitePower"/>).
 /// </summary>
 public sealed class SpoonSpoonful : SpoonCard
 {
@@ -39,6 +39,8 @@ public sealed class SpoonSpoonful : SpoonCard
 			.Execute(choiceContext);
 		if (shouldTriggerFatal && attackCommand.Results.SelectMany(r => r).Any(r => r.WasTargetKilled))
 			await CreatureCmd.GainMaxHp(Owner.Creature, DynamicVars.MaxHp.IntValue);
+		if (cardPlay.Target.Monster is SpoonMonster spoon && spoon.Creature.IsAlive)
+			await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, spoon.Creature, -SpoonRule.AppetiteBite, Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()
