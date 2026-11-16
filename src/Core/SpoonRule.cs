@@ -71,10 +71,15 @@ public static class SpoonRule
 	public static SpoonMove Move(int turn) => turn % 3 == 2 ? SpoonMove.Ladle : SpoonMove.Bouchee;
 
 	/// <summary>
-	/// Spoon-Feed is playable only while the giver keeps at least 1 max HP after the gift: vanilla LoseMaxHp floors max
-	/// HP at 1, so a smaller pool would hand out max HP the giver never had.
+	/// Spoon-Feed is playable while the giver has more than 1 max HP (owner decision 2026-11-16): it gives down to 1 max HP.
 	/// </summary>
-	public static bool CanGift(int ownerMaxHp) => ownerMaxHp > GiftMaxHp;
+	public static bool CanGift(int ownerMaxHp) => ownerMaxHp > 1;
+
+	/// <summary>
+	/// The max HP Spoon-Feed takes from the giver: <see cref="GiftMaxHp"/>, or less so the giver keeps 1 max HP. Vanilla
+	/// LoseMaxHp then damages the giver down to the new max HP at most, which is at least 1, so the gift is never lethal.
+	/// </summary>
+	public static int GiftAmount(int ownerMaxHp) => Math.Clamp(ownerMaxHp - 1, 0, GiftMaxHp);
 
 	/// <summary>The max HP a fighter gains from Spoon-Feed: what the giver actually lost, never more than the gift.</summary>
 	public static int GiftTransferred(int ownerMaxHpBefore, int ownerMaxHpAfter) =>

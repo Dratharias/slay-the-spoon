@@ -70,12 +70,31 @@ public class SpoonRuleTests
 	}
 
 	[Theory]
+	[InlineData(0, false)]
 	[InlineData(1, false)]
-	[InlineData(5, false)]
-	[InlineData(6, true)]
+	[InlineData(2, true)]
+	[InlineData(5, true)]
 	[InlineData(300, true)]
-	public void CanGiftNeedsMoreMaxHpThanTheGift(int ownerMaxHp, bool expected) =>
+	public void CanGiftWhileTheGiverHasMoreThanOneMaxHp(int ownerMaxHp, bool expected) =>
 		Assert.Equal(expected, SpoonRule.CanGift(ownerMaxHp));
+
+	[Theory]
+	[InlineData(0, 0)]
+	[InlineData(1, 0)]
+	[InlineData(2, 1)]
+	[InlineData(5, 4)]
+	[InlineData(6, 5)]
+	[InlineData(300, 5)]
+	public void GiftAmountLeavesTheGiverOneMaxHp(int ownerMaxHp, int expected) =>
+		Assert.Equal(expected, SpoonRule.GiftAmount(ownerMaxHp));
+
+	[Theory]
+	[InlineData(2)]
+	[InlineData(3)]
+	[InlineData(6)]
+	[InlineData(300)]
+	public void GiftNeverDropsTheGiverBelowOneMaxHp(int ownerMaxHp) =>
+		Assert.Equal(Math.Max(1, ownerMaxHp - SpoonRule.GiftMaxHp), ownerMaxHp - SpoonRule.GiftAmount(ownerMaxHp));
 
 	[Theory]
 	[InlineData(300, 295, 5)]

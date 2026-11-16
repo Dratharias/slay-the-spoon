@@ -422,6 +422,10 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     a win; losing to the Spoon is a defeat; boss numbers (about 1500 HP per fighter, Bouchée 30 + 10 max HP eaten,
     Coup de louche 50, +3 Strength per move) are a starting point, tuned after play; Spoon damage is scaled by the team's
     total max HP (`base x 300 x players / team max HP`); a run where nobody reaches 300 has no Spoon.
+    Owner decision 2026-11-16 (replaces the review wave's "unplayable at 5 max HP or less"): Spoon-Feed is playable
+    while the supporter has more than 1 max HP and gives min(5, max HP - 1) (`SpoonRule.GiftAmount`); the supporter
+    never drops below 1 max HP, so vanilla `LoseMaxHp`'s damage step (unblockable, unpowered) leaves at least 1 HP, and
+    the fighter gains exactly what was lost.
   - **Owner design call (open, ask the owner):** in an Act 4 run missing only the Ruby key, the Spoon act's rest site
     offers Ruby Recall, a 4th chance at the Ruby key, which then appends The Ending after the Spoon. Keep it, or hide
     Ruby Recall at the Spoon rest site?
@@ -441,6 +445,7 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     - ~~T5: Spoon-Feed can create max HP: a supporter under 6 max HP loses less than 5 (`LoseMaxHp` floors at 1) while the
       fighter gains 5.~~ Done in the 1.3.0 review fix wave: Spoon-Feed is unplayable at 5 max HP or less
       (`SpoonRule.CanGift`), and the fighter gains what the supporter actually lost (`SpoonRule.GiftTransferred`).
+      Superseded by the owner decision of 2026-11-16 (decision log above).
     - ~~Final review: the Fruit Juice merchant entry drew `PlayerRng.Shops` once more (`CalcCost`).~~ Done in the 1.3.0
       review fix wave: `SpoonJuiceCostPatch` prices the Juice from the mod's `SlaySpoon.Spoon.Juice_*` stream.
     - T5: skipping `HauntPower.AfterCardPlayed` for a supporter also skips its `Rng.CombatTargets` draw (deterministic,

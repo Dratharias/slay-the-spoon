@@ -60,7 +60,8 @@ helping from the side. **Non-goals:** a complex boss (no minions, no phases), St
      Becquée stay lost after a win; a loss ends the run anyway. No max HP or HP bookkeeping is kept for the fight.
 6. **The gift card.** Every supporter gets a combat-only card "Spoon-Feed" ("Becquée"): cost 1, choose a fighter
    (Mend's ally targeting); the supporter loses 5 max HP and the fighter gains 5. Retained, not exhausted.
-   *(Numbers: builder proposal accepted by the owner.)*
+   *(Numbers: builder proposal accepted by the owner.)* Owner decision 2026-11-16: playable while the supporter has
+   more than 1 max HP; it moves min(5, max HP − 1), so the supporter keeps at least 1 max HP and never dies from it.
 7. **After the Spoon.** If The Ending follows, the Spoon gives ordinary boss rewards and the run goes on; otherwise
    it is the final boss and its death wins the run.
 

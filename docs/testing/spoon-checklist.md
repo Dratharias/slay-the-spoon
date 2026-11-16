@@ -68,8 +68,11 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Each supporter gets one Spoon-Feed at combat start (cost 1, Skill, Retain, not exhausted); fighters get none.
 - [ ] Targeting: the arrow can only land on a living fighter; with the arrow on a supporter the play is refused (known UX gap).
 - [ ] Play: the supporter loses 5 max HP, the fighter gains 5; the team's total, and the damage, stay the same.
-- [ ] A supporter with 5 max HP or less: Spoon-Feed is unplayable (refused like other unplayable cards).
-- [ ] A supporter with 6+ max HP: the fighter gains exactly the max HP the supporter lost.
+- [ ] A supporter with 2 to 5 max HP: Spoon-Feed gives all but 1 max HP (e.g. 3 max HP gives 2); the supporter stays
+  alive at 1 max HP and 1 HP, and the fighter gains exactly what the supporter lost.
+- [ ] A supporter with 1 max HP: Spoon-Feed is unplayable (refused like other unplayable cards).
+- [ ] A supporter with 6+ max HP: the supporter loses 5 and the fighter gains 5.
+- [ ] Text (EN/FR) says "up to 5" and "keeping at least 1".
 - [ ] Not playable when no fighter is alive. The card cannot be upgraded and is not added to the deck after the fight.
 - [ ] Spoon-Feed portrait (placeholder) shows.
 

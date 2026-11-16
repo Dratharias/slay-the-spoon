@@ -1,7 +1,7 @@
 {
 	"SPOON_SPOONFUL.description": "Deal {Damage:diff()} damage.\nIf [gold]Fatal[/gold], raise your Max HP by {MaxHp:diff()}.",
 	"SPOON_SPOONFUL.title": "Spoonful",
-	"SPOON_SPOON_FEED.description": "Lose [blue]5[/blue] Max HP.\nA fighter gains [blue]5[/blue] Max HP.",
+	"SPOON_SPOON_FEED.description": "Lose up to [blue]5[/blue] Max HP, keeping at least [blue]1[/blue].\nA fighter gains what you lost.",
 	"SPOON_SPOON_FEED.title": "Spoon-Feed",
 	"STS1_AGGREGATE.description": "Gain {energyPrefix:energyIcons(1)} for every {CardsPerEnergy:diff()} cards in your [gold]Draw Pile[/gold].",
 	"STS1_AGGREGATE.title": "Aggregate",

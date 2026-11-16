@@ -10,8 +10,9 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// Spoon-Feed ("Becquée", spec §6): handed to each supporter at the start of the Spoon fight. The supporter gives
-/// <see cref="SpoonRule.GiftMaxHp"/> max HP to a fighter. Retained, never exhausted, combat-only.
+/// Spoon-Feed ("Becquée", spec §6): handed to each supporter at the start of the Spoon fight. The supporter gives up to
+/// <see cref="SpoonRule.GiftMaxHp"/> max HP to a fighter, keeping at least 1 (<see cref="SpoonRule.GiftAmount"/>).
+/// Retained, never exhausted, combat-only.
 /// </summary>
 public sealed class SpoonSpoonFeed : SpoonCard
 {
@@ -23,7 +24,7 @@ public sealed class SpoonSpoonFeed : SpoonCard
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
-	/// <summary>Only while a fighter is alive to receive it and the giver has more max HP than the gift.</summary>
+	/// <summary>Only while a fighter is alive to receive it and the giver has more than 1 max HP.</summary>
 	protected override bool IsPlayable =>
 		SpoonRule.CanGift(Owner.Creature.MaxHp) && SpoonFight.Fighters(CombatState).Any(c => c.IsAlive);
 
@@ -37,7 +38,9 @@ public sealed class SpoonSpoonFeed : SpoonCard
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		if (!SpoonRule.CanGift(Owner.Creature.MaxHp)) return;
 		int before = Owner.Creature.MaxHp;
-		await CreatureCmd.LoseMaxHp(choiceContext, Owner.Creature, DynamicVars.MaxHp.BaseValue, true);
+		// Never below 1 max HP: LoseMaxHp's damage step then leaves the giver at the new max HP (at least 1), unblockable
+		// and unpowered, so powered damage modifiers such as Vulnerable do not apply.
+		await CreatureCmd.LoseMaxHp(choiceContext, Owner.Creature, SpoonRule.GiftAmount(before), true);
 		// The fighter gains what the giver actually lost, so the gift never creates max HP.
 		int transferred = SpoonRule.GiftTransferred(before, Owner.Creature.MaxHp);
 		if (transferred > 0 && cardPlay.Target.IsAlive) await CreatureCmd.GainMaxHp(cardPlay.Target, transferred);
