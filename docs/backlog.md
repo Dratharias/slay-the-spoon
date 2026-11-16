@@ -413,6 +413,13 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     4. Spoon-Feed card portrait: PNG 250x190 (`images/cards/spoon/spoon_spoon_feed.png`; optional). Open.
     5. Spoonful card portrait: same (`images/cards/spoon/spoon_spoonful.png`; optional). Open.
     Animations are out of scope (static sprite).
+  - **Restaurant ambience (owner request, 2026-11-16, open):** in the Spoon act, a light restaurant ambience (chatter,
+    cutlery, glasses) under the music, with the boss music kept as the main track. Its level is set like a sound
+    effect (follows the SFX volume, kept low in decibels so it never covers the music). Needs a free ambience recording
+    and an `AmbientSfx`-style loop for `SpoonAct` (today Glory's).
+  - **Test start balance (owner, 2026-11-16):** the bare test deck lost to the Spoon ("soit mon deck est nul ou la
+    cuillère est OP"; the owner blames the deck). The test deck is now upgraded with seven combat relics; the Spoon's
+    numbers stay a starting point until a real run reaches it.
   - **Art sources:** the placeholder art comes from two Pixabay photos under the Pixabay Content License (free use, no
     attribution required): "teaspoon" https://pixabay.com/photos/teaspoon-554065/ (spoon sprite, boss icon and outline,
     card portraits) and "exclusive banquet" https://pixabay.com/photos/exclusive-banquet-1812772/ (combat background,

@@ -95,8 +95,10 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Clicking it starts a solo Ironclad run directly on the Spoon act's map (rest site, merchant, then the Spoon); no Neow,
       no act 1 map. Top bar shows the "Spoon" and "Test" modifiers.
 - [ ] Player: 350 max HP and 350 HP, vanilla starting gold, Burning Blood, and the Spoonful in hand at combat start.
-- [ ] Deck (unupgraded): Body Slam ×2, Barricade, Entrench, Impervious, Shrug It Off ×2, Flame Barrier, Iron Wave ×2,
+- [ ] Deck (every card upgraded): Body Slam ×2, Barricade, Entrench, Impervious, Shrug It Off ×2, Flame Barrier, Iron Wave ×2,
       Metallicize (StS1 port), Juggernaut, Defend ×4, Strike ×2, Bash, plus the Spoonful.
+- [ ] Relics besides Burning Blood: Anchor, Horn Cleat, Captain's Wheel, Orichalcum, Bronze Scales, Vajra, Lantern;
+      each triggers in the fight.
 - [ ] Music and background are the Spoon act's; the map's boss icon is the Spoon.
 - [ ] Save and quit at the rest site and in the fight, then Continue: the run reloads on the Spoon act with the same
       deck, HP and modifiers.

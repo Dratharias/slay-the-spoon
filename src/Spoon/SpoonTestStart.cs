@@ -84,9 +84,16 @@ public static class SpoonTestStart
 				{
 					CardModel copy = card.ToMutable();
 					copy.FloorAddedToDeck = 1;
+					if (copy.IsUpgradable)
+					{
+						copy.UpgradeInternal();
+						copy.FinalizeUpgradeInternal();
+					}
 					player.Deck.AddInternal(copy, -1, silent: true);
 				}
 			}
+			foreach (RelicModel relic in SpoonTestDeck.Relics)
+				player.AddRelicInternal(relic.ToMutable());
 			player.Creature.SetMaxHpInternal(SpoonTestStartRule.MaxHp);
 			player.Creature.SetCurrentHpInternal(SpoonTestStartRule.MaxHp);
 
