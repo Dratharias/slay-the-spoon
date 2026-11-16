@@ -50,6 +50,10 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Ladle Smash: 70 base damage. No Strength from turns passing.
 - [ ] Growth: HP lost past Block raises the Spoon's max HP by as much (its HP does not rise), and every 10 max HP gained
       gives 1 Strength (log: `spoon: grew N max HP ... +S Strength`). A fully blocked hit gives nothing.
+- [ ] Animations (`SpoonMotion`, tweens on the static sprite, pivot at the handle tip): slow idle sway; Mouthful leans
+      back and swoops at the players, the hit lands at the bottom, then it rises back up; Ladle Smash rises and slams
+      with a squash; a short recoil when hit; it swells a little as it grows (at most 1.2×); on death it tips over and
+      fades. No error line `spoon: animation failed` in the log.
 - [ ] Damage is scaled by the team's total max HP: solo 300 takes the base, solo 600 takes half; duo 600 in total takes the base.
 - [ ] Intents show the scaled number per player; a supporter sees 0, a fighter sees the scaled hit.
 - [ ] Mouthful's debuff-style intent reads well (it stands for the max HP loss).

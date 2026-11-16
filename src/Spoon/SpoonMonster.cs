@@ -57,6 +57,34 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	/// <summary>Max HP grown this fight, for the Strength remainder. Not saved, like the fighters.</summary>
 	private int _grown;
 
+	/// <summary>The sprite's tweens (<see cref="SpoonMotion"/>), found once the creature node exists.</summary>
+	private SpoonMotion? _motion;
+
+	/// <summary>Runs a visual-only step; a failure is logged and never reaches the combat.</summary>
+	private void Animate(Action<SpoonMotion> step)
+	{
+		try
+		{
+			if ((_motion ??= SpoonMotion.For(Creature)) is { } motion) step(motion);
+		}
+		catch (Exception e)
+		{
+			SpoonLog.Error($"spoon: animation failed: {e.Message}");
+		}
+	}
+
+	private async Task AnimateAsync(Func<SpoonMotion, Task> step)
+	{
+		try
+		{
+			if ((_motion ??= SpoonMotion.For(Creature)) is { } motion) await step(motion);
+		}
+		catch (Exception e)
+		{
+			SpoonLog.Error($"spoon: animation failed: {e.Message}");
+		}
+	}
+
 	/// <summary>Set while the supporters are killed after the last fighter, so their own deaths don't recurse.</summary>
 	private bool _losing;
 
@@ -99,6 +127,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	public override async Task BeforeCombatStart()
 	{
 		await base.BeforeCombatStart();
+		Animate(m => m.Idle());
 		foreach (Player player in CombatState.Players)
 		{
 			if (IsFighter(player) || player.Creature.IsDead) continue;
@@ -109,9 +138,11 @@ public sealed class SpoonMonster : Sts1EndingMonster
 
 	private async Task BoucheeMove(IReadOnlyList<Creature> targets)
 	{
+		await AnimateAsync(m => m.SwoopAsync());
 		AttackCommand attack = await DamageCmd.Attack(SpoonRule.BoucheeDamage).FromMonster(this)
 			.WithHitFx("vfx/vfx_bite")
 			.Execute(null);
+		Animate(m => m.Recover());
 		await Grow(attack);
 		var context = new ThrowingPlayerChoiceContext();
 		int eaten = 0;
@@ -127,9 +158,11 @@ public sealed class SpoonMonster : Sts1EndingMonster
 
 	private async Task LadleMove(IReadOnlyList<Creature> targets)
 	{
+		await AnimateAsync(m => m.SmashAsync());
 		AttackCommand attack = await DamageCmd.Attack(SpoonRule.LadleDamage).FromMonster(this)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(null);
+		Animate(m => m.Recover());
 		await Grow(attack);
 	}
 
@@ -145,6 +178,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		await CreatureCmd.SetMaxHp(Creature, Creature.MaxHp + unblocked);
 		int strength = SpoonRule.StrengthFromGrowth(_grown, unblocked);
 		_grown += unblocked;
+		Animate(m => m.Grow(_grown));
 		if (strength > 0)
 			await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, strength, Creature, null);
 		SpoonLog.Info($"spoon: grew {unblocked} max HP (now {Creature.MaxHp}), +{strength} Strength");
@@ -168,6 +202,13 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		return 1m;
 	}
 
+	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result,
+		ValueProp props, Creature? dealer, CardModel? cardSource)
+	{
+		await base.AfterDamageReceived(choiceContext, target, result, props, dealer, cardSource);
+		if (target == Creature && result.UnblockedDamage > 0 && Creature.IsAlive) Animate(m => m.Recoil());
+	}
+
 	/// <summary>
 	/// The fight is lost once every fighter is dead, even with supporters alive: they are killed (forced) here, inside the
 	/// last fighter's death, so the vanilla kill that is running ends the combat and shows the game over once. The public
@@ -176,6 +217,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
 	{
 		await base.AfterDeath(choiceContext, creature, wasRemovalPrevented, deathAnimLength);
+		if (creature == Creature && !wasRemovalPrevented) Animate(m => m.Topple());
 		if (_losing || wasRemovalPrevented || !creature.IsPlayer || CombatState == null) return;
 		IReadOnlyList<Player> players = CombatState.Players;
 		if (players.Any(p => IsFighter(p) && p.Creature.IsAlive)) return;

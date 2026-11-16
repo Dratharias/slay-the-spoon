@@ -412,7 +412,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     3. Spoon act combat background: JPG 1920x1136 (`images/spoon/combat_bg.jpg`; optional). Open.
     4. Spoon-Feed card portrait: PNG 250x190 (`images/cards/spoon/spoon_spoon_feed.png`; optional). Open.
     5. Spoonful card portrait: same (`images/cards/spoon/spoon_spoonful.png`; optional). Open.
-    Animations are out of scope (static sprite).
+    Animations: light tweens on the static sprite (`src/Spoon/SpoonMotion.cs`, owner request 2026-11-16: rotations,
+    swoop and rise); a drawn replacement sprite keeps them if its ground point stays at the handle tip.
   - **Restaurant ambience (owner request, 2026-11-16, open):** in the Spoon act, a light restaurant ambience (chatter,
     cutlery, glasses) under the music, with the boss music kept as the main track. Its level is set like a sound
     effect (follows the SFX volume, kept low in decibels so it never covers the music). Needs a free ambience recording
