@@ -83,7 +83,7 @@ public sealed class SpoonWoodenSpoon : SpoonCutleryCard
 	protected override void OnUpgrade() => DynamicVars[SatedKey].UpgradeValueBy(1m);
 }
 
-/// <summary>Skimmer: gain 6 Block (9 upgraded); the Spoon's next Banquet eats none of your max HP.</summary>
+/// <summary>Skimmer: gain 6 Block (9 upgraded); the next Banquet deals no damage and eats none of your max HP.</summary>
 public sealed class SpoonSkimmer : SpoonCutleryCard
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(SpoonRule.SkimmerBlock, ValueProp.Move)];
@@ -111,7 +111,7 @@ public sealed class SpoonMelonBaller : SpoonCutleryCard
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new MaxHpVar(SpoonRule.BallerMaxHp)];
 
 	public SpoonMelonBaller()
-		: base(2, TargetType.AnyEnemy)
+		: base(1, TargetType.AnyEnemy)
 	{
 	}
 

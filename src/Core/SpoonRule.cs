@@ -6,12 +6,12 @@ namespace SlaySpoon.Core;
 /// </summary>
 public static class SpoonRule
 {
-	public const int Threshold = 300, FeastMaxHp = 5, GiftMaxHp = 5, HpPerFighter = 2000,
+	public const int Threshold = 300, FeastMaxHp = 5, GiftMaxHp = 5, HpPerFighter = 1200,
 		AppetitePerMove = 2, AppetiteBite = 3, SpoonfulAppetite = 1, SpoonfulAppetiteUpgraded = 2, AppetitePercent = 5, AppetiteStolenBack = 1;
 
 	/// <summary>The fight's numbers (docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md); tuned during balancing.</summary>
-	public const int BoucheeDamage = 35, LadleDamage = 55, BanquetDamage = 12, BanquetMaxHp = 10, FrailAmount = 2, VulnerableAmount = 2,
-		BanquetHealBase = 60, BanquetHealPerPlayer = 10, MaxHpPerStrength = 5,
+	public const int BoucheeDamage = 25, LadleDamage = 35, BanquetDamage = 8, BanquetMaxHp = 10, FrailAmount = 2, VulnerableAmount = 2,
+		BanquetHealBase = 30, BanquetHealPerPlayer = 10, MaxHpPerStrength = 5,
 		TeaspoonAppetite = 2, TeaspoonAppetiteUpgraded = 3, SkimmerBlock = 6, SkimmerBlockUpgraded = 9,
 		BallerMaxHp = 12, BallerMaxHpUpgraded = 15, WoodenMaxHpPercent = 10, ExtraFromDeck = 25, ExtraEveryCards = 5,
 		LadleStealDivisor = 4;
@@ -30,6 +30,15 @@ public static class SpoonRule
 		("STONE_HUMIDIFIER", "Uncommon"), ("DARKSTONE_PERIAPT", "Uncommon"), ("CHOSEN_CHEESE", "Uncommon"),
 		("FAKE_MANGO", "Common"),
 	];
+
+	/// <summary>Shop base price for promoted relics, using their Spoon grab-bag tier.</summary>
+	public static int? ExtraRelicPrice(string entry) => ExtraRelics.FirstOrDefault(r => r.Entry == entry).Deque switch
+	{
+		"Common" => 175,
+		"Uncommon" => 225,
+		"Rare" => 275,
+		_ => null,
+	};
 
 	public static bool ShouldInsert(bool spoonRun, bool vanillaActIndexIsLast3, bool atLastBoss, IReadOnlyList<int> maxHps, bool alreadyInserted) =>
 		spoonRun && vanillaActIndexIsLast3 && atLastBoss && !alreadyInserted && maxHps.Any(h => h >= Threshold);
@@ -76,13 +85,14 @@ public static class SpoonRule
 
 	/// <summary>
 	/// The Spoon's Strength follows its max HP: 1 per <see cref="MaxHpPerStrength"/> above its max HP at fight start,
-	/// minus 1 per as many below, truncated toward zero (owner, 2026-11-16). The max HP it grew from its hits does not
-	/// count (owner, 2026-11-16: growth fed Strength, which fed growth, up to 200+ hits). What it loses (Melon Baller)
-	/// and the max HP Ladle Smash steals (1 Strength per 5 stolen, owner, 2026-11-16) do.
+	/// minus 1 per as many below, truncated toward zero. All max HP changes count against the fixed combat baseline.
 	/// </summary>
-	public static int StrengthFor(int maxHp, int startMaxHp, int grown = 0) => (maxHp - grown - startMaxHp) / MaxHpPerStrength;
+	public static int StrengthFor(int maxHp, int startMaxHp) => (maxHp - startMaxHp) / MaxHpPerStrength;
 
-	/// <summary>Banquet heals 60, plus 10 per player past the first (owner: 60, 70, 80, 90).</summary>
+	/// <summary>All unblocked damage becomes max HP (owner retained the full growth rate).</summary>
+	public static int GrowthFromDamage(int unblocked) => Math.Max(0, unblocked);
+
+	/// <summary>Banquet heals 30, plus 10 per player past the first.</summary>
 	public static int BanquetHeal(int players) => BanquetHealBase + BanquetHealPerPlayer * Math.Max(0, players - 1);
 
 	/// <summary>The max HP a Melon Baller takes: its amount, leaving the Spoon at least 1.</summary>
@@ -103,10 +113,10 @@ public static class SpoonRule
 	public static int WoodenDamage(int maxHp) => Math.Max(0, maxHp) * WoodenMaxHpPercent / 100;
 
 	/// <summary>
-	/// The Appetite the Spoon takes from a player after a move whose hits pierced their Block (owner, 2026-11-16); the
+	/// The Appetite the Spoon takes from a player hit by an attack, even if fully blocked (owner, 2026-11-16); the
 	/// player may go negative.
 	/// </summary>
-	public static int StolenBack(int unblocked) => unblocked <= 0 ? 0 : AppetiteStolenBack;
+	public static int StolenBack(bool hit) => hit ? AppetiteStolenBack : 0;
 
 	/// <summary>
 	/// Ladle Smash steals max HP (owner, 2026-11-16): a quarter of the damage it dealt past a player's Block, rounded

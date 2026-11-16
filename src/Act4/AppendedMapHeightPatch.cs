@@ -30,6 +30,8 @@ internal static class AppendedMapHeightPatch
 		AccessTools.FieldRefAccess<NMapScreen, float>("_distY");
 	private static readonly AccessTools.FieldRef<NMapScreen, Vector2> TargetDragPos =
 		AccessTools.FieldRefAccess<NMapScreen, Vector2>("_targetDragPos");
+	private static readonly AccessTools.FieldRef<NMapScreen, Control> MapContainer =
+		AccessTools.FieldRefAccess<NMapScreen, Control>("_mapContainer");
 	private static readonly Action<NMapScreen, NMapPoint, MapPoint> DrawPaths =
 		AccessTools.MethodDelegate<Action<NMapScreen, NMapPoint, MapPoint>>(AccessTools.Method(typeof(NMapScreen), "DrawPaths"));
 
@@ -44,7 +46,14 @@ internal static class AppendedMapHeightPatch
 	/// the new run state, so the screen's <c>_runState</c> still held the previous run (in game, 1.3.1: points left at
 	/// vanilla height while the scroll was clamped).
 	/// </summary>
-	private static bool Appended(ActMap map) => map is SpoonActMap or EndingActMap;
+	private static bool Appended(ActMap map)
+	{
+		if (map is SpoonActMap or EndingActMap) return true;
+		// SavedActMap loses the concrete map type. Use the active manager, since the screen may still
+		// reference the previous run during initialization. Identity prevents shortening an unrelated map.
+		RunState? run = RunManager.Instance.DebugOnlyGetState();
+		return map is SavedActMap && run?.Map == map && run.Act is IAppendedAct;
+	}
 
 	[HarmonyPatch(typeof(NMapScreen), nameof(NMapScreen.SetMap))]
 	[HarmonyPostfix]
@@ -61,7 +70,7 @@ internal static class AppendedMapHeightPatch
 			{
 				Vector2 position = node.Position;
 				position.Y = coord == map.BossMapPoint.coord
-					? AppendedMapHeight.BossY(rowCount)
+					? AppendedMapHeight.BossPointY(position.Y, rowCount)
 					: AppendedMapHeight.PointY(position.Y, coord.row, vanillaDist);
 				node.Position = position;
 			}
@@ -100,6 +109,10 @@ internal static class AppendedMapHeightPatch
 	{
 		if (_scrollTop >= AppendedMapHeight.VanillaScrollTop) return; // vanilla acts keep their elastic overscroll
 		ref Vector2 target = ref TargetDragPos(__instance);
-		if (target.Y > _scrollTop) target = new Vector2(target.X, _scrollTop);
+		target = new Vector2(target.X, AppendedMapHeight.ClampScroll(target.Y, _scrollTop));
+		// Opening the map also writes Position directly; clamp it before the vanilla interpolation.
+		Control container = MapContainer(__instance);
+		container.Position = new Vector2(container.Position.X,
+			AppendedMapHeight.ClampScroll(container.Position.Y, _scrollTop));
 	}
 }

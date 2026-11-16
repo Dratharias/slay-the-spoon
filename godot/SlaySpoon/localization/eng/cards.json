@@ -493,7 +493,7 @@
 	"SPOON_WOODEN_SPOON.title": "Wooden Spoon",
 	"SPOON_WOODEN_SPOON.description": "Deal [blue]10%[/blue] of your Max HP as damage.\nThe Spoon's [gold]Appetite[/gold] does nothing for {Sated:diff()} {Sated:plural:turn|turns}.",
 	"SPOON_SKIMMER.title": "Skimmer",
-	"SPOON_SKIMMER.description": "Gain {Block:diff()} [gold]Block[/gold].\nThis turn, [gold]Banquet[/gold] eats none of your Max HP.",
+	"SPOON_SKIMMER.description": "Gain {Block:diff()} [gold]Block[/gold].\nPrevent the next [gold]Banquet[/gold] from dealing damage or taking your Max HP. Lasts until Banquet.",
 	"SPOON_MELON_BALLER.title": "Melon Baller",
 	"SPOON_MELON_BALLER.description": "Take {MaxHp:diff()} Max HP from the Spoon.",
 	"SPOON_STOLEN_SPOONFUL.title": "Stolen Spoonful",

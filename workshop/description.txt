@@ -17,6 +17,11 @@ Slay the Spoon adds Slay the Spire 1 content and new options to Slay the Spire 2
 [*][b]Campfire Sales[/b] (co-op): offer an ally a card for 0–999 gold. Any shortfall becomes a loan at 0–900% interest. The buyer must accept. No curses.
 [/list]
 
+[h2]Spoon mode (1.3.6)[/h2]
+Grow your max HP with Spoonful, Feast rest sites, extra max HP relics and merchant Fruit Juice. Reach 300 max HP to face the Spoon after act 3; other players support the fighters.
+The solo boss has 1200 HP. Mouthful/Ladle deal 25/35 base damage. Banquet causes 8 fixed HP loss through Block and takes 10 max HP; Skimmer prevents both and lasts until Banquet. The boss still heals (30 solo) and applies Vulnerable. Melon Baller costs 1 energy.
+Unblocked damage grows its max HP by 100%; Strength is +1 per 5 above its combat-start max HP, negative below. Every attack steals 1 Appetite per fighter hit, even if fully blocked. The test launcher has been removed.
+
 [h2]Also included[/h2]
 [list]
 [*][b]The Watcher[/b]: playable in solo Standard Runs and all Custom Runs.
@@ -33,6 +38,9 @@ In Standard Runs, the Spire Souvenir can drop and Act 4 is enabled by default on
 En partie personnalisée : PV et dégâts des monstres de 25 à 500 %, cartes de Slay the Spire 1, mélange des deux jeux avec le Souvenir de la Tour, bénédictions de Neow, coffre de départ, reliques de boss et acte 4. En coopération : dons ou prêts d’or chez le marchand et ventes de cartes au feu de camp à 0–999 pièces d’or, avec crédit à 0–900 % d’intérêt et accord de l’acheteur.
 
 La Gardienne est jouable en partie standard solo et dans toutes les parties personnalisées. Le mod ajoute aussi trois événements de Slay the Spire 1 à l’acte 2 et une couleur de personnage personnalisable.
+
+[b]Mode Cuillère (1.3.6)[/b] : augmentez vos PV max avec Cuillerée, les festins et les reliques. Atteignez 300 PV max pour affronter la Cuillère après l’acte 3 ; les autres joueurs soutiennent les combattants. En solo : 1 200 PV, Bouchée à 25 et Louche à 35 dégâts de base. Banquet inflige 8 pertes de PV fixes à travers l’Armure et retire 10 PV max. L’Écumoire annule les deux et dure jusqu’au Banquet ; la Cuillère se soigne toujours (30 PV en solo) et applique Vulnérable. La Parisienne coûte 1 énergie.
+La croissance reste égale à 100 % des dégâts non bloqués, avec 1 Force par tranche de 5 PV max au-dessus ou en dessous du début de combat. Chaque attaque vole 1 Appétit par combattant touché, même entièrement bloquée. Le lanceur de test a été retiré.
 
 La copie facultative de progression vers le profil avec mods écrase sa progression à chaque lancement, sans toucher à la sauvegarde habituelle.
 

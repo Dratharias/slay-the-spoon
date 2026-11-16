@@ -493,7 +493,7 @@
 	"SPOON_WOODEN_SPOON.title": "Cuillère en bois",
 	"SPOON_WOODEN_SPOON.description": "Infligez [blue]10 %[/blue] de vos PV max en dégâts.\nL'[gold]Appétit[/gold] de la Cuillère est sans effet pendant {Sated:diff()} {Sated:plural:tour|tours}.",
 	"SPOON_SKIMMER.title": "Écumoire",
-	"SPOON_SKIMMER.description": "Gagnez {Block:diff()} d'[gold]Armure[/gold].\nCe tour-ci, le [gold]Banquet[/gold] ne mange aucun de vos PV max.",
+	"SPOON_SKIMMER.description": "Gagnez {Block:diff()} d’[gold]Armure[/gold].\nLe prochain [gold]Banquet[/gold] ne vous inflige aucun dégât et ne mange aucun de vos PV max. Dure jusqu’au Banquet.",
 	"SPOON_MELON_BALLER.title": "Cuillère parisienne",
 	"SPOON_MELON_BALLER.description": "Volez {MaxHp:diff()} PV max à la Cuillère.",
 	"SPOON_STOLEN_SPOONFUL.title": "Cuillerée volée",

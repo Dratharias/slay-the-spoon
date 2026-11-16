@@ -152,3 +152,60 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Game over (win or loss): no unlock score bar progress, no new epoch; the modded profile's play time, floors,
       encounter stats and enemy kill stats do not change (log: `spoon test: run end progress skipped`, `unlock score
       skipped`). The run still appears in the run history as a Custom Run.
+
+## Merchant prices and short-map scrolling regression (2026-11-16)
+
+Automated validation: build without warnings; 742 xUnit and 91 pytest tests pass.
+
+- [ ] Spoon merchants price promoted event/Ancient relics from their grab-bag tier (175/225/275 base gold,
+      normal variation and discounts), including restocks; other modes retain their original prices.
+- [ ] Fresh Spoon and Ending maps have compact paths. Drag, wheel and controller scrolling stop at their bounds.
+- [ ] Save at the merchant, quit and Continue: both short acts retain compact spacing and traveled-path colors.
+      Closing/reopening the map at each node keeps its points visible rather than showing a long empty path.
+- [ ] Starting a normal act after a short-act run restores ordinary map spacing and scrolling.
+
+## Strength baseline regression (2026-11-16)
+
+- [ ] With a 2000 max HP combat baseline, growth to 2010 grants +2 Strength; dropping back to 2000 removes it;
+      dropping to 1985 gives -3 Strength. Growth from hits and Ladle theft both count.
+- [ ] Independent Strength changes are preserved when the max HP contribution updates.
+- [ ] Reloading combat establishes the baseline again at combat start.
+
+## 1.3.3 balance and Banquet regression
+
+- [ ] Solo Spoon starts at 1200 max HP. Mouthful/Ladle base damage is 25/35; Banquet heals 30.
+- [ ] Unblocked hits still grow max HP by 100%; Strength stays 1 per 5 above/below combat-start max HP.
+- [ ] With Block, Strength, Appetite, Vulnerable, Buffer or Intangible, an unprotected Banquet still takes exactly
+      8 current HP before its separate 10 max HP loss (which can additionally clamp current HP).
+- [ ] Skimmer played before an earlier move persists until Banquet, prevents both losses, then expires.
+      Banquet still applies Vulnerable and heals. Melon Baller costs 1 energy.
+- [ ] Banquet intent and tooltip show 8 unprotected and 0 protected, without attack scaling; supporters take no loss.
+- [ ] Other attacks retain normal damage modifiers, prevention and pet redirection. Test co-op and save/reload.
+
+## 1.3.4 short-map boss visibility
+
+The boss height adjustment now preserves the parent anchor translation, like the other map points.
+Previously it overwrote the laid-out position with a pre-parenting coordinate, leaving most of the icon above
+view even at maximum scroll. Geometry tests cover the full placeholder including hover scale.
+
+- [ ] On fresh and reloaded Spoon/Ending maps, scroll to the boss: the entire icon and hover outline are visible
+      below the top bar and the boss can be selected. Check mouse wheel, drag and controller.
+
+## 1.3.5 combat power icons
+
+The combat power UI now resolves borrowed/own packed icons explicitly before loading the texture, avoiding
+an inlined vanilla getter that looked up nonexistent mod IDs in the vanilla atlas.
+
+- [ ] Metallicize shows the Plating icon; Skimmed shows Buffer, both below the player and in hover tips.
+- [ ] Other borrowed powers (including Appetite/Sated) and the own-art Block Return retain their intended icons.
+- [ ] Vanilla buffs, amounts, flashes and hover tips remain unchanged. No missing-sprite warnings for these powers.
+
+## 1.3.6 publication
+
+Owner approved the balance after play-testing. Attack hits now steal one Appetite even when fully blocked;
+only actual fighters are eligible, once per player per move. A Banquet canceled by Skimmed never hits.
+The test menu/launcher/deck and install-detection helper were removed; legacy run flags and progress guards remain.
+
+- [ ] Fully block Mouthful/Ladle: lose 1 Appetite, boss gains 1; max HP growth/theft still require HP damage.
+- [ ] Sets the Table steals none; a Skimmed Banquet steals none from its protected player; supporters are excluded.
+- [ ] Main menu has no test entry, including a local install. Existing test saves can still reload.

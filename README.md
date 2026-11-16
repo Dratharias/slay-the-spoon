@@ -16,7 +16,7 @@ Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic descri
 
 ## Features
 
-Current (0.10.0):
+Current version: **1.3.6**.
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps (− / + buttons,
   or left/right on a gamepad), synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -108,7 +108,20 @@ broken Maw Bank can be reopened there. Not with Matriochka. Not tested in game: 
 
 **Spoon** (Custom Run): everyone starts with a Spoonful, and max HP becomes the currency of the run: more max HP relics
 in the draws, a Feast at every rest site, Fruit Juice at every merchant. Reach 300 max HP and something wants to feed on
-you after the last boss. The others can only help from the side. Not tested in game: `docs/testing/spoon-checklist.md`.
+you after the last boss. Players below the threshold support the fighters from the side.
+
+The Spoon starts at 1200 HP in solo. Its four-turn cycle is Sets the Table, Mouthful (25 base damage), Banquet,
+and Ladle Smash (35 base damage). Banquet deals 8 fixed HP loss through Block, takes 10 max HP and heals the Spoon
+for 30 in solo. Skimmer prevents both losses and stays active until the next Banquet; the boss still heals and
+applies Vulnerable. Melon Baller costs 1 energy and transfers 12 max HP (15 upgraded).
+
+Damage that gets through Block grows the Spoon's max HP by the full amount. Its Strength follows the difference
+from its max HP at combat start: +1 per 5 above the baseline, −1 per 5 below, rounded toward zero. Each attack steals
+1 Appetite per fighter hit, even when fully blocked; a Banquet prevented by Skimmer does not hit. Sets the Table
+grants 2 Appetite per living player. Each Appetite stack changes damage by 5%, except Banquet's fixed HP loss.
+
+The balance has been play-tested by the author. The standalone test launcher has been removed; existing test saves
+remain loadable. See `docs/testing/spoon-checklist.md` for remaining regression and co-op checks.
 
 **Merchant Loans** (co-op Custom Runs): enable the modifier in the lobby. If a merchant purchase
 fails for lack of gold, choose **Ask** to open a request. Other players can lend gold at 0–900%
@@ -135,15 +148,12 @@ the Corrupt Heart. Without all keys the run ends after Act 3 as usual. A Custom 
 keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-game validation; see
 `docs/testing/step-6-checklist.md`.
 
-## Development status — 2026-10-29
+## Development status — 2026-11-16
 
-Work is on `step-3`, not merged or published. The current version is **0.6.0**: Ironclad, Silent,
-Defect and colorless cards and the Slay the Spire 1 events are implemented and pass the automated
-checks (100 xUnit and 36 Python tests, build with zero warnings). None of it has been tested in game yet; see the checklists
-for [Silent](docs/testing/step-3a-checklist.md), [Defect](docs/testing/step-3b-checklist.md),
-[colorless cards](docs/testing/step-3c-checklist.md) and [events](docs/testing/step-3d-checklist.md). Which cards count as the same card in
-both games is still subject to the author's review in the comparison pages under
-[docs/review/](docs/review/).
+Version **1.3.6** includes the Spoon balance pass, corrected merchant prices for promoted event/Ancient relics,
+compact Spoon/Heart maps with fully reachable boss icons, and combat power icon fixes. Automated validation:
+736 xUnit and 91 Python tests pass; the build has no warnings. In-game coverage varies by feature; the
+[testing checklists](docs/testing/) record remaining checks. The Spoon's balance was approved after play-testing.
 
 ## Languages
 
@@ -156,7 +166,7 @@ Every player in a co-op lobby needs the same version of the mod.
 Slay the Spoon requires [BaseLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127)
 3.4.7 or later (declared in `SlaySpoon.json`; the game refuses to load the mod without it).
 
-- Steam Workshop: a friends-only alpha. BaseLib is a required item: subscribing to Slay the Spoon
+- [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3829630403): a friends-only alpha. BaseLib is a required item: subscribing to Slay the Spoon
   offers to subscribe to it too.
 - Manually: install BaseLib, then copy the `SlaySpoon` folder (containing `SlaySpoon.json`, `SlaySpoon.dll`,
   `SlaySpoon.pck`) into `<Slay the Spire 2>/mods/`, then start the game and accept mod loading.

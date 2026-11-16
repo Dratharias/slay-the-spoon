@@ -1,5 +1,8 @@
+using System.Reflection.Emit;
+using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Cards.Sts1.Powers;
@@ -46,6 +49,15 @@ public static class BorrowedIconPatch
 		}
 	}
 
+	/// <summary>Resolve explicitly at the UI call site: JIT inlining can bypass the PackedIconPath patch.</summary>
+	public static Texture2D CombatIcon(PowerModel power)
+	{
+		string path = power is IBorrowedIcon borrowed ? Source(borrowed).PackedIconPath
+			: Sts1PowerIcons.Has(power.Id.Entry) ? Sts1PowerIcons.Packed(power.Id.Entry)
+			: power.PackedIconPath;
+		return ResourceLoader.Load<Texture2D>(path);
+	}
+
 	private static PowerModel Source(IBorrowedIcon borrowed)
 	{
 		return ModelDb.GetById<PowerModel>(ModelDb.GetId(borrowed.IconSource));
@@ -63,5 +75,31 @@ public static class BorrowedIconPreloadPatch
 		{
 			BorrowedIconPatch.Seed(power);
 		}
+	}
+}
+
+/// <summary>
+/// Replace the combat UI's Icon getter call before JIT compilation. Patching only PackedIconPath is insufficient:
+/// PowerModel.Icon may already contain its inlined original body, producing a missing atlas sprite (NOPE).
+/// </summary>
+[HarmonyPatch(typeof(NPower), "Reload")]
+internal static class BorrowedCombatIconPatch
+{
+	private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+	{
+		var iconGetter = AccessTools.PropertyGetter(typeof(PowerModel), nameof(PowerModel.Icon));
+		var resolve = AccessTools.Method(typeof(BorrowedIconPatch), nameof(BorrowedIconPatch.CombatIcon));
+		int replaced = 0;
+		foreach (CodeInstruction instruction in instructions)
+		{
+			if (instruction.Calls(iconGetter))
+			{
+				instruction.opcode = OpCodes.Call;
+				instruction.operand = resolve;
+				replaced++;
+			}
+			yield return instruction;
+		}
+		if (replaced != 1) throw new InvalidOperationException($"Expected one NPower.Reload Icon call, found {replaced}");
 	}
 }

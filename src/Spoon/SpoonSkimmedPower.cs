@@ -6,8 +6,7 @@ using SlaySpoon.Cards.Sts1.Powers;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// Skimmed (Skimmer, cutlery spec): the Spoon's Banquet eats none of this player's max HP. SpoonMonster removes it from
-/// every player at the end of each of its turns.
+/// Skimmed prevents the next Banquet's fixed damage and max HP loss. Persists until that Banquet consumes it.
 /// </summary>
 public sealed class SpoonSkimmedPower : PowerModel, IBorrowedIcon
 {

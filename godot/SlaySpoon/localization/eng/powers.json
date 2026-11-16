@@ -141,13 +141,14 @@
 	"STS1_WRATH_STANCE_POWER.description": "Your card attacks deal double damage. Enemy attacks deal double damage to you.",
 	"STS1_WRATH_STANCE_POWER.smartDescription": "Your card attacks deal double damage. Enemy attacks deal double damage to you.",
 	"STS1_WRATH_STANCE_POWER.title": "Wrath",
-	"SPOON_APPETITE_POWER.description": "Deals [blue]5%[/blue] more damage per stack, [blue]5%[/blue] less per negative stack. After Sets the Table the Spoon gains [blue]2[/blue] per player; after a move that pierced a player's Block it takes [blue]1[/blue] from them. Each [gold]Spoonful[/gold] played on it removes [blue]1[/blue] ([blue]2[/blue] upgraded).",
-	"SPOON_APPETITE_POWER.smartDescription": "Deals [blue]5%[/blue] more damage per stack, [blue]5%[/blue] less per negative stack ([blue]{Amount}[/blue]). After Sets the Table the Spoon gains [blue]2[/blue] per player; after a move that pierced a player's Block it takes [blue]1[/blue] from them. Each [gold]Spoonful[/gold] played on it removes [blue]1[/blue] ([blue]2[/blue] upgraded).",
+	"SPOON_APPETITE_POWER.description": "Deals [blue]5%[/blue] more damage per stack, [blue]5%[/blue] less per negative stack. After Sets the Table the Spoon gains [blue]2[/blue] per player; after an attack hits a player, even if fully blocked, it takes [blue]1[/blue] from them. Each [gold]Spoonful[/gold] played on it removes [blue]1[/blue] ([blue]2[/blue] upgraded).",
+	"SPOON_APPETITE_POWER.smartDescription": "Deals [blue]5%[/blue] more damage per stack, [blue]5%[/blue] less per negative stack ([blue]{Amount}[/blue]). After Sets the Table the Spoon gains [blue]2[/blue] per player; after an attack hits a player, even if fully blocked, it takes [blue]1[/blue] from them. Each [gold]Spoonful[/gold] played on it removes [blue]1[/blue] ([blue]2[/blue] upgraded).",
 	"SPOON_APPETITE_POWER.title": "Appetite",
 	"SPOON_SATED_POWER.title": "Sated",
 	"SPOON_SATED_POWER.description": "Its [gold]Appetite[/gold] does nothing: it hits for its normal damage. Lasts one turn per stack.",
 	"SPOON_SATED_POWER.smartDescription": "Its [gold]Appetite[/gold] does nothing {Amount:plural:on its next turn|for its next [blue]{}[/blue] turns}: it hits for its normal damage.",
 	"SPOON_SKIMMED_POWER.title": "Skimmed",
-	"SPOON_SKIMMED_POWER.description": "This turn, [gold]Banquet[/gold] eats none of your Max HP.",
-	"SPOON_SKIMMED_POWER.smartDescription": "This turn, [gold]Banquet[/gold] eats none of your Max HP."
+	"SPOON_SKIMMED_POWER.description": "Prevent the next [gold]Banquet[/gold] from dealing damage or taking your Max HP. Lasts until Banquet.",
+	"SPOON_SKIMMED_POWER.smartDescription": "Prevent the next [gold]Banquet[/gold] from dealing damage or taking your Max HP. Lasts until Banquet.",
+	"SPOON_SKIMMED_POWER.banquetDescription": "Lose [blue]{Damage}[/blue] HP, ignoring Block and damage modifiers. Only [gold]Skimmed[/gold] prevents this loss and the loss of [blue]10[/blue] Max HP. The Spoon still applies Vulnerable and heals."
 }

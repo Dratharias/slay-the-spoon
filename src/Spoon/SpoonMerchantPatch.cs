@@ -71,3 +71,23 @@ internal static class SpoonJuiceCostPatch
 		return false;
 	}
 }
+
+/// <summary>Promoted event/Ancient relics use their Spoon tier instead of vanilla's prohibitive sentinel price.
+/// Uses exactly one Shops draw, like a normal relic, including on restock; ordinary price hooks still apply.</summary>
+[HarmonyPatch(typeof(MerchantRelicEntry), nameof(MerchantRelicEntry.CalcCost))]
+internal static class SpoonRelicCostPatch
+{
+	private static readonly AccessTools.FieldRef<MerchantEntry, Player> PlayerOf =
+		AccessTools.FieldRefAccess<MerchantEntry, Player>("_player");
+	private static readonly AccessTools.FieldRef<MerchantEntry, int> Cost =
+		AccessTools.FieldRefAccess<MerchantEntry, int>("_cost");
+
+	private static bool Prefix(MerchantRelicEntry __instance)
+	{
+		Player player = PlayerOf(__instance);
+		if (!SpoonSpoon.IsActive(player.RunState) || __instance.Model is not { } relic ||
+			SpoonRule.ExtraRelicPrice(relic.Id.Entry) is not { } basePrice) return true;
+		Cost(__instance) = (int)Math.Round(basePrice * player.PlayerRng.Shops.NextFloat(0.85f, 1.15f));
+		return false;
+	}
+}

@@ -14,6 +14,8 @@ public static class AppendedMapHeight
 	/// <summary>Vanilla scroll limits of the map container (bottom of the map shown, top of the map shown).</summary>
 	public const float VanillaScrollBottom = -600f, VanillaScrollTop = 1800f;
 
+	public static float ClampScroll(float position, float top) => Math.Clamp(position, VanillaScrollBottom, top);
+
 	public static float RowSpacing => VanillaHeight / (ReferenceRows - 1);
 
 	/// <summary>Glory's gap between its last grid row and the boss.</summary>
@@ -23,6 +25,10 @@ public static class AppendedMapHeight
 	public static float PointY(float y, int row, float vanillaDistY) => y + row * vanillaDistY - row * RowSpacing;
 
 	public static float BossY(int rowCount) => FirstRowY - (rowCount - 1) * RowSpacing - BossGap;
+
+	/// <summary>Shift the laid-out boss by the height difference, preserving the parent anchor offset.
+	/// Vanilla positions the boss before adding it to Points; parenting adds the centered anchor translation.</summary>
+	public static float BossPointY(float laidOutY, int rowCount) => laidOutY + BossY(rowCount) - VanillaBossY;
 
 	/// <summary>The top scroll limit: the boss shown where vanilla shows it at the top, never below the bottom limit.</summary>
 	public static float ScrollTop(int rowCount) =>

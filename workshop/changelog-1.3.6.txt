@@ -1,0 +1,8 @@
+1.3.6 — Spoon balance and fixes
+
+- Rebalanced the Spoon: 1200 starting HP, 25/35 base attack damage, Banquet healing reduced to 30.
+- Banquet deals 8 fixed damage through Block; Skimmer prevents this and max HP loss, lasting until Banquet.
+- Melon Baller now costs 1 energy. Full max HP growth and 1 Strength per 5 max HP from the combat baseline remain.
+- Attacks steal 1 Appetite per player hit, even when fully blocked.
+- Fixed promoted relic prices, short-act maps (Spoon and Heart), and borrowed combat power icons.
+- Removed the test launcher; existing test saves remain compatible.

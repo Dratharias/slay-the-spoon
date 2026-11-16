@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.Saves;
 namespace SlaySpoon.Config;
 
 /// <summary>
-/// Run flag: a run started from the main-menu "Test: The Spoon" button (<see cref="Spoon.SpoonTestStart"/>). It is
+/// Legacy run flag from the retired Spoon test launcher. Kept for existing saves. It is
 /// saved with the run, so a reload keeps it, and <see cref="Spoon.SpoonTestProgressGuards"/> keep such a run out of the
 /// modded profile's progress. No Custom Run row offers it.
 /// </summary>

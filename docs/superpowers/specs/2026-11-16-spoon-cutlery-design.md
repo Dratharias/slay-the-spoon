@@ -37,8 +37,9 @@ Strength = (max HP − max HP at fight start) / 5, truncated toward zero, negati
 per 5 max HP and vice versa"). Recomputed whenever its max HP changes. Replaces "+1 per 10 grown". The team max HP
 damage ratio stays removed.
 
-1.3.2 (owner, 2026-11-16): the max HP grown from its hits no longer counts. Growth fed Strength, which fed bigger hits
-and more growth (a play test reached 200+ per hit). Only the max HP it loses (Melon Baller) changes its Strength.
+Owner correction (2026-11-16): all max HP changes count, including growth from hits and stolen max HP.
+The baseline stays fixed at combat start; falling below it gives negative Strength. This supersedes the 1.3.2
+growth exclusion. Apply only the change in this contribution, preserving other Strength effects.
 
 ## Appetite and Spoonful
 
@@ -81,3 +82,17 @@ Every number not marked as the owner's is tuned during balancing (owner, 2026-11
 
 Pure rules (cycle, kit counts, Strength from max HP, heal) in `src/Core/SpoonRule.cs` with tests; card portraits are
 placeholders; EN/FR text; spec, checklist and backlog updates.
+
+
+## 1.3.3 balance pass (owner, 2026-11-16)
+
+This section supersedes earlier numbers: 1200 starting HP per fighter (existing multiplayer scaling),
+25 Mouthful damage, 35 Ladle damage, and Banquet heals 30 + 10 per additional player.
+The owner explicitly retained growth equal to 100% of unblocked damage and 1 Strength per 5 max HP
+above/below the fixed combat baseline. Appetite, Frail, Vulnerable and Ladle theft rates are unchanged.
+
+Banquet causes 8 fixed HP loss through Block, without Strength, Appetite, Vulnerable or damage-prevention
+modifiers. Skimmed alone cancels this loss and the existing 10 max HP loss. Skimmed lasts until the next
+Banquet and is consumed then. Banquet still applies Vulnerable and heals when countered. Its intent reports
+8 (0 for a protected local player or a supporter). Damage/death events still use the normal command path.
+The Melon Baller costs 1 energy instead of 2, with its 12/15 max HP transfer unchanged.

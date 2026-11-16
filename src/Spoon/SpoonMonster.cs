@@ -22,7 +22,7 @@ namespace SlaySpoon.Spoon;
 /// players who reached 300 max HP (the fighters); the others support them with Spoon-Feed and cannot hurt it or be
 /// hurt by it. It plays a 4-turn cycle (docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md): sets the table (Frail,
 /// and the cutlery kit into every player's draw pile), Mouthful (Block from the HP it took), Banquet (Vulnerable, eats max
-/// HP, heals) and Ladle Smash. Its hits grow with Appetite. It grows on the HP its hits take past Block (that much max HP,
+/// HP, heals) and Ladle Smash. Its hits grow with Appetite. It grows by the HP its hits take past Block (max HP,
 /// without healing), and its Strength follows its max HP against the start (<see cref="SpoonRule.StrengthFor"/>).
 /// </summary>
 public sealed class SpoonMonster : Sts1EndingMonster
@@ -57,10 +57,10 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	/// <summary>Not saved: StS2 restarts the combat when a save loads, and the fighters are chosen again then.</summary>
 	private HashSet<Player>? _fighters;
 
-	/// <summary>Max HP grown this fight, for the sprite's size and left out of Strength. Not saved, like the fighters.</summary>
+	/// <summary>Max HP grown this fight, for the sprite's size. Not saved, like the fighters.</summary>
 	private int _grown;
 
-	/// <summary>Max HP stolen by Ladle Smash: unlike growth, it gives Strength.</summary>
+	/// <summary>Max HP stolen by Ladle Smash, also used for the sprite's size.</summary>
 	private int _stolen;
 
 	/// <summary>How many times it set the table this fight; names the kit extras' Rng.</summary>
@@ -128,7 +128,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		{
 			[SpoonRule.SpoonMove.SetTable] = new("SET_TABLE_MOVE", SetTableMove, new DebuffIntent(), new StatusIntent(1)),
 			[SpoonRule.SpoonMove.Bouchee] = new("BOUCHEE_MOVE", BoucheeMove, new SingleAttackIntent(SpoonRule.BoucheeDamage), new DefendIntent()),
-			[SpoonRule.SpoonMove.Banquet] = new("BANQUET_MOVE", BanquetMove, new SingleAttackIntent(SpoonRule.BanquetDamage), new DebuffIntent(true), new HealIntent()),
+			[SpoonRule.SpoonMove.Banquet] = new("BANQUET_MOVE", BanquetMove, new SpoonBanquetIntent(), new DebuffIntent(true), new HealIntent()),
 			[SpoonRule.SpoonMove.Ladle] = new("LADLE_MOVE", LadleMove, new SingleAttackIntent(SpoonRule.LadleDamage)),
 		};
 		return BuildMachine(new EndingMoveBrain<SpoonRule.SpoonMove>((turn, _, _) => SpoonRule.Move(turn), SpoonRule.SpoonMove.SetTable), moves);
@@ -236,27 +236,41 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	}
 
 	/// <summary>
-	/// Banquet: a light hit (owner, 2026-11-16), Vulnerable on the fighters, each loses max HP unless Skimmed (lost, not
-	/// gained), then it heals.
+	/// Banquet: fixed unblockable HP loss and max HP loss unless Skimmed, then Vulnerable and healing.
 	/// </summary>
 	private async Task BanquetMove(IReadOnlyList<Creature> targets)
 	{
 		await AnimateAsync(m => m.BanquetAsync());
-		AttackCommand attack = await DamageCmd.Attack(SpoonRule.BanquetDamage).FromMonster(this)
-			.WithHitFx("vfx/vfx_bite")
-			.Execute(null);
-		await Grow(Unblocked(attack));
 		var context = new ThrowingPlayerChoiceContext();
 		List<Creature> fighters = LivingFighters().ToList();
-		await PowerCmd.Apply<VulnerablePower>(context, fighters, SpoonRule.VulnerableAmount, Creature, null);
 		int eaten = 0;
+		int unblocked = 0;
 		foreach (Creature fighter in fighters)
 		{
-			if (!fighter.IsAlive || fighter.GetPower<SpoonSkimmedPower>() != null) continue;
+			if (!fighter.IsAlive) continue;
+			if (fighter.GetPower<SpoonSkimmedPower>() is { } skimmed)
+			{
+				await PowerCmd.Remove(skimmed);
+				continue;
+			}
+			BanquetTarget = fighter;
+			try
+			{
+				var results = await CreatureCmd.Damage(context, fighter, SpoonRule.BanquetDamage,
+					ValueProp.Unblockable | ValueProp.Unpowered, Creature, null);
+				int lost = results.Sum(r => r.UnblockedDamage);
+				unblocked += lost;
+				_pierced[fighter] = lost;
+			}
+			finally { BanquetTarget = null; }
+			if (!fighter.IsAlive || !Creature.IsAlive) continue;
 			int before = fighter.MaxHp;
 			await CreatureCmd.LoseMaxHp(context, fighter, SpoonRule.BanquetMaxHp, false);
 			eaten += Math.Max(0, before - fighter.MaxHp);
 		}
+		await Grow(unblocked);
+		await PowerCmd.Apply<VulnerablePower>(context, fighters.Where(f => f.IsAlive).ToList(),
+			SpoonRule.VulnerableAmount, Creature, null);
 		int heal = SpoonRule.BanquetHeal(CombatState.Players.Count);
 		if (Creature.IsAlive) await CreatureCmd.Heal(Creature, heal);
 		Animate(m => m.Recover());
@@ -266,7 +280,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 
 	/// <summary>
 	/// Ladle Smash: the hit, its growth, then it steals max HP from each living player hit: a quarter of the damage past
-	/// their Block (<see cref="SpoonRule.LadleMaxHpSteal"/>). Stolen max HP is not growth: 1 Strength per 5.
+	/// their Block (<see cref="SpoonRule.LadleMaxHpSteal"/>). Like all max HP gains, this contributes 1 Strength per 5 above the combat baseline.
 	/// </summary>
 	private async Task LadleMove(IReadOnlyList<Creature> targets)
 	{
@@ -296,7 +310,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		await AfterMove();
 	}
 
-	/// <summary>The HP the hits took past Block; also records, per player, what this move pierced (Appetite steal).</summary>
+	/// <summary>The HP the hits took past Block; also records, per player, damage for Ladle theft; even zero-damage hits are recorded.</summary>
 	private int Unblocked(AttackCommand attack)
 	{
 		int total = 0;
@@ -311,25 +325,24 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	/// <summary>Per player creature, the HP this move's hits took past their Block; cleared after each move.</summary>
 	private readonly Dictionary<Creature, int> _pierced = new();
 
+	/// <summary>Scopes fixed-damage hooks to the current Banquet victim, excluding other damage and max HP loss.</summary>
+	internal Creature? BanquetTarget { get; private set; }
+
 	/// <summary>
-	/// After every move: one Sated turn is spent, pierced players lose Appetite to the Spoon, it gains its own after Sets
-	/// the Table, then the players' Skimmed ends.
+	/// After every move: one Sated turn is spent, hit players lose Appetite to the Spoon, it gains its own after Sets
+	/// the Table, Skimmed is consumed by Banquet itself.
 	/// </summary>
 	private async Task AfterMove(bool tableSet = false)
 	{
 		await GainAppetite(tableSet);
 		_pierced.Clear();
-		foreach (Player player in CombatState.Players.ToList())
-		{
-			if (player.Creature.GetPower<SpoonSkimmedPower>() is { } skimmed) await PowerCmd.Remove(skimmed);
-		}
 	}
 
 	/// <summary>Strength = <see cref="SpoonRule.StrengthFor"/>; only the change since the last sync is applied.</summary>
 	internal async Task SyncStrength()
 	{
 		if (!Creature.IsAlive || _startMaxHp <= 0) return;
-		int target = SpoonRule.StrengthFor(Creature.MaxHp, _startMaxHp, _grown);
+		int target = SpoonRule.StrengthFor(Creature.MaxHp, _startMaxHp);
 		int delta = target - _strengthGiven;
 		if (delta == 0) return;
 		_strengthGiven = target;
@@ -340,7 +353,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	/// <summary>
 	/// +<see cref="SpoonRule.AppetitePerMove"/> after Sets the Table only (<see cref="SpoonRule.GainsAppetite"/>), so its
 	/// first hit is at base. A Sated stack (its Appetite did nothing this turn) is spent first. A move whose hits
-	/// pierced a player's Block takes <see cref="SpoonRule.StolenBack"/> Appetite from them, down to negative.
+	/// touched a player, even through full Block, takes <see cref="SpoonRule.StolenBack"/> Appetite from them, down to negative.
 	/// </summary>
 	private async Task GainAppetite(bool tableSet)
 	{
@@ -354,8 +367,8 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		int gain = tableSet ? SpoonRule.AppetiteGain(CombatState.Players.Count(p => p.Creature.IsAlive)) : 0;
 		foreach (Player player in CombatState.Players.ToList())
 		{
-			if (!player.Creature.IsAlive) continue;
-			int taken = SpoonRule.StolenBack(_pierced.GetValueOrDefault(player.Creature));
+			if (!player.Creature.IsAlive || !IsFighter(player)) continue;
+			int taken = SpoonRule.StolenBack(_pierced.ContainsKey(player.Creature));
 			if (taken <= 0) continue;
 			await PowerCmd.Apply<SpoonAppetitePower>(context, player.Creature, -taken, Creature, null);
 			gain += taken;
@@ -364,16 +377,19 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	}
 
 	/// <summary>
-	/// The HP its hits took from players past their Block becomes its max HP (SetMaxHp: no heal). Growth gives no
+	/// The HP its hits took from players past their Block becomes its max HP (SetMaxHp: no heal), then updates
 	/// Strength (<see cref="SpoonRule.StrengthFor"/>).
 	/// </summary>
 	private async Task Grow(int unblocked)
 	{
 		if (!Creature.IsAlive || unblocked <= 0) return;
-		await CreatureCmd.SetMaxHp(Creature, Creature.MaxHp + unblocked);
-		_grown += unblocked;
+		int growth = SpoonRule.GrowthFromDamage(unblocked);
+		if (growth == 0) return;
+		await CreatureCmd.SetMaxHp(Creature, Creature.MaxHp + growth);
+		_grown += growth;
 		Animate(m => m.Grow(_grown));
-		SpoonLog.Info($"spoon: grew {unblocked} max HP (now {Creature.MaxHp})");
+		SpoonLog.Info($"spoon: grew {growth} max HP (now {Creature.MaxHp})");
+		await SyncStrength();
 	}
 
 	/// <summary>
