@@ -136,7 +136,8 @@ Spoon-Feed is removed. The Spoon act is inserted when the team's **summed** max 
 multiplies it by the player count and the act 3 boss factor; its attacks, Frail, Banquet and Vulnerable reach every
 living player. The fight is lost when every player is dead (vanilla).
 
-Why these numbers (owner's, builder-checked): only fatal Spoonfuls split between players in co-op (one kill, one
-Spoonful trigger); rest sites, relics, Fruit Juice and merchants stay per player. A solo run gets roughly 50 max HP from
-Spoonful kills, so each extra player costs everyone about 10–15 of it. The per-player average falls 300 → 275 → 250 →
-225, slightly more than that loss: a little generous, which the owner prefers for friends.
+Why these numbers (owner's, builder-checked): a Spoonful's max HP goes only to the player whose Spoonful lands the
+killing blow, never to the team. In co-op the enemies are divided between the players (each one dies once), so each
+player lands fewer killing blows than in solo; rest sites, relics, Fruit Juice and merchants stay per player. A solo run
+gets roughly 50 max HP from Spoonful kills, so each extra player costs everyone about 10–15 of it. The per-player average
+falls 300 → 275 → 250 → 225, slightly more than that loss: a little generous (builder's assessment).
