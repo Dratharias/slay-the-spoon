@@ -1,49 +1,47 @@
-[b]Friends-only alpha.[/b] Limited in-game testing. Expect bugs and back up your saves.
+[b]Friends-only alpha.[/b] Barely tested in game: expect bugs and back up your saves. Every co-op player needs the same mod version.
 
-Slay the Spoon adds Slay the Spire 1 content and new options to Slay the Spire 2. English and French. All co-op players need the same mod version.
+[b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 or later.[/b] English and French.
 
-[b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 or later.[/b]
+Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a few strange ways to play it. Tick what you want in Custom Run.
 
-[h2]Custom Run options[/h2]
+[h2]Party modes[/h2]
 [list]
-[*][b]Monster HP and Damage[/b]: adjust each from 25% to 500%.
-[*][b]Slay the Spire 1 Cards[/b]: use the original game's cards for the Ironclad, Silent, Defect and Watcher, plus colorless cards for everyone.
-[*][b]Spire Souvenir[/b]: start with a relic that mixes cards from both games. Choose between versions of differing cards in rewards.
-[*][b]Neow's Blessings[/b]: restore Neow's usual blessings.
-[*][b]Starting Chest[/b]: choose 1 of 10 relics at Neow and keep your starting relic.
-[*][b]StS1 Boss Relics[/b]: choose from a shared chest of 3 boss relics instead of the Ancient's gift in acts 2 and 3.
-[*][b]Act 4[/b]: collect the three keys to face the Corrupt Heart.
-[*][b]Merchant Loans[/b] (co-op): give allies gold or lend it at 0–900% interest. Their gold gains repay you.
-[*][b]Campfire Sales[/b] (co-op): offer an ally a card for 0–999 gold. Any shortfall becomes a loan at 0–900% interest. The buyer must accept. No curses.
+[*][b]Spoon[/b]: max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up (300 solo, 550 for two, 750 for three, 900 for four), something hungry waits after act 3. Bring cutlery.
+[*][b]Folie à deux[/b]: every card is up for grabs. Even yours.
+[*][b]Matriochka[/b]: hoard everything. Every floor brings cards.
+[*][b]King Midas[/b]: start rich. No free cards; every fire costs gold.
 [/list]
 
-[h2]Spoon mode (1.3.6)[/h2]
-Grow your max HP with Spoonful, Feast rest sites, extra max HP relics and merchant Fruit Juice. Reach 300 max HP to face the Spoon after act 3; other players support the fighters.
-The solo boss has 1200 HP. Mouthful/Ladle deal 25/35 base damage. Banquet causes 8 fixed HP loss through Block and takes 10 max HP; Skimmer prevents both and lasts until Banquet. The boss still heals (30 solo) and applies Vulnerable. Melon Baller costs 1 energy.
-Unblocked damage grows its max HP by 100%; Strength is +1 per 5 above its combat-start max HP, negative below. Every attack steals 1 Appetite per fighter hit, even if fully blocked. The test launcher has been removed.
-
-[h2]Also included[/h2]
+[h2]Slay the Spire 1[/h2]
 [list]
-[*][b]The Watcher[/b]: playable in solo Standard Runs and all Custom Runs.
-[*]Slay the Spire 1 events in act 2: Vampires, Augmenter and The Nest.
-[*][b]Character Color[/b]: tint your character and map drawings from the pause menu. Visible to co-op partners.
-[*]Optional progress copy from your regular profile to the modded profile on every launch. Replaces modded-only progress; leaves your regular save untouched.
+[*][b]StS1 Cards[/b] for the Ironclad, Silent and Defect, plus the colorless cards; or the [b]Spire Souvenir[/b] to mix both games.
+[*][b]The Watcher[/b], playable in solo Standard Runs and every Custom Run.
+[*][b]Act 4[/b]: three keys, then the Corrupt Heart.
+[*]StS1 events, boss relics, Neow's Blessings.
 [/list]
 
-In Standard Runs, the Spire Souvenir can drop and Act 4 is enabled by default once Ascension 5 is unlocked with any character. Daily Runs are unchanged.
+[h2]Co-op and tuning[/h2]
+[list]
+[*][b]Merchant Loans[/b] and [b]Campfire Sales[/b]: lend, borrow and sell cards between friends, interest included.
+[*][b]Monster HP and Damage[/b] from 25% to 500%, [b]Starting Chest[/b], [b]Character Color[/b].
+[/list]
+
+Daily Runs stay vanilla. Your regular save is never written; an optional copy brings its progress into the modded profile.
 
 [h2]Français[/h2]
-[b]Alpha réservée aux amis.[/b] Peu testée en jeu : prévoyez des bugs et sauvegardez vos parties. Nécessite BaseLib 3.4.7 ou plus et la même version du mod pour tous les joueurs.
+[b]Alpha réservée aux amis.[/b] À peine testée en jeu : attendez-vous à des bugs et sauvegardez vos parties. Tous les joueurs en coop ont besoin de la même version. Nécessite BaseLib 3.4.7 ou plus.
 
-En partie personnalisée : PV et dégâts des monstres de 25 à 500 %, cartes de Slay the Spire 1, mélange des deux jeux avec le Souvenir de la Tour, bénédictions de Neow, coffre de départ, reliques de boss et acte 4. En coopération : dons ou prêts d’or chez le marchand et ventes de cartes au feu de camp à 0–999 pièces d’or, avec crédit à 0–900 % d’intérêt et accord de l’acheteur.
+Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer. Cochez ce que vous voulez en partie personnalisée.
 
-La Gardienne est jouable en partie standard solo et dans toutes les parties personnalisées. Le mod ajoute aussi trois événements de Slay the Spire 1 à l’acte 2 et une couleur de personnage personnalisable.
+[list]
+[*][b]Cuillère[/b] : les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuillerée, festoyez aux feux de camp, buvez le jus de fruit du marchand. Si l'équipe cumule assez de PV max (300 en solo, 550 à deux, 750 à trois, 900 à quatre), quelque chose d'affamé attend après l'acte 3. Apportez vos couverts.
+[*][b]Folie à deux[/b] : chaque carte se dispute. Même les vôtres.
+[*][b]Matriochka[/b] : accumulez tout. Chaque étage apporte des cartes.
+[*][b]Roi Midas[/b] : départ fortuné. Aucune carte gratuite, chaque feu se paie.
+[*]Les cartes de Slay the Spire 1 ou le Souvenir de la Tour, la Gardienne, l'acte 4 et le Cœur, des événements et reliques de boss de StS1, les bénédictions de Neow.
+[*]En coop : prêts au marchand et ventes au feu de camp. Aussi : PV et dégâts des monstres, coffre de départ, couleur de personnage.
+[/list]
 
-[b]Mode Cuillère (1.3.6)[/b] : augmentez vos PV max avec Cuillerée, les festins et les reliques. Atteignez 300 PV max pour affronter la Cuillère après l’acte 3 ; les autres joueurs soutiennent les combattants. En solo : 1 200 PV, Bouchée à 25 et Louche à 35 dégâts de base. Banquet inflige 8 pertes de PV fixes à travers l’Armure et retire 10 PV max. L’Écumoire annule les deux et dure jusqu’au Banquet ; la Cuillère se soigne toujours (30 PV en solo) et applique Vulnérable. La Parisienne coûte 1 énergie.
-La croissance reste égale à 100 % des dégâts non bloqués, avec 1 Force par tranche de 5 PV max au-dessus ou en dessous du début de combat. Chaque attaque vole 1 Appétit par combattant touché, même entièrement bloquée. Le lanceur de test a été retiré.
-
-La copie facultative de progression vers le profil avec mods écrase sa progression à chaque lancement, sans toucher à la sauvegarde habituelle.
-
-En partie standard, le Souvenir de la Tour peut apparaître et l’acte 4 est activé par défaut dès que l’Ascension 5 est débloquée avec un personnage. Les défis quotidiens restent inchangés.
+Les défis quotidiens restent intacts. La sauvegarde habituelle n'est jamais modifiée.
 
 [i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes are not guaranteed.[/i]

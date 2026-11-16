@@ -27,16 +27,14 @@ rm -rf "$OUT"
 mkdir -p "$OUT/content/SlaySpoon"
 cp "$STAGE"/SlaySpoon.{json,dll,pck} "$OUT/content/SlaySpoon/"
 
-# 512x512 preview: title band over four StS1 portraits (one per card pool).
+# 512x512 preview (owner, 2026-11-16): the Spoonful card portrait under a title band.
 BG='#1b1e2b'
-magick "$CARDS/ironclad/sts1_limit_break.png" "$CARDS/silent/sts1_wraith_form.png" +append "$OUT/row1.png"
-magick "$CARDS/defect/sts1_electrodynamics.png" "$CARDS/colorless/sts1_apotheosis.png" +append "$OUT/row2.png"
-magick -size 500x120 xc:"$BG" -gravity north \
+magick "$CARDS/spoon/spoon_spoonful.png" -filter Lanczos -resize 512x390^ -gravity center -extent 512x390 "$OUT/art.png"
+magick -size 512x122 xc:"$BG" -gravity north \
 	-font Liberation-Sans-Bold -pointsize 52 -fill '#f2d27a' -annotate +0+12 'Slay the Spoon' \
-	-font Liberation-Sans -pointsize 24 -fill '#d8d8d8' -annotate +0+76 "StS1 cards - alpha $VERSION" "$OUT/title.png"
-magick "$OUT/title.png" "$OUT/row1.png" "$OUT/row2.png" -append \
-	-background "$BG" -gravity center -extent 512x512 +repage "$OUT/preview.png"
-rm "$OUT/row1.png" "$OUT/row2.png" "$OUT/title.png"
+	-font Liberation-Sans -pointsize 24 -fill '#d8d8d8' -annotate +0+78 "alpha $VERSION" "$OUT/title.png"
+magick "$OUT/title.png" "$OUT/art.png" -append +repage -depth 8 "$OUT/preview.png"
+rm "$OUT/art.png" "$OUT/title.png"
 
 # VDF strings: escape backslashes and double quotes.
 vdf_escape() { sed -e 's/\\/\\\\/g' -e 's/"/\\"/g'; }

@@ -16,7 +16,7 @@ Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic descri
 
 ## Features
 
-Current version: **1.3.6**.
+Current version: **1.3.7**.
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps (− / + buttons,
   or left/right on a gamepad), synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -65,7 +65,8 @@ Current version: **1.3.6**.
   text, can replace an act 2 event when Slay the Spire 1 cards are in play: in a "Slay the Spire 1
   Cards" run, or when a player holds the Spire Souvenir. The Nest and Augmenter need one holder; in
   co-op, players without the relic see their card option locked. Vampires needs every player to hold
-  it. Augmenter can also give **Mutagenic Strength**, a relic ported from Slay the Spire 1.
+  it. Augmenter can also give **Mutagenic Strength**, a relic ported from Slay the Spire 1. Golden Idol, Forgotten Altar, Moai Head, Cursed Tome,
+  Ominous Forge, Bonfire Spirits and Mind Bloom joined them later, with their relics and curses.
 
 - **The Watcher:** Slay the Spire 1's Watcher is always visible and selectable as a sixth character in a Custom Run,
   on both host and client. She is also selectable in Standard solo. In either solo mode, choosing her implicitly enables the StS1 card set (including colorless
@@ -82,6 +83,17 @@ Current version: **1.3.6**.
 - **Neow's Blessings:** a Custom Run option that brings back Neow's usual starting choice. Without it,
   any Custom Run option (even this mod's) makes Neow offer nothing, or only the options of modifiers
   like Draft. With it, those options come first, then the blessings.
+
+- **Starting Chest:** at Neow, open a chest and choose 1 of 10 common, uncommon or rare relics for your character; you
+  keep your starting relic.
+
+- **StS1 Boss Relics:** the act 2 and act 3 Ancients offer a chest of 3 boss relics instead: their own, Slay the Spire 1's
+  shared ones (Busted Crown, Runic Dome, Sacred Bark…) and the character ones. In co-op the chest is shared and
+  rock-paper-scissors settles competing picks. Champion Belt, Magic Flower and The Specimen are Rare relics in runs with
+  Slay the Spire 1 cards.
+
+- **Campfire Sales** (co-op): spend your rest site action to sell a deck card to an ally for 0–999 gold; any shortfall
+  becomes a loan, like Merchant Loans. The buyer must accept. No curses.
 
 - **Spire Souvenir:** a Common Ironclad, Silent and Defect relic, also found in Standard runs, that lets its owner find
   cards from the other game: Slay the Spire 1 cards in a normal run, Slay the Spire 2 cards in a
@@ -106,22 +118,27 @@ The Courier and more). No card rewards anywhere: cards come from the merchant. E
 is its only way out. Rest site actions cost gold (50, then 50 more each time at the same fire) and can be repeated; a
 broken Maw Bank can be reopened there. Not with Matriochka. Not tested in game: `docs/testing/roi-midas-checklist.md`.
 
-**Spoon** (Custom Run): everyone starts with a Spoonful, and max HP becomes the currency of the run: more max HP relics
-in the draws, a Feast at every rest site, Fruit Juice at every merchant. Reach 300 max HP and something wants to feed on
-you after the last boss. Players below the threshold support the fighters from the side.
+**Spoon** (Custom Run): max HP becomes the currency of the run. Everyone starts with a Spoonful, a Retain card that
+kills to feed: a fatal blow with it raises your max HP. Max HP relics are added to the draws, every rest site offers a
+Feast (+5 max HP), and every merchant sells Fruit Juice. When the team's max HP adds up to **300 solo, 550 for two, 750
+for three or 900 for four**, a Spoon act is inserted after the last act 3 boss: one rest site, then the Spoon. Every
+player fights it.
 
-The Spoon starts at 1200 HP in solo. Its four-turn cycle is Sets the Table, Mouthful (25 base damage), Banquet,
-and Ladle Smash (35 base damage). Banquet deals 8 fixed HP loss through Block, takes 10 max HP and heals the Spoon
-for 30 in solo. Skimmer prevents both losses and stays active until the next Banquet; the boss still heals and
-applies Vulnerable. Melon Baller costs 1 energy and transfers 12 max HP (15 upgraded).
+The Spoon has 1200 HP in solo (vanilla multiplayer scaling in co-op) and a four-move cycle:
+- **Sets the Table**: Frail on everyone, Appetite for the Spoon, and a cutlery kit shuffled into every draw pile, one
+  of each spoon every cycle plus extras for big decks (25+ cards). Ignore the kit and your deck fills up.
+- **Mouthful** (25): the Spoon gains Block equal to the damage that got through.
+- **Banquet**: Vulnerable, 8 HP loss through Block, eats 10 max HP, and heals the Spoon (30, +10 per extra player).
+- **Ladle Smash** (35): steals max HP from the players it hits.
 
-Damage that gets through Block grows the Spoon's max HP by the full amount. Its Strength follows the difference
-from its max HP at combat start: +1 per 5 above the baseline, −1 per 5 below, rounded toward zero. Each attack steals
-1 Appetite per fighter hit, even when fully blocked; a Banquet prevented by Skimmer does not hit. Sets the Table
-grants 2 Appetite per living player. Each Appetite stack changes damage by 5%, except Banquet's fixed HP loss.
+Damage that gets through Block grows the Spoon's max HP, and its Strength follows its max HP (+1 per 5 above its
+combat-start value, −1 per 5 below). Each Appetite stack is +5 % damage, for the Spoon or for a player.
+The cutlery answers each mechanic: **Teaspoon** (remove Appetite, draw), **Wooden Spoon** (hit for 10 % of your max HP,
+Appetite does nothing next turn), **Skimmer** (Block; Banquet takes nothing from you), **Melon Baller** (take 12 max HP
+from the Spoon). During the fight your Spoonfuls become **Stolen Spoonfuls**, attacks that steal Appetite.
 
-The balance has been play-tested by the author. The standalone test launcher has been removed; existing test saves
-remain loadable. See `docs/testing/spoon-checklist.md` for remaining regression and co-op checks.
+Art is placeholder. The balance was play-tested by the author in solo; co-op still needs checks, see
+`docs/testing/spoon-checklist.md`.
 
 **Merchant Loans** (co-op Custom Runs): enable the modifier in the lobby. If a merchant purchase
 fails for lack of gold, choose **Ask** to open a request. Other players can lend gold at 0–900%
@@ -150,10 +167,10 @@ keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-g
 
 ## Development status — 2026-11-16
 
-Version **1.3.6** includes the Spoon balance pass, corrected merchant prices for promoted event/Ancient relics,
-compact Spoon/Heart maps with fully reachable boss icons, and combat power icon fixes. Automated validation:
-736 xUnit and 91 Python tests pass; the build has no warnings. In-game coverage varies by feature; the
-[testing checklists](docs/testing/) record remaining checks. The Spoon's balance was approved after play-testing.
+Version **1.3.7**: the Spoon is fought by the whole team and opens on the team's total max HP; before it, the cutlery
+redesign and balance pass, King Midas, Folie à deux, Matriochka, StS1 boss relics, the Starting Chest and the Watcher
+in solo Standard. Automated validation: 722 xUnit and 91 Python tests pass; the build has no warnings. Most features
+still need in-game checks; the [testing checklists](docs/testing/) record them.
 
 ## Languages
 

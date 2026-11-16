@@ -412,3 +412,7 @@ Read `README.md` for the player view and the spec for every decision.
   one of each of five spoons every cycle (new Stolen Spoonful: steals 3 Appetite, which the player keeps at +5 % damage
   until the Spoon takes 1 back per gain) plus a random extra per 5 cards from 25 (seeded `Rng`); Wooden Spoon deals 10 %
   of max HP. 717 xUnit + 91 pytest pass. Not tested in game.
+- **1.3.7 (owner, 2026-11-16):** no more supporters: every player fights the Spoon, Spoon-Feed is removed (the fighter,
+  supporter and gift rules above are history). The act opens when the team's summed max HP reaches 300 / 550 / 750 / 900
+  for 1–4 players (`SpoonRule.TeamThreshold`). 1200 HP before vanilla multiplayer scaling. Workshop preview is the
+  Spoonful portrait under a title band; description and README rewritten. 722 xUnit + 91 pytest pass. Not tested in game.
