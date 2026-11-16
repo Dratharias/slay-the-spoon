@@ -426,14 +426,23 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     offers Ruby Recall, a 4th chance at the Ruby key, which then appends The Ending after the Spoon. Keep it, or hide
     Ruby Recall at the Spoon rest site?
   - **Deferred minors (all open; the final review may settle some):**
-    - T2: no top-bar icon or short text for `SpoonSpoon` (the default modifier icon shows, like King Midas).
+    - ~~T2: no top-bar icon or short text for `SpoonSpoon` (the default modifier icon shows, like King Midas).~~ Done in
+      the 1.3.0 review fix wave: `SPOON_SPOON.short` ("Spoon" / "Cuill.") shows in the top bar, and King Midas shows its
+      short text too.
     - T3: relics added to the grab bags are not re-added when a refreshing bag re-reads its relics by rarity.
+    - T3: `SpoonRelics.AddTo` skips a missing relic id or an unknown deque name silently (no log line).
     - T4: the floor counter skips a number in the Spoon act (the empty grid row; cosmetic).
+    - T4: `SpoonAct.BaseNumberOfRooms` is 1, which multiplayer reads as 0 (continue-run info only).
+    - T4: `EndingGeneratedMapPatch` builds a throwaway fixed map just to compare map types, and its log line says
+      "act4:" for the Spoon act too.
     - T4: free travel (Winged Boots, Flight) on the Spoon map is handled by `SpoonMapTravelPatch`; check it in game.
-    - T5: Pressure Points played by a supporter still fires the marks a fighter applied (dealer-less); fix: skip
-      `TriggerAll` when `SpoonFight.IsSupporter(owner)`.
-    - T5: Spoon-Feed can create max HP: a supporter under 6 max HP loses less than 5 (`LoseMaxHp` floors at 1) while the
-      fighter gains 5; fix: give the amount that actually dropped.
+    - ~~T5: Pressure Points played by a supporter still fires the marks a fighter applied (dealer-less).~~ Done in the
+      1.3.0 review fix wave: a supporter's Pressure Points skips the Spoon's mark; other enemies trigger as usual.
+    - ~~T5: Spoon-Feed can create max HP: a supporter under 6 max HP loses less than 5 (`LoseMaxHp` floors at 1) while the
+      fighter gains 5.~~ Done in the 1.3.0 review fix wave: Spoon-Feed is unplayable at 5 max HP or less
+      (`SpoonRule.CanGift`), and the fighter gains what the supporter actually lost (`SpoonRule.GiftTransferred`).
+    - ~~Final review: the Fruit Juice merchant entry drew `PlayerRng.Shops` once more (`CalcCost`).~~ Done in the 1.3.0
+      review fix wave: `SpoonJuiceCostPatch` prices the Juice from the mod's `SlaySpoon.Spoon.Juice_*` stream.
     - T5: skipping `HauntPower.AfterCardPlayed` for a supporter also skips its `Rng.CombatTargets` draw (deterministic,
       but the vanilla stream use differs).
     - T5: the Spoon's move-roll stream is named `SlaySpoon.Ending.SPOON_MONSTER` (naming only).
@@ -442,3 +451,10 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
       console-spawned Spoon only).
     - T5: the `GetPossibleTargets` postfix relies on the private method not being inlined; accepted, because the
       multiplicative hook zeroes a stray hit anyway.
+    - Final review: `SpoonMonster`'s hooks gate on the monster, not on `SpoonSpoon.IsActive` (see T5 above; console
+      spawn only).
+    - Final review: fighter pets (Osty) keep vanilla damage; the team-max-HP formula scales damage to players only.
+    - Final review: `SpoonRule.DamageFactor` and the Monster Damage % modifier each truncate, so a hit can land ±1 HP
+      off the exact product when both apply.
+    - Final review: the Feast and Spoon-Feed texts hardcode 5 instead of reading `SpoonRule.FeastMaxHp` / `GiftMaxHp`.
+    - Final review: the Spoon act has no entry heal like The Ending's; its row-0 rest site covers it.

@@ -389,5 +389,7 @@ Read `README.md` for the player view and the spec for every decision.
   postfix); supporters get Spoon-Feed (5 max HP to a fighter); defeat when every fighter is dead.
 - Art is placeholder (Pixabay photos, sources in `docs/backlog.md`, which also lists the drawing list, the open design
   call about Ruby Recall at the Spoon rest site and the deferred minors).
-- Build 0 warnings; 636 xUnit + 91 pytest pass; `make workshop` stages 1.3.0. Not tested in game:
+- Review fix wave: Spoon-Feed unplayable at 5 max HP or less and gives only what was lost; a supporter's Pressure Points
+  skips the Spoon; the Juice price comes from the mod's stream (`SpoonJuiceCostPatch`, `PlayerRng.Shops` untouched).
+- Build 0 warnings; 646 xUnit + 91 pytest pass; `make workshop` stages 1.3.0. Not tested in game:
   `docs/testing/spoon-checklist.md`.

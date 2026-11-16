@@ -22,6 +22,8 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Ruby Recall and Feast both fit on the rest site list.
 - [ ] Every merchant sells Fruit Juice (+5 max HP) at its usual price, in one potion slot; the layout is otherwise vanilla.
 - [ ] Bought, the Fruit Juice is gone like any shop potion.
+- [ ] Merchant prices in a Spoon run match the same seed without Spoon, apart from the Juice slot (cards, other
+      potions and removal cost; relic offers may differ, since the max HP relics join the grab bags).
 - [ ] Seeds stay vanilla: the same seed with the modifier off gives the same map and rewards (beyond the added relics).
 
 ## The Spoon act
@@ -55,8 +57,9 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
       A Thousand Cuts, Panache.
 - [ ] Supporter debuffs still apply (Uppercut's Weak and Vulnerable, Strength loss).
 - [ ] A fighter's damage works normally, including Poison and Doom.
-- [ ] Pressure Points by a supporter: marks a fighter applied still fire (known minor).
+- [ ] Pressure Points by a supporter on a Spoon a fighter marked: the Spoon takes no damage (fixed in the review wave).
 - [ ] Max HP eaten and given stay lost after a win; nothing is returned.
+- [ ] Save and reload during the Spoon fight (solo and co-op): fighters, supporters, Spoon-Feed and the boss HP come back.
 - [ ] Defeat: every fighter dead while supporters live ends the run (game-over screen), also in co-op with one fighter.
 - [ ] Solo at 300+: the player is the fighter and there are no supporters; Spoon-Feed is not given.
 
@@ -65,7 +68,8 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Each supporter gets one Spoon-Feed at combat start (cost 1, Skill, Retain, not exhausted); fighters get none.
 - [ ] Targeting: the arrow can only land on a living fighter; with the arrow on a supporter the play is refused (known UX gap).
 - [ ] Play: the supporter loses 5 max HP, the fighter gains 5; the team's total, and the damage, stay the same.
-- [ ] A supporter under 6 max HP (known minor: the fighter still gains 5).
+- [ ] A supporter with 5 max HP or less: Spoon-Feed is unplayable (refused like other unplayable cards).
+- [ ] A supporter with 6+ max HP: the fighter gains exactly the max HP the supporter lost.
 - [ ] Not playable when no fighter is alive. The card cannot be upgraded and is not added to the deck after the fight.
 - [ ] Spoon-Feed portrait (placeholder) shows.
 
