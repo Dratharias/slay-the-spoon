@@ -28,11 +28,11 @@ public sealed class SpoonMonster : Sts1EndingMonster
 	/// <summary>No skeleton: the static sprite stays (EndingVisuals builds no Spine body, so no animator is made).</summary>
 	public override string? SpineKey => null;
 
-	public override Vector2 Origin => new(300, 890);
-	public override Vector2 Size => new(600, 900);
+	public override Vector2 Origin => new(200, 593);
+	public override Vector2 Size => new(400, 600);
 
 	/// <summary>The handle and the lower half of the bowl: the whole sprite would put the intents off screen.</summary>
-	public override Rect2 Hitbox => new(-150, -700, 300, 710);
+	public override Rect2 Hitbox => new(-100, -467, 200, 473);
 
 	/// <summary>
 	/// <see cref="SpoonRule.BossHp"/> for the fighters of the run. The creature reads this before the combat state exists,

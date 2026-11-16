@@ -406,7 +406,7 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   `docs/superpowers/specs/2026-11-14-spoon-design.md`. Implemented in 1.3.0 (branch `two-modes`); not tested in game:
   `docs/testing/spoon-checklist.md`.
   - **Drawing list (owner, later; every drawing is a placeholder today):**
-    1. The Spoon combat sprite: PNG, transparent, about 600x900 px, facing left (`images/spoon/spoon.png`). Open.
+    1. The Spoon combat sprite: PNG, transparent, about 400x600 px (600x900 overflowed the top bar in game, 2026-11-16), facing left (`images/spoon/spoon.png`). Open.
     2. The Spoon map boss icon: PNG 512x512 plus the same shape as an outline (`spoon_boss.png`,
        `spoon_boss_outline.png`). Open.
     3. Spoon act combat background: JPG 1920x1136 (`images/spoon/combat_bg.jpg`; optional). Open.

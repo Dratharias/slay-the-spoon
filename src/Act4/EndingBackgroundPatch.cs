@@ -29,8 +29,9 @@ internal static class EndingBackgroundPatch
 
 	// The combat room's BgContainer is a zero-size Control at the screen centre, and vanilla layers draw around its
 	// origin: a full-rect child there has no size and showed nothing. Centre a fixed box on that origin instead, wider
-	// than the 1920×1080 view so screen shake keeps the edges hidden (combat_bg.jpg is 1920×1136).
-	internal const float CombatHalfWidth = 1100f, CombatHalfHeight = 651f;
+	// than the view so screen shake keeps the edges hidden; 2800 wide also covers a 21:9 screen (2580×1080 view),
+	// the image cropped vertically (combat_bg.jpg is 1920×1136).
+	internal const float CombatHalfWidth = 1400f, CombatHalfHeight = 651f;
 
 	[HarmonyPatch(typeof(NCombatBackground), nameof(NCombatBackground.Create))]
 	[HarmonyPrefix]
@@ -54,7 +55,7 @@ internal static class EndingBackgroundPatch
 		return false;
 	}
 
-	internal const float RestLeft = -86f, RestTop = -134f, RestWidth = 2040f, RestHeight = 1200f;
+	internal const float RestLeft = -416f, RestTop = -134f, RestWidth = 2700f, RestHeight = 1200f;
 
 	[HarmonyPatch(typeof(ActModel), nameof(ActModel.CreateRestSiteBackground))]
 	[HarmonyPrefix]
@@ -63,7 +64,8 @@ internal static class EndingBackgroundPatch
 		if (__instance is not (Sts1EndingAct or SpoonAct)) return true;
 		// The rest site room's BgContainer is a near-zero-size Control whose origin sits at (26, 74) on the 1920×1080
 		// view (centre-anchored, offset −934, −466): a full-rect child there has no size and the room showed black.
-		// Give the root a fixed box covering the view from that origin, with a margin for screen shake.
+		// Give the root a fixed box covering the view from that origin, with a margin for screen shake, 2700 wide so a
+		// 21:9 screen (2580×1080 view, 330 more on each side) has no black bars.
 		var root = new Control { MouseFilter = Control.MouseFilterEnum.Ignore };
 		root.SetAnchorsPreset(Control.LayoutPreset.TopLeft);
 		root.OffsetLeft = RestLeft;
