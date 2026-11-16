@@ -44,6 +44,8 @@ helping from the side. **Non-goals:** a complex boss (no minions, no phases), St
    HP or more**, a one-room act "The Spoon" is inserted right after act 3. One 300+ player is enough in co-op.
    - With The Ending (Act 4 run, all three keys): act 3 → **Spoon (act 4)** → **The Ending (act 5)**. The Spoon
      goes in front of The Ending even when The Ending was appended earlier.
+   - Map: a rest site, a merchant halfway, then the Spoon. (Owner addition, 2026-11-16: "le chemin est
+     effroyablement long, j'ajouterais un marchand midway".)
    - Nobody at 300: no Spoon; the run ends as it does today (victory, or The Ending).
 5. **The fight.** Fighters are the players with 300+ max HP when the Spoon fight starts; the others are supporters.
    *(Builder call: max HP cannot drop between the act 3 boss and the Spoon, so this keeps everyone who qualified, adds

@@ -28,7 +28,7 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 
 ## The Spoon act
 
-- [ ] Act 3 boss dies with a player at 300+ max HP: the Spoon act follows (rest site, then the boss). Log line "Spoon act inserted".
+- [ ] Act 3 boss dies with a player at 300+ max HP: the Spoon act follows (rest site, merchant halfway, then the boss). Log line "Spoon act inserted".
 - [ ] A10: only the second act 3 boss leads to the Spoon; the first one behaves as before.
 - [ ] Nobody at 300 (max HP 299): no Spoon, the run ends as vanilla (victory, or The Ending).
 - [ ] Co-op: one 300+ player is enough; every client enters the Spoon act.
@@ -92,7 +92,7 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
       Cuillère") under Multiplayer; the log has `spoon test: mod source ModsDirectory ... test button shown`.
 - [ ] With only the Workshop copy (no local `mods/SlaySpoon`), the button is absent (log: `test button hidden`).
 - [ ] With a run already saved, the button is hidden (like Singleplayer); after Abandon Run it comes back.
-- [ ] Clicking it starts a solo Ironclad run directly on the Spoon act's map (rest site, then the Spoon); no Neow,
+- [ ] Clicking it starts a solo Ironclad run directly on the Spoon act's map (rest site, merchant, then the Spoon); no Neow,
       no act 1 map. Top bar shows the "Spoon" and "Test" modifiers.
 - [ ] Player: 350 max HP and 350 HP, vanilla starting gold, Burning Blood, and the Spoonful in hand at combat start.
 - [ ] Deck (unupgraded): Body Slam ×2, Barricade, Entrench, Impervious, Shrug It Off ×2, Flame Barrier, Iron Wave ×2,

@@ -54,13 +54,22 @@ internal static class EndingBackgroundPatch
 		return false;
 	}
 
+	internal const float RestLeft = -86f, RestTop = -134f, RestWidth = 2040f, RestHeight = 1200f;
+
 	[HarmonyPatch(typeof(ActModel), nameof(ActModel.CreateRestSiteBackground))]
 	[HarmonyPrefix]
 	private static bool Rest(ActModel __instance, ref Control __result)
 	{
 		if (__instance is not (Sts1EndingAct or SpoonAct)) return true;
+		// The rest site room's BgContainer is a near-zero-size Control whose origin sits at (26, 74) on the 1920×1080
+		// view (centre-anchored, offset −934, −466): a full-rect child there has no size and the room showed black.
+		// Give the root a fixed box covering the view from that origin, with a margin for screen shake.
 		var root = new Control { MouseFilter = Control.MouseFilterEnum.Ignore };
-		root.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
+		root.SetAnchorsPreset(Control.LayoutPreset.TopLeft);
+		root.OffsetLeft = RestLeft;
+		root.OffsetTop = RestTop;
+		root.OffsetRight = RestLeft + RestWidth;
+		root.OffsetBottom = RestTop + RestHeight;
 		root.AddChild(Image("campfire_bg"));
 		// The room fades this node when resting. The characters and their interactions remain vanilla.
 		var lighting = new Control { Name = "RestSiteLighting", MouseFilter = Control.MouseFilterEnum.Ignore };

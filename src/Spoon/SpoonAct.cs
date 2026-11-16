@@ -11,7 +11,7 @@ using SlaySpoon.Act4;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// Spoon mode's one-room act (docs/superpowers/specs/2026-11-14-spoon-design.md, rule 4): a rest site, then the
+/// Spoon mode's short act (docs/superpowers/specs/2026-11-14-spoon-design.md, rule 4): a rest site, a merchant, then the
 /// Spoon. <see cref="SpoonRouting"/> inserts it after act 3, before The Ending when present. Glory supplies the map
 /// colours, music and chest assets; the combat background comes from EndingBackgroundPatch.
 /// </summary>
