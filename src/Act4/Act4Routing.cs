@@ -3,11 +3,13 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Config;
 using SlaySpoon.Core;
+using SlaySpoon.Spoon;
 
 namespace SlaySpoon.Act4;
 
 /// <summary>
-/// Appends The Ending as a fourth act once the team holds all three keys. From then on vanilla reads the act count:
+/// Appends The Ending as the last act once the team holds all three keys (after the Spoon act when Spoon mode put
+/// it there). From then on vanilla reads the act count:
 /// the act 3 boss is an ordinary boss (rewards, no win time, its reward screen enters act 4) and the Heart is the
 /// final boss (no rewards, win time, then the TheArchitect victory room and WinRun). The A10 second boss stays on
 /// act 3, where vanilla put it at run start.
@@ -21,7 +23,7 @@ public static class Act4Routing
 	private static readonly Func<RunManager, RunState?> State =
 		AccessTools.MethodDelegate<Func<RunManager, RunState?>>(AccessTools.PropertyGetter(typeof(RunManager), "State"));
 
-	private static readonly Action<RunState, IReadOnlyList<ActModel>> SetActs =
+	internal static readonly Action<RunState, IReadOnlyList<ActModel>> SetActs =
 		AccessTools.MethodDelegate<Action<RunState, IReadOnlyList<ActModel>>>(AccessTools.PropertySetter(typeof(RunState), nameof(RunState.Acts)));
 
 	private static bool _registered;
@@ -41,7 +43,8 @@ public static class Act4Routing
 	public static bool EnsureEndingAct(RunState state)
 	{
 		SpoonAct4? act4 = SpoonAct4.Of(state);
-		if (!EndingRouteRule.ShouldAppend(act4 != null, act4?.Keys.HasAll ?? false, state.Acts.Count)) return false;
+		bool spoonPresent = state.Acts.Any(a => a is SpoonAct);
+		if (!EndingRouteRule.ShouldAppend(act4 != null, act4?.Keys.HasAll ?? false, state.Acts.Count, spoonPresent)) return false;
 		// A new list, as vanilla's debug act switch does: the old list may be enumerated elsewhere.
 		SetActs(state, new List<ActModel>(state.Acts) { Sts1EndingAct.CreateForRun(state) });
 		SpoonLog.Info("act4: The Ending appended");

@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Spoon;
@@ -28,6 +29,20 @@ public sealed class SpoonSpoon : ModifierModel
 		foreach (Player player in runState.Players)
 			SpoonRelics.AddTo(player.RelicGrabBag, rng);
 		SpoonRelics.AddTo(runState.SharedRelicGrabBag, rng);
+	}
+
+	// Before vanilla sets the win time and saves the run, on every co-op peer at the same point.
+	public override Task AfterCombatVictory(CombatRoom room)
+	{
+		try
+		{
+			SpoonRouting.EnsureSpoonAct(RunState, room);
+		}
+		catch (Exception e)
+		{
+			SpoonLog.Error($"spoon: Spoon act routing failed: {e}");
+		}
+		return Task.CompletedTask;
 	}
 
 	public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)

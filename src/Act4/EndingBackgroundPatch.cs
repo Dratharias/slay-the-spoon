@@ -2,19 +2,23 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using SlaySpoon.Spoon;
 
 namespace SlaySpoon.Act4;
 
-/// <summary>Static StS1 atlas regions; Glory is retained only for the map and unrelated room assets.</summary>
+/// <summary>
+/// Static StS1 atlas regions; Glory is retained only for the map and unrelated room assets. The Spoon act has its own
+/// combat background (images/spoon) and borrows the Ending's campfire.
+/// </summary>
 [HarmonyPatch]
 internal static class EndingBackgroundPatch
 {
-	internal static TextureRect Image(string name)
+	internal static TextureRect Image(string name, string folder = "ending")
 	{
 		var image = new TextureRect
 		{
 			Name = "Sts1EndingBackground",
-			Texture = ResourceLoader.Load<Texture2D>($"res://SlaySpoon/images/ending/{name}.jpg"),
+			Texture = ResourceLoader.Load<Texture2D>($"res://SlaySpoon/images/{folder}/{name}.jpg"),
 			ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
 			StretchMode = TextureRect.StretchModeEnum.KeepAspectCovered,
 			MouseFilter = Control.MouseFilterEnum.Ignore,
@@ -32,9 +36,15 @@ internal static class EndingBackgroundPatch
 	[HarmonyPrefix]
 	private static bool Combat(ref NCombatBackground __result)
 	{
-		if (Act4Routing.CurrentRun()?.Act is not Sts1EndingAct) return true;
+		string? folder = Act4Routing.CurrentRun()?.Act switch
+		{
+			Sts1EndingAct => "ending",
+			SpoonAct => "spoon",
+			_ => null,
+		};
+		if (folder == null) return true;
 		__result = new NCombatBackground { MouseFilter = Control.MouseFilterEnum.Ignore };
-		TextureRect image = Image("combat_bg");
+		TextureRect image = Image("combat_bg", folder);
 		image.SetAnchorsPreset(Control.LayoutPreset.TopLeft);
 		image.OffsetLeft = -CombatHalfWidth;
 		image.OffsetTop = -CombatHalfHeight;
@@ -48,7 +58,7 @@ internal static class EndingBackgroundPatch
 	[HarmonyPrefix]
 	private static bool Rest(ActModel __instance, ref Control __result)
 	{
-		if (__instance is not Sts1EndingAct) return true;
+		if (__instance is not (Sts1EndingAct or SpoonAct)) return true;
 		var root = new Control { MouseFilter = Control.MouseFilterEnum.Ignore };
 		root.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
 		root.AddChild(Image("campfire_bg"));

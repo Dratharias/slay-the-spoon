@@ -7,11 +7,12 @@ public static class EndingRouteRule
 	public const int VanillaActCount = 3;
 
 	/// <summary>
-	/// True only for an Act 4 run whose team holds all three keys and that still has exactly the vanilla three acts:
-	/// the Ending is appended once and never to a run of another shape.
+	/// True only for an Act 4 run whose team holds all three keys and that still has exactly the vanilla three acts,
+	/// plus the Spoon act when it is already there: the Ending is appended once, last, and never to a run of another
+	/// shape.
 	/// </summary>
-	public static bool ShouldAppend(bool act4Run, bool hasAllKeys, int actCount) =>
-		act4Run && hasAllKeys && actCount == VanillaActCount;
+	public static bool ShouldAppend(bool act4Run, bool hasAllKeys, int actCount, bool spoonPresent) =>
+		act4Run && hasAllKeys && actCount == VanillaActCount + (spoonPresent ? 1 : 0);
 
 	/// <summary>
 	/// An appended Ending means the run is not won yet, so a recorded WinTime (act 3 boss counted as final, saved on

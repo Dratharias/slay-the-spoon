@@ -18,10 +18,12 @@ namespace SlaySpoon.Act4;
 /// <see cref="Index"/> is -1, so the act stays out of <c>ModelDb.ActsByIndex</c> and random act choice
 /// (<c>ModelDb.Acts</c> is a hardcoded list anyway). It is appended to a run only by the Act 4 routing.
 /// </remarks>
-public sealed class Sts1EndingAct : ActModel
+public sealed class Sts1EndingAct : ActModel, IAppendedAct
 {
 	/// <summary>Name of the act's own room Rng, so filling its rooms never draws from a vanilla Rng.</summary>
 	public const string RoomsRngName = "SlaySpoon.EndingRooms";
+
+	string IAppendedAct.RoomsRngName => RoomsRngName;
 
 	private static Glory Canon => ModelDb.Act<Glory>();
 
@@ -74,7 +76,7 @@ public sealed class Sts1EndingAct : ActModel
 	/// Sets the room set directly (vanilla GenerateRooms assumes non-empty weak/normal/ancient lists): no events,
 	/// no normal encounters, the Shield and Spear as the only elite, the Heart as boss, no ancient, no second boss.
 	/// </summary>
-	internal void FillRooms(Rng rng)
+	public void FillRooms(Rng rng)
 	{
 		AssertMutable();
 		_rooms.events.Clear();
@@ -84,6 +86,8 @@ public sealed class Sts1EndingAct : ActModel
 		_rooms.Boss = rng.NextItem(AllBossEncounters)!;
 		_rooms.SecondBoss = null;
 	}
+
+	public ActMap CreateFixedMap() => new EndingActMap();
 
 	/// <summary>Logs at startup whether the act's id is the one its text and saves use.</summary>
 	public static void SelfCheck()

@@ -7,8 +7,8 @@ namespace SlaySpoon.Act4;
 /// <summary>
 /// ActModel derives the rest site background, the three map backgrounds, the combat background scene and layers
 /// (<c>GenerateBackgroundAssets</c>, <c>GetFullLayerPath</c>, <c>GetAllBackgroundLayerPaths</c>) from the
-/// protected, non-virtual <c>FilePathIdentifier</c> (the lowercased id). The Ending has no assets of its own, so
-/// its identifier is Glory's.
+/// protected, non-virtual <c>FilePathIdentifier</c> (the lowercased id). The appended acts (the Ending, the Spoon)
+/// have no such assets of their own, so their identifier is Glory's.
 /// </summary>
 /// <remarks>
 /// sts2.dll is plain IL (not ReadyToRun) and Harmony 2.4 (MonoMod.Core) disables inlining of a patched method,
@@ -24,7 +24,7 @@ internal static class EndingActAssetsPatch
 
 	private static void Postfix(ActModel __instance, ref string __result)
 	{
-		if (__instance is Sts1EndingAct)
+		if (__instance is IAppendedAct)
 		{
 			// Through Glory's canonical model, so the patched getter runs its vanilla path for Glory.
 			__result = Identifier(ModelDb.Act<Glory>());
