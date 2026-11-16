@@ -126,10 +126,21 @@ public class SpoonRuleTests
 	public void WoodenSpoonHitsTenPercentOfMaxHp(int maxHp, int damage) => Assert.Equal(damage, SpoonRule.WoodenDamage(maxHp));
 
 	[Theory]
-	[InlineData(0, 0)]
-	[InlineData(1, 1)]
-	[InlineData(6, 1)]
-	public void SpoonTakesOneAppetiteBackPerGain(int playerStacks, int taken) => Assert.Equal(taken, SpoonRule.StolenBack(playerStacks));
+	[InlineData(0, 3, 0)]
+	[InlineData(5, 0, 0)]
+	[InlineData(5, 1, 1)]
+	[InlineData(1, 6, 1)]
+	public void SpoonTakesAppetiteBackOnlyWhenItPiercesBlock(int unblocked, int playerStacks, int taken) =>
+		Assert.Equal(taken, SpoonRule.StolenBack(unblocked, playerStacks));
+
+	[Theory]
+	[InlineData(55, 350, 13)]
+	[InlineData(80, 350, 20)]
+	[InlineData(3, 350, 0)]
+	[InlineData(80, 10, 9)]
+	[InlineData(80, 1, 0)]
+	public void LadleStealsAQuarterOfItsRawDamageAsMaxHp(int raw, int maxHp, int stolen) =>
+		Assert.Equal(stolen, SpoonRule.LadleMaxHpSteal(raw, maxHp));
 
 	[Fact]
 	public void BanquetHitsLightly() => Assert.InRange(SpoonRule.BanquetDamage, 1, SpoonRule.BoucheeDamage / 2);

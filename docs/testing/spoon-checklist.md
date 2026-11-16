@@ -56,7 +56,8 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
       Intents: attack + defend. No max HP eaten.
 - [ ] Banquet (1.3.2): a light 12 damage hit (attack intent shown with the debuff and heal), then Vulnerable 2 on every fighter; each fighter loses 10 max HP (not a hit: no Block, no on-hit reactions)
       unless Skimmed; the Spoon heals 60 solo, 70 / 80 / 90 with 2 / 3 / 4 players (log: `spoon: Banquet ate ... healed`).
-- [ ] Ladle Smash: 55 base damage. No Strength from turns passing.
+- [ ] Ladle Smash: 55 base damage. No Strength from turns passing. It steals max HP from each living player hit: a quarter
+      of the raw damage (before Block), never below 1 max HP; the Spoon gains them, no Strength (log: `spoon: Ladle stole`).
 - [ ] Growth: HP lost past Block raises the Spoon's max HP by as much (its HP does not rise).
 - [ ] Strength follows max HP: (max HP − max HP grown from hits − start max HP) / 5, rounded toward zero (1.3.2:
       growth no longer gives Strength, no more 200+ hits); it goes negative when Melon Baller takes it below its start (log: `spoon: max HP ... Strength from max HP S`). A player's Strength debuff on the
@@ -98,7 +99,7 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Melon Baller (2, targets the Spoon): takes 12 max HP (15 upgraded) from the Spoon, never below 1, and the player
       gains them (with the heal of a vanilla max HP gain); the Spoon's Strength drops accordingly.
 - [ ] Stolen Spoonful (1, attack, targets the Spoon): 10 damage (12 upgraded), steals up to 3 Appetite: the Spoon loses
-      it and the player gains Appetite (+5 % damage per stack for the fight). At each Appetite gain the Spoon takes 1 back
+      it and the player gains Appetite (+5 % damage per stack for the fight). After a move that pierced a player's Block the Spoon takes 1 back
       from each player holding some (its gain is 2 + what it took back). EN/FR tooltip reads well on both.
 - [ ] A supporter's cutlery works too (they are targetable on the Spoon even though the supporter deals it no damage).
 - [ ] Portraits (Pixabay placeholders) and EN/FR titles and descriptions read well, Banquet named in gold.

@@ -13,7 +13,8 @@ public static class SpoonRule
 	public const int BoucheeDamage = 35, LadleDamage = 55, BanquetDamage = 12, BanquetMaxHp = 10, FrailAmount = 2, VulnerableAmount = 2,
 		BanquetHealBase = 60, BanquetHealPerPlayer = 10, MaxHpPerStrength = 5,
 		TeaspoonAppetite = 2, TeaspoonAppetiteUpgraded = 3, SkimmerBlock = 6, SkimmerBlockUpgraded = 9,
-		BallerMaxHp = 12, BallerMaxHpUpgraded = 15, WoodenMaxHpPercent = 10, ExtraFromDeck = 25, ExtraEveryCards = 5;
+		BallerMaxHp = 12, BallerMaxHpUpgraded = 15, WoodenMaxHpPercent = 10, ExtraFromDeck = 25, ExtraEveryCards = 5,
+		LadleStealDivisor = 4;
 
 	/// <summary>The 4-turn cycle: sets the table (Frail and the cutlery), Mouthful, Banquet, Ladle Smash.</summary>
 	public enum SpoonMove { SetTable, Bouchee, Banquet, Ladle }
@@ -92,8 +93,19 @@ public static class SpoonRule
 	/// <summary>The Wooden Spoon's damage: 10 % of the player's max HP, rounded down (owner, 2026-11-16).</summary>
 	public static int WoodenDamage(int maxHp) => Math.Max(0, maxHp) * WoodenMaxHpPercent / 100;
 
-	/// <summary>The Appetite the Spoon takes back from a player at each of its own gains.</summary>
-	public static int StolenBack(int playerStacks) => Math.Clamp(playerStacks, 0, AppetiteStolenBack);
+	/// <summary>
+	/// The Appetite the Spoon takes back from a player after a move: only when that move's hits pierced their Block
+	/// (owner, 2026-11-16), 1 or what they have. Its +2 gain happens either way.
+	/// </summary>
+	public static int StolenBack(int unblocked, int playerStacks) =>
+		unblocked <= 0 ? 0 : Math.Clamp(playerStacks, 0, AppetiteStolenBack);
+
+	/// <summary>
+	/// Ladle Smash steals max HP (owner, 2026-11-16): a quarter of its raw damage on a player (before Block), rounded
+	/// down, leaving them at least 1 max HP.
+	/// </summary>
+	public static int LadleMaxHpSteal(int rawDamage, int playerMaxHp) =>
+		Math.Clamp(Math.Max(0, rawDamage) / LadleStealDivisor, 0, Math.Max(0, playerMaxHp - 1));
 
 	/// <summary>
 	/// Spoon-Feed is playable while the giver has more than 1 max HP (owner decision 2026-11-16): it gives down to 1 max HP.
