@@ -1,5 +1,5 @@
 {
-	"SPOON_SPOONFUL.description": "Deal {Damage:diff()} damage.\nIf [gold]Fatal[/gold], raise your Max HP by {MaxHp:diff()}.\nOn the Spoon: remove {Appetite:diff()} [gold]Appetite[/gold].",
+	"SPOON_SPOONFUL.description": "Deal {Damage:diff()} damage.\nIf [gold]Fatal[/gold], raise your Max HP by {MaxHp:diff()}.\nRemove {Appetite:diff()} [gold]Appetite[/gold].",
 	"SPOON_SPOONFUL.title": "Spoonful",
 	"STS1_AGGREGATE.description": "Gain {energyPrefix:energyIcons(1)} for every {CardsPerEnergy:diff()} cards in your [gold]Draw Pile[/gold].",
 	"STS1_AGGREGATE.title": "Aggregate",

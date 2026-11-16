@@ -1,5 +1,5 @@
 {
-	"SPOON_SPOONFUL.description": "Infligez {Damage:diff()} dégâts.\n[gold]Coup de grâce[/gold] : augmentez vos PV Max de {MaxHp:diff()}.\nSur la Cuillère : retirez {Appetite:diff()} d'[gold]Appétit[/gold].",
+	"SPOON_SPOONFUL.description": "Infligez {Damage:diff()} dégâts.\n[gold]Coup de grâce[/gold] : augmentez vos PV Max de {MaxHp:diff()}.\nRetirez {Appetite:diff()} d'[gold]Appétit[/gold].",
 	"SPOON_SPOONFUL.title": "Cuillerée",
 	"STS1_AGGREGATE.description": "Gagnez {energyPrefix:energyIcons(1)} toutes les {CardsPerEnergy:diff()} cartes dans votre [gold]Pioche[/gold].",
 	"STS1_AGGREGATE.title": "Agglomération",

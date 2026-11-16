@@ -219,4 +219,11 @@ public class SpoonRuleTests
 		Assert.Equal(2, SpoonRule.JuiceSlot(3, false, 5));
 		Assert.Equal(1, SpoonRule.JuiceSlot(3, false, -5));
 	}
+
+	[Theory]
+	[InlineData(0, 0)]
+	[InlineData(1, 1)]
+	[InlineData(4, 4)]
+	[InlineData(-1, 0)]
+	public void OrdinaryMonstersStealOneAppetitePerHit(int hits, int stolen) => Assert.Equal(stolen, SpoonRule.StolenOnHits(hits));
 }

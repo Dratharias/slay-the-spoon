@@ -195,3 +195,9 @@ The test menu/launcher/deck and install-detection helper were removed; legacy ru
 - [ ] Every player is targeted by the Spoon's attacks, Frail, Banquet and Vulnerable; nobody gets Spoon-Feed (removed).
 - [ ] Co-op Spoon HP is 1200 × players × 1.3 (vanilla scaling); the intent numbers match each player's own Appetite/Strength state.
 - [ ] An old save in the Spoon fight with a pre-1.3.7 layout still loads (Spoon-Feed was never a deck card).
+
+### 1.3.7 Appetite in every fight
+- [ ] In an ordinary Spoon-run fight, a monster hit (even fully blocked) moves 1 Appetite from the player to it; a 3-hit attack moves 3.
+- [ ] The Spoonful removes 1 Appetite (2 upgraded) from any monster, which can go negative and then deals less damage.
+- [ ] Player and monster Appetite start at 0 in the next fight.
+- [ ] Co-op: both screens show the same Appetite after a multi-target monster attack.

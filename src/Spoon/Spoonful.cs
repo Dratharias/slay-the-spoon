@@ -12,8 +12,8 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Spoon;
 
 /// <summary>
-/// Feed that stays: Retain and Eternal (no Exhaust), so it can be neither removed nor transformed. Played on the Spoon it
-/// also removes <see cref="SpoonRule.SpoonfulAppetite"/> Appetite (2 upgraded), below zero too
+/// Feed that stays: Retain and Eternal (no Exhaust), so it can be neither removed nor transformed. Played on any monster
+/// (owner, 2026-11-16; was the Spoon only) it also removes <see cref="SpoonRule.SpoonfulAppetite"/> Appetite (2 upgraded), below zero too
 /// (<see cref="SpoonAppetitePower"/>). Nerfed by the owner (2026-11-16): it was Innate and removed 3.
 /// </summary>
 public sealed class SpoonSpoonful : SpoonCard
@@ -42,8 +42,8 @@ public sealed class SpoonSpoonful : SpoonCard
 			.Execute(choiceContext);
 		if (shouldTriggerFatal && attackCommand.Results.SelectMany(r => r).Any(r => r.WasTargetKilled))
 			await CreatureCmd.GainMaxHp(Owner.Creature, DynamicVars.MaxHp.IntValue);
-		if (cardPlay.Target.Monster is SpoonMonster spoon && spoon.Creature.IsAlive)
-			await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, spoon.Creature, -DynamicVars[AppetiteKey].IntValue, Owner.Creature, this);
+		if (cardPlay.Target.Monster != null && cardPlay.Target.IsAlive)
+			await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, cardPlay.Target, -DynamicVars[AppetiteKey].IntValue, Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

@@ -141,3 +141,10 @@ killing blow, never to the team. In co-op the enemies are divided between the pl
 player lands fewer killing blows than in solo; rest sites, relics, Fruit Juice and merchants stay per player. A solo run
 gets roughly 50 max HP from Spoonful kills, so each extra player costs everyone about 10–15 of it. The per-player average
 falls 300 → 275 → 250 → 225, slightly more than that loss: a little generous (builder's assessment).
+
+## Amendment 1.3.7: Appetite in every fight (owner, 2026-11-16)
+
+Appetite is no longer the Spoon fight's alone. In a Spoon run, each hit an ordinary monster lands on a player, even
+fully blocked, takes 1 Appetite from that player (below 0 too) and gives it to the monster (`SpoonSpoon.AfterAttack`,
+`SpoonRule.StolenOnHits`); the Spoon keeps its per-move rule. The Spoonful removes its Appetite (1, 2 upgraded) from any
+monster it hits, not only the Spoon. Appetite lasts one combat (owner).

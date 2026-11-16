@@ -416,3 +416,6 @@ Read `README.md` for the player view and the spec for every decision.
   supporter and gift rules above are history). The act opens when the team's summed max HP reaches 300 / 550 / 750 / 900
   for 1–4 players (`SpoonRule.TeamThreshold`). 1200 HP before vanilla multiplayer scaling. Workshop preview is the
   Spoonful portrait under a title band; description and README rewritten. 722 xUnit + 91 pytest pass. Not tested in game.
+- 1.3.7 also (owner, 2026-11-16): Appetite in every Spoon-run fight. `SpoonSpoon.AfterAttack` moves 1 Appetite per hit
+  from the player to an ordinary attacker (modifiers are combat hook listeners); the Spoonful removes Appetite from any
+  monster. 726 xUnit + 91 pytest pass. Not tested in game.

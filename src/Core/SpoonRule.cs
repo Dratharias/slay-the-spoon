@@ -112,6 +112,12 @@ public static class SpoonRule
 	public static int StolenBack(bool hit) => hit ? AppetiteStolenBack : 0;
 
 	/// <summary>
+	/// Ordinary monsters in a Spoon run (owner, 2026-11-16): each hit that reaches a player, even fully blocked, takes
+	/// <see cref="AppetiteStolenBack"/> Appetite from them and gives it to the attacker. The Spoon keeps its per-move rule.
+	/// </summary>
+	public static int StolenOnHits(int hits) => Math.Max(0, hits) * AppetiteStolenBack;
+
+	/// <summary>
 	/// Ladle Smash steals max HP (owner, 2026-11-16): a quarter of the damage it dealt past a player's Block, rounded
 	/// down, leaving them at least 1 max HP. Blocking it all steals nothing.
 	/// </summary>

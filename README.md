@@ -133,6 +133,9 @@ The Spoon has 1200 HP in solo (vanilla multiplayer scaling in co-op) and a four-
 
 Damage that gets through Block grows the Spoon's max HP, and its Strength follows its max HP (+1 per 5 above its
 combat-start value, −1 per 5 below). Each Appetite stack is +5 % damage, for the Spoon or for a player.
+Appetite runs through the whole Spoon run: in every fight, each monster hit on a player, even fully blocked, moves 1
+Appetite from that player to the monster, and the Spoonful removes 1 (2 upgraded) from any monster it hits. It resets
+every combat.
 The cutlery answers each mechanic: **Teaspoon** (remove Appetite, draw), **Wooden Spoon** (hit for 10 % of your max HP,
 Appetite does nothing next turn), **Skimmer** (Block; Banquet takes nothing from you), **Melon Baller** (take 12 max HP
 from the Spoon). During the fight your Spoonfuls become **Stolen Spoonfuls**, attacks that steal Appetite.
