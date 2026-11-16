@@ -100,9 +100,11 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
       ends after the Spoon's next move.
 - [ ] Melon Baller (2, targets the Spoon): takes 12 max HP (15 upgraded) from the Spoon, never below 1, and the player
       gains them (with the heal of a vanilla max HP gain); the Spoon's Strength drops accordingly.
-- [ ] Stolen Spoonful (1, attack, targets the Spoon): 10 damage (12 upgraded), steals 3 Appetite (the Spoon may go negative)
-      and the player gains it (+5 % damage per stack for the fight). After a move that pierced a player's Block the Spoon
-      takes 1 from that player, even below 0 (the player then deals 5 % less per negative stack). EN/FR tooltip reads well on both.
+- [ ] Stolen Spoonful (owner merge, 2026-11-16): no longer in the kit (4 spoons). At the Spoon fight start every Spoonful
+      in the combat piles becomes a Stolen Spoonful, upgrade kept (log: `Spoonful -> Stolen Spoonful`): 1, attack,
+      Retain, no Exhaust, 10 damage (12 upgraded), steals 1 Appetite (2 upgraded) that the player keeps. After a move that
+      pierced a player's Block the Spoon takes 1 from that player, even below 0. After the fight the deck still holds
+      the Spoonful.
 - [ ] A supporter's cutlery works too (they are targetable on the Spoon even though the supporter deals it no damage).
 - [ ] Portraits (Pixabay placeholders) and EN/FR titles and descriptions read well, Banquet named in gold.
 - [ ] Co-op: every client sees the same kits, the same Sated/Skimmed state and the same Spoon max HP.

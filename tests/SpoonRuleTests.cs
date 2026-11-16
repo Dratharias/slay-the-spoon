@@ -120,14 +120,14 @@ public class SpoonRuleTests
 	public void ExtraSpoonsFromTwentyFive(int deck, int extra) => Assert.Equal(extra, SpoonRule.ExtraSpoons(deck));
 
 	[Fact]
-	public void KitHasOneOfEachOfTheFiveSpoons() =>
-		Assert.Equal(5, Enum.GetValues<SpoonRule.Cutlery>().Distinct().Count());
+	public void KitHasOneOfEachOfTheFourSpoons() =>
+		Assert.Equal(4, Enum.GetValues<SpoonRule.Cutlery>().Distinct().Count());
 
 	[Theory]
 	[InlineData(0, SpoonRule.Cutlery.Teaspoon)]
-	[InlineData(4, SpoonRule.Cutlery.StolenSpoonful)]
-	[InlineData(7, SpoonRule.Cutlery.Skimmer)]
-	[InlineData(-1, SpoonRule.Cutlery.StolenSpoonful)]
+	[InlineData(4, SpoonRule.Cutlery.Teaspoon)]
+	[InlineData(6, SpoonRule.Cutlery.Skimmer)]
+	[InlineData(-1, SpoonRule.Cutlery.Baller)]
 	public void ExtraPickCoversTheKit(int roll, SpoonRule.Cutlery expected) => Assert.Equal(expected, SpoonRule.ExtraPick(roll));
 
 	[Theory]

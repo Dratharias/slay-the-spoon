@@ -155,6 +155,27 @@ public sealed class SpoonMonster : Sts1EndingMonster
 			CardModel card = CombatState.CreateCard<SpoonSpoonFeed>(player);
 			await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);
 		}
+		await TransformSpoonfuls();
+	}
+
+	/// <summary>
+	/// For this fight every Spoonful becomes a Stolen Spoonful, upgrade kept (owner, 2026-11-16: the two are merged).
+	/// Only the combat copies change (a combat pile is not the deck, so Eternal does not block it): the deck keeps its
+	/// Spoonful after the fight.
+	/// </summary>
+	private async Task TransformSpoonfuls()
+	{
+		foreach (Player player in CombatState.Players.ToList())
+		{
+			if (player.PlayerCombatState is not { } combat) continue;
+			foreach (SpoonSpoonful spoonful in combat.AllCards.OfType<SpoonSpoonful>().ToList())
+			{
+				CardModel stolen = CombatState.CreateCard<SpoonStolenSpoonful>(player);
+				if (spoonful.IsUpgraded) CardCmd.Upgrade(stolen);
+				await CardCmd.Transform(spoonful, stolen);
+				SpoonLog.Info($"spoon: player {player.NetId} Spoonful -> Stolen Spoonful{(spoonful.IsUpgraded ? "+" : "")}");
+			}
+		}
 	}
 
 	private IEnumerable<Creature> LivingFighters() =>
@@ -162,7 +183,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 
 	/// <summary>
 	/// Sets the table: Frail on the fighters, and every living player's kit shuffled into their draw pile: one of each of
-	/// the five spoons, plus <see cref="SpoonRule.ExtraSpoons"/> random ones for a 25+ card deck. The extras come from an
+	/// the four spoons, plus <see cref="SpoonRule.ExtraSpoons"/> random ones for a 25+ card deck. The extras come from an
 	/// Rng named after the run seed, the cycle and the player's slot, so every co-op client draws the same.
 	/// </summary>
 	private async Task SetTableMove(IReadOnlyList<Creature> targets)
@@ -188,7 +209,6 @@ public sealed class SpoonMonster : Sts1EndingMonster
 			await Deal<SpoonWoodenSpoon>(player, counts[SpoonRule.Cutlery.Wooden]);
 			await Deal<SpoonSkimmer>(player, counts[SpoonRule.Cutlery.Skimmer]);
 			await Deal<SpoonMelonBaller>(player, counts[SpoonRule.Cutlery.Baller]);
-			await Deal<SpoonStolenSpoonful>(player, counts[SpoonRule.Cutlery.StolenSpoonful]);
 			SpoonLog.Info($"spoon: set the table for a {deck}-card deck: {string.Join(", ", counts.Select(c => $"{c.Key} {c.Value}"))}");
 		}
 		Animate(m => m.Recover());

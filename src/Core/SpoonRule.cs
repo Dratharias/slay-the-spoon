@@ -20,7 +20,8 @@ public static class SpoonRule
 	public enum SpoonMove { SetTable, Bouchee, Banquet, Ladle }
 
 	/// <summary>The five spoons of the kit; each player gets one of each every cycle (owner, 2026-11-16).</summary>
-	public enum Cutlery { Teaspoon, Wooden, Skimmer, Baller, StolenSpoonful }
+	/// <remarks>Stolen Spoonful left the kit (owner, 2026-11-16): the deck Spoonful becomes it for the Spoon fight.</remarks>
+	public enum Cutlery { Teaspoon, Wooden, Skimmer, Baller }
 
 	/// <summary>Event and Ancient relics that join the ordinary deques, by id entry, with the deque name.</summary>
 	public static readonly IReadOnlyList<(string Entry, string Deque)> ExtraRelics =

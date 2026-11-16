@@ -130,20 +130,28 @@ public sealed class SpoonMelonBaller : SpoonCutleryCard
 }
 
 /// <summary>
-/// Stolen Spoonful, the kit's Spoonful copy (owner, 2026-11-16): deal 10 (12 upgraded) and steal up to 3 Appetite from
-/// the Spoon; the player keeps it for the fight (+5 % damage per stack) until the Spoon takes it back, 1 per gain.
+/// Stolen Spoonful: what the deck Spoonful becomes for the Spoon fight (owner, 2026-11-16, merged with the former kit
+/// card; <see cref="SpoonMonster"/> transforms the combat copies). Deal 10 (12 upgraded) and steal
+/// <see cref="SpoonRule.SpoonfulAppetite"/> Appetite (2 upgraded) from the Spoon, which the player keeps for the fight.
+/// Retain like the Spoonful, no Exhaust.
 /// </summary>
-public sealed class SpoonStolenSpoonful : SpoonCutleryCard
+public sealed class SpoonStolenSpoonful : SpoonCard
 {
 	private const string AppetiteKey = "Appetite";
 
+	public override bool CanBeGeneratedInCombat => false;
+
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+
 	protected override IEnumerable<DynamicVar> CanonicalVars =>
-		[new DamageVar(10m, ValueProp.Move), new DynamicVar(AppetiteKey, SpoonRule.AppetiteBite)];
+		[new DamageVar(10m, ValueProp.Move), new DynamicVar(AppetiteKey, SpoonRule.SpoonfulAppetite)];
 
 	public SpoonStolenSpoonful()
-		: base(1, TargetType.AnyEnemy, CardType.Attack)
+		: base(1, CardType.Attack, TargetType.AnyEnemy)
 	{
 	}
+
+	private static SpoonMonster? SpoonOf(CardPlay cardPlay) => cardPlay.Target?.Monster as SpoonMonster;
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
@@ -157,5 +165,9 @@ public sealed class SpoonStolenSpoonful : SpoonCutleryCard
 		await PowerCmd.Apply<SpoonAppetitePower>(choiceContext, Owner.Creature, stolen, Owner.Creature, this);
 	}
 
-	protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2m);
+	protected override void OnUpgrade()
+	{
+		DynamicVars.Damage.UpgradeValueBy(2m);
+		DynamicVars[AppetiteKey].UpgradeValueBy(SpoonRule.SpoonfulAppetiteUpgraded - SpoonRule.SpoonfulAppetite);
+	}
 }

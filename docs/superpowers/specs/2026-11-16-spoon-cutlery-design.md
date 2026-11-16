@@ -63,7 +63,7 @@ pierced a player's Block it takes 1 from that player, below 0 too.
 | Wooden Spoon (Cuillère en bois) | 1 | 1.3.2: an attack dealing 10 % of your max HP; the Spoon's Appetite does nothing on its next turn (normal damage; stacks kept, gain still happens). |
 | Skimmer (Écumoire) | 1 | Gain 6 Block (*builder call*). This turn, Feast eats none of your max HP. |
 | Melon Baller (Cuillère parisienne) | 2 | Take 12 max HP from the Spoon (fixed: no damage, no Strength); you gain them. |
-| Stolen Spoonful (Cuillerée volée) | 1 | 1.3.2: an attack, 10 damage (12 upgraded); steal up to 3 Appetite from the Spoon. |
+| Stolen Spoonful (Cuillerée volée) | 1 | Not in the kit since the owner's merge (2026-11-16): the deck Spoonful becomes it for the Spoon fight (combat copies only, upgrade kept). Attack, Retain, no Exhaust, 10 damage (12 upgraded), steal 1 Appetite (2 upgraded). |
 
 Targeted like vanilla cards (owner): Teaspoon, Wooden Spoon and Melon Baller target the Spoon, Skimmer the player.
 "This turn" for the Skimmer means until the end of the Spoon's next turn. Played on the Spoon (Wooden Spoon, Melon
@@ -71,7 +71,7 @@ Baller, Teaspoon target it); a supporter's copy works too.
 
 ## Kit (1.3.2, owner, 2026-11-16)
 
-Every Sets the Table gives each living player one of each of the five spoons. From 25 cards in the deck, 1 extra kit
+Every Sets the Table gives each living player one of each of the four spoons (Stolen Spoonful left the kit). From 25 cards in the deck, 1 extra kit
 spoon at random, plus 1 per further 5 cards (25 → +1, 30 → +2). The extras come from an `Rng` named after the run seed,
 the cycle and the player's slot, so co-op clients agree (*builder call*). This replaces the 1.3.0 table by deck size.
 
