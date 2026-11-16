@@ -21,9 +21,8 @@ countering one of the Spoon's mechanics, handed out by the Spoon itself so ignor
    unmanageable if the kit is ignored).
 2. **Mouthful**: 35 damage (*builder call*); the Spoon gains Block equal to the HP its hit took past the players'
    Block (*builder call: unblocked damage*).
-3. **Feast**: +3 Appetite (*builder call: the only Appetite gain, the per-move +2 is gone*), Vulnerable 2 on every
-   fighter (*builder call*), each fighter loses 10 max HP without an attack (lost, the Spoon doesn't gain them,
-   *builder call*), then it heals 60 + 20 per player past the first.
+3. **Feast**: Vulnerable 2 on every fighter (*builder call*), each fighter loses 10 max HP without an attack (lost,
+   the Spoon doesn't gain them, *builder call*), then it heals 60 + 10 per player past the first (60, 70, 80, 90).
 4. **Ladle Smash**: 55 damage (*builder call*).
 
 Unchanged: supporters are never targeted and deal it nothing; growth on unblocked damage (that much max HP, no heal).
@@ -32,7 +31,12 @@ Unchanged: supporters are never targeted and deal it nothing; growth on unblocke
 
 Strength = (max HP − max HP at fight start) / 5, truncated toward zero, negative below the start (owner: "1 Strength
 per 5 max HP and vice versa"). Recomputed whenever its max HP changes. Replaces "+1 per 10 grown". The team max HP
-damage ratio stays removed. Appetite stays at +10 % damage per stack; Spoonful still removes 3.
+damage ratio stays removed.
+
+## Appetite and Spoonful
+
+Appetite is unchanged: +2 after each of the Spoon's moves, +10 % damage per stack. Spoonful stays the normal deck card
+that manages it (the fifth spoon, owner): each one played on the Spoon removes 3.
 
 ## The cutlery (Exhaust, combat-only, `SpoonCard`s outside every card source)
 
@@ -56,6 +60,8 @@ Baller, Teaspoon target it); a supporter's copy works too.
 | 20–24 | + Skimmer |
 | 25–29 | + Melon Baller |
 | 30+ | + 2 Teaspoons (4 in all), and 2 more per further 15 cards (*builder call*) |
+
+Every number not marked as the owner's is tuned during balancing (owner, 2026-11-16).
 
 ## Left to the builder
 
