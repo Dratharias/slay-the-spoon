@@ -67,6 +67,9 @@ helping from the side. **Non-goals:** a complex boss (no minions, no phases), St
 7. **After the Spoon.** If The Ending follows, the Spoon gives ordinary boss rewards and the run goes on; otherwise
    it is the final boss and its death wins the run.
 
+> **2026-11-16:** the fight's moves, Strength and the player's answer to them are replaced by
+> `2026-11-16-spoon-cutlery-design.md` (4-turn cycle, cutlery kit, Strength from max HP). The numbers below are history.
+
 ## Boss numbers (starting point, tuned after play)
 
 Accepted as a proposal by the owner ("à ajuster une fois en jeu"):

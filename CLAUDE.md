@@ -397,3 +397,9 @@ Read `README.md` for the player view and the spec for every decision.
   hidden `SpoonTestRun` flag skips the modded profile's progress (`SpoonTestProgressGuards`).
 - Build 0 warnings; 675 xUnit + 91 pytest pass; `make workshop` stages 1.3.0. Not tested in game:
   `docs/testing/spoon-checklist.md`.
+- **Cutlery redesign** (branch `spoon-test-start`, spec `docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md`): the
+  Spoon cycles Sets the Table (Frail, deals each player a cutlery kit by deck size), Mouthful (Block from unblocked
+  damage), Banquet (Vulnerable, eats 10 max HP unless Skimmed, heals 60 + 10 per extra player) and Ladle Smash; Strength =
+  (max HP − start) / 5, applied by delta (`SyncStrength`). Cards in `src/Spoon/SpoonCutlery.cs` (Teaspoon, Wooden Spoon,
+  Skimmer, Melon Baller; Pixabay portraits), powers Sated/Skimmed, tweens `SetTableAsync`/`BanquetAsync`. Build 0
+  warnings; 702 xUnit + 91 pytest pass. Not tested in game.
