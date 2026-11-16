@@ -18,5 +18,8 @@
   "SPOON_TINT.close": "Close",
   "SPOON_FOLIE_MP.title": "Folie à deux",
   "SPOON_FOLIE_MP.description": "Fight over every card.",
-  "SPOON_FOLIE_MP.LOCKED.description": "Fight over every card."
+  "SPOON_FOLIE_MP.LOCKED.description": "Fight over every card.",
+  "SPOON_SPOON_MODE.title": "Slay the Spoon",
+  "SPOON_SPOON_MODE.description": "Dinner is served. The Spoon is waiting.",
+  "SPOON_SPOON_MODE.LOCKED.description": "Dinner is served. The Spoon is waiting."
 }

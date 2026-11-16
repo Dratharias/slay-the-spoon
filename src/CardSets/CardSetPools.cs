@@ -56,12 +56,6 @@ public static class CardSetPools
 		return run?.Players.FirstOrDefault(p => ReferenceEquals(p.UnlockState, unlockState));
 	}
 
-	/// <summary>True when <paramref name="character"/> has StS1 cards, so the Spire Souvenir does something for them.</summary>
-	public static bool HasSts1Cards(CharacterModel character)
-	{
-		return HasPair(character.CardPool);
-	}
-
 	/// <summary>True when <paramref name="pool"/> is a vanilla pool or StS1 pool that the mode reshapes.</summary>
 	public static bool HasPair(CardPoolModel pool)
 	{

@@ -22,8 +22,8 @@ public sealed class SpoonCardSetSts1Only : SpoonCardSet
 }
 
 /// <summary>
-/// Spire Souvenir run: every player whose character has StS1 cards starts with the Spire Souvenir, which puts them
-/// in Hybrid. The run itself stays StS2; the relic carries the effect, so losing it ends it. Runs on every peer at
+/// Spire Souvenir run: every player starts with the Spire Souvenir, which puts them in Hybrid (only the colorless
+/// cards for the Necrobinder and the Regent, owner 2026-11-16). The run itself stays StS2; the relic carries the effect, so losing it ends it. Runs on every peer at
 /// run creation; the relic is saved with the player afterwards.
 /// </summary>
 public sealed class SpoonSpireSouvenirModifier : ModifierModel
@@ -32,7 +32,7 @@ public sealed class SpoonSpireSouvenirModifier : ModifierModel
 	{
 		foreach (Player player in runState.Players)
 		{
-			if (CardSetPools.HasSts1Cards(player.Character) && !player.Relics.Any(r => r is SpoonSpireSouvenir))
+			if (!player.Relics.Any(r => r is SpoonSpireSouvenir))
 			{
 				player.AddRelicInternal(ModelDb.Relic<SpoonSpireSouvenir>().ToMutable());
 			}

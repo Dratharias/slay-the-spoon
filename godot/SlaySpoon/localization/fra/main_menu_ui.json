@@ -18,5 +18,8 @@
   "SPOON_TINT.close": "Fermer",
   "SPOON_FOLIE_MP.title": "Folie à deux",
   "SPOON_FOLIE_MP.description": "Disputez-vous chaque carte.",
-  "SPOON_FOLIE_MP.LOCKED.description": "Disputez-vous chaque carte."
+  "SPOON_FOLIE_MP.LOCKED.description": "Disputez-vous chaque carte.",
+  "SPOON_SPOON_MODE.title": "Slay the Spoon",
+  "SPOON_SPOON_MODE.description": "À table, la Cuillère vous attend.",
+  "SPOON_SPOON_MODE.LOCKED.description": "À table, la Cuillère vous attend."
 }

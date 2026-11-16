@@ -201,3 +201,10 @@ The test menu/launcher/deck and install-detection helper were removed; legacy ru
 - [ ] The Spoonful removes 1 Appetite (2 upgraded) from any monster, which can go negative and then deals less damage.
 - [ ] Player and monster Appetite start at 0 in the next fight.
 - [ ] Co-op: both screens show the same Appetite after a multi-target monster attack.
+
+### 1.3.7 Slay the Spoon mode card
+- [ ] Solo screen: a "Slay the Spoon" card beside Standard / Daily / Custom, Spoonful art; the row fits the screen.
+- [ ] It opens the Standard character select; the run has the Spoonful, Feast, Fruit Juice and the Spoon act.
+- [ ] Neow offers the usual Standard options in that run.
+- [ ] Host screen: Folie à deux and Slay the Spoon both present, row fits; each starts its own mode; vanilla cards start vanilla runs.
+- [ ] Spire Souvenir: a Necrobinder or Regent in a "Spire Souvenir" run starts with it and sees colorless cards from both games.

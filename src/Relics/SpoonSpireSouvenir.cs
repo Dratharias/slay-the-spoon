@@ -8,7 +8,7 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Relics;
 
 /// <summary>
-/// Spire Souvenir (spec 2026-10-29-spire-souvenir-relic-design.md): a Common relic of the characters with StS1 cards that puts its owner in
+/// Spire Souvenir (spec 2026-10-29-spire-souvenir-relic-design.md): a Common relic of every vanilla character that puts its owner in
 /// Hybrid. A Spire Souvenir run (<see cref="SpoonSpireSouvenirModifier"/>) hands it out at the start. It has no hooks; <see cref="CardSetPools.ModeFor"/> reads whether a player holds it.
 /// </summary>
 public sealed class SpoonSpireSouvenir : RelicModel

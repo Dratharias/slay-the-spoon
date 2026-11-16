@@ -148,3 +148,10 @@ Appetite is no longer the Spoon fight's alone. In a Spoon run, each hit an ordin
 fully blocked, takes 1 Appetite from that player (below 0 too) and gives it to the monster (`SpoonSpoon.AfterAttack`,
 `SpoonRule.StolenOnHits`); the Spoon keeps its per-move rule. The Spoonful removes its Appetite (1, 2 upgraded) from any
 monster it hits, not only the Spoon. Appetite lasts one combat (owner).
+
+## Amendment 1.3.7: Slay the Spoon mode card (owner, 2026-11-16)
+
+The mode is named "Slay the Spoon" in both languages. A "Slay the Spoon" card on the solo and multiplayer host screens
+starts a Standard run carrying `SpoonSpoon` (a Standard exception, like Folie à deux); the Custom Run checkbox stays.
+Menu text: "Dinner is served. The Spoon is waiting." / "À table, la Cuillère vous attend." Builder call: Neow treats
+the flag as hidden, like Folie à deux, so both entry points get Neow's usual options.

@@ -4,3 +4,6 @@
 - The Spoon act opens on the team's total max HP: 300 solo, 550 for two, 750 for three, 900 for four.
 - New Workshop preview and description.
 - Appetite everywhere: every monster steals 1 Appetite per hit on a player, and the Spoonful removes Appetite from any monster.
+- Slay the Spoon: a mode card on the solo and multiplayer host screens starts a Standard run in Spoon mode; the Custom Run option is renamed Slay the Spoon.
+- The Spire Souvenir now works for the Necrobinder and the Regent too (colorless cards from both games).
+- Shorter Custom Run descriptions.

@@ -2,11 +2,11 @@
 
 [b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 or later.[/b] English and French.
 
-Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a few strange ways to play it. Tick what you want in Custom Run.
+Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a few strange ways to play it. Pick a mode card next to Standard, or tick what you want in Custom Run.
 
 [h2]Party modes[/h2]
 [list]
-[*][b]Spoon[/b]: max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up, something hungry waits after act 3. Bring cutlery.
+[*][b]Slay the Spoon[/b]: max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up, something hungry waits after act 3. Bring cutlery.
 [*][b]Folie à deux[/b]: every card is up for grabs. Even yours.
 [*][b]Matriochka[/b]: hoard everything. Every floor brings cards.
 [*][b]King Midas[/b]: start rich. No free cards; every fire costs gold.
@@ -31,10 +31,10 @@ Daily Runs stay vanilla. Your regular save is never written; an optional copy br
 [h2]Français[/h2]
 [b]Alpha réservée aux amis.[/b] À peine testée en jeu : attendez-vous à des bugs et sauvegardez vos parties. Tous les joueurs en coop ont besoin de la même version. Nécessite BaseLib 3.4.7 ou plus.
 
-Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer. Cochez ce que vous voulez en partie personnalisée.
+Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer. Choisissez une carte de mode à côté de Standard, ou cochez ce que vous voulez en partie personnalisée.
 
 [list]
-[*][b]Cuillère[/b] : les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuillerée, festoyez aux feux de camp, buvez le jus de fruit du marchand. Si l'équipe cumule assez de PV max, quelque chose d'affamé attend après l'acte 3. Apportez vos couverts.
+[*][b]Slay the Spoon[/b] : les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuillerée, festoyez aux feux de camp, buvez le jus de fruit du marchand. Si l'équipe cumule assez de PV max, quelque chose d'affamé attend après l'acte 3. Apportez vos couverts.
 [*][b]Folie à deux[/b] : chaque carte se dispute. Même les vôtres.
 [*][b]Matriochka[/b] : accumulez tout. Chaque étage apporte des cartes.
 [*][b]Roi Midas[/b] : départ fortuné. Aucune carte gratuite, chaque feu se paie.

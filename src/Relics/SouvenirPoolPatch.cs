@@ -10,14 +10,16 @@ using MegaCrit.Sts2.Core.Runs;
 namespace SlaySpoon.Relics;
 
 /// <summary>
-/// Puts the Spire Souvenir in the relic pool of every character with StS1 cards, so the compendium and pool lookups
+/// Puts the Spire Souvenir in the relic pool of every vanilla character (the Necrobinder and the Regent get Hybrid
+/// colorless cards from it, owner 2026-11-16), so the compendium and pool lookups
 /// know it. The pool caches this list on first read, during ModelDb.Init, which runs after mods are loaded.
 /// </summary>
 [HarmonyPatch]
 public static class SouvenirPoolPatch
 {
-	/// <summary>The relic pools of the characters with StS1 cards.</summary>
-	internal static readonly Type[] Pools = { typeof(IroncladRelicPool), typeof(SilentRelicPool), typeof(DefectRelicPool) };
+	/// <summary>The relic pools that hold the Souvenir.</summary>
+	internal static readonly Type[] Pools = { typeof(IroncladRelicPool), typeof(SilentRelicPool), typeof(DefectRelicPool),
+		typeof(NecrobinderRelicPool), typeof(RegentRelicPool) };
 
 	public static IEnumerable<MethodBase> TargetMethods() =>
 		Pools.Select(pool => AccessTools.Method(pool, "GenerateAllRelics"));

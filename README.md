@@ -2,7 +2,8 @@
 
 A Slay the Spire 2 mod for chaotic co-op and solo runs: it brings Slay the Spire 1 cards into
 Slay the Spire 2 and adds run options that the lobby host sets in the **Custom Run** screen.
-Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic described below.
+Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic described below, and the Folie à deux and
+Slay the Spoon cards start Standard runs in those modes.
 
 > **Unofficial.** This mod is not affiliated with, endorsed by or sponsored by Mega Crit.
 > Slay the Spire, Slay the Spire 2 and their assets (art, card text) belong to Mega Crit.
@@ -31,7 +32,7 @@ Current version: **1.3.7**.
 
 - **Card sets:** two Custom Run options, at most one ticked. **Slay the Spire 1 Cards** offers
   Slay the Spire 1 cards instead of Slay the Spire 2 ones in rewards, shops and card generation;
-  **Spire Souvenir** starts every character that has Slay the Spire 1 cards with the Spire Souvenir
+  **Spire Souvenir** starts every character with the Spire Souvenir
   relic (below), which mixes the two. With neither and without the relic, cards are vanilla. A card that exists in
   both games is offered once: as its weaker version when only the numbers differ, and as either
   version when it plays differently, with a button to switch between the two on card rewards, at
@@ -95,17 +96,17 @@ Current version: **1.3.7**.
 - **Campfire Sales** (co-op): spend your rest site action to sell a deck card to an ally for 0–999 gold; any shortfall
   becomes a loan, like Merchant Loans. The buyer must accept. No curses.
 
-- **Spire Souvenir:** a Common Ironclad, Silent and Defect relic, also found in Standard runs, that lets its owner find
-  cards from the other game: Slay the Spire 1 cards in a normal run, Slay the Spire 2 cards in a
+- **Spire Souvenir:** a Common relic of every character, also found in Standard runs, that lets its owner find
+  cards from the other game (only colorless cards for the Necrobinder and the Regent): Slay the Spire 1 cards in a normal run, Slay the Spire 2 cards in a
   "Slay the Spire 1 Cards" run. It only affects its owner; losing it ends the effect. It never drops
-  in a "Spire Souvenir" run (eligible players already start with it) or in a Daily run.
+  in a "Spire Souvenir" run (every player already starts with it) or in a Daily run.
 
 - **`sts1card` console command** for testing: in a modded game the developer console opens with the
   `` ` `` key (`*` or `'` on AZERTY); `sts1card STS1_HEAVY_BLADE` puts that card in your hand in combat,
   or in your deck elsewhere. The vanilla `card` command can't see Slay the Spire 1 cards.
   `sts1event STS1_NEST` (or `STS1_VAMPIRES`, `STS1_AUGMENTER`) opens a Slay the Spire 1 event.
 
-**Folie à deux** (co-op): a fourth card on the multiplayer host screen starts a Standard run with it; Custom Runs have it
+**Folie à deux** (co-op): an extra card on the multiplayer host screen starts a Standard run with it; Custom Runs have it
 as a checkbox. Every card reward goes into a chest: each player bids on one head, rock-paper-scissors settles ties, and
 an unclaimed head is lost. Draft and Sealed Deck hand every player one head. Solo runs are unaffected.
 
@@ -118,7 +119,7 @@ The Courier and more). No card rewards anywhere: cards come from the merchant. E
 is its only way out. Rest site actions cost gold (50, then 50 more each time at the same fire) and can be repeated; a
 broken Maw Bank can be reopened there. Not with Matriochka. Not tested in game: `docs/testing/roi-midas-checklist.md`.
 
-**Spoon** (Custom Run): max HP becomes the currency of the run. Everyone starts with a Spoonful, a Retain card that
+**Slay the Spoon** (a card on the solo and multiplayer host screens, or a Custom Run checkbox): max HP becomes the currency of the run. Everyone starts with a Spoonful, a Retain card that
 kills to feed: a fatal blow with it raises your max HP. Max HP relics are added to the draws, every rest site offers a
 Feast (+5 max HP), and every merchant sells Fruit Juice. When the team's max HP adds up to **300 solo, 550 for two, 750
 for three or 900 for four**, a Spoon act is inserted after the last act 3 boss: one rest site, then the Spoon. Every

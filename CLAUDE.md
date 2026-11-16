@@ -277,8 +277,8 @@ Read `README.md` for the player view and the spec for every decision.
   `godot/SlaySpoon/localization/eng/` and `.../fra/`.
 - The mod must **never write the regular (unmodded) save**. Progress sync only reads it.
 - Standard and Daily modes remain available; never lock the modes themselves.
-  Daily stays vanilla. Standard exceptions are Spire Souvenir, the approved Act 4 unlock and the solo Watcher (0.12.36)
-  documented above. Lobby activation options live in Custom Run.
+  Daily stays vanilla. Standard exceptions are Spire Souvenir, the approved Act 4 unlock, the solo Watcher (0.12.36)
+  and the Folie à deux / Slay the Spoon mode cards, documented above. Lobby activation options live in Custom Run.
 - Bug reports are not support requests (see README). Don't promise fixes.
 - Never commit decompiled game code.
 - Commit on a step branch. Push and publish only on request.
@@ -419,3 +419,8 @@ Read `README.md` for the player view and the spec for every decision.
 - 1.3.7 also (owner, 2026-11-16): Appetite in every Spoon-run fight. `SpoonSpoon.AfterAttack` moves 1 Appetite per hit
   from the player to an ordinary attacker (modifiers are combat hook listeners); the Spoonful removes Appetite from any
   monster. 726 xUnit + 91 pytest pass. Not tested in game.
+- 1.3.7 also (owner, 2026-11-16): mode cards (`src/Ui/ModeCardPatch.cs`, replaces `FolieHostButtonPatch`): a
+  "Slay the Spoon" card on the solo and host screens starts a Standard run with `SpoonSpoon` (new Standard exception;
+  Neow hides it like Folie à deux, so Custom Spoon runs get Neow's usual options too). The Spire Souvenir is in every
+  vanilla relic pool and the modifier gives it to every player (Necrobinder/Regent: Hybrid colorless). Custom Run
+  descriptions rewritten short. Not tested in game.
