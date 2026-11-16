@@ -25,7 +25,7 @@ in `src/Spoon/`; `SpoonMonster` gets the new move machine and calls back into `S
 ## Review Focus
 
 - A dead player gets no kit; a supporter does (spec: every player's draw pile). Test in Task 3 by reading the loop.
-- Melon Baller on a Spoon with ≤ 15 max HP: takes at most max HP − 1, never kills through max HP (`SpoonRule.BallerTake`).
+- Melon Baller on a Spoon with ≤ 12 max HP: takes at most max HP − 1, never kills through max HP (`SpoonRule.BallerTake`).
 - Several Wooden Spoons in one turn stack: each blocks one future Appetite gain (Counter power).
 - Strength recomputed after every max HP change the mod makes (growth, Melon Baller); never drifts (set by delta to the target).
 - Skimmer protection ends after the Spoon's turn even when the Spoon's move was not Feast.
@@ -41,8 +41,8 @@ in `src/Spoon/`; `SpoonMonster` gets the new move machine and calls back into `S
 **Interfaces:**
 - Produces:
   - `enum SpoonMove { SetTable, Bouchee, Feast, Ladle }`; `SpoonMove Move(int turn)` (turn 0-based: 0 SetTable, 1 Bouchee, 2 Feast, 3 Ladle, repeating).
-  - constants `BoucheeDamage = 35`, `LadleDamage = 55`, `FeastMaxHp = 10` (rename of BoucheeMaxHp), `FrailAmount = 2`, `VulnerableAmount = 2`, `FeastHealBase = 60`, `FeastHealPerPlayer = 10`, `MaxHpPerStrength = 5`, `TeaspoonAppetite = 2`, `SkimmerBlock = 6`, `BallerMaxHp = 15`.
-  - `int StrengthFor(int maxHp, int startMaxHp)`; `int FeastHeal(int players)`; `int BallerTake(int spoonMaxHp)` = clamp(15, 0, maxHp − 1).
+  - constants `BoucheeDamage = 35`, `LadleDamage = 55`, `FeastMaxHp = 10` (rename of BoucheeMaxHp), `FrailAmount = 2`, `VulnerableAmount = 2`, `FeastHealBase = 60`, `FeastHealPerPlayer = 10`, `MaxHpPerStrength = 5`, `TeaspoonAppetite = 2`, `SkimmerBlock = 6`, `BallerMaxHp = 12`.
+  - `int StrengthFor(int maxHp, int startMaxHp)`; `int FeastHeal(int players)`; `int BallerTake(int spoonMaxHp, int amount = BallerMaxHp)` = clamp(amount, 0, maxHp − 1).
   - `record struct Kit(int Teaspoons, bool Wooden, bool Skimmer, bool Baller)`; `Kit KitFor(int deckSize)`.
 - Removes: `StrengthFromGrowth`, `BoucheeMaxHp` (and their tests).
 
@@ -62,7 +62,7 @@ public void StrengthFollowsMaxHp(int hp, int start, int s) => Assert.Equal(s, Sp
 [Theory] [InlineData(1, 60)] [InlineData(2, 70)] [InlineData(3, 80)] [InlineData(4, 90)]
 public void FeastHealByPlayers(int players, int heal) => Assert.Equal(heal, SpoonRule.FeastHeal(players));
 
-[Theory] [InlineData(2000, 15)] [InlineData(16, 15)] [InlineData(10, 9)] [InlineData(1, 0)]
+[Theory] [InlineData(2000, 12)] [InlineData(13, 12)] [InlineData(10, 9)] [InlineData(1, 0)]
 public void BallerTakeIsCapped(int hp, int take) => Assert.Equal(take, SpoonRule.BallerTake(hp));
 
 [Theory]
@@ -91,12 +91,12 @@ public void KitBySize(int deck, int tea, bool wood, bool skim, bool baller) =>
 - Consumes: `SpoonFight.Find(ICombatState?)`, Task 1 constants.
 - Produces: `SpoonSatedPower` (Buff, Counter, on the Spoon; each stack blocks one Appetite gain), `SpoonSkimmedPower` (Buff, Single, on a player; Feast skips their max HP loss), `SpoonMonster.SyncStrength()` is called by the Melon Baller (defined in Task 3; add a stub here returning `Task.CompletedTask`).
 
-Cards (all `CardKeyword.Exhaust`, `TargetType.None`, act on `SpoonFight.Find(CombatState)`; no-op when it is null or dead):
+Cards (all `CardKeyword.Exhaust`; owner 2026-11-16: targeted like vanilla cards: Teaspoon, Wooden Spoon and Melon Baller `TargetType.AnyEnemy` acting on `cardPlay.Target` when it is the `SpoonMonster`, Skimmer `TargetType.Self`):
 - Teaspoon: cost 0 Skill; Appetite −min(2, amount) via `PowerCmd.ModifyAmount`; draw 1.
 - Wooden Spoon: cost 1 Skill; apply `SpoonSatedPower` 1 to the Spoon.
 - Skimmer: cost 1 Skill; `BlockVar(6)` gain; apply `SpoonSkimmedPower` 1 to the player.
 - Melon Baller: cost 2 Skill; `take = BallerTake(spoon.MaxHp)`; `CreatureCmd.SetMaxHp(spoon, max − take)` (clamp current HP by the game), `CreatureCmd.GainMaxHp(owner.Creature, take)`, then `spoon.SyncStrength()`.
-Upgrades (builder): Teaspoon draws 2, Wooden Spoon cost 0, Skimmer Block 9, Melon Baller takes 20 (`BallerMaxHp` stays the base; pass the amount).
+Upgrades (owner: Teaspoon still draws 1, Wooden Spoon still costs 1, Melon Baller takes 12): Teaspoon removes 3 Appetite, Wooden Spoon blocks 2 gains, Skimmer Block 9, Melon Baller takes 15 (builder calls).
 
 Text — titles EN/FR: Teaspoon/Cuillère à café, Wooden Spoon/Cuillère en bois, Skimmer/Écumoire, Melon Baller/Cuillère parisienne; powers Sated/Rassasiée ("Its next {Amount} Appetite gain(s) do nothing"), Skimmed/Écumé ("Feast eats none of your max HP this turn"). Match vanilla wording for Block/draw (grep the PCK).
 

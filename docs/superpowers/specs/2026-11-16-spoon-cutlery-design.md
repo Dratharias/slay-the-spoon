@@ -45,8 +45,9 @@ that manages it (the fifth spoon, owner): each one played on the Spoon removes 3
 | Teaspoon (Cuillère à café) | 0 | Remove 2 Appetite. Draw 1. |
 | Wooden Spoon (Cuillère en bois) | 1 | Prevents the Spoon's next Appetite gain. |
 | Skimmer (Écumoire) | 1 | Gain 6 Block (*builder call*). This turn, Feast eats none of your max HP. |
-| Melon Baller (Cuillère parisienne) | 2 | Take 15 max HP from the Spoon (fixed: no damage, no Strength); you gain them. |
+| Melon Baller (Cuillère parisienne) | 2 | Take 12 max HP from the Spoon (fixed: no damage, no Strength); you gain them. |
 
+Targeted like vanilla cards (owner): Teaspoon, Wooden Spoon and Melon Baller target the Spoon, Skimmer the player.
 "This turn" for the Skimmer means until the end of the Spoon's next turn. Played on the Spoon (Wooden Spoon, Melon
 Baller, Teaspoon target it); a supporter's copy works too.
 
