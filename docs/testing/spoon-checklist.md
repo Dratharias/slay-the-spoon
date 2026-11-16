@@ -85,3 +85,22 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
 - [ ] Card portraits for Spoonful and Spoon-Feed show in hand, deck view and card library without a missing-image mark.
 - [ ] Text: every name (Spoonful / Cuillerée, Spoon-Feed / Becquée, The Spoon / La Cuillère, Bouchée, Coup de louche)
       reads right in EN and FR; the owner proofreads.
+
+## Main-menu test start ("Test: The Spoon")
+
+- [ ] With the mod in the game's `mods/SlaySpoon/` folder, the main menu shows "Test: The Spoon" (FR "Test : la
+      Cuillère") under Multiplayer; the log has `spoon test: mod source ModsDirectory ... test button shown`.
+- [ ] With only the Workshop copy (no local `mods/SlaySpoon`), the button is absent (log: `test button hidden`).
+- [ ] With a run already saved, the button is hidden (like Singleplayer); after Abandon Run it comes back.
+- [ ] Clicking it starts a solo Ironclad run directly on the Spoon act's map (rest site, then the Spoon); no Neow,
+      no act 1 map. Top bar shows the "Spoon" and "Test" modifiers.
+- [ ] Player: 350 max HP and 350 HP, vanilla starting gold, Burning Blood, and the Spoonful in hand at combat start.
+- [ ] Deck (unupgraded): Body Slam ×2, Barricade, Entrench, Impervious, Shrug It Off ×2, Flame Barrier, Iron Wave ×2,
+      Metallicize (StS1 port), Juggernaut, Defend ×4, Strike ×2, Bash, plus the Spoonful.
+- [ ] Music and background are the Spoon act's; the map's boss icon is the Spoon.
+- [ ] Save and quit at the rest site and in the fight, then Continue: the run reloads on the Spoon act with the same
+      deck, HP and modifiers.
+- [ ] Winning the fight wins the run (the Spoon is the last act); losing shows the game-over screen.
+- [ ] Game over (win or loss): no unlock score bar progress, no new epoch; the modded profile's play time, floors,
+      encounter stats and enemy kill stats do not change (log: `spoon test: run end progress skipped`, `unlock score
+      skipped`). The run still appears in the run history as a Custom Run.

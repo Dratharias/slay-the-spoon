@@ -18,5 +18,6 @@
   "SPOON_TINT.close": "Close",
   "SPOON_FOLIE_MP.title": "Folie à deux",
   "SPOON_FOLIE_MP.description": "Fight over every card.",
-  "SPOON_FOLIE_MP.LOCKED.description": "Fight over every card."
+  "SPOON_FOLIE_MP.LOCKED.description": "Fight over every card.",
+  "SPOON_TEST_SPOON": "Test: The Spoon"
 }

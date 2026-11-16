@@ -392,5 +392,8 @@ Read `README.md` for the player view and the spec for every decision.
 - Review fix wave: Spoon-Feed gives min(5, max HP − 1), so down to 1 max HP, never lethal, and the fighter gains what
   was lost (`SpoonRule.GiftAmount`, owner decision 2026-11-16); a supporter's Pressure Points
   skips the Spoon; the Juice price comes from the mod's stream (`SpoonJuiceCostPatch`, `PlayerRng.Shops` untouched).
-- Build 0 warnings; 646 xUnit + 91 pytest pass; `make workshop` stages 1.3.0. Not tested in game:
+- Main-menu "Test: The Spoon" (`src/Spoon/SpoonTestStart.cs`, `SpoonTestButtonPatch`): only for a mod loaded from the game's
+  `mods/` folder (`SpoonTestStartRule.IsLocalInstall`), a solo Custom Run on the Spoon act (Ironclad, 350 max HP, `SpoonTestDeck`),
+  hidden `SpoonTestRun` flag skips the modded profile's progress (`SpoonTestProgressGuards`).
+- Build 0 warnings; 675 xUnit + 91 pytest pass; `make workshop` stages 1.3.0. Not tested in game:
   `docs/testing/spoon-checklist.md`.

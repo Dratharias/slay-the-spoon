@@ -50,5 +50,8 @@
   "SPOON_ROI_MIDAS.short": "Midas",
   "SPOON_SPOON.title": "Cuillère",
   "SPOON_SPOON.description": "Gonflez vos PV max. À 300, la Cuillère attend après l'acte 3.",
-  "SPOON_SPOON.short": "Cuill."
+  "SPOON_SPOON.short": "Cuill.",
+  "SPOON_TEST_RUN.title": "Test de la Cuillère",
+  "SPOON_TEST_RUN.description": "Un départ de test sur l’acte de la Cuillère. Il ne compte pour aucune progression.",
+  "SPOON_TEST_RUN.short": "Test"
 }
