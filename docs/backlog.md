@@ -482,3 +482,7 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     - Final review: the Spoon act has no entry heal like The Ending's; its row-0 rest site covers it.
     - 1.3.2: Stolen Spoonful's portrait is a copy of Spoonful's (drawing list); its Appetite texts hardcode 5 %, 2, 1
       and 3 like the other Spoon texts.
+    - Balance play test (2026-11-16, seed GPHXW6YEPE, won in 18 turns): the test deck's blocks (Barricade, Entrench,
+      Body Slam, Impervious) let the Ladle pierce once; Appetite went −4 per cycle (Teaspoon, Stolen 3, Spoonful) and
+      Melon Baller took Strength from +3 to −6. Owner: keep the counter deck as the test deck, no Baller change; retest
+      after the Stolen Spoonful merge (Appetite now −1 per cycle).
