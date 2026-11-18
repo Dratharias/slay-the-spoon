@@ -36,7 +36,7 @@ public sealed class Sts1Hyperbeam : Sts1DefectCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).TargetingAllOpponents(CombatState!)
 			.WithAttackerAnim("Cast", 0.5f)
 			.BeforeDamage(PlayBeam)
 			.Execute(choiceContext);

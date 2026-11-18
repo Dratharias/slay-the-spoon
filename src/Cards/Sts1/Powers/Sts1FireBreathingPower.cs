@@ -24,7 +24,7 @@ public sealed class Sts1FireBreathingPower : PowerModel, IBorrowedIcon
 		if (card.Owner.Creature == Owner && card.Type is CardType.Status or CardType.Curse && CombatState.HittableEnemies.Any())
 		{
 			Flash();
-			await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, Amount, ValueProp.Unpowered, Owner, null);
+			await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, Amount, ValueProp.Unpowered, Owner, null, null);
 		}
 	}
 }

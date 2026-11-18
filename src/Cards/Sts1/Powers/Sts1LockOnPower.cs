@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -19,7 +20,7 @@ public sealed class Sts1LockOnPower : PowerModel, IBorrowedIcon
 
 	public Type IconSource => typeof(TrackingPower);
 
-	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
 	{
 		return target == Owner && OrbDamagePatch.Current is LightningOrb or DarkOrb ? 1.5m : 1m;
 	}

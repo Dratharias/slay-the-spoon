@@ -266,7 +266,7 @@ internal static class ChestRematchView
 			free[i].FocusNeighborRight = free[(i + 1) % free.Count].GetPath();
 		}
 		ShowLabel(!rematching ? "SPOON_CHEST_REMATCH_WAIT" : round.KeyOffered ? "SPOON_CHEST_REMATCH_KEY" : "SPOON_CHEST_REMATCH");
-		if (rematching && NControllerManager.Instance?.IsUsingController == true) free[0].TryGrabFocus();
+		if (rematching && NControllerManager.Instance?.IsUsingDirectionalNavigation == true) free[0].TryGrabFocus();
 		SpoonLog.Info($"act4: chest round {round.Round - 1} shown, rematch {(rematching ? "for you" : "for the others")}");
 	}
 

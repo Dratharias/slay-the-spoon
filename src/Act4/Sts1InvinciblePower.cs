@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -34,7 +35,7 @@ public sealed class Sts1InvinciblePower : PowerModel, IBorrowedIcon
 	}
 
 	// Intent previews and block loss only; the authoritative clamp is ModifyHpLostAfterOsty.
-	public override decimal ModifyDamageCap(Creature? target, ValueProp props, Creature? dealer, CardModel? cardSource) =>
+	public override decimal ModifyDamageCap(Creature? target, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay) =>
 		target == Owner ? HeartInvincibleRule.DamageCap(Amount, Owner.Block, props.HasFlag(ValueProp.Unblockable)) : decimal.MaxValue;
 
 	public override decimal ModifyHpLostAfterOsty(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource) =>

@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using Godot;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
@@ -58,7 +59,7 @@ public sealed class Sts1Watcher : CharacterModel
 	public override float CastAnimDelay => 0.25f;
 
 	/// <summary>Her StS1 skeleton has Idle and Hit only: no attack or cast animation, as in StS1.</summary>
-	public override CreatureAnimator GenerateAnimator(MegaSprite controller) => Sts1Spine.Animator(controller);
+	public override CreatureAnimator GenerateAnimator(MegaSprite controller, Creature creature) => Sts1Spine.Animator(controller);
 
 	// Necrobinder's purple UI colours.
 	public override Color EnergyLabelOutlineColor => new Color("702D6FFF");

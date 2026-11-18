@@ -45,7 +45,7 @@ public sealed class Sts1ThunderStrike : Sts1DefectCard
 		{
 			return;
 		}
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(hits).FromCard(this)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(hits).FromCard(this, cardPlay)
 			.TargetingRandomOpponents(CombatState!)
 			.WithHitFx("vfx/vfx_attack_lightning")
 			.Execute(choiceContext);

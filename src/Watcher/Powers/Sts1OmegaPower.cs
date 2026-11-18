@@ -19,6 +19,6 @@ public sealed class Sts1OmegaPower : PowerModel, IBorrowedIcon
     {
         if (!participants.Contains(Owner) || CombatState == null) return;
         Flash();
-        await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies.ToList(), Amount, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies.ToList(), Amount, ValueProp.Unpowered, Owner, null, null);
     }
 }

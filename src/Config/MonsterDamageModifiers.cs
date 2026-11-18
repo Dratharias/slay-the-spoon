@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
@@ -13,7 +14,7 @@ public abstract class SpoonMonsterDamage : SpoonPercentModifier
 	protected override string FamilyKey => "SPOON_MONSTER_DAMAGE";
 
 	/// <summary>Scales all damage enemies cause (<see cref="MonsterDamageRule"/>); the game's damage pipeline does the rounding.</summary>
-	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
 	{
 		bool scales = MonsterDamageRule.Scales(dealer?.Side == CombatSide.Enemy, target?.Side == CombatSide.Enemy,
 			EnemyEffectDamage.IsEnemyStatus(cardSource), EnemyEffectDamage.IsEnemyEffectOn(target));

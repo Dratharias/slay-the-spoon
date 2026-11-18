@@ -29,7 +29,7 @@ public sealed class Sts1Bane : Sts1SilentCard
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		// Checked before the first hit, as in StS1.
 		int hits = cardPlay.Target.HasPower<PoisonPower>() ? 2 : 1;
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(hits).FromCard(this).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(hits).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
 	}

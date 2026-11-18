@@ -54,6 +54,8 @@ public static class MassiveScrollPatch
 			.Where(c => c.Rarity is CardRarity.Common or CardRarity.Uncommon or CardRarity.Rare);
 		IReadOnlyList<CardModel> eligible = ColorlessCardRules.PreferCoopCards(ordinary.ToList(),
 			c => c.MultiplayerConstraint == CardMultiplayerConstraint.MultiplayerOnly);
-		return CardFactory.CreateForReward(player, count, options.WithCustomPool(eligible));
+		// 0.111: custom pools are gone; the options already hold the character and colorless pools, so filter them.
+		HashSet<ModelId> allowed = eligible.Select(c => c.Id).ToHashSet();
+		return CardFactory.CreateForReward(player, count, options.WithFilter(c => allowed.Contains(c.Id)));
 	}
 }

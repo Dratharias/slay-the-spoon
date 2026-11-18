@@ -1,0 +1,4 @@
+1.3.8 — game update 0.111.1
+
+- Works with Slay the Spire 2 v0.111.1 (older game versions are no longer supported).
+- Slay the Spoon: new rest site option Digest: lose 15 max HP, heal to full.

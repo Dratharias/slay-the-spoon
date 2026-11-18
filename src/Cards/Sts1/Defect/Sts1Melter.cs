@@ -24,8 +24,8 @@ public sealed class Sts1Melter : Sts1DefectCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		await CreatureCmd.LoseBlock(choiceContext, cardPlay.Target, cardPlay.Target.Block, Owner.Creature);
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(choiceContext);
 	}

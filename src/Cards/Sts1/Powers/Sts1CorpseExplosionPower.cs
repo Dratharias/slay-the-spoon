@@ -30,6 +30,6 @@ public sealed class Sts1CorpseExplosionPower : PowerModel, IBorrowedIcon
 			return;
 		}
 		Flash();
-		await CreatureCmd.Damage(choiceContext, targets, Owner.MaxHp * Amount, ValueProp.Unpowered, Applier, null);
+		await CreatureCmd.Damage(choiceContext, targets, Owner.MaxHp * Amount, ValueProp.Unpowered, Applier, null, null);
 	}
 }

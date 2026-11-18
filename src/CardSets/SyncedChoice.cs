@@ -22,7 +22,7 @@ public static class SyncedChoice
 	{
 		PlayerChoiceSynchronizer sync = RunManager.Instance.PlayerChoiceSynchronizer;
 		uint choiceId = sync.ReserveChoiceId(player);
-		await context.SignalPlayerChoiceBegun(PlayerChoiceOptions.None);
+		await context.SignalPlayerChoiceBegun(player, PlayerChoiceOptions.None);
 		int index;
 		if (ShouldSelectLocalCard(player))
 		{

@@ -24,7 +24,7 @@ public sealed class Sts1Reaper : Sts1IroncladCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
+		AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).TargetingAllOpponents(CombatState!)
 			.WithHitFx("vfx/vfx_giant_horizontal_slash")
 			.Execute(choiceContext);
 		int healed = attack.Results.SelectMany(hits => hits).Sum(r => r.UnblockedDamage);

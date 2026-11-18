@@ -29,7 +29,7 @@ public sealed class Sts1RipAndTear : Sts1DefectCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(2).FromCard(this)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(2).FromCard(this, cardPlay)
 			.TargetingRandomOpponents(CombatState!)
 			.WithHitVfxNode((Creature t) => NScratchVfx.Create(t, goingRight: true))
 			.Execute(choiceContext);

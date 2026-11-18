@@ -36,7 +36,7 @@ public sealed class Sts1JustLucky : Sts1WatcherCard
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await ScryCmd.Scry(Owner, DynamicVars["Magic"].IntValue, choiceContext);
 		await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt").Execute(choiceContext);
 	}
 

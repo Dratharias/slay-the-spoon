@@ -58,7 +58,7 @@ public sealed class Sts1RitualDagger : Sts1ColorlessCard
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		// Snapshot Fatal eligibility before damage removes powers from a dying target (same as Feed).
 		bool eligible = cardPlay.Target.Powers.All(p => p.ShouldOwnerDeathTriggerFatal());
-		AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+		AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
 			.Targeting(cardPlay.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
 		if (eligible && attack.Results.SelectMany(hits => hits).Any(hit => hit.WasTargetKilled))
 		{

@@ -14,10 +14,10 @@ namespace SlaySpoon.Potions.Sts1;
 [HarmonyPatch(typeof(PotionFactory), nameof(PotionFactory.GetPotionOptions))]
 public static class Sts1PotionOptionsPatch
 {
-	public static void Postfix(Player player, IEnumerable<PotionModel> blacklist, ref IEnumerable<PotionModel> __result)
+	// Since 0.111 the callers apply the blacklist after this call, so it covers the added potions too.
+	public static void Postfix(Player player, ref IEnumerable<PotionModel> __result)
 	{
 		if (!Sts1PotionRule.Offered(CardSetPools.ModeOf(player.RunState))) return;
-		var extra = ModelDb.PotionPool<Sts1PotionPool>().AllPotions.Where(p => !blacklist.Contains(p));
-		__result = __result.Concat(extra).ToList();
+		__result = __result.Concat(ModelDb.PotionPool<Sts1PotionPool>().AllPotions).ToList();
 	}
 }

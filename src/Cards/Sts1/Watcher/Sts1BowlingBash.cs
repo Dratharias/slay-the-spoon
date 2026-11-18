@@ -29,7 +29,7 @@ public sealed class Sts1BowlingBash : Sts1WatcherCard
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		int hits = Math.Max(1, CombatState!.HittableEnemies.Count);
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(hits).FromCard(this).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(hits).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_heavy_blunt").Execute(choiceContext);
 	}
 

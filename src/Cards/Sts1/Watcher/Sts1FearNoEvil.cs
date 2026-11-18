@@ -33,7 +33,7 @@ public sealed class Sts1FearNoEvil : Sts1WatcherCard
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		// StS1 reads the intent before the hit lands.
 		bool intendsToAttack = cardPlay.Target.Monster?.IntendsToAttack ?? false;
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
 		if (intendsToAttack)
 		{

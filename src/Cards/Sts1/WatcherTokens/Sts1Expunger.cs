@@ -24,7 +24,7 @@ public sealed class Sts1Expunger : Sts1WatcherTokenCard
 	{
 		if (DynamicVars.Repeat.IntValue > 0)
 			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars.Repeat.IntValue)
-				.FromCard(this).Targeting(cardPlay.Target!).Execute(choiceContext);
+				.FromCard(this, cardPlay).Targeting(cardPlay.Target!).Execute(choiceContext);
 	}
 	protected override void OnUpgrade() { DynamicVars.Damage.UpgradeValueBy(6m); }
 }

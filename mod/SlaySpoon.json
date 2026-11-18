@@ -3,12 +3,12 @@
   "name": "Slay the Spoon",
   "author": "Dratharias",
   "description": "Slay the Spire 1 cards and run options for Slay the Spire 2 custom runs. Unofficial.",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [
     { "id": "BaseLib", "min_version": "3.4.7" }
   ],
   "affects_gameplay": true,
-  "min_game_version": "0.107.1"
+  "min_game_version": "0.111.1"
 }

@@ -12,7 +12,7 @@ namespace SlaySpoon.Cards.Sts1.Defect;
 /// <summary>
 /// StS1's weaker Genetic Algorithm (grows by 2 / 3) replaces the StS2 card. The growth lives on the deck
 /// card and is saved; the property names are vanilla Genetic Algorithm's, so the save already knows them
-/// (see <see cref="Sts1SavedProperties"/>).
+/// (registered by the game since 0.111).
 /// </summary>
 public sealed class Sts1GeneticAlgorithm : Sts1DefectCard
 {

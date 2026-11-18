@@ -32,7 +32,7 @@ public sealed class Sts1Tantrum : Sts1WatcherCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars["Magic"].IntValue).FromCard(this).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars["Magic"].IntValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt").Execute(choiceContext);
 		await StanceCmd.Enter(Owner, Stance.Wrath, this, choiceContext);
 	}
@@ -43,12 +43,12 @@ public sealed class Sts1Tantrum : Sts1WatcherCard
 	}
 
 	// Played normally it would go to the discard pile; StS1 shuffles it into the draw pile instead. Exhaust is left alone.
-	public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(CardModel card, bool isAutoPlay, ResourceInfo resources, PileType pileType, CardPilePosition position)
+	public override CardLocation ModifyCardPlayResultLocation(CardModel card, bool isAutoPlay, ResourceInfo resources, CardLocation cardLocation)
 	{
-		if (card == this && pileType == PileType.Discard)
+		if (card == this && cardLocation.pileType == PileType.Discard)
 		{
-			return (PileType.Draw, CardPilePosition.Random);
+			return cardLocation with { pileType = PileType.Draw, position = CardPilePosition.Random };
 		}
-		return (pileType, position);
+		return cardLocation;
 	}
 }

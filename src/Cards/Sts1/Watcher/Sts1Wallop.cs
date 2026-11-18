@@ -30,7 +30,7 @@ public sealed class Sts1Wallop : Sts1WatcherCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_heavy_blunt").Execute(choiceContext);
 		int unblocked = attack.Results.SelectMany(hits => hits).Sum(hit => hit.UnblockedDamage);
 		if (unblocked > 0)

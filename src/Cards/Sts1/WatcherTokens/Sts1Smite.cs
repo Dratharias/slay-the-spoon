@@ -17,7 +17,7 @@ public sealed class Sts1Smite : Sts1WatcherTokenCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target!).Execute(choiceContext);
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target!).Execute(choiceContext);
 	}
 	protected override void OnUpgrade() { DynamicVars.Damage.UpgradeValueBy(4m); }
 }

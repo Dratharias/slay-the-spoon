@@ -115,6 +115,6 @@ public static class SpoonWidgets
 		var focusables = Focusables(root);
 		if (focusables.Count == 0) return;
 		if (focused >= 0) focusables[Math.Min(focused, focusables.Count - 1)].GrabFocus();
-		else if (appeared && NControllerManager.Instance?.IsUsingController == true) focusables[0].GrabFocus();
+		else if (appeared && NControllerManager.Instance?.IsUsingDirectionalNavigation == true) focusables[0].GrabFocus();
 	}
 }

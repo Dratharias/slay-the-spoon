@@ -32,7 +32,7 @@ public sealed class Sts1Dropkick : Sts1IroncladCard
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		// Checked before the hit, as in StS1.
 		bool vulnerable = cardPlay.Target.HasPower<VulnerablePower>();
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
 			.Execute(choiceContext);
 		if (vulnerable)

@@ -69,7 +69,7 @@ public sealed class Sts1PanachePower : PowerModel, IBorrowedIcon
 		if (CombatState != null)
 		{
 			Flash();
-			await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies.ToList(), Amount, ValueProp.Unpowered, Owner, null);
+			await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies.ToList(), Amount, ValueProp.Unpowered, Owner, null, null);
 		}
 	}
 

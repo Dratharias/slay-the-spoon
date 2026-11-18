@@ -25,7 +25,7 @@ public sealed class Sts1BrutalityPower : PowerModel, IBorrowedIcon
 		{
 			Flash();
 			await CardPileCmd.Draw(choiceContext, Amount, player);
-			await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unblockable | ValueProp.Unpowered, Owner, null);
+			await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unblockable | ValueProp.Unpowered, Owner, null, null);
 		}
 	}
 }

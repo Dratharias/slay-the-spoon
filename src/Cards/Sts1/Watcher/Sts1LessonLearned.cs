@@ -40,7 +40,7 @@ public sealed class Sts1LessonLearned : Sts1WatcherCard
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		// Snapshot Fatal eligibility before damage removes powers from a dying target (same as Feed).
 		bool eligible = cardPlay.Target.Powers.All(p => p.ShouldOwnerDeathTriggerFatal());
-		AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt").Execute(choiceContext);
 		if (eligible && attack.Results.SelectMany(hits => hits).Any(hit => hit.WasTargetKilled))
 		{

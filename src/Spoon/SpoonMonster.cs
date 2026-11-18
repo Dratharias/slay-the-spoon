@@ -220,7 +220,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 			try
 			{
 				var results = await CreatureCmd.Damage(context, target, SpoonRule.BanquetDamage,
-					ValueProp.Unblockable | ValueProp.Unpowered, Creature, null);
+					ValueProp.Unblockable | ValueProp.Unpowered, Creature, null, null);
 				int lost = results.Sum(r => r.UnblockedDamage);
 				unblocked += lost;
 				_pierced[target] = lost;

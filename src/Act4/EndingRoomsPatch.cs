@@ -18,8 +18,8 @@ internal static class EndingRoomsPatch
 	private static bool Prefix(ActModel __instance, Rng rng)
 	{
 		if (__instance is not IAppendedAct act) return true;
-		uint seed = Act4Routing.CurrentRun()?.Rng.Seed ?? rng.Seed;
-		act.FillRooms(new Rng(seed, act.RoomsRngName));
+		ulong? seed = Act4Routing.CurrentRun()?.Rng.Seed;
+		act.FillRooms(seed is { } s ? new Rng(s, act.RoomsRngName) : rng);
 		return false;
 	}
 }

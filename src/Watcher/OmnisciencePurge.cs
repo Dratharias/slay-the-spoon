@@ -22,11 +22,11 @@ internal static class OmnisciencePurge
 		public void Dispose() => Marked.Remove(card);
 	}
 
-	[HarmonyPatch(typeof(Hook), nameof(Hook.ModifyCardPlayResultPileTypeAndPosition))]
+	[HarmonyPatch(typeof(Hook), nameof(Hook.ModifyCardPlayResultLocation))]
 	[HarmonyPostfix]
-	private static void Result(CardModel card, ref (PileType, CardPilePosition) __result)
+	private static void Result(CardModel card, ref CardLocation __result)
 	{
-		if (Marked.TryGetValue(card, out _)) __result = (PileType.None, __result.Item2);
+		if (Marked.TryGetValue(card, out _)) __result = __result with { pileType = PileType.None };
 	}
 
 	[HarmonyPatch(typeof(CardModel), nameof(CardModel.MoveToResultPileWithoutPlaying))]

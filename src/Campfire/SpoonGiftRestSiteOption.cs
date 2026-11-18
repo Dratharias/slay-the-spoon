@@ -110,7 +110,7 @@ public sealed class SpoonGiftRestSiteOption(Player owner) : RestSiteOption(owner
 		if (NRestSiteRoom.Instance is not { } room || room.GetButtonForOption(this) is not { } button) return null;
 		room.AnimateDescriptionDown();
 		Vector2 start = button.GlobalPosition + button.Size / 2f;
-		bool controller = NControllerManager.Instance?.IsUsingController == true;
+		bool controller = NControllerManager.Instance?.IsUsingDirectionalNavigation == true;
 		NTargetManager targets = NTargetManager.Instance;
 		targets.StartTargeting(TargetType.AnyPlayer, start, controller ? TargetMode.Controller : TargetMode.ClickMouseToTarget,
 			ShouldCancel, node => CanReceive(NodeToPlayer(node)));

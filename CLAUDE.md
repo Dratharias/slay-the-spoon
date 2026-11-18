@@ -1,6 +1,6 @@
 # Slay the Spoon — notes for Claude
 
-Slay the Spire 2 mod (StS2 Early Access v0.107.1, Godot 4.5.1 + C# .NET 9, Harmony) that brings
+Slay the Spire 2 mod (StS2 Early Access v0.111.1 since mod 1.3.8, Godot 4.5.1 + C# .NET 9, Harmony) that brings
 vanilla Slay the Spire 1 cards into StS2 and adds Custom Run options set by the lobby host.
 Read `README.md` for the player view and the spec for every decision.
 
@@ -424,3 +424,19 @@ Read `README.md` for the player view and the spec for every decision.
   Neow hides it like Folie à deux, so Custom Spoon runs get Neow's usual options too). The Spire Souvenir is in every
   vanilla relic pool and the modifier gives it to every player (Necrobinder/Regent: Hybrid colorless). Custom Run
   descriptions rewritten short. Not tested in game.
+
+## 1.3.8 — game 0.111.1 (2026-11-18, branch `spoon-test-start`)
+
+- Port to StS2 v0.111.1 (`min_game_version` 0.111.1). The API changes it absorbed: damage hooks and
+  `CreatureCmd.Damage` / `AttackCommand.FromCard` take a `CardPlay?`; `ModifyCardPlayResultPileTypeAndPosition` became
+  `ModifyCardPlayResultLocation` (`CardLocation`); `CharacterModel.GenerateAnimator` takes the creature; `LoseBlock` takes a
+  context and remover; `Rng.Seed` is gone (seeds are `ulong`, `RunRngSet.Seed`); `CardCreationOptions.WithCustomPool` is gone
+  (filter the pools); `NControllerManager.IsUsingController` → `IsUsingDirectionalNavigation`; `PotionFactory.GetPotionOptions`
+  lost its blacklist (callers apply it). The game now registers mod models' `[SavedProperty]` names itself
+  (`ModelIdSerializationCache`), so `Sts1SavedProperties` is removed.
+- `ModEntry.PatchEach` patches class by class and logs every broken target before refusing to load (a game update
+  shows all breakages in one launch). New decompile: `~/Projects/sts-decomp/sts2-0.111.1/` (the old one stays in `sts2/`).
+- Digest rest option in Spoon runs (`SpoonDigestRestSiteOption`, owner 2026-11-18): −15 max HP, heal to full; disabled at
+  15 max HP or less (`SpoonRule.CanDigest`). Ruby Recall stays at the Spoon act's rest site (owner decision).
+- Build 0 warnings; 721 xUnit + 91 pytest pass; loads at the main menu on 0.111.1 with BaseLib 3.4.8. Not tested in a run.
+

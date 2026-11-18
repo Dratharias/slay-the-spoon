@@ -42,7 +42,7 @@ public sealed class Sts1GrandFinale : Sts1SilentCard
 			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(vfx);
 			await Cmd.Wait(NGrandFinaleVfx.totalAnticipationDuration);
 		}
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).TargetingAllOpponents(CombatState!)
 			.WithHitVfxNode(NGrandFinaleImpactVfx.Create)
 			.WithHitFx(null, null, "blunt_attack.mp3")
 			.Execute(choiceContext);

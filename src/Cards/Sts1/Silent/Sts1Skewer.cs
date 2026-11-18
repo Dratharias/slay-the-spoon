@@ -32,7 +32,7 @@ public sealed class Sts1Skewer : Sts1SilentCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(ResolveEnergyXValue()).FromCard(this)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(ResolveEnergyXValue()).FromCard(this, cardPlay)
 			.Targeting(cardPlay.Target)
 			.WithHitVfxNode((Creature t) => NStabVfx.Create(t, facingEnemies: true, VfxColor.Gold))
 			.Execute(choiceContext);

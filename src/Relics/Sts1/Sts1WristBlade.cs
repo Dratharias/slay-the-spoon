@@ -18,7 +18,7 @@ namespace SlaySpoon.Relics.Sts1;
 
 public sealed class Sts1WristBlade : Sts1BossRelic
 {
-	public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+	public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
 	{
 	 if (dealer != Owner.Creature || cardSource == null || cardSource.Owner != Owner || !props.IsPoweredAttack()) return 0;
 	 return Sts1RelicRule.WristBlade(cardSource.Type == CardType.Attack, cardSource.EnergyCost.CostsX,

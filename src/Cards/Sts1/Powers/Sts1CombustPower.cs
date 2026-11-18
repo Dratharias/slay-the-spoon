@@ -37,8 +37,8 @@ public sealed class Sts1CombustPower : PowerModel, IBorrowedIcon
 		}
 		Flash();
 		DamageVar selfDamage = (DamageVar)DynamicVars[SelfDamageKey];
-		await CreatureCmd.Damage(choiceContext, Owner, selfDamage.BaseValue, selfDamage.Props, Owner, null);
-		await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, Amount, ValueProp.Unpowered, Owner, null);
+		await CreatureCmd.Damage(choiceContext, Owner, selfDamage.BaseValue, selfDamage.Props, Owner, null, null);
+		await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, Amount, ValueProp.Unpowered, Owner, null, null);
 	}
 
 	public void IncrementSelfDamage()

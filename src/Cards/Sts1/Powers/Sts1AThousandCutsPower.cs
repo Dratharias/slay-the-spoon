@@ -43,7 +43,7 @@ public sealed class Sts1AThousandCutsPower : PowerModel, IBorrowedIcon
 			&& amount > 0 && CombatState != null)
 		{
 			Flash();
-			await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies.ToList(), amount, ValueProp.Unpowered, Owner, null);
+			await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies.ToList(), amount, ValueProp.Unpowered, Owner, null, null);
 		}
 	}
 }

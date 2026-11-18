@@ -28,7 +28,7 @@ public sealed class Sts1Ragnarok : Sts1WatcherCard
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars["Magic"].IntValue).FromCard(this)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars["Magic"].IntValue).FromCard(this, cardPlay)
 			.TargetingRandomOpponents(CombatState!).WithHitFx("vfx/vfx_attack_lightning").Execute(choiceContext);
 	}
 
