@@ -1,2 +1,0 @@
-# Task 1 report
-Status: DONE. Added src/Core/AchillesRule.cs (BlockPerBonus, BlockLean, StartRelics ANCHOR/ODDLY_SMOOTH_STONE/GORGET, DexterityFor, BlockBonus, HeelKills), OfferWeights.Compute optional `blockCards` (null changes nothing; multiplies with Souvenir lean and combo factor). Tests in tests/AchillesRuleTests.cs and tests/OfferWeightsTests.cs (failed to compile first, then green). Relic ids match class names in the vanilla decompile. make test: 839 xUnit + 106 pytest pass; make build: 0 warnings.
