@@ -70,7 +70,7 @@ Read `README.md` for the player view and the spec for every decision.
   "choose a version" step per duplicate kept); not tested in game (`docs/testing/step-2b-checklist.md`).
 - **Steam Workshop:** `make workshop` stages `build/workshop/` (content, preview, `item.vdf`; visibility friends only);
   `make workshop-upload` runs SteamCMD in Podman and needs the owner's Steam login, so only the owner runs it, in a terminal.
-  The first upload stores the item id in `workshop/published-file-id` (commit it). A local `mods/SlaySpoon` disables the Workshop copy.
+  The first upload stores the item id in `workshop/published-file-id` (commit it). A local `mods/SlaySpoon` disables the Workshop copy unless the Workshop version is greater (game 0.111.1).
   BaseLib (Workshop 3737335127, ≥ 3.4.7) is a manifest dependency (`mod/SlaySpoon.json`) and a Steam required item:
   after an upload, `tools/workshop_dependency.py` maps `workshop/required-items` through the game's `libsteam_api.so`
   (Steam client running, logged in as the owner; fallback: "Add/Remove Required Items" on the item page).
