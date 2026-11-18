@@ -123,4 +123,21 @@ public class CurseRuleTests
 		Assert.Equal(15, CurseRule.PlayedAmount(t["DEBT"], true, 0, 0));
 		Assert.Equal(5, CurseRule.PlayedAmount(t["STS1_PARASITE"], true, 0, 0));
 	}
+
+	[Fact]
+	public void EmbraceGoesBeforeLeave()
+	{
+		Assert.Equal(1, CurseRule.EmbraceIndex(new[] { "A.options.TAKE", "A.options.LEAVE" }));
+		Assert.Equal(1, CurseRule.EmbraceIndex(new[] { "A.options.TAKE", "A.options.PROCEED", "A.options.X" }));
+		Assert.Equal(2, CurseRule.EmbraceIndex(new[] { "A.options.TAKE", "A.options.TRADE" }));
+		Assert.Equal(0, CurseRule.EmbraceIndex(Array.Empty<string>()));
+	}
+
+	[Fact]
+	public void EventHealIsAQuarterAtLeastOne()
+	{
+		Assert.Equal(20, CurseRule.EventHeal(80));
+		Assert.Equal(18, CurseRule.EventHeal(75));
+		Assert.Equal(1, CurseRule.EventHeal(3));
+	}
 }

@@ -98,6 +98,19 @@ public static class CurseRule
 		_ => CurseEventReward.Heal,
 	};
 
+	/// <summary>Where the Embrace option goes: before the first LEAVE or PROCEED option, else last.</summary>
+	public static int EmbraceIndex(IReadOnlyList<string> optionKeys)
+	{
+		for (int i = 0; i < optionKeys.Count; i++)
+		{
+			if (optionKeys[i].EndsWith("LEAVE", StringComparison.Ordinal) || optionKeys[i].EndsWith("PROCEED", StringComparison.Ordinal)) return i;
+		}
+		return optionKeys.Count;
+	}
+
+	/// <summary>The heal reward: 25 % of max HP, rounded down, at least 1.</summary>
+	public static int EventHeal(int maxHp) => Math.Max(1, maxHp * EventHealPercent / 100);
+
 	public static string RelicStream(int floor, int draw) => $"cursed_deck_relic_{floor}_{draw}";
 	public static string EventStream(int floor, int slot) => $"cursed_deck_event_{floor}_{slot}";
 	public static string StartStream(int slot) => $"cursed_deck_start_{slot}";

@@ -1,4 +1,7 @@
 {
+	"SPOON_CURSED_DECK_EMBRACE.description": "Add a random [red]curse[/red] to your [gold]Deck[/gold]. Then gain a [gold]cursed relic[/gold], [gold]75 Gold[/gold] or heal [green]25%[/green] of your Max HP.",
+	"SPOON_CURSED_DECK_EMBRACE.pages.DONE.description": "The curse takes hold. In exchange, fate looks kindly on you.",
+	"SPOON_CURSED_DECK_EMBRACE.title": "Embrace the curse",
 	"STS1_ACCURSED_BLACKSMITH.loss": "{character} was burned at the [gold]{event}[/gold].",
 	"STS1_ACCURSED_BLACKSMITH.pages.FORGE.description": "You decide to put the forge to use and...\n\n[gold][jitter]CLANG[/jitter][/gold] [gold][jitter]CLAAANG[/jitter][/gold] [gold][jitter]CLANG![/jitter][/gold]\n\n...improve your arsenal!",
 	"STS1_ACCURSED_BLACKSMITH.pages.INITIAL.description": "You duck into a small hut. Inside, you find what appears to be a forge. The smithing tools are covered with dust, yet a fire roars inside the furnace. You feel on edge...",
