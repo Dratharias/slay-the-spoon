@@ -53,4 +53,26 @@ public class OfferWeightsTests
 	[InlineData(0.99, 1)]
 	public void PickFollowsTheWeights(double roll, int expected) =>
 		Assert.Equal(expected, OfferWeights.Pick(new[] { 1.0, 3.0 }, roll));
+
+	[Fact]
+	public void BlockCardsWeighDouble()
+	{
+		var w = OfferWeights.Compute(new[] { ("A", OfferSide.Neutral), ("B", OfferSide.Neutral) }, null, None, new HashSet<string> { "A" });
+		Assert.Equal(new[] { AchillesRule.BlockLean, 1.0 }, w);
+	}
+
+	[Fact]
+	public void NoRelicMeansUniformWeights()
+	{
+		var w = OfferWeights.Compute(new[] { ("A", OfferSide.Neutral), ("B", OfferSide.Neutral) }, null, None, null);
+		Assert.True(OfferWeights.IsUniform(w));
+	}
+
+	[Fact]
+	public void BlockLeanMultipliesWithComboFactor()
+	{
+		var w = OfferWeights.Compute(new[] { ("A", OfferSide.Neutral), ("B", OfferSide.Neutral) }, null,
+			new HashSet<string> { "A" }, new HashSet<string> { "A" });
+		Assert.Equal(AchillesRule.BlockLean * OfferWeights.ComboFactor, w[0], 9);
+	}
 }

@@ -46,9 +46,11 @@ public static class OfferWeights
 
 	/// <summary>
 	/// One weight per card. <paramref name="lean"/> is the favored game (null: no lean, for a player without the
-	/// Souvenir); <paramref name="completers"/> comes from <see cref="ComboCompleters"/>.
+	/// Souvenir); <paramref name="completers"/> comes from <see cref="ComboCompleters"/>;
+	/// <paramref name="blockCards"/> (Achilles' Heel relic holders) doubles those cards' weight.
 	/// </summary>
-	public static double[] Compute(IReadOnlyList<(string Id, OfferSide Side)> cards, OfferSide? lean, ISet<string> completers)
+	public static double[] Compute(IReadOnlyList<(string Id, OfferSide Side)> cards, OfferSide? lean, ISet<string> completers,
+		ISet<string>? blockCards = null)
 	{
 		var weights = new double[cards.Count];
 		int sts1 = cards.Count(c => c.Side == OfferSide.Sts1);
@@ -65,6 +67,7 @@ public static class OfferWeights
 				weight = share * total / count;
 			}
 			if (completers.Contains(cards[i].Id)) weight *= ComboFactor;
+			if (blockCards != null && blockCards.Contains(cards[i].Id)) weight *= AchillesRule.BlockLean;
 			weights[i] = weight;
 		}
 		return weights;
