@@ -32,29 +32,29 @@ Custom relics (proposal, art from Pixabay like the Grimoire):
 | **Black Censer** (Encensoir noir) | Whenever you obtain a curse, upgrade it. |
 | **Reliquary** (Reliquaire) | At the end of each combat, gain 3 gold for each curse in your deck. |
 
-## Curses against the enemy (proposal)
+## Curses against the enemy (owner decisions 2026-11-18)
 
-Played with the Grimoire, a curse **targets one enemy** (owner decision 2026-11-18): it is exhausted (5 damage to ALL
-enemies), then its effect hits the chosen enemy.
-The player-side effect is the vanilla one, untouched (it happens only if the curse stays in hand at end of turn).
+Played with the Grimoire, a curse **targets one enemy**: it is exhausted (the Grimoire's damage to ALL enemies), then its
+effect hits the chosen enemy only. Left in hand at end of turn, it hits the player as in vanilla.
 
-| Curse | Vanilla (on you) | Against the enemy | Upgraded (+) |
-|-------|------------------|-------------------|--------------|
+An upgraded curse is stronger **on both sides**: Bad Luck+ costs the player 20 HP if it stays in hand, and deals −20 HP to
+the enemy when played. A curse with no effect gets nothing on either side but its Grimoire damage goes to **12** when
+upgraded (5 otherwise). Curses with an effect keep the Grimoire at 5.
+
+| Curse | Left in hand (you) | Played (chosen enemy) | Upgraded (+), both sides |
+|-------|--------------------|-----------------------|--------------------------|
 | Bad Luck | lose 13 HP | loses 13 HP | 20 |
 | Decay | take 2 damage | takes 2 damage | 4 |
 | Regret | lose 1 HP per card in hand | loses 1 HP per card in your hand | 2 per card |
 | Doubt | gain 1 Weak | gains 1 Weak | 2 |
 | Shame | gain 1 Frail | gains 1 Vulnerable (Frail does little to monsters) | 2 |
 | Debt | lose 10 gold | you gain 10 gold (the monster pays) | 15 |
-| Normality | max 3 cards this turn | — | Grimoire +5 |
-| Clumsy, Injury, Writhe, Guilty, Enthralled | — | — | Grimoire +5 |
-| Greed, Folly, Curse of the Bell, Poor Sleep, Spore Mind, Ascender's Bane | (relic/event curses) | — | Grimoire +5 |
+| Normality, Clumsy, Injury, Writhe, Guilty, Enthralled | vanilla | — | Grimoire 12 |
+| Greed, Folly, Curse of the Bell, Poor Sleep, Spore Mind, Ascender's Bane | vanilla | — | Grimoire 12 |
 
-- An upgraded curse costs 0 and its enemy number goes up (column "+"); a curse with no enemy effect deals the Grimoire's
-  damage +5 when upgraded (10). The player-side number doesn't change (owner decision 2026-11-18: upgrades are on the
-  enemy side only).
+- An upgraded curse costs 0 to play (1 otherwise).
 - Curses upgrade like other cards in this mode (Smith, Armaments, Apotheosis...), at most +1; the Black Censer upgrades
-  every curse it sees join the deck. The title gets the usual "+".
+  every curse that joins the deck. The title gets the usual "+".
 
 ## Builder calls (proposal)
 
