@@ -301,7 +301,7 @@
 	"STS1_OMNISCIENCE.title": "Omniscience",
 	"STS1_OUTMANEUVER.description": "Au prochain tour, gagnez {Energy:energyIcons()}.",
 	"STS1_OUTMANEUVER.title": "Astucieux",
-	"STS1_PAIN.description": "Si vous l'avez en [gold]Main[/gold], perdez 1 PV par autre carte jouée.",
+	"STS1_PAIN.description": "Si vous l'avez en [gold]Main[/gold], perdez {HpLoss:diff()} PV par autre carte jouée.",
 	"STS1_PAIN.title": "Douleur",
 	"STS1_PANACEA.description": "Gagnez {ArtifactPower:diff()} d'[gold]Artéfact[/gold].",
 	"STS1_PANACEA.title": "Panacée",
@@ -507,5 +507,7 @@
   "SPOON_FORGE_BONUS.Energy": "Énergie",
 	"SPOON_TROPHY_CARD.title": "Trophée",
 	"SPOON_TROPHY_CARD.description": "Infligez {Damage:diff()} dégâts {Repeat:diff()} fois.",
-	"SPOON_TROPHY_CARD.fallback": "Trophée"
+	"SPOON_TROPHY_CARD.fallback": "Trophée",
+	"SPOON_CURSED_REGRET_PLUS.description": "À la fin de votre tour, si cette carte est dans votre [gold]Main[/gold], perdez {Amount} PV pour chaque carte dans votre [gold]Main[/gold].",
+	"SPOON_CURSED_NORMALITY_PLUS.description": "Vous ne pouvez pas jouer plus de {Amount} cartes ce tour.{InCombat:\n({CalculatedCards:plural:{} carte restante|{} cartes restantes})|}"
 }

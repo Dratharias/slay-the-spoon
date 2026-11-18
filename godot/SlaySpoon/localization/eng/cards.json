@@ -301,7 +301,7 @@
 	"STS1_OMNISCIENCE.title": "Omniscience",
 	"STS1_OUTMANEUVER.description": "Next turn, gain {Energy:energyIcons()}.",
 	"STS1_OUTMANEUVER.title": "Outmaneuver",
-	"STS1_PAIN.description": "While in your [gold]Hand[/gold], lose 1 HP whenever you play another card.",
+	"STS1_PAIN.description": "While in your [gold]Hand[/gold], lose {HpLoss:diff()} HP whenever you play another card.",
 	"STS1_PAIN.title": "Pain",
 	"STS1_PANACEA.description": "Gain {ArtifactPower:diff()} [gold]Artifact[/gold].",
 	"STS1_PANACEA.title": "Panacea",
@@ -507,5 +507,7 @@
   "SPOON_FORGE_BONUS.Energy": "Energy",
 	"SPOON_TROPHY_CARD.title": "Trophy",
 	"SPOON_TROPHY_CARD.description": "Deal {Damage:diff()} damage {Repeat:diff()} {Repeat:plural:time|times}.",
-	"SPOON_TROPHY_CARD.fallback": "Trophy"
+	"SPOON_TROPHY_CARD.fallback": "Trophy",
+	"SPOON_CURSED_REGRET_PLUS.description": "At the end of your turn, if this is in your [gold]Hand[/gold], lose {Amount} HP for each card in your [gold]Hand[/gold].",
+	"SPOON_CURSED_NORMALITY_PLUS.description": "You cannot play more than {Amount} cards this turn.{InCombat:\n({CalculatedCards:plural:{} card|{} cards} left)|}"
 }

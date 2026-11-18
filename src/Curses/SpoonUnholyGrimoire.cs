@@ -28,7 +28,7 @@ public sealed class SpoonUnholyGrimoire : RelicModel
 	protected override string PackedIconOutlinePath => ArtRoot + "_outline.png";
 	protected override string BigIconPath => ArtRoot + "_large.png";
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new DynamicVar("Damage", CurseRule.GrimoireDamage) };
+	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new DynamicVar("Damage", CurseRule.GrimoireDamage), new DynamicVar("DamagePlus", CurseRule.GrimoireNoEffectPlus) };
 
 	public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
 	{

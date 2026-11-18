@@ -117,6 +117,6 @@
 	"SPOON_DECK_OF_TEN_RELIC.description": "Your deck holds [blue]{Limit}[/blue] cards. Each card dropped gives [blue]{MaxHp}[/blue] Max HP.",
 	"SPOON_DECK_OF_TEN_RELIC.flavor": "\"Less is more. Ten is plenty.\"",
 	"SPOON_UNHOLY_GRIMOIRE.title": "Unholy Grimoire",
-	"SPOON_UNHOLY_GRIMOIRE.description": "Whenever one of your [red]Curses[/red] is [gold]Exhausted[/gold], deal [blue]{Damage}[/blue] damage to ALL enemies.\nIn Cursed Deck runs, your [red]Curses[/red] are playable.",
+	"SPOON_UNHOLY_GRIMOIRE.description": "Whenever one of your [red]Curses[/red] is [gold]Exhausted[/gold], deal [blue]{Damage}[/blue] damage to ALL enemies ([blue]{DamagePlus}[/blue] for an upgraded Curse with no effect).\nIn Cursed Deck runs, your [red]Curses[/red] are playable.",
 	"SPOON_UNHOLY_GRIMOIRE.flavor": "\"Every page was written by someone who regretted it.\""
 }
