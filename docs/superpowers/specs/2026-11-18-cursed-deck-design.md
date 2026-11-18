@@ -56,6 +56,12 @@ upgraded (5 otherwise). Curses with an effect keep the Grimoire at 5.
 - Curses upgrade like other cards in this mode (Smith, Armaments, Apotheosis...), at most +1; the Black Censer upgrades
   every curse that joins the deck. The title gets the usual "+".
 
+The full list, reviewed curse by curse like the Forge's cards: `data/curses/curses.json` (hand table, read at
+runtime), `tools/curse_table.py` (checks every curse of the game and the mod has a row, writes the owner page
+`docs/review/cursed-curses.md`). Notable rows: Pain (StS1) hits the enemy for 1 HP per card played this turn;
+Normality, Enthralled and Spore Mind have no played effect; the Necronomicurse keeps cost 1 upgraded (at 0 it would loop
+forever, since it returns to the hand when exhausted).
+
 ## Builder calls (proposal)
 
 - Mode: `SpoonCursedDeck`, Custom Run only, off by default; Standard and Daily untouched. Title "Cursed Deck" /
