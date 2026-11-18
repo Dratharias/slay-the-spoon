@@ -1,8 +1,4 @@
 {
-  "SLAY_SPOON_SYNC.title": "Slay the Spoon",
-  "SLAY_SPOON_SYNC.body": "Les mods utilisent un profil séparé, sans déblocages au départ.\n\nY copier votre progression habituelle à chaque lancement ? Votre sauvegarde habituelle reste intacte. La progression propre aux parties avec mods sera écrasée au lancement suivant.\n\nPour changer ce choix, supprimez mod_configs/SlaySpoon.cfg dans le dossier utilisateur du jeu.",
-  "SLAY_SPOON_SYNC.yes": "Utiliser ma progression",
-  "SLAY_SPOON_SYNC.no": "Conserver un profil séparé",
   "SPOON_TINT.button": "Couleur du personnage",
   "SPOON_TINT.title": "Couleur du personnage",
   "SPOON_TINT.mode": "Mode : {Mode}",

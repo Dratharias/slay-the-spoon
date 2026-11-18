@@ -5,21 +5,11 @@ namespace SlaySpoon.Core;
 
 /// <summary>
 /// The mod's config file content (mod_configs/SlaySpoon.cfg), a flat JSON object of strings like
-/// BaseLib's. Holds the progress-sync choice and the Act 4 unlock and preview flags.
+/// BaseLib's. Holds the Act 4 unlock flags and the character color. A
+/// "SyncRegularProgress" key left by mod versions before 1.3.8 is ignored (the game copies unmodded saves itself).
 /// </summary>
 public static class SpoonConfig
 {
-	private const string SyncKey = "SyncRegularProgress";
-
-	/// <summary>The saved choice, or null when the player has not been asked yet (or the file is unreadable).</summary>
-	public static bool? ReadSyncChoice(string? json)
-	{
-		return Read(json).TryGetValue(SyncKey, out string? raw) && bool.TryParse(raw, out bool choice) ? choice : null;
-	}
-
-	/// <summary>The new file content, or null when the existing content is unreadable and must not be overwritten.</summary>
-	public static string? WriteSyncChoice(string? json, bool choice) => With(json, SyncKey, choice ? "True" : "False");
-
 	public const string TintKey = "CharacterTint";
 
 	/// <summary>The permanent Act 4 unlock is per modded profile.</summary>

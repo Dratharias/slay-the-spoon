@@ -9,7 +9,7 @@ Read `README.md` for the player view and the spec for every decision.
 - **Step 1 is done and merged into `main`:**
   - mod skeleton;
   - Monster HP and Monster Damage modifiers (25–500 %) in Custom Run, synced in co-op and saved;
-  - opt-in one-way progress sync into the modded profile;
+  - opt-in one-way progress sync into the modded profile (removed in 1.3.8: the game copies unmodded saves itself);
   - the top bar shows each modifier's percent (red above 100 %, blue below).
 - **Not yet tested in game** (the owner tests these when they feel like it): the edge cases left
   unticked in `docs/testing/step-1-checklist.md`.
@@ -275,7 +275,7 @@ Read `README.md` for the player view and the spec for every decision.
   - Report in French. Everything written to the repo is in English.
 - The mod ships in **English and French only**. Every text the mod adds goes in both
   `godot/SlaySpoon/localization/eng/` and `.../fra/`.
-- The mod must **never write the regular (unmodded) save**. Progress sync only reads it.
+- The mod must **never write the regular (unmodded) save**. Since 1.3.8 the mod does not copy it either; the game does that once.
 - Standard and Daily modes remain available; never lock the modes themselves.
   Daily stays vanilla. Standard exceptions are Spire Souvenir, the approved Act 4 unlock, the solo Watcher (0.12.36)
   and the Folie à deux / Slay the Spoon mode cards, documented above. Lobby activation options live in Custom Run.
@@ -297,7 +297,7 @@ Read `README.md` for the player view and the spec for every decision.
   lines start with `[SlaySpoon]`. Each run logs a line
   `Embarking on a CUSTOM ... Modifiers: ...` listing its modifiers.
 - **Modded profile:** with mods active the game uses `modded/profile1`, separate from the regular
-  profile. The opt-in answer is stored in `~/.local/share/SlayTheSpire2/mod_configs/SlaySpoon.cfg`.
+  profile; the game copies the regular saves into it on the first modded launch. The mod's cfg (`~/.local/share/SlayTheSpire2/mod_configs/SlaySpoon.cfg`) holds the Act 4 unlock and the character color.
 - **`make mp`:** two local instances, `--fastmp host_custom` and `--fastmp join --clientId 1001`.
   - Both write to the same `godot.log`.
   - A run started this way has dev player IDs 1/1001, so it resumes only under `make mp`. A normal
@@ -322,7 +322,7 @@ Read `README.md` for the player view and the spec for every decision.
 | `src/Config/` | `ModifierModel`s. One sealed class per percent (`SpoonMonsterHp150`); the class name *is* the value, so the game's own id sync and save carry it |
 | `src/CustomRunUi/` | Extra Custom Run rows with − / + steppers, co-op sync, lobby init fixes |
 | `src/Combat/` | Enemy HP scaling (`Creature.ScaleHpForMultiplayer` postfix + solo `CombatState.CreateCreature`); `EnemyEffectDamage` flags dealer-less enemy damage for Monster Damage |
-| `src/Saves/` | Progress sync prefix on `ProgressSaveManager.LoadProgress`, first-launch popup, cfg file |
+| `src/Saves/` | cfg file (Act 4 unlock, character color), Watcher progress guards |
 | `src/TopBar/` | Percent label instead of the missing modifier icon |
 | `src/Config/CardSetModifiers.cs` | Card set modifiers: `SpoonCardSetSts1Only`, and `SpoonSpireSouvenirModifier`, which gives the Spire Souvenir at run start to every character with StS1 cards (Hybrid comes from the relic; mutually exclusive) |
 | `src/CardSets/` | One postfix on `CardPoolModel.GetUnlockedCards` makes every card source (rewards, shop, transform, random generation) follow the mode; `Sts1Matches.g.cs` is generated. Hybrid duplicates: `VersionSwap`, `RandomVersionPatch` (CardFactory postfixes), `RewardSwapPatch`, `ChooseACardSwapPatch`, `GridVersionPatch`, `MerchantSwapPatch` (shared `SwapButton`, `SyncedChoice`). `CharacterCardsMerchantPatch` lets vanilla "<Character> Cards" add to a merchant offer holding StS1 cards |
@@ -438,5 +438,7 @@ Read `README.md` for the player view and the spec for every decision.
   shows all breakages in one launch). New decompile: `~/Projects/sts-decomp/sts2-0.111.1/` (the old one stays in `sts2/`).
 - Digest rest option in Spoon runs (`SpoonDigestRestSiteOption`, owner 2026-11-18): −15 max HP, heal to full; disabled at
   15 max HP or less (`SpoonRule.CanDigest`). Ruby Recall stays at the Spoon act's rest site (owner decision).
+- The mod's progress copy and first-launch popup are removed (owner, 2026-11-18): 0.111.1 copies the unmodded saves
+  into the modded folder itself on the first modded launch (once, with its own popup).
 - Build 0 warnings; 721 xUnit + 91 pytest pass; loads at the main menu on 0.111.1 with BaseLib 3.4.8. Not tested in a run.
 

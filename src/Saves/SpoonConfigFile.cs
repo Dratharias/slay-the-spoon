@@ -73,11 +73,6 @@ public static class SpoonConfigFile
 		}
 	}
 
-	/// <summary>True: copy regular progress into the modded profile; false: keep them separate; null: not asked yet.</summary>
-	public static bool? SyncChoice => SpoonConfig.ReadSyncChoice(Content);
-
-	public static void SaveSyncChoice(bool choice) => Update(c => SpoonConfig.WriteSyncChoice(c, choice));
-
 	/// <summary>Whether this modded profile has earned the permanent Act 4 unlock. Nothing ever clears it.</summary>
 	public static bool Act4Unlocked(int profileId) => SpoonConfig.ReadFlag(Content, SpoonConfig.Act4UnlockKey(profileId));
 

@@ -23,12 +23,9 @@ Current version: **1.3.7**.
   or left/right on a gamepad), synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
   red when monsters are stronger than vanilla and blue when weaker.
 
-- **Progress sync (optional):** with mods active, Slay the Spire 2 uses a separate "modded" profile
-  that starts with nothing unlocked. The first time you launch with the mod, it asks whether to copy
-  your regular progress into that profile on every launch. One way only: your regular save is read,
-  never written; progress made only in modded runs is replaced at the next launch. The answer is
-  stored in `mod_configs/SlaySpoon.cfg` in the game's user folder (on Linux
-  `~/.local/share/SlayTheSpire2/mod_configs/`); delete that file to be asked again.
+- **Modded profile:** with mods active, Slay the Spire 2 uses a separate "modded" profile. On the
+  first modded launch the game itself copies your regular saves into it (one time); the mod adds no
+  copy of its own since 1.3.8.
 
 - **Card sets:** two Custom Run options, at most one ticked. **Slay the Spire 1 Cards** offers
   Slay the Spire 1 cards instead of Slay the Spire 2 ones in rewards, shops and card generation;

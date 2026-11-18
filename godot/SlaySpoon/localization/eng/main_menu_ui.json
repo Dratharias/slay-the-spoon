@@ -1,8 +1,4 @@
 {
-  "SLAY_SPOON_SYNC.title": "Slay the Spoon",
-  "SLAY_SPOON_SYNC.body": "Mods use a separate profile with nothing unlocked at first.\n\nCopy your regular progress into it on every launch? Your regular save stays untouched. Progress unique to modded runs will be overwritten at the next launch.\n\nTo change this choice, delete mod_configs/SlaySpoon.cfg in the game’s user folder.",
-  "SLAY_SPOON_SYNC.yes": "Use my progress",
-  "SLAY_SPOON_SYNC.no": "Keep a separate profile",
   "SPOON_TINT.button": "Character Color",
   "SPOON_TINT.title": "Character Color",
   "SPOON_TINT.mode": "Mode: {Mode}",

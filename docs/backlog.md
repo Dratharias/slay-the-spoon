@@ -498,9 +498,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
 - Design call (owner): the new Custom Run "Randomize" button draws 2 good + 1 bad vanilla modifiers
   (`ModifierModel.Pick2Good1Bad`, from `ModelDb.GoodModifiers`) and unticks every other row, ours included.
   Kept as is for now; our modes could join the draw through a postfix if wanted.
-- Minor: the game now copies the unmodded saves into the modded folder on the first modded launch, with its
-  own popup. On a fresh install the player may see that popup and our progress-sync popup. Our sync still
-  matters afterwards (the game copies once). Not checked in game.
+- ~~Double first-launch popup (ours and the game's save copy)~~: done in 1.3.8, the mod's progress copy and popup are
+  removed; the game copies unmodded saves once (owner, 2026-11-18).
 - Minor: 0.111.1 lets most potions target another player. Ours stay `Self` (Watcher stance potions need the
   Watcher); Bottled Miracle could become `AnyPlayer`.
 - Testing: a Workshop copy with a greater version now wins over a local `mods/SlaySpoon`; keep the local
