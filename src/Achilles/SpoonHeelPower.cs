@@ -22,6 +22,9 @@ public sealed class SpoonHeelPower : PowerModel, IBorrowedIcon
 
 	public Type IconSource => typeof(TheGambitPower);
 
+	/// <summary>Kill strips powers by default; the heel must outlive a revive.</summary>
+	public override bool ShouldPowerBeRemovedAfterOwnerDeath() => false;
+
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
 		if (target != Owner || !AchillesRule.HeelKills(props.IsPoweredAttack(), result.UnblockedDamage)) return;

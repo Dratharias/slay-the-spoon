@@ -38,6 +38,7 @@ public sealed class SpoonAchillesHeel : RelicModel
 		Flash();
 		var context = new ThrowingPlayerChoiceContext();
 		await PowerCmd.Apply<SpoonHeelPower>(context, Owner.Creature, 1, Owner.Creature, null);
+		// Appended acts count: the Spoon act plus The Ending gives 4 Dexterity in the Ending (accepted).
 		int dexterity = AchillesRule.DexterityFor(Owner.RunState.CurrentActIndex);
 		if (dexterity > 0) await PowerCmd.Apply<DexterityPower>(context, Owner.Creature, dexterity, Owner.Creature, null);
 	}
