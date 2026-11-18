@@ -56,5 +56,8 @@
   "SPOON_TEST_RUN.short": "Test",
   "SPOON_FORGE.title": "The Forge",
   "SPOON_FORGE.description": "Fuse copies at the fire, up to +9. The merchant duplicates cards.",
-  "SPOON_FORGE.short": "Forge"
+  "SPOON_FORGE.short": "Forge",
+  "SPOON_MUTATION.title": "Mutation",
+  "SPOON_MUTATION.description": "Each new act transforms every card that is not upgraded.",
+  "SPOON_MUTATION.short": "Mut."
 }

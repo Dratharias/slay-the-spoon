@@ -1,0 +1,113 @@
+# Backlog modes — design
+
+Owner goal (2026-11-18): "Implémente tous les modes de jeu du backlog". The owner picked seven modes in the mode
+brainstorm (`docs/backlog.md`, "Future Custom Run modes picked by the owner"). Under that goal the builder makes the
+calls below and documents them; the owner reviews them when they play. Each mode is one Custom Run modifier, off by
+default, Custom Run only (Standard and Daily untouched), with EN/FR text and its pure rules in `src/Core/`.
+
+The owner's compatibility rule applies: every pair of a new mode with an existing mode is listed in
+"Compatibility" with its decision (combine, order, or mutually exclusive).
+
+## Mutation (`SpoonMutation`)
+
+- When act 2 and every later act start (`AfterActEntered`, act index ≥ 1; appended acts count too), every deck card
+  that is not upgraded and that the game lets transform (`IsTransformable`: Eternal cards stay) is transformed at
+  random, like the vanilla transform events (`CardCmd.Transform`, the transform pool and preview).
+- RNG: one stream per act and player slot from the run seed (`MutationRule.Stream`), so seeds stay vanilla.
+- The last mutated act is saved (`SpoonMutationAct`): a reload at the start of an act never mutates twice.
+- Builder call: "at the end of each act" is read as "when the next act starts", so the last act never mutates and
+  the player sees the result on the new act's map.
+
+## Deck of 10 (`SpoonDeckOfTen`)
+
+- The deck holds at most 10 cards (`DeckOfTenRule.Limit`). When a card joins a deck that then holds more than 10, the
+  owner picks the cards to drop (the vanilla removal screen, not skippable, exactly the excess). The new card may be
+  the one dropped.
+- Each dropped card gives +1 max HP (and heals 1, like any max HP gain).
+- Builder calls:
+  - Starting decks above 10 (the Silent's 12) are trimmed the same way when the first room is entered.
+  - A card that joins during combat is checked when combat ends.
+  - Cards the removal screen refuses (Eternal, unremovable) still count toward the 10 but can't be picked.
+    If the excess can't be met, the deck stays above 10.
+  - Curses count, so a curse added to a full deck is a free removal at the cost of another card: kept, it's the mode's
+    trade.
+
+## Blood (`SpoonBlood`)
+
+- Gold no longer exists: the player's gold is set to 0 at the start and every gold gain is 0 (combat gold rewards
+  are dropped).
+- Every gold price is paid in current HP at a fixed rate: 1 HP = 5 gold (`BloodRule.Rate`). The game reads a Blood
+  player's gold as `(current HP − 1) × 5`, so every purchase check (merchant, card removal, events, campfire gifts,
+  campfire sales, Forge duplicate) works unchanged, and paying N gold costs `ceil(N / 5)` HP. Payments never kill:
+  the spendable gold keeps 1 HP.
+- Gold losses that aren't payments (thieves, events that "lose all gold") cost HP the same way.
+- The vampirism relic: **Blood Fang** (`SpoonBloodFang`, given to every player at the start, kept out of every grab
+  bag): when an attack you play deals unblocked damage, heal 20 % of it, rounded down (`BloodRule.Leech`).
+- Builder call: the top bar gold shows the spendable gold equivalent.
+
+## Trophies (`SpoonTrophies`)
+
+- When an elite fight is won, each player gets one **Trophy** card: an Attack built from one attack move of one elite in
+  the fight, chosen on a seeded RNG (run seed, floor, player slot).
+- The card is named "<Monster>: <Move>" from the game's monster and move titles (EN/FR come from the game). It deals the
+  move's damage at the run's current ascension, as many times as the move hits.
+- Its cost is 1 when the total damage is under 15, 2 under 30, else 3 (`TrophyRule.Cost`). Its upgrade adds 25 % damage,
+  rounded up.
+- One card class (`SpoonTrophyCard`) carries the monster, move, damage and hits as saved properties.
+- Builder call: elites with no attack move give a 1-cost, 10-damage "<Monster>: Trophy".
+
+## Forced Trade (`SpoonForcedTrade`, co-op)
+
+- After each combat won, before the rewards, each player picks one card of their deck (synced removal screen,
+  not skippable, removable cards only), and it moves to a random other player (seeded: run seed, floor, slot).
+- Solo: the mode does nothing.
+- Builder calls:
+  - The giver picks the card, the receiver is random; a player with no removable card gives nothing.
+  - Moving a card keeps its upgrade and enchantment (the Campfire Gifts move).
+
+## Conductor (`SpoonConductor`, co-op)
+
+- After each combat won, one player, drawn on a seeded RNG and never the previous one when there are two or more
+  players, is the Conductor.
+- Every player's rewards are merged into the Conductor's screen; the others get none.
+- When the Conductor takes a reward, they pick which player receives it: the potion, relic or card goes to that
+  player, and gold is split evenly.
+- Builder calls:
+  - The recipient pick is a synced player choice, shown as a small panel of player names.
+  - Card rewards keep each original owner's character pool: the cards are the ones that player would have been offered.
+  - Solo: the mode does nothing.
+
+## Useless Relics (`SpoonUselessRelics`)
+
+- In combat, a relic that is spent for the fight can be thrown. Clicking it starts targeting (like a potion), and the
+  chosen enemy takes 10 unblockable, unpowered damage.
+- A thrown relic is greyed out (Disabled status, the melted-wax tint) and stops working until the combat ends, then it
+  comes back.
+- "Spent" is a hand list in `src/Core/UselessRelicRule.cs`: relics whose combat effect happens once per fight (start of
+  combat, first turn, first attack...). They count as spent once the relic has flashed this combat.
+- Co-op: the throw is a synced action (like a potion use).
+- Builder call: a hand list rather than a generic signal. The game has no "used up" flag; most once-per-fight relics
+  check the turn number.
+
+## Compatibility
+
+| New mode | Existing mode | Decision |
+|----------|---------------|----------|
+| Mutation | The Forge | Combine: forged cards are upgraded and stay. |
+| Mutation | Hybrid / StS1-only | Combine: the transform pool follows the card set mode. |
+| Mutation | Spoon | Combine: the Spoonful is Eternal and stays. |
+| Deck of 10 | The Forge | Combine: fusing removes a card, the Duplicate adds one, then the deck is trimmed. |
+| Deck of 10 | Matriochka | Combine: every floor's card reward forces a drop. |
+| Deck of 10 | Folie à deux, Campfire Gifts, Forced Trade | Order: the card moves first, then the receiver trims. |
+| Deck of 10 | King Midas | Combine (Midas gives no cards). |
+| Blood | Merchant Loans | Mutually exclusive: loans lend gold that Blood erases. |
+| Blood | King Midas | Mutually exclusive: Midas is a gold economy. |
+| Blood | Spoon | Combine: HP is both the price and the threshold. |
+| Trophies | Folie à deux | Order: Trophies are given straight to each player and are not bid on. |
+| Trophies | King Midas | Combine: Trophies are not card rewards. |
+| Forced Trade | Folie à deux | Order: the trade happens at combat victory, before the chests. |
+| Forced Trade | Campfire Gifts | Combine. |
+| Conductor | Folie à deux | Mutually exclusive: both own the reward screen. |
+| Conductor | King Midas | Combine (no card rewards to hand out). |
+| Conductor | Matriochka | Mutually exclusive: Matriochka's unskippable per-player card rewards. |
+| Useless Relics | every mode | Combine: combat-only. |

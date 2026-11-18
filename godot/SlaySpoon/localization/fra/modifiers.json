@@ -56,5 +56,8 @@
   "SPOON_TEST_RUN.short": "Test",
   "SPOON_FORGE.title": "La Forge",
   "SPOON_FORGE.description": "Fusionnez vos copies au feu, jusqu’à +9. Le marchand duplique vos cartes.",
-  "SPOON_FORGE.short": "Forge"
+  "SPOON_FORGE.short": "Forge",
+  "SPOON_MUTATION.title": "Mutation",
+  "SPOON_MUTATION.description": "Chaque nouvel acte transforme toutes les cartes non améliorées.",
+  "SPOON_MUTATION.short": "Mut."
 }

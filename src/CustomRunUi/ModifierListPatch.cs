@@ -7,7 +7,7 @@ using SlaySpoon.Config;
 namespace SlaySpoon.CustomRunUi;
 
 /// <summary>
-/// Adds one row per Slay the Spoon family (and one per card set mode, plus Neow's Blessings, Merchant Loans, Campfire Gifts, Starting Chest, StS1 Boss Relics, Matriochka, Folie à deux, King Midas, Spoon, The Forge, and the Act 4 flag) to the Custom Run list only. ModelDb.GoodModifiers is left
+/// Adds one row per Slay the Spoon family (and one per card set mode, plus Neow's Blessings, Merchant Loans, Campfire Gifts, Starting Chest, StS1 Boss Relics, Matriochka, Folie à deux, King Midas, Spoon, The Forge, Mutation, and the Act 4 flag) to the Custom Run list only. ModelDb.GoodModifiers is left
 /// alone because Daily runs draw from it: this list is the Custom Run screen's only.
 /// </summary>
 [HarmonyPatch(typeof(NCustomRunModifiersList), "GetAllModifiers")]
@@ -31,6 +31,7 @@ public static class ModifierListPatch
 			ModelDb.Modifier<SpoonRoiMidas>().ToMutable(),
 			ModelDb.Modifier<SpoonSpoon>().ToMutable(),
 			ModelDb.Modifier<SpoonForge>().ToMutable(),
+			ModelDb.Modifier<SpoonMutation>().ToMutable(),
 			ModelDb.Modifier<SpoonAct4>().ToMutable(),
 		};
 		__result = __result.Concat(ours);
