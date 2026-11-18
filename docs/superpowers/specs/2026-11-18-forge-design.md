@@ -121,16 +121,23 @@ The merchant sells copies of your own cards, which makes duplicates something yo
 ### Fuse (rest site option)
 
 - Text: EN "Fuse", FR "Fusionner". It costs the rest site action, like Smith.
-- It is enabled when the player's deck has two copies of the same card id where the result stays within the cap and the
+- It is enabled when the player's deck has two copies (see **Copies** below) where the result stays within the cap and the
   card is fusable. Otherwise it is greyed out and its hover says why.
 - Flow:
   1. Pick the card to keep, from cards with at least one fusable copy.
   2. Pick the copy to sacrifice.
-  3. A preview of the result appears (Strike+3, with its new numbers).
+  3. A preview of the result appears (Strike+3, with its new numbers); for a StS1/StS2 pair, the player picks the
+     version here.
   4. Confirm.
 - The sacrificed copy leaves the deck. **[builder]** It is removed as in a card removal, so "on remove" relic triggers
   behave as they do for a removal.
-- Only the same card id counts as a copy. In Hybrid runs, StS1 and StS2 namesakes are different cards.
+- **Copies:** the same card id, or a StS1 card and its StS2 namesake (owner, 2026-11-18). Namesake pairs are every StS1
+  entry with an `Sts2Id` (`Duplicate` pairs from `VersionPairs`, plus `SameKeepSts1` and `Retired` namesakes that can still
+  sit in a deck). In Hybrid runs, Rampage StS1 + Rampage StS2 fuse.
+  - When the two cards are different versions, the player picks which version the result is, in the preview step
+    (like the Hybrid swap button). The result level is still kept + sacrificed + 1, applied to the chosen version's curve,
+    with that version's cap and `fusable` flag.
+  - **[builder]** The choice is synced in co-op like the other version choices (`VersionChoiceCode`).
 - Co-op: each player fuses in their own deck. The option is synced like the vanilla rest site options.
 - **[builder]** Enchantments: the kept card keeps its enchantment and the sacrificed card's enchantment is lost. The
   preview says so.
