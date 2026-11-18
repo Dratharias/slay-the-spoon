@@ -45,7 +45,7 @@ public static class TopBarPercentPatch
 				});
 				break;
 			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing or SpoonCampfireGift or SpoonStartingChest or SpoonBossRelics or SpoonFolieADeux
-				or SpoonRoiMidas or SpoonSpoon or SpoonForge or SpoonMutation or SpoonTestRun:
+				or SpoonRoiMidas or SpoonSpoon or SpoonForge or SpoonMutation or SpoonDeckOfTen or SpoonTestRun:
 				ReplaceIcon(__instance, new LocString("modifiers", Modifier(__instance).Id.Entry + ".short").GetFormattedText(), StsColors.cream);
 				break;
 			case SpoonMerchantLoans loans:

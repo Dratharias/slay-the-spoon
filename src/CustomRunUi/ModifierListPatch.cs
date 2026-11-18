@@ -32,6 +32,7 @@ public static class ModifierListPatch
 			ModelDb.Modifier<SpoonSpoon>().ToMutable(),
 			ModelDb.Modifier<SpoonForge>().ToMutable(),
 			ModelDb.Modifier<SpoonMutation>().ToMutable(),
+			ModelDb.Modifier<SpoonDeckOfTen>().ToMutable(),
 			ModelDb.Modifier<SpoonAct4>().ToMutable(),
 		};
 		__result = __result.Concat(ours);

@@ -59,5 +59,8 @@
   "SPOON_FORGE.short": "Forge",
   "SPOON_MUTATION.title": "Mutation",
   "SPOON_MUTATION.description": "Chaque nouvel acte transforme toutes les cartes non améliorées.",
-  "SPOON_MUTATION.short": "Mut."
+  "SPOON_MUTATION.short": "Mut.",
+  "SPOON_DECK_OF_TEN.title": "Deck de 10",
+  "SPOON_DECK_OF_TEN.description": "Votre deck tient 10 cartes. Chaque carte jetée donne 1 PV max.",
+  "SPOON_DECK_OF_TEN.short": "10"
 }

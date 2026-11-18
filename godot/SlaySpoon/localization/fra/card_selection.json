@@ -8,5 +8,6 @@
 	"SPOON_TO_GIFT": "Choisissez une carte à [gold]vendre[/gold].",
 	"SPOON_FORGE_KEEP": "Choisissez la carte à [gold]garder[/gold].",
 	"SPOON_FORGE_SACRIFICE": "Choisissez la copie à [gold]fusionner[/gold].",
-	"SPOON_FORGE_DUPLICATE": "Choisissez une carte à [gold]dupliquer[/gold] : {Common} / {Uncommon} / {Rare} or selon la rareté."
+	"SPOON_FORGE_DUPLICATE": "Choisissez une carte à [gold]dupliquer[/gold] : {Common} / {Uncommon} / {Rare} or selon la rareté.",
+	"SPOON_DECK_OF_TEN": "Votre deck tient 10 cartes : choisissez-en {Count} à [gold]jeter[/gold]."
 }
