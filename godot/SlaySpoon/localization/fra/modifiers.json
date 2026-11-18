@@ -71,5 +71,10 @@
   "SPOON_TROPHIES.short": "Troph.",
   "SPOON_FORCED_TRADE.title": "Échange forcé",
   "SPOON_FORCED_TRADE.description": "Coop : après chaque victoire, chacun donne une carte à un allié au hasard.",
-  "SPOON_FORCED_TRADE.short": "Éch."
+  "SPOON_FORCED_TRADE.short": "Éch.",
+  "SPOON_CONDUCTOR.ask": "Chef d’orchestre : à qui ?",
+  "SPOON_CONDUCTOR.reward": "Récompense de {Name} : {Reward}",
+  "SPOON_CONDUCTOR.title": "Chef d’orchestre",
+  "SPOON_CONDUCTOR.description": "Coop : après chaque victoire, un joueur décide qui reçoit chaque récompense.",
+  "SPOON_CONDUCTOR.short": "Chef"
 }

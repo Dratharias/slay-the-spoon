@@ -5,7 +5,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.CustomRunUi;
 
-/// <summary>Ticking "Slay the Spire 1 Cards" in Custom Run unticks "Spire Souvenir", and the other way round; King Midas and Matriochka likewise; Blood and either Merchant Loans or King Midas.</summary>
+/// <summary>Ticking "Slay the Spire 1 Cards" in Custom Run unticks "Spire Souvenir", and the other way round; King Midas and Matriochka likewise; Blood and either Merchant Loans or King Midas; Conductor and either Folie à deux or Matriochka.</summary>
 [HarmonyPatch(typeof(ModelDb), nameof(ModelDb.MutuallyExclusiveModifiers), MethodType.Getter)]
 public static class MutuallyExclusivePatch
 {
@@ -23,6 +23,12 @@ public static class MutuallyExclusivePatch
 		// Blood erases gold: Merchant Loans and King Midas are gold economies.
 		HashSet<ModifierModel> bloodLoans = new() { ModelDb.Modifier<SpoonBlood>(), ModelDb.Modifier<SpoonMerchantLoans>() };
 		HashSet<ModifierModel> bloodMidas = new() { ModelDb.Modifier<SpoonBlood>(), ModelDb.Modifier<SpoonRoiMidas>() };
-		__result = __result.Append(cardSets).Append(midas).Append(bloodLoans).Append(bloodMidas).ToList();
+		// Conductor owns the reward screen, like Folie à deux's chests and Matriochka's mandatory rewards.
+		HashSet<ModifierModel> conductorFolie = new() { ModelDb.Modifier<SpoonConductor>(), ModelDb.Modifier<SpoonFolieADeux>() };
+		HashSet<ModifierModel> conductorMatriochka = new() { ModelDb.Modifier<SpoonConductor>() };
+		for (int r = 0; r <= MatriochkaRule.MaxRerolls; r++)
+			conductorMatriochka.Add(PercentModifierTable.CanonicalFor(typeof(SpoonMatriochka), r));
+		__result = __result.Append(cardSets).Append(midas).Append(bloodLoans).Append(bloodMidas)
+			.Append(conductorFolie).Append(conductorMatriochka).ToList();
 	}
 }
