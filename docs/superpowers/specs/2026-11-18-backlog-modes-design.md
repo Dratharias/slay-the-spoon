@@ -54,7 +54,10 @@ The owner's compatibility rule applies: every pair of a new mode with an existin
 - Its cost is 1 when the total damage is under 15, 2 under 30, else 3 (`TrophyRule.Cost`). Its upgrade adds 25 % damage,
   rounded up.
 - One card class (`SpoonTrophyCard`) carries the monster, move, damage and hits as saved properties.
-- Builder call: elites with no attack move give a 1-cost, 10-damage "<Monster>: Trophy".
+- Builder calls:
+  - Elites with no attack move give a 1-cost, 10-damage "<Monster>: Trophy".
+  - The moves and their damage are read when the fight starts (`BeforeCombatStart`), so the card shows the damage the
+    move had at the start of the fight, before any Strength the elite gains.
 
 ## Forced Trade (`SpoonForcedTrade`, co-op)
 
@@ -69,13 +72,16 @@ The owner's compatibility rule applies: every pair of a new mode with an existin
 
 - After each combat won, one player, drawn on a seeded RNG and never the previous one when there are two or more
   players, is the Conductor.
-- Every player's rewards are merged into the Conductor's screen; the others get none.
-- When the Conductor takes a reward, they pick which player receives it: the potion, relic or card goes to that
-  player, and gold is split evenly.
+- Every player's rewards are handed out by the Conductor: for each card, potion and relic reward, the Conductor picks
+  which player receives it.
 - Builder calls:
   - The recipient pick is a synced player choice, shown as a small panel of player names.
   - Card rewards keep each original owner's character pool: the cards are the ones that player would have been offered.
   - Solo: the mode does nothing.
+  - As built: the Conductor assigns every reward up front, one small panel per reward, then each player's own vanilla
+    reward screen opens with what they received. One merged screen would have meant rewriting the reward screen.
+  - Gold is not redistributed: every player already gets the same amount, so splitting it changes nothing.
+  - A relic the recipient already holds stays with its original owner.
 
 ## Useless Relics (`SpoonUselessRelics`)
 
@@ -86,8 +92,13 @@ The owner's compatibility rule applies: every pair of a new mode with an existin
 - "Spent" is a hand list in `src/Core/UselessRelicRule.cs`: relics whose combat effect happens once per fight (start of
   combat, first turn, first attack...). They count as spent once the relic has flashed this combat.
 - Co-op: the throw is a synced action (like a potion use).
-- Builder call: a hand list rather than a generic signal. The game has no "used up" flag; most once-per-fight relics
-  check the turn number.
+- Builder calls:
+  - A hand list rather than a generic signal. The game has no "used up" flag; most once-per-fight relics check the
+    turn number. The list: start-of-combat relics (Akabeko, Anchor, Bag of Marbles, Lantern...) and "first time in a
+    fight" relics (Centennial Puzzle, Throwing Axe, Vambrace...).
+  - A thrown relic leaves the hook listener lists (combat and run) until the combat ends, so it stops working; it is
+    not melted (melting is saved and tints the relic red).
+  - The throw is a play-phase action, like a potion; the relic's inspect screen opens as usual when it can't be thrown.
 
 ## Compatibility
 

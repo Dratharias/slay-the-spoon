@@ -505,9 +505,10 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
 - Testing: a Workshop copy with a greater version now wins over a local `mods/SlaySpoon`; keep the local
   version at least equal to the uploaded one when testing with `make up`.
 
-## Future Custom Run modes picked by the owner (2026-11-18)
+## Custom Run modes picked by the owner (2026-11-18)
 
-Ideas the owner kept from the mode brainstorm. Each one needs its own design pass before any code.
+All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-backlog-modes-design.md`, checklist
+`docs/testing/backlog-modes-checklist.md`). The owner's original wording, kept for reference:
 
 - **Blood:** gold no longer exists. Everything is paid in current HP: at the merchant, at events and at the campfire. A
   vampirism relic is given at the start.
@@ -525,6 +526,17 @@ Ideas the owner kept from the mode brainstorm. Each one needs its own design pas
 - **Compatibility (owner, 2026-11-18):** each new mode must be checked against every existing one before it ships, for
   example Forced Trade with Folie à deux (both move cards between players after a fight). Each design pass lists the
   pairs that clash and decides: combine, order the effects, or make them mutually exclusive.
+
+## Backlog modes (1.5.0, 2026-11-18)
+
+- Minor: Conductor assigns rewards through one panel per reward, then each player's own reward screen opens; the spec's
+  merged screen was not built (see the spec's builder calls). Gold is not split.
+- Minor: Trophies read the elites' moves at combat start; a move whose damage depends on state later in the fight shows
+  its start-of-fight value.
+- Minor: Useless Relics uses a hand list (`UselessRelicRule.OncePerCombat`); mod relics and future vanilla relics are not
+  on it. A thrown relic's hover tip doesn't say it was thrown (only the grey tint shows it).
+- Minor: Useless Relics throws are not saved; the game restarts a fight on reload, so nothing is lost.
+- Minor: Blood shows the spendable gold equivalent in the top bar; no HP-cost text on merchant prices.
 
 ## The Forge (1.4.0, 2026-11-18)
 

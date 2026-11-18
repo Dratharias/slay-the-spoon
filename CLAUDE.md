@@ -464,3 +464,15 @@ Read `README.md` for the player view and the spec for every decision.
 - The fusion preview sets `ForgeFusion.Previewing`, which the Hybrid swap, King Midas and Folie à deux respect.
 - Build 0 warnings; 748 xUnit + 99 pytest pass. Not tested in game: `docs/testing/forge-checklist.md`.
 
+## 1.5.0 — backlog modes (2026-11-18, branch `backlog-modes`)
+
+- Seven Custom Run modes from the owner's brainstorm (spec `docs/superpowers/specs/2026-11-18-backlog-modes-design.md`,
+  builder calls there; compatibility table at its end): **Mutation** (`SpoonMutation`, each new act transforms unupgraded
+  cards), **Deck of 10** (`SpoonDeckOfTen`, excess dropped for +1 max HP each), **Blood** (`SpoonBlood`, gold read as
+  (HP − 1) × 5 and paid in HP, `src/Blood/`, Blood Fang relic), **Trophies** (`SpoonTrophies`, elite attack cards,
+  `src/Trophies/SpoonTrophyCard.cs`), co-op **Forced Trade** (`SpoonForcedTrade`), co-op **Conductor** (`SpoonConductor`,
+  `src/Conductor/`), **Useless Relics** (`SpoonUselessRelics`, `src/UselessRelics/`: a once-per-fight relic that flashed
+  can be thrown for 10 damage through a synced `UselessRelicThrowAction`; thrown relics are filtered out of both
+  `IterateHookListeners` until combat ends). Pure rules in `src/Core/*Rule.cs` with tests.
+- Build 0 warnings; 795 xUnit + 99 pytest pass. Not tested in game: `docs/testing/backlog-modes-checklist.md`.
+
