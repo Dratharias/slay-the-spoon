@@ -319,7 +319,7 @@
 	"STS1_PRAY.title": "Prière",
 	"STS1_PRESSURE_POINTS.description": "Appliquez {Magic:diff()} de [gold]Marque[/gold].\nTOUS les ennemis perdent des PV équivalents à leur [gold]Marque[/gold].",
 	"STS1_PRESSURE_POINTS.title": "Points vitaux",
-	"STS1_PRIDE.description": "À la fin de votre tour, placez une copie de cette carte au dessus de votre pioche.",
+	"STS1_PRIDE.description": "À la fin de votre tour, placez une copie de cette carte au-dessus de votre pioche.",
 	"STS1_PRIDE.title": "Orgueil",
 	"STS1_PROSTRATE.description": "Gagnez {Magic:diff()} de Mantra.\nGagnez {Block:diff()} d'[gold]Armure[/gold].",
 	"STS1_PROSTRATE.title": "Prosternation",
