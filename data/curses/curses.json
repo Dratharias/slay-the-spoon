@@ -1,58 +1,82 @@
 {
-  "_comment": "Hand review of every curse for the Cursed Deck mode (2026-11-18, docs/superpowers/specs/2026-11-18-cursed-deck-design.md). Played with the Unholy Grimoire: exhausted (Grimoire damage to ALL enemies), then 'played' hits the chosen enemy. Upgraded (+): 'amount' becomes 'amountPlus' on both sides (selfVar is the card var raised for the player side), cost costPlus, Grimoire grimoirePlus. tools/curse_table.py validates it and writes docs/review/cursed-curses.md.",
+  "_comment": "Hand review of every curse for the Cursed Deck mode (2026-11-18, docs/superpowers/specs/2026-11-18-cursed-deck-design.md). Played with the Unholy Grimoire: exhausted (Grimoire damage to ALL enemies), then 'played' hits the chosen enemy. Upgraded (+): 'amount' becomes 'amountPlus' on both sides (selfVar is the card var raised for the player side), cost costPlus, Grimoire grimoirePlus. Curses whose effect only hits the player (no 'played' effect) are nerfed when upgraded instead: 'self' is [vanilla, upgraded] and inHandPlus says what changes (owner, 2026-11-18). tools/curse_table.py validates it and writes docs/review/cursed-curses.md.",
   "BAD_LUCK": {
     "keywords": "Eternal, Unplayable",
     "inHand": "End of turn in hand: lose 13 HP",
-    "played": "HpLoss", "amount": 13, "amountPlus": 20, "selfVar": "HpLoss",
+    "played": "HpLoss",
+    "amount": 13,
+    "amountPlus": 20,
+    "selfVar": "HpLoss",
     "note": "Owner's example: -13 HP flat to the monster, 20 upgraded, on both sides"
   },
   "DECAY": {
     "keywords": "Unplayable",
     "inHand": "End of turn in hand: take 2 damage",
-    "played": "Damage", "amount": 2, "amountPlus": 4, "selfVar": "Damage",
+    "played": "Damage",
+    "amount": 2,
+    "amountPlus": 4,
+    "selfVar": "Damage",
     "note": "Unpowered damage, Block stops it, like the vanilla side; doubled upgraded since 2 -> 3 is invisible"
   },
   "REGRET": {
     "keywords": "Unplayable",
     "inHand": "End of turn in hand: lose 1 HP per card in hand",
-    "played": "HpLossPerHandCard", "amount": 1, "amountPlus": 2,
+    "played": "HpLossPerHandCard",
+    "amount": 1,
+    "amountPlus": 2,
     "note": "Counts your hand after Regret left it; no var, the upgraded player side is a patch on its turn-end damage"
   },
   "DOUBT": {
     "keywords": "Unplayable",
     "inHand": "End of turn in hand: gain 1 Weak",
-    "played": "Weak", "amount": 1, "amountPlus": 2, "selfVar": "WeakPower",
+    "played": "Weak",
+    "amount": 1,
+    "amountPlus": 2,
+    "selfVar": "WeakPower",
     "note": "Mirror effect"
   },
   "SHAME": {
     "keywords": "Unplayable",
     "inHand": "End of turn in hand: gain 1 Frail",
-    "played": "Vulnerable", "amount": 1, "amountPlus": 2, "selfVar": "Frail",
+    "played": "Vulnerable",
+    "amount": 1,
+    "amountPlus": 2,
+    "selfVar": "Frail",
     "note": "Frail barely matters on monsters (few gain Block); Vulnerable is the attacker's version of the same malus"
   },
   "DEBT": {
     "keywords": "Unplayable",
     "inHand": "End of turn in hand: lose 10 gold",
-    "played": "GainGold", "amount": 10, "amountPlus": 15, "selfVar": "Gold",
+    "played": "GainGold",
+    "amount": 10,
+    "amountPlus": 15,
+    "selfVar": "Gold",
     "note": "Monsters have no gold: the monster pays you. In Blood runs gold gains are 0, so it does nothing there"
   },
   "STS1_PAIN": {
     "keywords": "Unplayable (StS1, Ominous Forge)",
     "inHand": "While in hand: lose 1 HP whenever you play another card",
-    "played": "HpLossPerCardPlayed", "amount": 1, "amountPlus": 2,
+    "played": "HpLossPerCardPlayed",
+    "amount": 1,
+    "amountPlus": 2,
     "note": "Enemy loses 1 HP per card you played this turn, Pain included; the mod owns the class, its +1 raises the HP lost"
   },
   "NORMALITY": {
     "keywords": "Unplayable",
     "inHand": "While in hand: you can't play more than 3 cards this turn",
     "played": "None",
-    "note": "No monster version of a card limit: Grimoire only, 12 upgraded. Its limit stays 3 (an upgrade lowering it to 2 would read as a nerf of the Grimoire)"
+    "note": "No monster version of a card limit: Grimoire only (5, 12 upgraded). Upgraded, the limit goes to 4 (owner, 2026-11-18)",
+    "self": [
+      3,
+      4
+    ],
+    "inHandPlus": "While in hand: you can't play more than 4 cards this turn"
   },
   "ENTHRALLED": {
     "keywords": "Eternal; playable for 2 in vanilla",
     "inHand": "While in hand: must be played before other cards",
     "played": "None",
-    "note": "Already playable: keeps its cost 2, 0 upgraded; with the Grimoire it is exhausted on play (5 / 12)"
+    "note": "Already playable: keeps its cost 2, 0 upgraded (that's its nerf: forced first, but free); with the Grimoire it is exhausted on play (5 / 12)"
   },
   "SPORE_MIND": {
     "keywords": "Exhaust; playable for 1 in vanilla",
@@ -66,23 +90,78 @@
     "played": "None",
     "note": "Owner's example of a curse with no effect: Grimoire only (5, 12 upgraded)"
   },
-  "INJURY": { "keywords": "Unplayable", "inHand": "No effect", "played": "None", "note": "Grimoire only" },
-  "WRITHE": { "keywords": "Innate, Unplayable", "inHand": "No effect; Innate", "played": "None", "note": "Grimoire only; Innate makes it a reliable opening hit" },
+  "INJURY": {
+    "keywords": "Unplayable",
+    "inHand": "No effect",
+    "played": "None",
+    "note": "Grimoire only"
+  },
+  "WRITHE": {
+    "keywords": "Innate, Unplayable",
+    "inHand": "No effect; Innate",
+    "played": "None",
+    "note": "Grimoire only; Innate makes it a reliable opening hit"
+  },
   "GUILTY": {
     "keywords": "Unplayable",
     "inHand": "Leaves the deck after 5 combats",
     "played": "None",
-    "note": "Grimoire only; the countdown counts combats it spends in the deck, playing it doesn't change that"
+    "note": "Grimoire only; the player-side nerf makes it leave sooner, so less fuel: a real trade",
+    "self": [
+      5,
+      3
+    ],
+    "inHandPlus": "Leaves the deck after 3 combats"
   },
-  "FOLLY": { "keywords": "Eternal, Innate, Ethereal, Unplayable", "inHand": "No effect (Preserved Fog)", "played": "None", "note": "Grimoire only" },
-  "GREED": { "keywords": "Eternal, Unplayable", "inHand": "No effect (Cursed Pearl, Sunken Treasury)", "played": "None", "note": "Grimoire only" },
-  "CURSE_OF_THE_BELL": { "keywords": "Eternal, Unplayable", "inHand": "No effect (Calling Bell)", "played": "None", "note": "Grimoire only" },
-  "POOR_SLEEP": { "keywords": "Retain, Unplayable", "inHand": "No effect; Retain (Unrest Site)", "played": "None", "note": "Grimoire only; Retain lets you hold it for the right turn" },
-  "ASCENDERS_BANE": { "keywords": "Eternal, Ethereal, Unplayable", "inHand": "No effect (ascension curse)", "played": "None", "note": "Grimoire only; it can be upgraded like the others" },
+  "FOLLY": {
+    "keywords": "Eternal, Innate, Ethereal, Unplayable",
+    "inHand": "No effect (Preserved Fog)",
+    "played": "None",
+    "note": "Grimoire only"
+  },
+  "GREED": {
+    "keywords": "Eternal, Unplayable",
+    "inHand": "No effect (Cursed Pearl, Sunken Treasury)",
+    "played": "None",
+    "note": "Grimoire only"
+  },
+  "CURSE_OF_THE_BELL": {
+    "keywords": "Eternal, Unplayable",
+    "inHand": "No effect (Calling Bell)",
+    "played": "None",
+    "note": "Grimoire only"
+  },
+  "POOR_SLEEP": {
+    "keywords": "Retain, Unplayable",
+    "inHand": "No effect; Retain (Unrest Site)",
+    "played": "None",
+    "note": "Grimoire only; Retain lets you hold it for the right turn"
+  },
+  "ASCENDERS_BANE": {
+    "keywords": "Eternal, Ethereal, Unplayable",
+    "inHand": "No effect (ascension curse)",
+    "played": "None",
+    "note": "Grimoire only; it can be upgraded like the others"
+  },
   "STS1_NECRONOMICURSE": {
     "keywords": "Eternal, Unplayable (StS1, Necronomicon)",
     "inHand": "When exhausted, comes back to your hand",
-    "played": "None", "costPlus": 1,
-    "note": "Exhausted on play then back in hand: replayable all turn. Upgraded it keeps cost 1 (at 0 it would loop forever); Grimoire 12 per energy"
+    "played": "None",
+    "costPlus": 1,
+    "note": "Exhausted on play then back in hand: replayable all turn. Upgraded it keeps cost 1 (at 0 it would loop forever); Grimoire 12 per energy; its return to the hand is fuel too, so no nerf"
+  },
+  "STS1_PARASITE": {
+    "keywords": "Unplayable (StS1, to port)",
+    "inHand": "No effect; removed from the deck: lose 3 max HP",
+    "played": "MaxHpLoss",
+    "amount": 3,
+    "amountPlus": 5,
+    "note": "The parasite jumps: the enemy loses 3 max HP (and HP); upgraded, 5 on both sides (removing it costs you 5 max HP)"
+  },
+  "STS1_PRIDE": {
+    "keywords": "Innate, Exhaust; playable for 1 (StS1, to port)",
+    "inHand": "End of turn in hand: put a copy on top of your draw pile",
+    "played": "None",
+    "note": "Already playable and exhausting; its copies are Grimoire fuel, so no nerf. Cost 0 and Grimoire 12 upgraded; the copies are +0"
   }
 }

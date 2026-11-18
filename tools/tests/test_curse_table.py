@@ -14,7 +14,7 @@ def test_repo_table_is_valid_and_covers_the_mod_curses():
     curses = c.rows(TABLE)
     assert c.validate(TABLE, sorted(curses)) == []
     assert {"STS1_PAIN", "STS1_NECRONOMICURSE"} <= set(c.scan([REPO / "src/Cards"]))
-    assert len(curses) == 20
+    assert len(curses) == 22
 
 
 def test_owner_examples():
@@ -38,3 +38,16 @@ def test_validate_catches_missing_rows_and_bad_amounts():
 def test_review_lists_every_curse():
     page = c.review(TABLE)
     assert all(f"| {k} |" in page for k in c.rows(TABLE))
+
+
+def test_player_only_curses_are_nerfed_when_upgraded():
+    assert TABLE["NORMALITY"]["self"] == [3, 4]
+    assert TABLE["GUILTY"]["self"] == [5, 3]
+    bad = {"A": {"keywords": "k", "inHand": "i", "note": "n", "played": "Weak", "amount": 1, "amountPlus": 2, "self": [1, 2]}}
+    assert "A: only a curse with no played effect is nerfed on the player side" in c.validate(bad, ["A"])
+
+
+def test_every_sts1_curse_has_a_row():
+    sts1 = {"ASCENDERS_BANE", "CLUMSY", "CURSE_OF_THE_BELL", "DECAY", "DOUBT", "INJURY", "STS1_NECRONOMICURSE",
+            "NORMALITY", "STS1_PAIN", "STS1_PARASITE", "STS1_PRIDE", "REGRET", "SHAME", "WRITHE"}
+    assert sts1 <= set(c.rows(TABLE))

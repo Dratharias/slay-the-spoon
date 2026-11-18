@@ -52,6 +52,9 @@ upgraded (5 otherwise). Curses with an effect keep the Grimoire at 5.
 | Normality, Clumsy, Injury, Writhe, Guilty, Enthralled | vanilla | — | Grimoire 12 |
 | Greed, Folly, Curse of the Bell, Poor Sleep, Spore Mind, Ascender's Bane | vanilla | — | Grimoire 12 |
 
+- A curse whose effect only hits the player (no played effect) is **nerfed** when upgraded instead (owner,
+  2026-11-18): Normality+ allows 4 cards, Guilty+ leaves after 3 combats. Curses whose player-side effect is Grimoire
+  fuel (Pride's copies, the Necronomicurse's return) keep it.
 - An upgraded curse costs 0 to play (1 otherwise).
 - Curses upgrade like other cards in this mode (Smith, Armaments, Apotheosis...), at most +1; the Black Censer upgrades
   every curse that joins the deck. The title gets the usual "+".
@@ -59,7 +62,8 @@ upgraded (5 otherwise). Curses with an effect keep the Grimoire at 5.
 The full list, reviewed curse by curse like the Forge's cards: `data/curses/curses.json` (hand table, read at
 runtime), `tools/curse_table.py` (checks every curse of the game and the mod has a row, writes the owner page
 `docs/review/cursed-curses.md`). Notable rows: Pain (StS1) hits the enemy for 1 HP per card played this turn;
-Normality, Enthralled and Spore Mind have no played effect; the Necronomicurse keeps cost 1 upgraded (at 0 it would loop
+Normality, Enthralled and Spore Mind have no played effect; the StS1 curses StS2 lacks are ported for this mode:
+Parasite (played: the enemy loses 3 max HP, 5 upgraded) and Pride (Innate, Exhaust, puts a copy on the draw pile); the Necronomicurse keeps cost 1 upgraded (at 0 it would loop
 forever, since it returns to the hand when exhausted).
 
 ## Builder calls (proposal)
@@ -76,8 +80,9 @@ forever, since it returns to the hand when exhausted).
   player slot): a cursed relic not held (if any are left), 75 gold, or a heal of 25 % of max HP. Ancients (Neow,
   the act Ancients) don't get the option. The added option comes last, before any "Leave" option.
 - The 2-in-3 roll uses the mod's own stream, so vanilla draws stay in their order (no seed drift for the other third).
-- Random curses come from the game's curse pool (the curses vanilla events give), never Ascender's Bane-style special
-  curses.
+- Random curses come from the game's curse pool (the curses vanilla events give) plus the StS1 Pain, Parasite and Pride,
+  never Ascender's Bane-style special curses or the Necronomicurse (Cursed Tome only). The StS1 curses StS2 shares
+  (Clumsy, Decay, Doubt...) are the StS2 cards.
 
 ## Compatibility
 

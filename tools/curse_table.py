@@ -14,16 +14,20 @@ from pathlib import Path
 
 GRIMOIRE = 5
 GRIMOIRE_NO_EFFECT_PLUS = 12
-PLAYED_KINDS = {"None", "HpLoss", "Damage", "HpLossPerHandCard", "HpLossPerCardPlayed", "Weak", "Vulnerable", "GainGold"}
+PLAYED_KINDS = {"None", "HpLoss", "Damage", "HpLossPerHandCard", "HpLossPerCardPlayed", "Weak", "Vulnerable", "GainGold", "MaxHpLoss"}
 LABELS = {
     "HpLoss": "loses {} HP", "Damage": "takes {} damage", "HpLossPerHandCard": "loses {} HP per card in your hand",
     "HpLossPerCardPlayed": "loses {} HP per card you played this turn", "Weak": "gains {} Weak",
-    "Vulnerable": "gains {} Vulnerable", "GainGold": "you gain {} gold",
+    "Vulnerable": "gains {} Vulnerable", "GainGold": "you gain {} gold", "MaxHpLoss": "loses {} max HP",
 }
 
 
 def card_id(class_name: str) -> str:
     return re.sub(r"(?<=[A-Za-z0-9])(?=[A-Z])", "_", class_name).upper()
+
+
+# StS1 curses the mod has no class for yet; the Cursed Deck plan ports them.
+TO_PORT = ["STS1_PARASITE", "STS1_PRIDE"]
 
 
 def scan(directories) -> list[str]:
@@ -69,6 +73,11 @@ def validate(table: dict, scanned: list[str]) -> list[str]:
             errors.append(f"{key}: no amount without a played effect")
         if has_amount and row["amountPlus"] <= row["amount"]:
             errors.append(f"{key}: amountPlus must be above amount")
+        if "self" in row:
+            if kind != "None":
+                errors.append(f"{key}: only a curse with no played effect is nerfed on the player side")
+            if len(row["self"]) != 2 or not row.get("inHandPlus"):
+                errors.append(f"{key}: self needs [vanilla, upgraded] and inHandPlus")
         for field in ("keywords", "inHand", "note"):
             if not row.get(field):
                 errors.append(f"{key}: missing {field}")
@@ -89,13 +98,13 @@ def review(table: dict) -> str:
         f"a curse costs 1 (0 upgraded) and targets one enemy: it is exhausted (Grimoire: {GRIMOIRE} damage to ALL enemies),",
         "then **Played** hits the chosen enemy. Left in hand, it does **In hand** to you, as in vanilla. Upgraded (+), its",
         "number goes up on both sides; a curse with no played effect gets the Grimoire at "
-        f"{GRIMOIRE_NO_EFFECT_PLUS} instead.",
+        f"{GRIMOIRE_NO_EFFECT_PLUS} instead, and its effect on you is nerfed when it has one (**+ In hand**).",
         "",
-        "| Curse | Keywords | In hand (you) | Played (enemy) | + Played | + Grimoire | + Cost | Why |",
-        "|-------|----------|---------------|----------------|----------|------------|--------|-----|",
+        "| Curse | Keywords | In hand (you) | + In hand | Played (enemy) | + Played | + Grimoire | + Cost | Why |",
+        "|-------|----------|---------------|-----------|----------------|----------|------------|--------|-----|",
     ]
     for key, row in rows(table).items():
-        cells = [key, row["keywords"], row["inHand"], played_text(row, False), played_text(row, True),
+        cells = [key, row["keywords"], row["inHand"], row.get("inHandPlus", "same" if row["played"] == "None" else "stronger, as Played"), played_text(row, False), played_text(row, True),
                  grimoire_plus(row), cost_plus(row), row["note"]]
         lines.append("| " + " | ".join(str(c).replace("|", "/") for c in cells) + " |")
     return "\n".join(lines) + "\n"
@@ -109,7 +118,7 @@ def main():
     parser.add_argument("--review", default="docs/review/cursed-curses.md")
     args = parser.parse_args()
     table = json.loads(Path(args.table).read_text(encoding="utf-8"))
-    errors = validate(table, scan([args.sts2, args.mod]))
+    errors = validate(table, sorted(set(scan([args.sts2, args.mod])) | set(TO_PORT)))
     if errors:
         raise SystemExit("\n".join(errors))
     Path(args.review).write_text(review(table), encoding="utf-8")
