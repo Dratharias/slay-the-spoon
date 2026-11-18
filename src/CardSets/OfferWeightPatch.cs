@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
+using SlaySpoon.Achilles;
 using SlaySpoon.Cards;
 using SlaySpoon.Core;
 
@@ -88,8 +89,11 @@ public static class OfferWeightPatch
 		var completers = OfferWeights.ComboCompleters(
 			player.RunState.Players.SelectMany(p => p.Deck.Cards).Select(c => c.Id.Entry).ToHashSet());
 		OfferSide? lean = VersionSwap.IsHybrid(player) ? Lean(player) : null;
-		if (completers.Count == 0 && lean == null) return null;
-		return OfferWeights.Compute(cards.Select(c => (c.Id.Entry, SideOf(c))).ToList(), lean, completers);
+		HashSet<string>? blockCards = player.Relics.Any(r => r is SpoonAchillesHeel)
+			? cards.Where(AchillesBlock.IsBlockCard).Select(c => c.Id.Entry).ToHashSet()
+			: null;
+		if (completers.Count == 0 && lean == null && blockCards == null) return null;
+		return OfferWeights.Compute(cards.Select(c => (c.Id.Entry, SideOf(c))).ToList(), lean, completers, blockCards);
 	}
 
 	/// <summary>The run's lean, from its seed on a private RNG that no vanilla draw shares.</summary>

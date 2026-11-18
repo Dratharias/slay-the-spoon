@@ -150,5 +150,8 @@
 	"SPOON_SKIMMED_POWER.title": "Skimmed",
 	"SPOON_SKIMMED_POWER.description": "Prevent the next [gold]Banquet[/gold] from dealing damage or taking your Max HP. Lasts until Banquet.",
 	"SPOON_SKIMMED_POWER.smartDescription": "Prevent the next [gold]Banquet[/gold] from dealing damage or taking your Max HP. Lasts until Banquet.",
-	"SPOON_SKIMMED_POWER.banquetDescription": "Lose [blue]{Damage}[/blue] HP, ignoring Block and damage modifiers. Only [gold]Skimmed[/gold] prevents this loss and the loss of [blue]10[/blue] Max HP. The Spoon still applies Vulnerable and heals."
+	"SPOON_SKIMMED_POWER.banquetDescription": "Lose [blue]{Damage}[/blue] HP, ignoring Block and damage modifiers. Only [gold]Skimmed[/gold] prevents this loss and the loss of [blue]10[/blue] Max HP. The Spoon still applies Vulnerable and heals.",
+	"SPOON_HEEL_POWER.title": "Heel",
+	"SPOON_HEEL_POWER.description": "If you take unblocked attack damage, die.",
+	"SPOON_HEEL_POWER.smartDescription": "If you take unblocked attack damage, die."
 }

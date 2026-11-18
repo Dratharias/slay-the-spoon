@@ -150,5 +150,8 @@
 	"SPOON_SKIMMED_POWER.title": "Écumé",
 	"SPOON_SKIMMED_POWER.description": "Le prochain [gold]Banquet[/gold] ne vous inflige aucun dégât et ne mange aucun de vos PV max. Dure jusqu’au Banquet.",
 	"SPOON_SKIMMED_POWER.smartDescription": "Le prochain [gold]Banquet[/gold] ne vous inflige aucun dégât et ne mange aucun de vos PV max. Dure jusqu’au Banquet.",
-	"SPOON_SKIMMED_POWER.banquetDescription": "Perdez [blue]{Damage}[/blue] PV, en ignorant l’Armure et les modificateurs de dégâts. Seul [gold]Écumé[/gold] empêche cette perte et celle de [blue]10[/blue] PV max. La Cuillère applique toujours Vulnérable et se soigne."
+	"SPOON_SKIMMED_POWER.banquetDescription": "Perdez [blue]{Damage}[/blue] PV, en ignorant l’Armure et les modificateurs de dégâts. Seul [gold]Écumé[/gold] empêche cette perte et celle de [blue]10[/blue] PV max. La Cuillère applique toujours Vulnérable et se soigne.",
+	"SPOON_HEEL_POWER.title": "Talon",
+	"SPOON_HEEL_POWER.description": "Si vous subissez des dégâts d’attaque non bloqués, vous mourez.",
+	"SPOON_HEEL_POWER.smartDescription": "Si vous subissez des dégâts d’attaque non bloqués, vous mourez."
 }

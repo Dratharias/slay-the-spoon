@@ -556,6 +556,9 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
     Pin Doll https://pixabay.com/vectors/voodoo-doll-pins-doll-cheap-4659327/,
     Black Censer https://pixabay.com/photos/censer-religion-burner-faith-1486493/,
     Reliquary https://pixabay.com/photos/chest-casket-byzantine-ivory-casket-67592/.
+  - **Achilles' Heel** (`SpoonAchillesHeel`, `src/Achilles/`, 2026-11-18): placeholder art, Pixabay photo "Foot, Marble, Sculpture,
+    Hermes, Wing" https://pixabay.com/photos/foot-marble-sculpture-hermes-wing-4793310/ (Pixabay Content License, no attribution
+    required), cropped to the heel with a soft round mask (no Greek sandal photo could be fetched); the heel power borrows The Gambit's icon.
 
 ## Backlog modes (1.5.0, 2026-11-18)
 

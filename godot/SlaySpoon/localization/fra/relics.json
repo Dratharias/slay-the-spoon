@@ -130,5 +130,8 @@
 	"SPOON_BLACK_CENSER.flavor": "« La fumée sent les vieilles promesses. »",
 	"SPOON_RELIQUARY.title": "Reliquaire",
 	"SPOON_RELIQUARY.description": "À la fin de chaque combat, gagnez [blue]{Gold}[/blue] d’[gold]Or[/gold] pour chaque [red]Malédiction[/red] dans votre deck.",
-	"SPOON_RELIQUARY.flavor": "« Les pèlerins paient cher pour toucher ce qui fait mal. »"
+	"SPOON_RELIQUARY.flavor": "« Les pèlerins paient cher pour toucher ce qui fait mal. »",
+	"SPOON_ACHILLES_HEEL.title": "Talon d’Achille",
+	"SPOON_ACHILLES_HEEL.description": "Si vous subissez des dégâts d’attaque non bloqués, vous mourez. Gagnez 1 [gold]Dextérité[/gold] par acte après le premier. Vos attaques infligent 1 dégât de plus par tranche de {BlockPerBonus} d’[gold]Armure[/gold].",
+	"SPOON_ACHILLES_HEEL.flavor": "« Tout le reste était invulnérable. »"
 }

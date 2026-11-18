@@ -130,5 +130,8 @@
 	"SPOON_BLACK_CENSER.flavor": "\"The smoke smells of old promises.\"",
 	"SPOON_RELIQUARY.title": "Reliquary",
 	"SPOON_RELIQUARY.description": "At the end of each combat, gain [blue]{Gold}[/blue] [gold]Gold[/gold] for each [red]Curse[/red] in your deck.",
-	"SPOON_RELIQUARY.flavor": "\"Pilgrims pay well to touch what hurts.\""
+	"SPOON_RELIQUARY.flavor": "\"Pilgrims pay well to touch what hurts.\"",
+	"SPOON_ACHILLES_HEEL.title": "Achilles' Heel",
+	"SPOON_ACHILLES_HEEL.description": "If you take unblocked attack damage, die. Gain 1 [gold]Dexterity[/gold] per act past the first. Your attacks deal 1 more damage per {BlockPerBonus} [gold]Block[/gold] you have.",
+	"SPOON_ACHILLES_HEEL.flavor": "\"Everything else was invulnerable.\""
 }
