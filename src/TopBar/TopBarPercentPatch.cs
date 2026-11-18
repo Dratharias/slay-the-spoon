@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.sts2.Core.Nodes.TopBar;
 using SlaySpoon.Act4;
 using SlaySpoon.Config;
+using SlaySpoon.Curses;
 using SlaySpoon.Core;
 using SlaySpoon.Loans;
 
@@ -45,7 +46,7 @@ public static class TopBarPercentPatch
 				});
 				break;
 			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing or SpoonCampfireGift or SpoonStartingChest or SpoonBossRelics or SpoonFolieADeux
-				or SpoonRoiMidas or SpoonSpoon or SpoonForge or SpoonMutation or SpoonDeckOfTen or SpoonBlood or SpoonTrophies or SpoonForcedTrade or SpoonConductor or SpoonUselessRelics or SpoonTestRun:
+				or SpoonRoiMidas or SpoonSpoon or SpoonForge or SpoonMutation or SpoonDeckOfTen or SpoonBlood or SpoonTrophies or SpoonForcedTrade or SpoonConductor or SpoonUselessRelics or SpoonCursedDeck or SpoonTestRun:
 				ReplaceIcon(__instance, new LocString("modifiers", Modifier(__instance).Id.Entry + ".short").GetFormattedText(), StsColors.cream);
 				break;
 			case SpoonMerchantLoans loans:

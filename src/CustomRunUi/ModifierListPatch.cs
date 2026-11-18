@@ -3,6 +3,7 @@ using SlaySpoon.Core;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
 using SlaySpoon.Config;
+using SlaySpoon.Curses;
 
 namespace SlaySpoon.CustomRunUi;
 
@@ -38,6 +39,7 @@ public static class ModifierListPatch
 			ModelDb.Modifier<SpoonForcedTrade>().ToMutable(),
 			ModelDb.Modifier<SpoonConductor>().ToMutable(),
 			ModelDb.Modifier<SpoonUselessRelics>().ToMutable(),
+			ModelDb.Modifier<SpoonCursedDeck>().ToMutable(),
 			ModelDb.Modifier<SpoonAct4>().ToMutable(),
 		};
 		__result = __result.Concat(ours);
