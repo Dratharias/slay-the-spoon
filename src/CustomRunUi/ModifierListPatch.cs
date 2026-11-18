@@ -40,6 +40,7 @@ public static class ModifierListPatch
 			ModelDb.Modifier<SpoonConductor>().ToMutable(),
 			ModelDb.Modifier<SpoonUselessRelics>().ToMutable(),
 			ModelDb.Modifier<SpoonCursedDeck>().ToMutable(),
+			ModelDb.Modifier<SpoonAchillesHeelMode>().ToMutable(),
 			ModelDb.Modifier<SpoonAct4>().ToMutable(),
 		};
 		__result = __result.Concat(ours);

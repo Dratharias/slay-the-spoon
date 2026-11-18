@@ -82,5 +82,8 @@
   "SPOON_CONDUCTOR.short": "Cond.",
   "SPOON_USELESS_RELICS.title": "Useless Relics",
   "SPOON_USELESS_RELICS.description": "In combat, click a relic that has done its job to throw it at an enemy for 10 damage. It comes back after the fight.",
-  "SPOON_USELESS_RELICS.short": "Useless"
+  "SPOON_USELESS_RELICS.short": "Useless",
+  "SPOON_ACHILLES_HEEL_MODE.title": "Achilles' Heel",
+  "SPOON_ACHILLES_HEEL_MODE.description": "Everyone starts with Achilles' Heel and three Block relics.",
+  "SPOON_ACHILLES_HEEL_MODE.short": "Heel"
 }

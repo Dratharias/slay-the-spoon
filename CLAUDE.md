@@ -493,3 +493,14 @@ Read `README.md` for the player view and the spec for every decision.
   (Parasite, Pride, transform patch), `src/Core/CurseRule.cs`, `data/curses/curses.json` (hand table, embedded),
   `tools/curse_table.py` (checks every curse has a row, writes `docs/review/cursed-curses.md`).
 - Build 0 warnings; 819 xUnit + 106 pytest pass. Not tested in game: `docs/testing/cursed-deck-checklist.md`.
+
+## 1.7.0 — Achilles' Heel (2026-11-18, branch `backlog-modes`)
+
+- **Achilles' Heel** (`SpoonAchillesHeelMode`, Custom Run only, spec `docs/superpowers/specs/2026-11-18-achilles-heel-design.md`):
+  every player starts with the Achilles' Heel relic (`SpoonAchillesHeel`, `src/Achilles/`, Event rarity) and the three common Block
+  relics (`AchillesRule.StartRelics`: Anchor, Oddly Smooth Stone, Gorget), taken out of every grab bag. The heel (`SpoonHeelPower`,
+  never removed, survives the owner's death in co-op) kills its holder on any unblocked attack hit (not Poison). Dexterity per act is
+  the 0-based act index, uncapped, so appended acts count (the Ending after the Spoon act gives 4). Attacks deal +1 per 5 Block
+  (`AchillesBlock`); card offers lean x2 toward Block cards. Numbers in `src/Core/AchillesRule.cs`. All modes combine.
+- Art is a placeholder: a Pixabay marble Hermes foot, since no Greek sandal was found (sources in `docs/backlog.md`).
+- Build 0 warnings; 839 xUnit + 106 pytest pass. Not tested in game: `docs/testing/achilles-heel-checklist.md`.

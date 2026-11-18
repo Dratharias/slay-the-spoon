@@ -46,7 +46,7 @@ public static class TopBarPercentPatch
 				});
 				break;
 			case SpoonCardSet or SpoonSpireSouvenirModifier or SpoonNeowBlessing or SpoonCampfireGift or SpoonStartingChest or SpoonBossRelics or SpoonFolieADeux
-				or SpoonRoiMidas or SpoonSpoon or SpoonForge or SpoonMutation or SpoonDeckOfTen or SpoonBlood or SpoonTrophies or SpoonForcedTrade or SpoonConductor or SpoonUselessRelics or SpoonCursedDeck or SpoonTestRun:
+				or SpoonRoiMidas or SpoonSpoon or SpoonForge or SpoonMutation or SpoonDeckOfTen or SpoonBlood or SpoonTrophies or SpoonForcedTrade or SpoonConductor or SpoonUselessRelics or SpoonCursedDeck or SpoonAchillesHeelMode or SpoonTestRun:
 				ReplaceIcon(__instance, new LocString("modifiers", Modifier(__instance).Id.Entry + ".short").GetFormattedText(), StsColors.cream);
 				break;
 			case SpoonMerchantLoans loans:
