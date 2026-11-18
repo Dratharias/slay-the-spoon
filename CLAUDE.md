@@ -479,3 +479,17 @@ Read `README.md` for the player view and the spec for every decision.
   the start; the first trim is the Sealed Deck keep grid, later trims the removal screen. New Standard exception: Neow's
   cursed option is Deck of 10 one time in 11 (`DeckOfTenNeowPatch`, the mod's own seed stream, vanilla draws untouched).
   801 xUnit + 99 pytest pass. Not tested in game.
+
+## 1.6.0 — Cursed Deck (2026-11-18, branch `backlog-modes`)
+
+- **Cursed Deck** (`SpoonCursedDeck`, Custom Run only, spec `docs/superpowers/specs/2026-11-18-cursed-deck-design.md`, plan
+  `docs/superpowers/plans/2026-11-18-cursed-deck.md`): every player starts with the Unholy Grimoire and a random curse; the
+  Grimoire makes curses playable (cost 1, 0 upgraded, one enemy target, Exhaust), then the curse's effect hits the chosen
+  enemy. Curses upgrade to +1 in the mode (Black Censer too), with nerfs for Normality+/Guilty+. Every non-Ancient "?" event
+  gets an "Embrace the curse" option (random curse for a cursed relic, 75 gold or a 25 % heal). Relic draws are cursed 2 in 3
+  from a pool of 11 (7 vanilla + Blood Pact, Pin Doll, Black Censer, Reliquary) until all are held; seeded own streams, vanilla
+  RNG untouched.
+- Files: `src/Curses/` (mode, playable and upgrade patches, event option, relic draw, relics), `src/Cards/Sts1/Curses/`
+  (Parasite, Pride, transform patch), `src/Core/CurseRule.cs`, `data/curses/curses.json` (hand table, embedded),
+  `tools/curse_table.py` (checks every curse has a row, writes `docs/review/cursed-curses.md`).
+- Build 0 warnings; 819 xUnit + 106 pytest pass. Not tested in game: `docs/testing/cursed-deck-checklist.md`.

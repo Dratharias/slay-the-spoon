@@ -530,6 +530,16 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
 ## Owner ideas (2026-11-18)
 
 - **Glass Cannon** (owner works the idea): halved max HP, damage ×1.5; could reuse the percent modifiers. Not designed yet.
+- **Curse deck mode** is built (1.6.0, `SpoonCursedDeck`, `src/Curses/`; spec `docs/superpowers/specs/2026-11-18-cursed-deck-design.md`,
+  checklist `docs/testing/cursed-deck-checklist.md`). Original idea text kept below for reference. Minors and design calls:
+  - Minor: local 0-cost modifiers (Corruption-style, `SetThisTurnOrUntilPlayed`) don't reduce a playable curse's cost. Kept.
+  - Design call (owner): card text doesn't show a curse's played enemy effect, only the Grimoire text does.
+  - Design call (owner): Embrace on shared combat events (e.g. Punch Off) lets a team vote skip the fight.
+  - Minor: a mid-event reload may re-add Embrace on a later page (the seen set isn't saved). Kept.
+  - Minor: a relic drawn but never obtained stays reserved until the floor changes. Kept.
+  - Minor: an upgraded Normality loses its multiplier if downgraded; curses are never downgraded. Kept.
+  - Minor: Parasite is charged even when Transform returns early on an ending. Kept.
+  - Minor: every playable curse shows the targeting arrow, also those with no played effect (one-line change in `PlayableCursePatch`).
 - **Curse deck mode** (idea, not designed): curses as a resource; cursed relics (Darkstone Periapt, Calling Bell,
   Distinguished Cape, Neow's Bones, Cursed Key, Slaver's Collar...) plus StS1 ports (Du-Vu Doll, Blue Candle) and custom
   relics. Open: does the player play the curses (Blue Candle) or endure them?
