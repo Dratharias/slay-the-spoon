@@ -1,6 +1,6 @@
+using System.Runtime.CompilerServices;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Models.Relics;
@@ -36,15 +36,19 @@ public static class CursedRelics
 
 	public static IReadOnlyList<RelicModel> Pool => Vanilla().Concat(Custom()).ToList();
 
-	/// <summary>Draws made on the current floor; not saved, so a reload replays the same rolls.</summary>
-	private static int _floor = -1;
-	private static int _draws;
-
-	private static int NextDraw(int floor)
+	/// <summary>
+	/// Per-run draw state, never saved: a reload replays the rolls, and can shift them only within the reloaded floor.
+	/// Draws are counted per bag key (player slot, -1 for the shared bag) so clients agree; relics drawn but not yet
+	/// obtained are reserved until the floor changes.
+	/// </summary>
+	private sealed class DrawState
 	{
-		if (floor != _floor) { _floor = floor; _draws = 0; }
-		return _draws++;
+		public int Floor = -1;
+		public readonly Dictionary<int, int> Draws = new();
+		public readonly Dictionary<int, HashSet<string>> Reserved = new();
 	}
+
+	private static readonly ConditionalWeakTable<IRunState, DrawState> States = new();
 
 	/// <summary>
 	/// The cursed draw: in a Cursed Deck run, 2 pulls in 3 (own seeded stream, vanilla RNG untouched) give a cursed relic
@@ -54,14 +58,34 @@ public static class CursedRelics
 	{
 		if (!SpoonCursedDeck.IsActive(run)) return null;
 		var concerned = run.Players.Where(p => ReferenceEquals(p.RelicGrabBag, bag)).ToList();
+		int key = concerned.Count == 1 ? run.GetPlayerSlotIndex(concerned[0]) : -1;
 		if (concerned.Count == 0 && ReferenceEquals(run.SharedRelicGrabBag, bag)) concerned = run.Players.ToList();
 		if (concerned.Count == 0) return null;
-		HashSet<string> held = concerned.SelectMany(p => p.Relics).Select(r => r.Id.Entry).ToHashSet();
-		Rng rng = new(run.Rng.Seed, CurseRule.RelicStream(run.TotalFloor, NextDraw(run.TotalFloor)));
+
+		DrawState state = States.GetOrCreateValue(run);
+		int floor = run.TotalFloor;
+		if (state.Floor != floor)
+		{
+			state.Floor = floor;
+			state.Draws.Clear();
+			state.Reserved.Clear();
+		}
+		int draw = state.Draws.GetValueOrDefault(key);
+		state.Draws[key] = draw + 1;
+
+		HashSet<string> excluded = concerned.SelectMany(p => p.Relics).Select(r => r.Id.Entry).ToHashSet();
+		foreach (var (k, ids) in state.Reserved)
+		{
+			if (key == -1 || k == key || k == -1) excluded.UnionWith(ids);
+		}
+		Rng rng = new(run.Rng.Seed, CurseRule.RelicStream(floor, key, draw));
 		if (!CurseRule.CursedRelicRoll(rng.NextInt(int.MaxValue))) return null;
-		List<RelicModel> left = Pool.Where(r => !held.Contains(r.Id.Entry) && r.IsAllowed(run) && filter(r)).ToList();
+		List<RelicModel> left = Pool.Where(r => !excluded.Contains(r.Id.Entry) && r.IsAllowed(run) && filter(r)).ToList();
 		string? id = CurseRule.PickCursedRelic(left.Select(r => r.Id.Entry).ToList(), new HashSet<string>(), rng.NextInt(int.MaxValue));
-		return id == null ? null : left.First(r => r.Id.Entry == id);
+		if (id == null) return null;
+		if (!state.Reserved.TryGetValue(key, out var set)) state.Reserved[key] = set = new HashSet<string>();
+		set.Add(id);
+		return left.First(r => r.Id.Entry == id);
 	}
 }
 

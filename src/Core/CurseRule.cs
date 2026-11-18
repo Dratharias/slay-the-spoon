@@ -28,7 +28,10 @@ public static class CurseRule
 	/// <summary>Reliquary: gold per curse in the deck after each combat.</summary>
 	public const int ReliquaryGoldPerCurse = 3;
 
-	public static int PinDollStrength(int curses) => Math.Max(0, curses) / PinDollCursesPerStrength;
+	/// <summary>Pin Doll: Strength per full group of curses.</summary>
+	public const int PinDollStrengthPerGroup = 1;
+
+	public static int PinDollStrength(int curses) => Math.Max(0, curses) / PinDollCursesPerStrength * PinDollStrengthPerGroup;
 
 	public static int ReliquaryGold(int curses) => Math.Max(0, curses) * ReliquaryGoldPerCurse;
 
@@ -124,7 +127,10 @@ public static class CurseRule
 	/// <summary>The heal reward: 25 % of max HP, rounded down, at least 1.</summary>
 	public static int EventHeal(int maxHp) => Math.Max(1, maxHp * EventHealPercent / 100);
 
-	public static string RelicStream(int floor, int draw) => $"cursed_deck_relic_{floor}_{draw}";
+	/// <summary>Stream of one cursed relic draw; bagKey is the owner's player slot, or -1 for the shared bag.</summary>
+	public static string RelicStream(int floor, int bagKey, int draw) => $"cursed_deck_relic_{floor}_{bagKey}_{draw}";
+
+	public static string RelicStream(int floor, int draw) => RelicStream(floor, -1, draw);
 	public static string EventStream(int floor, int slot) => $"cursed_deck_event_{floor}_{slot}";
 	public static string StartStream(int slot) => $"cursed_deck_start_{slot}";
 }

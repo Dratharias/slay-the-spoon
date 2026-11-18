@@ -1,4 +1,3 @@
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -7,7 +6,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.ValueProps;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Curses;
@@ -22,7 +20,7 @@ public sealed class SpoonPinDoll : RelicModel
 	protected override string PackedIconOutlinePath => ArtRoot + "_outline.png";
 	protected override string BigIconPath => ArtRoot + "_large.png";
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new DynamicVar("Curses", CurseRule.PinDollCursesPerStrength), new PowerVar<StrengthPower>(1m) };
+	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new DynamicVar("Curses", CurseRule.PinDollCursesPerStrength), new PowerVar<StrengthPower>(CurseRule.PinDollStrengthPerGroup) };
 
 	public override async Task AfterRoomEntered(AbstractRoom room)
 	{

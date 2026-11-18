@@ -152,4 +152,12 @@ public class CurseRuleTests
 		Assert.Equal(15, CurseRule.ReliquaryGold(5));
 		Assert.Equal(4, CurseRule.BloodPactBlock);
 	}
+
+	[Fact]
+	public void RelicStreamDiffersPerBagKey()
+	{
+		Assert.NotEqual(CurseRule.RelicStream(5, 0, 0), CurseRule.RelicStream(5, 1, 0));
+		Assert.NotEqual(CurseRule.RelicStream(5, 0, 0), CurseRule.RelicStream(5, -1, 0));
+		Assert.NotEqual(CurseRule.RelicStream(5, 0, 0), CurseRule.RelicStream(5, 0, 1));
+	}
 }
