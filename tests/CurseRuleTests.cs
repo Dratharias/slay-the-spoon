@@ -94,4 +94,33 @@ public class CurseRuleTests
 		Assert.Equal(new[] { 3, 4 }, t["NORMALITY"].Self);
 		Assert.Equal(new[] { 5, 3 }, t["GUILTY"].Self);
 	}
+
+	[Fact]
+	public void PlayCostFollowsVanillaPlayability()
+	{
+		var t = Table();
+		Assert.Equal(1, CurseRule.PlayedCost(t["BAD_LUCK"], -1, false, -1));
+		Assert.Equal(0, CurseRule.PlayedCost(t["BAD_LUCK"], -1, true, -1));
+		Assert.Equal(1, CurseRule.PlayedCost(t["STS1_NECRONOMICURSE"], -1, true, -1));
+		Assert.Null(CurseRule.PlayedCost(t["ENTHRALLED"], 2, false, 2));
+		Assert.Equal(0, CurseRule.PlayedCost(t["ENTHRALLED"], 2, true, 2));
+		Assert.Equal(0, CurseRule.PlayedCost(t["STS1_PRIDE"], 1, true, 1));
+		Assert.Equal(1, CurseRule.PlayedCost(null, -1, false, -1));
+	}
+
+	[Fact]
+	public void PlayedAmountPerKind()
+	{
+		var t = Table();
+		Assert.Equal(13, CurseRule.PlayedAmount(t["BAD_LUCK"], false, 7, 4));
+		Assert.Equal(20, CurseRule.PlayedAmount(t["BAD_LUCK"], true, 7, 4));
+		Assert.Equal(4, CurseRule.PlayedAmount(t["REGRET"], false, 4, 9));
+		Assert.Equal(8, CurseRule.PlayedAmount(t["REGRET"], true, 4, 9));
+		Assert.Equal(0, CurseRule.PlayedAmount(t["REGRET"], false, 0, 9));
+		Assert.Equal(3, CurseRule.PlayedAmount(t["STS1_PAIN"], false, 9, 3));
+		Assert.Equal(6, CurseRule.PlayedAmount(t["STS1_PAIN"], true, 9, 3));
+		Assert.Equal(0, CurseRule.PlayedAmount(t["CLUMSY"], true, 5, 5));
+		Assert.Equal(15, CurseRule.PlayedAmount(t["DEBT"], true, 0, 0));
+		Assert.Equal(5, CurseRule.PlayedAmount(t["STS1_PARASITE"], true, 0, 0));
+	}
 }

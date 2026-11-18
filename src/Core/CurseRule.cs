@@ -58,6 +58,30 @@ public static class CurseRule
 
 	public static bool IsPlayable(bool modeActive, bool holdsGrimoire) => modeActive && holdsGrimoire;
 
+	/// <summary>
+	/// Energy cost shown and paid for a playable curse, or null to keep the vanilla value. A vanilla-unplayable curse
+	/// (canonical −1) costs <see cref="CostFor"/>; an already-playable one (Enthralled, Spore Mind, Pride) keeps its
+	/// vanilla cost, modifiers included, until upgraded, then shifts by the row's upgraded cost.
+	/// </summary>
+	public static int? PlayedCost(CurseRow? row, int canonical, bool upgraded, int vanillaWithModifiers)
+	{
+		if (canonical < 0) return CostFor(row, canonical, upgraded);
+		if (!upgraded) return null;
+		return Math.Max(0, vanillaWithModifiers + CostFor(row, canonical, true) - canonical);
+	}
+
+	/// <summary>
+	/// The amount of the row's played effect on the chosen enemy: per card left in the hand (Regret, counted after the
+	/// curse left it), per card played this turn (Pain, itself included), flat otherwise; 0 for "None".
+	/// </summary>
+	public static int PlayedAmount(CurseRow row, bool upgraded, int handCards, int cardsPlayedThisTurn) => row.Played switch
+	{
+		"None" => 0,
+		"HpLossPerHandCard" => EnemyAmount(row, upgraded) * Math.Max(0, handCards),
+		"HpLossPerCardPlayed" => EnemyAmount(row, upgraded) * Math.Max(0, cardsPlayedThisTurn),
+		_ => EnemyAmount(row, upgraded),
+	};
+
 	/// <summary>2 rolls in 3 give a cursed relic.</summary>
 	public static bool CursedRelicRoll(int roll) => roll % 3 != 0;
 
