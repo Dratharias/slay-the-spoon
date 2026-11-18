@@ -76,5 +76,8 @@
   "SPOON_CONDUCTOR.reward": "{Name}'s reward: {Reward}",
   "SPOON_CONDUCTOR.title": "Conductor",
   "SPOON_CONDUCTOR.description": "Co-op: after each victory, one player decides who gets each reward.",
-  "SPOON_CONDUCTOR.short": "Cond."
+  "SPOON_CONDUCTOR.short": "Cond.",
+  "SPOON_USELESS_RELICS.title": "Useless Relics",
+  "SPOON_USELESS_RELICS.description": "In combat, click a relic that has done its job to throw it at an enemy for 10 damage. It comes back after the fight.",
+  "SPOON_USELESS_RELICS.short": "Useless"
 }

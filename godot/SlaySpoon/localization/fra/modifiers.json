@@ -76,5 +76,8 @@
   "SPOON_CONDUCTOR.reward": "Récompense de {Name} : {Reward}",
   "SPOON_CONDUCTOR.title": "Chef d’orchestre",
   "SPOON_CONDUCTOR.description": "Coop : après chaque victoire, un joueur décide qui reçoit chaque récompense.",
-  "SPOON_CONDUCTOR.short": "Chef"
+  "SPOON_CONDUCTOR.short": "Chef",
+  "SPOON_USELESS_RELICS.title": "Reliques inutiles",
+  "SPOON_USELESS_RELICS.description": "En combat, cliquez sur une relique qui a fait son effet pour la lancer sur un ennemi : 10 dégâts. Elle revient après le combat.",
+  "SPOON_USELESS_RELICS.short": "Inutiles"
 }
