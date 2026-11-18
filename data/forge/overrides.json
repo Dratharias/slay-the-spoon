@@ -3,7 +3,7 @@
   "STS1_LIMIT_BREAK": {
     "cap": 5,
     "perLevel": { "StrengthPower": 1 },
-    "note": "gains 1 Strength per level past +1 before doubling (+5: gain 4, then double)"
+    "note": "gains 1 Strength per level past +1 before doubling (+9: gain 8, then double)"
   },
   "DEMON_FORM": { "cap": 5, "note": "Strength every turn; +5 already wins long fights" },
   "STS1_DEUS_EX_MACHINA": { "cap": 5, "note": "Miracles drawn: energy" },

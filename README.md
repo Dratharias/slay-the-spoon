@@ -118,8 +118,9 @@ broken Maw Bank can be reopened there. Not with Matriochka. Not tested in game: 
 
 **The Forge** (Custom Run): two copies of a card fuse at a rest site's new Fuse option, past +1 and up to +9. Levels
 add up, plus one: Strike+1 fused with Strike+1 gives Strike+3. Each level repeats the card's +1 numbers; its cost and
-keywords stay as at +1. Cards that would break the game stop earlier (energy and extra plays at +3, draw at +5; the table
-is `docs/review/forge-curves.md`), and Limit Break gains 1 Strength per level past +1 before doubling. A StS1 card fuses
+keywords stay as at +1. Numbers that would break the game stop growing earlier (energy and extra plays at +3, draw at +5;
+the table is `docs/review/forge-curves.md`), while the card's other numbers keep going. Every card gains Retain at +6,
+costs 1 less at +7 and becomes Innate at +9. Limit Break gains 1 Strength per level past +1 before doubling. A StS1 card fuses
 with its StS2 namesake and you pick which one comes out. Ordinary upgrades still stop at +1. Once per visit, the merchant
 sells a +0 copy of a deck card: 25 / 50 / 75 gold by rarity (+25 from Ascension 6), +25 per earlier purchase.
 Not tested in game: `docs/testing/forge-checklist.md`.

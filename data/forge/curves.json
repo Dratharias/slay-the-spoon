@@ -26,7 +26,11 @@
   },
   "BEAT_INTO_SHAPE": {
     "cap": 5,
-    "note": "auto: scaling multiplier (CalculationExtra)"
+    "note": "auto: scaling multiplier (CalculationExtra)",
+    "beyond": [
+      "CalculationBase",
+      "Damage"
+    ]
   },
   "BELIEVE_IN_YOU": {
     "cap": 3,
@@ -86,7 +90,10 @@
   },
   "CAPTURE_SPIRIT": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "CATASTROPHE": {
     "cap": 5,
@@ -102,7 +109,10 @@
   },
   "CLAW": {
     "cap": 5,
-    "note": "auto: growth per play (Increase)"
+    "note": "auto: growth per play (Increase)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "CLEANSE": {
     "cap": 5,
@@ -138,11 +148,17 @@
   },
   "DELAY": {
     "cap": 3,
-    "note": "auto: energy (Energy)"
+    "note": "auto: energy (Energy)",
+    "beyond": [
+      "Block"
+    ]
   },
   "DEMON_FORM": {
     "cap": 5,
-    "note": "Strength every turn; +5 already wins long fights"
+    "note": "Strength every turn; +5 already wins long fights",
+    "beyond": [
+      "StrengthPower"
+    ]
   },
   "DIRGE": {
     "cap": 5,
@@ -150,7 +166,10 @@
   },
   "DRAIN_POWER": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "DRUM_OF_BATTLE": {
     "cap": 3,
@@ -166,7 +185,10 @@
   },
   "EXPECT_A_FIGHT": {
     "cap": 5,
-    "note": "auto: scaling multiplier (CalculationExtra)"
+    "note": "auto: scaling multiplier (CalculationExtra)",
+    "beyond": [
+      "CalculationBase"
+    ]
   },
   "EXPERTISE": {
     "cap": 5,
@@ -178,11 +200,17 @@
   },
   "FEED": {
     "cap": 3,
-    "note": "auto: economy (MaxHp)"
+    "note": "auto: economy (MaxHp)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "FOCUSED_STRIKE": {
     "cap": 5,
-    "note": "auto: Focus (FocusPower)"
+    "note": "auto: Focus (FocusPower)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "FOREGONE_CONCLUSION": {
     "cap": 5,
@@ -194,7 +222,10 @@
   },
   "FTL": {
     "cap": 3,
-    "note": "auto: extra hits or plays (PlayMax)"
+    "note": "auto: extra hits or plays (PlayMax)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "FUEL": {
     "cap": 3,
@@ -222,15 +253,24 @@
   },
   "GUIDING_STAR": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "HAND_OF_GREED": {
     "cap": 3,
-    "note": "auto: economy (Gold)"
+    "note": "auto: economy (Gold)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "HEGEMONY": {
     "cap": 3,
-    "note": "auto: energy (Energy)"
+    "note": "auto: energy (Energy)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "HIBERNATE": {
     "cap": 3,
@@ -262,7 +302,10 @@
   },
   "KINGLY_PUNCH": {
     "cap": 5,
-    "note": "auto: growth per play (Increase)"
+    "note": "auto: growth per play (Increase)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "LEGION_OF_BONE": {
     "cap": 5,
@@ -282,7 +325,10 @@
   },
   "MAUL": {
     "cap": 5,
-    "note": "auto: growth per play (Increase)"
+    "note": "auto: growth per play (Increase)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "METAMORPHOSIS": {
     "cap": 5,
@@ -298,7 +344,10 @@
   },
   "NEOWS_FURY": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "NEUROSURGE": {
     "cap": 3,
@@ -338,7 +387,10 @@
   },
   "PHOTON_CUT": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "PLOT": {
     "cap": 5,
@@ -346,7 +398,10 @@
   },
   "POMMEL_STRIKE": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "PREPARED": {
     "cap": 5,
@@ -362,7 +417,10 @@
   },
   "PULL_AGGRO": {
     "cap": 5,
-    "note": "auto: summons (Summon)"
+    "note": "auto: summons (Summon)",
+    "beyond": [
+      "Block"
+    ]
   },
   "PURITY": {
     "cap": 5,
@@ -390,7 +448,10 @@
   },
   "RELAX": {
     "cap": 3,
-    "note": "auto: energy (Energy)"
+    "note": "auto: energy (Energy)",
+    "beyond": [
+      "Block"
+    ]
   },
   "RESTLESSNESS": {
     "cap": 3,
@@ -402,7 +463,10 @@
   },
   "ROCKET_PUNCH": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "ROYALTIES": {
     "cap": 3,
@@ -414,11 +478,17 @@
   },
   "SCOURGE": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Doom"
+    ]
   },
   "SCRAPE": {
     "cap": 5,
-    "note": "auto: draw or card count (Cards)"
+    "note": "auto: draw or card count (Cards)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "SIDESTEP": {
     "cap": 3,
@@ -430,7 +500,10 @@
   },
   "SOLAR_STRIKE": {
     "cap": 3,
-    "note": "auto: stars (Stars)"
+    "note": "auto: stars (Stars)",
+    "beyond": [
+      "Damage"
+    ]
   },
   "SOUL": {
     "cap": 5,
@@ -470,11 +543,17 @@
   },
   "STS1_DEUS_EX_MACHINA": {
     "cap": 5,
-    "note": "Miracles drawn: energy"
+    "note": "Miracles drawn: energy",
+    "beyond": [
+      "Magic"
+    ]
   },
   "STS1_DEVOTION": {
     "cap": 5,
-    "note": "Mantra each turn; +5 enters Divinity every other turn"
+    "note": "Mantra each turn; +5 enters Divinity every other turn",
+    "beyond": [
+      "Magic"
+    ]
   },
   "STS1_DOUBLE_TAP": {
     "cap": 5,
@@ -490,7 +569,10 @@
   },
   "STS1_FASTING": {
     "cap": 5,
-    "note": "Strength and Dexterity at once"
+    "note": "Strength and Dexterity at once",
+    "beyond": [
+      "Magic"
+    ]
   },
   "STS1_HEATSINKS": {
     "cap": 5,
@@ -513,7 +595,10 @@
     "perLevel": {
       "StrengthPower": 1
     },
-    "note": "gains 1 Strength per level past +1 before doubling (+5: gain 4, then double)"
+    "note": "gains 1 Strength per level past +1 before doubling (+9: gain 8, then double)",
+    "beyond": [
+      "StrengthPower"
+    ]
   },
   "STS1_METAMORPHOSIS": {
     "cap": 5,
@@ -537,7 +622,11 @@
   },
   "STS1_RAGNAROK": {
     "cap": 3,
-    "note": "hit count"
+    "note": "hit count",
+    "beyond": [
+      "Damage",
+      "Magic"
+    ]
   },
   "STS1_REFLEX": {
     "cap": 5,
@@ -545,7 +634,11 @@
   },
   "STS1_REPROGRAM": {
     "cap": 5,
-    "note": "auto: Focus (FocusPower)"
+    "note": "auto: Focus (FocusPower)",
+    "beyond": [
+      "DexterityPower",
+      "StrengthPower"
+    ]
   },
   "STS1_SEEK": {
     "cap": 5,
@@ -553,7 +646,10 @@
   },
   "STS1_SENTINEL": {
     "cap": 3,
-    "note": "auto: energy (Energy)"
+    "note": "auto: energy (Energy)",
+    "beyond": [
+      "Block"
+    ]
   },
   "STS1_STATIC_DISCHARGE": {
     "cap": 5,
@@ -573,7 +669,11 @@
   },
   "STS1_WISH": {
     "cap": 3,
-    "note": "auto: economy (Gold)"
+    "note": "auto: economy (Gold)",
+    "beyond": [
+      "PlatedArmor",
+      "Strength"
+    ]
   },
   "SUPERCRITICAL": {
     "cap": 3,

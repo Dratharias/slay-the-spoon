@@ -14,7 +14,9 @@ namespace SlaySpoon.Forge;
 /// Upgrade levels past +1 (spec "Upgrade levels"). Only cards that keep <see cref="CardModel"/>'s own
 /// <c>MaxUpgradeLevel</c> are touched: curses (0) and StS1 Searing Blow (99) keep theirs.
 /// <list type="bullet">
-/// <item>In a Forge run, the max is the card's cap (<see cref="Cap"/>); ordinary upgrades still stop at +1 (<see cref="Gate"/>).</item>
+/// <item>In a Forge run, every fusable card's max is +9 (<see cref="Limit"/>); ordinary upgrades still stop at +1 (<see cref="Gate"/>).</item>
+/// <item>Up to its growth cap (<see cref="Cap"/>) a card grows fully; past it only the row's <c>beyond</c> vars grow, and the
+/// ladder adds Retain at +6, cost −1 at +7 and Innate at +9 (<see cref="ForgeRule.BonusAt"/>).</item>
 /// <item>A saved or received card above +1 always loads, whatever the run state: the level itself proves a Forge run.</item>
 /// <item>Each level past +1 replays the card's <c>OnUpgrade</c> but keeps its cost, star cost and keywords, so only the
 /// var deltas repeat; a table row can replace the deltas or lower the cost per level.</item>
@@ -73,7 +75,10 @@ public static class ForgeLevels
 
 	public static bool InForgeRun(CardModel card) => SpoonForge.IsActive(OwnerRef(card)?.RunState ?? CurrentRun);
 
-	/// <summary>The highest level fusion can reach: the table's cap, a cost-only card's cost cap, 1 when +1 changes no number, else 9.</summary>
+	/// <summary>The highest level fusion can reach: +9 for fusable cards, else +1.</summary>
+	public static int Limit(CardModel card) => Fusable(card) ? ForgeRule.MaxLevel : 1;
+
+	/// <summary>The growth cap: the table's cap, a cost-only card's cost cap, 1 when +1 changes no number, else 9.</summary>
 	public static int Cap(CardModel card)
 	{
 		var row = ForgeCurves.For(card.Id.Entry);
@@ -87,7 +92,7 @@ public static class ForgeLevels
 	}
 
 	public static bool Fusable(CardModel card) => UsesBaseMax(card) && card.Type is not (CardType.Curse or CardType.Status)
-		&& Cap(card) > 0;
+		&& ForgeCurves.For(card.Id.Entry) is not { Fusable: false };
 
 	private static Probe ProbeOf(CardModel card)
 	{
@@ -145,7 +150,7 @@ public static class ForgeLevels
 			// The base getter only runs for classes that do not override it.
 			if (__result != 1 || _probing) return;
 			if (_openScopes > 0) __result = ForgeRule.MaxLevel;
-			else if (InForgeRun(__instance)) __result = Math.Max(Cap(__instance), __instance.CurrentUpgradeLevel);
+			else if (InForgeRun(__instance)) __result = Math.Max(Limit(__instance), __instance.CurrentUpgradeLevel);
 		}
 	}
 
@@ -183,8 +188,10 @@ public static class ForgeLevels
 			var card = __instance;
 			if (card.CurrentUpgradeLevel < 1 || !UsesBaseMax(card)) return true;
 
-			LevelSetter.Invoke(card, [card.CurrentUpgradeLevel + 1]);
+			int level = card.CurrentUpgradeLevel + 1;
+			LevelSetter.Invoke(card, [level]);
 			var row = ForgeCurves.For(card.Id.Entry);
+			bool pastCap = level > Cap(card);
 			var vars = card.DynamicVars.Values.ToDictionary(v => v.Name, v => v.BaseValue);
 			int cost = CostBaseRef(card.EnergyCost);
 			bool costsX = card.EnergyCost.CostsX;
@@ -200,6 +207,13 @@ public static class ForgeLevels
 				foreach (var (name, delta) in perLevel)
 					if (card.DynamicVars.TryGetValue(name, out var v)) v.UpgradeValueBy(delta);
 			}
+			if (pastCap)
+			{
+				// Past the growth cap only the safe vars keep growing.
+				var keep = row?.Beyond ?? [];
+				foreach (var v in card.DynamicVars.Values)
+					if (!keep.Contains(v.Name) && vars.TryGetValue(v.Name, out var b)) v.BaseValue = b;
+			}
 			StarCostRef(card) = stars;
 			var now = Local(card);
 			foreach (var k in now.Where(k => !keywords.Contains(k))) card.RemoveKeyword(k);
@@ -209,14 +223,19 @@ public static class ForgeLevels
 				// Cost-only cards keep lowering their cost (their cap stops at 0); every other card keeps its +1 cost.
 				var probe = ProbeOf(card);
 				bool costOnly = row?.PerLevel is not { Count: > 0 } && !probe.VarsChange && probe.CostDelta < 0;
-				int next = row is { CostPerLevel: < 0 } ? Math.Max(cost + row.CostPerLevel, 0)
+				int next = pastCap ? cost
+					: row is { CostPerLevel: < 0 } ? Math.Max(cost + row.CostPerLevel, 0)
 					: costOnly ? Math.Max(CostBaseRef(card.EnergyCost), 0) : cost;
+				if (ForgeRule.BonusAt(level) == ForgeBonus.CostDown) next = Math.Max(next - 1, 0);
 				if (CostBaseRef(card.EnergyCost) != next)
 				{
 					if (next < cost) card.EnergyCost.UpgradeBy(next - CostBaseRef(card.EnergyCost));
 					else card.EnergyCost.SetCustomBaseCost(next);
 				}
 			}
+			var bonus = ForgeRule.BonusAt(level);
+			if (bonus == ForgeBonus.Retain && !card.Keywords.Contains(CardKeyword.Retain)) card.AddKeyword(CardKeyword.Retain);
+			if (bonus == ForgeBonus.Innate && !card.Keywords.Contains(CardKeyword.Innate)) card.AddKeyword(CardKeyword.Innate);
 			card.DynamicVars.RecalculateForUpgradeOrEnchant();
 			UpgradedRef(card)?.Invoke();
 			return false;

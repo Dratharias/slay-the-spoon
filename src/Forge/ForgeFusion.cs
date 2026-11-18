@@ -49,7 +49,7 @@ public static class ForgeFusion
 	private static bool CanBecome(CardModel kept, CardModel version)
 	{
 		var canonical = Canonical(version);
-		return ForgeLevels.Fusable(canonical) && ForgeRule.CanFuseInto(kept.CurrentUpgradeLevel, ForgeLevels.Cap(canonical), fusable: true);
+		return ForgeLevels.Fusable(canonical) && ForgeRule.CanFuseInto(kept.CurrentUpgradeLevel, ForgeLevels.Limit(canonical), fusable: true);
 	}
 
 	/// <summary>The versions the result can take: the kept card's own, then the copy's when it is the other version.</summary>
@@ -72,7 +72,7 @@ public static class ForgeFusion
 	}
 
 	public static int ResultLevel(CardModel kept, CardModel sacrificed, CardModel version) =>
-		ForgeRule.FusedLevel(kept.CurrentUpgradeLevel, sacrificed.CurrentUpgradeLevel, ForgeLevels.Cap(Canonical(version)));
+		ForgeRule.FusedLevel(kept.CurrentUpgradeLevel, sacrificed.CurrentUpgradeLevel, ForgeLevels.Limit(Canonical(version)));
 
 	/// <summary>
 	/// A new card of <paramref name="version"/> at the result level, carrying the kept card's enchantment when it can.

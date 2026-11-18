@@ -12,15 +12,27 @@ public enum ForgeRarity
 
 /// <summary>
 /// One row of <c>data/forge/curves.json</c>: how a card behaves past +1.
-/// <see cref="PerLevel"/> replaces the replayed +1 var deltas; <see cref="CostPerLevel"/> lowers the cost at each level past
-/// +1 (floor 0). Mod cards with code-level per-level behavior read their own level and note it here.
+/// <see cref="Cap"/> is the growth cap: up to it, each level replays the +1 var deltas (or <see cref="PerLevel"/>) and
+/// lowers the cost by <see cref="CostPerLevel"/> (floor 0). Past it, fusion still goes to +9, but only the vars in
+/// <see cref="Beyond"/> keep growing, and the <see cref="ForgeBonus"/> ladder applies.
 /// </summary>
 public sealed record ForgeCurve(
 	int? Cap,
 	bool Fusable,
 	IReadOnlyDictionary<string, decimal>? PerLevel,
 	int CostPerLevel,
-	string? Note);
+	string? Note,
+	IReadOnlyList<string>? Beyond = null);
+
+/// <summary>The fixed bonuses every fusable card gets at high levels (owner, 2026-11-18).</summary>
+[Flags]
+public enum ForgeBonus
+{
+	None = 0,
+	Retain = 1,
+	CostDown = 2,
+	Innate = 4,
+}
 
 /// <summary>The Forge (spec docs/superpowers/specs/2026-11-18-forge-design.md): fusion levels, caps and prices.</summary>
 public static class ForgeRule
@@ -28,6 +40,27 @@ public static class ForgeRule
 	public const int MaxLevel = 9;
 
 	public const int DuplicateIncrease = 25;
+
+	public const int RetainLevel = 6;
+	public const int CostDownLevel = 7;
+	public const int InnateLevel = 9;
+
+	/// <summary>The ladder bonus a card gains on reaching <paramref name="level"/>: Retain at +6, cost −1 at +7, Innate at +9.</summary>
+	public static ForgeBonus BonusAt(int level) => level switch
+	{
+		RetainLevel => ForgeBonus.Retain,
+		CostDownLevel => ForgeBonus.CostDown,
+		InnateLevel => ForgeBonus.Innate,
+		_ => ForgeBonus.None,
+	};
+
+	/// <summary>Every ladder bonus a card at <paramref name="level"/> holds.</summary>
+	public static ForgeBonus BonusesUpTo(int level)
+	{
+		var all = ForgeBonus.None;
+		for (int l = 2; l <= Math.Min(level, MaxLevel); l++) all |= BonusAt(l);
+		return all;
+	}
 
 	/// <summary>Levels add up: kept + sacrificed + 1, clamped to the cap.</summary>
 	public static int FusedLevel(int kept, int sacrificed, int cap) =>
@@ -90,7 +123,10 @@ public static class ForgeRule
 			int cost = e.TryGetProperty("costPerLevel", out var cp) ? cp.GetInt32() : 0;
 			if (cost > 0) throw new FormatException($"{row.Name}: costPerLevel must not raise the cost");
 			string? note = e.TryGetProperty("note", out var n) ? n.GetString() : null;
-			result[row.Name] = new ForgeCurve(cap, fusable, perLevel, cost, note);
+			List<string>? beyond = null;
+			if (e.TryGetProperty("beyond", out var b))
+				beyond = b.EnumerateArray().Select(v => v.GetString() ?? "").Where(v => v.Length > 0).ToList();
+			result[row.Name] = new ForgeCurve(cap, fusable, perLevel, cost, note, beyond);
 		}
 		return result;
 	}

@@ -50,3 +50,11 @@ def test_committed_table_follows_the_parser_rules():
         assert row.get("costPerLevel", 0) <= 0, key
     limit = table["STS1_LIMIT_BREAK"]
     assert limit["cap"] == 5 and limit["perLevel"] == {"StrengthPower": 1}
+    assert limit["beyond"] == ["StrengthPower"]
+
+
+def test_safe_vars_keep_growing_past_the_cap():
+    assert f.propose(["Cards", "Energy", "Damage"])["beyond"] == ["Damage"]
+    assert "beyond" not in f.propose(["Energy"])
+    rows = f.merge({}, {"X": {"cap": 5}}, {"X": ["Block", "Focus"]})
+    assert rows["X"]["beyond"] == ["Block"]

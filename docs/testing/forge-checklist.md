@@ -9,10 +9,14 @@ Spec: `docs/superpowers/specs/2026-11-18-forge-design.md`. Tick only what was se
 - [ ] The Fuse option uses the Smith icon; it is disabled with the explanation when no pair exists.
 - [ ] Pick the kept card, then the copy (only valid copies offered); Escape at either step cancels and keeps the action.
 - [ ] Preview shows the result level; skipping it cancels without spending the rest action.
-- [ ] Strike + Strike = Strike+1; Strike+1 + Strike+1 = Strike+3; the result never passes the card's cap.
+- [ ] Strike + Strike = Strike+1; Strike+1 + Strike+1 = Strike+3; the result never passes +9.
 - [ ] Damage/Block repeat the +1 delta per level; cost and keywords stay as at +1.
 - [ ] A cost-only card (e.g. Barricade-like) lowers its cost each level and stops at 0.
-- [ ] A card capped at 3 (e.g. Adrenaline) refuses fusion at +3; one at 1 (only keywords change at +1) never fuses.
+- [ ] A card capped at 3 (e.g. Adrenaline) still fuses past +3, but its energy and draw stop growing; Battle Trance's
+      draw stops at +5 while a capped card's damage or Block keeps growing.
+- [ ] Ladder: Retain at +6, cost 1 lower at +7 (never below 0), Innate at +9; a card whose +1 only adds a keyword fuses
+      too and only gains the ladder.
+- [ ] Limit Break+9: gains 8 Strength, then doubles.
 - [ ] StS1 card + its StS2 namesake: the preview offers both versions; the chosen one replaces the kept card in place.
 - [ ] The kept card's enchantment carries over to the other version when it can.
 - [ ] Smith, Armaments, Apotheosis and other ordinary upgrades never take a card past +1.

@@ -89,4 +89,28 @@ public class ForgeRuleTests
 		Assert.Equal(5, rows["STS1_LIMIT_BREAK"].Cap);
 		Assert.Equal(1m, rows["STS1_LIMIT_BREAK"].PerLevel!["StrengthPower"]);
 	}
+
+	[Theory]
+	[InlineData(5, ForgeBonus.None)]
+	[InlineData(6, ForgeBonus.Retain)]
+	[InlineData(7, ForgeBonus.CostDown)]
+	[InlineData(8, ForgeBonus.None)]
+	[InlineData(9, ForgeBonus.Innate)]
+	public void LadderBonusPerLevel(int level, ForgeBonus bonus) => Assert.Equal(bonus, ForgeRule.BonusAt(level));
+
+	[Fact]
+	public void LadderAccumulates()
+	{
+		Assert.Equal(ForgeBonus.None, ForgeRule.BonusesUpTo(5));
+		Assert.Equal(ForgeBonus.Retain | ForgeBonus.CostDown, ForgeRule.BonusesUpTo(8));
+		Assert.Equal(ForgeBonus.Retain | ForgeBonus.CostDown | ForgeBonus.Innate, ForgeRule.BonusesUpTo(9));
+	}
+
+	[Fact]
+	public void ParsesBeyond()
+	{
+		var rows = ForgeRule.ParseCurves("""{ "A": { "cap": 3, "beyond": ["Damage"] }, "B": { "cap": 5 } }""");
+		Assert.Equal(new[] { "Damage" }, rows["A"].Beyond);
+		Assert.Null(rows["B"].Beyond);
+	}
 }
