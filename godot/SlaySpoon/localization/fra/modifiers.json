@@ -68,5 +68,8 @@
   "SPOON_BLOOD.short": "Sang",
   "SPOON_TROPHIES.title": "Trophées",
   "SPOON_TROPHIES.description": "Chaque élite vaincue donne une carte : une de ses attaques.",
-  "SPOON_TROPHIES.short": "Troph."
+  "SPOON_TROPHIES.short": "Troph.",
+  "SPOON_FORCED_TRADE.title": "Échange forcé",
+  "SPOON_FORCED_TRADE.description": "Coop : après chaque victoire, chacun donne une carte à un allié au hasard.",
+  "SPOON_FORCED_TRADE.short": "Éch."
 }

@@ -35,6 +35,7 @@ public static class ModifierListPatch
 			ModelDb.Modifier<SpoonDeckOfTen>().ToMutable(),
 			ModelDb.Modifier<SpoonBlood>().ToMutable(),
 			ModelDb.Modifier<SpoonTrophies>().ToMutable(),
+			ModelDb.Modifier<SpoonForcedTrade>().ToMutable(),
 			ModelDb.Modifier<SpoonAct4>().ToMutable(),
 		};
 		__result = __result.Concat(ours);

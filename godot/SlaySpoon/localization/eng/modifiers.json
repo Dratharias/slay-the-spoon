@@ -68,5 +68,8 @@
   "SPOON_BLOOD.short": "Blood",
   "SPOON_TROPHIES.title": "Trophies",
   "SPOON_TROPHIES.description": "Each elite you beat gives a card: one of its attacks.",
-  "SPOON_TROPHIES.short": "Troph."
+  "SPOON_TROPHIES.short": "Troph.",
+  "SPOON_FORCED_TRADE.title": "Forced Trade",
+  "SPOON_FORCED_TRADE.description": "Co-op: after each victory, everyone gives a card to a random ally.",
+  "SPOON_FORCED_TRADE.short": "Trade"
 }
