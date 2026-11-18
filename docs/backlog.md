@@ -527,6 +527,19 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   example Forced Trade with Folie à deux (both move cards between players after a fight). Each design pass lists the
   pairs that clash and decides: combine, order the effects, or make them mutually exclusive.
 
+## Owner ideas (2026-11-18)
+
+- **Glass Cannon** (owner works the idea): halved max HP, damage ×1.5; could reuse the percent modifiers. Not designed yet.
+- **Curse deck mode** (idea, not designed): curses as a resource; cursed relics (Darkstone Periapt, Calling Bell,
+  Distinguished Cape, Neow's Bones, Cursed Key, Slaver's Collar...) plus StS1 ports (Du-Vu Doll, Blue Candle) and custom
+  relics. Open: does the player play the curses (Blue Candle) or endure them?
+  - **Unholy Grimoire** (`SpoonUnholyGrimoire`, `src/Curses/`, owner 2026-11-18) is built: whenever one of the holder's
+    curses is exhausted, 5 damage to every enemy (`CurseRule.GrimoireDamage`). Event pool only, so nothing hands it
+    out yet: the curse mode will. Test it with the console (`relic add SPOON_UNHOLY_GRIMOIRE`). Not tested in game.
+    Art: Pixabay illustration "Ancient Book, Spell Book, Magic Book"
+    https://pixabay.com/illustrations/ancient-book-spell-book-magic-book-10064076/ (Pixabay Content License, no
+    attribution required), resized into `images/relics/spoon/`.
+
 ## Backlog modes (1.5.0, 2026-11-18)
 
 - Deck of 10 relic (1.5.1): Neow's cursed slot, 1 in 11, is a builder call (the owner chose "a Neow option"); also the

@@ -115,5 +115,8 @@
 	"SPOON_BLOOD_FANG.flavor": "« L’or rouille. Le sang garde. »",
 	"SPOON_DECK_OF_TEN_RELIC.title": "Deck de 10",
 	"SPOON_DECK_OF_TEN_RELIC.description": "Votre deck tient [blue]{Limit}[/blue] cartes. Chaque carte jetée donne [blue]{MaxHp}[/blue] PV max.",
-	"SPOON_DECK_OF_TEN_RELIC.flavor": "« Moins, c’est mieux. Dix, c’est assez. »"
+	"SPOON_DECK_OF_TEN_RELIC.flavor": "« Moins, c’est mieux. Dix, c’est assez. »",
+	"SPOON_UNHOLY_GRIMOIRE.title": "Grimoire profane",
+	"SPOON_UNHOLY_GRIMOIRE.description": "Chaque fois qu’une de vos [red]Malédictions[/red] est [gold]Épuisée[/gold], infligez [blue]{Damage}[/blue] dégâts à TOUS les ennemis.",
+	"SPOON_UNHOLY_GRIMOIRE.flavor": "« Chaque page a été écrite par quelqu’un qui l’a regretté. »"
 }
