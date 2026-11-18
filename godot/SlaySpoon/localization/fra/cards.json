@@ -307,7 +307,7 @@
 	"STS1_PANACEA.title": "Panacée",
 	"STS1_PANACHE.description": "Pour toutes les 5 cartes que vous jouez en un tour, infligez {Sts1PanachePower:diff()} dégâts à TOUS les ennemis.",
 	"STS1_PANACHE.title": "Panache",
-	"STS1_PARASITE.description": "Si la carte est retirée de votre deck, perdez [blue]{MaxHp}[/blue] PV max.",
+	"STS1_PARASITE.description": "Si la carte est transformée ou retirée de votre deck, perdez [blue]{MaxHp}[/blue] PV max.",
 	"STS1_PARASITE.title": "Parasite",
 	"STS1_PERSEVERANCE.description": "Gagnez {Block:diff()} d'[gold]Armure[/gold].\nLorsque cette carte est retenue, augmente son gain d'[gold]Armure[/gold] de {Magic:diff()} pour ce combat.",
 	"STS1_PERSEVERANCE.title": "Persévérance",
