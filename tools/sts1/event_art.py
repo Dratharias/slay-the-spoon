@@ -63,6 +63,8 @@ STS1_RELICS = {
 CURSES = {
     "curse/necronomicurse": "sts1_necronomicurse",
     "curse/pain": "sts1_pain",
+    "curse/parasite": "sts1_parasite",
+    "curse/pride": "sts1_pride",
 }
 CARD_SIZE = (250, 190)
 

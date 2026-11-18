@@ -26,10 +26,6 @@ def card_id(class_name: str) -> str:
     return re.sub(r"(?<=[A-Za-z0-9])(?=[A-Z])", "_", class_name).upper()
 
 
-# StS1 curses the mod has no class for yet; the Cursed Deck plan ports them.
-TO_PORT = ["STS1_PARASITE", "STS1_PRIDE"]
-
-
 def scan(directories) -> list[str]:
     """Ids of every class that builds a curse (CardType.Curse in its constructor's base call)."""
     found = set()
@@ -118,7 +114,7 @@ def main():
     parser.add_argument("--review", default="docs/review/cursed-curses.md")
     args = parser.parse_args()
     table = json.loads(Path(args.table).read_text(encoding="utf-8"))
-    errors = validate(table, sorted(set(scan([args.sts2, args.mod])) | set(TO_PORT)))
+    errors = validate(table, sorted(set(scan([args.sts2, args.mod]))))
     if errors:
         raise SystemExit("\n".join(errors))
     Path(args.review).write_text(review(table), encoding="utf-8")

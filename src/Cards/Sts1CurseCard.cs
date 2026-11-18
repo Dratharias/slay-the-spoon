@@ -8,7 +8,7 @@ namespace SlaySpoon.Cards;
 /// <summary>A StS1 curse handed out by a StS1 relic only; its hidden pool keeps it out of every random curse.</summary>
 public abstract class Sts1CurseCard : Sts1Card
 {
-	protected Sts1CurseCard() : base(-1, CardType.Curse, CardRarity.Curse, TargetType.None) { }
+	protected Sts1CurseCard(int cost = -1, TargetType target = TargetType.None) : base(cost, CardType.Curse, CardRarity.Curse, target) { }
 
 	public override CardPoolModel Pool => ModelDb.CardPool<Sts1CurseCardPool>();
 	public override CardPoolModel VisualCardPool => ModelDb.CardPool<CurseCardPool>();
