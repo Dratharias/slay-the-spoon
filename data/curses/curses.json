@@ -156,7 +156,7 @@
     "played": "MaxHpLoss",
     "amount": 3,
     "amountPlus": 5,
-    "note": "The parasite jumps: the enemy loses 3 max HP (and HP); upgraded, 5 on both sides (removing it costs you 5 max HP)"
+    "note": "The parasite jumps to the targeted monster: it loses 3 max HP (current HP only drops if above the new max); upgraded, 5 on both sides (removing it costs you 5 max HP)"
   },
   "STS1_PRIDE": {
     "keywords": "Innate, Exhaust; playable for 1 (StS1, to port)",
