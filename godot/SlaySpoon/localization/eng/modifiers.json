@@ -65,5 +65,8 @@
   "SPOON_DECK_OF_TEN.short": "10",
   "SPOON_BLOOD.title": "Blood",
   "SPOON_BLOOD.description": "No gold: you pay in HP. Start with Blood Fang.",
-  "SPOON_BLOOD.short": "Blood"
+  "SPOON_BLOOD.short": "Blood",
+  "SPOON_TROPHIES.title": "Trophies",
+  "SPOON_TROPHIES.description": "Each elite you beat gives a card: one of its attacks.",
+  "SPOON_TROPHIES.short": "Troph."
 }

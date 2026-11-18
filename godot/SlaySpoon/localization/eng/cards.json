@@ -500,5 +500,8 @@
   "SPOON_FORGE_BONUS.Block": "Block",
   "SPOON_FORGE_BONUS.Damage": "damage",
   "SPOON_FORGE_BONUS.Draw": "draw",
-  "SPOON_FORGE_BONUS.Energy": "Energy"
+  "SPOON_FORGE_BONUS.Energy": "Energy",
+	"SPOON_TROPHY_CARD.title": "Trophy",
+	"SPOON_TROPHY_CARD.description": "Deal {Damage:diff()} damage {Repeat:diff()} {Repeat:plural:time|times}.",
+	"SPOON_TROPHY_CARD.fallback": "Trophy"
 }

@@ -65,5 +65,8 @@
   "SPOON_DECK_OF_TEN.short": "10",
   "SPOON_BLOOD.title": "Sang",
   "SPOON_BLOOD.description": "Plus d’or : vous payez en PV. Vous commencez avec Croc de sang.",
-  "SPOON_BLOOD.short": "Sang"
+  "SPOON_BLOOD.short": "Sang",
+  "SPOON_TROPHIES.title": "Trophées",
+  "SPOON_TROPHIES.description": "Chaque élite vaincue donne une carte : une de ses attaques.",
+  "SPOON_TROPHIES.short": "Troph."
 }
