@@ -55,6 +55,9 @@ Curse table (owner page): `docs/review/cursed-curses.md`. Tick only what was see
 - [ ] Blood Pact: drawing a curse gives 4 Block. Pin Doll: +1 Strength per 3 curses at combat start.
       Black Censer: every curse that joins the deck is upgraded. Reliquary: 3 gold per curse at combat end.
 - [ ] Relic art and EN/FR text for the four custom relics.
+- [ ] A shop shows a cursed relic at a normal price (225 gold, give or take the usual variation) and it can be bought.
+- [ ] A rest-site Dig or an event relic (Trial, Ranwid...) is never cursed; only chests, elites and shops roll cursed relics.
+- [ ] The Architect (act 3 victory room) shows no Embrace option.
 
 ## Compatibility
 - [ ] Deck of 10: curses take slots; dropping them in the keep grid works.

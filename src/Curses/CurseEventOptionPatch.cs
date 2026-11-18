@@ -4,7 +4,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Config;
@@ -30,7 +32,9 @@ public static class CurseEventOptionPatch
 
 	public static void Prefix(EventModel __instance, ref IEnumerable<EventOption> eventOptions)
 	{
-		if (__instance.Owner is not { } owner || __instance is AncientEventModel || !SpoonCursedDeck.IsActive(owner.RunState)) return;
+		if (__instance.Owner is not { } owner || __instance is AncientEventModel or TheArchitect || !SpoonCursedDeck.IsActive(owner.RunState)) return;
+		// Only events entered from a "?" map room (not the victory room, the Ending's events or a shrine elsewhere).
+		if (owner.RunState.CurrentMapPoint?.PointType != MapPointType.Unknown) return;
 		if (Seen.TryGetValue(__instance, out _)) return;
 		Seen.Add(__instance, new object());
 		List<EventOption> options = eventOptions.ToList();

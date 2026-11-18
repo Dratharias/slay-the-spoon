@@ -1,6 +1,10 @@
 using System.Runtime.CompilerServices;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Models.Relics;
@@ -89,15 +93,92 @@ public static class CursedRelics
 	}
 }
 
-/// <summary>Cursed Deck: relic pulls from the front of a grab bag are cursed 2 times in 3.</summary>
+/// <summary>
+/// Cursed Deck: the cursed draw applies only inside the vanilla methods that generate a chest, elite or merchant relic.
+/// The scope is a thread-static depth counter (these methods are synchronous), so event grants, the rest-site Dig,
+/// Pael's Wing, Toy Box and Large Capsule stay vanilla.
+/// </summary>
+public static class CursedScope
+{
+	[ThreadStatic] private static int _depth;
+
+	public static bool Active => _depth > 0;
+
+	public static void Enter() => _depth++;
+
+	public static void Exit() { if (_depth > 0) _depth--; }
+}
+
+/// <summary>Chest: the treasure room's relic generation.</summary>
+[HarmonyPatch(typeof(TreasureRoomRelicSynchronizer), nameof(TreasureRoomRelicSynchronizer.BeginRelicPicking))]
+public static class CursedChestScopePatch
+{
+	public static void Prefix() => CursedScope.Enter();
+
+	public static void Finalizer() => CursedScope.Exit();
+}
+
+/// <summary>Elite: the relic reward is populated while the current room is an elite fight.</summary>
+[HarmonyPatch(typeof(RelicReward), nameof(RelicReward.Populate))]
+public static class CursedEliteScopePatch
+{
+	public static void Prefix(RelicReward __instance, out bool __state)
+	{
+		__state = __instance.Player.RunState.CurrentRoom is { RoomType: RoomType.Elite };
+		if (__state) CursedScope.Enter();
+	}
+
+	public static void Finalizer(bool __state)
+	{
+		if (__state) CursedScope.Exit();
+	}
+}
+
+/// <summary>Merchant: filling a relic slot (the purchase restock goes through the same method).</summary>
+[HarmonyPatch(typeof(MerchantRelicEntry), "FillSlot")]
+public static class CursedMerchantScopePatch
+{
+	public static void Prefix() => CursedScope.Enter();
+
+	public static void Finalizer() => CursedScope.Exit();
+}
+
+/// <summary>Cursed Deck: relic pulls from the front of a grab bag (chest, elite) are cursed 2 times in 3.</summary>
 [HarmonyPatch(typeof(RelicGrabBag), nameof(RelicGrabBag.PullFromFront), typeof(RelicRarity), typeof(Func<RelicModel, bool>), typeof(IRunState))]
 public static class CursedRelicDrawPatch
 {
 	public static bool Prefix(RelicGrabBag __instance, Func<RelicModel, bool> filter, IRunState runState, ref RelicModel? __result)
 	{
-		if (CursedRelics.TryDraw(__instance, filter, runState) is not { } relic) return true;
+		if (!CursedScope.Active || CursedRelics.TryDraw(__instance, filter, runState) is not { } relic) return true;
 		__result = relic;
 		return false;
+	}
+}
+
+/// <summary>Cursed Deck: the merchant's relic pulls (from the back of a grab bag) are cursed 2 times in 3 too.</summary>
+[HarmonyPatch(typeof(RelicGrabBag), nameof(RelicGrabBag.PullFromBack), typeof(RelicRarity), typeof(Func<RelicModel, bool>), typeof(IRunState))]
+public static class CursedRelicShopDrawPatch
+{
+	public static bool Prefix(RelicGrabBag __instance, Func<RelicModel, bool> filter, IRunState runState, ref RelicModel? __result)
+	{
+		if (!CursedScope.Active || CursedRelics.TryDraw(__instance, filter, runState) is not { } relic) return true;
+		__result = relic;
+		return false;
+	}
+}
+
+/// <summary>Event and Ancient relics have no merchant price (999999999): a cursed relic in a shop costs the Uncommon price.</summary>
+[HarmonyPatch(typeof(RelicModel), nameof(RelicModel.MerchantCost), MethodType.Getter)]
+public static class CursedMerchantPricePatch
+{
+	public const int UncommonPrice = 225;
+
+	public static void Postfix(RelicModel __instance, ref int __result)
+	{
+		if (__result < 999999999) return;
+		if (!CursedRelics.Pool.Any(r => r.Id == __instance.Id)) return;
+		if (__instance.Owner is { } owner && !SpoonCursedDeck.IsActive(owner.RunState)) return;
+		__result = UncommonPrice;
 	}
 }
 

@@ -540,6 +540,7 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   - Minor: an upgraded Normality loses its multiplier if downgraded; curses are never downgraded. Kept.
   - Minor: Parasite is charged even when Transform returns early on an ending. Kept.
   - Minor: every playable curse shows the targeting arrow, also those with no played effect (one-line change in `PlayableCursePatch`).
+  - Minor: the cursed relic draw state (counters, reservations) is not saved, so a mid-floor reload can change a pending roll. Kept, low impact.
 - **Curse deck relics and art sources** (the original idea is now the 1.6.0 mode above):
   - **Unholy Grimoire** (`SpoonUnholyGrimoire`, `src/Curses/`, owner 2026-11-18) is built: whenever one of the holder's
     curses is exhausted, 5 damage to every enemy (`CurseRule.GrimoireDamage`). Event pool only, so nothing hands it
