@@ -562,6 +562,9 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   - Achilles' Heel mode is built (1.7.0, `SpoonAchillesHeelMode`; checklist `docs/testing/achilles-heel-checklist.md`). Minors:
     the art is a placeholder (a marble Hermes foot, not a sandal); `AchillesBlock.IsBlockCard` is untested (needs game types);
     Dexterity is uncapped on long appended-act runs.
+    Design calls (owner): the Block lean also weights in-combat random cards and transforms (Mutation, events), not only card
+    offers, like the Souvenir lean; the relic text doesn't mention the lean (short texts). Minor: the damage preview reads current
+    Block, so a card that gains Block before its hit previews less than it deals.
 
 ## Backlog modes (1.5.0, 2026-11-18)
 
