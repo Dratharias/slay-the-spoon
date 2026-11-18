@@ -5,7 +5,7 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.CustomRunUi;
 
-/// <summary>Ticking "Slay the Spire 1 Cards" in Custom Run unticks "Spire Souvenir", and the other way round; King Midas and Matriochka likewise.</summary>
+/// <summary>Ticking "Slay the Spire 1 Cards" in Custom Run unticks "Spire Souvenir", and the other way round; King Midas and Matriochka likewise; Blood and either Merchant Loans or King Midas.</summary>
 [HarmonyPatch(typeof(ModelDb), nameof(ModelDb.MutuallyExclusiveModifiers), MethodType.Getter)]
 public static class MutuallyExclusivePatch
 {
@@ -20,6 +20,9 @@ public static class MutuallyExclusivePatch
 		HashSet<ModifierModel> midas = new() { ModelDb.Modifier<SpoonRoiMidas>() };
 		for (int r = 0; r <= MatriochkaRule.MaxRerolls; r++)
 			midas.Add(PercentModifierTable.CanonicalFor(typeof(SpoonMatriochka), r));
-		__result = __result.Append(cardSets).Append(midas).ToList();
+		// Blood erases gold: Merchant Loans and King Midas are gold economies.
+		HashSet<ModifierModel> bloodLoans = new() { ModelDb.Modifier<SpoonBlood>(), ModelDb.Modifier<SpoonMerchantLoans>() };
+		HashSet<ModifierModel> bloodMidas = new() { ModelDb.Modifier<SpoonBlood>(), ModelDb.Modifier<SpoonRoiMidas>() };
+		__result = __result.Append(cardSets).Append(midas).Append(bloodLoans).Append(bloodMidas).ToList();
 	}
 }

@@ -109,5 +109,8 @@
 	"STS1_WARPED_TONGS.title": "Warped Tongs",
 	"STS1_WRIST_BLADE.description": "Attacks that cost [blue]0[/blue] deal [blue]4[/blue] additional damage.",
 	"STS1_WRIST_BLADE.flavor": "Handy for assassinations.",
-	"STS1_WRIST_BLADE.title": "Wrist Blade"
+	"STS1_WRIST_BLADE.title": "Wrist Blade",
+	"SPOON_BLOOD_FANG.title": "Blood Fang",
+	"SPOON_BLOOD_FANG.description": "Attacks you play heal [blue]{Percent}%[/blue] of the unblocked damage they deal. Every price is paid in HP: [blue]1[/blue] HP for [blue]5[/blue] [gold]Gold[/gold].",
+	"SPOON_BLOOD_FANG.flavor": "\"Gold rusts. Blood keeps.\""
 }

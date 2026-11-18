@@ -62,5 +62,8 @@
   "SPOON_MUTATION.short": "Mut.",
   "SPOON_DECK_OF_TEN.title": "Deck of 10",
   "SPOON_DECK_OF_TEN.description": "Your deck holds 10 cards. Each card dropped gives 1 max HP.",
-  "SPOON_DECK_OF_TEN.short": "10"
+  "SPOON_DECK_OF_TEN.short": "10",
+  "SPOON_BLOOD.title": "Blood",
+  "SPOON_BLOOD.description": "No gold: you pay in HP. Start with Blood Fang.",
+  "SPOON_BLOOD.short": "Blood"
 }

@@ -62,5 +62,8 @@
   "SPOON_MUTATION.short": "Mut.",
   "SPOON_DECK_OF_TEN.title": "Deck de 10",
   "SPOON_DECK_OF_TEN.description": "Votre deck tient 10 cartes. Chaque carte jetée donne 1 PV max.",
-  "SPOON_DECK_OF_TEN.short": "10"
+  "SPOON_DECK_OF_TEN.short": "10",
+  "SPOON_BLOOD.title": "Sang",
+  "SPOON_BLOOD.description": "Plus d’or : vous payez en PV. Vous commencez avec Croc de sang.",
+  "SPOON_BLOOD.short": "Sang"
 }

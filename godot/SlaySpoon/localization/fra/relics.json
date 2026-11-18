@@ -109,5 +109,8 @@
 	"STS1_WARPED_TONGS.title": "Pinces déformées",
 	"STS1_WRIST_BLADE.description": "Les Attaques qui coûtent [blue]0[/blue] infligent [blue]4[/blue] dégâts supplémentaires.",
 	"STS1_WRIST_BLADE.flavor": "Pratique pour les assassinats.",
-	"STS1_WRIST_BLADE.title": "Poignard"
+	"STS1_WRIST_BLADE.title": "Poignard",
+	"SPOON_BLOOD_FANG.title": "Croc de sang",
+	"SPOON_BLOOD_FANG.description": "Vos Attaques vous soignent de [blue]{Percent} %[/blue] des dégâts non bloqués qu’elles infligent. Tout se paie en PV : [blue]1[/blue] PV pour [blue]5[/blue] [gold]Or[/gold].",
+	"SPOON_BLOOD_FANG.flavor": "« L’or rouille. Le sang garde. »"
 }
