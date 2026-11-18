@@ -118,5 +118,17 @@
 	"SPOON_DECK_OF_TEN_RELIC.flavor": "« Moins, c’est mieux. Dix, c’est assez. »",
 	"SPOON_UNHOLY_GRIMOIRE.title": "Grimoire profane",
 	"SPOON_UNHOLY_GRIMOIRE.description": "Chaque fois qu’une de vos [red]Malédictions[/red] est [gold]Épuisée[/gold], infligez [blue]{Damage}[/blue] dégâts à TOUS les ennemis ([blue]{DamagePlus}[/blue] pour une Malédiction améliorée sans effet).\nEn partie Deck maudit, vos [red]Malédictions[/red] sont jouables.",
-	"SPOON_UNHOLY_GRIMOIRE.flavor": "« Chaque page a été écrite par quelqu’un qui l’a regretté. »"
+	"SPOON_UNHOLY_GRIMOIRE.flavor": "« Chaque page a été écrite par quelqu’un qui l’a regretté. »",
+	"SPOON_BLOOD_PACT.title": "Pacte de sang",
+	"SPOON_BLOOD_PACT.description": "Chaque fois que vous piochez une [red]Malédiction[/red], gagnez [blue]{Block}[/blue] d’[gold]Armure[/gold].",
+	"SPOON_BLOOD_PACT.flavor": "« Signé d’une main qui n’était pas la mienne. »",
+	"SPOON_PIN_DOLL.title": "Poupée d’épingles",
+	"SPOON_PIN_DOLL.description": "Au début de chaque combat, gagnez [blue]{Strength}[/blue] [gold]Force[/gold] pour chaque tranche de [blue]{Curses}[/blue] [red]Malédictions[/red] dans votre deck.",
+	"SPOON_PIN_DOLL.flavor": "« Elle vous ressemble beaucoup. »",
+	"SPOON_BLACK_CENSER.title": "Encensoir noir",
+	"SPOON_BLACK_CENSER.description": "Chaque fois qu’une [red]Malédiction[/red] rejoint votre deck, [gold]Améliorez[/gold]-la.",
+	"SPOON_BLACK_CENSER.flavor": "« La fumée sent les vieilles promesses. »",
+	"SPOON_RELIQUARY.title": "Reliquaire",
+	"SPOON_RELIQUARY.description": "À la fin de chaque combat, gagnez [blue]{Gold}[/blue] d’[gold]Or[/gold] pour chaque [red]Malédiction[/red] dans votre deck.",
+	"SPOON_RELIQUARY.flavor": "« Les pèlerins paient cher pour toucher ce qui fait mal. »"
 }

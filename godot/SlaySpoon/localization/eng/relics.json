@@ -118,5 +118,17 @@
 	"SPOON_DECK_OF_TEN_RELIC.flavor": "\"Less is more. Ten is plenty.\"",
 	"SPOON_UNHOLY_GRIMOIRE.title": "Unholy Grimoire",
 	"SPOON_UNHOLY_GRIMOIRE.description": "Whenever one of your [red]Curses[/red] is [gold]Exhausted[/gold], deal [blue]{Damage}[/blue] damage to ALL enemies ([blue]{DamagePlus}[/blue] for an upgraded Curse with no effect).\nIn Cursed Deck runs, your [red]Curses[/red] are playable.",
-	"SPOON_UNHOLY_GRIMOIRE.flavor": "\"Every page was written by someone who regretted it.\""
+	"SPOON_UNHOLY_GRIMOIRE.flavor": "\"Every page was written by someone who regretted it.\"",
+	"SPOON_BLOOD_PACT.title": "Blood Pact",
+	"SPOON_BLOOD_PACT.description": "Whenever you draw a [red]Curse[/red], gain [blue]{Block}[/blue] [gold]Block[/gold].",
+	"SPOON_BLOOD_PACT.flavor": "\"Signed in a hand that was not mine.\"",
+	"SPOON_PIN_DOLL.title": "Pin Doll",
+	"SPOON_PIN_DOLL.description": "At the start of each combat, gain [blue]{Strength}[/blue] [gold]Strength[/gold] for every [blue]{Curses}[/blue] [red]Curses[/red] in your deck.",
+	"SPOON_PIN_DOLL.flavor": "\"It looks a lot like you.\"",
+	"SPOON_BLACK_CENSER.title": "Black Censer",
+	"SPOON_BLACK_CENSER.description": "Whenever a [red]Curse[/red] joins your deck, [gold]Upgrade[/gold] it.",
+	"SPOON_BLACK_CENSER.flavor": "\"The smoke smells of old promises.\"",
+	"SPOON_RELIQUARY.title": "Reliquary",
+	"SPOON_RELIQUARY.description": "At the end of each combat, gain [blue]{Gold}[/blue] [gold]Gold[/gold] for each [red]Curse[/red] in your deck.",
+	"SPOON_RELIQUARY.flavor": "\"Pilgrims pay well to touch what hurts.\""
 }

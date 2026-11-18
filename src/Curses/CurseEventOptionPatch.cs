@@ -47,7 +47,7 @@ public static class CurseEventOptionPatch
 		await CursedDeckCurses.AddRandom(player, rng);
 
 		HashSet<string> held = player.Relics.Select(r => r.Id.Entry).ToHashSet();
-		List<RelicModel> left = CursedRelics.Vanilla().Where(r => !held.Contains(r.Id.Entry)).ToList();
+		List<RelicModel> left = CursedRelics.Pool.Where(r => !held.Contains(r.Id.Entry)).ToList();
 		int roll = rng.NextInt(int.MaxValue);
 		CurseEventReward reward = CurseRule.EventReward(roll, left.Count > 0);
 		if (reward == CurseEventReward.Gold && SpoonBlood.IsActive(run)) reward = CurseEventReward.Heal;

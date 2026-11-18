@@ -539,6 +539,13 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
     Art: Pixabay illustration "Ancient Book, Spell Book, Magic Book"
     https://pixabay.com/illustrations/ancient-book-spell-book-magic-book-10064076/ (Pixabay Content License, no
     attribution required), resized into `images/relics/spoon/`.
+  - **Cursed Deck relics** (`SpoonBloodPact`, `SpoonPinDoll`, `SpoonBlackCenser`, `SpoonReliquary`, `src/Curses/`; art
+    from Pixabay, Pixabay Content License, resized into `images/relics/spoon/`; placeholder art, the Black Censer is the
+    golden censer darkened, Blood Pact is the parchment with its black corners cut out):
+    Blood Pact https://pixabay.com/illustrations/blood-spatter-scroll-grunge-bloody-497546/,
+    Pin Doll https://pixabay.com/vectors/voodoo-doll-pins-doll-cheap-4659327/,
+    Black Censer https://pixabay.com/photos/censer-religion-burner-faith-1486493/,
+    Reliquary https://pixabay.com/photos/chest-casket-byzantine-ivory-casket-67592/.
 
 ## Backlog modes (1.5.0, 2026-11-18)
 

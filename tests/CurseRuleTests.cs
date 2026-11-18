@@ -140,4 +140,16 @@ public class CurseRuleTests
 		Assert.Equal(18, CurseRule.EventHeal(75));
 		Assert.Equal(1, CurseRule.EventHeal(3));
 	}
+
+	[Fact]
+	public void CursedRelicNumbers()
+	{
+		Assert.Equal(0, CurseRule.PinDollStrength(2));
+		Assert.Equal(1, CurseRule.PinDollStrength(3));
+		Assert.Equal(2, CurseRule.PinDollStrength(7));
+		Assert.Equal(0, CurseRule.PinDollStrength(-1));
+		Assert.Equal(0, CurseRule.ReliquaryGold(0));
+		Assert.Equal(15, CurseRule.ReliquaryGold(5));
+		Assert.Equal(4, CurseRule.BloodPactBlock);
+	}
 }

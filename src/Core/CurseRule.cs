@@ -19,6 +19,19 @@ public static class CurseRule
 	/// <summary>Energy cost of a curse made playable by the Grimoire when the vanilla card is unplayable.</summary>
 	public const int PlayCost = 1;
 
+	/// <summary>Blood Pact: Block gained whenever the holder draws a curse.</summary>
+	public const int BloodPactBlock = 4;
+
+	/// <summary>Pin Doll: one Strength per this many curses in the deck.</summary>
+	public const int PinDollCursesPerStrength = 3;
+
+	/// <summary>Reliquary: gold per curse in the deck after each combat.</summary>
+	public const int ReliquaryGoldPerCurse = 3;
+
+	public static int PinDollStrength(int curses) => Math.Max(0, curses) / PinDollCursesPerStrength;
+
+	public static int ReliquaryGold(int curses) => Math.Max(0, curses) * ReliquaryGoldPerCurse;
+
 	public const int EventGold = 75;
 	public const int EventHealPercent = 25;
 
