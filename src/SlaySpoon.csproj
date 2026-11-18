@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="../data/forge/curves.json" LogicalName="SlaySpoon.forge.curves.json" />
+    <EmbeddedResource Include="../data/curses/curses.json" LogicalName="SlaySpoon.curses.curses.json" />
   </ItemGroup>
 
 </Project>

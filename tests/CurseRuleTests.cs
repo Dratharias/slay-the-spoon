@@ -1,0 +1,97 @@
+using SlaySpoon.Core;
+using Xunit;
+
+namespace SlaySpoon.Tests;
+
+public class CurseRuleTests
+{
+	private static IReadOnlyDictionary<string, CurseRow> Table()
+	{
+		var dir = new DirectoryInfo(AppContext.BaseDirectory);
+		while (dir != null && !File.Exists(Path.Combine(dir.FullName, "mod", "SlaySpoon.json"))) dir = dir.Parent;
+		return CurseRule.ParseTable(File.ReadAllText(Path.Combine(dir!.FullName, "data", "curses", "curses.json")));
+	}
+
+	[Fact]
+	public void ParsesEveryRow()
+	{
+		var t = Table();
+		Assert.Equal(22, t.Count);
+		var b = t["BAD_LUCK"];
+		Assert.Equal("HpLoss", b.Played);
+		Assert.Equal(13, b.Amount);
+		Assert.Equal(20, b.AmountPlus);
+		Assert.Equal("HpLoss", b.SelfVar);
+	}
+
+	[Fact]
+	public void GrimoireTwelveOnlyForUpgradedNoEffect()
+	{
+		var t = Table();
+		Assert.Equal(12, CurseRule.GrimoireDamageFor(t["CLUMSY"], true));
+		Assert.Equal(5, CurseRule.GrimoireDamageFor(t["CLUMSY"], false));
+		Assert.Equal(5, CurseRule.GrimoireDamageFor(t["BAD_LUCK"], true));
+		Assert.Equal(12, CurseRule.GrimoireDamageFor(null, true));
+	}
+
+	[Fact]
+	public void NecronomicurseKeepsCostOne()
+	{
+		var t = Table();
+		Assert.Equal(1, CurseRule.CostFor(t["STS1_NECRONOMICURSE"], -1, true));
+		Assert.Equal(0, CurseRule.CostFor(t["BAD_LUCK"], -1, true));
+		Assert.Equal(2, CurseRule.CostFor(t["ENTHRALLED"], 2, false));
+		Assert.Equal(1, CurseRule.CostFor(t["BAD_LUCK"], -1, false));
+	}
+
+	[Fact]
+	public void EnemyAmountFollowsUpgrade()
+	{
+		var b = Table()["BAD_LUCK"];
+		Assert.Equal(13, CurseRule.EnemyAmount(b, false));
+		Assert.Equal(20, CurseRule.EnemyAmount(b, true));
+	}
+
+	[Theory]
+	[InlineData(true, true, true)]
+	[InlineData(true, false, false)]
+	[InlineData(false, true, false)]
+	[InlineData(false, false, false)]
+	public void PlayableOnlyWithModeAndGrimoire(bool mode, bool grim, bool expected) =>
+		Assert.Equal(expected, CurseRule.IsPlayable(mode, grim));
+
+	[Fact]
+	public void TwoInThreeRelicRoll()
+	{
+		Assert.False(CurseRule.CursedRelicRoll(0));
+		Assert.True(CurseRule.CursedRelicRoll(1));
+		Assert.True(CurseRule.CursedRelicRoll(2));
+		Assert.False(CurseRule.CursedRelicRoll(3));
+	}
+
+	[Fact]
+	public void CursedRelicPickSkipsHeld()
+	{
+		var pool = new[] { "A", "B", "C" };
+		Assert.Null(CurseRule.PickCursedRelic(pool, new HashSet<string> { "A", "B", "C" }, 7));
+		Assert.Equal("B", CurseRule.PickCursedRelic(pool, new HashSet<string> { "A", "C" }, 7));
+		Assert.Equal("C", CurseRule.PickCursedRelic(pool, new HashSet<string> { "A" }, 3));
+	}
+
+	[Fact]
+	public void EventRewardThirdsAndFold()
+	{
+		Assert.Equal(CurseEventReward.CursedRelic, CurseRule.EventReward(0, true));
+		Assert.Equal(CurseEventReward.Gold, CurseRule.EventReward(1, true));
+		Assert.Equal(CurseEventReward.Heal, CurseRule.EventReward(2, true));
+		Assert.Equal(CurseEventReward.Gold, CurseRule.EventReward(0, false));
+	}
+
+	[Fact]
+	public void NormalityAndGuiltyNerfs()
+	{
+		var t = Table();
+		Assert.Equal(new[] { 3, 4 }, t["NORMALITY"].Self);
+		Assert.Equal(new[] { 5, 3 }, t["GUILTY"].Self);
+	}
+}

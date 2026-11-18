@@ -1,8 +1,80 @@
+using System.Text.Json;
+
 namespace SlaySpoon.Core;
 
-/// <summary>Numbers of the curse deck relics (owner idea, 2026-11-18).</summary>
+/// <summary>One row of data/curses/curses.json (only the fields the code reads).</summary>
+public sealed record CurseRow(string Id, string Played, int Amount, int AmountPlus, string? SelfVar, int[]? Self, int CostPlus);
+
+public enum CurseEventReward { CursedRelic, Gold, Heal }
+
+/// <summary>Numbers and rules of the curse deck relics and the Cursed Deck mode (owner idea, 2026-11-18).</summary>
 public static class CurseRule
 {
 	/// <summary>Unholy Grimoire: damage to every enemy per curse exhausted.</summary>
 	public const int GrimoireDamage = 5;
+
+	/// <summary>Grimoire damage of an upgraded curse that has no played effect.</summary>
+	public const int GrimoireNoEffectPlus = 12;
+
+	/// <summary>Energy cost of a curse made playable by the Grimoire when the vanilla card is unplayable.</summary>
+	public const int PlayCost = 1;
+
+	public const int EventGold = 75;
+	public const int EventHealPercent = 25;
+
+	/// <summary>Parses the curse table. Keys starting with "_" are comments.</summary>
+	public static IReadOnlyDictionary<string, CurseRow> ParseTable(string json)
+	{
+		var result = new Dictionary<string, CurseRow>(StringComparer.Ordinal);
+		using var doc = JsonDocument.Parse(json, new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true });
+		foreach (var row in doc.RootElement.EnumerateObject())
+		{
+			if (row.Name.StartsWith('_')) continue;
+			var e = row.Value;
+			string played = e.TryGetProperty("played", out var p) ? p.GetString() ?? "None" : "None";
+			int amount = e.TryGetProperty("amount", out var a) ? a.GetInt32() : 0;
+			int plus = e.TryGetProperty("amountPlus", out var ap) ? ap.GetInt32() : amount;
+			string? selfVar = e.TryGetProperty("selfVar", out var sv) ? sv.GetString() : null;
+			int[]? self = null;
+			if (e.TryGetProperty("self", out var s))
+			{
+				self = s.EnumerateArray().Select(x => x.GetInt32()).ToArray();
+				if (self.Length != 2) throw new FormatException($"{row.Name}: self needs [vanilla, upgraded]");
+			}
+			int cost = e.TryGetProperty("costPlus", out var c) ? c.GetInt32() : 0;
+			result[row.Name] = new CurseRow(row.Name, played, amount, plus, selfVar, self, cost);
+		}
+		return result;
+	}
+
+	/// <summary>Damage to every enemy when the Grimoire exhausts the curse; a curse without a row counts as having no effect.</summary>
+	public static int GrimoireDamageFor(CurseRow? row, bool upgraded) =>
+		upgraded && (row == null || row.Played == "None") ? GrimoireNoEffectPlus : GrimoireDamage;
+
+	public static int CostFor(CurseRow? row, int vanillaCost, bool upgraded) =>
+		upgraded ? row?.CostPlus ?? 0 : vanillaCost >= 0 ? vanillaCost : PlayCost;
+
+	public static int EnemyAmount(CurseRow row, bool upgraded) => upgraded ? row.AmountPlus : row.Amount;
+
+	public static bool IsPlayable(bool modeActive, bool holdsGrimoire) => modeActive && holdsGrimoire;
+
+	/// <summary>2 rolls in 3 give a cursed relic.</summary>
+	public static bool CursedRelicRoll(int roll) => roll % 3 != 0;
+
+	public static string? PickCursedRelic(IReadOnlyList<string> pool, ISet<string> held, int roll)
+	{
+		var left = pool.Where(r => !held.Contains(r)).ToList();
+		return left.Count == 0 ? null : left[(int)((uint)roll % (uint)left.Count)];
+	}
+
+	public static CurseEventReward EventReward(int roll, bool cursedRelicLeft) => (roll % 3) switch
+	{
+		0 => cursedRelicLeft ? CurseEventReward.CursedRelic : CurseEventReward.Gold,
+		1 => CurseEventReward.Gold,
+		_ => CurseEventReward.Heal,
+	};
+
+	public static string RelicStream(int floor, int draw) => $"cursed_deck_relic_{floor}_{draw}";
+	public static string EventStream(int floor, int slot) => $"cursed_deck_event_{floor}_{slot}";
+	public static string StartStream(int slot) => $"cursed_deck_start_{slot}";
 }
