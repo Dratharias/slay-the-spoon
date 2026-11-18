@@ -112,5 +112,8 @@
 	"STS1_WRIST_BLADE.title": "Wrist Blade",
 	"SPOON_BLOOD_FANG.title": "Blood Fang",
 	"SPOON_BLOOD_FANG.description": "Attacks you play heal [blue]{Percent}%[/blue] of the unblocked damage they deal. Every price is paid in HP: [blue]1[/blue] HP for [blue]5[/blue] [gold]Gold[/gold].",
-	"SPOON_BLOOD_FANG.flavor": "\"Gold rusts. Blood keeps.\""
+	"SPOON_BLOOD_FANG.flavor": "\"Gold rusts. Blood keeps.\"",
+	"SPOON_DECK_OF_TEN_RELIC.title": "Deck of 10",
+	"SPOON_DECK_OF_TEN_RELIC.description": "Your deck holds [blue]{Limit}[/blue] cards. Each card dropped gives [blue]{MaxHp}[/blue] Max HP.",
+	"SPOON_DECK_OF_TEN_RELIC.flavor": "\"Less is more. Ten is plenty.\""
 }

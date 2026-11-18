@@ -529,6 +529,8 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
 
 ## Backlog modes (1.5.0, 2026-11-18)
 
+- Deck of 10 relic (1.5.1): Neow's cursed slot, 1 in 11, is a builder call (the owner chose "a Neow option"); also the
+  keep grid only for the first trim. Both in the spec; the owner may change the odds or make it a fourth option.
 - Minor: Conductor assigns rewards through one panel per reward, then each player's own reward screen opens; the spec's
   merged screen was not built (see the spec's builder calls). Gold is not split.
 - Minor: Trophies read the elites' moves at combat start; a move whose damage depends on state later in the fight shows

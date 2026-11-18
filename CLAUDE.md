@@ -278,7 +278,7 @@ Read `README.md` for the player view and the spec for every decision.
 - The mod must **never write the regular (unmodded) save**. Since 1.3.8 the mod does not copy it either; the game does that once.
 - Standard and Daily modes remain available; never lock the modes themselves.
   Daily stays vanilla. Standard exceptions are Spire Souvenir, the approved Act 4 unlock, the solo Watcher (0.12.36)
-  and the Folie à deux / Slay the Spoon mode cards, documented above. Lobby activation options live in Custom Run.
+  the Folie à deux / Slay the Spoon mode cards and the Deck of 10 Neow option (1.5.1), documented above. Lobby activation options live in Custom Run.
 - Bug reports are not support requests (see README). Don't promise fixes.
 - Never commit decompiled game code.
 - Commit on a step branch. Push and publish only on request.
@@ -475,4 +475,7 @@ Read `README.md` for the player view and the spec for every decision.
   can be thrown for 10 damage through a synced `UselessRelicThrowAction`; thrown relics are filtered out of both
   `IterateHookListeners` until combat ends). Pure rules in `src/Core/*Rule.cs` with tests.
 - Build 0 warnings; 795 xUnit + 99 pytest pass. Not tested in game: `docs/testing/backlog-modes-checklist.md`.
-
+- **1.5.1 (owner, 2026-11-18):** Deck of 10 is a relic (`src/DeckOfTen/SpoonDeckOfTenRelic.cs`): the mode gives it at
+  the start; the first trim is the Sealed Deck keep grid, later trims the removal screen. New Standard exception: Neow's
+  cursed option is Deck of 10 one time in 11 (`DeckOfTenNeowPatch`, the mod's own seed stream, vanilla draws untouched).
+  801 xUnit + 99 pytest pass. Not tested in game.

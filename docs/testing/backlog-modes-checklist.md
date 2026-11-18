@@ -12,9 +12,13 @@ Spec: `docs/superpowers/specs/2026-11-18-backlog-modes-design.md`. Tick only wha
 - [ ] Save and reload at the start of act 2: no second mutation. Same seed twice gives the same cards.
 
 ## Deck of 10
-- [ ] The Silent's 12-card start is trimmed to 10 on the first room; each dropped card gives +1 max HP.
+- [ ] Every player starts with the Deck of 10 relic (Precarious Shears icon, EN/FR text); it never shows in a relic reward.
+- [ ] The Silent's 12-card start opens the Sealed Deck grid on the first room: pick 10 to keep; each dropped card gives +1 max HP.
 - [ ] A card reward on a full deck opens the unskippable removal screen for exactly the excess; the new card can be dropped.
 - [ ] A card added in combat is trimmed when the combat ends. Eternal cards can't be picked.
+- [ ] Standard run: Neow's cursed option is sometimes Deck of 10 (1 in 11; restart runs to see it). Taking it opens the
+      keep grid at once; the other two options and the rest of the run are the same as without the mod for that seed.
+- [ ] Co-op: the keep grid of one player doesn't block or desync the other.
 
 ## Blood
 - [ ] Gold starts at 0; the top bar shows (HP − 1) × 5; no gold reward after combat.

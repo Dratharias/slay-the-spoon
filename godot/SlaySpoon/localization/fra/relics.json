@@ -112,5 +112,8 @@
 	"STS1_WRIST_BLADE.title": "Poignard",
 	"SPOON_BLOOD_FANG.title": "Croc de sang",
 	"SPOON_BLOOD_FANG.description": "Vos Attaques vous soignent de [blue]{Percent} %[/blue] des dégâts non bloqués qu’elles infligent. Tout se paie en PV : [blue]1[/blue] PV pour [blue]5[/blue] [gold]Or[/gold].",
-	"SPOON_BLOOD_FANG.flavor": "« L’or rouille. Le sang garde. »"
+	"SPOON_BLOOD_FANG.flavor": "« L’or rouille. Le sang garde. »",
+	"SPOON_DECK_OF_TEN_RELIC.title": "Deck de 10",
+	"SPOON_DECK_OF_TEN_RELIC.description": "Votre deck tient [blue]{Limit}[/blue] cartes. Chaque carte jetée donne [blue]{MaxHp}[/blue] PV max.",
+	"SPOON_DECK_OF_TEN_RELIC.flavor": "« Moins, c’est mieux. Dix, c’est assez. »"
 }

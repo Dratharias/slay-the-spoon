@@ -18,19 +18,29 @@ The owner's compatibility rule applies: every pair of a new mode with an existin
 - Builder call: "at the end of each act" is read as "when the next act starts", so the last act never mutates and
   the player sees the result on the new act's map.
 
-## Deck of 10 (`SpoonDeckOfTen`)
+## Deck of 10 (`SpoonDeckOfTen`, relic `SpoonDeckOfTenRelic`)
 
-- The deck holds at most 10 cards (`DeckOfTenRule.Limit`). When a card joins a deck that then holds more than 10, the
-  owner picks the cards to drop (the vanilla removal screen, not skippable, exactly the excess). The new card may be
-  the one dropped.
-- Each dropped card gives +1 max HP (and heals 1, like any max HP gain).
+- Owner rework (2026-11-18): the rule lives in a relic, **Deck of 10**. The Custom Run mode gives it to every player at
+  the start (kept out of every grab bag); in a Standard run Neow can offer it (Standard exception, below).
+- The holder's deck holds at most 10 cards (`DeckOfTenRule.Limit`); each dropped card gives +1 max HP (and heals 1, like
+  any max HP gain). Players without the relic are unaffected.
+- The first trim uses the Sealed Deck grid: the player picks the cards to **keep** (not skippable, manual confirmation,
+  Sealed Deck's rarity/title order). It runs when the relic is obtained, or for the mode, when the first room is entered.
+  Later trims (a card joins a full deck) pick the cards to drop on the vanilla removal screen, exactly the excess; the
+  new card may be the one dropped.
+- Neow (Standard runs, and wherever Neow draws its vanilla options): the cursed option is replaced by Deck of 10 one time
+  in 11 (`DeckOfTenRule.NeowOdds`: an equal share with the 10 vanilla cursed relics), rolled on the mod's own stream from
+  the run seed and the player slot after vanilla drew its options, so vanilla seeds don't change. Never offered to a
+  player who already holds it.
 - Builder calls:
-  - Starting decks above 10 (the Silent's 12) are trimmed the same way when the first room is entered.
+  - Neow's cursed slot rather than a fourth option: the relic is a trade (lose cards, gain max HP), like the cursed relics.
+  - The keep grid only for the first trim: picking 10 cards to keep is right for a whole deck, but tedious when one card
+    goes over.
+  - Unremovable cards (Eternal...) count toward the 10 and are not shown in either screen. If the excess can't be met,
+    the deck stays above 10.
   - A card that joins during combat is checked when combat ends.
-  - Cards the removal screen refuses (Eternal, unremovable) still count toward the 10 but can't be picked.
-    If the excess can't be met, the deck stays above 10.
-  - Curses count, so a curse added to a full deck is a free removal at the cost of another card: kept, it's the mode's
-    trade.
+  - Curses count, so a curse added to a full deck is a free removal at the cost of another card: kept, it's the trade.
+  - Icon borrowed from Precarious Shears.
 
 ## Blood (`SpoonBlood`)
 
