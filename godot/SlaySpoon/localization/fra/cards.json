@@ -495,5 +495,10 @@
 	"SPOON_MELON_BALLER.title": "Cuillère parisienne",
 	"SPOON_MELON_BALLER.description": "Volez {MaxHp:diff()} PV max à la Cuillère.",
 	"SPOON_STOLEN_SPOONFUL.title": "Cuillerée volée",
-	"SPOON_STOLEN_SPOONFUL.description": "Infligez {Damage:diff()} dégâts.\nVolez {Appetite:diff()} d'[gold]Appétit[/gold] à la Cuillère."
+	"SPOON_STOLEN_SPOONFUL.description": "Infligez {Damage:diff()} dégâts.\nVolez {Appetite:diff()} d'[gold]Appétit[/gold] à la Cuillère.",
+  "SPOON_FORGE_BONUS": "Forgée : {Bonuses}.",
+  "SPOON_FORGE_BONUS.Block": "Blocage",
+  "SPOON_FORGE_BONUS.Damage": "dégâts",
+  "SPOON_FORGE_BONUS.Draw": "pioche",
+  "SPOON_FORGE_BONUS.Energy": "Énergie"
 }

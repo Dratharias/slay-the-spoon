@@ -1,4 +1,7 @@
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
@@ -68,6 +71,13 @@ public sealed class SpoonForge : ModifierModel
 		if (room is MerchantRoom) _usedHere.Clear();
 		return Task.CompletedTask;
 	}
+
+	/// <summary>A forged card's <c>powerBonus</c>: more of a power it applies, per level past +1 (Tracking: +25 % per level).</summary>
+	public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource) =>
+		ForgeBonuses.PowerBonus(power, cardSource);
+
+	/// <summary>A forged card's <c>play</c> bonus: extra Block, damage, draw... per level past +1.</summary>
+	public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay) => ForgeBonuses.OnPlayed(choiceContext, cardPlay);
 
 	public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
 	{

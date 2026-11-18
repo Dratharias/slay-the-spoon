@@ -495,5 +495,10 @@
 	"SPOON_MELON_BALLER.title": "Melon Baller",
 	"SPOON_MELON_BALLER.description": "Take {MaxHp:diff()} Max HP from the Spoon.",
 	"SPOON_STOLEN_SPOONFUL.title": "Stolen Spoonful",
-	"SPOON_STOLEN_SPOONFUL.description": "Deal {Damage:diff()} damage.\nSteal {Appetite:diff()} [gold]Appetite[/gold] from the Spoon."
+	"SPOON_STOLEN_SPOONFUL.description": "Deal {Damage:diff()} damage.\nSteal {Appetite:diff()} [gold]Appetite[/gold] from the Spoon.",
+  "SPOON_FORGE_BONUS": "Forged: {Bonuses}.",
+  "SPOON_FORGE_BONUS.Block": "Block",
+  "SPOON_FORGE_BONUS.Damage": "damage",
+  "SPOON_FORGE_BONUS.Draw": "draw",
+  "SPOON_FORGE_BONUS.Energy": "Energy"
 }

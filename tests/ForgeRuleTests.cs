@@ -113,4 +113,23 @@ public class ForgeRuleTests
 		Assert.Equal(new[] { "Damage" }, rows["A"].Beyond);
 		Assert.Null(rows["B"].Beyond);
 	}
+
+	[Theory]
+	[InlineData(1, 0)]
+	[InlineData(2, 25)]
+	[InlineData(9, 200)]
+	[InlineData(12, 200)]
+	public void PerLevelBonusCountsLevelsPastOne(int level, int expected) =>
+		Assert.Equal((decimal)expected, ForgeRule.PerLevelBonus(25m, level));
+
+	[Fact]
+	public void PerLevelBonusStopsAtTheCap() => Assert.Equal(50m, ForgeRule.PerLevelBonus(25m, 9, cap: 3));
+
+	[Fact]
+	public void ParsesPowerBonusAndPlay()
+	{
+		var rows = ForgeRule.ParseCurves("""{ "T": { "powerBonus": { "TrackingPower": 25 }, "play": { "Block": 2 } } }""");
+		Assert.Equal(25m, rows["T"].PowerBonus!["TrackingPower"]);
+		Assert.Equal(2m, rows["T"].Play!["Block"]);
+	}
 }

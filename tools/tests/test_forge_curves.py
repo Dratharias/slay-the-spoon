@@ -36,11 +36,6 @@ def test_lowest_cap_wins_and_safe_vars_need_no_row():
     assert f.propose(["IntangiblePower"])["cap"] == 3
 
 
-def test_overrides_replace_proposals_and_skip_comments():
-    rows = f.merge({"A": {"cap": 3}, "B": {"cap": 5}}, {"_comment": "x", "A": {"cap": 1}})
-    assert rows == {"A": {"cap": 1}, "B": {"cap": 5}}
-
-
 def test_committed_table_follows_the_parser_rules():
     table = json.loads((REPO / "data/forge/curves.json").read_text(encoding="utf-8"))
     for key, row in table.items():
@@ -56,5 +51,24 @@ def test_committed_table_follows_the_parser_rules():
 def test_safe_vars_keep_growing_past_the_cap():
     assert f.propose(["Cards", "Energy", "Damage"])["beyond"] == ["Damage"]
     assert "beyond" not in f.propose(["Energy"])
-    rows = f.merge({}, {"X": {"cap": 5}}, {"X": ["Block", "Focus"]})
-    assert rows["X"]["beyond"] == ["Block"]
+
+
+def test_validate_flags_bad_rows():
+    errors = f.validate({"A": {"plus1": "x", "effect": "y", "note": "z", "cap": 12, "play": {"Gold": 1}}, "B": {"plus1": "x"}})
+    assert any("A: cap" in e for e in errors)
+    assert any("unknown play kind Gold" in e for e in errors)
+    assert any("B: missing effect" in e for e in errors)
+
+
+def test_runtime_keeps_reviewed_calls_and_auto_rows_for_the_rest():
+    cards = {"A": {"plus1": "x", "effect": "y", "note": "n", "cap": 9}, "B": {"plus1": "x", "effect": "y", "note": "n", "play": {"Block": 2}}}
+    rows = f.runtime(cards, {"A": {"cap": 3}, "C": {"cap": 5}})
+    assert "A" not in rows
+    assert rows["B"] == {"play": {"Block": 2}, "note": "n"}
+    assert rows["C"] == {"cap": 5}
+
+
+def test_committed_review_is_valid():
+    cards = json.loads((REPO / "data/forge/cards.json").read_text(encoding="utf-8"))
+    assert f.validate(cards) == []
+    assert len([k for k in cards if not k.startswith("_")]) >= 780

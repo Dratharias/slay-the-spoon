@@ -518,6 +518,10 @@ Ideas the owner kept from the mode brainstorm. Each one needs its own design pas
 - Co-op **Forced Trade:** after each combat won, each player gives one card from their deck to a random player.
 - Co-op **Conductor:** a random player, different each combat, hands out the end-of-combat rewards. The players' rewards
   are merged.
+- **Useless Relics (owner, 2026-11-18):** in combat, a relic that has already triggered and cannot trigger again this
+  fight (for example Akabeko after its first attack) can be thrown at an enemy for a fixed 10 damage. Thrown relics come
+  back to the inventory at the end of combat; until then the relic is greyed out like a melted wax relic (checked in 0.111.1: a melted wax relic stays in the inventory, `RelicCmd.Melt` sets `Status = Disabled` and `UpdateTexture` tints it dark red; a thrown relic can reuse the disabled status and the tint without being wax). Design calls: which relics count as "spent" (a per-relic list or a
+  generic signal), how to throw (click on the relic, then a target), and co-op sync.
 - **Compatibility (owner, 2026-11-18):** each new mode must be checked against every existing one before it ships, for
   example Forced Trade with Folie à deux (both move cards between players after a fight). Each design pass lists the
   pairs that clash and decides: combine, order the effects, or make them mutually exclusive.
@@ -533,4 +537,6 @@ Ideas the owner kept from the mode brainstorm. Each one needs its own design pas
 - Check in game: the Duplicate service runs its synced deck choice inside a queued action (vanilla removal uses a
   one-off message). If the merchant freezes in co-op, move it to a message like `MerchantCardRemovalMessage`.
 - The curve table is generated (`tools/forge_curves.py`, run with the 0.111.1 decompile mounted as `/sts2src`);
-  hand calls live in `data/forge/overrides.json`. Owner review: `docs/review/forge-curves.md`.
+  every card's hand call lives in `data/forge/cards.json` (792 cards). Owner review: `docs/review/forge-curves.md`.
+- Check in game: `powerBonus` with a negative amount (Malaise's Strength loss), Wish's option cards counting as the
+  card source, Time's Up's fractional `ExtraDamage` step (0.25) and Friendship's Strength loss crossing 0 at +2.

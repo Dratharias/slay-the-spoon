@@ -22,7 +22,9 @@ public sealed record ForgeCurve(
 	IReadOnlyDictionary<string, decimal>? PerLevel,
 	int CostPerLevel,
 	string? Note,
-	IReadOnlyList<string>? Beyond = null);
+	IReadOnlyList<string>? Beyond = null,
+	IReadOnlyDictionary<string, decimal>? PowerBonus = null,
+	IReadOnlyDictionary<string, decimal>? Play = null);
 
 /// <summary>The fixed bonuses every fusable card gets at high levels (owner, 2026-11-18).</summary>
 [Flags]
@@ -60,6 +62,24 @@ public static class ForgeRule
 		var all = ForgeBonus.None;
 		for (int l = 2; l <= Math.Min(level, MaxLevel); l++) all |= BonusAt(l);
 		return all;
+	}
+
+	/// <summary>The play bonus kinds the runtime knows (data/forge/curves.json "play").</summary>
+	public static readonly IReadOnlySet<string> PlayKinds = new HashSet<string>(StringComparer.Ordinal)
+	{
+		"Block", "Damage", "Draw", "Energy", "Strength", "Dexterity", "Vigor", "Poison", "Weak", "Vulnerable",
+	};
+
+	/// <summary>A per-level bonus at <paramref name="level"/>: one step per level past +1, up to the card's growth cap.</summary>
+	public static decimal PerLevelBonus(decimal perLevel, int level, int cap = MaxLevel) =>
+		level <= 1 ? 0 : perLevel * (Math.Clamp(Math.Min(level, cap), 1, MaxLevel) - 1);
+
+	private static Dictionary<string, decimal>? Amounts(JsonElement e, string name)
+	{
+		if (!e.TryGetProperty(name, out var obj) || obj.ValueKind != JsonValueKind.Object) return null;
+		var d = new Dictionary<string, decimal>(StringComparer.Ordinal);
+		foreach (var p in obj.EnumerateObject()) d[p.Name] = p.Value.GetDecimal();
+		return d.Count > 0 ? d : null;
 	}
 
 	/// <summary>Levels add up: kept + sacrificed + 1, clamped to the cap.</summary>
@@ -123,10 +143,12 @@ public static class ForgeRule
 			int cost = e.TryGetProperty("costPerLevel", out var cp) ? cp.GetInt32() : 0;
 			if (cost > 0) throw new FormatException($"{row.Name}: costPerLevel must not raise the cost");
 			string? note = e.TryGetProperty("note", out var n) ? n.GetString() : null;
+			var powerBonus = Amounts(e, "powerBonus");
+			var play = Amounts(e, "play");
 			List<string>? beyond = null;
 			if (e.TryGetProperty("beyond", out var b))
 				beyond = b.EnumerateArray().Select(v => v.GetString() ?? "").Where(v => v.Length > 0).ToList();
-			result[row.Name] = new ForgeCurve(cap, fusable, perLevel, cost, note, beyond);
+			result[row.Name] = new ForgeCurve(cap, fusable, perLevel, cost, note, beyond, powerBonus, play);
 		}
 		return result;
 	}

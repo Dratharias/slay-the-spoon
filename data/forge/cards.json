@@ -1,0 +1,4951 @@
+{
+  "_comment": "Hand review of every card for The Forge (2026-11-18): what +1 does, what the card does, and how it grows from +2 to +9. tools/forge_curves.py turns it into curves.json.",
+  "ABRASIVE": {
+    "plus1": "ThornsPower +2 (4->6)",
+    "effect": "Gain 1 Dexterity and 4 Thorns",
+    "perLevel": {
+      "ThornsPower": 2,
+      "DexterityPower": 1
+    },
+    "note": "Thorns replay is safe; Dexterity also grows by 1 per level to fit the defensive power"
+  },
+  "ABUNDANCE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Exhaust: choose 1 of 3 upgraded Powers, free this turn",
+    "cap": 5,
+    "play": {
+      "Draw": 1
+    },
+    "note": "Cost already 0 at +1; a tiny Draw per level to find the Power's synergies, Exhaust keeps it safe, capped at 5"
+  },
+  "ACCELERANT": {
+    "plus1": "Accelerant +1 (1->2)",
+    "effect": "Poison triggers N additional times",
+    "cap": 5,
+    "note": "Extra Poison triggers are a multiplier: cap 5"
+  },
+  "ACCURACY": {
+    "plus1": "AccuracyPower +2 (4->6)",
+    "effect": "Shivs deal N additional damage",
+    "note": "Shiv damage bonus is safe to replay to +9"
+  },
+  "ACROBATICS": {
+    "plus1": "Cards +1 (3->4)",
+    "effect": "Draw 3, discard 1",
+    "cap": 5,
+    "note": "Draw: cap 5"
+  },
+  "ADAPTIVE_STRIKE": {
+    "plus1": "Damage +5 (18->23)",
+    "effect": "Deal 18 damage, add a 0-cost copy to discard",
+    "note": "Plain damage replay"
+  },
+  "ADRENALINE": {
+    "plus1": "Energy +1 (1->2)",
+    "effect": "Gain 1 energy, draw 2, Exhaust",
+    "cap": 3,
+    "note": "Energy: cap 3"
+  },
+  "AFTERIMAGE": {
+    "plus1": "Innate",
+    "effect": "Whenever you play a card, gain 1 Block (AfterimagePower 1)",
+    "perLevel": {
+      "AfterimagePower": 1
+    },
+    "note": "Block per card grows by 1 per level; Innate is already given"
+  },
+  "AFTERLIFE": {
+    "plus1": "Summon +3 (6->9)",
+    "effect": "Summon 6, Exhaust",
+    "cap": 5,
+    "note": "Summons: cap 5"
+  },
+  "AGGRESSION": {
+    "plus1": "Innate",
+    "effect": "Each turn start, put a random Attack from discard into hand and Upgrade it (AggressionPower 1, hardcoded)",
+    "cap": 5,
+    "powerBonus": {
+      "AggressionPower": 1
+    },
+    "note": "One more Attack recovered per turn per level (amount = attacks taken); card generation: cap 5"
+  },
+  "ALCHEMIZE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Exhaust: procure a random potion",
+    "play": {
+      "Poison": 2
+    },
+    "note": "Cost hits 0 at +1; potions stay one per play, so add a small alchemical Poison per level"
+  },
+  "ALIGNMENT": {
+    "plus1": "Energy +1 (2->3)",
+    "effect": "2 stars: gain 2 energy",
+    "cap": 3,
+    "note": "Energy: cap 3"
+  },
+  "ALL_FOR_ONE": {
+    "plus1": "Damage +4 (10->14)",
+    "effect": "Deal 10, put all 0-cost cards from discard into hand",
+    "note": "Plain damage replay"
+  },
+  "ANGER": {
+    "plus1": "Damage +2 (6->8)",
+    "effect": "Deal 6, add a copy to discard",
+    "note": "Plain damage replay"
+  },
+  "ANOINTED": {
+    "plus1": "Retain",
+    "effect": "Exhaust: put every Rare from draw pile into hand",
+    "cap": 5,
+    "play": {
+      "Draw": 1
+    },
+    "note": "No number; it is about fetching cards, so a small Draw per level (Exhaust, cap 5)"
+  },
+  "ANTICIPATE": {
+    "plus1": "DexterityPower +2 (2->4)",
+    "effect": "Gain 2 temporary Dexterity this turn",
+    "note": "Temporary Dexterity replay is safe"
+  },
+  "APOTHEOSIS": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Exhaust, Innate: upgrade every other card in combat",
+    "play": {
+      "Strength": 1,
+      "Dexterity": 1
+    },
+    "note": "Cost reaches 0 at +2; ascension theme: gain 1 Strength and 1 Dexterity per level (Exhaust, once per combat)"
+  },
+  "APPARITION": {
+    "plus1": "remove Ethereal",
+    "effect": "Exhaust: gain 1 Intangible",
+    "cap": 3,
+    "perLevel": {
+      "IntangiblePower": 1
+    },
+    "note": "Intangible grows by 1 per level: cap 3"
+  },
+  "ARMAMENTS": {
+    "plus1": "IsUpgraded: upgrade every card in hand instead of one",
+    "effect": "Gain 5 Block, upgrade a card in hand",
+    "perLevel": {
+      "Block": 3
+    },
+    "note": "The +1 changes no number; the Block var grows by 3 per level"
+  },
+  "ARSENAL": {
+    "plus1": "Innate",
+    "effect": "Whenever you create a card, gain 1 Strength (ArsenalPower 1)",
+    "perLevel": {
+      "ArsenalPower": 1
+    },
+    "note": "Strength per created card grows by 1 per level; Strength is safe"
+  },
+  "ASHEN_STRIKE": {
+    "plus1": "ExtraDamage +1 (3->4)",
+    "effect": "Deal 6 + 3 per exhausted card",
+    "beyond": [
+      "CalculationBase"
+    ],
+    "note": "Damage per exhausted card is safe to replay; base damage also keeps up"
+  },
+  "ASSASSINATE": {
+    "plus1": "Damage +3, Vulnerable +1",
+    "effect": "0 cost, Innate, Exhaust: deal 10, apply 1 Vulnerable",
+    "note": "Damage and Vulnerable replay are safe"
+  },
+  "ASTRAL_PULSE": {
+    "plus1": "Damage +2 (6->8)",
+    "effect": "3 stars: deal 6 to all enemies twice",
+    "note": "Plain damage replay"
+  },
+  "AUTOMATION": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Every 10 cards drawn, gain 1 energy (AutomationPower = energy)",
+    "cap": 3,
+    "perLevel": {
+      "Energy": 1
+    },
+    "note": "Cost hits 0 at +1; the Energy var grows instead, energy: cap 3 (cost lowering, if any, still applies)"
+  },
+  "BACKFLIP": {
+    "plus1": "Block +3 (5->8)",
+    "effect": "Gain 5 Block, draw 2",
+    "note": "Block replay is safe; draw stays 2"
+  },
+  "BACKSTAB": {
+    "plus1": "Damage +4 (11->15)",
+    "effect": "0 cost, Innate, Exhaust: deal 11",
+    "note": "Plain damage replay"
+  },
+  "BALL_LIGHTNING": {
+    "plus1": "Damage +3 (7->10)",
+    "effect": "Deal 7, channel 1 Lightning",
+    "note": "Plain damage replay"
+  },
+  "BANSHEES_CRY": {
+    "plus1": "cost 9 -> 7",
+    "effect": "Deal 33 to all enemies; costs 2 less per Ethereal card played",
+    "perLevel": {
+      "Damage": 5
+    },
+    "note": "Cost-only: keeps dropping by 2 to 0 at +5; damage also grows by 5 per level so it keeps scaling"
+  },
+  "BARRAGE": {
+    "plus1": "Damage +2 (5->7)",
+    "effect": "Deal 5 once per channeled orb",
+    "note": "Plain damage replay"
+  },
+  "BARRICADE": {
+    "plus1": "cost 3 -> 2",
+    "effect": "Block is not removed at turn start (BarricadePower, single)",
+    "play": {
+      "Block": 5
+    },
+    "note": "Cost-only drops to 0 at +3; the power cannot stack, so a Block bonus per level fits the theme"
+  },
+  "BASH": {
+    "plus1": "Damage +2, Vulnerable +1",
+    "effect": "Deal 8, apply 2 Vulnerable",
+    "note": "Damage and Vulnerable replay are safe"
+  },
+  "BATTLE_TRANCE": {
+    "plus1": "Cards +1 (3->4)",
+    "effect": "0 cost: draw 3, no more draw this turn",
+    "cap": 5,
+    "note": "Draw: cap 5"
+  },
+  "BEACON_OF_HOPE": {
+    "plus1": "Innate",
+    "effect": "Whenever you gain Block on your turn, allies gain half of it (single stack, 50% hardcoded)",
+    "play": {
+      "Block": 4
+    },
+    "note": "Single-stack power with a hardcoded 50%; Block on play feeds the share to allies"
+  },
+  "BEAM_CELL": {
+    "plus1": "Damage +1, Vulnerable +1",
+    "effect": "0 cost: deal 3, apply 1 Vulnerable",
+    "note": "Damage and Vulnerable replay are safe"
+  },
+  "BEAT_DOWN": {
+    "plus1": "Cards +1 (3->4)",
+    "effect": "Autoplay 3 random Attacks from discard",
+    "cap": 3,
+    "note": "Cards here are free extra plays of Attacks, not draw: cap 3"
+  },
+  "BEAT_INTO_SHAPE": {
+    "plus1": "Damage +2, CalculationBase +2, CalculationExtra +2",
+    "effect": "Deal 5, Forge 5 + 5 per time the target was hit this turn",
+    "cap": 5,
+    "beyond": [
+      "CalculationBase",
+      "Damage"
+    ],
+    "note": "Forge per hit is a per-hit multiplier: cap 5; base and damage keep growing"
+  },
+  "BEGONE": {
+    "plus1": "IsUpgraded: the Minion Strike is upgraded",
+    "effect": "Transform a card in hand into a Minion Strike",
+    "play": {
+      "Damage": 4
+    },
+    "note": "No var; a small Damage per level to the target or a random enemy fits the banishing theme"
+  },
+  "BELIEVE_IN_YOU": {
+    "plus1": "Energy +1 (2->3)",
+    "effect": "0 cost: an ally gains 2 energy",
+    "cap": 3,
+    "note": "Energy: cap 3"
+  },
+  "BIASED_COGNITION": {
+    "plus1": "FocusPower +1 (5->6)",
+    "effect": "Gain 5 Focus, lose 1 Focus each turn",
+    "cap": 5,
+    "note": "Focus: cap 5"
+  },
+  "BIG_BANG": {
+    "plus1": "Innate",
+    "effect": "0 cost, Exhaust: draw 1, gain 1 star, 1 energy, Forge 5",
+    "cap": 3,
+    "beyond": [
+      "Forge"
+    ],
+    "perLevel": {
+      "Cards": 1,
+      "Energy": 1,
+      "Stars": 1,
+      "Forge": 5
+    },
+    "note": "The +1 grows no var; everything grows by 1 (Forge by 5) per level, energy/stars: cap 3, Forge keeps growing"
+  },
+  "BLACK_HOLE": {
+    "plus1": "BlackHolePower +1 (3->4)",
+    "effect": "Whenever you gain or spend stars, deal 3 to all enemies",
+    "note": "Damage per star event is safe to replay"
+  },
+  "BLADE_DANCE": {
+    "plus1": "Cards +1 (3->4)",
+    "effect": "Exhaust: add 3 Shivs to hand",
+    "cap": 5,
+    "note": "Card generation: cap 5"
+  },
+  "BLADE_OF_INK": {
+    "plus1": "Cards +1 (2->3)",
+    "effect": "Add 2 Inky Shivs to hand",
+    "cap": 5,
+    "note": "Card generation: cap 5"
+  },
+  "BLADE_SYMPHONY": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Multiplayer: each teammate adds 2 Shivs to hand",
+    "cap": 5,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "Cost-only drops to 0 at +2; then more Shivs per teammate, card generation: cap 5"
+  },
+  "BLAZE": {
+    "plus1": "StrengthPower +2 (5->7)",
+    "effect": "Multiplayer: an ally gains 5 Strength",
+    "note": "Strength replay is safe"
+  },
+  "BLIGHT_STRIKE": {
+    "plus1": "Damage +2 (8->10)",
+    "effect": "Deal 8, apply Doom equal to damage dealt",
+    "note": "Damage replay also grows the Doom"
+  },
+  "BLOODLETTING": {
+    "plus1": "Energy +1 (2->3)",
+    "effect": "0 cost: lose 3 HP, gain 2 energy",
+    "cap": 3,
+    "note": "Energy: cap 3; HP cost limits it"
+  },
+  "BLOOD_WALL": {
+    "plus1": "Block +4 (16->20)",
+    "effect": "Lose 2 HP, gain 16 Block",
+    "note": "Block replay is safe"
+  },
+  "BLUDGEON": {
+    "plus1": "Damage +10 (32->42)",
+    "effect": "Deal 32",
+    "note": "Plain damage replay"
+  },
+  "BLUR": {
+    "plus1": "Block +3 (5->8)",
+    "effect": "Gain 5 Block, Block is kept next turn (Blur 1)",
+    "note": "Block replay is safe"
+  },
+  "BODYGUARD": {
+    "plus1": "Summon +2 (5->7)",
+    "effect": "Summon 5",
+    "cap": 5,
+    "note": "Summons: cap 5"
+  },
+  "BODY_SLAM": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Deal damage equal to your Block (ExtraDamage 1 x Block)",
+    "cap": 3,
+    "beyond": [
+      "CalculationBase"
+    ],
+    "perLevel": {
+      "ExtraDamage": 1,
+      "CalculationBase": 3
+    },
+    "note": "Cost hits 0 at +1; Block multiplier grows by 1 to x3 at cap 3, flat base damage keeps growing"
+  },
+  "BOLAS": {
+    "plus1": "Damage +1 (3->4)",
+    "effect": "0 cost: deal 3, returns to hand next turn",
+    "note": "Plain damage replay"
+  },
+  "BOMBARDMENT": {
+    "plus1": "Damage +6 (18->24)",
+    "effect": "Exhaust: deal 18, replays itself from the exhaust pile each turn",
+    "note": "Plain damage replay"
+  },
+  "BONE_SHARDS": {
+    "plus1": "OstyDamage +3, Block +3",
+    "effect": "Osty deals 9 to all, gain 9 Block, Osty dies",
+    "note": "Damage and Block replay are safe"
+  },
+  "BOOST_AWAY": {
+    "plus1": "Block +3 (6->9)",
+    "effect": "0 cost: gain 6 Block, add a Dazed to discard",
+    "note": "Block replay is safe"
+  },
+  "BOOT_SEQUENCE": {
+    "plus1": "Block +3 (10->13)",
+    "effect": "0 cost, Innate, Exhaust: gain 10 Block",
+    "note": "Block replay is safe"
+  },
+  "BORROWED_TIME": {
+    "plus1": "Energy +2 (4->6)",
+    "effect": "Gain 4 energy, your cards cost 1 more this turn",
+    "cap": 3,
+    "perLevel": {
+      "Energy": 1
+    },
+    "note": "Energy: cap 3, and only +1 per level past +1 (the +2 delta would reach 10)"
+  },
+  "BOUNCING_FLASK": {
+    "plus1": "Repeat +1 (3->4)",
+    "effect": "Apply 3 Poison to a random enemy 3 times",
+    "cap": 5,
+    "beyond": [
+      "PoisonPower"
+    ],
+    "perLevel": {
+      "Repeat": 1,
+      "PoisonPower": 1
+    },
+    "note": "Bounces are Poison hits, not card plays: cap 5 on bounces, Poison per bounce keeps growing"
+  },
+  "BRAND": {
+    "plus1": "StrengthPower +1 (1->2)",
+    "effect": "0 cost: lose 1 HP, exhaust a card, gain 1 Strength",
+    "note": "Strength replay is safe"
+  },
+  "BREAK": {
+    "plus1": "Damage +10, Vulnerable +2",
+    "effect": "Deal 20, apply 5 Vulnerable",
+    "note": "Damage and Vulnerable replay are safe"
+  },
+  "BREAKTHROUGH": {
+    "plus1": "Damage +4 (9->13)",
+    "effect": "Lose 1 HP, deal 9 to all enemies",
+    "note": "Plain damage replay"
+  },
+  "BRIGHTEST_FLAME": {
+    "plus1": "Energy +1, Cards +1",
+    "effect": "0 cost: gain 2 energy, draw 2, lose 2 max HP",
+    "cap": 3,
+    "note": "Energy and draw: cap 3; max HP loss limits it"
+  },
+  "BUBBLE_BUBBLE": {
+    "plus1": "PoisonPower +3 (9->12)",
+    "effect": "Apply 9 Poison to a poisoned enemy",
+    "note": "Poison replay is safe"
+  },
+  "BUFFER": {
+    "plus1": "BufferPower +1 (1->2)",
+    "effect": "Prevent the next HP loss (Buffer 1)",
+    "cap": 3,
+    "note": "Buffer: cap 3"
+  },
+  "BULK_UP": {
+    "plus1": "Strength +1, Dexterity +1",
+    "effect": "Lose 1 orb slot, gain 2 Strength and 2 Dexterity",
+    "note": "Strength/Dexterity replay is safe"
+  },
+  "BULLET_TIME": {
+    "plus1": "cost 3 -> 2",
+    "effect": "Cards in hand are free this turn, no more draw",
+    "note": "Cost-only: drops to 0 at +3; no draw after, so no loop"
+  },
+  "BULLY": {
+    "plus1": "ExtraDamage +1 (2->3)",
+    "effect": "0 cost: deal 4 + 2 per Vulnerable on the target",
+    "note": "Damage per Vulnerable is safe to replay"
+  },
+  "BULWARK": {
+    "plus1": "Block +3, Forge +3",
+    "effect": "Gain 12 Block, Forge 10",
+    "note": "Block and Forge replay are safe"
+  },
+  "BUNDLE_OF_JOY": {
+    "plus1": "Cards +1 (3->4)",
+    "effect": "Exhaust: add 3 random colorless cards to hand",
+    "cap": 5,
+    "note": "Card generation: cap 5"
+  },
+  "BURNING_PACT": {
+    "plus1": "Cards +1 (2->3)",
+    "effect": "Exhaust a card, draw 2",
+    "cap": 5,
+    "note": "Draw: cap 5"
+  },
+  "BURST": {
+    "plus1": "Skills +1 (1->2)",
+    "effect": "This turn, your next Skill is played an extra time (BurstPower)",
+    "cap": 3,
+    "note": "Skills here are extra plays, not draw: cap 3"
+  },
+  "BURY": {
+    "plus1": "Damage +11 (52->63)",
+    "effect": "Deal 52",
+    "note": "Plain damage replay"
+  },
+  "BYRDONIS_EGG": {
+    "plus1": "none (MaxUpgradeLevel 0)",
+    "effect": "Unplayable Quest card: adds the Hatch rest site option",
+    "fusable": false,
+    "note": "Quest card with MaxUpgradeLevel 0 and no effect to scale; fusing two eggs would only destroy one"
+  },
+  "BYRD_SWOOP": {
+    "plus1": "Damage +4 (14->18)",
+    "effect": "0 cost: Byrdpip deals 14",
+    "note": "Plain damage replay"
+  },
+  "CACOPHONY": {
+    "plus1": "Damage +33 (66->99)",
+    "effect": "Every 33 cards drawn, deal 66 to a random enemy",
+    "note": "Unpowered damage replay is safe"
+  },
+  "CALAMITY": {
+    "plus1": "cost 3 -> 2",
+    "effect": "Whenever you play an Attack, add 1 random Attack to hand (CalamityPower 1, hardcoded)",
+    "cap": 5,
+    "powerBonus": {
+      "CalamityPower": 1
+    },
+    "note": "Cost-only drops to 0 at +3; then one more Attack generated per level, card generation: cap 5"
+  },
+  "CALCIFY": {
+    "plus1": "CalcifyPower +2 (4->6)",
+    "effect": "Osty's attacks deal 4 more damage",
+    "note": "Osty damage bonus replay is safe"
+  },
+  "CALCULATED_GAMBLE": {
+    "plus1": "Retain",
+    "effect": "0 cost, Exhaust: discard your hand, draw that many",
+    "cap": 5,
+    "play": {
+      "Draw": 1
+    },
+    "note": "No number; one extra card drawn per level fits the reroll, Exhaust: cap 5"
+  },
+  "CALL_OF_THE_VOID": {
+    "plus1": "Innate",
+    "effect": "Each turn, add 1 random Ethereal card to hand (Cards 1)",
+    "cap": 5,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "The +1 grows no var; one more Ethereal card per turn per level, card generation: cap 5"
+  },
+  "CALTROPS": {
+    "plus1": "ThornsPower +2 (3->5)",
+    "effect": "Gain 3 Thorns",
+    "note": "Thorns replay is safe"
+  },
+  "CAPACITOR": {
+    "plus1": "Repeat +1 (2->3)",
+    "effect": "Gain 2 orb slots",
+    "cap": 5,
+    "note": "Repeat is orb slots here, not plays: orbs cap 5"
+  },
+  "CAPTURE_SPIRIT": {
+    "plus1": "Damage +1, Cards +1",
+    "effect": "Deal 3 unblockable, shuffle 3 Souls into draw pile",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "Card generation: cap 5; damage keeps growing"
+  },
+  "CASCADE": {
+    "plus1": "IsUpgraded: X+1 cards autoplayed",
+    "effect": "X cost: autoplay the top X cards of your draw pile",
+    "cap": 3,
+    "play": {
+      "Draw": 1
+    },
+    "note": "X-cost with no var; a small Draw per level refills the pile it plays from, cap 3 as it chains plays"
+  },
+  "CATASTROPHE": {
+    "plus1": "Cards +1 (2->3)",
+    "effect": "Autoplay 2 random cards from your draw pile",
+    "cap": 3,
+    "note": "Cards here are free extra plays, not draw: cap 3"
+  },
+  "CELESTIAL_MIGHT": {
+    "plus1": "Repeat +1 (3->4)",
+    "effect": "Deal 6 three times",
+    "cap": 3,
+    "beyond": [
+      "Damage"
+    ],
+    "perLevel": {
+      "Repeat": 1,
+      "Damage": 2
+    },
+    "note": "Extra hits: cap 3; damage per hit also grows and keeps growing past it"
+  },
+  "CHAOS": {
+    "plus1": "Repeat +1 (1->2)",
+    "effect": "Channel 1 random orb",
+    "cap": 5,
+    "note": "Repeat is orbs channeled: orbs cap 5"
+  },
+  "CHARGE": {
+    "plus1": "IsUpgraded: the Minion Dive Bombs are upgraded",
+    "effect": "Transform 2 cards from your draw pile into Minion Dive Bombs",
+    "cap": 5,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "The +1 grows no var; one more card transformed per level, card generation: cap 5"
+  },
+  "CHARGE_BATTERY": {
+    "plus1": "Block +3 (7->10)",
+    "effect": "Gain 7 Block, gain 1 energy next turn",
+    "note": "Block replay is safe; energy stays 1"
+  },
+  "CHILD_OF_THE_STARS": {
+    "plus1": "BlockForStars +1 (2->3)",
+    "effect": "Whenever you spend stars, gain 2 Block per star",
+    "note": "Block per star replay is safe"
+  },
+  "CHILL": {
+    "plus1": "remove Exhaust",
+    "effect": "0 cost, Exhaust: channel 1 Frost",
+    "play": {
+      "Block": 2
+    },
+    "note": "No var; Frost is the defensive orb, so a small Block per level fits"
+  },
+  "CINDER": {
+    "plus1": "Damage +6 (18->24)",
+    "effect": "Deal 18, exhaust a random card in hand",
+    "note": "Plain damage replay"
+  },
+  "CLASH": {
+    "plus1": "Damage +4 (14->18)",
+    "effect": "0 cost, only playable if hand is all Attacks: deal 14",
+    "note": "Plain damage replay"
+  },
+  "CLAW": {
+    "plus1": "Damage +1, Increase +1",
+    "effect": "0 cost: deal 3, every Claw gains 2 damage this combat",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "Growth per play is scaling: cap 5; base damage keeps growing"
+  },
+  "CLEANSE": {
+    "plus1": "Summon +2 (3->5)",
+    "effect": "Summon 3, exhaust a card from draw pile",
+    "cap": 5,
+    "note": "Summons: cap 5"
+  },
+  "CLOAK_AND_DAGGER": {
+    "plus1": "Cards +1 (1->2)",
+    "effect": "Gain 6 Block, add 1 Shiv to hand",
+    "cap": 5,
+    "beyond": [
+      "Block"
+    ],
+    "perLevel": {
+      "Cards": 1,
+      "Block": 2
+    },
+    "note": "Shiv generation: cap 5; Block also grows and keeps growing past it"
+  },
+  "CLOAK_OF_STARS": {
+    "plus1": "Block +3 (7->10)",
+    "effect": "1 star: gain 7 Block",
+    "note": "Block replay is safe"
+  },
+  "COLD_SNAP": {
+    "plus1": "Damage +3 (6->9)",
+    "effect": "Deal 6, channel 1 Frost",
+    "note": "Plain damage replay"
+  },
+  "COLLISION_COURSE": {
+    "plus1": "Damage +4 (10->14)",
+    "effect": "0 cost: deal 10, add a Debris to hand",
+    "note": "Plain damage replay"
+  },
+  "COLOSSUS": {
+    "plus1": "Block +3 (4->7)",
+    "effect": "Gain 4 Block; for 1 turn, Vulnerable enemies deal you half damage",
+    "note": "Block replay is safe"
+  },
+  "COMET": {
+    "plus1": "Damage +11 (33->44)",
+    "effect": "5 stars: deal 33, apply 3 Weak and 3 Vulnerable",
+    "note": "Plain damage replay"
+  },
+  "COMPACT": {
+    "plus1": "Block +1 (6->7); IsUpgraded: the Fuel cards are upgraded",
+    "effect": "Gain 6 Block, transform Statuses in hand into Fuel",
+    "perLevel": {
+      "Block": 3
+    },
+    "note": "A +1 Block delta is too small per level; Block grows by 3 instead"
+  },
+  "COMPILE_DRIVER": {
+    "plus1": "Damage +3 (7->10)",
+    "effect": "Deal 7, draw 1 per distinct orb type",
+    "note": "Damage replay; the draw stays tied to orbs"
+  },
+  "CONCOCT": {
+    "plus1": "ConcoctPower +1 (3->4)",
+    "effect": "Multiplayer: this turn an ally's unblocked attacks apply 3 Poison",
+    "note": "Poison per hit replay is safe"
+  },
+  "CONFLAGRATION": {
+    "plus1": "Repeat +1 (4->5)",
+    "effect": "Deal 2 to all enemies 4 times",
+    "cap": 3,
+    "beyond": [
+      "Damage"
+    ],
+    "perLevel": {
+      "Repeat": 1,
+      "Damage": 1
+    },
+    "note": "Extra hits: cap 3; damage per hit also grows and keeps growing past it"
+  },
+  "CONQUEROR": {
+    "plus1": "Forge +2 (3->5)",
+    "effect": "Forge 3; the target takes double damage from Sovereign Blade for 1 turn (ConquerorPower 1, hardcoded)",
+    "cap": 5,
+    "beyond": [
+      "Forge"
+    ],
+    "powerBonus": {
+      "ConquerorPower": 1
+    },
+    "note": "Forge keeps growing; the double-damage window lasts 1 more turn per level, a multiplier: cap 5"
+  },
+  "CONSTELLATION": {
+    "plus1": "Block +3 (9->12)",
+    "effect": "Multiplayer, 2 stars: an ally draws 1, gains 1 energy and 9 Block",
+    "note": "Block replay is safe; draw and energy stay 1"
+  },
+  "CONSUMING_SHADOW": {
+    "plus1": "Repeat +1 (2->3)",
+    "effect": "Channel 2 Dark orbs; at turn end evoke your last orb (ConsumingShadowPower 1)",
+    "cap": 5,
+    "note": "Repeat is Dark orbs channeled: orbs cap 5"
+  },
+  "CONVERGENCE": {
+    "plus1": "Stars +1 (1->2)",
+    "effect": "Retain your hand; next turn gain 1 energy and 1 star",
+    "cap": 3,
+    "note": "Stars: cap 3"
+  },
+  "COOLANT": {
+    "plus1": "CoolantPower +1 (2->3)",
+    "effect": "Each turn, gain 2 Block per distinct orb type",
+    "note": "Block replay is safe"
+  },
+  "COOLHEADED": {
+    "plus1": "Cards +1 (1->2)",
+    "effect": "Channel 1 Frost, draw 1",
+    "cap": 5,
+    "note": "Draw: cap 5"
+  },
+  "COORDINATE": {
+    "plus1": "StrengthPower +3 (5->8)",
+    "effect": "Multiplayer: an ally gains 5 temporary Strength",
+    "note": "Temporary Strength replay is safe"
+  },
+  "CORROSIVE_WAVE": {
+    "plus1": "CorrosiveWave +1 (2->3)",
+    "effect": "This turn, whenever you draw a card, apply 2 Poison to all enemies",
+    "note": "Poison per draw replay is safe"
+  },
+  "CORRUPTION": {
+    "plus1": "cost 3 -> 2",
+    "effect": "Skills cost 0 and Exhaust when played (CorruptionPower, single stack)",
+    "play": {
+      "Strength": 1
+    },
+    "note": "Cost-only drops to 0 at +3; the power cannot stack, so a dark Strength gain per level"
+  },
+  "COSMIC_INDIFFERENCE": {
+    "plus1": "Block +3 (6->9)",
+    "effect": "Gain 6 Block, put a card from discard on top of draw pile",
+    "note": "Block replay is safe"
+  },
+  "COUNTDOWN": {
+    "plus1": "CountdownPower +3 (6->9)",
+    "effect": "Each turn, apply 6 Doom to a random enemy",
+    "note": "Doom replay is safe"
+  },
+  "CRASH_LANDING": {
+    "plus1": "Damage +5 (21->26)",
+    "effect": "Deal 21 to all enemies, fill your hand with Debris",
+    "note": "Plain damage replay"
+  },
+  "CREATIVE_AI": {
+    "plus1": "cost 3 -> 2",
+    "effect": "Each turn, add 1 random Power to hand (CreativeAi 1)",
+    "cap": 5,
+    "perLevel": {
+      "CreativeAi": 1
+    },
+    "note": "Cost-only drops to 0 at +3; then one more Power per turn per level, card generation: cap 5"
+  },
+  "CRESCENT_SPEAR": {
+    "plus1": "ExtraDamage +1 (2->3)",
+    "effect": "1 star: deal 8 + 2 per star-cost card you own",
+    "note": "Damage per star card replay is safe"
+  },
+  "CRIMSON_MANTLE": {
+    "plus1": "CrimsonMantlePower +3 (7->10)",
+    "effect": "Each turn, take self damage (1 per Mantle played) and gain 7 Block",
+    "note": "Block replay is safe"
+  },
+  "CRUELTY": {
+    "plus1": "CrueltyPower +25 (25->50)",
+    "effect": "Vulnerable enemies take 25% more attack damage",
+    "cap": 5,
+    "note": "A damage multiplier: cap 5 (+150%)"
+  },
+  "CRUSH_UNDER": {
+    "plus1": "Damage +1, StrengthLoss +1",
+    "effect": "Deal 8 to all enemies, they lose 1 Strength this turn",
+    "note": "Damage and temporary Strength loss replay are safe"
+  },
+  "DAGGER_SPRAY": {
+    "plus1": "Damage +2 (4->6)",
+    "effect": "Deal 4 to all enemies twice",
+    "note": "Plain damage replay"
+  },
+  "DAGGER_THROW": {
+    "plus1": "Damage +3 (9->12)",
+    "effect": "Deal 9, draw 1, discard 1",
+    "note": "Plain damage replay"
+  },
+  "DANSE_MACABRE": {
+    "plus1": "DanseMacabrePower +2 (4->6)",
+    "effect": "Whenever you play a card costing 2+, gain 4 Block",
+    "note": "Block replay is safe"
+  },
+  "DARKNESS": {
+    "plus1": "IsUpgraded: Dark orbs trigger their passive twice",
+    "effect": "Channel 1 Dark orb, trigger every Dark orb's passive",
+    "play": {
+      "Damage": 3
+    },
+    "note": "No var; a small dark Damage per level to a random enemy fits the orb's theme"
+  },
+  "DARK_EMBRACE": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Whenever a card is exhausted, draw 1 (DarkEmbracePower 1, hardcoded)",
+    "cap": 3,
+    "powerBonus": {
+      "DarkEmbracePower": 1
+    },
+    "note": "Cost-only drops to 0 at +2; then one more draw per exhaust per level, a per-trigger draw: cap 3"
+  },
+  "DARK_SHACKLES": {
+    "plus1": "StrengthLoss +6 (9->15)",
+    "effect": "0 cost, Exhaust: the enemy loses 9 Strength this turn",
+    "note": "Temporary Strength loss replay is safe"
+  },
+  "DASH": {
+    "plus1": "Damage +3, Block +3",
+    "effect": "Gain 10 Block, deal 10",
+    "note": "Damage and Block replay are safe"
+  },
+  "DEADLY_POISON": {
+    "plus1": "PoisonPower +2 (5->7)",
+    "effect": "Apply 5 Poison",
+    "note": "Poison replay is safe"
+  },
+  "DEATHBRINGER": {
+    "plus1": "Doom +5 (21->26)",
+    "effect": "Apply 21 Doom and 1 Weak to all enemies",
+    "note": "Doom replay is safe"
+  },
+  "DEATHS_DOOR": {
+    "plus1": "Block +1 (6->7)",
+    "effect": "Gain 6 Block; twice more if you applied Doom this turn",
+    "perLevel": {
+      "Block": 2
+    },
+    "note": "A +1 Block delta is too small per level; Block grows by 2 instead (it is gained up to 3 times)"
+  },
+  "DEATH_MARCH": {
+    "plus1": "CalculationBase +1, ExtraDamage +2",
+    "effect": "8 dmg + 4 per card drawn this turn outside hand draw",
+    "note": "damage only; full replay is safe"
+  },
+  "DEBILITATE": {
+    "plus1": "Damage +2, DebilitatePower +1 turn",
+    "effect": "10 dmg; Vulnerable/Weak doubled on target for 2 turns",
+    "note": "damage and debuff turns are safe"
+  },
+  "DECISIONS_DECISIONS": {
+    "plus1": "Cards +2",
+    "effect": "Draw 3, then autoplay a chosen Skill 3 times (6 stars, Exhaust)",
+    "cap": 3,
+    "note": "draw grows by 2 per level; hand is full by +3"
+  },
+  "DEFEND_DEFECT": {
+    "plus1": "Block +3",
+    "effect": "Gain 5 Block",
+    "note": "block only; full replay"
+  },
+  "DEFEND_IRONCLAD": {
+    "plus1": "Block +3",
+    "effect": "Gain 5 Block",
+    "note": "block only; full replay"
+  },
+  "DEFEND_NECROBINDER": {
+    "plus1": "Block +3",
+    "effect": "Gain 5 Block",
+    "note": "block only; full replay"
+  },
+  "DEFEND_REGENT": {
+    "plus1": "Block +3",
+    "effect": "Gain 5 Block",
+    "note": "block only; full replay"
+  },
+  "DEFEND_SILENT": {
+    "plus1": "Block +3",
+    "effect": "Gain 5 Block",
+    "note": "block only; full replay"
+  },
+  "DEFILE": {
+    "plus1": "Damage +4",
+    "effect": "13 dmg, Ethereal",
+    "note": "damage only"
+  },
+  "DEFLECT": {
+    "plus1": "Block +3",
+    "effect": "0 cost: gain 4 Block",
+    "note": "block only"
+  },
+  "DEFRAGMENT": {
+    "plus1": "FocusPower +1",
+    "effect": "Gain 1 Focus",
+    "cap": 5,
+    "note": "Focus: cap 5"
+  },
+  "DEFY": {
+    "plus1": "Block +3",
+    "effect": "Gain 6 Block, apply 1 Weak (Ethereal)",
+    "note": "block grows; Weak stays 1"
+  },
+  "DELAY": {
+    "plus1": "Block +2, Energy +1",
+    "effect": "Gain 11 Block, 1 energy next turn",
+    "cap": 3,
+    "beyond": [
+      "Block"
+    ],
+    "note": "next-turn energy capped at 3"
+  },
+  "DEMESNE": {
+    "plus1": "cost 3 -> 2",
+    "effect": "Power: +1 max energy and +1 hand draw per turn (Ethereal)",
+    "note": "cost-only reaches 0 at +3; no powerBonus since amount is energy+draw per turn"
+  },
+  "DEMONIC_SHIELD": {
+    "plus1": "removes Exhaust",
+    "effect": "Lose 1 HP, give an ally Block equal to your Block (co-op only)",
+    "perLevel": {
+      "CalculationBase": 2
+    },
+    "note": "flat Block on top of the copied Block, the shield gets thicker"
+  },
+  "DEMON_FORM": {
+    "plus1": "StrengthPower +1",
+    "effect": "Power: gain 3 Strength each turn",
+    "note": "Strength is safe; full replay to +9"
+  },
+  "DEVASTATE": {
+    "plus1": "Damage +10",
+    "effect": "35 dmg (4 stars)",
+    "note": "damage only"
+  },
+  "DEVOUR_LIFE": {
+    "plus1": "DevourLifePower +1",
+    "effect": "Power: playing a Soul summons Osty for N",
+    "cap": 5,
+    "note": "summons: cap 5"
+  },
+  "DIRGE": {
+    "plus1": "Summon +1; IsUpgraded upgrades the X Souls",
+    "effect": "X cost: summon 3 X times, add X Souls to draw pile (Exhaust)",
+    "cap": 5,
+    "note": "summons: cap 5; Souls stay at +1"
+  },
+  "DISCOVERY": {
+    "plus1": "removes Exhaust",
+    "effect": "Choose 1 of 3 class cards, free this turn",
+    "play": {
+      "Block": 2
+    },
+    "note": "no number; small Block (Draw/Energy would loop once the ladder makes it 0 cost)"
+  },
+  "DISMANTLE": {
+    "plus1": "Damage +2",
+    "effect": "8 dmg, hits twice on Vulnerable",
+    "note": "damage only"
+  },
+  "DISTRACTION": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Add a random Skill to hand, free this turn (Exhaust)",
+    "play": {
+      "Weak": 1
+    },
+    "note": "cost already 0 at +1; Weak fits a distraction"
+  },
+  "DODGE_AND_ROLL": {
+    "plus1": "Block +2",
+    "effect": "Gain 4 Block, same Block next turn",
+    "note": "block only"
+  },
+  "DOMINATE": {
+    "plus1": "VulnerablePower +1",
+    "effect": "Apply 1 Vulnerable, gain Strength equal to target's Vulnerable (Exhaust)",
+    "note": "Vulnerable and Strength grow together; safe"
+  },
+  "DOUBLE_ENERGY": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Double your energy (Exhaust)",
+    "cap": 3,
+    "play": {
+      "Energy": 1
+    },
+    "note": "0 at +1; tiny extra energy, Exhaust bounds it"
+  },
+  "DOWSING": {
+    "plus1": "none (MaxUpgradeLevel 0)",
+    "effect": "Quest: after 5 unknown rooms transforms into Abundance",
+    "fusable": false,
+    "note": "quest card cannot be upgraded at all; fusing it is meaningless"
+  },
+  "DRAIN_POWER": {
+    "plus1": "Damage +2, Cards +1",
+    "effect": "10 dmg, upgrade 2 random cards in discard",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "upgrade count: cap 5; damage keeps growing"
+  },
+  "DRAMATIC_ENTRANCE": {
+    "plus1": "Damage +4",
+    "effect": "0 cost, 11 dmg to all, Innate, Exhaust",
+    "note": "damage only"
+  },
+  "DREDGE": {
+    "plus1": "adds Retain",
+    "effect": "Put 3 cards from discard into hand (Exhaust)",
+    "cap": 5,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "Retain changes no number; grow the cards fetched"
+  },
+  "DRUM_OF_BATTLE": {
+    "plus1": "Energy +1",
+    "effect": "Draw 2; when exhausted gain 2 energy",
+    "cap": 3,
+    "note": "energy: cap 3"
+  },
+  "DUALCAST": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Evoke front orb twice",
+    "play": {
+      "Damage": 3
+    },
+    "note": "0 at +1; a small hit like a third evoke"
+  },
+  "DUAL_WIELD": {
+    "plus1": "Cards +1",
+    "effect": "Add 1 copy of an Attack/Power in hand",
+    "cap": 5,
+    "note": "card generation: cap 5"
+  },
+  "DYING_STAR": {
+    "plus1": "Damage +2, StrengthLoss +2",
+    "effect": "9 dmg to all, temporary Strength loss 9 (Ethereal, 3 stars)",
+    "note": "damage and temp Strength loss are safe"
+  },
+  "ECHOING_SLASH": {
+    "plus1": "Damage +3",
+    "effect": "10 dmg to all, repeats per kill",
+    "note": "damage only"
+  },
+  "ECHO_FORM": {
+    "plus1": "removes Ethereal",
+    "effect": "Power: first card each turn is played twice",
+    "cap": 3,
+    "perLevel": {
+      "EchoForm": 1
+    },
+    "note": "extra plays: +1 echoed card per level, cap 3"
+  },
+  "EIDOLON": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Autoplay every Ethereal card in exhaust pile (Exhaust)",
+    "note": "cost-only reaches 0 at +2; fine"
+  },
+  "END_OF_DAYS": {
+    "plus1": "Doom +8",
+    "effect": "Apply 29 Doom to all, kill doomed",
+    "note": "Doom is a damage stand-in; safe"
+  },
+  "ENERGY_SURGE": {
+    "plus1": "Energy +1",
+    "effect": "All players gain 2 energy (co-op, Exhaust)",
+    "cap": 3,
+    "note": "energy: cap 3"
+  },
+  "ENFEEBLING_TOUCH": {
+    "plus1": "StrengthLoss +3",
+    "effect": "Enemy temporarily loses 8 Strength (Ethereal)",
+    "note": "debuff only; safe"
+  },
+  "ENLIGHTENMENT": {
+    "plus1": "IsUpgraded: cost 1 for the whole combat instead of this turn",
+    "effect": "Hand cards cost at most 1 (Exhaust, 0 cost)",
+    "cap": 5,
+    "play": {
+      "Draw": 1
+    },
+    "note": "no number; drawing more cards to discount fits; Exhaust bounds it"
+  },
+  "ENTRENCH": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Double your Block",
+    "note": "cost-only reaches 0 at +2"
+  },
+  "ENTROPY": {
+    "plus1": "adds Innate",
+    "effect": "Power: each turn transform 1 card in hand",
+    "cap": 3,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "Innate gives no number; more chaos per turn, kept small (exact select count)"
+  },
+  "ENVENOM": {
+    "plus1": "EnvenomPower +1",
+    "effect": "Power: unblocked attack hits apply 1 Poison",
+    "note": "poison is safe; full replay"
+  },
+  "EQUILIBRIUM": {
+    "plus1": "Block +3",
+    "effect": "Gain 13 Block, retain hand this turn",
+    "note": "block only"
+  },
+  "ERADICATE": {
+    "plus1": "Damage +3",
+    "effect": "X cost: 11 dmg X times (Retain)",
+    "note": "damage only"
+  },
+  "ESCAPE_PLAN": {
+    "plus1": "Block +2",
+    "effect": "0 cost: draw 1, gain 3 Block if Skill",
+    "note": "block only"
+  },
+  "ETERNAL_ARMOR": {
+    "plus1": "PlatingPower +3",
+    "effect": "Gain 9 Plating",
+    "note": "block-like; safe"
+  },
+  "EVIL_EYE": {
+    "plus1": "Block +3",
+    "effect": "Gain 8 Block, twice if a card was exhausted this turn",
+    "note": "block only"
+  },
+  "EXPECT_A_FIGHT": {
+    "plus1": "CalculationBase +1, CalculationExtra +3",
+    "effect": "Block 15 + 5 per Strength",
+    "cap": 5,
+    "beyond": [
+      "CalculationBase"
+    ],
+    "note": "per-Strength multiplier: cap 5; base keeps growing"
+  },
+  "EXPERTISE": {
+    "plus1": "Cards +1",
+    "effect": "Draw 2, they Retain this turn",
+    "cap": 5,
+    "note": "draw: cap 5"
+  },
+  "EXPOSE": {
+    "plus1": "Power (Vulnerable) +1",
+    "effect": "Remove Block and Artifact, apply 2 Vulnerable (Exhaust)",
+    "note": "Vulnerable is safe"
+  },
+  "EXTERMINATE": {
+    "plus1": "Damage +1",
+    "effect": "3 dmg x4 to all",
+    "note": "damage only"
+  },
+  "FADE": {
+    "plus1": "Dexterity +3",
+    "effect": "Ally gains 6 temporary Dexterity (co-op, Retain)",
+    "note": "temporary Dexterity is safe"
+  },
+  "FALLING_STAR": {
+    "plus1": "Damage +4",
+    "effect": "8 dmg, 1 Weak, 1 Vulnerable (2 stars)",
+    "note": "damage only"
+  },
+  "FAN_OF_KNIVES": {
+    "plus1": "Shivs +1",
+    "effect": "Power: Shivs hit all enemies; add 4 Shivs",
+    "cap": 5,
+    "note": "card generation: cap 5"
+  },
+  "FASTEN": {
+    "plus1": "ExtraBlock +2",
+    "effect": "Power: Defend cards gain +4 Block",
+    "note": "block only"
+  },
+  "FEAR": {
+    "plus1": "Damage +1, Vulnerable +1",
+    "effect": "7 dmg, 1 Vulnerable (Ethereal)",
+    "note": "safe vars"
+  },
+  "FEED": {
+    "plus1": "Damage +2, MaxHp +1",
+    "effect": "10 dmg; on kill gain 3 max HP (Exhaust)",
+    "cap": 3,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "max HP: cap 3; damage keeps growing"
+  },
+  "FEEDING_FRENZY": {
+    "plus1": "Strength +2",
+    "effect": "Gain 5 temporary Strength",
+    "note": "temporary Strength is safe"
+  },
+  "FEEL_NO_PAIN": {
+    "plus1": "Power +1",
+    "effect": "Power: gain 3 Block whenever a card is exhausted",
+    "note": "block only"
+  },
+  "FERAL": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: first 0-cost Attack each turn returns to hand",
+    "note": "cost-only reaches 0 at +2; extra returns would be extra plays, left alone"
+  },
+  "FETCH": {
+    "plus1": "OstyDamage +3",
+    "effect": "Osty deals 3; draw 1 first time each turn",
+    "note": "damage only"
+  },
+  "FIEND_FIRE": {
+    "plus1": "Damage +3",
+    "effect": "Exhaust hand, 7 dmg per card",
+    "note": "damage only"
+  },
+  "FIGHT_ME": {
+    "plus1": "Damage +1, Strength +1",
+    "effect": "5 dmg x2, gain 3 Strength, enemy gains 1",
+    "note": "Strength and damage are safe"
+  },
+  "FIGHT_THROUGH": {
+    "plus1": "Block +4",
+    "effect": "Gain 13 Block, 2 Wounds to discard",
+    "note": "block only"
+  },
+  "FINESSE": {
+    "plus1": "Block +3",
+    "effect": "0 cost: 4 Block, draw 1",
+    "note": "block only; draw stays 1"
+  },
+  "FINISHER": {
+    "plus1": "Damage +2",
+    "effect": "6 dmg per Attack played this turn",
+    "note": "damage only"
+  },
+  "FISTICUFFS": {
+    "plus1": "Damage +2",
+    "effect": "7 dmg, gain Block equal to damage",
+    "note": "damage/block only"
+  },
+  "FLAK_CANNON": {
+    "plus1": "Damage +3",
+    "effect": "Exhaust statuses, 8 dmg per status",
+    "note": "damage only"
+  },
+  "FLAME_BARRIER": {
+    "plus1": "Block +4, DamageBack +2",
+    "effect": "12 Block, thorns 4 this turn",
+    "note": "safe vars"
+  },
+  "FLANKING": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Target takes x2 attack damage from other players this turn (co-op)",
+    "cap": 5,
+    "powerBonus": {
+      "FlankingPower": 1
+    },
+    "note": "cost hits 0 at +2; the hardcoded x2 multiplier grows instead (multiplier: cap 5)"
+  },
+  "FLASH_OF_STEEL": {
+    "plus1": "Damage +3",
+    "effect": "0 cost: 5 dmg, draw 1",
+    "note": "damage only"
+  },
+  "FLATTEN": {
+    "plus1": "OstyDamage +4",
+    "effect": "Osty deals 12; free after Osty attacked",
+    "note": "damage only"
+  },
+  "FLECHETTES": {
+    "plus1": "Damage +2",
+    "effect": "5 dmg per Skill in hand",
+    "note": "damage only"
+  },
+  "FLICK_FLACK": {
+    "plus1": "Damage +2",
+    "effect": "7 dmg to all (Sly)",
+    "note": "damage only"
+  },
+  "FOCUSED_STRIKE": {
+    "plus1": "Damage +2, FocusPower +1",
+    "effect": "9 dmg, temporary Focus 1",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "Focus: cap 5; damage keeps growing"
+  },
+  "FOOTWORK": {
+    "plus1": "Dexterity +1",
+    "effect": "Gain 2 Dexterity",
+    "note": "Dexterity is safe"
+  },
+  "FORBIDDEN_GRIMOIRE": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power (Eternal): a card removal reward after each combat",
+    "cap": 3,
+    "powerBonus": {
+      "ForbiddenGrimoirePower": 1
+    },
+    "note": "cost reaches 0 at +2; one more removal reward per level (economy: cap 3)"
+  },
+  "FOREGONE_CONCLUSION": {
+    "plus1": "Cards +1",
+    "effect": "Next turn, put 2 chosen draw-pile cards in hand",
+    "cap": 5,
+    "note": "card selection count: cap 5"
+  },
+  "FORGOTTEN_RITUAL": {
+    "plus1": "Energy +1",
+    "effect": "Gain 3 energy (Exhaust)",
+    "cap": 3,
+    "note": "energy: cap 3"
+  },
+  "FRIENDSHIP": {
+    "plus1": "StrengthPower -1 (lose 1 Strength instead of 2)",
+    "effect": "Lose 2 Strength, +1 max energy per turn",
+    "note": "replayed -1 turns the Strength loss into a Strength gain from +3: fun, Strength is safe; energy stays 1"
+  },
+  "FTL": {
+    "plus1": "Damage +1, PlayMax +1",
+    "effect": "0 cost: 5 dmg, draw 1 if fewer than 3 cards played",
+    "cap": 3,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "draw condition: cap 3; damage keeps growing"
+  },
+  "FUEL": {
+    "plus1": "Energy +1",
+    "effect": "0 cost: gain 1 energy (Exhaust)",
+    "cap": 3,
+    "note": "energy: cap 3"
+  },
+  "FURNACE": {
+    "plus1": "Forge +2",
+    "effect": "Power: Forge 5 each turn",
+    "note": "Forge is damage scaling; safe"
+  },
+  "FUSION": {
+    "plus1": "removes Exhaust",
+    "effect": "Channel 1 Plasma",
+    "play": {
+      "Block": 2
+    },
+    "note": "no number; small Block, Plasma energy left alone (0-cost via ladder)"
+  },
+  "GAMMA_BLAST": {
+    "plus1": "Damage +5",
+    "effect": "13 dmg, 2 Weak, 2 Vulnerable (3 stars)",
+    "note": "damage only"
+  },
+  "GANG_UP": {
+    "plus1": "ExtraDamage +2",
+    "effect": "5 dmg + 5 per ally hit on target this turn (co-op)",
+    "note": "damage only"
+  },
+  "GATHER_LIGHT": {
+    "plus1": "Block +3",
+    "effect": "8 Block, gain 1 star",
+    "note": "block grows; star stays 1"
+  },
+  "GENESIS": {
+    "plus1": "StarsPerTurn +1",
+    "effect": "Power: gain 2 stars each turn",
+    "cap": 3,
+    "note": "stars: cap 3"
+  },
+  "GENETIC_ALGORITHM": {
+    "plus1": "Increase +1",
+    "effect": "Gain Block; Block grows 3 permanently per play (Exhaust)",
+    "cap": 5,
+    "note": "scaling per play: cap 5"
+  },
+  "GIANT_ROCK": {
+    "plus1": "Damage +4",
+    "effect": "20 dmg",
+    "note": "damage only"
+  },
+  "GLACIER": {
+    "plus1": "Block +3",
+    "effect": "6 Block, channel 2 Frost",
+    "note": "block only"
+  },
+  "GLASSWORK": {
+    "plus1": "Block +3",
+    "effect": "5 Block, channel 1 Glass",
+    "note": "block only"
+  },
+  "GLIMMER": {
+    "plus1": "Cards +1",
+    "effect": "Draw 3, put 1 back on top",
+    "cap": 5,
+    "note": "draw: cap 5"
+  },
+  "GLIMPSE_BEYOND": {
+    "plus1": "Cards +1",
+    "effect": "Every player adds 3 Souls to draw pile (co-op, Exhaust)",
+    "cap": 5,
+    "note": "card generation: cap 5"
+  },
+  "GLITTERSTREAM": {
+    "plus1": "Block +2, BlockNextTurn +2",
+    "effect": "11 Block now, 5 next turn",
+    "note": "block only"
+  },
+  "GLOW": {
+    "plus1": "Stars +1",
+    "effect": "Gain 1 star, draw 1 now and 1 next turn",
+    "cap": 3,
+    "note": "stars: cap 3"
+  },
+  "GOLD_AXE": {
+    "plus1": "adds Retain",
+    "effect": "Deal 1 dmg per card played this combat",
+    "perLevel": {
+      "ExtraDamage": 1
+    },
+    "note": "Retain gives no number; grow the per-card damage (damage is safe)"
+  },
+  "GO_FOR_THE_EYES": {
+    "plus1": "Damage +1, Weak +1",
+    "effect": "0 cost: 3 dmg, 1 Weak if target attacks",
+    "note": "safe vars"
+  },
+  "GRAND_FINALE": {
+    "plus1": "Damage +15",
+    "effect": "0 cost: 60 dmg to all when draw pile is empty",
+    "note": "damage only"
+  },
+  "GRAVEBLAST": {
+    "plus1": "Damage +2, removes Exhaust",
+    "effect": "4 dmg, return a discard card to hand",
+    "note": "damage grows; full replay"
+  },
+  "GRAVE_WARDEN": {
+    "plus1": "Block +3",
+    "effect": "8 Block, add 1 Soul to draw pile",
+    "note": "block only"
+  },
+  "GUARDS": {
+    "plus1": "IsUpgraded: the Minion Sacrifices are upgraded",
+    "effect": "Transform any hand cards into Minion Sacrifice (Exhaust)",
+    "play": {
+      "Block": 3
+    },
+    "note": "no number; Block fits the guard theme"
+  },
+  "GUIDING_STAR": {
+    "plus1": "Damage +1, Cards +1",
+    "effect": "12 dmg, draw 2 next turn (1 star)",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "draw: cap 5; damage keeps growing"
+  },
+  "GUNK_UP": {
+    "plus1": "Damage +1",
+    "effect": "4 dmg x3, add Slimed to discard",
+    "note": "damage only"
+  },
+  "HAILSTORM": {
+    "plus1": "HailstormPower +2",
+    "effect": "Power: end of turn with Frost, 6 dmg to all",
+    "note": "damage only"
+  },
+  "HAMMER_TIME": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: your Forges also forge for allies (co-op)",
+    "note": "cost reaches 0 at +2; single-stack power, nothing to scale"
+  },
+  "HAND_OF_GREED": {
+    "plus1": "Damage +5, Gold +5",
+    "effect": "20 dmg; on kill gain 20 gold",
+    "cap": 3,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "gold: cap 3; damage keeps growing"
+  },
+  "HAND_TRICK": {
+    "plus1": "Block +3",
+    "effect": "7 Block, a Skill in hand gains Sly this turn",
+    "note": "block only"
+  },
+  "HANG": {
+    "plus1": "Damage +3",
+    "effect": "10 dmg, Hang power doubles",
+    "note": "damage only"
+  },
+  "HAUNT": {
+    "plus1": "HpLoss +2",
+    "effect": "Power: playing a Soul deals 7 to a random enemy",
+    "note": "damage only"
+  },
+  "HAVOC": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Autoplay top card of draw pile and exhaust it",
+    "play": {
+      "Damage": 4
+    },
+    "note": "0 at +1; a chaotic random hit"
+  },
+  "HAZE": {
+    "plus1": "Poison +2, Weak +1",
+    "effect": "4 Poison and 1 Weak to all",
+    "note": "safe vars"
+  },
+  "HEADBUTT": {
+    "plus1": "Damage +3",
+    "effect": "9 dmg, put a discard card on top of draw pile",
+    "note": "damage only"
+  },
+  "HEAVENLY_DRILL": {
+    "plus1": "Damage +2",
+    "effect": "X cost: 8 dmg X times, doubled at 4+ energy",
+    "note": "damage only"
+  },
+  "HEGEMONY": {
+    "plus1": "Damage +3, Energy +1",
+    "effect": "15 dmg, 2 energy next turn",
+    "cap": 3,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "energy: cap 3; damage keeps growing"
+  },
+  "HEIRLOOM_HAMMER": {
+    "plus1": "Damage +5",
+    "effect": "20 dmg, add a copy of a colorless card in hand",
+    "note": "damage grows; copy count stays 1"
+  },
+  "HELIX_DRILL": {
+    "plus1": "Damage +2",
+    "effect": "0 cost: 3 dmg per energy spent this turn",
+    "note": "damage only"
+  },
+  "HELLO_WORLD": {
+    "plus1": "adds Innate",
+    "effect": "Power: add 1 random Common card to hand each turn",
+    "cap": 5,
+    "powerBonus": {
+      "HelloWorldPower": 1
+    },
+    "note": "Innate gives no number; one more Common per turn per level (card generation: cap 5)"
+  },
+  "HELLRAISER": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: drawn Strikes are autoplayed",
+    "note": "cost reaches 0 at +2; single-stack power"
+  },
+  "HEMOKINESIS": {
+    "plus1": "Damage +5",
+    "effect": "Lose 2 HP, 15 dmg",
+    "note": "damage only"
+  },
+  "HIBERNATE": {
+    "plus1": "Repeat +1",
+    "effect": "Hibernate power, channel 2 Frost (co-op)",
+    "cap": 5,
+    "note": "Repeat is Frost orbs channeled: orbs cap 5"
+  },
+  "HIDDEN_CACHE": {
+    "plus1": "StarNextTurnPower +1",
+    "effect": "Gain 1 star, 3 stars next turn",
+    "cap": 3,
+    "note": "stars: cap 3"
+  },
+  "HIDDEN_DAGGERS": {
+    "plus1": "IsUpgraded: Shivs are upgraded",
+    "effect": "0 cost: discard 2, add 2 Shivs",
+    "cap": 5,
+    "perLevel": {
+      "Shivs": 1
+    },
+    "note": "no number grows; one more Shiv per level (card generation: cap 5)"
+  },
+  "HIDDEN_GEM": {
+    "plus1": "Replay +1",
+    "effect": "A random draw-pile card gains Replay 2",
+    "cap": 3,
+    "note": "replays: cap 3"
+  },
+  "HIGH_FIVE": {
+    "plus1": "OstyDamage +2, Vulnerable +1",
+    "effect": "Osty deals 11 to all, 2 Vulnerable to all",
+    "note": "safe vars"
+  },
+  "HOLOGRAM": {
+    "plus1": "Block +2, removes Exhaust",
+    "effect": "3 Block, return a discard card to hand",
+    "note": "block grows; full replay"
+  },
+  "HOTFIX": {
+    "plus1": "removes Exhaust",
+    "effect": "0 cost: gain 2 temporary Focus",
+    "cap": 5,
+    "perLevel": {
+      "FocusPower": 1
+    },
+    "note": "no var grows on +1; more temporary Focus per level (Focus: cap 5)"
+  },
+  "HOWL_FROM_BEYOND": {
+    "plus1": "Damage +6",
+    "effect": "18 dmg to all, replays from exhaust",
+    "note": "damage only"
+  },
+  "HUDDLE_UP": {
+    "plus1": "Cards +1",
+    "effect": "All players draw 2 (co-op, Exhaust)",
+    "cap": 5,
+    "note": "draw: cap 5"
+  },
+  "HYPERBEAM": {
+    "plus1": "Damage +6",
+    "effect": "24 dmg to all, lose 3 Focus next turn",
+    "note": "damage grows; Focus loss stays"
+  },
+  "ICE_LANCE": {
+    "plus1": "Damage +5",
+    "effect": "19 dmg, channel 3 Frost",
+    "note": "damage only; Frost count stays"
+  },
+  "IGNITION": {
+    "plus1": "removes Exhaust",
+    "effect": "an ally Channels Plasma (MP only)",
+    "play": {
+      "Vigor": 2
+    },
+    "note": "no number to grow; Vigor fits 'ignition' and stays a self buff, unlike energy"
+  },
+  "IMITATION_LEARNING": {
+    "plus1": "ImitationLearningPower 2 -> 3",
+    "effect": "copies the ally's next N Power plays for you (autoplay)",
+    "cap": 3,
+    "note": "each stack is a free replay of a Power: replay cap"
+  },
+  "IMPATIENCE": {
+    "plus1": "Cards 2 -> 3",
+    "effect": "0-cost: if no Attacks in hand, draw N",
+    "cap": 5,
+    "note": "draw"
+  },
+  "IMPERVIOUS": {
+    "plus1": "Block 30 -> 40",
+    "effect": "gain Block, Exhaust",
+    "note": "Block grows freely"
+  },
+  "INFERNAL_BLADE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "add a random Attack to hand, free this turn; Exhaust",
+    "play": {
+      "Vigor": 3
+    },
+    "note": "cost-only card already at 0 after +1; Vigor powers up the free Attack it hands you"
+  },
+  "INFERNO": {
+    "plus1": "InfernoPower 6 -> 9",
+    "effect": "lose 1 HP each turn; whenever you lose HP on your turn, damage ALL enemies",
+    "note": "AoE damage per trigger, safe to grow"
+  },
+  "INFINITE_BLADES": {
+    "plus1": "gains Innate",
+    "effect": "InfiniteBladesPower 1 (hardcoded): add N Shivs to hand each turn",
+    "powerBonus": {
+      "InfiniteBladesPower": 1
+    },
+    "note": "one more Shiv per turn per level past +1 (+9: 9 Shivs a turn); Shivs still cost plays, not energy loops Cap 5 (lead review: card generation).",
+    "cap": 5
+  },
+  "INFLAME": {
+    "plus1": "StrengthPower 2 -> 3",
+    "effect": "gain Strength",
+    "note": "Strength is safe"
+  },
+  "INTERCEPT": {
+    "plus1": "Block 9 -> 13",
+    "effect": "gain Block, redirect attacks on an ally to you (MP only)",
+    "note": "Block grows freely"
+  },
+  "INVOKE": {
+    "plus1": "Summon 2 -> 3, Energy 2 -> 3",
+    "effect": "next turn Summon N and gain energy",
+    "cap": 3,
+    "note": "energy"
+  },
+  "IRON_WAVE": {
+    "plus1": "Damage 5 -> 7, Block 5 -> 7",
+    "effect": "deal damage and gain Block",
+    "note": "safe vars"
+  },
+  "ITERATION": {
+    "plus1": "IterationPower 2 -> 3",
+    "effect": "first Status drawn each turn draws N cards",
+    "cap": 5,
+    "note": "draw"
+  },
+  "I_AM_INVINCIBLE": {
+    "plus1": "Block 10 -> 13",
+    "effect": "gain Block; auto-plays itself if on top of draw pile at end of turn",
+    "note": "Block grows freely"
+  },
+  "JACKPOT": {
+    "plus1": "Damage 25 -> 30; IsUpgraded: the 3 generated 0-cost cards are upgraded",
+    "effect": "deal damage, add 3 random 0-cost cards to hand",
+    "note": "Damage replay is enough; the generated count stays 3 so it never floods hand"
+  },
+  "JACK_OF_ALL_TRADES": {
+    "plus1": "Cards 1 -> 2",
+    "effect": "add N random Colorless cards to hand; Exhaust",
+    "cap": 5,
+    "note": "card generation"
+  },
+  "JUGGERNAUT": {
+    "plus1": "JuggernautPower 6 -> 8",
+    "effect": "whenever you gain Block, deal N damage to a random enemy",
+    "note": "damage per Block gain, safe"
+  },
+  "JUGGLING": {
+    "plus1": "gains Innate",
+    "effect": "JugglingPower 1 (hardcoded): 3rd Attack each turn adds N copies of it to hand",
+    "powerBonus": {
+      "JugglingPower": 1
+    },
+    "note": "one more copy per level past +1; copies still cost energy, once per turn Cap 5 (lead review: card copies).",
+    "cap": 5
+  },
+  "KINGLY_KICK": {
+    "plus1": "Damage 27 -> 35",
+    "effect": "4-cost attack, costs 1 less each time it's drawn",
+    "note": "Damage grows freely"
+  },
+  "KINGLY_PUNCH": {
+    "plus1": "Damage 8 -> 10, Increase 4 -> 6",
+    "effect": "attack; gains Increase damage each time it's drawn",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "growth per draw capped, base Damage keeps growing"
+  },
+  "KNIFE_TRAP": {
+    "plus1": "IsUpgraded: upgrades each Shiv before replaying it",
+    "effect": "replay every Shiv in your exhaust pile at the target",
+    "play": {
+      "Damage": 5
+    },
+    "note": "no number; extra unpowered damage to the trap's target fits the knife theme"
+  },
+  "KNOCKDOWN": {
+    "plus1": "Damage 10 -> 14, KnockdownPower 2 -> 3",
+    "effect": "attack; target takes xN attack damage from other players this turn (MP)",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "KnockdownPower is a damage multiplier: cap it, keep raw Damage growing"
+  },
+  "KNOCKOUT_BLOW": {
+    "plus1": "Damage 30 -> 38",
+    "effect": "attack; gain 5 Stars if it kills",
+    "note": "Damage grows; Stars bonus stays hardcoded at 5"
+  },
+  "KNOW_THY_PLACE": {
+    "plus1": "removes Exhaust",
+    "effect": "0-cost: apply 1 Weak and 1 Vulnerable",
+    "perLevel": {
+      "WeakPower": 1,
+      "VulnerablePower": 1
+    },
+    "note": "no var grows by default; +1 Weak and Vulnerable per level fits the card"
+  },
+  "LANTERN_KEY": {
+    "plus1": "none (MaxUpgradeLevel 0)",
+    "effect": "quest card: Unplayable; forces act 3 '?' rooms into the War Historian event",
+    "fusable": false,
+    "note": "quest item with MaxUpgradeLevel 0; fusing it makes no sense"
+  },
+  "LARGESSE": {
+    "plus1": "IsUpgraded: the generated Colorless card is upgraded",
+    "effect": "0-cost: give an ally a random Colorless card (MP)",
+    "play": {
+      "Block": 3
+    },
+    "note": "no number; a small self Block per level keeps the generous 0-cost card a non-loop"
+  },
+  "LEADING_STRIKE": {
+    "plus1": "Damage 3 -> 6",
+    "effect": "attack, then add 2 Shivs to hand",
+    "note": "Damage replay; Shiv count stays 2"
+  },
+  "LEAP": {
+    "plus1": "Block 9 -> 12",
+    "effect": "gain Block",
+    "note": "safe"
+  },
+  "LEGION_OF_BONE": {
+    "plus1": "Summon 6 -> 8",
+    "effect": "every living player Summons N (MP)",
+    "cap": 5,
+    "note": "summons"
+  },
+  "LEG_SWEEP": {
+    "plus1": "Block 11 -> 14, Weak 2 -> 3",
+    "effect": "gain Block, apply Weak",
+    "note": "safe vars"
+  },
+  "LETHALITY": {
+    "plus1": "LethalityPower 50 -> 75",
+    "effect": "first Attack each turn deals +N% damage",
+    "note": "percent damage on one attack per turn: safe to grow (+9: +275%)"
+  },
+  "LIFT": {
+    "plus1": "Block 11 -> 16",
+    "effect": "give an ally Block (MP)",
+    "note": "safe"
+  },
+  "LIGHTNING_ROD": {
+    "plus1": "Block 4 -> 7",
+    "effect": "gain Block; Channel 1 Lightning at the start of the next N turns (LightningRodPower 2)",
+    "cap": 5,
+    "beyond": [
+      "Block"
+    ],
+    "perLevel": {
+      "Block": 3,
+      "LightningRodPower": 1
+    },
+    "note": "the +1 never grows the orb turns; add 1 turn per level up to the orb cap, Block keeps growing"
+  },
+  "LOOP": {
+    "plus1": "Loop 1 -> 2",
+    "effect": "LoopPower: trigger first orb's passive N extra times each turn",
+    "cap": 3,
+    "note": "extra triggers"
+  },
+  "LUMINESCE": {
+    "plus1": "Energy 2 -> 3",
+    "effect": "0-cost token: gain energy; Retain, Exhaust",
+    "cap": 3,
+    "note": "energy"
+  },
+  "LUNAR_BLAST": {
+    "plus1": "Damage 4 -> 5",
+    "effect": "0-cost: hit once per Skill played this turn",
+    "note": "per-hit damage, safe"
+  },
+  "MACHINE_LEARNING": {
+    "plus1": "gains Innate",
+    "effect": "MachineLearningPower: draw N (Cards 1) extra cards each turn",
+    "cap": 3,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "the +1 never grows Cards; +1 draw per turn per level, low cap since it is permanent per-turn draw"
+  },
+  "MAD_SCIENCE": {
+    "plus1": "gains Innate",
+    "effect": "Tinker Time card: Attack (12 dmg) / Skill (8 Block) / Power, with a rider (Weak/Vuln, Strangle, energy, draw, Str/Dex, ...)",
+    "perLevel": {
+      "Damage": 3,
+      "Block": 3,
+      "SappingWeak": 1,
+      "SappingVulnerable": 1,
+      "ChokingDamage": 2,
+      "ExpertiseStrength": 1,
+      "ExpertiseDexterity": 1
+    },
+    "note": "no var grows by default; grow the safe numbers (damage, block, debuffs, Strangle, Str/Dex), leave energy/draw/hits/cost riders alone"
+  },
+  "MAKE_IT_SO": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "0-cost attack; returns to hand every 3rd Skill played in a turn",
+    "note": "Damage only; the return threshold stays 3"
+  },
+  "MALAISE": {
+    "plus1": "IsUpgraded: X+1",
+    "effect": "X cost: enemy loses X Strength and gains X Weak; Exhaust",
+    "powerBonus": {
+      "StrengthPower": -1,
+      "WeakPower": 1
+    },
+    "note": "X+1 never grows; each level past +1 adds 1 more Strength loss and Weak (negative additive on StrengthPower)"
+  },
+  "MANGLE": {
+    "plus1": "Damage 20 -> 26, StrengthLoss 10 -> 15",
+    "effect": "attack; target loses N Strength this turn (ManglePower)",
+    "note": "temporary Strength loss and damage, safe"
+  },
+  "MANIFEST_AUTHORITY": {
+    "plus1": "Block 7 -> 8; IsUpgraded: the generated Colorless card is upgraded",
+    "effect": "gain Block, add a random Colorless card to hand",
+    "perLevel": {
+      "Block": 3
+    },
+    "note": "a +1 Block replay is meagre; 3 Block per level instead"
+  },
+  "MASTER_OF_STRATEGY": {
+    "plus1": "Cards 3 -> 4",
+    "effect": "0-cost: draw N; Exhaust",
+    "cap": 5,
+    "note": "draw"
+  },
+  "MASTER_PLANNER": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: Skills you play gain Sly",
+    "play": {
+      "Dexterity": 1
+    },
+    "note": "cost-only (0 at +2), then nothing; Dexterity per level fits a Skill-heavy Silent plan"
+  },
+  "MAUL": {
+    "plus1": "Damage 5 -> 6, Increase 2 -> 3",
+    "effect": "hit twice; every Maul gains Increase damage when played",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "growth per play capped, base Damage keeps growing"
+  },
+  "MAYHEM": {
+    "plus1": "cost 2 -> 1",
+    "effect": "MayhemPower 1 (hardcoded): auto-play top card of draw pile each turn",
+    "powerBonus": {
+      "MayhemPower": 1
+    },
+    "note": "cost-only to 0; one more autoplay per turn per level past +1 (+3: 3 a turn); autoplays are bounded per turn, not a loop Cap 3 (lead review: autoplays per turn).",
+    "cap": 3
+  },
+  "MELANCHOLY": {
+    "plus1": "Block 13 -> 17",
+    "effect": "gain Block; costs 1 less whenever a creature dies",
+    "note": "Block grows; the cost cut per death stays 1"
+  },
+  "MEMENTO_MORI": {
+    "plus1": "CalculationBase 9 -> 11, ExtraDamage 4 -> 5",
+    "effect": "attack: base + N per card discarded this turn",
+    "note": "damage only, safe"
+  },
+  "METAMORPHOSIS": {
+    "plus1": "Cards 3 -> 5",
+    "effect": "add N random Attacks, free this combat, to draw pile; Exhaust",
+    "cap": 5,
+    "note": "card generation"
+  },
+  "METEOR_SHOWER": {
+    "plus1": "Damage 14 -> 21",
+    "effect": "0 energy, 2 Stars: AoE damage, 2 Weak and 2 Vulnerable to all",
+    "note": "Damage replay; star cost kept"
+  },
+  "METEOR_STRIKE": {
+    "plus1": "Damage 24 -> 30",
+    "effect": "5-cost attack, then Channel 3 Plasma",
+    "note": "Damage grows; Plasma count stays 3"
+  },
+  "MIDNIGHT": {
+    "plus1": "Damage 60 -> 72",
+    "effect": "12-cost attack, costs 1 less per card exhausted this combat (MP)",
+    "note": "Damage grows freely"
+  },
+  "MIMIC": {
+    "plus1": "removes Exhaust",
+    "effect": "gain Block equal to the target ally's Block (MP)",
+    "perLevel": {
+      "CalculationBase": 3
+    },
+    "note": "no var grows by default; flat Block on top via CalculationBase"
+  },
+  "MIND_BLAST": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Innate; damage = cards in draw pile x1",
+    "perLevel": {
+      "CalculationBase": 4
+    },
+    "note": "cost-only already at 0 after +1; flat damage on top via CalculationBase (a perLevel keeps the 0 cost)"
+  },
+  "MINION_DIVE_BOMB": {
+    "plus1": "Damage 13 -> 16",
+    "effect": "0-cost token attack; Exhaust",
+    "note": "safe"
+  },
+  "MINION_SACRIFICE": {
+    "plus1": "Block 7 -> 10",
+    "effect": "0-cost token Block; Exhaust",
+    "note": "safe"
+  },
+  "MINION_STRIKE": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "0-cost token attack, draw 1; Exhaust",
+    "note": "Damage only; draw stays 1"
+  },
+  "MIRAGE": {
+    "plus1": "removes Exhaust",
+    "effect": "gain Block equal to total Poison on enemies",
+    "perLevel": {
+      "CalculationBase": 3
+    },
+    "note": "no var grows by default; flat Block on top via CalculationBase"
+  },
+  "MISERY": {
+    "plus1": "Damage 7 -> 9, gains Retain",
+    "effect": "0-cost attack; copy the target's debuffs onto all other enemies",
+    "note": "Damage replay; Retain kept"
+  },
+  "MODDED": {
+    "plus1": "Cards 1 -> 2",
+    "effect": "0-cost: gain 1 orb slot, draw N; costs 1 more each play this combat",
+    "cap": 5,
+    "note": "draw"
+  },
+  "MOLTEN_FIST": {
+    "plus1": "Damage 10 -> 14",
+    "effect": "attack, double target's Vulnerable; Exhaust",
+    "note": "safe"
+  },
+  "MOMENTUM_STRIKE": {
+    "plus1": "Damage 11 -> 15",
+    "effect": "attack; becomes 0-cost for the combat",
+    "note": "safe"
+  },
+  "MONARCHS_GAZE": {
+    "plus1": "cost 2 -> 1",
+    "effect": "MonarchsGazePower: your attacks make the target lose N (StrengthLoss 1) Strength",
+    "cap": 5,
+    "perLevel": {
+      "StrengthLoss": 1
+    },
+    "costPerLevel": -1,
+    "note": "the +1 never grows StrengthLoss; +1 per level (cost still drops to 0 via costPerLevel), capped as per-hit scaling"
+  },
+  "MONOLOGUE": {
+    "plus1": "gains Retain",
+    "effect": "0-cost: this turn gain N (Power 1) temporary Strength per card played",
+    "cap": 5,
+    "perLevel": {
+      "Power": 1
+    },
+    "note": "the +1 never grows Power; +1 Strength per card per level, capped as scaling-per-play"
+  },
+  "MULTI_CAST": {
+    "plus1": "IsUpgraded: X+1 evokes",
+    "effect": "X cost: evoke your next orb X times",
+    "play": {
+      "Damage": 4
+    },
+    "note": "X+1 never grows and extra evokes are replays; a small unpowered hit per level instead"
+  },
+  "MURDER": {
+    "plus1": "cost 3 -> 2",
+    "effect": "damage = 1 + 1 per card drawn this combat",
+    "costPerLevel": -1,
+    "perLevel": {
+      "CalculationBase": 5
+    },
+    "note": "keep the cost falling to 0 by +3 and add flat damage so it keeps growing after"
+  },
+  "NECRO_MASTERY": {
+    "plus1": "Summon 5 -> 8",
+    "effect": "Summon N; Osty's HP loss is dealt to all enemies",
+    "cap": 5,
+    "note": "summons"
+  },
+  "NEGATIVE_PULSE": {
+    "plus1": "Block 5 -> 6, Doom 7 -> 11",
+    "effect": "gain Block, apply Doom to all enemies",
+    "note": "Doom acts like damage, safe"
+  },
+  "NEOWS_FURY": {
+    "plus1": "Damage 10 -> 14, Cards 2 -> 3",
+    "effect": "attack, return up to N cards from discard to hand; Exhaust",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "card recursion capped, Damage keeps growing"
+  },
+  "NEUROSURGE": {
+    "plus1": "Energy 3 -> 4",
+    "effect": "0-cost Power: gain energy, draw 2, gain 3 Doom each turn (NeurosurgePower)",
+    "cap": 3,
+    "note": "energy"
+  },
+  "NEUTRALIZE": {
+    "plus1": "Damage 3 -> 4, Weak 1 -> 2",
+    "effect": "0-cost attack, apply Weak",
+    "note": "safe"
+  },
+  "NEUTRON_AEGIS": {
+    "plus1": "PlatingPower 8 -> 11",
+    "effect": "1 energy + 5 Stars: gain Plating",
+    "note": "Plating is Block per turn, safe"
+  },
+  "NIGHTMARE": {
+    "plus1": "cost 3 -> 2",
+    "effect": "choose a card in hand, add 3 copies (NightmarePower, hardcoded) next turn; Exhaust",
+    "powerBonus": {
+      "NightmarePower": 1
+    },
+    "note": "cost-only to 0 by +4; one more copy per level past +1 fits the card (hand limit caps it) Cap 5 (lead review: card copies).",
+    "cap": 5
+  },
+  "NOSTALGIA": {
+    "plus1": "cost 1 -> 0",
+    "effect": "NostalgiaPower 1: first N Attacks/Skills each turn go on top of the draw pile",
+    "powerBonus": {
+      "NostalgiaPower": 1
+    },
+    "note": "cost-only already at 0; one more card per turn per level, bounded by energy Cap 5 (lead review: draw-like).",
+    "cap": 5
+  },
+  "NOT_YET": {
+    "plus1": "Heal 10 -> 13",
+    "effect": "heal; Exhaust",
+    "cap": 5,
+    "note": "healing"
+  },
+  "NOXIOUS_FUMES": {
+    "plus1": "PoisonPerTurn 2 -> 3",
+    "effect": "Poison all enemies each turn",
+    "note": "Poison is safe"
+  },
+  "NO_ESCAPE": {
+    "plus1": "CalculationBase 10 -> 15",
+    "effect": "apply Doom: base + 5 per 10 Doom already on target",
+    "note": "Doom, safe"
+  },
+  "NULL": {
+    "plus1": "Damage 10 -> 13, Weak 1 -> 2",
+    "effect": "attack, Weak, Channel 1 Dark",
+    "note": "safe vars"
+  },
+  "OBLIVION": {
+    "plus1": "Doom 3 -> 4",
+    "effect": "0-cost: this turn, each card you play applies N Doom to the target",
+    "note": "Doom per card is damage-like; full replay is fine"
+  },
+  "OFFERING": {
+    "plus1": "Cards 3 -> 5",
+    "effect": "0-cost: lose 6 HP, gain 2 energy, draw N; Exhaust",
+    "cap": 5,
+    "note": "draw; energy stays 2"
+  },
+  "OMNISLICE": {
+    "plus1": "Damage 8 -> 11",
+    "effect": "0-cost attack; damage dealt (with overkill) splashes to other enemies",
+    "note": "safe"
+  },
+  "ONE_FOR_ALL": {
+    "plus1": "OneForAllPower 3 -> 4",
+    "effect": "all players' 0-energy attacks deal +N damage (MP)",
+    "note": "flat damage, safe"
+  },
+  "ONE_TWO_PUNCH": {
+    "plus1": "Attacks 1 -> 2",
+    "effect": "this turn your next N Attacks are played twice",
+    "cap": 3,
+    "note": "extra plays, not draw: tighter cap"
+  },
+  "ORBIT": {
+    "plus1": "cost 2 -> 1",
+    "effect": "OrbitPower: gain N energy (1) per 4 energy spent",
+    "note": "cost-only to 0 by +2; the power grants energy so it gets nothing more"
+  },
+  "OUTBREAK": {
+    "plus1": "Poison 9 -> 12",
+    "effect": "apply Poison to all enemies, then trigger every enemy's Poison",
+    "note": "Poison is safe"
+  },
+  "OUTMANEUVER": {
+    "plus1": "Energy 2 -> 3",
+    "effect": "gain N energy next turn",
+    "cap": 3,
+    "note": "energy"
+  },
+  "OUTRAGE": {
+    "plus1": "Damage 9 -> 13",
+    "effect": "0-cost attack; every ally gets a copy in their discard (MP)",
+    "note": "safe"
+  },
+  "OVERCLOCK": {
+    "plus1": "Cards 2 -> 3",
+    "effect": "0-cost: draw N, add a Burn to discard",
+    "cap": 5,
+    "note": "draw"
+  },
+  "PACTS_END": {
+    "plus1": "Damage 18 -> 24",
+    "effect": "0-cost AoE attack, only if 3+ cards in exhaust pile",
+    "note": "Damage only; the exhaust threshold stays 3"
+  },
+  "PAGESTORM": {
+    "plus1": "cost 1 -> 0",
+    "effect": "PagestormPower: whenever you draw an Ethereal card, draw N (Cards 1)",
+    "powerBonus": {
+      "PagestormPower": 1
+    },
+    "note": "cost-only already at 0; one more draw per Ethereal card per level, bounded by Ethereal cards in the deck Cap 5 (lead review: draw).",
+    "cap": 5
+  },
+  "PALE_BLUE_DOT": {
+    "plus1": "Cards 1 -> 2",
+    "effect": "after 5 cards in a turn, draw N next turn",
+    "cap": 5,
+    "note": "draw"
+  },
+  "PANACHE": {
+    "plus1": "PanacheDamage 10 -> 14",
+    "effect": "every 5 cards in a turn, deal N to all enemies",
+    "note": "damage, safe"
+  },
+  "PANIC_BUTTON": {
+    "plus1": "Block 30 -> 40",
+    "effect": "0-cost: gain Block, no Block from cards for 2 turns; Exhaust",
+    "note": "Block grows; the no-Block turns stay 2"
+  },
+  "PARRY": {
+    "plus1": "ParryPower 10 -> 14",
+    "effect": "Sovereign Blade grants N Block when played (read by the card)",
+    "note": "Block, safe"
+  },
+  "PARSE": {
+    "plus1": "Cards 3 -> 4",
+    "effect": "draw N; Ethereal",
+    "cap": 5,
+    "note": "draw"
+  },
+  "PARTICLE_WALL": {
+    "plus1": "Block 9 -> 12",
+    "effect": "0 energy, 2 Stars: gain Block, return to hand",
+    "note": "Block, safe; star cost kept"
+  },
+  "PATTER": {
+    "plus1": "Block 8 -> 10, VigorPower 2 -> 3",
+    "effect": "gain Block and Vigor",
+    "note": "safe vars"
+  },
+  "PECK": {
+    "plus1": "Repeat 3 -> 4",
+    "effect": "hit 2 damage N times",
+    "cap": 3,
+    "note": "hit count"
+  },
+  "PERFECTED_STRIKE": {
+    "plus1": "ExtraDamage 2 -> 3",
+    "effect": "damage = 6 + N per Strike card you own",
+    "note": "per-Strike damage; damage only, safe to keep growing"
+  },
+  "PHANTOM_BLADES": {
+    "plus1": "PhantomBladesPower 9 -> 12",
+    "effect": "Shivs gain Retain; first Shiv each turn deals +N",
+    "note": "flat damage, safe"
+  },
+  "PHOTON_CUT": {
+    "plus1": "Damage 10 -> 13, Cards 1 -> 2",
+    "effect": "attack, draw N, put 1 card from hand on top of draw pile",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "draw capped, Damage keeps growing"
+  },
+  "PIERCING_WAIL": {
+    "plus1": "StrengthLoss 6 -> 8",
+    "effect": "all enemies lose N Strength this turn; Exhaust",
+    "note": "temporary Strength loss, safe"
+  },
+  "PILLAGE": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "attack, then draw until a non-Attack is drawn",
+    "note": "Damage only"
+  },
+  "PILLAR_OF_CREATION": {
+    "plus1": "Block 2 -> 3",
+    "effect": "gain N Block whenever you generate a card",
+    "note": "Block per trigger, safe"
+  },
+  "PINPOINT": {
+    "plus1": "Damage 15 -> 19",
+    "effect": "3-cost attack, costs 1 less per Skill played this turn",
+    "note": "safe"
+  },
+  "PLOT": {
+    "plus1": "Cards 2 -> 3",
+    "effect": "all allies draw N next turn (MP)",
+    "cap": 5,
+    "note": "draw"
+  },
+  "POISONED_STAB": {
+    "plus1": "Damage 6 -> 8, Poison 3 -> 4",
+    "effect": "attack, apply Poison",
+    "note": "safe vars"
+  },
+  "POKE": {
+    "plus1": "OstyDamage 6 -> 9",
+    "effect": "0-cost: Osty attacks",
+    "note": "safe"
+  },
+  "POMMEL_STRIKE": {
+    "plus1": "Damage 9 -> 10, Cards 1 -> 2",
+    "effect": "attack, draw N",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "draw capped, Damage keeps growing"
+  },
+  "POUNCE": {
+    "plus1": "Damage 14 -> 20",
+    "effect": "attack; your next Skill is free (FreeSkillPower 1)",
+    "note": "Damage only; the free Skill is energy, kept at 1"
+  },
+  "PRECISE_CUT": {
+    "plus1": "CalculationBase 13 -> 16",
+    "effect": "0-cost attack: base - 2 per other card in hand",
+    "note": "damage, safe"
+  },
+  "PREDATOR": {
+    "plus1": "Damage 15 -> 20",
+    "effect": "attack, draw 2 next turn",
+    "note": "Damage only; the 2 draw stays hardcoded"
+  },
+  "PREPARED": {
+    "plus1": "Cards 1 -> 2",
+    "effect": "0-cost: draw N, then discard N",
+    "cap": 5,
+    "note": "draw"
+  },
+  "PREP_TIME": {
+    "plus1": "PrepTimePower 4 -> 6",
+    "effect": "gain N Vigor each turn",
+    "note": "Vigor, safe"
+  },
+  "PRIMAL_FORCE": {
+    "plus1": "IsUpgraded: Giant Rocks are upgraded",
+    "effect": "0-cost: transform every Attack in hand into Giant Rock",
+    "play": {
+      "Vigor": 3
+    },
+    "note": "no number; Vigor per level fuels the first Giant Rock without turning a repeatable 0-cost card into Strength stacking"
+  },
+  "PRODUCTION": {
+    "plus1": "Energy 2 -> 3",
+    "effect": "0-cost: gain energy; Exhaust",
+    "cap": 3,
+    "note": "energy"
+  },
+  "PROLONG": {
+    "plus1": "removes Exhaust",
+    "effect": "0-cost: gain your current Block again next turn",
+    "play": {
+      "Block": 3
+    },
+    "note": "no number; a small Block per level (gained after the copy) fits"
+  },
+  "PROPHESIZE": {
+    "plus1": "Cards 6 -> 9",
+    "effect": "draw N",
+    "cap": 5,
+    "note": "draw"
+  },
+  "PROTECTOR": {
+    "plus1": "cost 1 -> 0, CalculationBase 10 -> 15",
+    "effect": "Osty attack: base + Osty's max HP",
+    "note": "the replay grows CalculationBase only (vars change, cost stays 0): fine"
+  },
+  "PROWESS": {
+    "plus1": "Strength 1 -> 2, Dexterity 1 -> 2",
+    "effect": "gain Strength and Dexterity",
+    "note": "safe vars"
+  },
+  "PULL_AGGRO": {
+    "plus1": "Summon 4 -> 5, Block 7 -> 9",
+    "effect": "Summon N, gain Block",
+    "cap": 5,
+    "beyond": [
+      "Block"
+    ],
+    "note": "summons capped, Block keeps growing"
+  },
+  "PULL_FROM_BELOW": {
+    "plus1": "Damage 5 -> 7",
+    "effect": "hit once per Ethereal card played this combat",
+    "note": "per-hit damage, safe"
+  },
+  "PURITY": {
+    "plus1": "Cards 3 -> 5",
+    "effect": "0-cost: exhaust up to N cards from hand; Retain, Exhaust",
+    "cap": 5,
+    "note": "selection count, harmless; cap 5 is plenty with a 10-card hand"
+  },
+  "PUTREFY": {
+    "plus1": "Power 2 -> 3",
+    "effect": "apply N Weak and N Vulnerable; Exhaust",
+    "note": "debuffs, safe"
+  },
+  "PYRE": {
+    "plus1": "Energy 1 -> 2",
+    "effect": "PyrePower: +N energy each turn",
+    "cap": 3,
+    "note": "energy per turn"
+  },
+  "QUADCAST": {
+    "plus1": "cost 1 -> 0",
+    "effect": "evoke your front orb 4 (Repeat) times",
+    "cap": 3,
+    "perLevel": {
+      "Repeat": 1
+    },
+    "note": "cost-only already at 0; one more evoke per level is a replay, so low cap (perLevel keeps the 0 cost)"
+  },
+  "QUASAR": {
+    "plus1": "IsUpgraded: the 3 offered Colorless cards are upgraded",
+    "effect": "0 energy, 2 Stars: choose 1 of 3 Colorless cards into hand",
+    "play": {
+      "Damage": 5
+    },
+    "note": "no number; a small radiant hit per level, star cost kept"
+  },
+  "RADIATE": {
+    "plus1": "Damage 3 -> 4",
+    "effect": "0-cost AoE: one hit per Star gained this turn",
+    "note": "per-hit damage, safe"
+  },
+  "RAGE": {
+    "plus1": "Power 3 -> 5",
+    "effect": "this turn, gain N Block whenever you play an Attack",
+    "note": "Block per trigger, safe"
+  },
+  "RAINBOW": {
+    "plus1": "removes Exhaust",
+    "effect": "Channel Lightning, Frost and Dark",
+    "play": {
+      "Block": 2,
+      "Damage": 2
+    },
+    "note": "no number and extra orbs would be snowbally; a bit of Frost-like Block and Lightning-like damage per level"
+  },
+  "RALLY": {
+    "plus1": "Block 12 -> 17",
+    "effect": "all players gain Block (MP)",
+    "note": "safe"
+  },
+  "RAMPAGE": {
+    "plus1": "Increase 5 -> 10",
+    "effect": "attack; gains Increase damage each play this combat",
+    "cap": 5,
+    "note": "growth per play"
+  },
+  "RATTLE": {
+    "plus1": "OstyDamage 7 -> 9",
+    "effect": "Osty attacks once + once per Osty attack this turn",
+    "note": "per-hit damage, safe"
+  },
+  "REANIMATE": {
+    "plus1": "Summon 20 -> 25",
+    "effect": "Summon 20 (Osty max HP), Exhaust",
+    "cap": 5,
+    "note": "summon growth; cap 5 per summon policy"
+  },
+  "REAP": {
+    "plus1": "Damage 27 -> 33",
+    "effect": "Deal 27 damage, Retain",
+    "note": "plain damage, full replay"
+  },
+  "REAPER_FORM": {
+    "plus1": "adds Retain",
+    "effect": "Attacks apply Doom equal to damage x ReaperFormPower amount (1, hardcoded)",
+    "powerBonus": {
+      "ReaperFormPower": 1
+    },
+    "note": "amount multiplies Doom per damage; +1 multiplier per level is absurd but end-of-turn Doom only"
+  },
+  "REAVE": {
+    "plus1": "Damage 10 -> 13; Soul added is upgraded (IsUpgraded)",
+    "effect": "Deal 10, shuffle Cards (1) Soul into draw pile",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "perLevel": {
+      "Damage": 3,
+      "Cards": 1
+    },
+    "note": "one more Soul per level (card generation, cap 5); damage keeps growing"
+  },
+  "REBOOT": {
+    "plus1": "Cards 4 -> 6",
+    "effect": "Shuffle hand into draw pile, draw Cards, Exhaust",
+    "cap": 5,
+    "note": "draw; cap 5"
+  },
+  "REBOUND": {
+    "plus1": "Damage 9 -> 12",
+    "effect": "Deal 9, next card played goes on top of draw pile",
+    "note": "plain damage, full replay"
+  },
+  "REFINE_BLADE": {
+    "plus1": "Forge 8 -> 12",
+    "effect": "Forge 8, gain 1 energy next turn",
+    "note": "Forge is Sovereign Blade damage, safe to grow; energy not touched"
+  },
+  "REFLECT": {
+    "plus1": "Block 15 -> 20",
+    "effect": "Gain 15 Block, reflect blocked attack damage this turn",
+    "note": "block, full replay"
+  },
+  "REFLEX": {
+    "plus1": "Cards 2 -> 3",
+    "effect": "Sly: draw 2",
+    "cap": 5,
+    "note": "draw; cap 5"
+  },
+  "REFRACT": {
+    "plus1": "Damage 10 -> 13",
+    "effect": "Deal 10 twice, channel Repeat (2) Glass",
+    "note": "damage only; Glass count not grown"
+  },
+  "RELAX": {
+    "plus1": "Block +2, Cards +1, Energy +1",
+    "effect": "Gain Block, next turn draw Cards and gain Energy, Exhaust",
+    "cap": 3,
+    "beyond": [
+      "Block"
+    ],
+    "note": "energy next turn; cap 3, block keeps growing"
+  },
+  "REND": {
+    "plus1": "CalculationBase 10 -> 12, ExtraDamage 5 -> 8",
+    "effect": "Deal 10 + 5 per non-temporary debuff on target",
+    "note": "damage, full replay"
+  },
+  "RESONANCE": {
+    "plus1": "StrengthPower 1 -> 2",
+    "effect": "Gain Strength, all enemies lose 1 Strength (hardcoded)",
+    "note": "self Strength, safe; powerBonus avoided since it would also cancel the enemy -1"
+  },
+  "RESTLESSNESS": {
+    "plus1": "Cards 2 -> 3, Energy 2 -> 3",
+    "effect": "If only card in hand: draw Cards, gain Energy; Retain",
+    "cap": 3,
+    "note": "energy + draw; cap 3"
+  },
+  "RICOCHET": {
+    "plus1": "Repeat 4 -> 5",
+    "effect": "Sly: deal 3 damage Repeat times to random enemies",
+    "note": "Repeat is hit count, not plays; extra 3-damage hits are safe, full replay"
+  },
+  "RIGHT_HAND_HAND": {
+    "plus1": "OstyDamage 4 -> 6",
+    "effect": "Osty deals 4; returns to hand after you play a 2+ energy card",
+    "note": "damage, full replay"
+  },
+  "RIP_AND_TEAR": {
+    "plus1": "Damage 7 -> 9",
+    "effect": "Deal 7 twice to random enemies",
+    "note": "plain damage"
+  },
+  "ROCKET_PUNCH": {
+    "plus1": "Damage +1, Cards +1",
+    "effect": "Deal 13, draw Cards; cost -1 when you create a Status",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "draw; cap 5, damage keeps growing"
+  },
+  "ROLLING_BOULDER": {
+    "plus1": "RollingBoulderPower 5 -> 10",
+    "effect": "Power: rolling boulder damage that grows by 5 each turn",
+    "note": "damage power, safe"
+  },
+  "ROYALTIES": {
+    "plus1": "Gold 30 -> 40",
+    "effect": "Power: gain Gold after combat",
+    "cap": 3,
+    "note": "gold; cap 3"
+  },
+  "ROYAL_GAMBLE": {
+    "plus1": "adds Retain",
+    "effect": "Costs 5 stars: gain 9 stars, Exhaust",
+    "cap": 3,
+    "perLevel": {
+      "Stars": 1
+    },
+    "note": "+1 star net per level; stars capped at 3"
+  },
+  "RUPTURE": {
+    "plus1": "Strength 1 -> 2",
+    "effect": "Power: gain Strength when you lose HP from a card",
+    "note": "Strength scaling, safe"
+  },
+  "SACRIFICE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Kill Osty, gain Block = 3x Osty max HP; Retain",
+    "perLevel": {
+      "CalculationBase": 5
+    },
+    "note": "cost already 0 at +1; flat +5 Block per level on top of the sacrifice"
+  },
+  "SALVO": {
+    "plus1": "Damage 12 -> 16",
+    "effect": "Deal 12, retain your hand this turn",
+    "note": "plain damage"
+  },
+  "SCAVENGE": {
+    "plus1": "Energy 2 -> 3",
+    "effect": "Exhaust a card, gain Energy next turn",
+    "cap": 3,
+    "note": "energy; cap 3"
+  },
+  "SCOURGE": {
+    "plus1": "Doom 13 -> 16, Cards +1",
+    "effect": "Apply Doom, draw Cards",
+    "cap": 5,
+    "beyond": [
+      "Doom"
+    ],
+    "note": "draw; cap 5, Doom keeps growing"
+  },
+  "SCRAPE": {
+    "plus1": "Damage +3, Cards +1",
+    "effect": "Deal 7, draw Cards, discard drawn non-0-cost cards",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "draw; cap 5, damage keeps growing"
+  },
+  "SCRAWL": {
+    "plus1": "adds Retain",
+    "effect": "Draw until hand is full, Exhaust (cost 1)",
+    "cap": 3,
+    "costPerLevel": -1,
+    "note": "no number; cost reaches 0 at +2, a free full-hand refill once per combat"
+  },
+  "SCULPTING_STRIKE": {
+    "plus1": "Damage 9 -> 12",
+    "effect": "Deal 9, make a card in hand Ethereal",
+    "note": "plain damage"
+  },
+  "SEANCE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Transform Cards (1) from draw pile into Soul, Ethereal",
+    "cap": 5,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "cost already 0; one more card turned into a Soul per level (card generation, cap 5)"
+  },
+  "SECOND_WIND": {
+    "plus1": "Block 5 -> 7",
+    "effect": "Exhaust non-Attacks in hand, gain Block per card",
+    "note": "block, full replay"
+  },
+  "SECRET_TECHNIQUE": {
+    "plus1": "removes Exhaust",
+    "effect": "Put a Skill from draw pile into hand (cost 0)",
+    "play": {
+      "Block": 3
+    },
+    "note": "tutor with no number; small Block per level for the Skill it fetches"
+  },
+  "SECRET_WEAPON": {
+    "plus1": "removes Exhaust",
+    "effect": "Put an Attack from draw pile into hand (cost 0)",
+    "play": {
+      "Vigor": 2
+    },
+    "note": "tutor with no number; Vigor primes the fetched Attack"
+  },
+  "SEEKER_STRIKE": {
+    "plus1": "Damage 9 -> 12",
+    "effect": "Deal 9, choose 1 of Cards (3) random draw pile cards into hand",
+    "note": "plain damage"
+  },
+  "SEEKING_EDGE": {
+    "plus1": "Forge 7 -> 11",
+    "effect": "Power: Sovereign Blade hits all enemies; Forge 7",
+    "note": "Forge is damage, safe"
+  },
+  "SENTRY_MODE": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: add SentryModePower (1) Sweeping Gaze to hand each turn",
+    "cap": 5,
+    "costPerLevel": -1,
+    "perLevel": {
+      "SentryModePower": 1
+    },
+    "note": "cost reaches 0 at +2; one more Sweeping Gaze per turn per level (card generation, cap 5)"
+  },
+  "SERPENT_FORM": {
+    "plus1": "SerpentFormPower 4 -> 6",
+    "effect": "Power: deal damage whenever you play a card",
+    "note": "damage power, safe"
+  },
+  "SETUP_STRIKE": {
+    "plus1": "Damage +2, Strength 3 -> 4",
+    "effect": "Deal 7, gain temporary Strength (SetupStrikePower)",
+    "note": "damage + temporary Strength, safe"
+  },
+  "SEVEN_STARS": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Costs 7 stars: deal 7 damage 7 times to all enemies",
+    "costPerLevel": -1,
+    "perLevel": {
+      "Damage": 1
+    },
+    "note": "cost reaches 0 at +2; +1 damage per hit per level (x7 hits)"
+  },
+  "SEVERANCE": {
+    "plus1": "Damage 13 -> 18",
+    "effect": "Deal 13, add a Soul to draw, discard and hand",
+    "note": "plain damage"
+  },
+  "SHADOWMELD": {
+    "plus1": "cost 1 -> 0",
+    "effect": "This turn Block gains are doubled (2^Power, Power 1)",
+    "cap": 3,
+    "perLevel": {
+      "Power": 1
+    },
+    "note": "exponential multiplier: x4 at +2, x8 at +3, then stops"
+  },
+  "SHADOW_SHIELD": {
+    "plus1": "Block 11 -> 15",
+    "effect": "Gain 11 Block, channel Dark",
+    "note": "block, full replay"
+  },
+  "SHADOW_STEP": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Discard hand; next turn gain DoubleDamagePower (turns = ShadowStepPower, 1 hardcoded)",
+    "cap": 3,
+    "powerBonus": {
+      "ShadowStepPower": 1
+    },
+    "note": "power amount becomes turns of Double Damage; +1 turn per level, cap 3"
+  },
+  "SHARED_FATE": {
+    "plus1": "EnemyStrengthLoss 2 -> 3",
+    "effect": "You lose 2 Strength, enemy loses EnemyStrengthLoss Strength, Exhaust",
+    "note": "enemy Strength loss, safe"
+  },
+  "SHATTER": {
+    "plus1": "Damage 7 -> 11",
+    "effect": "Deal 7 to all, evoke every orb twice, Exhaust",
+    "note": "plain damage"
+  },
+  "SHINING_STRIKE": {
+    "plus1": "Damage 8 -> 11",
+    "effect": "Deal 8, gain 2 stars, goes on top of draw pile",
+    "note": "damage only; stars not grown"
+  },
+  "SHIV": {
+    "plus1": "Damage 4 -> 6",
+    "effect": "Deal 4, Exhaust (cost 0 token)",
+    "note": "plain damage"
+  },
+  "SHOCKWAVE": {
+    "plus1": "Power 3 -> 5",
+    "effect": "Apply Power Weak and Vulnerable to all enemies, Exhaust",
+    "note": "debuff durations, safe"
+  },
+  "SHROUD": {
+    "plus1": "Block 3 -> 4",
+    "effect": "Power: gain Block whenever you apply Doom",
+    "note": "block power, safe"
+  },
+  "SHRUG_IT_OFF": {
+    "plus1": "Block 8 -> 11",
+    "effect": "Gain 8 Block, draw 1",
+    "note": "block only; draw not grown"
+  },
+  "SIC_EM": {
+    "plus1": "OstyDamage +1, SicEmPower 3 -> 4",
+    "effect": "Osty deals 5; Osty hits on target summon SicEmPower this turn",
+    "note": "small damage and summon growth, safe"
+  },
+  "SIDESTEP": {
+    "plus1": "Energy 1 -> 2",
+    "effect": "Gain Energy next turn (cost 0)",
+    "cap": 3,
+    "note": "energy; cap 3"
+  },
+  "SIGNAL_BOOST": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Next SignalBoostPower (1) Power cards are played twice, Exhaust",
+    "cap": 3,
+    "perLevel": {
+      "SignalBoostPower": 1
+    },
+    "note": "extra plays; one more doubled Power per level, cap 3"
+  },
+  "SKEWER": {
+    "plus1": "Damage 8 -> 11",
+    "effect": "X cost: deal 8 X times",
+    "note": "plain damage"
+  },
+  "SKIM": {
+    "plus1": "Cards 3 -> 4",
+    "effect": "Draw Cards",
+    "cap": 5,
+    "note": "draw; cap 5"
+  },
+  "SLEIGHT_OF_FLESH": {
+    "plus1": "SleightOfFleshPower 9 -> 13",
+    "effect": "Power: deal damage whenever you apply a debuff to an enemy",
+    "note": "damage power, safe"
+  },
+  "SLICE": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "Deal 6 (cost 0)",
+    "note": "plain damage"
+  },
+  "SMOKESTACK": {
+    "plus1": "SmokestackPower 5 -> 7",
+    "effect": "Power: deal damage to all enemies whenever you create a Status",
+    "note": "damage power, safe"
+  },
+  "SNAKEBITE": {
+    "plus1": "Poison 7 -> 10",
+    "effect": "Apply Poison, Retain",
+    "note": "poison, safe"
+  },
+  "SNAP": {
+    "plus1": "OstyDamage 7 -> 10",
+    "effect": "Osty deals 7, give a card in hand Retain",
+    "note": "damage, full replay"
+  },
+  "SNEAKY": {
+    "plus1": "SneakyPower 1 -> 2",
+    "effect": "Power: gain Block whenever an ally plays an Attack",
+    "note": "block power, safe"
+  },
+  "SOLAR_STRIKE": {
+    "plus1": "Damage +1, Stars +1",
+    "effect": "Deal 9, gain Stars",
+    "cap": 3,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "stars; cap 3, damage keeps growing"
+  },
+  "SOUL": {
+    "plus1": "Cards 2 -> 3",
+    "effect": "Draw Cards, Exhaust (cost 0 token)",
+    "cap": 5,
+    "note": "draw; cap 5"
+  },
+  "SOULBOUND": {
+    "plus1": "adds Innate",
+    "effect": "Ally power: whenever you create a Soul, ally gets SoulboundPower (1) Souls",
+    "cap": 5,
+    "powerBonus": {
+      "SoulboundPower": 1
+    },
+    "note": "one more Soul for the ally per level (card generation, cap 5); no loop thanks to IsAddingSoul"
+  },
+  "SOUL_STORM": {
+    "plus1": "ExtraDamage 4 -> 6",
+    "effect": "Deal 9 + ExtraDamage per exhausted Soul",
+    "note": "damage scaling, safe"
+  },
+  "SOVEREIGN_BLADE": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Forged token: deal Damage Repeat times, Retain",
+    "costPerLevel": -1,
+    "play": {
+      "Damage": 5
+    },
+    "note": "cost reaches 0 at +2; Damage/Repeat are Forge-managed state, so growth goes through an unpowered play bonus"
+  },
+  "SOW": {
+    "plus1": "Damage 8 -> 11",
+    "effect": "Deal 8 to all, Retain",
+    "note": "plain damage"
+  },
+  "SPECTRUM_SHIFT": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: add Cards (1) random Colorless cards to hand each turn",
+    "cap": 5,
+    "costPerLevel": -1,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "cost reaches 0 at +2; one more Colorless card per turn per level (card generation, cap 5)"
+  },
+  "SPEEDSTER": {
+    "plus1": "adds Innate",
+    "effect": "Power: deal SpeedsterPower (2) to all enemies when you draw outside hand draw",
+    "perLevel": {
+      "SpeedsterPower": 1
+    },
+    "note": "damage power with no +1 delta; +1 damage per level"
+  },
+  "SPINNER": {
+    "plus1": "channels a Glass orb on play (IsUpgraded)",
+    "effect": "Power: channel SpinnerPower (1) Glass each turn",
+    "cap": 5,
+    "perLevel": {
+      "SpinnerPower": 1
+    },
+    "note": "one more Glass per turn per level (orbs, cap 5)"
+  },
+  "SPIRIT_OF_ASH": {
+    "plus1": "BlockOnExhaust 4 -> 5",
+    "effect": "Power: gain Block whenever you exhaust a card",
+    "note": "block power, safe"
+  },
+  "SPITE": {
+    "plus1": "Repeat 2 -> 3",
+    "effect": "Deal 5 (Repeat times if you lost HP this turn), cost 0",
+    "note": "Repeat is hit count, not plays; extra 5-damage hits are safe, full replay"
+  },
+  "SPLASH": {
+    "plus1": "generated Attack is upgraded (IsUpgraded)",
+    "effect": "Choose 1 of 3 other-character Attacks, free this turn",
+    "play": {
+      "Vigor": 2
+    },
+    "note": "no number; Vigor powers the borrowed Attack"
+  },
+  "SPOILS_MAP": {
+    "plus1": "none (MaxUpgradeLevel 0)",
+    "effect": "Unplayable quest: 600 gold at the act's treasure",
+    "fusable": false,
+    "note": "quest card that can never upgrade; fusing it would only destroy a quest"
+  },
+  "SPOILS_OF_BATTLE": {
+    "plus1": "Forge 6 -> 9",
+    "effect": "Forge 6, draw 2",
+    "note": "Forge is damage, safe; draw not grown"
+  },
+  "SPUR": {
+    "plus1": "Summon +2, Heal +2",
+    "effect": "Summon, heal Osty, Retain",
+    "cap": 5,
+    "note": "summon + healing; cap 5"
+  },
+  "SQUASH": {
+    "plus1": "Damage +2, Vulnerable 2 -> 3",
+    "effect": "Deal 10, apply Vulnerable",
+    "note": "damage + debuff duration, safe"
+  },
+  "SQUEEZE": {
+    "plus1": "CalculationBase 25 -> 30, ExtraDamage 5 -> 6",
+    "effect": "Osty deals 25 + ExtraDamage per other Osty attack card",
+    "note": "damage, full replay"
+  },
+  "STACK": {
+    "plus1": "CalculationBase 0 -> 3",
+    "effect": "Gain Block equal to discard pile size (+ base)",
+    "note": "block, full replay"
+  },
+  "STAMPEDE": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: at end of turn auto-play Power (1) random Attacks from hand",
+    "cap": 3,
+    "costPerLevel": -1,
+    "perLevel": {
+      "Power": 1
+    },
+    "note": "cost reaches 0 at +2; one more autoplay per level (extra plays, cap 3)"
+  },
+  "STARDUST": {
+    "plus1": "Damage 5 -> 7",
+    "effect": "Star X: deal 5 X times to random enemies",
+    "note": "plain damage"
+  },
+  "STOKE": {
+    "plus1": "generated cards are upgraded (IsUpgraded)",
+    "effect": "Exhaust hand, add as many random class cards",
+    "cap": 3,
+    "play": {
+      "Energy": 1
+    },
+    "note": "no number; 1 energy per level to play the new hand, cap 3 (2 energy at +3)"
+  },
+  "STOMP": {
+    "plus1": "Damage 12 -> 15",
+    "effect": "Deal 12 to all; costs 1 less per Attack played this turn",
+    "note": "plain damage"
+  },
+  "STONE_ARMOR": {
+    "plus1": "PlatingPower 4 -> 6",
+    "effect": "Power: gain Plating",
+    "note": "block-like, safe"
+  },
+  "STORM": {
+    "plus1": "StormPower 1 -> 2",
+    "effect": "Power: channel Lightning per Power played",
+    "cap": 5,
+    "note": "orbs per trigger; cap 5"
+  },
+  "STORM_OF_STEEL": {
+    "plus1": "Shivs are upgraded (IsUpgraded)",
+    "effect": "Discard hand, add a Shiv per card discarded",
+    "play": {
+      "Strength": 1
+    },
+    "note": "no number; Strength boosts every Shiv hit"
+  },
+  "STRANGLE": {
+    "plus1": "Damage +2, StranglePower 2 -> 3",
+    "effect": "Deal 8, target takes StranglePower per card played this turn",
+    "note": "damage, safe"
+  },
+  "STRATAGEM": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Power: on shuffle, pick StratagemPower (1, hardcoded) cards from draw pile into hand",
+    "cap": 5,
+    "powerBonus": {
+      "StratagemPower": 1
+    },
+    "note": "one more pick per shuffle per level (draw-like, cap 5)"
+  },
+  "STRIKE_DEFECT": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "Deal 6",
+    "note": "plain damage"
+  },
+  "STRIKE_IRONCLAD": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "Deal 6",
+    "note": "plain damage"
+  },
+  "STRIKE_NECROBINDER": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "Deal 6",
+    "note": "plain damage"
+  },
+  "STRIKE_REGENT": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "Deal 6",
+    "note": "plain damage"
+  },
+  "STRIKE_SILENT": {
+    "plus1": "Damage 6 -> 9",
+    "effect": "Deal 6",
+    "note": "plain damage"
+  },
+  "STS1_AGGREGATE": {
+    "plus1": "CardsPerEnergy 4 -> 3",
+    "effect": "Gain 1 energy per CardsPerEnergy cards in draw pile",
+    "cap": 2,
+    "note": "divisor: -1 per level hits 0 (division by zero) at +4; stop at 2 cards per energy"
+  },
+  "STS1_ALCHEMIZE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Obtain a random potion, Exhaust",
+    "play": {
+      "Poison": 2
+    },
+    "note": "cost already 0, no var; a whiff of brewed poison per level"
+  },
+  "STS1_ALL_OUT_ATTACK": {
+    "plus1": "Damage 10 -> 14",
+    "effect": "Deal 10 to all, discard a random card",
+    "note": "plain damage"
+  },
+  "STS1_ALPHA": {
+    "plus1": "adds Innate",
+    "effect": "Shuffle Beta into draw pile, Exhaust",
+    "cap": 3,
+    "play": {
+      "Draw": 1
+    },
+    "note": "no number; a draw per level helps reach Beta, cap 3"
+  },
+  "STS1_AMPLIFY": {
+    "plus1": "Powers 1 -> 2",
+    "effect": "This turn the next Powers Power cards are played twice",
+    "cap": 3,
+    "note": "extra plays; cap 3"
+  },
+  "STS1_APOTHEOSIS": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Upgrade every card in combat, Exhaust",
+    "costPerLevel": -1,
+    "play": {
+      "Strength": 1,
+      "Dexterity": 1
+    },
+    "note": "cost 0 at +2; ascension theme: Strength and Dexterity per level, once per combat"
+  },
+  "STS1_APPARITION": {
+    "plus1": "removes Ethereal",
+    "effect": "Gain IntangiblePower (1), Exhaust",
+    "cap": 3,
+    "perLevel": {
+      "IntangiblePower": 1
+    },
+    "note": "Intangible turns; cap 3"
+  },
+  "STS1_AUTO_SHIELDS": {
+    "plus1": "Block 11 -> 15",
+    "effect": "Gain Block if you have none",
+    "note": "block, full replay"
+  },
+  "STS1_A_THOUSAND_CUTS": {
+    "plus1": "Sts1AThousandCutsPower 1 -> 2",
+    "effect": "Power: deal damage to all enemies per card played",
+    "perLevel": {
+      "Sts1AThousandCutsPower": 1
+    },
+    "note": "damage power, safe; explicit perLevel because the var key is a nameof constant"
+  },
+  "STS1_BANDAGE_UP": {
+    "plus1": "Heal 4 -> 6",
+    "effect": "Heal 4, Exhaust (cost 0)",
+    "cap": 5,
+    "note": "healing; cap 5"
+  },
+  "STS1_BANE": {
+    "plus1": "Damage 7 -> 10",
+    "effect": "Deal 7 (twice if target is poisoned)",
+    "note": "plain damage"
+  },
+  "STS1_BARRAGE": {
+    "plus1": "Damage 4 -> 6",
+    "effect": "Deal 4 once per orb",
+    "note": "plain damage"
+  },
+  "STS1_BATTLE_HYMN": {
+    "plus1": "adds Innate",
+    "effect": "Power: add Magic (1) Smite to hand each turn",
+    "cap": 5,
+    "perLevel": {
+      "Magic": 1
+    },
+    "note": "one more Smite per turn per level (card generation, cap 5)"
+  },
+  "STS1_BECOME_ALMIGHTY": {
+    "plus1": "Magic 3 -> 4",
+    "effect": "Unplayable choice token: gain Magic Strength",
+    "note": "Strength, safe"
+  },
+  "STS1_BERSERK": {
+    "plus1": "VulnerablePower 2 -> 1",
+    "effect": "Power: gain 1 Vulnerable, gain Energy (1) each turn",
+    "cap": 2,
+    "perLevel": {
+      "VulnerablePower": -1
+    },
+    "note": "drawback reaches 0 at +2 (0 amount is a no-op); never negative, energy per turn not grown"
+  },
+  "STS1_BETA": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Shuffle Omega into draw pile, Exhaust",
+    "cap": 3,
+    "costPerLevel": -1,
+    "play": {
+      "Draw": 1
+    },
+    "note": "cost 0 at +2; a draw per level helps reach Omega, cap 3"
+  },
+  "STS1_BITE": {
+    "plus1": "Damage +1, Magic (heal) 2 -> 3",
+    "effect": "Deal 7, heal Magic",
+    "cap": 5,
+    "beyond": [
+      "Damage"
+    ],
+    "note": "Magic is healing; cap 5, damage keeps growing"
+  },
+  "STS1_BLADE_DANCE": {
+    "plus1": "Cards 3 -> 4",
+    "effect": "Add Cards Shivs to hand",
+    "cap": 5,
+    "note": "card generation; cap 5"
+  },
+  "STS1_BLASPHEMY": {
+    "plus1": "adds Retain",
+    "effect": "Enter Divinity, die at end of turn, Exhaust",
+    "play": {
+      "Vigor": 3
+    },
+    "note": "no number; Vigor is tripled by Divinity, fits the all-in turn"
+  },
+  "STS1_BLIND": {
+    "plus1": "targets all enemies (IsUpgraded)",
+    "effect": "Apply WeakPower (2) Weak",
+    "perLevel": {
+      "WeakPower": 1
+    },
+    "note": "+1 Weak duration per level, safe"
+  },
+  "STS1_BLIZZARD": {
+    "plus1": "ExtraDamage 2 -> 3",
+    "effect": "Deal ExtraDamage per Frost channeled this combat to all",
+    "note": "damage scaling, safe"
+  },
+  "STS1_BLOOD_FOR_BLOOD": {
+    "plus1": "Damage 18 -> 22, cost 4 -> 3",
+    "effect": "Deal 18; costs 1 less per HP loss this combat",
+    "note": "damage replay; cost already falls with HP loss"
+  },
+  "STS1_BOWLING_BASH": {
+    "plus1": "Damage 7 -> 10",
+    "effect": "Deal 7 once per enemy",
+    "note": "plain damage"
+  },
+  "STS1_BRILLIANCE": {
+    "plus1": "CalculationBase 12 -> 16",
+    "effect": "Deal 12 + Mantra gained this combat",
+    "note": "damage, full replay"
+  },
+  "STS1_BRUTALITY": {
+    "plus1": "adds Innate",
+    "effect": "Power: each turn draw Sts1BrutalityPower (1, hardcoded) and lose that much HP",
+    "cap": 5,
+    "powerBonus": {
+      "Sts1BrutalityPower": 1
+    },
+    "note": "draw + HP loss per turn; +1 per level, cap 5"
+  },
+  "STS1_CALCULATED_GAMBLE": {
+    "plus1": "removes Exhaust",
+    "effect": "Discard hand, draw that many (cost 0)",
+    "cap": 3,
+    "play": {
+      "Draw": 1
+    },
+    "note": "no number; one extra card per level, cap 3"
+  },
+  "STS1_CALTROPS": {
+    "plus1": "ThornsPower 3 -> 5",
+    "effect": "Power: gain Thorns",
+    "note": "Thorns damage, safe"
+  },
+  "STS1_CARNAGE": {
+    "plus1": "Damage 20 -> 28",
+    "effect": "Ethereal: deal 20",
+    "note": "plain damage"
+  },
+  "STS1_CARVE_REALITY": {
+    "plus1": "Damage 6 -> 10",
+    "effect": "Deal 6, add a Smite to hand",
+    "note": "plain damage"
+  },
+  "STS1_CATALYST": {
+    "plus1": "triples instead of doubles Poison (IsUpgraded)",
+    "effect": "Add the target's Poison again (x2 or x3 total), Exhaust",
+    "powerBonus": {
+      "PoisonPower": 3
+    },
+    "note": "no var; +3 Poison per level on top of the multiplied amount"
+  },
+  "STS1_CHILL": {
+    "plus1": "adds Innate",
+    "effect": "Channel a Frost per enemy, Exhaust (cost 0)",
+    "play": {
+      "Block": 3
+    },
+    "note": "no number; Frost theme is Block"
+  },
+  "STS1_CHOKE": {
+    "plus1": "StranglePower 3 -> 5",
+    "effect": "Deal 12, target takes StranglePower per card played this turn",
+    "note": "damage, safe"
+  },
+  "STS1_CHRYSALIS": {
+    "plus1": "Cards 3 -> 5",
+    "effect": "Shuffle Cards random Skills (free this combat) into draw pile, Exhaust",
+    "cap": 5,
+    "note": "card generation; cap 5"
+  },
+  "STS1_CLASH": {
+    "plus1": "Damage 14 -> 18",
+    "effect": "Deal 14, only playable if hand is all Attacks (cost 0)",
+    "note": "plain damage"
+  },
+  "STS1_CLAW": {
+    "plus1": "Damage 3 -> 5",
+    "effect": "Deal 3, all Claws gain 2 damage",
+    "note": "damage, full replay; Increase stays 2"
+  },
+  "STS1_CLEAVE": {
+    "plus1": "Damage 8 -> 11",
+    "effect": "Deal 8 to all",
+    "note": "plain damage"
+  },
+  "STS1_CLOTHESLINE": {
+    "plus1": "Damage +2, Weak 2 -> 3",
+    "effect": "Deal 12, apply Weak",
+    "note": "damage + debuff, safe"
+  },
+  "STS1_COLLECT": {
+    "plus1": "+1 turn (IsUpgraded)",
+    "effect": "X cost: put a Miracle+ in hand for X turns, Exhaust",
+    "cap": 3,
+    "powerBonus": {
+      "Sts1CollectPower": 1
+    },
+    "note": "one more Miracle+ turn per level; Miracle is energy, cap 3"
+  },
+  "STS1_COMBUST": {
+    "plus1": "Sts1CombustPower 5 -> 7",
+    "effect": "Power: end of turn lose 1 HP, deal damage to all",
+    "note": "damage power, safe"
+  },
+  "STS1_CONCENTRATE": {
+    "plus1": "Cards (discard count) 3 -> 2",
+    "effect": "discard 3 cards, gain 2 energy (0 cost)",
+    "cap": 3,
+    "note": "the +1 lowers the discard; +3 reaches discard 0, past that it would go negative"
+  },
+  "STS1_CONCLUDE": {
+    "plus1": "Damage +4",
+    "effect": "AoE damage, end your turn",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_CONJURE_BLADE": {
+    "plus1": "IsUpgraded: Expunger gets X+1 hits instead of X",
+    "effect": "X cost, exhaust: shuffle an Expunger hitting X(+1) times into the draw pile",
+    "play": {
+      "Strength": 1
+    },
+    "note": "no var; Strength multiplies across every Expunger hit, once per combat (exhaust)"
+  },
+  "STS1_CONSECRATE": {
+    "plus1": "Damage +3",
+    "effect": "0-cost AoE damage",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_CONSERVE_BATTERY": {
+    "plus1": "Block +3",
+    "effect": "block + 1 energy next turn (constant)",
+    "note": "block grows, the energy stays 1"
+  },
+  "STS1_CONSUME": {
+    "plus1": "FocusPower +1",
+    "effect": "gain 2 Focus, lose an orb slot",
+    "cap": 5,
+    "note": "Focus: cap 5"
+  },
+  "STS1_CORE_SURGE": {
+    "plus1": "Damage +4",
+    "effect": "damage + 1 Artifact (constant), exhaust",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_CORPSE_EXPLOSION": {
+    "plus1": "Poison +3",
+    "effect": "poison + Corpse Explosion (damage to all on death)",
+    "note": "poison is safe to grow"
+  },
+  "STS1_CRESCENDO": {
+    "plus1": "cost 1 -> 0",
+    "effect": "enter Wrath; retain, exhaust",
+    "play": {
+      "Vigor": 3
+    },
+    "note": "cost hits 0 at +1; Vigor feeds the next attack, doubled by the Wrath it enters"
+  },
+  "STS1_CRIPPLING_POISON": {
+    "plus1": "Poison +3",
+    "effect": "poison + 2 Weak to all enemies, exhaust",
+    "note": "poison is safe to grow; Weak stays 2"
+  },
+  "STS1_CRUSH_JOINTS": {
+    "plus1": "Damage +2, Magic (Vulnerable) +1",
+    "effect": "damage; Vulnerable if last card was a skill",
+    "note": "damage and Vulnerable turns are safe"
+  },
+  "STS1_CUT_THROUGH_FATE": {
+    "plus1": "Damage +2, Magic (Scry) +1",
+    "effect": "damage, Scry, draw 1 (constant)",
+    "note": "damage and Scry are safe; draw stays 1"
+  },
+  "STS1_DARKNESS": {
+    "plus1": "IsUpgraded: also trigger every Dark orb's passive",
+    "effect": "channel 1 Dark orb",
+    "play": {
+      "Damage": 3
+    },
+    "note": "no var; an unpowered dark hit per level fits the orb's evoke"
+  },
+  "STS1_DECEIVE_REALITY": {
+    "plus1": "Block +3",
+    "effect": "block + a Safety in hand",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_DEEP_BREATH": {
+    "plus1": "Cards +1",
+    "effect": "shuffle discard into draw, draw",
+    "cap": 5,
+    "note": "draw: cap 5"
+  },
+  "STS1_DEFEND_WATCHER": {
+    "plus1": "Block +3",
+    "effect": "block",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_DEUS_EX_MACHINA": {
+    "plus1": "Magic (Miracles) +1",
+    "effect": "unplayable; on draw add Magic Miracles (1 energy each) to hand, exhaust",
+    "cap": 5,
+    "note": "Miracles are energy; once per combat, so cap 5 (7 Miracles) and nothing beyond"
+  },
+  "STS1_DEVA_FORM": {
+    "plus1": "removes Ethereal",
+    "effect": "power: gain energy each turn, the gain rises by Magic each turn",
+    "cap": 3,
+    "perLevel": {
+      "Magic": 1
+    },
+    "note": "no number at +1; Magic is the energy ramp per turn, energy cap 3"
+  },
+  "STS1_DEVOTION": {
+    "plus1": "Magic (Mantra/turn) +1",
+    "effect": "power: gain Mantra each turn",
+    "cap": 5,
+    "note": "Mantra feeds Divinity (energy + triple damage); cap 5, nothing beyond"
+  },
+  "STS1_DIE_DIE_DIE": {
+    "plus1": "Damage +4",
+    "effect": "AoE damage, exhaust",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_DISARM": {
+    "plus1": "StrengthLoss +1",
+    "effect": "enemy loses Strength, exhaust",
+    "note": "enemy Strength loss is safe to grow"
+  },
+  "STS1_DISCOVERY": {
+    "plus1": "removes Exhaust",
+    "effect": "choose 1 of 3 class cards, free this turn (retired)",
+    "play": {
+      "Block": 3
+    },
+    "note": "no number; non-exhaust repeatable card, so a safe Block bonus instead of draw/energy"
+  },
+  "STS1_DISTRACTION": {
+    "plus1": "cost 1 -> 0",
+    "effect": "exhaust: random skill to hand, free this turn",
+    "play": {
+      "Weak": 1
+    },
+    "note": "cost hits 0 at +1; distracted enemies get Weak"
+  },
+  "STS1_DOOM_AND_GLOOM": {
+    "plus1": "Damage +4",
+    "effect": "AoE damage, channel Dark",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_DOPPELGANGER": {
+    "plus1": "IsUpgraded: X+1 instead of X",
+    "effect": "X cost, exhaust: next turn draw X and gain X energy",
+    "cap": 3,
+    "powerBonus": {
+      "EnergyNextTurnPower": 1,
+      "DrawCardsNextTurnPower": 1
+    },
+    "note": "no var; +1 draw and energy next turn per level, once per combat (exhaust)"
+  },
+  "STS1_DOUBLE_TAP": {
+    "plus1": "Attacks +1",
+    "effect": "next N attacks are played twice",
+    "cap": 3,
+    "note": "extra plays: cap 3"
+  },
+  "STS1_DRAMATIC_ENTRANCE": {
+    "plus1": "Damage +4",
+    "effect": "innate AoE damage, exhaust",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_DROPKICK": {
+    "plus1": "Damage +3",
+    "effect": "damage; vs Vulnerable gain 1 energy and draw 1 (constant)",
+    "note": "damage grows, energy/draw stay 1"
+  },
+  "STS1_DUAL_WIELD": {
+    "plus1": "Cards (copies) +1",
+    "effect": "copy an attack/power in hand N times",
+    "cap": 5,
+    "note": "card generation: cap 5"
+  },
+  "STS1_ELECTRODYNAMICS": {
+    "plus1": "Orbs +1",
+    "effect": "Lightning hits all; channel N Lightning",
+    "cap": 5,
+    "note": "orbs: cap 5"
+  },
+  "STS1_EMPTY_BODY": {
+    "plus1": "Block +3",
+    "effect": "block, exit stance",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_EMPTY_FIST": {
+    "plus1": "Damage +5",
+    "effect": "damage, exit stance",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_EMPTY_MIND": {
+    "plus1": "Magic (draw) +1",
+    "effect": "draw, exit stance",
+    "cap": 5,
+    "note": "Magic is draw: cap 5"
+  },
+  "STS1_ENDLESS_AGONY": {
+    "plus1": "Damage +2",
+    "effect": "0-cost damage, copies itself when drawn, exhaust",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_ENLIGHTENMENT": {
+    "plus1": "IsUpgraded: hand costs 1 for the combat instead of this turn",
+    "effect": "0 cost: reduce hand costs to 1",
+    "play": {
+      "Block": 3
+    },
+    "note": "no number; 0-cost repeatable, so a safe Block bonus, no draw/energy"
+  },
+  "STS1_ENTRENCH": {
+    "plus1": "cost 2 -> 1",
+    "effect": "double your Block",
+    "play": {
+      "Block": 3
+    },
+    "note": "cost-only reaches 0 at +2; extra Block per level feeds the doubling"
+  },
+  "STS1_ENVENOM": {
+    "plus1": "cost 2 -> 1",
+    "effect": "power: unblocked attack damage applies Poison",
+    "powerBonus": {
+      "EnvenomPower": 1
+    },
+    "note": "+1 Poison per hit per level past +1 (cost still drops to 0 at +2)"
+  },
+  "STS1_EQUILIBRIUM": {
+    "plus1": "Block +3",
+    "effect": "block, retain hand this turn",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_ERUPTION": {
+    "plus1": "cost 2 -> 1",
+    "effect": "damage, enter Wrath",
+    "perLevel": {
+      "Damage": 3
+    },
+    "costPerLevel": -1,
+    "note": "cost-only would stop at 0 (+2); grow damage and keep lowering the cost"
+  },
+  "STS1_ESTABLISHMENT": {
+    "plus1": "adds Innate",
+    "effect": "power: retained cards cost Magic less",
+    "cap": 3,
+    "perLevel": {
+      "Magic": 1
+    },
+    "note": "no number at +1; Magic is cost reduction per retain (energy-like), cap 3"
+  },
+  "STS1_EVALUATE": {
+    "plus1": "Block +4",
+    "effect": "block, Insight into draw pile",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_EVISCERATE": {
+    "plus1": "Damage +2",
+    "effect": "3 hits, costs 1 less per discard this turn",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_EVOLVE": {
+    "plus1": "Sts1EvolvePower +1",
+    "effect": "power: draw when you draw a Status",
+    "cap": 5,
+    "note": "draw: cap 5"
+  },
+  "STS1_EXHUME": {
+    "plus1": "cost 1 -> 0",
+    "effect": "exhaust: return an exhausted card to hand",
+    "play": {
+      "Draw": 1
+    },
+    "note": "cost hits 0 at +1; exhaust, so a once-per-combat draw is safe Cap 5 (lead review: draw).",
+    "cap": 5
+  },
+  "STS1_EXPUNGER": {
+    "plus1": "Damage +6",
+    "effect": "token: damage X times",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_FAME_AND_FORTUNE": {
+    "plus1": "Magic (gold) +5",
+    "effect": "Wish choice: gain gold",
+    "cap": 3,
+    "note": "gold: cap 3"
+  },
+  "STS1_FASTING": {
+    "plus1": "Magic +1",
+    "effect": "power: gain Strength and Dexterity, 1 less energy per turn",
+    "cap": 5,
+    "beyond": [
+      "Magic"
+    ],
+    "note": "Strength/Dexterity are safe; kept as decided"
+  },
+  "STS1_FEAR_NO_EVIL": {
+    "plus1": "Damage +3",
+    "effect": "damage; Calm if the enemy intends to attack",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_FINESSE": {
+    "plus1": "Block +2",
+    "effect": "0 cost: block, draw 1 (constant)",
+    "note": "block grows, draw stays 1"
+  },
+  "STS1_FIRE_BREATHING": {
+    "plus1": "Sts1FireBreathingPower +4",
+    "effect": "power: AoE damage when drawing Status/Curse",
+    "note": "damage is safe to grow"
+  },
+  "STS1_FISSION": {
+    "plus1": "IsUpgraded: evoke orbs instead of removing them",
+    "effect": "exhaust: remove all orbs, gain that much energy and draw",
+    "cap": 3,
+    "play": {
+      "Energy": 1
+    },
+    "note": "no number; energy fits, once per combat (exhaust)"
+  },
+  "STS1_FLASH_OF_STEEL": {
+    "plus1": "Damage +3",
+    "effect": "0 cost: damage, draw 1 (constant)",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_FLECHETTES": {
+    "plus1": "Damage +2",
+    "effect": "damage once per skill in hand",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_FLEX": {
+    "plus1": "StrengthPower +2",
+    "effect": "temporary Strength this turn",
+    "note": "temporary Strength is safe"
+  },
+  "STS1_FLURRY_OF_BLOWS": {
+    "plus1": "Damage +2",
+    "effect": "0 cost damage, returns on stance change",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_FLYING_KNEE": {
+    "plus1": "Damage +3",
+    "effect": "damage, 1 energy next turn (constant)",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_FLYING_SLEEVES": {
+    "plus1": "Damage +2",
+    "effect": "retain, 2 hits",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_FOLLOW_UP": {
+    "plus1": "Damage +4",
+    "effect": "damage; 1 energy if last card was an attack (constant)",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_FORCE_FIELD": {
+    "plus1": "Block +4",
+    "effect": "block, costs 1 less per power played",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_FOREIGN_INFLUENCE": {
+    "plus1": "IsUpgraded: chosen attack is free this turn",
+    "effect": "0 cost exhaust: choose 1 of 3 attacks from any class",
+    "play": {
+      "Vigor": 3
+    },
+    "note": "no var; Vigor powers the attack it hands you"
+  },
+  "STS1_FORESIGHT": {
+    "plus1": "Magic (Scry) +1",
+    "effect": "power: Scry at turn start",
+    "note": "Scry is not draw; safe to grow"
+  },
+  "STS1_FORETHOUGHT": {
+    "plus1": "IsUpgraded: any number of cards instead of 1",
+    "effect": "0 cost: put hand cards at the bottom, free until played",
+    "play": {
+      "Block": 3
+    },
+    "note": "no number; 0-cost repeatable cost cheat, so Block rather than draw/energy"
+  },
+  "STS1_FUSION": {
+    "plus1": "cost 2 -> 1",
+    "effect": "channel Plasma",
+    "note": "cost-only reaches 0 at +2; Plasma is energy, no more growth wanted"
+  },
+  "STS1_GENETIC_ALGORITHM": {
+    "plus1": "Increase +1",
+    "effect": "exhaust: block, permanently grows its block",
+    "perLevel": {
+      "Increase": 1
+    },
+    "note": "permanent block growth is safe; perLevel because the scan missed the IntVar delta"
+  },
+  "STS1_GHOSTLY_ARMOR": {
+    "plus1": "Block +3",
+    "effect": "ethereal block",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_GLASS_KNIFE": {
+    "plus1": "Damage +4",
+    "effect": "2 hits, loses 2 damage per play",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_GOOD_INSTINCTS": {
+    "plus1": "Block +3",
+    "effect": "0 cost block",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_GRAND_FINALE": {
+    "plus1": "Damage +10",
+    "effect": "AoE damage, only with an empty draw pile",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_HALT": {
+    "plus1": "Block +1, Magic (Wrath block) +5",
+    "effect": "0 cost block, more in Wrath",
+    "note": "block values are safe"
+  },
+  "STS1_HEATSINKS": {
+    "plus1": "Cards +1",
+    "effect": "power: draw when you play a power",
+    "cap": 5,
+    "note": "draw: cap 5"
+  },
+  "STS1_HEAVY_BLADE": {
+    "plus1": "Multiplier +2",
+    "effect": "damage, Strength counts Multiplier times",
+    "cap": 5,
+    "note": "Strength multiplier: cap 5"
+  },
+  "STS1_HEEL_HOOK": {
+    "plus1": "Damage +3",
+    "effect": "damage; vs Weak gain 1 energy, draw 1 (constant)",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_HELLO_WORLD": {
+    "plus1": "adds Innate",
+    "effect": "power: add a random Common card to hand each turn",
+    "powerBonus": {
+      "HelloWorldPower": 1
+    },
+    "note": "no number; one more card per turn per level Cap 5 (lead review: card generation).",
+    "cap": 5
+  },
+  "STS1_HYPERBEAM": {
+    "plus1": "Damage +8",
+    "effect": "AoE damage, lose 3 Focus (constant)",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_IMMOLATE": {
+    "plus1": "Damage +7",
+    "effect": "AoE damage, Burn into discard",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_INDIGNATION": {
+    "plus1": "Magic (Vulnerable) +2",
+    "effect": "Wrath, or Vulnerable to all if already in Wrath",
+    "note": "Vulnerable turns are safe"
+  },
+  "STS1_INNER_PEACE": {
+    "plus1": "Magic (draw) +1",
+    "effect": "Calm, or draw if already in Calm",
+    "cap": 5,
+    "note": "Magic is draw: cap 5"
+  },
+  "STS1_INSIGHT": {
+    "plus1": "Cards +1",
+    "effect": "token: retain, draw, exhaust",
+    "cap": 5,
+    "note": "draw: cap 5"
+  },
+  "STS1_INTIMIDATE": {
+    "plus1": "WeakPower +1",
+    "effect": "0 cost exhaust: Weak to all",
+    "note": "Weak is safe"
+  },
+  "STS1_JACK_OF_ALL_TRADES": {
+    "plus1": "Cards +1",
+    "effect": "exhaust: add random colorless cards to hand",
+    "cap": 5,
+    "note": "card generation: cap 5"
+  },
+  "STS1_JAX": {
+    "plus1": "Strength +1",
+    "effect": "lose 3 HP, gain Strength",
+    "note": "Strength is safe; HP loss stays 3"
+  },
+  "STS1_JUDGEMENT": {
+    "plus1": "Magic (threshold) +10",
+    "effect": "kill an enemy at or under Magic HP",
+    "note": "threshold growth is fun and bounded by its 1 cost"
+  },
+  "STS1_JUGGERNAUT": {
+    "plus1": "JuggernautPower +2",
+    "effect": "power: gaining block damages a random enemy",
+    "note": "damage is safe"
+  },
+  "STS1_JUST_LUCKY": {
+    "plus1": "Damage +1, Block +1, Magic (Scry) +1",
+    "effect": "0 cost: scry, block, damage",
+    "note": "all safe values"
+  },
+  "STS1_LESSON_LEARNED": {
+    "plus1": "Damage +3",
+    "effect": "damage; on a kill upgrade a deck card, exhaust",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_LIKE_WATER": {
+    "plus1": "Magic +2",
+    "effect": "power: block at end of turn in Calm",
+    "note": "block is safe"
+  },
+  "STS1_LIMIT_BREAK": {
+    "plus1": "removes Exhaust",
+    "effect": "double your Strength",
+    "cap": 5,
+    "perLevel": {
+      "StrengthPower": 1
+    },
+    "beyond": [
+      "StrengthPower"
+    ],
+    "note": "gains 1 Strength per level past +1 before doubling; kept as decided"
+  },
+  "STS1_LIVE_FOREVER": {
+    "plus1": "Magic (Plated Armor) +2",
+    "effect": "Wish choice: gain Plated Armor",
+    "note": "Plated Armor is block, safe"
+  },
+  "STS1_LOCK_ON": {
+    "plus1": "Damage +3, Sts1LockOnPower +1",
+    "effect": "damage, Lock-On for N turns",
+    "note": "damage and Lock-On turns are safe"
+  },
+  "STS1_MADNESS": {
+    "plus1": "cost 1 -> 0",
+    "effect": "exhaust: a random hand card costs 0 for the combat",
+    "play": {
+      "Draw": 1
+    },
+    "note": "cost hits 0 at +1; exhaust, so a once-per-combat draw finds more to make free Cap 5 (lead review: draw).",
+    "cap": 5
+  },
+  "STS1_MAGNETISM": {
+    "plus1": "cost 2 -> 1",
+    "effect": "power: a random colorless card to hand each turn",
+    "powerBonus": {
+      "Sts1MagnetismPower": 1
+    },
+    "note": "one more colorless card per turn per level (cost still drops to 0 at +2)"
+  },
+  "STS1_MASTERFUL_STAB": {
+    "plus1": "Damage +4",
+    "effect": "0 cost damage, +1 cost per HP loss",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_MASTER_REALITY": {
+    "plus1": "cost 1 -> 0",
+    "effect": "power: created cards are upgraded (single stack)",
+    "play": {
+      "Dexterity": 1
+    },
+    "note": "cost hits 0 at +1 and the power cannot stack; a small one-time stat per level"
+  },
+  "STS1_MEDITATE": {
+    "plus1": "Magic (cards returned) +1",
+    "effect": "return cards from discard with Retain, Calm, end turn",
+    "cap": 5,
+    "note": "card recursion like draw: cap 5"
+  },
+  "STS1_MELTER": {
+    "plus1": "Damage +4",
+    "effect": "remove enemy block, damage",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_MENTAL_FORTRESS": {
+    "plus1": "Magic +2",
+    "effect": "power: block on stance change",
+    "note": "block is safe"
+  },
+  "STS1_METALLICIZE": {
+    "plus1": "Sts1MetallicizePower +1",
+    "effect": "power: block at end of turn",
+    "note": "block is safe"
+  },
+  "STS1_METAMORPHOSIS": {
+    "plus1": "Cards +2",
+    "effect": "exhaust: shuffle N random attacks, free for the combat",
+    "cap": 5,
+    "note": "card generation: cap 5"
+  },
+  "STS1_MIND_BLAST": {
+    "plus1": "cost 2 -> 1",
+    "effect": "innate: damage equal to draw pile size",
+    "cap": 5,
+    "perLevel": {
+      "ExtraDamage": 1
+    },
+    "costPerLevel": -1,
+    "note": "damage per draw-pile card grows (multiplier, cap 5) and the cost keeps dropping"
+  },
+  "STS1_MIRACLE": {
+    "plus1": "Energy +1",
+    "effect": "token: retain, gain energy, exhaust",
+    "cap": 3,
+    "note": "energy: cap 3"
+  },
+  "STS1_NIRVANA": {
+    "plus1": "Magic +1",
+    "effect": "power: block whenever you Scry",
+    "note": "block is safe"
+  },
+  "STS1_OMEGA": {
+    "plus1": "Magic +10",
+    "effect": "token power: AoE damage at end of turn",
+    "note": "damage is safe"
+  },
+  "STS1_OMNISCIENCE": {
+    "plus1": "cost 4 -> 3",
+    "effect": "exhaust: play a card from the draw pile twice",
+    "note": "cost-only reaches 0 at +4; play count stays 2 (extra plays not grown)"
+  },
+  "STS1_OUTMANEUVER": {
+    "plus1": "Energy +1",
+    "effect": "energy next turn",
+    "cap": 3,
+    "note": "energy: cap 3"
+  },
+  "STS1_PANACEA": {
+    "plus1": "ArtifactPower +1",
+    "effect": "0 cost exhaust: gain Artifact",
+    "note": "Artifact is safe to grow on an exhaust card"
+  },
+  "STS1_PANACHE": {
+    "plus1": "Sts1PanachePower +4",
+    "effect": "0 cost power: every 5th card a turn deals AoE damage",
+    "perLevel": {
+      "Sts1PanachePower": 4
+    },
+    "note": "damage is safe; perLevel because the scan missed the const-keyed var"
+  },
+  "STS1_PERSEVERANCE": {
+    "plus1": "Block +2, Magic +1",
+    "effect": "retain: block, grows when retained",
+    "note": "block values are safe"
+  },
+  "STS1_PHANTASMAL_KILLER": {
+    "plus1": "cost 1 -> 0",
+    "effect": "next turn attacks deal double damage",
+    "powerBonus": {
+      "ShadowStepPower": 1
+    },
+    "note": "cost hits 0 at +1; one more turn of double damage per level Cap 5 (lead review: double-damage turns).",
+    "cap": 5
+  },
+  "STS1_POWER_THROUGH": {
+    "plus1": "Block +5",
+    "effect": "2 Wounds to hand, block",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_PRAY": {
+    "plus1": "Magic (Mantra) +1",
+    "effect": "Mantra, Insight into draw pile",
+    "cap": 5,
+    "note": "Mantra leads to Divinity (energy): cap 5"
+  },
+  "STS1_PRESSURE_POINTS": {
+    "plus1": "Magic (Mark) +3",
+    "effect": "apply Mark, all Marked enemies lose HP",
+    "note": "Mark is damage, safe"
+  },
+  "STS1_PROSTRATE": {
+    "plus1": "Magic (Mantra) +1",
+    "effect": "0 cost: Mantra, 4 block",
+    "cap": 3,
+    "note": "0-cost Mantra reaching 10 per play would chain Divinity energy; cap 3"
+  },
+  "STS1_PROTECT": {
+    "plus1": "Block +4",
+    "effect": "retain: block",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_PUMMEL": {
+    "plus1": "Repeat +1",
+    "effect": "exhaust: 2 damage N times",
+    "cap": 3,
+    "perLevel": {
+      "Repeat": 1,
+      "Damage": 1
+    },
+    "beyond": [
+      "Damage"
+    ],
+    "note": "hit count capped at 3 levels; damage per hit keeps growing so +9 still matters"
+  },
+  "STS1_PURITY": {
+    "plus1": "Cards +2",
+    "effect": "0 cost exhaust: exhaust up to N cards from hand",
+    "cap": 4,
+    "note": "exhaust count, not draw; +4 already covers a full hand"
+  },
+  "STS1_QUICK_SLASH": {
+    "plus1": "Damage +4",
+    "effect": "damage, draw 1 (constant)",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_RAGNAROK": {
+    "plus1": "Damage +1, Magic (hits) +1",
+    "effect": "N hits of damage to random enemies",
+    "cap": 3,
+    "beyond": [
+      "Damage",
+      "Magic"
+    ],
+    "note": "kept as decided: hits are damage, not plays"
+  },
+  "STS1_RAMPAGE": {
+    "plus1": "Increase +3",
+    "effect": "damage, grows by Increase each play",
+    "perLevel": {
+      "Increase": 3
+    },
+    "note": "per-play damage growth is safe; perLevel because the scan missed the const-keyed var"
+  },
+  "STS1_REACH_HEAVEN": {
+    "plus1": "Damage +5",
+    "effect": "damage, Through Violence into draw pile",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_REAPER": {
+    "plus1": "Damage +1",
+    "effect": "exhaust: AoE damage, heal unblocked damage",
+    "note": "tiny +1 delta, exhaust: healing stays small even at +9"
+  },
+  "STS1_REBOUND": {
+    "plus1": "Damage +3",
+    "effect": "damage, next card goes on top of the draw pile",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_RECKLESS_CHARGE": {
+    "plus1": "Damage +3",
+    "effect": "0 cost damage, Dazed into draw pile",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_RECURSION": {
+    "plus1": "cost 1 -> 0",
+    "effect": "evoke your next orb and channel a copy",
+    "play": {
+      "Damage": 3
+    },
+    "note": "cost hits 0 at +1; 0-cost repeatable, so an evoke-like hit rather than energy/draw"
+  },
+  "STS1_RECYCLE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "exhaust a hand card, gain its cost in energy",
+    "play": {
+      "Block": 3
+    },
+    "note": "cost hits 0 at +1; 0-cost repeatable energy card, so Block, no energy"
+  },
+  "STS1_REFLEX": {
+    "plus1": "Cards +1",
+    "effect": "unplayable: draw when discarded",
+    "cap": 5,
+    "note": "draw: cap 5"
+  },
+  "STS1_REINFORCED_BODY": {
+    "plus1": "Block +2",
+    "effect": "X cost: block X times",
+    "note": "replay of the +1 block delta is the right growth"
+  },
+  "STS1_REPROGRAM": {
+    "plus1": "FocusPower, StrengthPower, DexterityPower +1",
+    "effect": "lose Focus, gain Strength and Dexterity",
+    "cap": 5,
+    "beyond": [
+      "DexterityPower",
+      "StrengthPower"
+    ],
+    "note": "kept as decided: Focus loss stops at +5, Strength/Dexterity keep growing"
+  },
+  "STS1_RIDDLE_WITH_HOLES": {
+    "plus1": "Damage +1",
+    "effect": "5 hits",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_RIP_AND_TEAR": {
+    "plus1": "Damage +2",
+    "effect": "2 hits to random enemies",
+    "note": "replay of the +1 damage delta is the right growth"
+  },
+  "STS1_RITUAL_DAGGER": {
+    "plus1": "Increase +2",
+    "effect": "exhaust: damage, permanently grows on a kill",
+    "perLevel": {
+      "Increase": 2
+    },
+    "note": "permanent damage growth is safe; perLevel because the scan missed the IntVar delta"
+  },
+  "STS1_RUPTURE": {
+    "plus1": "StrengthPower +1",
+    "effect": "power: Strength when you lose HP from a card",
+    "note": "Strength is safe"
+  },
+  "STS1_RUSHDOWN": {
+    "plus1": "cost 1 -> 0",
+    "effect": "power: draw 2 when entering Wrath",
+    "powerBonus": {
+      "Sts1RushdownPower": 1
+    },
+    "note": "cost hits 0 at +1; +1 draw per Wrath entry per level (already a known infinite piece, kept at 1) Cap 5 (lead review: draw).",
+    "cap": 5
+  },
+  "STS1_SADISTIC_NATURE": {
+    "plus1": "SleightOfFleshPower +2",
+    "effect": "Power: whenever you apply a debuff to an enemy, it takes 5 damage",
+    "perLevel": {
+      "SleightOfFleshPower": 2
+    },
+    "note": "Damage per debuff is safe; perLevel pins the +2 since the scanner missed the keyed var"
+  },
+  "STS1_SAFETY": {
+    "plus1": "Block +4",
+    "effect": "Token: 12 Block, Retain, Exhaust",
+    "note": "Plain block, full replay"
+  },
+  "STS1_SANCTITY": {
+    "plus1": "Block +3",
+    "effect": "6 Block; draw 2 if the last card played was a Skill",
+    "note": "Only Block grows; draw stays at 2"
+  },
+  "STS1_SANDS_OF_TIME": {
+    "plus1": "Damage +6",
+    "effect": "Retain; 20 damage; cost -1 each time it is retained",
+    "note": "Plain damage"
+  },
+  "STS1_SASH_WHIP": {
+    "plus1": "Damage +2, Magic (Weak) +1",
+    "effect": "8 damage; apply 1 Weak if the last card was an Attack",
+    "note": "Damage and Weak are safe"
+  },
+  "STS1_SCRAWL": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Exhaust; draw until your hand is full",
+    "play": {
+      "Vigor": 2
+    },
+    "note": "Already free and draw is capped by hand size; Vigor feeds the next attack of the full hand"
+  },
+  "STS1_SEARING_BLOW": {
+    "plus1": "Damage per StS1 Searing Blow formula (grows each upgrade)",
+    "effect": "2 cost, damage that grows with every upgrade, MaxUpgradeLevel 99",
+    "note": "Keeps its own MaxUpgradeLevel (ForgeLevels skips it); its formula already scales with level"
+  },
+  "STS1_SECRET_TECHNIQUE": {
+    "plus1": "loses Exhaust",
+    "effect": "Put a Skill from your draw pile into your hand (Retired: StS2 card used in every mode)",
+    "play": {
+      "Block": 3
+    },
+    "note": "No number; a small Block per level fits a defensive tutor"
+  },
+  "STS1_SECRET_WEAPON": {
+    "plus1": "loses Exhaust",
+    "effect": "Put an Attack from your draw pile into your hand (Retired: StS2 card used in every mode)",
+    "play": {
+      "Vigor": 2
+    },
+    "note": "No number; Vigor powers the fetched Attack"
+  },
+  "STS1_SEEING_RED": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Exhaust; gain 2 energy",
+    "cap": 3,
+    "perLevel": {
+      "Energy": 1
+    },
+    "note": "Cost already 0; grow the energy itself, capped at 3 (4 energy at +3, Exhaust)"
+  },
+  "STS1_SEEK": {
+    "plus1": "Cards +1",
+    "effect": "Exhaust; put N chosen cards from the draw pile into hand",
+    "cap": 5,
+    "note": "Tutor count, draw-like cap"
+  },
+  "STS1_SELF_REPAIR": {
+    "plus1": "Healing +3",
+    "effect": "Power: heal 7 at the end of combat",
+    "cap": 5,
+    "note": "Healing cap"
+  },
+  "STS1_SENTINEL": {
+    "plus1": "Block +3, Energy +1",
+    "effect": "5 Block; gain 2 energy when exhausted",
+    "cap": 3,
+    "beyond": [
+      "Block"
+    ],
+    "note": "Energy capped at 3, Block keeps growing"
+  },
+  "STS1_SETUP": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Put a card from hand on top of the draw pile; it costs 0 until played",
+    "play": {
+      "Block": 3
+    },
+    "note": "Not Exhaust and free, so no draw/energy; a small Block per level"
+  },
+  "STS1_SEVER_SOUL": {
+    "plus1": "Damage +6",
+    "effect": "Exhaust all non-Attacks in hand; deal 16 damage",
+    "note": "Plain damage"
+  },
+  "STS1_SHOCKWAVE": {
+    "plus1": "Power (Weak and Vulnerable amount) +2",
+    "effect": "Exhaust; apply 3 Weak and 3 Vulnerable to all enemies",
+    "perLevel": {
+      "Power": 1
+    },
+    "note": "Debuff turns are safe; perLevel slows the keyed var (scanner missed it) to +1"
+  },
+  "STS1_SIGNATURE_MOVE": {
+    "plus1": "Damage +10",
+    "effect": "30 damage; only playable if it is the only Attack in hand",
+    "note": "Plain damage"
+  },
+  "STS1_SIMMERING_FURY": {
+    "plus1": "Magic (cards drawn next turn) +1",
+    "effect": "Enter Wrath next turn and draw 2 cards next turn",
+    "cap": 5,
+    "note": "Magic is draw: draw cap"
+  },
+  "STS1_SKEWER": {
+    "plus1": "Damage +3",
+    "effect": "X-cost: deal 7 damage X times",
+    "note": "Damage per hit is safe"
+  },
+  "STS1_SMITE": {
+    "plus1": "Damage +4",
+    "effect": "Token: Retain, Exhaust; 12 damage",
+    "note": "Plain damage"
+  },
+  "STS1_SNEAKY_STRIKE": {
+    "plus1": "Damage +4",
+    "effect": "12 damage; gain 2 energy if you discarded this turn",
+    "note": "Only damage grows; energy stays 2"
+  },
+  "STS1_SPIRIT_SHIELD": {
+    "plus1": "Magic (Block per card in hand) +1",
+    "effect": "Gain 3 Block per other card in hand",
+    "note": "Block only, safe even when large"
+  },
+  "STS1_SPOT_WEAKNESS": {
+    "plus1": "StrengthPower +1",
+    "effect": "Gain 3 Strength if the target intends to attack",
+    "note": "Strength is safe"
+  },
+  "STS1_STACK": {
+    "plus1": "CalculationBase +3",
+    "effect": "Block equal to discard pile size (+3 when upgraded)",
+    "note": "Flat Block bonus, safe"
+  },
+  "STS1_STATIC_DISCHARGE": {
+    "plus1": "Orbs +1",
+    "effect": "Power: channel 1 Lightning whenever you take unblocked attack damage",
+    "cap": 5,
+    "note": "Orb count cap"
+  },
+  "STS1_STEAM_BARRIER": {
+    "plus1": "Block +2",
+    "effect": "0 cost: 6 Block, loses 1 Block each play this combat",
+    "note": "Plain block"
+  },
+  "STS1_STORM": {
+    "plus1": "Innate",
+    "effect": "Power: channel 1 Lightning whenever you play a Power",
+    "cap": 5,
+    "perLevel": {
+      "Orbs": 1
+    },
+    "note": "Innate-only upgrade; grow the Orbs var (lightning per Power) with the orb cap"
+  },
+  "STS1_STREAMLINE": {
+    "plus1": "Damage +5",
+    "effect": "15 damage; costs 1 less this combat each play",
+    "note": "Plain damage"
+  },
+  "STS1_STRIKE_WATCHER": {
+    "plus1": "Damage +3",
+    "effect": "6 damage (Strike)",
+    "note": "Plain damage"
+  },
+  "STS1_STUDY": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: at end of turn shuffle 1 Insight into the draw pile",
+    "cap": 3,
+    "perLevel": {
+      "Magic": 1
+    },
+    "costPerLevel": -1,
+    "note": "Grow Insights per turn (card generation) to 3, keep lowering cost to 0"
+  },
+  "STS1_SUCKER_PUNCH": {
+    "plus1": "Damage +2, Weak +1",
+    "effect": "7 damage, apply 1 Weak",
+    "note": "Damage and Weak are safe"
+  },
+  "STS1_SWIFT_STRIKE": {
+    "plus1": "Damage +3",
+    "effect": "0 cost: 7 damage",
+    "note": "Plain damage"
+  },
+  "STS1_SWIVEL": {
+    "plus1": "Block +3",
+    "effect": "8 Block; next Attack costs 0 (FreeAttackPower 1, hardcoded)",
+    "note": "Block grows; the free attack stays one"
+  },
+  "STS1_TACTICIAN": {
+    "plus1": "Energy +1",
+    "effect": "Unplayable; gain 1 energy when discarded",
+    "cap": 3,
+    "note": "Energy cap"
+  },
+  "STS1_TALK_TO_THE_HAND": {
+    "plus1": "Damage +2, Magic (Block Return) +1",
+    "effect": "Exhaust; 5 damage, target gives 2 Block to attackers per hit",
+    "note": "Block per hit is safe"
+  },
+  "STS1_TANTRUM": {
+    "plus1": "Magic (hit count) +1",
+    "effect": "3 damage x3, enter Wrath, shuffles into draw pile",
+    "cap": 5,
+    "note": "Hit count is a multiplier"
+  },
+  "STS1_TEMPEST": {
+    "plus1": "IsUpgraded: channel X+1 Lightning",
+    "effect": "X-cost, Exhaust: channel X Lightning",
+    "play": {
+      "Damage": 3
+    },
+    "note": "No var; a Lightning-themed unpowered zap per level"
+  },
+  "STS1_TERROR": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Exhaust; apply 99 Vulnerable",
+    "play": {
+      "Weak": 1
+    },
+    "note": "Vulnerable is maxed and cost is 0; terror also weakens"
+  },
+  "STS1_THIRD_EYE": {
+    "plus1": "Block +2, Magic (Scry) +2",
+    "effect": "7 Block, Scry 3",
+    "note": "Block and Scry are safe"
+  },
+  "STS1_THROUGH_VIOLENCE": {
+    "plus1": "Damage +10",
+    "effect": "Token: Retain, Exhaust, 0 cost; 20 damage",
+    "note": "Plain damage"
+  },
+  "STS1_THUNDER_STRIKE": {
+    "plus1": "Damage +2",
+    "effect": "7 damage to random enemies per Lightning channeled this combat",
+    "note": "Damage per hit is safe"
+  },
+  "STS1_TRANQUILITY": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Retain, Exhaust; enter Calm",
+    "play": {
+      "Block": 3
+    },
+    "note": "Calm is defensive: small Block per level"
+  },
+  "STS1_TRANSMUTATION": {
+    "plus1": "IsUpgraded: generated cards are upgraded",
+    "effect": "X-cost, Exhaust: add X random colorless cards to hand, free this turn",
+    "play": {
+      "Block": 3
+    },
+    "note": "No var to grow; small Block per level (generation itself can't be scaled)"
+  },
+  "STS1_TRIP": {
+    "plus1": "IsUpgraded: targets all enemies",
+    "effect": "0 cost: apply 2 Vulnerable",
+    "perLevel": {
+      "VulnerablePower": 1
+    },
+    "note": "Grow the Vulnerable amount, safe"
+  },
+  "STS1_UNLOAD": {
+    "plus1": "Damage +4",
+    "effect": "14 damage, discard all non-Attacks",
+    "note": "Plain damage"
+  },
+  "STS1_VAULT": {
+    "plus1": "cost 3 -> 2",
+    "effect": "Exhaust: take an extra turn, end your turn",
+    "note": "Cost-only keeps lowering to 0 by +3; Exhaust and a Single power keep it to one extra turn"
+  },
+  "STS1_VIGILANCE": {
+    "plus1": "Block +4",
+    "effect": "8 Block, enter Calm",
+    "note": "Plain block"
+  },
+  "STS1_VIOLENCE": {
+    "plus1": "Cards +1",
+    "effect": "Exhaust, 0 cost: put 3 random Attacks from draw pile into hand",
+    "cap": 5,
+    "note": "Card count cap"
+  },
+  "STS1_WALLOP": {
+    "plus1": "Damage +3",
+    "effect": "9 damage; gain Block equal to unblocked damage",
+    "note": "Damage (and thus Block) is safe"
+  },
+  "STS1_WARCRY": {
+    "plus1": "Cards +1",
+    "effect": "Exhaust, 0 cost: draw 1, put a card from hand on top",
+    "cap": 5,
+    "note": "Draw cap"
+  },
+  "STS1_WAVE_OF_THE_HAND": {
+    "plus1": "Magic (Weak) +1",
+    "effect": "This turn, whenever you gain Block apply 1 Weak to all enemies",
+    "note": "Weak is safe"
+  },
+  "STS1_WEAVE": {
+    "plus1": "Damage +2",
+    "effect": "0 cost: 4 damage; returns to hand on Scry",
+    "note": "Plain damage"
+  },
+  "STS1_WHEEL_KICK": {
+    "plus1": "Damage +5",
+    "effect": "15 damage, draw 2",
+    "note": "Only damage grows; draw stays 2"
+  },
+  "STS1_WILD_STRIKE": {
+    "plus1": "Damage +5",
+    "effect": "12 damage, shuffle a Wound into the draw pile",
+    "note": "Plain damage"
+  },
+  "STS1_WINDMILL_STRIKE": {
+    "plus1": "Damage +3, Magic (growth when retained) +1",
+    "effect": "Retain; 7 damage, +4 damage each time retained",
+    "note": "Damage growth only, safe"
+  },
+  "STS1_WISH": {
+    "plus1": "Strength +1, PlatedArmor +2, Gold +5 (display); IsUpgraded upgrades the three option cards once",
+    "effect": "Exhaust: choose 6 Plated Armor, 3 Strength or 25 Gold",
+    "cap": 3,
+    "powerBonus": {
+      "StrengthPower": 1,
+      "Sts1PlatedArmorPower": 2
+    },
+    "note": "Wish's own vars are display only: the option cards hold the real values, so replay changes nothing in play. powerBonus grows the Strength/Plated Armor actually applied (source = Wish). Gold has no hook and stays put. Cap 3 (the cap now limits powerBonus): 5 Strength or 10 Plated Armor at +3"
+  },
+  "STS1_WORSHIP": {
+    "plus1": "Retain",
+    "effect": "Gain 5 Mantra",
+    "cap": 3,
+    "perLevel": {
+      "Magic": 2
+    },
+    "note": "Retain is already on the ladder; grow Mantra (Divinity = energy) with a low cap: 9 Mantra at +3"
+  },
+  "STS1_WRAITH_FORM": {
+    "plus1": "IntangiblePower +1",
+    "effect": "Power: gain 2 Intangible; lose 1 Dexterity each turn",
+    "cap": 3,
+    "perLevel": {
+      "IntangiblePower": 1
+    },
+    "note": "Intangible cap (scanner missed the keyed var)"
+  },
+  "STS1_WREATH_OF_FLAME": {
+    "plus1": "Magic (Vigor) +3",
+    "effect": "Gain 5 Vigor",
+    "note": "Vigor is safe"
+  },
+  "SUBROUTINE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Power: gain 1 energy whenever you play a Power",
+    "play": {
+      "Block": 3
+    },
+    "note": "Energy per Power can't be capped through powerBonus (uncapped to +9), so a small Block instead"
+  },
+  "SUCKER_PUNCH": {
+    "plus1": "Damage +2, Weak +1",
+    "effect": "8 damage, apply 1 Weak",
+    "note": "Damage and Weak are safe"
+  },
+  "SUMMON_FORTH": {
+    "plus1": "Forge +3",
+    "effect": "Put Sovereign Blades into hand, Forge 8",
+    "note": "Forge is damage, safe"
+  },
+  "SUNDER": {
+    "plus1": "Damage +8",
+    "effect": "26 damage; gain 3 energy if it kills",
+    "note": "Only damage grows; energy stays 3"
+  },
+  "SUPERCRITICAL": {
+    "plus1": "Energy +2",
+    "effect": "Exhaust, 0 cost: gain 4 energy",
+    "cap": 3,
+    "perLevel": {
+      "Energy": 1
+    },
+    "note": "Energy cap; +1 per level instead of +2 (7 then 8)"
+  },
+  "SUPERMASSIVE": {
+    "plus1": "ExtraDamage +1",
+    "effect": "5 damage +3 per card you generated this combat",
+    "note": "Damage scaling, safe"
+  },
+  "SUPPRESS": {
+    "plus1": "Damage +6, Weak +2",
+    "effect": "Innate, 0 cost: 11 damage, 3 Weak",
+    "note": "Damage and Weak are safe"
+  },
+  "SURVIVOR": {
+    "plus1": "Block +3",
+    "effect": "8 Block, discard 1",
+    "note": "Plain block"
+  },
+  "SWEEPING_BEAM": {
+    "plus1": "Damage +3",
+    "effect": "6 damage to all enemies, draw 1",
+    "note": "Only damage grows"
+  },
+  "SWEEPING_GAZE": {
+    "plus1": "OstyDamage +5",
+    "effect": "Ethereal, Exhaust: Osty deals 10 damage to a random enemy",
+    "note": "Plain damage"
+  },
+  "SWORD_BOOMERANG": {
+    "plus1": "Repeat +1",
+    "effect": "3 damage to random enemies 3 times",
+    "cap": 5,
+    "note": "Hit count is a damage multiplier, not a replay"
+  },
+  "SWORD_SAGE": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: Sovereign Blade is replayed 1 extra time",
+    "play": {
+      "Vigor": 2
+    },
+    "note": "Cost reaches 0 at +2; replays must not grow; Vigor powers the Blade"
+  },
+  "SYNCHRONIZE": {
+    "plus1": "CalculationExtra +1",
+    "effect": "Gain temporary Focus per distinct orb type channeled",
+    "cap": 5,
+    "note": "Focus multiplier cap"
+  },
+  "SYNTHESIS": {
+    "plus1": "Damage +6",
+    "effect": "14 damage; next Power costs 0",
+    "note": "Only damage grows"
+  },
+  "TACTICIAN": {
+    "plus1": "Energy +1",
+    "effect": "Sly, cost 3: gain 1 energy",
+    "cap": 3,
+    "note": "Energy cap"
+  },
+  "TAG_TEAM": {
+    "plus1": "Damage +4",
+    "effect": "Multiplayer: 11 damage; the target's next ally attack plays twice",
+    "note": "Damage only; extra plays stay 1"
+  },
+  "TANK": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Multiplayer Power: take 50% more damage, allies Guarded",
+    "play": {
+      "Block": 4
+    },
+    "note": "Single-stack power with nothing to raise; a tank gains Block"
+  },
+  "TAUNT": {
+    "plus1": "Block +1, Vulnerable +1",
+    "effect": "6 Block, apply 1 Vulnerable",
+    "note": "Block and Vulnerable are safe"
+  },
+  "TEAR_ASUNDER": {
+    "plus1": "Damage +2",
+    "effect": "5 damage, +1 hit per time you lost HP this combat",
+    "note": "Damage per hit is safe"
+  },
+  "TEMPEST": {
+    "plus1": "IsUpgraded: channel X+1 Lightning",
+    "effect": "X-cost: channel X Lightning",
+    "play": {
+      "Damage": 3
+    },
+    "note": "No var; Lightning-themed unpowered damage per level"
+  },
+  "TERRAFORMING": {
+    "plus1": "VigorPower +3",
+    "effect": "Gain 7 Vigor",
+    "note": "Vigor is safe"
+  },
+  "TESLA_COIL": {
+    "plus1": "Damage +1; IsUpgraded: Lightning passives trigger twice",
+    "effect": "3 damage, trigger each Lightning's passive on the target",
+    "perLevel": {
+      "Damage": 2
+    },
+    "note": "+1 damage is negligible; +2 per level gives the zap some weight"
+  },
+  "THE_BALL": {
+    "plus1": "Increase +5",
+    "effect": "Multiplayer: 10 damage, +10 damage per play, passes to an ally",
+    "cap": 5,
+    "note": "Per-play scaling cap"
+  },
+  "THE_BOMB": {
+    "plus1": "BombDamage +10",
+    "effect": "In 3 turns deal 40 damage to all enemies",
+    "note": "Damage is safe"
+  },
+  "THE_GAMBIT": {
+    "plus1": "Block +25",
+    "effect": "0 cost: 50 Block; die if you take unblocked damage",
+    "note": "Block is safe"
+  },
+  "THE_HUNT": {
+    "plus1": "Damage +5",
+    "effect": "Exhaust: 10 damage; fatal gives an extra card reward",
+    "note": "Plain damage"
+  },
+  "THE_SCYTHE": {
+    "plus1": "Increase +2",
+    "effect": "Exhaust: 13 damage, +5 permanently each play",
+    "cap": 5,
+    "note": "Permanent per-play scaling cap"
+  },
+  "THE_SEALED_THRONE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Power (3 stars): gain 1 star whenever you play a card",
+    "play": {
+      "Block": 3
+    },
+    "note": "Stars per card must not grow; a small Block per level"
+  },
+  "THE_SMITH": {
+    "plus1": "Forge +10",
+    "effect": "Star cost 4: Forge 30",
+    "note": "Forge is damage, safe"
+  },
+  "THINKING_AHEAD": {
+    "plus1": "loses Exhaust",
+    "effect": "0 cost: draw 2, put 1 card from hand on top",
+    "cap": 4,
+    "perLevel": {
+      "Cards": 1
+    },
+    "note": "Free, non-Exhaust draw: grow Cards but cap at 4 (draw 5) to avoid easy loops"
+  },
+  "THRASH": {
+    "plus1": "Damage +2",
+    "effect": "4 damage x2, exhaust a random Attack in hand and gain its damage",
+    "note": "Plain damage"
+  },
+  "THRUMMING_HATCHET": {
+    "plus1": "Damage +3",
+    "effect": "11 damage; returns to hand next turn",
+    "note": "Plain damage"
+  },
+  "THUNDER": {
+    "plus1": "ThunderPower +3",
+    "effect": "Power: evoking an orb deals 8 damage to its targets",
+    "note": "Damage, safe"
+  },
+  "THUNDERCLAP": {
+    "plus1": "Damage +3",
+    "effect": "4 damage to all, 1 Vulnerable to all",
+    "note": "Plain damage"
+  },
+  "TIMES_UP": {
+    "plus1": "Retain",
+    "effect": "Deal damage equal to the target's Doom",
+    "perLevel": {
+      "ExtraDamage": 0.25
+    },
+    "note": "Retain is on the ladder; grow damage per Doom slowly (x3 at +9) since Doom stacks are large"
+  },
+  "TOOLS_OF_THE_TRADE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Power: draw 1 more and discard 1 each turn",
+    "play": {
+      "Block": 4
+    },
+    "note": "Draw via powerBonus would be uncapped; a small Block per level instead"
+  },
+  "TORIC_TOUGHNESS": {
+    "plus1": "Block +2",
+    "effect": "5 Block now and for the next 2 turns",
+    "note": "Plain block"
+  },
+  "TRACKING": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: Weak enemies take +50% attack damage (TrackingPower 50, hardcoded)",
+    "powerBonus": {
+      "TrackingPower": 25
+    },
+    "note": "Brief example: +25% per level past +1"
+  },
+  "TRANSFIGURE": {
+    "plus1": "loses Exhaust",
+    "effect": "A card in hand costs 1 more and gains a Replay",
+    "play": {
+      "Block": 3
+    },
+    "note": "Replays must not grow; a small Block per level"
+  },
+  "TRASH_TO_TREASURE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Power: channel a random orb whenever you generate a card",
+    "play": {
+      "Block": 3
+    },
+    "note": "Orbs per generated card via powerBonus would be uncapped; a small Block per level"
+  },
+  "TREMBLE": {
+    "plus1": "Vulnerable +1",
+    "effect": "Exhaust: apply 3 Vulnerable",
+    "note": "Vulnerable is safe"
+  },
+  "TRUE_GRIT": {
+    "plus1": "Block +2; IsUpgraded: choose the card to exhaust",
+    "effect": "7 Block, exhaust a random card (chosen when upgraded)",
+    "note": "Plain block"
+  },
+  "TURBO": {
+    "plus1": "Energy +1",
+    "effect": "0 cost: gain 2 energy, add a Void to discard",
+    "cap": 3,
+    "note": "Energy cap; the Void keeps the drawback"
+  },
+  "TUTOR": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Multiplayer: an ally puts a card from their draw pile into hand",
+    "play": {
+      "Block": 3
+    },
+    "note": "Free already; a small Block per level"
+  },
+  "TWIN_STRIKE": {
+    "plus1": "Damage +2",
+    "effect": "5 damage x2",
+    "note": "Plain damage"
+  },
+  "TYRANNY": {
+    "plus1": "Innate",
+    "effect": "Power: draw 1 more and exhaust 1 each turn",
+    "play": {
+      "Strength": 1
+    },
+    "note": "Innate is on the ladder; a tyrant's Strength on play (played once per combat)"
+  },
+  "ULTIMATE_DEFEND": {
+    "plus1": "Block +4",
+    "effect": "11 Block",
+    "note": "Plain block"
+  },
+  "ULTIMATE_STRIKE": {
+    "plus1": "Damage +6",
+    "effect": "14 damage",
+    "note": "Plain damage"
+  },
+  "UNDEATH": {
+    "plus1": "Block +2",
+    "effect": "0 cost: 7 Block, add a copy to discard",
+    "note": "Plain block (the clone inherits the level)"
+  },
+  "UNDERWORLD": {
+    "plus1": "loses Exhaust",
+    "effect": "Multiplayer: this turn damage dealt also applies that much Doom",
+    "play": {
+      "Vulnerable": 1
+    },
+    "note": "Doom multiplier via powerBonus would be uncapped; Vulnerable fits the setup"
+  },
+  "UNLEASH": {
+    "plus1": "CalculationBase +3",
+    "effect": "Osty deals 6 + his Block damage",
+    "note": "Flat damage, safe"
+  },
+  "UNMOVABLE": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power: the first Block card each turn gains double Block",
+    "powerBonus": {
+      "UnmovablePower": 1
+    },
+    "note": "One more doubled Block card per level; Block is safe"
+  },
+  "UNRELENTING": {
+    "plus1": "Damage +6",
+    "effect": "14 damage; next Attack costs 0",
+    "note": "Only damage grows"
+  },
+  "UNTOUCHABLE": {
+    "plus1": "Block +3",
+    "effect": "Sly: 6 Block",
+    "note": "Plain block"
+  },
+  "UPPERCUT": {
+    "plus1": "Power (Weak and Vulnerable) +1",
+    "effect": "13 damage, 1 Weak and 1 Vulnerable",
+    "note": "Debuff turns are safe"
+  },
+  "UPROAR": {
+    "plus1": "Damage +2",
+    "effect": "6 damage x2, autoplay a random Attack from the draw pile",
+    "note": "Only damage grows; the autoplay stays one"
+  },
+  "UP_MY_SLEEVE": {
+    "plus1": "Cards +1",
+    "effect": "Add 3 Shivs to hand; costs 1 less this combat",
+    "cap": 5,
+    "note": "Card generation cap"
+  },
+  "VEILPIERCER": {
+    "plus1": "Damage +3",
+    "effect": "10 damage; next Ethereal card costs 0",
+    "note": "Only damage grows"
+  },
+  "VENERATE": {
+    "plus1": "Stars +1",
+    "effect": "Gain 2 stars",
+    "cap": 3,
+    "note": "Stars cap"
+  },
+  "VICIOUS": {
+    "plus1": "Cards +1",
+    "effect": "Power: draw 1 whenever you apply Vulnerable",
+    "cap": 5,
+    "note": "Draw cap"
+  },
+  "VOID_FORM": {
+    "plus1": "loses Ethereal",
+    "effect": "Power: the first 2 cards each turn are free; end your turn",
+    "cap": 3,
+    "perLevel": {
+      "VoidFormPower": 1
+    },
+    "note": "Free cards per turn are energy: +1 per level to 4"
+  },
+  "VOLLEY": {
+    "plus1": "Damage +4",
+    "effect": "X-cost: 10 damage to random enemies X times",
+    "note": "Plain damage"
+  },
+  "VOLTAIC": {
+    "plus1": "loses Exhaust",
+    "effect": "Cost 3: channel 1 Lightning per Lightning channeled this combat",
+    "play": {
+      "Damage": 3
+    },
+    "note": "Orb count must not grow; Lightning-themed unpowered damage per level"
+  },
+  "WELL_LAID_PLANS": {
+    "plus1": "cost 2 -> 1",
+    "effect": "Power (Single): retain your hand",
+    "play": {
+      "Block": 3
+    },
+    "note": "Cost reaches 0 at +2; a small Block per level"
+  },
+  "WHIRLWIND": {
+    "plus1": "Damage +3",
+    "effect": "X-cost: 5 damage to all X times",
+    "note": "Plain damage"
+  },
+  "WHISTLE": {
+    "plus1": "Damage +11",
+    "effect": "Exhaust: 33 damage, stun the target",
+    "note": "Plain damage; stun stays"
+  },
+  "WHITE_NOISE": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Exhaust: add a random Power to hand, free this turn",
+    "play": {
+      "Block": 3
+    },
+    "note": "Generation count can't grow; a small Block per level"
+  },
+  "WISH": {
+    "plus1": "Retain",
+    "effect": "Exhaust, 0 cost: put any card from your draw pile into hand",
+    "cap": 5,
+    "play": {
+      "Draw": 1
+    },
+    "note": "Retain is on the ladder; one-shot Exhaust tutor, so a tiny draw per level, draw cap (draw 4 at +5)"
+  },
+  "WISP": {
+    "plus1": "Retain",
+    "effect": "Exhaust, 0 cost: gain 1 energy",
+    "cap": 3,
+    "perLevel": {
+      "Energy": 1
+    },
+    "note": "Energy var grows, capped (3 energy at +3, Exhaust)"
+  },
+  "WRAITH_FORM": {
+    "plus1": "IntangiblePower +1",
+    "effect": "Power: gain 2 Intangible, lose Dexterity each turn",
+    "cap": 3,
+    "note": "Intangible cap"
+  },
+  "WROUGHT_IN_WAR": {
+    "plus1": "Damage +2, Forge +2",
+    "effect": "7 damage, Forge 7",
+    "note": "Damage and Forge are safe"
+  },
+  "ZAP": {
+    "plus1": "cost 1 -> 0",
+    "effect": "Channel 1 Lightning",
+    "play": {
+      "Damage": 3
+    },
+    "note": "Free already; a Lightning-themed unpowered zap per level"
+  }
+}

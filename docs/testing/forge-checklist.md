@@ -14,8 +14,11 @@ Spec: `docs/superpowers/specs/2026-11-18-forge-design.md`. Tick only what was se
 - [ ] A cost-only card (e.g. Barricade-like) lowers its cost each level and stops at 0.
 - [ ] A card capped at 3 (e.g. Adrenaline) still fuses past +3, but its energy and draw stop growing; Battle Trance's
       draw stops at +5 while a capped card's damage or Block keeps growing.
-- [ ] Ladder: Retain at +6, cost 1 lower at +7 (never below 0), Innate at +9; a card whose +1 only adds a keyword fuses
-      too and only gains the ladder.
+- [ ] Ladder: Retain at +6, cost 1 lower at +7 (never below 0), Innate at +9.
+- [ ] Tracking+3: Weak enemies take +100 % attack damage (50 + 25 × 2); the card shows an orange "Forged: Tracking +50." line.
+- [ ] A `play` bonus card (e.g. Havoc+3: 8 extra damage to a random enemy) applies its bonus on every play, and the text
+      lists it in English and French.
+- [ ] A capped card's `play`/`powerBonus` stops growing past its cap (Double Energy+5 gives the same extra Energy as +3).
 - [ ] Limit Break+9: gains 8 Strength, then doubles.
 - [ ] StS1 card + its StS2 namesake: the preview offers both versions; the chosen one replaces the kept card in place.
 - [ ] The kept card's enchantment carries over to the other version when it can.
