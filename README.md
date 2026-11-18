@@ -116,6 +116,14 @@ The Courier and more). No card rewards anywhere: cards come from the merchant. E
 is its only way out. Rest site actions cost gold (50, then 50 more each time at the same fire) and can be repeated; a
 broken Maw Bank can be reopened there. Not with Matriochka. Not tested in game: `docs/testing/roi-midas-checklist.md`.
 
+**The Forge** (Custom Run): two copies of a card fuse at a rest site's new Fuse option, past +1 and up to +9. Levels
+add up, plus one: Strike+1 fused with Strike+1 gives Strike+3. Each level repeats the card's +1 numbers; its cost and
+keywords stay as at +1. Cards that would break the game stop earlier (energy and extra plays at +3, draw at +5; the table
+is `docs/review/forge-curves.md`), and Limit Break gains 1 Strength per level past +1 before doubling. A StS1 card fuses
+with its StS2 namesake and you pick which one comes out. Ordinary upgrades still stop at +1. Once per visit, the merchant
+sells a +0 copy of a deck card: 25 / 50 / 75 gold by rarity (+25 from Ascension 6), +25 per earlier purchase.
+Not tested in game: `docs/testing/forge-checklist.md`.
+
 **Slay the Spoon** (a card on the solo and multiplayer host screens, or a Custom Run checkbox): max HP becomes the currency of the run. Everyone starts with a Spoonful, a Retain card that
 kills to feed: a fatal blow with it raises your max HP. Everyone also starts with the 12 max HP relics, every rest site offers a
 Feast (+5 max HP) and Digest (−15 max HP, heal to full), and every merchant sells Fruit Juice. When the team's max HP adds up to **300 solo, 550 for two, 750

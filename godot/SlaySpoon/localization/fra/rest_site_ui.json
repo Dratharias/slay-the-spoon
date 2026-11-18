@@ -27,5 +27,8 @@
   "OPTION_SPOON_FEAST.name": "Festin",
   "OPTION_SPOON_FEAST.description": "Gagnez [green]5[/green] PV max.",
   "OPTION_SPOON_DIGEST.name": "Digestion",
-  "OPTION_SPOON_DIGEST.description": "Perdez [red]15[/red] PV max. Récupérez tous vos PV."
+  "OPTION_SPOON_DIGEST.description": "Perdez [red]15[/red] PV max. Récupérez tous vos PV.",
+  "OPTION_SPOON_FORGE_FUSE.name": "Fusionner",
+  "OPTION_SPOON_FORGE_FUSE.description": "Fusionnez deux copies d’une carte. Leurs niveaux s’additionnent, plus 1.",
+  "OPTION_SPOON_FORGE_FUSE.descriptionDisabled": "Il vous faut deux copies d’une carte qui peut encore monter."
 }

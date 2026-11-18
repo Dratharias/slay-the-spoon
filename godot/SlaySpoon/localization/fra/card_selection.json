@@ -5,5 +5,8 @@
 	"SPOON_SELECTED_COUNT": "Sélection : {Selected} / {Max}",
 	"SPOON_STANCE_TIP.description": "Vous ne pouvez adopter qu’une seule Position à la fois.",
 	"SPOON_STANCE_TIP.title": "Position",
-	"SPOON_TO_GIFT": "Choisissez une carte à [gold]vendre[/gold]."
+	"SPOON_TO_GIFT": "Choisissez une carte à [gold]vendre[/gold].",
+	"SPOON_FORGE_KEEP": "Choisissez la carte à [gold]garder[/gold].",
+	"SPOON_FORGE_SACRIFICE": "Choisissez la copie à [gold]fusionner[/gold].",
+	"SPOON_FORGE_DUPLICATE": "Choisissez une carte à [gold]dupliquer[/gold] : {Common} / {Uncommon} / {Rare} or selon la rareté."
 }

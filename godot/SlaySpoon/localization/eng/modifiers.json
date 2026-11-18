@@ -53,5 +53,8 @@
   "SPOON_SPOON.short": "Spoon",
   "SPOON_TEST_RUN.title": "Spoon Test",
   "SPOON_TEST_RUN.description": "A test start on the Spoon act. It counts toward no progress.",
-  "SPOON_TEST_RUN.short": "Test"
+  "SPOON_TEST_RUN.short": "Test",
+  "SPOON_FORGE.title": "The Forge",
+  "SPOON_FORGE.description": "Fuse copies at the fire, up to +9. The merchant duplicates cards.",
+  "SPOON_FORGE.short": "Forge"
 }

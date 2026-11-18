@@ -261,7 +261,7 @@
 	"STS1_LESSON_LEARNED.title": "Leçon apprise",
 	"STS1_LIKE_WATER.description": "À la fin de votre tour, si vous êtes en Calme, gagnez {Magic:diff()} d'[gold]Armure[/gold].",
 	"STS1_LIKE_WATER.title": "Fluidité",
-	"STS1_LIMIT_BREAK.description": "Doublez votre [gold]Force[/gold].",
+	"STS1_LIMIT_BREAK.description": "{StrengthPower:cond:>0?Gagnez [blue]{}[/blue] [gold]Force[/gold], puis doublez|Doublez} votre [gold]Force[/gold].",
 	"STS1_LIMIT_BREAK.title": "Dépasser les limites",
 	"STS1_LIVE_FOREVER.description": "Gagnez {Magic:diff()} [gold]Armure plaquée[/gold].",
 	"STS1_LIVE_FOREVER.title": "Immortalité",

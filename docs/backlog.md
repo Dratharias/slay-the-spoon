@@ -504,3 +504,33 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   Watcher); Bottled Miracle could become `AnyPlayer`.
 - Testing: a Workshop copy with a greater version now wins over a local `mods/SlaySpoon`; keep the local
   version at least equal to the uploaded one when testing with `make up`.
+
+## Future Custom Run modes picked by the owner (2026-11-18)
+
+Ideas the owner kept from the mode brainstorm. Each one needs its own design pass before any code.
+
+- **Blood:** gold no longer exists. Everything is paid in current HP: at the merchant, at events and at the campfire. A
+  vampirism relic is given at the start.
+- **Deck of 10:** the deck is locked at 10 cards. Taking a card forces you to discard one, and each discarded card gives
+  +1 max HP.
+- **Mutation:** at the end of each act, every card that is not upgraded is transformed at random.
+- **Trophies:** each elite killed gives a card drawn from its own attacks, for example "Gremlin Nob's Strike".
+- Co-op **Forced Trade:** after each combat won, each player gives one card from their deck to a random player.
+- Co-op **Conductor:** a random player, different each combat, hands out the end-of-combat rewards. The players' rewards
+  are merged.
+- **Compatibility (owner, 2026-11-18):** each new mode must be checked against every existing one before it ships, for
+  example Forced Trade with Folie à deux (both move cards between players after a fight). Each design pass lists the
+  pairs that clash and decides: combine, order the effects, or make them mutually exclusive.
+
+## The Forge (1.4.0, 2026-11-18)
+
+- Minor: in a Forge run every fusable card's title shows its level as a number ("Strike+1"), because the game names
+  cards that way once their max level is above 1. Kept: it shows the level the fusion uses.
+- Minor: the preview cards of a cancelled fusion stay registered in the run's card scope until the run ends, as the
+  Hybrid version swap does. Harmless (not in any pile, not saved).
+- Minor: the other-version result goes through `CardCmd.Transform`, so relic hooks on cards added to the deck
+  (`ModifyCardBeingAddedToDeck`, e.g. eggs) can apply to it. Kept: a fusion that changes the card is a new card.
+- Check in game: the Duplicate service runs its synced deck choice inside a queued action (vanilla removal uses a
+  one-off message). If the merchant freezes in co-op, move it to a message like `MerchantCardRemovalMessage`.
+- The curve table is generated (`tools/forge_curves.py`, run with the 0.111.1 decompile mounted as `/sts2src`);
+  hand calls live in `data/forge/overrides.json`. Owner review: `docs/review/forge-curves.md`.

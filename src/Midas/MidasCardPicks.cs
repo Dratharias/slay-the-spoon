@@ -16,7 +16,7 @@ namespace SlaySpoon.Midas;
 public static class MidasCardPicks
 {
 	public static bool Blocks(Player player) =>
-		SpoonRoiMidas.IsActive(player.RunState) && !CombatManager.Instance.IsInProgress && !SpoonRoiMidas.AtAncient(player.RunState);
+		!Forge.ForgeFusion.Previewing && SpoonRoiMidas.IsActive(player.RunState) && !CombatManager.Instance.IsInProgress && !SpoonRoiMidas.AtAncient(player.RunState);
 }
 
 [HarmonyPatch(typeof(CardSelectCmd), nameof(CardSelectCmd.FromSimpleGridForRewards))]

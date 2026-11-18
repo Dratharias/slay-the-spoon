@@ -43,5 +43,7 @@
   "SLAY_SPOON_LOANS.loan_received": "Gold received: {Amount}. Debt added, including interest: {Debt}.",
   "SLAY_SPOON_LOANS.gift_delivered": "Gift accepted: {Amount} gold delivered. No repayment expected.",
   "SLAY_SPOON_LOANS.loan_delivered": "Loan accepted: {Amount} gold delivered. Repayment due: {Debt}.",
-  "SLAY_SPOON_LOANS.sending": "Transaction pending…"
+  "SLAY_SPOON_LOANS.sending": "Transaction pending…",
+  "SPOON_FORGE_DUPLICATE": "Duplicate",
+  "SPOON_FORGE_DUPLICATE_USED": "Duplicated"
 }

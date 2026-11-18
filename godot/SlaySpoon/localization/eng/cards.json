@@ -261,7 +261,7 @@
 	"STS1_LESSON_LEARNED.title": "Lesson Learned",
 	"STS1_LIKE_WATER.description": "At the end of your turn, if you are in Calm, gain {Magic:diff()} [gold]Block[/gold].",
 	"STS1_LIKE_WATER.title": "Like Water",
-	"STS1_LIMIT_BREAK.description": "Double your [gold]Strength[/gold].",
+	"STS1_LIMIT_BREAK.description": "{StrengthPower:cond:>0?Gain [blue]{}[/blue] [gold]Strength[/gold], then double|Double} your [gold]Strength[/gold].",
 	"STS1_LIMIT_BREAK.title": "Limit Break",
 	"STS1_LIVE_FOREVER.description": "Gain {Magic:diff()} [gold]Plated Armor[/gold].",
 	"STS1_LIVE_FOREVER.title": "Live Forever",

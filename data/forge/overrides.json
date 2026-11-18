@@ -1,0 +1,13 @@
+{
+  "_comment": "Hand decisions for the Forge curve table (tools/forge_curves.py). A row here replaces the scan's proposal.",
+  "STS1_LIMIT_BREAK": {
+    "cap": 5,
+    "perLevel": { "StrengthPower": 1 },
+    "note": "gains 1 Strength per level past +1 before doubling (+5: gain 4, then double)"
+  },
+  "DEMON_FORM": { "cap": 5, "note": "Strength every turn; +5 already wins long fights" },
+  "STS1_DEUS_EX_MACHINA": { "cap": 5, "note": "Miracles drawn: energy" },
+  "STS1_DEVOTION": { "cap": 5, "note": "Mantra each turn; +5 enters Divinity every other turn" },
+  "STS1_FASTING": { "cap": 5, "note": "Strength and Dexterity at once" },
+  "STS1_RAGNAROK": { "cap": 3, "note": "hit count" }
+}

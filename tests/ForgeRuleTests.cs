@@ -78,4 +78,15 @@ public class ForgeRuleTests
 		Assert.Throws<FormatException>(() => ForgeRule.ParseCurves("""{ "A": { "cap": 12 } }"""));
 		Assert.Throws<FormatException>(() => ForgeRule.ParseCurves("""{ "A": { "costPerLevel": 1 } }"""));
 	}
+
+	[Fact]
+	public void CommittedTableParses()
+	{
+		var dir = new DirectoryInfo(AppContext.BaseDirectory);
+		while (dir != null && !File.Exists(Path.Combine(dir.FullName, "mod", "SlaySpoon.json"))) dir = dir.Parent;
+		var rows = ForgeRule.ParseCurves(File.ReadAllText(Path.Combine(dir!.FullName, "data", "forge", "curves.json")));
+		Assert.True(rows.Count > 100);
+		Assert.Equal(5, rows["STS1_LIMIT_BREAK"].Cap);
+		Assert.Equal(1m, rows["STS1_LIMIT_BREAK"].PerLevel!["StrengthPower"]);
+	}
 }

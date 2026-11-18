@@ -43,5 +43,7 @@
   "SLAY_SPOON_LOANS.loan_received": "Or reçu : {Amount}. Dette ajoutée, intérêts compris : {Debt}.",
   "SLAY_SPOON_LOANS.gift_delivered": "Don accepté : {Amount} pièces d’or remises. Aucun remboursement attendu.",
   "SLAY_SPOON_LOANS.loan_delivered": "Prêt accepté : {Amount} pièces d’or remises. À recevoir : {Debt}.",
-  "SLAY_SPOON_LOANS.sending": "Transaction en cours…"
+  "SLAY_SPOON_LOANS.sending": "Transaction en cours…",
+  "SPOON_FORGE_DUPLICATE": "Dupliquer",
+  "SPOON_FORGE_DUPLICATE_USED": "Dupliqué"
 }

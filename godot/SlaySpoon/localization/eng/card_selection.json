@@ -5,5 +5,8 @@
 	"SPOON_SELECTED_COUNT": "Selected: {Selected} / {Max}",
 	"SPOON_STANCE_TIP.description": "You can only have one Stance at a time.",
 	"SPOON_STANCE_TIP.title": "Stance",
-	"SPOON_TO_GIFT": "Choose a card to [gold]sell[/gold]."
+	"SPOON_TO_GIFT": "Choose a card to [gold]sell[/gold].",
+	"SPOON_FORGE_KEEP": "Choose a card to [gold]keep[/gold].",
+	"SPOON_FORGE_SACRIFICE": "Choose the copy to [gold]fuse[/gold] into it.",
+	"SPOON_FORGE_DUPLICATE": "Choose a card to [gold]duplicate[/gold]: {Common} / {Uncommon} / {Rare} gold by rarity."
 }

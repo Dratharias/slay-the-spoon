@@ -22,7 +22,7 @@ public static class FolieCardPicks
 	internal static bool Bypass;
 
 	internal static bool Applies(Player player) =>
-		!Bypass && SpoonFolieADeux.IsActive(player.RunState) && !CombatManager.Instance.IsInProgress
+		!Bypass && !Forge.ForgeFusion.Previewing && SpoonFolieADeux.IsActive(player.RunState) && !CombatManager.Instance.IsInProgress
 		&& player.RunState.Players.Count(p => !p.Creature.IsDead) >= 2 && !player.Creature.IsDead;
 
 	/// <returns>Who takes the picked cards: the owner, another player, or null (lost).</returns>

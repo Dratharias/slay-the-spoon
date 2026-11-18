@@ -10,6 +10,7 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 [*][b]Folie à deux[/b]: every card is up for grabs. Even yours.
 [*][b]Matriochka[/b]: hoard everything. Every floor brings cards.
 [*][b]King Midas[/b]: start rich. No free cards; every fire costs gold.
+[*][b]The Forge[/b]: fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
 [/list]
 
 [h2]Slay the Spire 1[/h2]
@@ -38,6 +39,7 @@ Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelq
 [*][b]Folie à deux[/b] : chaque carte se dispute. Même les vôtres.
 [*][b]Matriochka[/b] : accumulez tout. Chaque étage apporte des cartes.
 [*][b]Roi Midas[/b] : départ fortuné. Aucune carte gratuite, chaque feu se paie.
+[*][b]La Forge[/b] : fusionnez les copies d’une carte au feu, jusqu’à +9. Le marchand duplique vos cartes.
 [*]Les cartes de Slay the Spire 1 ou le Souvenir de la Tour, la Gardienne, l'acte 4 et le Cœur, des événements et reliques de boss de StS1, les bénédictions de Neow.
 [*]En coop : prêts au marchand et ventes au feu de camp. Aussi : PV et dégâts des monstres, coffre de départ, couleur de personnage.
 [/list]

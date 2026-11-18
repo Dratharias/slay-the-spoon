@@ -1,0 +1,7 @@
+1.4.0 — The Forge
+
+- New Custom Run mode The Forge: a Fuse option at rest sites merges two copies of a card, past +1 and up to +9.
+  Levels add up plus one (Strike+1 + Strike+1 = Strike+3). A StS1 card fuses with its StS2 namesake; you pick the version.
+- Cards that would break the game stop earlier: energy and extra plays at +3, draw at +5.
+- Limit Break gains 1 Strength per level past +1 before doubling.
+- The merchant duplicates a deck card once per visit (+0 copy, price by rarity, +25 per earlier purchase).
