@@ -6,7 +6,7 @@ namespace SlaySpoon.Core;
 /// </summary>
 public static class SpoonRule
 {
-	public const int FeastMaxHp = 5, HpPerPlayer = 1200,
+	public const int FeastMaxHp = 5, DigestMaxHpLoss = 15, HpPerPlayer = 1200,
 		AppetitePerMove = 2, AppetiteBite = 3, SpoonfulAppetite = 1, SpoonfulAppetiteUpgraded = 2, AppetitePercent = 5, AppetiteStolenBack = 1;
 
 	/// <summary>The fight's numbers (docs/superpowers/specs/2026-11-16-spoon-cutlery-design.md); tuned during balancing.</summary>
@@ -33,6 +33,9 @@ public static class SpoonRule
 		("BIG_MUSHROOM", 20), ("LOOMING_FRUIT", 31), ("DRAGON_FRUIT", 0), ("DARKSTONE_PERIAPT", 0), ("CHOSEN_CHEESE", 0),
 		("STONE_HUMIDIFIER", 0),
 	];
+
+	/// <summary>Digest (owner, 2026-11-18) needs more max HP than it costs, so the player keeps at least 1.</summary>
+	public static bool CanDigest(int maxHp) => maxHp > DigestMaxHpLoss;
 
 	/// <summary>Max HP the starting relics add at run start.</summary>
 	public static int StartRelicMaxHp => StartRelics.Sum(r => r.PickupMaxHp);

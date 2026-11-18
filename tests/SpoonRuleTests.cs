@@ -192,6 +192,12 @@ public class SpoonRuleTests
 	[Fact]
 	public void BanquetHitsLightly() => Assert.InRange(SpoonRule.BanquetDamage, 1, SpoonRule.BoucheeDamage / 2);
 
+	[Theory]
+	[InlineData(15, false)]
+	[InlineData(16, true)]
+	[InlineData(300, true)]
+	public void DigestKeepsAtLeastOneMaxHp(int maxHp, bool allowed) => Assert.Equal(allowed, SpoonRule.CanDigest(maxHp));
+
 	[Fact]
 	public void TwelveDistinctStartRelics()
 	{

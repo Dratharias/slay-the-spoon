@@ -91,6 +91,7 @@ public sealed class SpoonSpoon : ModifierModel
 	public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
 	{
 		options.Add(new SpoonFeastRestSiteOption(player));
+		options.Add(new SpoonDigestRestSiteOption(player));
 		return true;
 	}
 }

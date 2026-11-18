@@ -446,9 +446,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     Owner decision 2026-11-16 (1.3.7, replaces fighters, supporters and Spoon-Feed): everyone fights; the act needs the
     team's summed max HP at 300 / 550 / 750 / 900 for 1–4 players (`SpoonRule.TeamThreshold`). Spec amendment in
     `2026-11-14-spoon-design.md`.
-  - **Owner design call (open, ask the owner):** in an Act 4 run missing only the Ruby key, the Spoon act's rest site
-    offers Ruby Recall, a 4th chance at the Ruby key, which then appends The Ending after the Spoon. Keep it, or hide
-    Ruby Recall at the Spoon rest site?
+  - ~~**Owner design call:** in an Act 4 run missing only the Ruby key, the Spoon act's rest site offers Ruby Recall, a 4th
+    chance at the Ruby key, which then appends The Ending after the Spoon.~~ Settled 2026-11-18: kept.
   - **Deferred minors (all open; the final review may settle some):**
     - ~~T2: no top-bar icon or short text for `SpoonSpoon` (the default modifier icon shows, like King Midas).~~ Done in
       the 1.3.0 review fix wave: `SPOON_SPOON.short` ("Spoon" / "Cuill.") shows in the top bar, and King Midas shows its

@@ -22,6 +22,7 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] spoon: ...`. For a
       Fake Merchant, Nonupeipe) may still give a second copy; taking it works and gives its effect again.
 - [ ] Every rest site has a "Feast" option: +5 max HP, spends the rest action like Rest or Smith. Co-op: each player's own.
 - [ ] Ruby Recall and Feast both fit on the rest site list.
+- [ ] Every rest site also has "Digest" (1.3.8): −15 max HP, then full HP; spends the rest action; greyed out at 15 max HP or less. Ruby Recall, Feast and Digest all fit.
 - [ ] Every merchant sells Fruit Juice (+5 max HP) at its usual price, in one potion slot; the layout is otherwise vanilla.
 - [ ] Bought, the Fruit Juice is gone like any shop potion.
 - [ ] Merchant prices in a Spoon run match the same seed without Spoon, apart from the Juice slot (cards, other
