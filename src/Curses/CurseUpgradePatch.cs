@@ -46,29 +46,19 @@ public static class CurseUpgrade
 		_ => null,
 	};
 
-	/// <summary>Curse classes that declare their own MaxUpgradeLevel (every vanilla curse sets 0), plus the mod's curse base.</summary>
+	/// <summary>
+	/// Every concrete game card class that declares its own MaxUpgradeLevel (every vanilla curse sets 0; so do a few
+	/// non-curses, which <see cref="MaxLevelPatch"/> leaves alone by checking the card type), plus the mod's curse base.
+	/// </summary>
 	public static IEnumerable<MethodBase> OverridingGetters()
 	{
-		var ids = new HashSet<string>(StringComparer.Ordinal) { "BAD_LUCK", "DECAY", "REGRET", "DOUBT", "SHAME", "DEBT", "NORMALITY", "ENTHRALLED",
-			"SPORE_MIND", "CLUMSY", "INJURY", "WRITHE", "GUILTY", "FOLLY", "GREED", "CURSE_OF_THE_BELL", "POOR_SLEEP", "ASCENDERS_BANE" };
 		foreach (var type in typeof(CardModel).Assembly.GetTypes())
 		{
-			if (type.IsAbstract || !type.IsSubclassOf(typeof(CardModel)) || !ids.Contains(SnakeUpper(type.Name))) continue;
+			if (type.IsAbstract || !type.IsSubclassOf(typeof(CardModel))) continue;
 			var getter = AccessTools.DeclaredPropertyGetter(type, nameof(CardModel.MaxUpgradeLevel));
 			if (getter != null) yield return getter;
 		}
 		yield return AccessTools.DeclaredPropertyGetter(typeof(Sts1CurseCard), nameof(CardModel.MaxUpgradeLevel));
-	}
-
-	private static string SnakeUpper(string name)
-	{
-		var sb = new System.Text.StringBuilder();
-		for (int i = 0; i < name.Length; i++)
-		{
-			if (i > 0 && char.IsUpper(name[i])) sb.Append('_');
-			sb.Append(char.ToUpperInvariant(name[i]));
-		}
-		return sb.ToString();
 	}
 
 	[HarmonyPatch]
@@ -79,7 +69,7 @@ public static class CurseUpgrade
 		/// <summary>In the mode a curse goes to +1 (never fused: the Forge only touches classes that keep the base getter).</summary>
 		public static void Postfix(CardModel __instance, ref int __result)
 		{
-			if (__result == 0 && Active(__instance)) __result = 1;
+			if (__result == 0 && IsCurse(__instance) && Active(__instance)) __result = 1;
 		}
 	}
 
@@ -89,7 +79,7 @@ public static class CurseUpgrade
 	{
 		public static void Prefix(SerializableCard save, out bool __state)
 		{
-			__state = save.CurrentUpgradeLevel == 1 && CurseTable.For(save.Id.Entry) != null;
+			__state = save.CurrentUpgradeLevel == 1 && CurseTable.For(save.Id!.Entry) != null;
 			if (__state) _loading++;
 		}
 
@@ -137,9 +127,20 @@ public static class CurseUpgrade
 		public static int Limit(Normality card) => UpgradedRow(card)?.Self is { } s ? s[1] : -1;
 	}
 
-	/// <summary>Normality+ allows the table's upgraded number of cards.</summary>
-	[HarmonyPatch(typeof(Normality), "ShouldPreventCardPlay", MethodType.Getter)]
-	public static class NormalityLimitPatch
+	/// <summary>Normality+ allows the table's upgraded number of cards (the private getter it replaces can be inlined, so the callers are patched).</summary>
+	[HarmonyPatch(typeof(Normality), nameof(Normality.ShouldPlay))]
+	public static class NormalityShouldPlayPatch
+	{
+		public static void Postfix(Normality __instance, CardModel card, ref bool __result)
+		{
+			int limit = NormalityPatch.Limit(__instance);
+			if (limit < 0 || card.Owner != __instance.Owner || __instance.Pile?.Type != PileType.Hand) return;
+			__result = NormalityPatch.PlayedThisTurn(__instance) < limit;
+		}
+	}
+
+	[HarmonyPatch(typeof(Normality), "ShouldGlowRedInternal", MethodType.Getter)]
+	public static class NormalityGlowPatch
 	{
 		public static void Postfix(Normality __instance, ref bool __result)
 		{
