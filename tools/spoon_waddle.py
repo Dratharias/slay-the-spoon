@@ -22,10 +22,10 @@ PIVOT = (200, 593)  # SpoonMonster.Origin
 SWAY_DEG = 8.0
 HOP = 18.0  # sprite px at mid-swing
 STRETCH = 0.05  # y stretch at mid-swing, x squash at the sides
-HALF = 0.6  # seconds per step
+HALF = 1.0  # seconds per step
 FPS = 25
 PAD_TOP = 64  # the breath lifts the bowl above the sprite's own frame
-SCALE = 0.5  # output size
+SCALE = 0.3  # output size: small enough for the Workshop description
 MATTE = (27, 40, 56)  # Steam's #1b2838
 ALPHA_CUT = 96
 
