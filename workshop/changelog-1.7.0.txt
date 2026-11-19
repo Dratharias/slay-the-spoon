@@ -1,0 +1,9 @@
+1.7.0 — Cursed Deck, Achilles' Heel and seven challenges
+
+- New Custom Run mode Cursed Deck: start with the Unholy Grimoire and a curse. Curses become playable and hit the
+  enemy you target; they upgrade too. "?" events offer to embrace a curse, and most relic draws are cursed.
+- New Custom Run mode Achilles' Heel: unblocked attack damage kills you. You start with Anchor, Oddly Smooth Stone and
+  Gorget, gain Dexterity each act, hit harder with Block up and see more Block cards.
+- New Custom Run challenges: Blood (pay in HP), Deck of 10, Mutation, Trophies, Useless Relics, and in co-op Forced
+  Trade and Conductor.
+- Neow's cursed option is sometimes Deck of 10.

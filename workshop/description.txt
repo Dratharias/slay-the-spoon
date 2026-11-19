@@ -11,6 +11,18 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 [*][b]Matriochka[/b]: hoard everything. Every floor brings cards.
 [*][b]King Midas[/b]: start rich. No free cards; every fire costs gold.
 [*][b]The Forge[/b]: fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
+[*][b]Cursed Deck[/b]: curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
+[*][b]Achilles' Heel[/b]: one unblocked hit and you die. Stack Block, then hit with it.
+[/list]
+
+[h2]Challenges[/h2]
+[list]
+[*][b]Blood[/b]: no gold. You pay in HP.
+[*][b]Deck of 10[/b]: ten cards, no more. Everything else becomes max HP.
+[*][b]Mutation[/b]: every new act rewrites your deck.
+[*][b]Trophies[/b]: beat an elite, take one of its attacks.
+[*][b]Useless Relics[/b]: a relic that has done its job? Throw it.
+[*][b]Forced Trade[/b] and [b]Conductor[/b] (co-op): your friends decide what you get.
 [/list]
 
 [h2]Slay the Spire 1[/h2]
@@ -27,7 +39,7 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 [*][b]Monster HP and Damage[/b] from 25% to 500%, [b]Starting Chest[/b], [b]Character Color[/b].
 [/list]
 
-Daily Runs stay vanilla. Your regular save is never written; an optional copy brings its progress into the modded profile.
+Daily Runs stay vanilla. Your regular save is never written.
 
 [h2]Français[/h2]
 [b]Alpha réservée aux amis.[/b] À peine testée en jeu : attendez-vous à des bugs et sauvegardez vos parties. Tous les joueurs en coop ont besoin de la même version. Nécessite BaseLib 3.4.7 ou plus.
@@ -40,6 +52,9 @@ Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelq
 [*][b]Matriochka[/b] : accumulez tout. Chaque étage apporte des cartes.
 [*][b]Roi Midas[/b] : départ fortuné. Aucune carte gratuite, chaque feu se paie.
 [*][b]La Forge[/b] : fusionnez les copies d’une carte au feu, jusqu’à +9. Le marchand duplique vos cartes.
+[*][b]Deck maudit[/b] : les malédictions sont vos munitions. Jouez-les, lancez-les sur l’ennemi, collectionnez les reliques qui les adorent.
+[*][b]Talon d’Achille[/b] : un seul coup non bloqué et vous mourez. Empilez l’Armure, puis frappez avec.
+[*]Défis : [b]Sang[/b] (pas d’or, vous payez en PV), [b]Deck de 10[/b], [b]Mutation[/b], [b]Trophées[/b], [b]Reliques inutiles[/b], et en coop [b]Échange forcé[/b] et [b]Chef d’orchestre[/b].
 [*]Les cartes de Slay the Spire 1 ou le Souvenir de la Tour, la Gardienne, l'acte 4 et le Cœur, des événements et reliques de boss de StS1, les bénédictions de Neow.
 [*]En coop : prêts au marchand et ventes au feu de camp. Aussi : PV et dégâts des monstres, coffre de départ, couleur de personnage.
 [/list]

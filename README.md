@@ -2,8 +2,8 @@
 
 A Slay the Spire 2 mod for chaotic co-op and solo runs: it brings Slay the Spire 1 cards into
 Slay the Spire 2 and adds run options that the lobby host sets in the **Custom Run** screen.
-Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic described below, and the Folie à deux and
-Slay the Spoon cards start Standard runs in those modes.
+Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic described below, the Folie à deux and
+Slay the Spoon cards start Standard runs in those modes, and Neow's cursed option is sometimes Deck of 10.
 
 > **Unofficial.** This mod is not affiliated with, endorsed by or sponsored by Mega Crit.
 > Slay the Spire, Slay the Spire 2 and their assets (art, card text) belong to Mega Crit.
@@ -17,7 +17,7 @@ Slay the Spoon cards start Standard runs in those modes.
 
 ## Features
 
-Current version: **1.3.7**.
+Current version: **1.7.0**.
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps (− / + buttons,
   or left/right on a gamepad), synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -125,6 +125,26 @@ with its StS2 namesake and you pick which one comes out. Ordinary upgrades still
 sells a +0 copy of a deck card: 25 / 50 / 75 gold by rarity (+25 from Ascension 6), +25 per earlier purchase.
 Not tested in game: `docs/testing/forge-checklist.md`.
 
+**Cursed Deck** (Custom Run): every player starts with the Unholy Grimoire and a random curse. With the Grimoire, curses
+cost 1 (0 upgraded), target an enemy and turn their own effect against it: Bad Luck makes the monster lose 13 HP, Doubt
+weakens it. Curses can be upgraded in this mode. Every "?" event gets an "Embrace the curse" option (a curse for a cursed
+relic, gold or a heal), and relic draws from chests, elites and the merchant are cursed 2 times in 3 until you hold them
+all, including four new ones: Blood Pact, Pin Doll, Black Censer and Reliquary. Not tested in game:
+`docs/testing/cursed-deck-checklist.md`.
+
+**Achilles' Heel** (Custom Run): every player starts with the Achilles' Heel relic plus Anchor, Oddly Smooth Stone and
+Gorget. In every combat, unblocked attack damage kills you (Poison and HP loss don't). You gain 1 Dexterity per act past
+the first, your attacks deal 1 more damage per 5 Block you have, and card offers lean toward Block cards. HP stays vanilla,
+so it combines with the Spoon. Not tested in game: `docs/testing/achilles-heel-checklist.md`.
+
+**Challenges** (Custom Run): **Blood** (no gold: prices are paid in HP, with the Blood Fang relic), **Deck of 10** (a
+relic keeps your deck at 10 cards; each card dropped gives 1 max HP; Neow's cursed option is sometimes Deck of 10 in
+Standard runs too), **Mutation** (each new act transforms every card that is not upgraded), **Trophies** (each elite you
+beat gives one of its attacks as a card), **Useless Relics** (click a relic that has done its job to throw it for 10
+damage; it comes back after the fight), and in co-op **Forced Trade** (after each victory everyone gives a card to a
+random ally) and **Conductor** (one player hands out each reward). Not tested in game:
+`docs/testing/backlog-modes-checklist.md`.
+
 **Slay the Spoon** (a card on the solo and multiplayer host screens, or a Custom Run checkbox): max HP becomes the currency of the run. Everyone starts with a Spoonful, a Retain card that
 kills to feed: a fatal blow with it raises your max HP. Everyone also starts with the 12 max HP relics, every rest site offers a
 Feast (+5 max HP) and Digest (−15 max HP, heal to full), and every merchant sells Fruit Juice. When the team's max HP adds up to **300 solo, 550 for two, 750
@@ -175,12 +195,11 @@ the Corrupt Heart. Without all keys the run ends after Act 3 as usual. A Custom 
 keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-game validation; see
 `docs/testing/step-6-checklist.md`.
 
-## Development status — 2026-11-16
+## Development status — 2026-11-18
 
-Version **1.3.7**: the Spoon is fought by the whole team and opens on the team's total max HP; before it, the cutlery
-redesign and balance pass, King Midas, Folie à deux, Matriochka, StS1 boss relics, the Starting Chest and the Watcher
-in solo Standard. Automated validation: 722 xUnit and 91 Python tests pass; the build has no warnings. Most features
-still need in-game checks; the [testing checklists](docs/testing/) record them.
+Version **1.7.0**: Cursed Deck, Achilles' Heel and seven Custom Run challenges, after The Forge (1.4.0) and the port to
+game version 0.111.1 (1.3.8). Automated validation: 839 xUnit and 106 Python tests pass; the build has no warnings. Most
+features still need in-game checks; the [testing checklists](docs/testing/) record them.
 
 ## Languages
 
