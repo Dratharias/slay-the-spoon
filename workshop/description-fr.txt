@@ -42,6 +42,7 @@ Fusionnez les copies d’une carte au feu, jusqu’à +9. Le marchand duplique v
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-climb-fr.gif[/img]
 Gourdin+9 : 344 dégâts.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/forge-bludgeon.jpg[/img]
+[i]Astuce : améliorez vos copies d’abord, puis fusionnez les copies améliorées. +1 et +1 donnent +3, deux +3 donnent +7, et +7 avec un dernier +1 atteint +9.[/i]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-fr.png[/img]
 Les malédictions sont vos munitions. Jouez-les, lancez-les sur l’ennemi, collectionnez les reliques qui les adorent.

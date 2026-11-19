@@ -42,6 +42,7 @@ Fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-climb-en.gif[/img]
 Bludgeon+9: 344 damage.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/forge-bludgeon.jpg[/img]
+[i]Tip: upgrade your copies first, then fuse the upgraded ones. +1 and +1 give +3, two +3 give +7, and +7 with one more +1 reaches +9.[/i]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-en.png[/img]
 Curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
