@@ -23,12 +23,12 @@ public static class MatriochkaRewards
 		return true;
 	}
 
-	/// <summary>Dolly's Mirror (first merchant), then an unskippable card reward of the player's character pool.</summary>
+	/// <summary>Dolly's Mirror (act 3 Reflections row, unless already held), then an unskippable card reward of the player's character pool.</summary>
 	public static async Task OfferFloor(Player player, bool mirror, bool cards)
 	{
 		if (player.Creature.IsDead)
 			return;
-		if (mirror)
+		if (mirror && !player.Relics.Any(r => r is DollysMirror))
 			await RelicCmd.Obtain(ModelDb.Relic<DollysMirror>().ToMutable(), player);
 		if (!cards)
 			return;

@@ -22,6 +22,8 @@ Spec: `docs/superpowers/specs/2026-11-18-forge-design.md`. Tick only what was se
 - [ ] Limit Break+9: gains 8 Strength, then doubles.
 - [ ] StS1 card + its StS2 namesake: the preview offers both versions; the chosen one replaces the kept card in place.
 - [ ] The kept card's enchantment carries over to the other version when it can.
+- [ ] 1.8.2: fusing an unenchanted card with an enchanted copy (either order, same card or other version) keeps the
+      enchantment on the result; with two enchanted copies the kept card's stays.
 - [ ] Smith, Armaments, Apotheosis and other ordinary upgrades never take a card past +1.
 - [ ] Limit Break+2 to +5: text shows "Gain N Strength, then double"; the Strength is gained before doubling.
 - [ ] Save and reload a run with +2 to +9 cards: levels, numbers and cost unchanged.

@@ -20,7 +20,7 @@ namespace SlaySpoon.Config;
 
 /// <summary>
 /// Matriochka (Custom Run, docs/superpowers/specs/2026-11-14-matriochka-design.md): vanilla Hoarder, an unskippable
-/// card reward on every floor, Dolly's Mirror from the first merchant, the Doll Room (Bing Bong only) as the first act 2
+/// card reward on every floor, Dolly's Mirror on the act 3 Reflections row, right before Shatter's Bad Luck (owner, 2026-11-19), the Doll Room (Bing Bong only) as the first act 2
 /// event, and a whole act 3 row of Reflections (Shatter only) before the final rest sites. The row's −/+ value is the
 /// number of card reward rerolls each player gets per act (one sealed class per value, like the percent rows).
 /// </summary>
@@ -108,7 +108,8 @@ public abstract class SpoonMatriochka : SpoonPercentModifier
 	{
 		bool ancient = RunState.CurrentMapPoint?.PointType == MapPointType.Ancient;
 		bool offers = room is MerchantRoom or RestSiteRoom or TreasureRoom || (room is EventRoom && !ancient);
-		bool mirror = room is MerchantRoom && IsFirstMerchant();
+		// Rule 3: Dolly's Mirror when the act 3 Reflections room opens, before its Shatter.
+		bool mirror = room is EventRoom && RunState.CurrentActIndex == MatriochkaRule.ReflectionsAct && OnReflectionsRow();
 		if (!offers && !mirror)
 			return Task.CompletedTask;
 		// Rule 7: with Folie à deux, the floor's rewards go through one chest.
@@ -122,8 +123,6 @@ public abstract class SpoonMatriochka : SpoonPercentModifier
 		return Task.CompletedTask;
 	}
 
-	private bool IsFirstMerchant() =>
-		RunState.MapPointHistory.SelectMany(act => act).Count(e => e.HasRoomOfType(RoomType.Shop)) <= 1;
 
 	// Rules 4 and 5.
 	public override EventModel ModifyNextEvent(EventModel currentEvent)

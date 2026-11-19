@@ -258,7 +258,7 @@ Read `README.md` for the player view and the spec for every decision.
   rounds and Sealed Deck with consolation), `FolieCardPicks` (out-of-combat picks from events and relics: the owner picks,
   then a one-head chest; `FromSimpleGridForRewards` / `FromChooseACardScreen` postfixes at `Priority.Last`). Rules in `src/Core/FolieRule.cs`.
 - **Matriochka** (`SpoonMatriochka`, spec `docs/superpowers/specs/2026-11-14-matriochka-design.md`): Hoarder,
-  unskippable card reward every floor, Dolly's Mirror at the first merchant, Doll Room (Bing Bong), act 3 Reflections
+  unskippable card reward every floor, Dolly's Mirror on the act 3 Reflections row (1.8.2), Doll Room (Bing Bong), act 3 Reflections
   row (Shatter); rerolls per act from the row's −/+ (0–10, default 3). Rules in `src/Core/MatriochkaRule.cs`.
 - Build 0 warnings; 594 xUnit + 91 pytest pass. Not tested in game: `docs/testing/two-modes-checklist.md`.
 
@@ -537,3 +537,13 @@ Read `README.md` for the player view and the spec for every decision.
   The GIF takes over a minute per language, so render it in its own launch.
 - Build 0 warnings; 867 xUnit + 110 pytest pass. Not tested in game: "Forged look" in `docs/testing/forge-checklist.md`.
 
+
+## 1.8.2 — fixes (2026-11-19, `main`)
+
+- Forge: the fused card keeps an enchantment from either copy (`ForgeRule.FusedEnchantment`: the kept card's, else the
+  sacrificed copy's), on both fusion paths (`ForgeFusion.CarryEnchantment`). Owner bug report.
+- Matriochka: Dolly's Mirror is given on entering the act 3 Reflections room, before Shatter (owner, 2026-11-19), not at the
+  first merchant; players who already hold it get none.
+- In-game screenshot of a Matriochka + Forge run (972-card deck, Bludgeon+9) on the Workshop page and README:
+  `workshop/images/screenshots/`, language-free (the test accepts it without a `-en`/`-fr` suffix).
+- 868 xUnit + 110 pytest pass. Not tested in game.

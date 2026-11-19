@@ -141,6 +141,9 @@ The merchant sells copies of your own cards, which makes duplicates something yo
 - Co-op: each player fuses in their own deck. The option is synced like the vanilla rest site options.
 - **[builder]** Enchantments: the kept card keeps its enchantment and the sacrificed card's enchantment is lost. The
   preview says so.
+  *Changed in 1.8.2 (owner bug report, 2026-11-19: "enchantments don't follow the card"):* the fused card wears the kept
+  card's enchantment, else the sacrificed copy's (`ForgeRule.FusedEnchantment`), on both the same-card and the
+  other-version path; a card holds one enchantment, so when both have one the kept card's wins.
 
 ### Duplicate (merchant service)
 

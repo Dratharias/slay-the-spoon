@@ -30,6 +30,8 @@ Every card is up for grabs. Even yours.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-en.png[/img]
 Hoard everything. Every floor brings cards.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-relic-en.png[/img]
+Matriochka with The Forge: 972 cards in the deck and a Bludgeon+9.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-forge-run.jpg[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-en.png[/img]
 Start rich. No free cards; every fire costs gold.

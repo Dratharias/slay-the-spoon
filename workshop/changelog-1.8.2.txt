@@ -1,0 +1,4 @@
+1.8.2 — Fixes
+
+- The Forge: a fused card keeps its enchantment, whichever copy carried it (the kept card's wins when both have one).
+- Matriochka: Dolly's Mirror now comes on the act 3 Reflections row, right before Shatter, instead of at the first merchant.

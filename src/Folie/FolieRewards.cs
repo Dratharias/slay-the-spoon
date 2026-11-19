@@ -101,7 +101,7 @@ public static class FolieRewards
 	{
 		if (mirror)
 		{
-			foreach (Player player in run.Players.Where(p => !p.Creature.IsDead))
+			foreach (Player player in run.Players.Where(p => !p.Creature.IsDead && !p.Relics.Any(r => r is MegaCrit.Sts2.Core.Models.Relics.DollysMirror)))
 				await RelicCmd.Obtain(ModelDb.Relic<MegaCrit.Sts2.Core.Models.Relics.DollysMirror>().ToMutable(), player);
 		}
 		if (!cards) return;

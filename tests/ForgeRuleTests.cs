@@ -17,6 +17,15 @@ public class ForgeRuleTests
 		Assert.Equal(expected, ForgeRule.FusedLevel(kept, sacrificed, cap));
 
 	[Fact]
+	public void FusedEnchantmentFollowsEitherCopy()
+	{
+		Assert.Equal("kept", ForgeRule.FusedEnchantment("kept", "copy"));
+		Assert.Equal("copy", ForgeRule.FusedEnchantment(null, "copy"));
+		Assert.Equal("kept", ForgeRule.FusedEnchantment("kept", null));
+		Assert.Null(ForgeRule.FusedEnchantment<string>(null, null));
+	}
+
+	[Fact]
 	public void CannotFuseAtTheCap()
 	{
 		Assert.False(ForgeRule.CanFuseInto(1, 1, true));

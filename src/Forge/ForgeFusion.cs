@@ -75,19 +75,23 @@ public static class ForgeFusion
 		ForgeRule.FusedLevel(kept.CurrentUpgradeLevel, sacrificed.CurrentUpgradeLevel, ForgeLevels.Limit(Canonical(version)));
 
 	/// <summary>
-	/// A new card of <paramref name="version"/> at the result level, carrying the kept card's enchantment when it can.
-	/// The enchantment goes on first, then the levels, in the order a reload replays them.
+	/// A new card of <paramref name="version"/> at the result level, carrying the fused enchantment when it can
+	/// (<see cref="ForgeRule.FusedEnchantment{T}"/>). The enchantment goes on first, then the levels, in the order a
+	/// reload replays them.
 	/// </summary>
 	public static CardModel Build(CardModel kept, CardModel sacrificed, CardModel version)
 	{
 		var card = kept.CardScope!.CreateCard(Canonical(version), kept.Owner);
-		if (kept.Enchantment is { } enchantment)
-		{
-			var copy = ModelDb.GetById<EnchantmentModel>(enchantment.Id).ToMutable();
-			if (copy.CanEnchant(card)) CardCmd.Enchant(copy, card, enchantment.Amount);
-		}
+		CarryEnchantment(ForgeRule.FusedEnchantment(kept.Enchantment, sacrificed.Enchantment), card);
 		ForgeLevels.RaiseTo(card, ResultLevel(kept, sacrificed, version));
 		return card;
+	}
+
+	private static void CarryEnchantment(EnchantmentModel? enchantment, CardModel card)
+	{
+		if (enchantment == null || card.Enchantment != null) return;
+		var copy = ModelDb.GetById<EnchantmentModel>(enchantment.Id).ToMutable();
+		if (copy.CanEnchant(card)) CardCmd.Enchant(copy, card, enchantment.Amount);
 	}
 
 	/// <summary>The preview screen: one card per allowed version, skippable (skip cancels the whole fusion).</summary>
@@ -111,9 +115,12 @@ public static class ForgeFusion
 	/// </summary>
 	public static async Task<CardModel> Apply(CardModel kept, CardModel sacrificed, CardModel version)
 	{
+		int keptLevel = kept.CurrentUpgradeLevel;
 		CardModel result;
 		if (version.Id == kept.Id)
 		{
+			// The kept card rises in place, so it already wears its own enchantment; the copy's comes over when it has none.
+			CarryEnchantment(ForgeRule.FusedEnchantment(kept.Enchantment, sacrificed.Enchantment), kept);
 			ForgeLevels.RaiseTo(kept, ResultLevel(kept, sacrificed, version));
 			result = kept;
 		}
@@ -123,7 +130,7 @@ public static class ForgeFusion
 			result = (await CardCmd.Transform(kept, result, CardPreviewStyle.None))?.cardAdded ?? result;
 		}
 		await CardPileCmd.RemoveFromDeck(sacrificed, showPreview: false);
-		SpoonLog.Info($"forge: {kept.Id.Entry}+{kept.CurrentUpgradeLevel} + {sacrificed.Id.Entry}+{sacrificed.CurrentUpgradeLevel} -> {result.Id.Entry}+{result.CurrentUpgradeLevel}");
+		SpoonLog.Info($"forge: {kept.Id.Entry}+{keptLevel} + {sacrificed.Id.Entry}+{sacrificed.CurrentUpgradeLevel} -> {result.Id.Entry}+{result.CurrentUpgradeLevel}{(result.Enchantment is { } e ? " " + e.Id.Entry : "")}");
 		return result;
 	}
 }

@@ -386,7 +386,7 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   - The chest view is built from plain controls (heads, names, scaled card visuals), not the vanilla chest scene.
 
 - **Matriochka (owner request, 2026-11-14):** Custom Run modifier: Hoarder, an unskippable card reward on every floor,
-  Dolly's Mirror from the first merchant, forced Doll Room with Bing Bong, forced Reflections "Shatter" in act 3.
+  Dolly's Mirror (first merchant; on the act 3 Reflections row since 1.8.2), forced Doll Room with Bing Bong, forced Reflections "Shatter" in act 3.
   Design: `docs/superpowers/specs/2026-11-14-matriochka-design.md`. Implemented in 1.1.0 (branch `two-modes`), with card
   reward rerolls per act set with the row's −/+ (0–10, default 3, per player); not tested in game:
   `docs/testing/two-modes-checklist.md`. Builder calls: non-combat rooms give their reward when the room is entered (the spec says when it ends);

@@ -15,8 +15,9 @@ with a card reward the player cannot skip on every floor, a free Dolly's Mirror,
 2. **A mandatory card reward on every floor.** Combat rooms (normal, elite, boss): the usual card reward cannot be
    skipped. Other rooms (merchant, rest site, event, treasure): a card reward is added when the room ends, also
    unskippable. *(builder call on the non-combat rooms)*
-3. **Dolly's Mirror from the first merchant.** Entering the run's first merchant room gives Dolly's Mirror for free
-   (its pickup effect duplicates a card), on top of the normal shop.
+3. **Dolly's Mirror before Bad Luck.** Entering the act 3 Reflections room (rule 5) gives Dolly's Mirror for free (its
+   pickup effect duplicates a card), right before Shatter; a player already holding it gets none. *(Owner, 2026-11-19;
+   until 1.8.1 it came from the run's first merchant.)*
 4. **Doll Room guaranteed, Bing Bong forced.** The first event of act 2 is replaced by the Doll Room *(builder call)*;
    its only option gives Bing Bong.
 5. **Reflections forced in act 3.** Every node on the map row just before the final rest-site row becomes the

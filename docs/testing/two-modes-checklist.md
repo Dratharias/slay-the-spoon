@@ -49,7 +49,8 @@ and awards of each chest, keyed `combat_<floor>`, `treasure_<floor>`, `floor_<fl
       ticking both does not give 5 copies.
 - [ ] Combat rewards: the card reward cannot be skipped and the screen cannot be left before taking a card.
 - [ ] Merchant, rest site, event and treasure rooms each give an unskippable card reward when the room ends.
-- [ ] First merchant: Dolly's Mirror is given once, its duplicate pick works.
+- [ ] Act 3 Reflections row (1.8.2): Dolly's Mirror is given on entering, before Shatter, once; its duplicate pick
+      works; a player who already holds it gets no second one. No mirror at the first merchant any more.
 - [ ] Act 2: the first event is the Doll Room with only the Bing Bong option.
 - [ ] Act 3: the row before the final rest sites is all Reflections; only Shatter; in co-op everyone shatters.
 - [ ] Rerolls: the row's −/+ sets 0–10 (default 3); the reroll button shows the rerolls left, resets each act,

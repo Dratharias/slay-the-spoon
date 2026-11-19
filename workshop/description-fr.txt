@@ -30,6 +30,8 @@ Chaque carte se dispute. Même les vôtres.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-fr.png[/img]
 Accumulez tout. Chaque étage apporte des cartes.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-relic-fr.png[/img]
+Matriochka avec La Forge : 972 cartes dans le deck et un Gourdin+9.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-forge-run.jpg[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-fr.png[/img]
 Départ fortuné. Aucune carte gratuite, chaque feu se paie.

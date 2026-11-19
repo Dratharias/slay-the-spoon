@@ -86,6 +86,12 @@ public static class ForgeRule
 	public static int FusedLevel(int kept, int sacrificed, int cap) =>
 		Math.Min(Math.Max(kept, 0) + Math.Max(sacrificed, 0) + 1, Math.Clamp(cap, 1, MaxLevel));
 
+	/// <summary>
+	/// The enchantment the fused card carries: the kept card's, else the sacrificed copy's (a card holds one enchantment,
+	/// so the kept card's wins when both have one).
+	/// </summary>
+	public static T? FusedEnchantment<T>(T? kept, T? sacrificed) where T : class => kept ?? sacrificed;
+
 	/// <summary>A card can be fused into while it is fusable and below its cap (the result clamps to the cap).</summary>
 	public static bool CanFuseInto(int keptLevel, int cap, bool fusable) => fusable && keptLevel < Math.Clamp(cap, 1, MaxLevel);
 

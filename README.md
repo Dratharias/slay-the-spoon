@@ -111,6 +111,9 @@ an unclaimed head is lost. Draft and Sealed Deck hand every player one head. Sol
 
 **Matriochka** (Custom Run): Hoarder, a card reward you cannot skip on every floor, and a few dolls along the way.
 The row's − / + sets the card reward rerolls each player gets per act (3 by default).
+
+<p align="center"><img src="workshop/images/screenshots/matriochka-forge-run.jpg" alt="A Matriochka + Forge run: 972 cards in the deck and a Bludgeon+9" width="800"></p>
+
 Both modes still need in-game validation; see `docs/testing/two-modes-checklist.md`.
 
 **King Midas** (Custom Run): every player starts with the gold relics (Bowler Hat, Maw Bank, Old Coin, Membership Card,
@@ -208,7 +211,7 @@ keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-g
 
 ## Development status — 2026-11-19
 
-Version **1.8.1**: forged cards show their level, after Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges (1.7.0), The Forge (1.4.0) and the port to
+Version **1.8.2**: Forge fusions keep enchantments and Matriochka's Dolly's Mirror moves to act 3, after forged card looks (1.8.1), Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges (1.7.0), The Forge (1.4.0) and the port to
 game version 0.111.1 (1.3.8). Automated validation: 867 xUnit and 110 Python tests pass; the build has no warnings. Most
 features still need in-game checks; the [testing checklists](docs/testing/) record them.
 
