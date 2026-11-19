@@ -130,6 +130,7 @@ public static class ForgeCardLook
 					border.Visible = glass.Visible = textBg.Visible = ancientBanner.Visible = false;
 					frame.Visible = banner.Visible = true;
 				}
+				if (FindBacking(frame) is { } backing) backing.Visible = false;
 				foreach (CanvasItem item in new CanvasItem[] { frame, banner, border, glass, textBg, ancientBanner }) item.Modulate = Colors.White;
 				return;
 			}
@@ -139,8 +140,16 @@ public static class ForgeCardLook
 			// The gloss goes on the Ancient border only: the ordinary frame's material carries its character color.
 			border.Material = shine;
 			border.Visible = glass.Visible = textBg.Visible = true;
-			// The Ancient border is a translucent glass made to sit over a full-art portrait: the ordinary frame stays opaque
-			// under it, or the glass shows the dark card back and the top of the card turns black with a hard edge.
+			// The Ancient border is a translucent glass made to sit over a full-art portrait: an opaque copy of the ordinary
+			// frame stays under it, or the glass shows the dark card back and the top of the card turns black with a hard
+			// edge. The real frame is drawn above the Ancient layers (they sit below it in the card scene), so it fades out.
+			TextureRect under = Backing(frame, glass);
+			under.Texture = model.Frame;
+			// In grey: the frame texture carries the character's color, and the Ancient border over it should stay the silver
+			// of a real Ancient card.
+			under.Material = Greyscale;
+			under.Modulate = Colors.White;
+			under.Visible = true;
 			frame.Visible = true;
 			// The banners swap instead of crossfading: their shapes differ, so two translucent banners showed the ordinary
 			// banner's straight band as a bar across the Ancient ribbon.
@@ -153,7 +162,40 @@ public static class ForgeCardLook
 			// A real Ancient card shows its full-art portrait through this background; a forged card has none behind it,
 			// so the background is tinted the dark navy of an Ancient card's body to keep the text readable.
 			textBg.Modulate = new Color(TextBgTint, blend);
-			frame.Modulate = Colors.White;
+			frame.Modulate = new Color(1, 1, 1, 1f - blend);
 		}
+	}
+
+	private static ShaderMaterial? _greyscale;
+
+	private static ShaderMaterial Greyscale => _greyscale ??= new ShaderMaterial
+	{
+		Shader = new Shader
+		{
+			Code = """
+				shader_type canvas_item;
+				void fragment() {
+					vec4 c = texture(TEXTURE, UV);
+					float g = dot(c.rgb, vec3(0.299, 0.587, 0.114));
+					COLOR = vec4(vec3(g) * vec3(0.62, 0.64, 0.70), c.a * COLOR.a);
+				}
+				""",
+		},
+	};
+
+	private const string BackingName = "SpoonForgeFrameBacking";
+
+	private static TextureRect? FindBacking(TextureRect frame) => frame.GetParent()?.GetNodeOrNull<TextureRect>(BackingName);
+
+	/// <summary>A copy of the ordinary frame placed just below the Ancient glass, made once per card node.</summary>
+	private static TextureRect Backing(TextureRect frame, TextureRect glass)
+	{
+		if (FindBacking(frame) is { } backing) return backing;
+		backing = (TextureRect)frame.Duplicate();
+		backing.Name = BackingName;
+		Node parent = frame.GetParent();
+		parent.AddChild(backing);
+		parent.MoveChild(backing, glass.GetIndex());
+		return backing;
 	}
 }
