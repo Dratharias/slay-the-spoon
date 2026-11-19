@@ -53,4 +53,11 @@ public class ForgeTitleColorsTests
 		Assert.Equal(1f, ForgeTitleColors.AncientBlend(9));
 		Assert.Equal(1f, ForgeTitleColors.AncientBlend(12));
 	}
+
+	[Theory]
+	[InlineData(0, false)]
+	[InlineData(5, false)]
+	[InlineData(6, true)]
+	[InlineData(9, true)]
+	public void TheBannerSwapsAtOnce(int level, bool ancient) => Assert.Equal(ancient, ForgeTitleColors.AncientBanner(level));
 }

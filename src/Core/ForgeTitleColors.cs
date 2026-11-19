@@ -45,6 +45,11 @@ public static class ForgeTitleColors
 	/// <summary>How far the frame has turned Ancient: 0 below +2, then an even step per level, fully Ancient at +9.</summary>
 	public static float AncientBlend(int level) => level < 2 ? 0f : Math.Min(1f, (level - 1) / (float)(DiamondLevel - 1));
 
+	/// <summary>The Ancient banner replaces the ordinary one from this level (the banners swap; they never crossfade).</summary>
+	public const int AncientBannerLevel = 6;
+
+	public static bool AncientBanner(int level) => level >= AncientBannerLevel;
+
 	/// <summary>The strength of the gloss sweeping the frame: none below +2, rising to full at +9.</summary>
 	public static float Gloss(int level) => level < 2 ? 0f : 0.15f + 0.55f * AncientBlend(level);
 

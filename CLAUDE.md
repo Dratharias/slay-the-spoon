@@ -527,7 +527,7 @@ Read `README.md` for the player view and the spec for every decision.
 
 - Forged cards wear their level (owner request): from +2 the title follows `ForgeTitleColors` (yellow-green → cyan,
   lighter fill and near-black outline where it would clash with the Rare or Uncommon banner) and the frame crossfades to the
-  Ancient one (`AncientBlend`, border, glass, banner, navy text background); a gloss shader sweeps the Ancient border
+  Ancient one (`AncientBlend`, border, glass, navy text background; the banner swaps to the Ancient one at +6, `AncientBanner`, since two translucent banners showed a bar); a gloss shader sweeps the Ancient border
   (`shaders/forge_gloss.gdshader`), the +9 title shimmers (`shaders/forge_diamond.gdshader`). `src/Forge/ForgeCardLook.cs`
   patches `NCard.UpdateTitleLabel` and `UpdatePortrait`. Never read `CardModel.AncientTextBg` on a non-Ancient card: it
   throws, and inside the redraw that crashes the game; the path is built by hand.
