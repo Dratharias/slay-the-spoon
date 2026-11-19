@@ -239,3 +239,9 @@ Slay the Spire 1 and its decompiled card classes (`STS1_DECOMP`, `STS1_JAR`; see
 ## License
 
 MIT for the code in this repository (see `LICENSE`). Game assets are Mega Crit's.
+
+## Crashes
+
+Paste the error part of your `godot.log` in a Workshop comment (modes ticked, solo or co-op), or attach the whole log
+to a [GitHub issue](https://github.com/Dratharias/slay-the-spoon/issues). Log: `%APPDATA%\SlayTheSpire2\logs`
+(Windows), `~/.local/share/SlayTheSpire2/logs` (Linux).
