@@ -504,3 +504,15 @@ Read `README.md` for the player view and the spec for every decision.
   (`AchillesBlock`); card offers lean x2 toward Block cards. Numbers in `src/Core/AchillesRule.cs`. All modes combine.
 - Art is a placeholder: a Pixabay marble Hermes foot, since no Greek sandal was found (sources in `docs/backlog.md`).
 - Build 0 warnings; 839 xUnit + 106 pytest pass. Not tested in game: `docs/testing/achilles-heel-checklist.md`.
+
+## 1.8.0 — Glass Cannon (2026-11-19, branch `glass-cannon`)
+
+- **Glass Cannon** (`SpoonGlassCannon`, Custom Run only, spec `docs/superpowers/specs/2026-11-19-glass-cannon-design.md`):
+  every player starts with the Glass Heart (`SpoonGlassHeart`, `src/GlassCannon/`, Event rarity), Vajra and Girya
+  (`GlassCannonRule.StartRelics`, out of every grab bag). Each combat the heart applies 99 Frail and Frenzy
+  (`SpoonFrenzyPower`, Buff, Enrage icon): +10 % powered attack damage per card played, the holder's and their Osty's;
+  Strength equal to the streak at the end of each turn without a Block Skill (1, 2, 3...). A Block Skill
+  (`GlassCannonBlock`: the Achilles test, neither Attack nor Power) resets stacks and streak. The Heart is unchanged.
+  With Achilles' Heel too, offers lean ×2 toward Block cards and Attacks (once, `OfferWeightPatch.Weights`).
+  Numbers in `src/Core/GlassCannonRule.cs`. All modes combine.
+- Build 0 warnings; 856 xUnit + 106 pytest pass. Not tested in game: `docs/testing/glass-cannon-checklist.md`.

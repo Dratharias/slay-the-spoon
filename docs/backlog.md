@@ -529,7 +529,11 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
 
 ## Owner ideas (2026-11-18)
 
-- **Glass Cannon** (owner works the idea): halved max HP, damage ×1.5; could reuse the percent modifiers. Not designed yet.
+- **Glass Cannon** is built (1.8.0, `SpoonGlassCannon`, spec `docs/superpowers/specs/2026-11-19-glass-cannon-design.md`;
+  checklist `docs/testing/glass-cannon-checklist.md`). The halved-HP idea was dropped for Frail 99 + Frenzy. Minors:
+  the Glass Heart art is a drawn placeholder (cracked glass heart, PIL, no source to credit) and Frenzy borrows Enrage's
+  icon; `GlassCannonBlock.BreaksFrenzy` is untested (needs game types); Frenzy's stacks and streak live in the power, not
+  in the save (a mid-combat reload restarts them).
 - **Curse deck mode** is built (1.6.0, `SpoonCursedDeck`, `src/Curses/`; spec `docs/superpowers/specs/2026-11-18-cursed-deck-design.md`,
   checklist `docs/testing/cursed-deck-checklist.md`). Original idea text kept below for reference. Minors and design calls:
   - Minor: local 0-cost modifiers (Corruption-style, `SetThisTurnOrUntilPlayed`) don't reduce a playable curse's cost. Kept.

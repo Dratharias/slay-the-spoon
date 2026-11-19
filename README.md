@@ -139,6 +139,11 @@ Gorget. In every combat, unblocked attack damage kills you (Poison and HP loss d
 the first, your attacks deal 1 more damage per 5 Block you have, and card offers lean toward Block cards. HP stays vanilla,
 so it combines with the Spoon. Not tested in game: `docs/testing/achilles-heel-checklist.md`.
 
+**Glass Cannon** (Custom Run): every player starts with the Glass Heart relic plus Vajra and Girya. Each combat starts
+with 99 Frail and Frenzy: every card played adds 10 % attack damage (Osty's too), and each turn without a Skill that gives
+Block adds Strength (1, then 2, then 3...). Such a Skill resets both; Attacks and Powers with Block don't. With Achilles'
+Heel as well, card offers lean toward Block cards and Attacks. Not tested in game: `docs/testing/glass-cannon-checklist.md`.
+
 **Challenges** (Custom Run): **Blood** (no gold: prices are paid in HP, with the Blood Fang relic), **Deck of 10** (a
 relic keeps your deck at 10 cards; each card dropped gives 1 max HP; Neow's cursed option is sometimes Deck of 10 in
 Standard runs too), **Mutation** (each new act transforms every card that is not upgraded), **Trophies** (each elite you
@@ -197,10 +202,10 @@ the Corrupt Heart. Without all keys the run ends after Act 3 as usual. A Custom 
 keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-game validation; see
 `docs/testing/step-6-checklist.md`.
 
-## Development status — 2026-11-18
+## Development status — 2026-11-19
 
-Version **1.7.0**: Cursed Deck, Achilles' Heel and seven Custom Run challenges, after The Forge (1.4.0) and the port to
-game version 0.111.1 (1.3.8). Automated validation: 839 xUnit and 106 Python tests pass; the build has no warnings. Most
+Version **1.8.0**: Glass Cannon, after Cursed Deck, Achilles' Heel and seven Custom Run challenges (1.7.0), The Forge (1.4.0) and the port to
+game version 0.111.1 (1.3.8). Automated validation: 856 xUnit and 106 Python tests pass; the build has no warnings. Most
 features still need in-game checks; the [testing checklists](docs/testing/) record them.
 
 ## Languages

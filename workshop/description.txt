@@ -15,6 +15,7 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 [*][b]The Forge[/b]: fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
 [*][b]Cursed Deck[/b]: curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
 [*][b]Achilles' Heel[/b]: one unblocked hit and you die. Stack Block, then hit with it.
+[*][b]Glass Cannon[/b]: forget Block. Every card you play makes the next hit harder.
 [/list]
 
 [h2]Challenges[/h2]

@@ -1,0 +1,7 @@
+1.8.0 — Glass Cannon
+
+- New Custom Run mode Glass Cannon: start with the Glass Heart, Vajra and Girya. Every combat you are Frail, and
+  Frenzy adds 10 % attack damage per card played and more Strength each turn you skip Block Skills. A Block Skill
+  resets it. The Necrobinder's Osty shares the bonus.
+- With Achilles' Heel too, card offers lean toward Block cards and Attacks.
+- Shorter crash report request; the Workshop title loses "alpha".
