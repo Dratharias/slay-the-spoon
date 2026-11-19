@@ -33,7 +33,7 @@ Start rich. No free cards; every fire costs gold.
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-en.png[/img]
 Fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-card-en.png[/img]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-climb-en.gif[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-en.png[/img]
 Curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.

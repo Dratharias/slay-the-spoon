@@ -19,7 +19,7 @@ namespace SlaySpoon.DevConsole;
 /// renders what <c>SLAYSPOON_RENDER_CARDS</c> names (comma-separated card class names, <c>Name+</c> for the upgraded card,
 /// <c>Name+9</c> for a Forge level, <c>relic:Name</c> for a relic's icon and tooltip) to
 /// <c>&lt;dir&gt;/&lt;lang&gt;/&lt;Name&gt;.png</c> (<c>+</c> written <c>Plus</c>, <c>relic:</c> dropped) in English and
-/// French, then quits.
+/// French, then quits. <c>gif:Name</c> writes the frames of the card's Forge climb instead (<see cref="RenderClimb"/>).
 /// </summary>
 [HarmonyPatch(typeof(NMainMenu), nameof(NMainMenu._Ready))]
 public static class CardRenderer
@@ -39,25 +39,56 @@ public static class CardRenderer
 	private static async Task RenderAll(Node host, string dir, string[] names)
 	{
 		string original = LocManager.Instance.Language;
-		foreach (string lang in new[] { "eng", "fra" })
+		try
 		{
-			LocManager.Instance.SetLanguage(lang);
-			System.IO.Directory.CreateDirectory(System.IO.Path.Combine(dir, lang));
-			foreach (string name in names)
+			foreach (string lang in new[] { "eng", "fra" })
 			{
-				try
+				await SetLanguage(host, lang);
+				System.IO.Directory.CreateDirectory(System.IO.Path.Combine(dir, lang));
+				foreach (string name in names)
 				{
-					await Render(host, System.IO.Path.Combine(dir, lang), name);
-				}
-				catch (Exception e)
-				{
-					SpoonLog.Error($"render {name} ({lang}) failed: {e}");
+					try
+					{
+						await Render(host, System.IO.Path.Combine(dir, lang), name);
+					}
+					catch (Exception e)
+					{
+						SpoonLog.Error($"render {name} ({lang}) failed: {e}");
+					}
 				}
 			}
+			await SetLanguage(host, original);
+			SpoonLog.Info("render done");
 		}
-		LocManager.Instance.SetLanguage(original);
-		SpoonLog.Info("render done");
-		host.GetTree().Quit();
+		catch (Exception e)
+		{
+			SpoonLog.Error($"render stopped: {e}");
+		}
+		finally
+		{
+			host.GetTree().Quit();
+		}
+	}
+
+	/// <summary>
+	/// <c>SetLanguage</c> now and then fails to find one of the game's own tables right after a batch of renders
+	/// (<c>LocException</c> on <c>eng/card_modifiers.json</c>); a second try a moment later loads it.
+	/// </summary>
+	private static async Task SetLanguage(Node host, string lang)
+	{
+		for (int attempt = 1; ; attempt++)
+		{
+			try
+			{
+				LocManager.Instance.SetLanguage(lang);
+				return;
+			}
+			catch (Exception e) when (attempt < 5)
+			{
+				SpoonLog.Info($"render: SetLanguage({lang}) attempt {attempt} failed: {e.Message}");
+				await host.ToSignal(host.GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
+			}
+		}
 	}
 
 	private static Type? Find<T>(string typeName) => AppDomain.CurrentDomain.GetAssemblies()
@@ -66,6 +97,11 @@ public static class CardRenderer
 
 	private static async Task Render(Node host, string dir, string name)
 	{
+		if (name.StartsWith("gif:"))
+		{
+			await RenderClimb(host, dir, name["gif:".Length..]);
+			return;
+		}
 		string file = System.IO.Path.Combine(dir, name.Replace("relic:", "").Replace("+", "Plus") + ".png");
 		if (name.StartsWith("relic:"))
 		{
@@ -87,9 +123,7 @@ public static class CardRenderer
 			SpoonLog.Error($"render: no card class {typeName}");
 			return;
 		}
-		CardModel card = ModelDb.GetById<CardModel>(ModelDb.GetId(type)).ToMutable();
-		if (level > 1) Forge.ForgeLevels.RaiseTo(card, level);
-		else if (level == 1) card.UpgradeInternal();
+		CardModel card = AtLevel(type, level);
 
 		// Margin around the card: its frame and cost orb overflow defaultSize. The tool trims the transparent edge.
 		NCard node = NCard.Create(card)!;
@@ -98,6 +132,86 @@ public static class CardRenderer
 		var root = new Control();
 		root.AddChild(node);
 		await Snapshot(host, file, root, size, () => node.UpdateVisuals(PileType.None, CardPreviewMode.Normal));
+	}
+
+	private static CardModel AtLevel(Type type, int level)
+	{
+		CardModel card = ModelDb.GetById<CardModel>(ModelDb.GetId(type)).ToMutable();
+		if (level > 1) Forge.ForgeLevels.RaiseTo(card, level);
+		else if (level == 1) card.UpgradeInternal();
+		return card;
+	}
+
+	private const int ClimbFps = 12;
+	private const float ClimbHold = 1.5f;
+
+	/// <summary>
+	/// The card from +0 to +9, each level held <see cref="ClimbHold"/> seconds and brought in by the game's upgrade
+	/// animation (vfx_card_upgrade: the card scales in from nothing over 0.25 s while its particles burst; the vanilla
+	/// node itself reads the card's pile, which a card outside a run lacks). Frames are captured in real time at
+	/// <see cref="ClimbFps"/> to <c>&lt;dir&gt;/gif_&lt;Name&gt;/NNN.png</c>, at scale 1.
+	/// </summary>
+	private static async Task RenderClimb(Node host, string dir, string typeName)
+	{
+		Type? type = Find<CardModel>(typeName);
+		if (type == null)
+		{
+			SpoonLog.Error($"render: no card class {typeName}");
+			return;
+		}
+		string outDir = System.IO.Path.Combine(dir, "gif_" + typeName);
+		System.IO.Directory.CreateDirectory(outDir);
+		Vector2 size = NCard.defaultSize + new Vector2(200, 200);
+		var viewport = new SubViewport
+		{
+			Size = new Vector2I((int)size.X, (int)size.Y),
+			TransparentBg = true,
+			RenderTargetUpdateMode = SubViewport.UpdateMode.Always,
+		};
+		host.AddChild(viewport);
+		var root = new Control();
+		viewport.AddChild(root);
+		var frames = new List<Image>();
+		NCard? shown = null;
+		for (int level = 0; level <= Core.ForgeRule.MaxLevel; level++)
+		{
+			shown?.QueueFree();
+			NCard node = NCard.Create(AtLevel(type, level))!;
+			node.Position = size / 2;
+			root.AddChild(node);
+			node.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
+			shown = node;
+			if (level > 0)
+			{
+				node.Scale = Vector2.Zero;
+				node.CreateTween().TweenProperty(node, "scale", Vector2.One, 0.25).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+				if (UpgradeParticles() is { } particles)
+				{
+					particles.Position = size / 2;
+					root.AddChild(particles);
+					particles.Emitting = true;
+					particles.Finished += particles.QueueFree;
+				}
+			}
+			for (int i = 0; i < (int)(ClimbHold * ClimbFps); i++)
+			{
+				await host.ToSignal(host.GetTree().CreateTimer(1.0 / ClimbFps), SceneTreeTimer.SignalName.Timeout);
+				frames.Add(viewport.GetTexture().GetImage());
+			}
+		}
+		for (int i = 0; i < frames.Count; i++) frames[i].SavePng(System.IO.Path.Combine(outDir, $"{i:000}.png"));
+		viewport.QueueFree();
+	}
+
+	/// <summary>The particles of the game's upgrade vfx, taken out of its scene before the scene enters the tree.</summary>
+	private static CpuParticles2D? UpgradeParticles()
+	{
+		Node vfx = GD.Load<PackedScene>(SceneHelper.GetScenePath("vfx/vfx_card_upgrade")).Instantiate();
+		var particles = vfx.FindChild("Particle", true, false) as CpuParticles2D;
+		particles?.GetParent().RemoveChild(particles);
+		if (particles != null) particles.Owner = null;
+		vfx.Free();
+		return particles;
 	}
 
 	/// <summary>A relic as the game shows it on hover: its big icon left of its tooltip.</summary>

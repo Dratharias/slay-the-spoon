@@ -33,7 +33,7 @@ Départ fortuné. Aucune carte gratuite, chaque feu se paie.
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-fr.png[/img]
 Fusionnez les copies d’une carte au feu, jusqu’à +9. Le marchand duplique vos cartes.
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-card-fr.png[/img]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-climb-fr.gif[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-fr.png[/img]
 Les malédictions sont vos munitions. Jouez-les, lancez-les sur l’ennemi, collectionnez les reliques qui les adorent.

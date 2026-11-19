@@ -597,5 +597,8 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   one-off message). If the merchant freezes in co-op, move it to a message like `MerchantCardRemovalMessage`.
 - The curve table is generated (`tools/forge_curves.py`, run with the 0.111.1 decompile mounted as `/sts2src`);
   every card's hand call lives in `data/forge/cards.json` (792 cards). Owner review: `docs/review/forge-curves.md`.
+- 1.8.1 forged look (`src/Forge/ForgeCardLook.cs`, colors in `src/Core/ForgeTitleColors.cs`): the Ancient text background
+  is tinted navy because a forged card has no full-art portrait behind it. Check in game: the gloss and the diamond run on
+  the game clock, so a paused screen keeps sweeping; the Ancient banner's small flame shows from about +3.
 - Check in game: `powerBonus` with a negative amount (Malaise's Strength loss), Wish's option cards counting as the
   card source, Time's Up's fractional `ExtraDamage` step (0.25) and Friendship's Strength loss crossing 0 at +2.

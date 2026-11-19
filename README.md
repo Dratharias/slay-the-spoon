@@ -125,7 +125,11 @@ the table is `docs/review/forge-curves.md`), while the card's other numbers keep
 costs 1 less at +7 and becomes Innate at +9. Limit Break gains 1 Strength per level past +1 before doubling. A StS1 card fuses
 with its StS2 namesake and you pick which one comes out. Ordinary upgrades still stop at +1. Once per visit, the merchant
 sells a +0 copy of a deck card: 25 / 50 / 75 gold by rarity (+25 from Ascension 6), +25 per earlier purchase.
+Forged cards show their level: from +2 the title climbs a color ladder and the frame turns Ancient step by step; at +9
+the card is fully Ancient and its title shimmers like a diamond (1.8.1).
 Not tested in game: `docs/testing/forge-checklist.md`.
+
+<p align="center"><img src="workshop/images/forge-climb-en.gif" alt="Limit Break forged from +0 to +9" width="320"></p>
 
 **Cursed Deck** (Custom Run): every player starts with the Unholy Grimoire and a random curse. With the Grimoire, curses
 cost 1 (0 upgraded), target an enemy and turn their own effect against it: Bad Luck makes the monster lose 13 HP, Doubt
@@ -204,8 +208,8 @@ keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-g
 
 ## Development status — 2026-11-19
 
-Version **1.8.0**: Glass Cannon, after Cursed Deck, Achilles' Heel and seven Custom Run challenges (1.7.0), The Forge (1.4.0) and the port to
-game version 0.111.1 (1.3.8). Automated validation: 857 xUnit and 106 Python tests pass; the build has no warnings. Most
+Version **1.8.1**: forged cards show their level, after Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges (1.7.0), The Forge (1.4.0) and the port to
+game version 0.111.1 (1.3.8). Automated validation: 867 xUnit and 110 Python tests pass; the build has no warnings. Most
 features still need in-game checks; the [testing checklists](docs/testing/) record them.
 
 ## Languages

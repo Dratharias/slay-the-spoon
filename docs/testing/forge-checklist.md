@@ -27,6 +27,15 @@ Spec: `docs/superpowers/specs/2026-11-18-forge-design.md`. Tick only what was se
 - [ ] Save and reload a run with +2 to +9 cards: levels, numbers and cost unchanged.
 - [ ] Co-op: a fusion on one client shows the same deck on the other; no desync at the next fight.
 
+## Forged look (1.8.1)
+- [ ] +2 to +8: the title takes yellow-green, orange, red, magenta, violet, blue, cyan in turn; readable on every banner
+      (Rare +2/+3 and Uncommon +7/+8 get the lighter fill and dark outline).
+- [ ] The frame fades toward the Ancient frame level by level; the card body darkens to navy; the text stays readable.
+- [ ] A gloss sweeps the Ancient border; at +9 the title shimmers (light band, faint rainbow).
+- [ ] The character color of the ordinary frame is kept below +9.
+- [ ] A card node reused for an unforged card (hand, grid, reward) shows the vanilla frame again.
+- [ ] Real Ancient cards and +0/+1 cards look vanilla.
+
 ## Duplicate (merchant)
 - [ ] "Duplicate" button at the merchant (top right, under the loan button spot); disabled when no card is affordable.
 - [ ] Prompt lists the three prices; Common 25, Uncommon 50, Rare 75; +25 at Ascension 6+; +25 per earlier purchase.

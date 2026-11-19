@@ -522,3 +522,18 @@ Read `README.md` for the player view and the spec for every decision.
   With Achilles' Heel too, offers lean ×2 toward Block cards and Attacks (once, `OfferWeightPatch.Weights`).
   Numbers in `src/Core/GlassCannonRule.cs`. All modes combine.
 - Build 0 warnings; 857 xUnit + 106 pytest pass. Not tested in game: `docs/testing/glass-cannon-checklist.md`.
+
+## 1.8.1 — forged looks (2026-11-19, `main`)
+
+- Forged cards wear their level (owner request): from +2 the title follows `ForgeTitleColors` (yellow-green → cyan,
+  lighter fill and near-black outline where it would clash with the Rare or Uncommon banner) and the frame crossfades to the
+  Ancient one (`AncientBlend`, border, glass, banner, navy text background); a gloss shader sweeps the Ancient border
+  (`shaders/forge_gloss.gdshader`), the +9 title shimmers (`shaders/forge_diamond.gdshader`). `src/Forge/ForgeCardLook.cs`
+  patches `NCard.UpdateTitleLabel` and `UpdatePortrait`. Never read `CardModel.AncientTextBg` on a non-Ancient card: it
+  throws, and inside the redraw that crashes the game; the path is built by hand.
+- `MaxPatch`: forged cards keep their "+N" title outside a Forge run.
+- `CardRenderer` `gif:Name`: the card's climb from +0 to +9 (1.5 s per level, upgrade pop and particles, 12 fps frames);
+  `workshop_banners.py` turns it into `workshop/images/forge-climb-{en,fr}.gif` (320 px, 128 colors), on the Workshop page.
+  The GIF takes over a minute per language, so render it in its own launch.
+- Build 0 warnings; 867 xUnit + 110 pytest pass. Not tested in game: "Forged look" in `docs/testing/forge-checklist.md`.
+

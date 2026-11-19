@@ -1,0 +1,6 @@
+1.8.1 — Forged looks
+
+- Forged cards show their level: from +2 the title climbs a color ladder (yellow-green, orange, red, magenta, violet,
+  blue, cyan) and the frame turns Ancient step by step, with a gloss. At +9 the card is fully Ancient and its title
+  shimmers like a diamond.
+- Forged cards keep their "+N" title outside a Forge run (compendium, run history).
