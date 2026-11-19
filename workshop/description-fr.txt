@@ -1,3 +1,4 @@
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-waddle.gif[/img]
 [h2]Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer.[/h2]
 Choisissez une carte de mode à côté de Standard, ou cochez ce que vous voulez en partie personnalisée.
 
