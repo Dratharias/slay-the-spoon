@@ -1,12 +1,13 @@
-"""Draw the Workshop images (workshop/images/): one slim banner per party mode, card showcases and the preview
-(thumbnail), in English and French.
+"""Draw the Workshop images (workshop/images/): one slim banner per party mode and section, card and relic showcases
+and the preview (thumbnail), in English and French.
 
 Usage: python3 -I tools/workshop_banners.py [--cards DIR]
 
 Without --cards only the banners are redrawn. The showcases and the preview need card renders from the game:
 with the mod installed (make up) and the game closed, launch it from its folder with
   SLAYSPOON_RENDER_DIR=DIR SLAYSPOON_RENDER_CARDS="<CARDS below, comma-separated>" SteamAppId=2868840 ./SlayTheSpire2
-which writes DIR/{eng,fra}/<Class>.png and quits (src/DevConsole/CardRenderer.cs).
+which writes DIR/{eng,fra}/<Class>.png and quits (src/DevConsole/CardRenderer.cs; "Name+9" renders a Forge level,
+"relic:Name" a relic's icon and tooltip).
 
 The descriptions show the images with [img] from the public GitHub repo (raw.githubusercontent.com), so commit the
 PNGs and push before the upload. Banner icons are the mod's own art or drawn symbols; the showcases show rendered cards
@@ -25,9 +26,11 @@ W, H, ICON = 640, 52, 42
 BG_TOP, BG_BOTTOM = (36, 32, 52), (20, 22, 33)
 GOLD, GREY = (242, 210, 122), (190, 190, 200)
 
-# key: (English title, French title, art: image path under godot/SlaySpoon/images, or "glyph:<char>", or "dolls")
+# key: (English title, French title, art: image path under godot/SlaySpoon/images, or "glyph:<char>", or "dolls").
+# Party modes, then the section banners (StS1 sits under Slay the Spoon, Custom Runs and Co-op close the page).
 MODES = {
     "spoon": ("Slay the Spoon", "Slay the Spoon", "cards/spoon/spoon_spoonful.png"),
+    "sts1": ("Slay the Spire 1", "Slay the Spire 1", "packed/character_select/char_select_sts1_watcher.png"),
     "folie": ("Folie à deux", "Folie à deux", "glyph:⚔"),
     "matriochka": ("Matriochka", "Matriochka", "dolls"),
     "midas": ("King Midas", "Roi Midas", "glyph:♛"),
@@ -35,6 +38,8 @@ MODES = {
     "cursed": ("Cursed Deck", "Deck maudit", "relics/spoon/spoon_unholy_grimoire_large.png"),
     "achilles": ("Achilles' Heel", "Talon d’Achille", "relics/spoon/spoon_achilles_heel_large.png"),
     "glass": ("Glass Cannon", "Canon de verre", "relics/spoon/spoon_glass_heart_large.png"),
+    "custom": ("Custom Runs", "Parties personnalisées", "glyph:⚙"),
+    "coop": ("Co-op and tuning", "Coop et réglages", "glyph:⚖"),
 }
 
 # Showcase rows: card classes (rendered) and creature sprites under godot/SlaySpoon/images ("img:<path>").
@@ -42,6 +47,13 @@ SHOWCASES = {
     "spoon-cards": ["SpoonSpoonful", "SpoonTeaspoon", "SpoonStolenSpoonful", "img:spoon/spoon.png"],
     "cursed-cards": ["Sts1Parasite", "Sts1Necronomicurse", "Sts1Pride"],
     "sts1-cards": ["img:creatures/sts1_watcher/body.png", "Sts1Ragnarok", "Sts1Wish", "img:ending/heart.png"],
+    # One mode item each: The Forge's showpiece card at +9, the other modes' relic (icon and tooltip).
+    "forge-card": ["Sts1LimitBreak+9"],
+    "matriochka-relic": ["relic:DollysMirror"],
+    "midas-relic": ["relic:GoldenPearl"],
+    "cursed-relic": ["relic:SpoonUnholyGrimoire"],
+    "achilles-relic": ["relic:SpoonAchillesHeel"],
+    "glass-relic": ["relic:SpoonGlassHeart"],
 }
 CARDS = sorted({c for row in SHOWCASES.values() for c in row if not c.startswith("img:")} | {"Sts1Blasphemy"})
 ROW_W, ROW_H = 1280, 420
@@ -149,7 +161,8 @@ def _piece(cards: Path, lang: str, name: str) -> Image.Image:
     if name.startswith("img:"):
         src = Image.open(IMAGES / name.removeprefix("img:")).convert("RGBA")
     else:
-        src = Image.open(cards / LANG_DIR[lang] / f"{name}.png").convert("RGBA")
+        file = name.removeprefix("relic:").replace("+", "Plus")
+        src = Image.open(cards / LANG_DIR[lang] / f"{file}.png").convert("RGBA")
     return src.crop(src.getbbox())
 
 
@@ -159,15 +172,21 @@ def _fit(img: Image.Image, height: int) -> Image.Image:
 
 def showcase(cards: Path, lang: str, names: list[str]) -> Image.Image:
     """One row on a transparent background, items scaled to the same height and spaced evenly."""
-    pieces = [_fit(_piece(cards, lang, n), ROW_H - 20) for n in names]
+    if all(n.startswith("relic:") for n in names):
+        # Relic tooltips keep one scale (70 % of the render) whatever their text length.
+        pieces = [_fit(p, round(p.height * 0.7)) for p in (_piece(cards, lang, n) for n in names)]
+        height = max(p.height for p in pieces) + 20
+    else:
+        height = ROW_H
+        pieces = [_fit(_piece(cards, lang, n), height - 20) for n in names]
     scale = min(1.0, (ROW_W - 30 * (len(pieces) + 1)) / sum(p.width for p in pieces))
     if scale < 1:
         pieces = [_fit(p, round(p.height * scale)) for p in pieces]
     gap = (ROW_W - sum(p.width for p in pieces)) / (len(pieces) + 1)
-    row = Image.new("RGBA", (ROW_W, ROW_H), (0, 0, 0, 0))
+    row = Image.new("RGBA", (ROW_W, height), (0, 0, 0, 0))
     x = gap
     for p in pieces:
-        row.alpha_composite(p, (round(x), (ROW_H - p.height) // 2))
+        row.alpha_composite(p, (round(x), (height - p.height) // 2))
         x += p.width + gap
     return row
 

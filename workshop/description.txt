@@ -11,29 +11,44 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 Max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up, something hungry waits after act 3. Bring cutlery.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-cards-en.png[/img]
 
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-en.png[/img]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-cards-en.png[/img]
+[list]
+[*][b]StS1 Cards[/b] for the Ironclad, Silent and Defect, plus the colorless cards; or the [b]Spire Souvenir[/b] to mix both games.
+[*][b]The Watcher[/b], playable in solo Standard Runs and every Custom Run.
+[*][b]Act 4[/b]: three keys, then the Corrupt Heart.
+[*]StS1 events, boss relics, Neow's Blessings.
+[/list]
+
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/folie-en.png[/img]
 Every card is up for grabs. Even yours.
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-en.png[/img]
 Hoard everything. Every floor brings cards.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-relic-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-en.png[/img]
 Start rich. No free cards; every fire costs gold.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-relic-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-en.png[/img]
 Fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-card-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-en.png[/img]
 Curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-en.png[/img]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-relic-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-en.png[/img]
 One unblocked hit and you die. Stack Block, then hit with it.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-relic-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/glass-en.png[/img]
 Forget Block. Every card you play makes the next hit harder.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/glass-relic-en.png[/img]
 
-[h2]Challenges[/h2]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/custom-en.png[/img]
 [list]
 [*][b]Blood[/b]: no gold. You pay in HP.
 [*][b]Deck of 10[/b]: ten cards, no more. Everything else becomes max HP.
@@ -43,16 +58,7 @@ Forget Block. Every card you play makes the next hit harder.
 [*][b]Forced Trade[/b] and [b]Conductor[/b] (co-op): your friends decide what you get.
 [/list]
 
-[h2]Slay the Spire 1[/h2]
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-cards-en.png[/img]
-[list]
-[*][b]StS1 Cards[/b] for the Ironclad, Silent and Defect, plus the colorless cards; or the [b]Spire Souvenir[/b] to mix both games.
-[*][b]The Watcher[/b], playable in solo Standard Runs and every Custom Run.
-[*][b]Act 4[/b]: three keys, then the Corrupt Heart.
-[*]StS1 events, boss relics, Neow's Blessings.
-[/list]
-
-[h2]Co-op and tuning[/h2]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/coop-en.png[/img]
 [list]
 [*][b]Merchant Loans[/b] and [b]Campfire Sales[/b]: lend, borrow and sell cards between friends, interest included.
 [*][b]Monster HP and Damage[/b] from 25% to 500%, [b]Starting Chest[/b], [b]Character Color[/b].
