@@ -11,9 +11,8 @@ Par plantages aléatoires, j'entends surtout des confusions entre des cartes qui
 
 [h2]Modes de jeu[/h2]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-fr.png[/img]
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-waddle.gif[/img]
 Les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuillerée, festoyez aux feux de camp, buvez le jus de fruit du marchand. Si l'équipe cumule assez de PV max, quelque chose d'affamé attend après l'acte 3. Apportez vos couverts.
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-cards-fr.png[/img]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-cards-fr.gif[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-fr.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-cards-fr.png[/img]

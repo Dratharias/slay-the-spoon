@@ -11,9 +11,8 @@ By random crashes I mostly mean mix-ups between cards that exist in both games. 
 
 [h2]Party modes[/h2]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-en.png[/img]
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-waddle.gif[/img]
 Max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up, something hungry waits after act 3. Bring cutlery.
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-cards-en.png[/img]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-cards-en.gif[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-en.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-cards-en.png[/img]
