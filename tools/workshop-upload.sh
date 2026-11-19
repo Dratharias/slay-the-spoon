@@ -32,7 +32,7 @@ BG='#1b1e2b'
 magick "$CARDS/spoon/spoon_spoonful.png" -filter Lanczos -resize 512x390^ -gravity center -extent 512x390 "$OUT/art.png"
 magick -size 512x122 xc:"$BG" -gravity north \
 	-font Liberation-Sans-Bold -pointsize 52 -fill '#f2d27a' -annotate +0+12 'Slay the Spoon' \
-	-font Liberation-Sans -pointsize 24 -fill '#d8d8d8' -annotate +0+78 "alpha $VERSION" "$OUT/title.png"
+	-font Liberation-Sans -pointsize 24 -fill '#d8d8d8' -annotate +0+78 "v$VERSION" "$OUT/title.png"
 magick "$OUT/title.png" "$OUT/art.png" -append +repage -depth 8 "$OUT/preview.png"
 rm "$OUT/art.png" "$OUT/title.png"
 
@@ -51,7 +51,7 @@ cat > "$OUT/item.vdf" <<EOF
 	"contentfolder" "/workshop/content"
 	"previewfile" "/workshop/preview.png"
 	"visibility" "$VISIBILITY"
-	"title" "Slay the Spoon (alpha)"
+	"title" "Slay the Spoon"
 	"description" "$DESCRIPTION"
 	"changenote" "$CHANGENOTE"
 }
