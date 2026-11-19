@@ -70,7 +70,8 @@ Forget Block. Every card you play makes the next hit harder.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/coop-en.png[/img]
 [list]
 [*][b]Merchant Loans[/b] and [b]Campfire Sales[/b]: lend, borrow and sell cards between friends, interest included.
-[*][b]Monster HP and Damage[/b] from 25% to 500%, [b]Starting Chest[/b], [b]Character Color[/b].
+[*][b]Monster HP and Damage[/b] from 25% to 500%, [b]Starting Chest[/b].
+[*][b]Character Color[/b]: recolor your character from the pause menu. Your friends see it too.
 [/list]
 
 Daily Runs stay vanilla. Your regular save is never written.

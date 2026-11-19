@@ -70,7 +70,8 @@ Oubliez l’Armure. Chaque carte jouée rend le prochain coup plus fort.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/coop-fr.png[/img]
 [list]
 [*][b]Prêts au marchand[/b] et [b]ventes au feu de camp[/b] : prêtez, empruntez et vendez des cartes entre amis, intérêts compris.
-[*][b]PV et dégâts des monstres[/b] de 25 % à 500 %, [b]coffre de départ[/b], [b]couleur de personnage[/b].
+[*][b]PV et dégâts des monstres[/b] de 25 % à 500 %, [b]coffre de départ[/b].
+[*][b]Couleur du personnage[/b] : recolorez votre personnage depuis le menu pause. Vos amis la voient aussi.
 [/list]
 
 Les défis quotidiens restent intacts. Votre sauvegarde habituelle n'est jamais modifiée.
