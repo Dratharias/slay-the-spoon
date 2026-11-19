@@ -110,7 +110,8 @@ def _art_icon(path: Path) -> Image.Image:
 def _glyph_icon(char: str) -> Image.Image:
     icon = Image.new("RGBA", (ICON, ICON), (0, 0, 0, 0))
     ImageDraw.Draw(icon).ellipse([0, 0, ICON - 1, ICON - 1], fill=(14, 15, 24, 255))
-    font = _font(GLYPH_FONTS, 62)
+    # Sized to the disc (the glyph's box fits in 62 % of it), so a smaller ICON never spills over the gold ring.
+    font = _font(GLYPH_FONTS, round(ICON * 0.62))
     d = ImageDraw.Draw(icon)
     box = d.textbbox((0, 0), char, font=font)
     x = (ICON - (box[2] - box[0])) / 2 - box[0]
@@ -125,11 +126,13 @@ def _dolls_icon() -> Image.Image:
     big = Image.new("RGBA", (ICON * s, ICON * s), (0, 0, 0, 0))
     d = ImageDraw.Draw(big)
     d.ellipse([0, 0, ICON * s - 1, ICON * s - 1], fill=(14, 15, 24, 255))
-    base = 74 * s
+    # Laid out on a 92 px disc, scaled to ICON.
+    k = ICON * s / 92
+    base = 74 * k
     for cx, h, color in ((30, 46, (196, 64, 58)), (55, 34, (226, 150, 60)), (72, 24, GOLD)):
         w = h * 0.62
-        cx *= s
-        hs, ws = h * s, w * s
+        cx *= k
+        hs, ws = h * k, w * k
         d.ellipse([cx - ws / 2, base - hs * 0.68, cx + ws / 2, base], fill=color)
         r = ws * 0.36
         d.ellipse([cx - r, base - hs * 0.68 - r * 1.5, cx + r, base - hs * 0.68 + r * 0.5], fill=color)
