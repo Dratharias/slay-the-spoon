@@ -85,5 +85,8 @@
   "SPOON_USELESS_RELICS.short": "Useless",
   "SPOON_ACHILLES_HEEL_MODE.title": "Achilles' Heel",
   "SPOON_ACHILLES_HEEL_MODE.description": "Everyone starts with Achilles' Heel and three Block relics.",
-  "SPOON_ACHILLES_HEEL_MODE.short": "Heel"
+  "SPOON_ACHILLES_HEEL_MODE.short": "Heel",
+  "SPOON_GLASS_CANNON.title": "Glass Cannon",
+  "SPOON_GLASS_CANNON.description": "Everyone starts with Glass Heart, Vajra and Girya.",
+  "SPOON_GLASS_CANNON.short": "Glass"
 }

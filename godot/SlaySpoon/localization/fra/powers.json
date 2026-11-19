@@ -153,5 +153,8 @@
 	"SPOON_SKIMMED_POWER.banquetDescription": "Perdez [blue]{Damage}[/blue] PV, en ignorant l’Armure et les modificateurs de dégâts. Seul [gold]Écumé[/gold] empêche cette perte et celle de [blue]10[/blue] PV max. La Cuillère applique toujours Vulnérable et se soigne.",
 	"SPOON_HEEL_POWER.title": "Talon",
 	"SPOON_HEEL_POWER.description": "Si vous subissez des dégâts d’attaque non bloqués, vous mourez.",
-	"SPOON_HEEL_POWER.smartDescription": "Si vous subissez des dégâts d’attaque non bloqués, vous mourez."
+	"SPOON_HEEL_POWER.smartDescription": "Si vous subissez des dégâts d’attaque non bloqués, vous mourez.",
+	"SPOON_FRENZY_POWER.title": "Frénésie",
+	"SPOON_FRENZY_POWER.description": "Chaque carte jouée ajoute 10 % de dégâts d’attaque. Chaque tour sans Compétence d’[gold]Armure[/gold] donne plus de [gold]Force[/gold] (1, 2, 3...). Jouer une Compétence qui donne de l’[gold]Armure[/gold] remet tout à zéro.",
+	"SPOON_FRENZY_POWER.smartDescription": "Chaque carte jouée ajoute 10 % de dégâts d’attaque. Chaque tour sans Compétence d’[gold]Armure[/gold] donne plus de [gold]Force[/gold] (1, 2, 3...). Jouer une Compétence qui donne de l’[gold]Armure[/gold] remet tout à zéro."
 }

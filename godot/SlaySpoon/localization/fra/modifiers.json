@@ -85,5 +85,8 @@
   "SPOON_USELESS_RELICS.short": "Inutiles",
   "SPOON_ACHILLES_HEEL_MODE.title": "Talon d’Achille",
   "SPOON_ACHILLES_HEEL_MODE.description": "Tout le monde commence avec le Talon d’Achille et trois reliques d’Armure.",
-  "SPOON_ACHILLES_HEEL_MODE.short": "Talon"
+  "SPOON_ACHILLES_HEEL_MODE.short": "Talon",
+  "SPOON_GLASS_CANNON.title": "Canon de verre",
+  "SPOON_GLASS_CANNON.description": "Tout le monde commence avec le Cœur de verre, le Vajra et le Girya.",
+  "SPOON_GLASS_CANNON.short": "Verre"
 }
