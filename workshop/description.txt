@@ -1,5 +1,7 @@
 [b]Early, and not everything has been tested.[/b] Expect bugs and the odd random crash. If a save gets corrupted, remove the mod; you can reinstall it afterwards if you still want to play. I patch things when I can. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and we have played a few runs with it.
 
+Some animations or backgrounds may be missing. Feel free to let me know.
+
 By random crashes I mostly mean mix-ups between cards that exist in both games. For example, with the Spire Souvenir among a player's relics, Corruption (StS1 and StS2) could crash the game because it did not know which of the two cards was meant.
 
 [b]Crashed?[/b] Paste the error part of your [i]godot.log[/i] in a comment (modes ticked, solo or co-op), or attach the whole log to a [url=https://github.com/Dratharias/slay-the-spoon/issues]GitHub issue[/url]. Log: [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).

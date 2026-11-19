@@ -1,5 +1,7 @@
 [b]Version précoce, tout n'a pas été testé.[/b] Attendez-vous à des bugs et à quelques plantages aléatoires. Si une sauvegarde est corrompue, retirez le mod ; vous pourrez le réinstaller ensuite si vous voulez continuer. Je corrige quand je peux. Tous les joueurs en coop ont besoin de la même version du mod. Je l'ai fait pour varier nos parties entre amis, et nous avons déjà joué quelques runs avec.
 
+Certaines animations ou certains décors peuvent manquer. N'hésitez pas à me le signaler.
+
 Par plantages aléatoires, j'entends surtout des confusions entre des cartes qui existent dans les deux jeux. Par exemple, avec le Souvenir de la Tour parmi les reliques d'un joueur, Corruption (StS1 et StS2) pouvait faire planter le jeu, qui ne savait pas de quelle carte il s'agissait.
 
 [b]Un plantage ?[/b] Collez la partie erreur de votre [i]godot.log[/i] en commentaire (modes cochés, solo ou coop), ou joignez le log complet à une [url=https://github.com/Dratharias/slay-the-spoon/issues]issue GitHub[/url]. Log : [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
