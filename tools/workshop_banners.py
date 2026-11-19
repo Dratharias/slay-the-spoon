@@ -216,7 +216,7 @@ def climb_gif(cards: Path, lang: str, card: str, out: Path) -> int:
     for f in files:
         frame = bg.copy()
         frame.alpha_composite(Image.open(f).convert("RGBA").resize(size, Image.LANCZOS))
-        frames.append(frame.convert("RGB").quantize(colors=64, method=Image.MEDIANCUT, dither=Image.Dither.NONE))
+        frames.append(frame.convert("RGB").quantize(colors=128, method=Image.MEDIANCUT, dither=Image.Dither.NONE))
     frames[0].save(out, save_all=True, append_images=frames[1:], duration=round(1000 / GIF_FPS), loop=0, optimize=True,
                    disposal=1)
     return len(frames)
