@@ -130,6 +130,10 @@ with its StS2 namesake and you pick which one comes out. Ordinary upgrades still
 sells a +0 copy of a deck card: 25 / 50 / 75 gold by rarity (+25 from Ascension 6), +25 per earlier purchase.
 Forged cards show their level: from +2 the title climbs a color ladder and the frame turns Ancient step by step; at +9
 the card is fully Ancient and its title shimmers like a diamond (1.8.1).
+
+*Tip (from the author):* upgrade your copies first, then fuse the upgraded ones. Each copy's +1 counts: +1 and +1 give
++3, two +3 give +7, and +7 with one more +1 reaches +9, which takes five copies and four fusions.
+
 Not tested in game: `docs/testing/forge-checklist.md`.
 
 <p align="center"><img src="workshop/images/forge-climb-en.gif" alt="Limit Break forged from +0 to +9" width="320"></p>
