@@ -10,6 +10,9 @@ public static class WatcherRunRule
 			: configured;
 	}
 
-	/// <summary>Random draws her only where her button is offered: a solo Standard run.</summary>
-	public static bool RandomIncludesWatcher(bool singleplayer, bool standard) => singleplayer && standard;
+	/// <summary>
+	/// She is an ordinary character (owner, 2026-11-19): offered in Standard and Custom lobbies, solo and co-op, and drawn
+	/// by Random there. Daily stays vanilla.
+	/// </summary>
+	public static bool OfferedInLobby(bool daily) => !daily;
 }

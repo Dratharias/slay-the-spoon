@@ -18,7 +18,7 @@ Max HP is your currency. Feed on everything you kill with your Spoonful, feast a
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-cards-en.png[/img]
 [list]
 [*][b]StS1 Cards[/b] for the Ironclad, Silent and Defect, plus the colorless cards; or the [b]Spire Souvenir[/b] to mix both games.
-[*][b]The Watcher[/b], playable solo and in co-op in every Custom Run, and in solo Standard Runs.
+[*][b]The Watcher[/b], playable solo and in co-op, in Standard and Custom Runs.
 [*][b]Act 4[/b]: three keys, then the Corrupt Heart.
 [*]StS1 events, boss relics, Neow's Blessings.
 [/list]

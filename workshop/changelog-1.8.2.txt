@@ -3,3 +3,4 @@
 - The Forge: a fused card keeps its enchantment, whichever copy carried it (the kept card's wins when both have one).
 - Matriochka: Dolly's Mirror now comes on the act 3 Reflections row, right before Shatter, instead of at the first merchant.
 - Forged cards: the top of the frame no longer turns black with a hard edge.
+- The Watcher is an ordinary character: selectable in Standard co-op too, and Random can pick her outside Daily.

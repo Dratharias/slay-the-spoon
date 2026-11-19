@@ -283,7 +283,7 @@ Read `README.md` for the player view and the spec for every decision.
   `godot/SlaySpoon/localization/eng/` and `.../fra/`.
 - The mod must **never write the regular (unmodded) save**. Since 1.3.8 the mod does not copy it either; the game does that once.
 - Standard and Daily modes remain available; never lock the modes themselves.
-  Daily stays vanilla. Standard exceptions are Spire Souvenir, the approved Act 4 unlock, the solo Watcher (0.12.36)
+  Daily stays vanilla. Standard exceptions are Spire Souvenir, the approved Act 4 unlock, the Watcher in Standard (solo since 0.12.36, co-op since 1.8.2)
   the Folie à deux / Slay the Spoon mode cards and the Deck of 10 Neow option (1.5.1), documented above. Lobby activation options live in Custom Run.
 - Bug reports are not support requests (see README). Don't promise fixes.
 - Never commit decompiled game code.
@@ -548,4 +548,7 @@ Read `README.md` for the player view and the spec for every decision.
   Bludgeon+9 dealing 344 for the Forge, language-free (the test accepts it without a `-en`/`-fr` suffix).
 - Forged look: the ordinary frame stays opaque under the Ancient border (a translucent glass meant for a full-art
   portrait; over the bare card back the top turned black with a hard edge). Owner report, seen in game and in renders.
+- The Watcher is an ordinary character (owner, 2026-11-19): Standard co-op too; her Standard button and Random follow
+  `WatcherRunRule.OfferedInLobby` (every lobby but Daily, solo or co-op). Her pool has no StS2 pair, so she keeps
+  her StS1 cards whatever the shared card set; co-op ascension is the shared multiplayer one.
 - 868 xUnit + 110 pytest pass. Not tested in game.

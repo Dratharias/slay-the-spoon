@@ -18,7 +18,7 @@ Les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuilleré
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-cards-fr.png[/img]
 [list]
 [*][b]Cartes de StS1[/b] pour le Soldat de fer, la Silencieuse et le Défectueux, plus les cartes incolores ; ou le [b]Souvenir de la Tour[/b] pour mélanger les deux jeux.
-[*][b]La Gardienne[/b], jouable en solo et en coop dans toute partie personnalisée, et en partie Standard solo.
+[*][b]La Gardienne[/b], jouable en solo et en coop, en partie Standard comme en partie personnalisée.
 [*][b]Acte 4[/b] : trois clés, puis le Cœur corrompu.
 [*]Événements, reliques de boss et bénédictions de Neow de StS1.
 [/list]

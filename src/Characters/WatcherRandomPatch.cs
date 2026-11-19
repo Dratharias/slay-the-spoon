@@ -2,7 +2,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Core;
@@ -11,8 +10,9 @@ namespace SlaySpoon.Characters;
 
 /// <summary>
 /// The Random button resolves through <c>rng.NextItem(ModelDb.AllCharacters)</c> in BeginRunLocally. In a solo
-/// Standard lobby, where her button is offered, that draw also includes the Watcher; ModelDb.AllCharacters itself
-/// stays vanilla, so co-op, Custom Run, Daily and every other reader are unchanged.
+/// Standard or Custom lobby (solo or co-op), where her button is offered, that draw also includes the Watcher; every
+/// client of a co-op lobby makes the same call on the same seed. ModelDb.AllCharacters itself stays vanilla, so Daily
+/// and every other reader are unchanged.
 /// BaseLib (a dependency) transpiles the same read into its <c>GetRandomEligibleCharacters()</c>. The original call is
 /// kept, whichever of the two it is, and its result is extended afterwards, so the patch order does not matter.
 /// </summary>
@@ -50,7 +50,7 @@ public static class WatcherRandomPatch
 	}
 
 	public static IEnumerable<CharacterModel> RandomPool(IEnumerable<CharacterModel> characters, StartRunLobby lobby) =>
-		WatcherRunRule.RandomIncludesWatcher(lobby.NetService.Type == NetGameType.Singleplayer, lobby.GameMode == GameMode.Standard)
+		WatcherRunRule.OfferedInLobby(lobby.GameMode == GameMode.Daily)
 			? characters.Append(ModelDb.Character<Sts1Watcher>()).ToArray()
 			: characters;
 }

@@ -111,9 +111,9 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     implemented.`, `EpochModel was not found :(`): it switches on the act index for the character epochs and has no act 4
     case. Harmless (no epoch, no write); left alone because routing it to act 3 would hand out an epoch. Kept (2026-11-05).
 - The Watcher (step 7), design calls made without the owner (change any of them):
-  - She never enters `AllCharacters`: no Daily or co-op Standard Watcher. Since 0.12.36 (owner-approved character-relic
+  - She never enters `AllCharacters`, so Daily stays vanilla. Since 0.12.36 (owner-approved character-relic
     work) she is selectable in solo Standard and in every Custom Run, and a solo Watcher run without a card set modifier
-    uses StS1 cards (`WatcherRunRule`); random picks include her in solo Standard only. Checks: `docs/testing/watcher-selection.md`.
+    uses StS1 cards (`WatcherRunRule`). Since 1.8.2 (owner, 2026-11-19) she is an ordinary character: Standard co-op too, and Random in Standard and Custom. Checks: `docs/testing/watcher-selection.md`.
   - Spire Souvenir: she has no StS2 cards, so "Hybrid" for her is her StS1 pool plus Hybrid colorless.
   - Solo ascension is capped by the highest ascension the player has on any vanilla character.
   - Her playtime goes into the modded profile; she never counts toward vanilla epochs.

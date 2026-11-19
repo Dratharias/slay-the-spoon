@@ -37,12 +37,10 @@ public class WatcherRunRuleTests
 public class WatcherRandomRuleTests
 {
 	[Theory]
-	[InlineData(true, true, true)]
-	[InlineData(false, true, false)]
-	[InlineData(true, false, false)]
-	[InlineData(false, false, false)]
-	public void RandomDrawsHerOnlyInSoloStandard(bool singleplayer, bool standard, bool expected)
+	[InlineData(false, true)]
+	[InlineData(true, false)]
+	public void OfferedEverywhereButDaily(bool daily, bool expected)
 	{
-		Assert.Equal(expected, WatcherRunRule.RandomIncludesWatcher(singleplayer, standard));
+		Assert.Equal(expected, WatcherRunRule.OfferedInLobby(daily));
 	}
 }

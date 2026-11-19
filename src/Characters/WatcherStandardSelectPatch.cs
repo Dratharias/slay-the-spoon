@@ -1,15 +1,15 @@
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Assets;
-using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
+using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Characters;
 
-/// <summary>Offer the Watcher in Standard solo without changing global character or random-pick lists.</summary>
+/// <summary>Offer the Watcher in Standard solo and co-op without changing global character or random-pick lists.</summary>
 [HarmonyPatch(typeof(NCharacterSelectScreen))]
 public static class WatcherStandardSelectPatch
 {
@@ -56,7 +56,8 @@ public static class WatcherStandardSelectPatch
 		{
 			return;
 		}
-		button.Visible = Lobby(__instance)?.NetService.Type == NetGameType.Singleplayer;
+		// Vanilla walks every button in the container for remote players' picks, so co-op lobbies mark hers too.
+		button.Visible = Lobby(__instance) is { } lobby && WatcherRunRule.OfferedInLobby(lobby.GameMode == GameMode.Daily);
 		WatcherSelectLayout.AddRightGap(container, RandomButton(__instance) ?? button).Visible = button.Visible;
 		var buttons = container.GetChildren().OfType<NCharacterSelectButton>().Where(b => b.Visible).ToList();
 		for (int i = 0; i < buttons.Count; i++)
