@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Achilles;
 using SlaySpoon.Cards;
 using SlaySpoon.Core;
+using SlaySpoon.GlassCannon;
 
 namespace SlaySpoon.CardSets;
 
@@ -89,8 +90,10 @@ public static class OfferWeightPatch
 		var completers = OfferWeights.ComboCompleters(
 			player.RunState.Players.SelectMany(p => p.Deck.Cards).Select(c => c.Id.Entry).ToHashSet());
 		OfferSide? lean = VersionSwap.IsHybrid(player) ? Lean(player) : null;
+		// Achilles' Heel leans toward Block cards; with the Glass Heart too, toward Attacks as well (one ×2, never ×4).
+		bool holdsGlass = player.Relics.Any(r => r is SpoonGlassHeart);
 		HashSet<string>? blockCards = player.Relics.Any(r => r is SpoonAchillesHeel)
-			? cards.Where(AchillesBlock.IsBlockCard).Select(c => c.Id.Entry).ToHashSet()
+			? cards.Where(c => AchillesBlock.IsBlockCard(c) || (holdsGlass && c.Type == CardType.Attack)).Select(c => c.Id.Entry).ToHashSet()
 			: null;
 		if (completers.Count == 0 && lean == null && blockCards == null) return null;
 		return OfferWeights.Compute(cards.Select(c => (c.Id.Entry, SideOf(c))).ToList(), lean, completers, blockCards);

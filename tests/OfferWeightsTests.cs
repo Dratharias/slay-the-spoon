@@ -75,4 +75,13 @@ public class OfferWeightsTests
 			new HashSet<string> { "A" }, new HashSet<string> { "A" });
 		Assert.Equal(AchillesRule.BlockLean * OfferWeights.ComboFactor, w[0], 9);
 	}
+
+	[Fact]
+	public void CombinedLeanCountsACardOnce()
+	{
+		// Achilles + Glass Cannon: Iron Wave (Attack and Block) is in the union once, so ×2, never ×4.
+		var w = OfferWeights.Compute(new[] { ("IRON_WAVE", OfferSide.Neutral), ("DEFEND", OfferSide.Neutral), ("INFLAME", OfferSide.Neutral) },
+			null, None, new HashSet<string> { "IRON_WAVE", "DEFEND" });
+		Assert.Equal(new[] { AchillesRule.BlockLean, AchillesRule.BlockLean, 1.0 }, w);
+	}
 }
