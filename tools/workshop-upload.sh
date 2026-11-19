@@ -8,7 +8,7 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 APP_ID=2868840
-VISIBILITY=1 # 0 public, 1 friends only, 2 private, 3 unlisted
+VISIBILITY=0 # 0 public, 1 friends only, 2 private, 3 unlisted
 IMAGE=docker.io/steamcmd/steamcmd:latest
 STAGE="$REPO/build/mods/SlaySpoon"
 OUT="$REPO/build/workshop"

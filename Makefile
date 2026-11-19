@@ -110,7 +110,7 @@ mp: up
 	sleep 12
 	cd "$(STS2_DIR)" && SteamAppId=2868840 ./SlayTheSpire2 --fastmp join --clientId 1001 $(GAME_ARGS) --position 1290,40 >/dev/null 2>&1 </dev/null &
 
-# Steam Workshop (friends-only alpha): stage build/workshop/ only, or stage and upload with SteamCMD.
+# Steam Workshop (public): stage build/workshop/ only, or stage and upload with SteamCMD.
 # The upload asks for the Steam account, password and Steam Guard code: run it in a terminal.
 workshop: build
 	tools/workshop-upload.sh --stage

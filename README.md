@@ -12,7 +12,9 @@ Slay the Spoon cards start Standard runs in those modes, and Neow's cursed optio
 > **Vibe coded.** The code in this repository was written with AI coding agents (Claude and Codex) under
 > the direction of the author, who designed the mod and tests it in game.
 
-> **Found a bug?** The code is public. I patch the bugs that annoy me, when I have tokens to spare.
+> **Found a bug or a crash?** Expect some: most features are barely tested in game. I patch them when I can. Tell me
+> what you were doing (modes and options ticked, solo or co-op, character, last action) and attach your
+> `godot.log` (`%APPDATA%\SlayTheSpire2\logs\` on Windows, `~/.local/share/SlayTheSpire2/logs/` on Linux). The code is public.
 > You are entirely free to fork the mod and make your own version.
 
 ## Features
@@ -212,7 +214,7 @@ Every player in a co-op lobby needs the same version of the mod.
 Slay the Spoon requires [BaseLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127)
 3.4.7 or later (declared in `SlaySpoon.json`; the game refuses to load the mod without it).
 
-- [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3829630403): a friends-only alpha. BaseLib is a required item: subscribing to Slay the Spoon
+- [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3829630403): public, early and barely tested. BaseLib is a required item: subscribing to Slay the Spoon
   offers to subscribe to it too.
 - Manually: install BaseLib, then copy the `SlaySpoon` folder (containing `SlaySpoon.json`, `SlaySpoon.dll`,
   `SlaySpoon.pck`) into `<Slay the Spire 2>/mods/`, then start the game and accept mod loading.

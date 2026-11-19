@@ -1,4 +1,6 @@
-[b]Friends-only alpha.[/b] Barely tested in game: expect bugs and back up your saves. Every co-op player needs the same mod version.
+[b]Early and barely tested.[/b] Expect bugs and the odd random crash, and back up your saves. I patch them when I can. Every co-op player needs the same mod version.
+
+[b]Crashed?[/b] Leave a comment saying what you were doing: the mode and options ticked, solo or co-op, the character, and the last thing you clicked. Attach your log if you can: [i]%APPDATA%\SlayTheSpire2\logs\godot.log[/i] on Windows, [i]~/.local/share/SlayTheSpire2/logs/godot.log[/i] on Linux.
 
 [b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 or later.[/b] English and French.
 
@@ -42,7 +44,7 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 Daily Runs stay vanilla. Your regular save is never written.
 
 [h2]Français[/h2]
-[b]Alpha réservée aux amis.[/b] À peine testée en jeu : attendez-vous à des bugs et sauvegardez vos parties. Tous les joueurs en coop ont besoin de la même version. Nécessite BaseLib 3.4.7 ou plus.
+[b]Version précoce, à peine testée.[/b] Attendez-vous à des bugs et à des plantages aléatoires, et sauvegardez vos parties. Je corrige quand je peux. En cas de plantage, dites en commentaire ce que vous faisiez (modes et options cochés, solo ou coop, personnage, dernier clic) et joignez le fichier godot.log si possible. Tous les joueurs en coop ont besoin de la même version. Nécessite BaseLib 3.4.7 ou plus.
 
 Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer. Choisissez une carte de mode à côté de Standard, ou cochez ce que vous voulez en partie personnalisée.
 
@@ -61,4 +63,4 @@ Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelq
 
 Les défis quotidiens restent intacts. La sauvegarde habituelle n'est jamais modifiée.
 
-[i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes are not guaranteed.[/i]
+[i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes come when time allows.[/i]

@@ -68,7 +68,7 @@ Read `README.md` for the player view and the spec for every decision.
   The Hybrid version switch also covers the merchant (local, price kept), choose-a-card screens (the synced
   index carries the version, `src/Core/VersionChoiceCode.cs`) and reward grids such as Sealed Deck (a synced
   "choose a version" step per duplicate kept); not tested in game (`docs/testing/step-2b-checklist.md`).
-- **Steam Workshop:** `make workshop` stages `build/workshop/` (content, preview, `item.vdf`; visibility friends only);
+- **Steam Workshop:** `make workshop` stages `build/workshop/` (content, preview, `item.vdf`; visibility public since 1.7.0, owner 2026-11-18);
   `make workshop-upload` runs SteamCMD in Podman and needs the owner's Steam login, so only the owner runs it, in a terminal.
   The first upload stores the item id in `workshop/published-file-id` (commit it). A local `mods/SlaySpoon` disables the Workshop copy unless the Workshop version is greater (game 0.111.1).
   BaseLib (Workshop 3737335127, ≥ 3.4.7) is a manifest dependency (`mod/SlaySpoon.json`) and a Steam required item:
