@@ -1,4 +1,4 @@
-[b]Version précoce, tout n'a pas été testé.[/b] Attendez-vous à des bugs et à quelques plantages aléatoires. Si une sauvegarde est corrompue, retirez le mod ; vous pourrez le réinstaller ensuite si vous voulez continuer. Je corrige quand je peux. Tous les joueurs en coop ont besoin de la même version du mod. Je l'ai fait pour varier nos parties entre amis, et nous avons déjà joué quelques runs avec.
+[b]Version précoce, tout n'a pas été testé.[/b] Attendez-vous à des bugs et à quelques plantages aléatoires. Si une sauvegarde est corrompue, retirez le mod ; vous pourrez le réinstaller ensuite si vous voulez continuer. Je corrige quand je peux. Tous les joueurs en coop ont besoin de la même version du mod. Je l'ai fait pour varier nos parties entre amis, et nous avons déjà joué quelques runs avec. Certaines choses seront déséquilibrées, mais pour moi, c'est justement ce qui rend le jeu amusant.
 
 Certaines animations ou certains décors peuvent manquer. N'hésitez pas à me le signaler.
 

@@ -1,4 +1,4 @@
-[b]Early, and not everything has been tested.[/b] Expect bugs and the odd random crash. If a save gets corrupted, remove the mod; you can reinstall it afterwards if you still want to play. I patch things when I can. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and we have played a few runs with it.
+[b]Early, and not everything has been tested.[/b] Expect bugs and the odd random crash. If a save gets corrupted, remove the mod; you can reinstall it afterwards if you still want to play. I patch things when I can. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and we have played a few runs with it. Some things will be unbalanced, but to me that's part of the fun.
 
 Some animations or backgrounds may be missing. Feel free to let me know.
 
