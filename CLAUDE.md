@@ -546,8 +546,9 @@ Read `README.md` for the player view and the spec for every decision.
   first merchant; players who already hold it get none.
 - In-game screenshots on the Workshop page and README (`workshop/images/screenshots/`): a 972-card Matriochka deck and a
   Bludgeon+9 dealing 344 for the Forge, language-free (the test accepts it without a `-en`/`-fr` suffix).
-- Forged look: the ordinary frame stays opaque under the Ancient border (a translucent glass meant for a full-art
-  portrait; over the bare card back the top turned black with a hard edge). Owner report, seen in game and in renders.
+- Forged look: a grey copy of the ordinary frame (`ForgeCardLook.Backing`) sits under the Ancient border (a translucent
+  glass meant for a full-art portrait; over the bare card back the top turned black with a hard edge). The real frame
+  is drawn above the Ancient layers in the card scene, so it fades out; kept opaque, it hid them all up to +9.
 - The Watcher is an ordinary character (owner, 2026-11-19): Standard co-op too; her Standard button and Random follow
   `WatcherRunRule.OfferedInLobby` (every lobby but Daily, solo or co-op). Her pool has no StS2 pair, so she keeps
   her StS1 cards whatever the shared card set; co-op ascension is the shared multiplayer one.
