@@ -9,6 +9,7 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 [h2]Party modes[/h2]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-en.png[/img]
 Max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up, something hungry waits after act 3. Bring cutlery.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-cards-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/folie-en.png[/img]
 Every card is up for grabs. Even yours.
@@ -24,6 +25,7 @@ Fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-en.png[/img]
 Curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-en.png[/img]
 One unblocked hit and you die. Stack Block, then hit with it.
@@ -42,6 +44,7 @@ Forget Block. Every card you play makes the next hit harder.
 [/list]
 
 [h2]Slay the Spire 1[/h2]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/sts1-cards-en.png[/img]
 [list]
 [*][b]StS1 Cards[/b] for the Ironclad, Silent and Defect, plus the colorless cards; or the [b]Spire Souvenir[/b] to mix both games.
 [*][b]The Watcher[/b], playable in solo Standard Runs and every Custom Run.

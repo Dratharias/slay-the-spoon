@@ -19,7 +19,6 @@ REQUIRED_FILE="$REPO/workshop/required-items"
 TAGS_FILE="$REPO/workshop/tags"
 # French description (Steam shows it to players whose Steam is in French); description.txt is the English one.
 FRENCH_FILE="$REPO/workshop/description-fr.txt"
-CARDS="$REPO/godot/SlaySpoon/images/cards"
 
 for f in SlaySpoon.json SlaySpoon.dll SlaySpoon.pck; do
 	[[ -f "$STAGE/$f" ]] || { echo "Missing $STAGE/$f: run make build first." >&2; exit 1; }
@@ -31,14 +30,8 @@ rm -rf "$OUT"
 mkdir -p "$OUT/content/SlaySpoon"
 cp "$STAGE"/SlaySpoon.{json,dll,pck} "$OUT/content/SlaySpoon/"
 
-# 512x512 preview (owner, 2026-11-16): the Spoonful card portrait under a title band.
-BG='#1b1e2b'
-magick "$CARDS/spoon/spoon_spoonful.png" -filter Lanczos -resize 512x390^ -gravity center -extent 512x390 "$OUT/art.png"
-magick -size 512x122 xc:"$BG" -gravity north \
-	-font Liberation-Sans-Bold -pointsize 52 -fill '#f2d27a' -annotate +0+12 'Slay the Spoon' \
-	-font Liberation-Sans -pointsize 24 -fill '#d8d8d8' -annotate +0+78 "v$VERSION" "$OUT/title.png"
-magick "$OUT/title.png" "$OUT/art.png" -append +repage -depth 8 "$OUT/preview.png"
-rm "$OUT/art.png" "$OUT/title.png"
+# 512x512 preview (owner, 2026-11-19): the Spoonful card in front of two others, drawn by tools/workshop_banners.py.
+cp "$REPO/workshop/images/preview.png" "$OUT/preview.png"
 
 # VDF strings: escape backslashes and double quotes.
 vdf_escape() { sed -e 's/\\/\\\\/g' -e 's/"/\\"/g'; }

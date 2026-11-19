@@ -1,11 +1,19 @@
-"""Draw the Workshop description banners: one per party mode, English and French (workshop/images/).
+"""Draw the Workshop images (workshop/images/): one slim banner per party mode, card showcases and the preview
+(thumbnail), in English and French.
 
-Usage: python3 -I tools/workshop_banners.py
+Usage: python3 -I tools/workshop_banners.py [--cards DIR]
 
-The descriptions show them with [img] from the public GitHub repo (raw.githubusercontent.com), so commit the PNGs.
-Only the mod's own art is used (Pixabay placeholders, the drawn Glass Heart) or a drawn symbol; no Mega Crit art.
-Fonts: Cinzel Bold when installed (~/.local/share/fonts), else Liberation Serif Bold; symbols from Symbola.
+Without --cards only the banners are redrawn. The showcases and the preview need card renders from the game:
+with the mod installed (make up) and the game closed, launch it from its folder with
+  SLAYSPOON_RENDER_DIR=DIR SLAYSPOON_RENDER_CARDS="<CARDS below, comma-separated>" SteamAppId=2868840 ./SlayTheSpire2
+which writes DIR/{eng,fra}/<Class>.png and quits (src/DevConsole/CardRenderer.cs).
+
+The descriptions show the images with [img] from the public GitHub repo (raw.githubusercontent.com), so commit the
+PNGs and push before the upload. Banner icons are the mod's own art or drawn symbols; the showcases show rendered cards
+and creature sprites. Fonts: Cinzel Bold when installed (~/.local/share/fonts), else Liberation Serif Bold; symbols
+from Symbola.
 """
+import argparse
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -13,7 +21,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 REPO = Path(__file__).resolve().parents[1]
 IMAGES = REPO / "godot/SlaySpoon/images"
 OUT = REPO / "workshop/images"
-W, H, ICON = 640, 112, 92
+W, H, ICON = 640, 52, 42
 BG_TOP, BG_BOTTOM = (36, 32, 52), (20, 22, 33)
 GOLD, GREY = (242, 210, 122), (190, 190, 200)
 
@@ -28,7 +36,16 @@ MODES = {
     "achilles": ("Achilles' Heel", "Talon d’Achille", "relics/spoon/spoon_achilles_heel_large.png"),
     "glass": ("Glass Cannon", "Canon de verre", "relics/spoon/spoon_glass_heart_large.png"),
 }
-CAPTION = {"en": "Slay the Spoon · party mode", "fr": "Slay the Spoon · mode de jeu"}
+
+# Showcase rows: card classes (rendered) and creature sprites under godot/SlaySpoon/images ("img:<path>").
+SHOWCASES = {
+    "spoon-cards": ["SpoonSpoonful", "SpoonTeaspoon", "SpoonStolenSpoonful", "img:spoon/spoon.png"],
+    "cursed-cards": ["Sts1Parasite", "Sts1Necronomicurse", "Sts1Pride"],
+    "sts1-cards": ["img:creatures/sts1_watcher/body.png", "Sts1Ragnarok", "Sts1Wish", "img:ending/heart.png"],
+}
+CARDS = sorted({c for row in SHOWCASES.values() for c in row if not c.startswith("img:")} | {"Sts1Blasphemy"})
+ROW_W, ROW_H = 1280, 420
+LANG_DIR = {"en": "eng", "fr": "fra"}
 
 
 def _font(candidates: list[Path], size: int) -> ImageFont.FreeTypeFont:
@@ -112,28 +129,97 @@ def _icon(art: str) -> Image.Image:
     return _art_icon(IMAGES / art)
 
 
-def banner(title: str, caption: str, art: str) -> Image.Image:
+def banner(title: str, art: str) -> Image.Image:
     img = _background().convert("RGBA")
     icon = _icon(art)
-    x0, y0 = 14, (H - ICON) // 2 - 1
+    x0, y0 = 10, (H - ICON) // 2 - 1
     glow = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    ImageDraw.Draw(glow).ellipse([x0 - 4, y0 - 4, x0 + ICON + 3, y0 + ICON + 3], fill=GOLD + (150,))
-    img.alpha_composite(glow.filter(ImageFilter.GaussianBlur(3)))
-    ImageDraw.Draw(img).ellipse([x0 - 2, y0 - 2, x0 + ICON + 1, y0 + ICON + 1], outline=GOLD, width=2)
+    ImageDraw.Draw(glow).ellipse([x0 - 3, y0 - 3, x0 + ICON + 2, y0 + ICON + 2], fill=GOLD + (150,))
+    img.alpha_composite(glow.filter(ImageFilter.GaussianBlur(2)))
+    ImageDraw.Draw(img).ellipse([x0 - 1, y0 - 1, x0 + ICON, y0 + ICON], outline=GOLD, width=1)
     img.alpha_composite(icon, (x0, y0))
     d = ImageDraw.Draw(img)
-    tx = x0 + ICON + 24
-    d.text((tx, 22), title, font=_font(TITLE_FONTS, 42), fill=GOLD)
-    d.text((tx, 74), caption, font=_font(CAPTION_FONTS, 17), fill=GREY)
+    font = _font(TITLE_FONTS, 28)
+    box = d.textbbox((0, 0), title, font=font)
+    d.text((x0 + ICON + 16, (H - 2 - (box[3] - box[1])) / 2 - box[1]), title, font=font, fill=GOLD)
+    return img.convert("RGB")
+
+
+def _piece(cards: Path, lang: str, name: str) -> Image.Image:
+    if name.startswith("img:"):
+        src = Image.open(IMAGES / name.removeprefix("img:")).convert("RGBA")
+    else:
+        src = Image.open(cards / LANG_DIR[lang] / f"{name}.png").convert("RGBA")
+    return src.crop(src.getbbox())
+
+
+def _fit(img: Image.Image, height: int) -> Image.Image:
+    return img.resize((round(img.width * height / img.height), height), Image.LANCZOS)
+
+
+def showcase(cards: Path, lang: str, names: list[str]) -> Image.Image:
+    """One row on a transparent background, items scaled to the same height and spaced evenly."""
+    pieces = [_fit(_piece(cards, lang, n), ROW_H - 20) for n in names]
+    scale = min(1.0, (ROW_W - 30 * (len(pieces) + 1)) / sum(p.width for p in pieces))
+    if scale < 1:
+        pieces = [_fit(p, round(p.height * scale)) for p in pieces]
+    gap = (ROW_W - sum(p.width for p in pieces)) / (len(pieces) + 1)
+    row = Image.new("RGBA", (ROW_W, ROW_H), (0, 0, 0, 0))
+    x = gap
+    for p in pieces:
+        row.alpha_composite(p, (round(x), (ROW_H - p.height) // 2))
+        x += p.width + gap
+    return row
+
+
+def preview(cards: Path) -> Image.Image:
+    """512x512 Workshop thumbnail: the title over a fan of three cards, the Spoonful (English) in front."""
+    size = 512
+    img = Image.new("RGBA", (size, size))
+    d = ImageDraw.Draw(img)
+    for y in range(size):
+        t = y / (size - 1)
+        d.line([(0, y), (size, y)], fill=tuple(round(a + (b - a) * t) for a, b in zip((44, 36, 62), BG_BOTTOM)))
+    glow = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ImageDraw.Draw(glow).ellipse([96, 150, 416, 470], fill=GOLD + (70,))
+    img.alpha_composite(glow.filter(ImageFilter.GaussianBlur(40)))
+    for name, angle, cx in (("Sts1Ragnarok", 14, 150), ("Sts1Parasite", -14, 362)):
+        card = _fit(_piece(cards, "en", name), 250).rotate(angle, expand=True, resample=Image.BICUBIC)
+        img.alpha_composite(card, (cx - card.width // 2, 300 - card.height // 2))
+    front = _fit(_piece(cards, "en", "SpoonSpoonful"), 330)
+    shadow = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    sx, sy = (size - front.width) // 2, 168
+    shadow.paste((0, 0, 0, 160), (sx + 6, sy + 10), front.getchannel("A"))
+    img.alpha_composite(shadow.filter(ImageFilter.GaussianBlur(8)))
+    img.alpha_composite(front, (sx, sy))
+    d = ImageDraw.Draw(img)
+    font = _font(TITLE_FONTS, 58)
+    title = "Slay the Spoon"
+    box = d.textbbox((0, 0), title, font=font, stroke_width=3)
+    tx, ty = (size - (box[2] - box[0])) / 2 - box[0], 22 - box[1]
+    d.text((tx, ty), title, font=font, fill=GOLD, stroke_width=3, stroke_fill=(14, 15, 24))
+    sub = "Slay the Spire 1 · party modes"
+    sfont = _font(CAPTION_FONTS, 20)
+    sb = d.textbbox((0, 0), sub, font=sfont)
+    d.text(((size - (sb[2] - sb[0])) / 2, 98), sub, font=sfont, fill=GREY)
     return img.convert("RGB")
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--cards", type=Path, help="card renders from the game (DIR/{eng,fra}/<Class>.png)")
+    args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     for key, (en, fr, art) in MODES.items():
         for lang, title in (("en", en), ("fr", fr)):
-            banner(title, CAPTION[lang], art).save(OUT / f"{key}-{lang}.png", optimize=True)
+            banner(title, art).save(OUT / f"{key}-{lang}.png", optimize=True)
     print(f"{len(MODES) * 2} banners in {OUT.relative_to(REPO)}")
+    if args.cards:
+        for key, names in SHOWCASES.items():
+            for lang in ("en", "fr"):
+                showcase(args.cards, lang, names).save(OUT / f"{key}-{lang}.png", optimize=True)
+        preview(args.cards).save(OUT / "preview.png", optimize=True)
+        print(f"{len(SHOWCASES) * 2} showcases and preview.png in {OUT.relative_to(REPO)}")
 
 
 if __name__ == "__main__":

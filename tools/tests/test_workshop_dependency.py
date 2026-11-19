@@ -49,3 +49,17 @@ def test_descriptions_fit_steam_limit():
     for name in ("description.txt", "description-fr.txt"):
         text = (REPO / "workshop" / name).read_text(encoding="utf-8")
         assert 0 < len(text) <= 8000, name
+
+
+def test_description_images_are_committed():
+    # The descriptions load their [img] from the repo on GitHub: each one must exist under workshop/images/.
+    prefix = "https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/"
+    for name, lang in (("description.txt", "en"), ("description-fr.txt", "fr")):
+        text = (REPO / "workshop" / name).read_text(encoding="utf-8")
+        urls = re.findall(r"\[img\](.*?)\[/img\]", text)
+        assert urls, name
+        for url in urls:
+            assert url.startswith(prefix), url
+            assert url.endswith(f"-{lang}.png"), url
+            assert (REPO / url.removeprefix(prefix)).is_file(), url
+    assert (REPO / "workshop/images/preview.png").is_file()

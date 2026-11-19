@@ -76,8 +76,10 @@ Read `README.md` for the player view and the spec for every decision.
   (Steam client running, logged in as the owner; fallback: "Add/Remove Required Items" on the item page).
   The same script sets the Workshop tags (`workshop/tags`: categories plus English and French) and the French title and
   description (`workshop/description-fr.txt`, Steam's per-language text; `description.txt` is English only, 8000 characters
-  max each). Party-mode banners: `tools/workshop_banners.py` → `workshop/images/` (the mod's own art or drawn symbols, no
-  Mega Crit art), shown through raw.githubusercontent.com, so push them before the upload.
+  max each). Images: `tools/workshop_banners.py` → `workshop/images/` (slim party-mode banners, card showcases, the 512×512
+  `preview.png` thumbnail), shown through raw.githubusercontent.com, so push them before the upload. Showcases and preview
+  need card renders: `src/DevConsole/CardRenderer.cs` renders cards to PNG in EN/FR at the main menu, then quits, when the
+  game is launched with `SLAYSPOON_RENDER_DIR` (command in the script's docstring); `--cards DIR` reads them.
 - **1.0.4 (2026-11-12)** is on `main`: merchant trade windows, campfire card sales, Act 4 by default once
   Ascension 5 is unlocked (`docs/testing/release-1.0.4.md`).
 - **1.0.5 (2026-11-12)** is on `main`: code-review fixes for loans and campfire sales (Escape only closes, Withdraw
