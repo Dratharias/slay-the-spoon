@@ -48,3 +48,4 @@ Spec: `docs/superpowers/specs/2026-11-18-forge-design.md`. Tick only what was se
 ## Other modes
 - [ ] With Spire Souvenir (Hybrid): the swap button does not appear on the fusion preview.
 - [ ] With King Midas and Folie à deux: the fusion preview is not blocked or turned into a chest.
+- [ ] 1.8.2: from +2 to +9 the top of a forged card's frame stays the card's color (no black band, no hard cut).

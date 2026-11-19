@@ -546,4 +546,6 @@ Read `README.md` for the player view and the spec for every decision.
   first merchant; players who already hold it get none.
 - In-game screenshots on the Workshop page and README (`workshop/images/screenshots/`): a 972-card Matriochka deck and a
   Bludgeon+9 dealing 344 for the Forge, language-free (the test accepts it without a `-en`/`-fr` suffix).
+- Forged look: the ordinary frame stays opaque under the Ancient border (a translucent glass meant for a full-art
+  portrait; over the bare card back the top turned black with a hard edge). Owner report, seen in game and in renders.
 - 868 xUnit + 110 pytest pass. Not tested in game.

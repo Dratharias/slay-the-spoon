@@ -139,14 +139,18 @@ public static class ForgeCardLook
 			// The gloss goes on the Ancient border only: the ordinary frame's material carries its character color.
 			border.Material = shine;
 			border.Visible = glass.Visible = textBg.Visible = ancientBanner.Visible = true;
+			// The Ancient border is a translucent glass made to sit over a full-art portrait: the ordinary frame stays opaque
+			// under it, or the glass shows the dark card back and the top of the card turns black with a hard edge.
 			bool full = blend >= 1f;
-			frame.Visible = banner.Visible = !full;
+			frame.Visible = true;
+			banner.Visible = !full;
 			var fadeIn = new Color(1, 1, 1, blend);
 			border.Modulate = glass.Modulate = ancientBanner.Modulate = fadeIn;
 			// A real Ancient card shows its full-art portrait through this background; a forged card has none behind it,
 			// so the background is tinted the dark navy of an Ancient card's body to keep the text readable.
 			textBg.Modulate = new Color(TextBgTint, blend);
-			frame.Modulate = banner.Modulate = new Color(1, 1, 1, 1f - blend * 0.8f);
+			frame.Modulate = Colors.White;
+			banner.Modulate = new Color(1, 1, 1, 1f - blend * 0.8f);
 		}
 	}
 }
