@@ -1,5 +1,7 @@
 # Slay the Spoon
 
+<p align="center"><img src="workshop/images/spoon-waddle.gif" alt="The Spoon waddling" width="160"></p>
+
 A Slay the Spire 2 mod for chaotic co-op and solo runs: it brings Slay the Spire 1 cards into
 Slay the Spire 2 and adds run options that the lobby host sets in the **Custom Run** screen.
 Daily runs stay vanilla. Standard runs can offer the Spire Souvenir relic described below, the Folie à deux and
