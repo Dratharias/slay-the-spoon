@@ -151,6 +151,8 @@ public static class ForgeLevels
 			if (__result != 1 || _probing) return;
 			if (_openScopes > 0) __result = ForgeRule.MaxLevel;
 			else if (InForgeRun(__instance)) __result = Math.Max(Limit(__instance), __instance.CurrentUpgradeLevel);
+			// Outside a Forge run (compendium, run history, renders) a forged card still titles itself "+N", not "+".
+			else if (__instance.CurrentUpgradeLevel > 1) __result = __instance.CurrentUpgradeLevel;
 		}
 	}
 
