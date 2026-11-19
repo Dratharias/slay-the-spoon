@@ -27,9 +27,11 @@ public static class GlassCannonRule
 	public static FrenzyState CardPlayed(FrenzyState s, bool breaks) =>
 		breaks ? new FrenzyState(0, 0, true) : s with { Stacks = s.Stacks + 1 };
 
-	/// <summary>The holder's turn ended: a clean turn extends the streak and gives Strength equal to it.</summary>
-	public static (FrenzyState Next, int Strength) TurnEnded(FrenzyState s)
+	/// <summary>The holder's turn ended: a clean turn extends the streak and gives Strength equal to it. A dead holder's
+	/// state is frozen (a co-op revive resumes the streak where it stopped).</summary>
+	public static (FrenzyState Next, int Strength) TurnEnded(FrenzyState s, bool ownerAlive = true)
 	{
+		if (!ownerAlive) return (s, 0);
 		if (s.BlockThisTurn) return (s with { Streak = 0, BlockThisTurn = false }, 0);
 		int streak = s.Streak + 1;
 		return (s with { Streak = streak }, streak);

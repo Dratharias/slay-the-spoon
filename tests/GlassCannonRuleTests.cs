@@ -69,4 +69,13 @@ public class GlassCannonRuleTests
 
 	[Fact]
 	public void FrailIs99() => Assert.Equal(99, GlassCannonRule.FrailAmount);
+
+	[Fact]
+	public void DeadHolderStreakIsFrozen()
+	{
+		var s = new FrenzyState(4, 2, false);
+		var (next, strength) = GlassCannonRule.TurnEnded(s, ownerAlive: false);
+		Assert.Equal(0, strength);
+		Assert.Equal(s, next);
+	}
 }

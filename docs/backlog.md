@@ -534,6 +534,9 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   the Glass Heart art is a drawn placeholder (cracked glass heart, PIL, no source to credit) and Frenzy borrows Enrage's
   icon; `GlassCannonBlock.BreaksFrenzy` is untested (needs game types); Frenzy's stacks and streak live in the power, not
   in the save (a mid-combat reload restarts them).
+  Review minors (2026-11-19): `BreaksFrenzy` counts any non-Attack, non-Power card with Block (a Status or Curse with Block
+  too), while the text says "Block Skill"; the Achilles + Glass lean folds Attacks into the `blockCards` set instead of a
+  separate set (same weights); the `stacks > 0` check before Frenzy's flash is redundant.
 - **Curse deck mode** is built (1.6.0, `SpoonCursedDeck`, `src/Curses/`; spec `docs/superpowers/specs/2026-11-18-cursed-deck-design.md`,
   checklist `docs/testing/cursed-deck-checklist.md`). Original idea text kept below for reference. Minors and design calls:
   - Minor: local 0-cost modifiers (Corruption-style, `SetThisTurnOrUntilPlayed`) don't reduce a playable curse's cost. Kept.

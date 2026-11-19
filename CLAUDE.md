@@ -515,4 +515,4 @@ Read `README.md` for the player view and the spec for every decision.
   (`GlassCannonBlock`: the Achilles test, neither Attack nor Power) resets stacks and streak. The Heart is unchanged.
   With Achilles' Heel too, offers lean ×2 toward Block cards and Attacks (once, `OfferWeightPatch.Weights`).
   Numbers in `src/Core/GlassCannonRule.cs`. All modes combine.
-- Build 0 warnings; 856 xUnit + 106 pytest pass. Not tested in game: `docs/testing/glass-cannon-checklist.md`.
+- Build 0 warnings; 857 xUnit + 106 pytest pass. Not tested in game: `docs/testing/glass-cannon-checklist.md`.

@@ -23,11 +23,11 @@ public sealed class SpoonFrenzyPower : PowerModel, IBorrowedIcon
 
 	public override PowerType Type => PowerType.Buff;
 
-	public override PowerStackType StackType => PowerStackType.Single;
+	public override PowerStackType StackType => PowerStackType.Counter;
 
 	public Type IconSource => typeof(EnragePower);
 
-	/// <summary>The bonus percent, as vanilla Slow shows it.</summary>
+	/// <summary>The bonus percent, as vanilla Slow shows it (NPower only draws the label for Counter powers).</summary>
 	public override int DisplayAmount => _state.Stacks * 10;
 
 	public override bool ShouldPowerBeRemovedAfterOwnerDeath() => false;
@@ -56,8 +56,8 @@ public sealed class SpoonFrenzyPower : PowerModel, IBorrowedIcon
 	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (!participants.Contains(Owner)) return;
-		(_state, int strength) = GlassCannonRule.TurnEnded(_state);
-		if (strength <= 0 || Owner.IsDead) return;
+		(_state, int strength) = GlassCannonRule.TurnEnded(_state, Owner.IsAlive);
+		if (strength <= 0) return;
 		Flash();
 		await PowerCmd.Apply<StrengthPower>(choiceContext, Owner, strength, Owner, null);
 	}
