@@ -1,14 +1,13 @@
-[b]Early, and not everything has been tested.[/b] Expect bugs and the odd random crash. If a save gets corrupted, remove the mod; you can reinstall it afterwards if you still want to play. I patch things when I can. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and we have played a few runs with it. Some things will be unbalanced, but to me that's part of the fun.
+[h2]Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a few strange ways to play it.[/h2]
+Pick a mode card next to Standard, or tick what you want in Custom Run.
+
+[b]Early, and not everything has been tested.[/b] Expect bugs and the odd random crash. If a save gets corrupted, remove the mod; you can reinstall it afterwards if you still want to play. I'll patch things when I can. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and we have played a few runs with it. Some things will be unbalanced, but to me that's part of the fun.
 
 Some animations or backgrounds may be missing. Feel free to let me know.
 
 By random crashes I mostly mean mix-ups between cards that exist in both games. For example, with the Spire Souvenir among a player's relics, Corruption (StS1 and StS2) could crash the game because it did not know which of the two cards was meant.
 
-[b]Crashed?[/b] Paste the error part of your [i]godot.log[/i] in a comment (modes ticked, solo or co-op), or attach the whole log to a [url=https://github.com/Dratharias/slay-the-spoon/issues]GitHub issue[/url]. Log: [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
-
 [b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 or later.[/b] English and French.
-
-Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a few strange ways to play it. Pick a mode card next to Standard, or tick what you want in Custom Run.
 
 [h2]Party modes[/h2]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-en.png[/img]
@@ -74,6 +73,6 @@ Forget Block. Every card you play makes the next hit harder.
 [*][b]Character Color[/b]: recolor your character from the pause menu. Your friends see it too.
 [/list]
 
-Daily Runs stay vanilla. Your regular save is never written.
+[b]Crashed?[/b] Paste the error part of your [i]godot.log[/i] in a comment (modes ticked, solo or co-op), or attach the whole log to a [url=https://github.com/Dratharias/slay-the-spoon/issues]GitHub issue[/url]. Log: [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
 
 [i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes come when time allows.[/i]

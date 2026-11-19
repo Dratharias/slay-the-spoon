@@ -1,14 +1,13 @@
-[b]Version précoce, tout n'a pas été testé.[/b] Attendez-vous à des bugs et à quelques plantages aléatoires. Si une sauvegarde est corrompue, retirez le mod ; vous pourrez le réinstaller ensuite si vous voulez continuer. Je corrige quand je peux. Tous les joueurs en coop ont besoin de la même version du mod. Je l'ai fait pour varier nos parties entre amis, et nous avons déjà joué quelques runs avec. Certaines choses seront déséquilibrées, mais pour moi, c'est justement ce qui rend le jeu amusant.
+[h2]Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer.[/h2]
+Choisissez une carte de mode à côté de Standard, ou cochez ce que vous voulez en partie personnalisée.
+
+[b]Version précoce, tout n'a pas été testé.[/b] Attendez-vous à des bugs et à quelques plantages aléatoires. Si une sauvegarde est corrompue, retirez le mod ; vous pourrez le réinstaller ensuite si vous voulez continuer. Je corrigerai quand je pourrai. Tous les joueurs en coop ont besoin de la même version du mod. Je l'ai fait pour varier nos parties entre amis, et nous avons déjà joué quelques runs avec. Certaines choses seront déséquilibrées, mais pour moi, c'est justement ce qui rend le jeu amusant.
 
 Certaines animations ou certains décors peuvent manquer. N'hésitez pas à me le signaler.
 
 Par plantages aléatoires, j'entends surtout des confusions entre des cartes qui existent dans les deux jeux. Par exemple, avec le Souvenir de la Tour parmi les reliques d'un joueur, Corruption (StS1 et StS2) pouvait faire planter le jeu, qui ne savait pas de quelle carte il s'agissait.
 
-[b]Un plantage ?[/b] Collez la partie erreur de votre [i]godot.log[/i] en commentaire (modes cochés, solo ou coop), ou joignez le log complet à une [url=https://github.com/Dratharias/slay-the-spoon/issues]issue GitHub[/url]. Log : [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
-
 [b]Nécessite [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 ou plus.[/b] Anglais et français.
-
-Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer. Choisissez une carte de mode à côté de Standard, ou cochez ce que vous voulez en partie personnalisée.
 
 [h2]Modes de jeu[/h2]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-fr.png[/img]
@@ -74,6 +73,6 @@ Oubliez l’Armure. Chaque carte jouée rend le prochain coup plus fort.
 [*][b]Couleur du personnage[/b] : recolorez votre personnage depuis le menu pause. Vos amis la voient aussi.
 [/list]
 
-Les défis quotidiens restent intacts. Votre sauvegarde habituelle n'est jamais modifiée.
+[b]Un plantage ?[/b] Collez la partie erreur de votre [i]godot.log[/i] en commentaire (modes cochés, solo ou coop), ou joignez le log complet à une [url=https://github.com/Dratharias/slay-the-spoon/issues]issue GitHub[/url]. Log : [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
 
 [i]Non officiel. Ni affilié à Mega Crit, ni approuvé ou parrainé par Mega Crit. Slay the Spire, Slay the Spire 2 et leurs ressources appartiennent à Mega Crit. Écrit avec des agents de programmation IA sous la direction de l’auteur. Les rapports de bugs sont les bienvenus ; les corrections viennent quand le temps le permet.[/i]
