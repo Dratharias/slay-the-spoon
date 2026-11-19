@@ -508,7 +508,7 @@ Read `README.md` for the player view and the spec for every decision.
   never removed, survives the owner's death in co-op) kills its holder on any unblocked attack hit (not Poison). Dexterity per act is
   the 0-based act index, uncapped, so appended acts count (the Ending after the Spoon act gives 4). Attacks deal +1 per 5 Block
   (`AchillesBlock`); card offers lean x2 toward Block cards. Numbers in `src/Core/AchillesRule.cs`. All modes combine.
-- Art is a placeholder: a Pixabay marble Hermes foot, since no Greek sandal was found (sources in `docs/backlog.md`).
+- Art: a gladiator sandal image the owner provided (2026-11-19), relic and Workshop images.
 - Build 0 warnings; 839 xUnit + 106 pytest pass. Not tested in game: `docs/testing/achilles-heel-checklist.md`.
 
 ## 1.8.0 — Glass Cannon (2026-11-19, branch `glass-cannon`)

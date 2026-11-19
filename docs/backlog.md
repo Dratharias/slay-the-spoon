@@ -563,11 +563,10 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
     Pin Doll https://pixabay.com/vectors/voodoo-doll-pins-doll-cheap-4659327/,
     Black Censer https://pixabay.com/photos/censer-religion-burner-faith-1486493/,
     Reliquary https://pixabay.com/photos/chest-casket-byzantine-ivory-casket-67592/.
-  - **Achilles' Heel** (`SpoonAchillesHeel`, `src/Achilles/`, 2026-11-18): placeholder art, Pixabay photo "Foot, Marble, Sculpture,
-    Hermes, Wing" https://pixabay.com/photos/foot-marble-sculpture-hermes-wing-4793310/ (Pixabay Content License, no attribution
-    required), cropped to the heel with a soft round mask (no Greek sandal photo could be fetched); the heel power borrows The Gambit's icon.
+  - **Achilles' Heel** (`SpoonAchillesHeel`, `src/Achilles/`, 2026-11-18): art is a gladiator sandal image the owner provided (2026-11-19,
+    replaces the earlier Pixabay marble Hermes foot), background removed; the heel power borrows The Gambit's icon.
   - Achilles' Heel mode is built (1.7.0, `SpoonAchillesHeelMode`; checklist `docs/testing/achilles-heel-checklist.md`). Minors:
-    the art is a placeholder (a marble Hermes foot, not a sandal); `AchillesBlock.IsBlockCard` is untested (needs game types);
+    `AchillesBlock.IsBlockCard` is untested (needs game types);
     Dexterity is uncapped on long appended-act runs.
     Design calls (owner): the Block lean also weights in-combat random cards and transforms (Mutation, events), not only card
     offers, like the Souvenir lean; the relic text doesn't mention the lean (short texts). Minor: the damage preview reads current
