@@ -51,7 +51,7 @@ mod's own `STS1_RAMPAGE`, so the power needs another name.
 - **Damage**: a multiplicative modifier, 1 + 0.1 × stacks, on powered attacks the holder deals
   (`props.IsPoweredAttack()`, the scope of Slow and Strength). Orbs, Poison, Thorns and other unpowered damage get no
   bonus.
-- **Osty (owner, 2026-11-19)**: Frenzy also multiplies the powered attacks of the holder's Osty (the dealer is
+- **Osty (owner, 2026-11-19)**: Frenzy applies to the Necrobinder's own attacks and also multiplies the powered attacks of the holder's Osty (the dealer is
   `Owner.Player.Osty`). The streak Strength stays vanilla: it is the Necrobinder's own and doesn't reach Osty.
 - **Stack gain**: `AfterCardPlayed` for a card the holder played. A Block card resets the stacks to 0 instead of adding
   one. Cards played by other effects, such as Havoc-style autoplay, count as played.
