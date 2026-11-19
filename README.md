@@ -112,7 +112,7 @@ an unclaimed head is lost. Draft and Sealed Deck hand every player one head. Sol
 **Matriochka** (Custom Run): Hoarder, a card reward you cannot skip on every floor, and a few dolls along the way.
 The row's − / + sets the card reward rerolls each player gets per act (3 by default).
 
-<p align="center"><img src="workshop/images/screenshots/matriochka-forge-run.jpg" alt="A Matriochka + Forge run: 972 cards in the deck and a Bludgeon+9" width="800"></p>
+<p align="center"><img src="workshop/images/screenshots/matriochka-deck.png" alt="A Matriochka deck of 972 cards" width="135"></p>
 
 Both modes still need in-game validation; see `docs/testing/two-modes-checklist.md`.
 
@@ -133,6 +133,8 @@ the card is fully Ancient and its title shimmers like a diamond (1.8.1).
 Not tested in game: `docs/testing/forge-checklist.md`.
 
 <p align="center"><img src="workshop/images/forge-climb-en.gif" alt="Limit Break forged from +0 to +9" width="320"></p>
+
+<p align="center"><img src="workshop/images/screenshots/forge-bludgeon.jpg" alt="A Bludgeon+9 dealing 344 damage" width="800"></p>
 
 **Cursed Deck** (Custom Run): every player starts with the Unholy Grimoire and a random curse. With the Grimoire, curses
 cost 1 (0 upgraded), target an enemy and turn their own effect against it: Bad Luck makes the monster lose 13 HP, Doubt

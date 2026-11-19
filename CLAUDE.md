@@ -544,6 +544,6 @@ Read `README.md` for the player view and the spec for every decision.
   sacrificed copy's), on both fusion paths (`ForgeFusion.CarryEnchantment`). Owner bug report.
 - Matriochka: Dolly's Mirror is given on entering the act 3 Reflections room, before Shatter (owner, 2026-11-19), not at the
   first merchant; players who already hold it get none.
-- In-game screenshot of a Matriochka + Forge run (972-card deck, Bludgeon+9) on the Workshop page and README:
-  `workshop/images/screenshots/`, language-free (the test accepts it without a `-en`/`-fr` suffix).
+- In-game screenshots on the Workshop page and README (`workshop/images/screenshots/`): a 972-card Matriochka deck and a
+  Bludgeon+9 dealing 344 for the Forge, language-free (the test accepts it without a `-en`/`-fr` suffix).
 - 868 xUnit + 110 pytest pass. Not tested in game.

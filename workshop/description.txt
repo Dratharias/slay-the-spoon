@@ -30,8 +30,8 @@ Every card is up for grabs. Even yours.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-en.png[/img]
 Hoard everything. Every floor brings cards.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-relic-en.png[/img]
-Matriochka with The Forge: 972 cards in the deck and a Bludgeon+9.
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-forge-run.jpg[/img]
+972 cards in the deck.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-deck.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-en.png[/img]
 Start rich. No free cards; every fire costs gold.
@@ -40,6 +40,8 @@ Start rich. No free cards; every fire costs gold.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-en.png[/img]
 Fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-climb-en.gif[/img]
+Bludgeon+9: 344 damage.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/forge-bludgeon.jpg[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-en.png[/img]
 Curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
