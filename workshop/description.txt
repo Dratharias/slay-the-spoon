@@ -7,16 +7,29 @@
 Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a few strange ways to play it. Pick a mode card next to Standard, or tick what you want in Custom Run.
 
 [h2]Party modes[/h2]
-[list]
-[*][b]Slay the Spoon[/b]: max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up, something hungry waits after act 3. Bring cutlery.
-[*][b]Folie à deux[/b]: every card is up for grabs. Even yours.
-[*][b]Matriochka[/b]: hoard everything. Every floor brings cards.
-[*][b]King Midas[/b]: start rich. No free cards; every fire costs gold.
-[*][b]The Forge[/b]: fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
-[*][b]Cursed Deck[/b]: curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
-[*][b]Achilles' Heel[/b]: one unblocked hit and you die. Stack Block, then hit with it.
-[*][b]Glass Cannon[/b]: forget Block. Every card you play makes the next hit harder.
-[/list]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-en.png[/img]
+Max HP is your currency. Feed on everything you kill with your Spoonful, feast at rest sites, drink the merchant's Fruit Juice. If the team's max HP adds up, something hungry waits after act 3. Bring cutlery.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/folie-en.png[/img]
+Every card is up for grabs. Even yours.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-en.png[/img]
+Hoard everything. Every floor brings cards.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-en.png[/img]
+Start rich. No free cards; every fire costs gold.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-en.png[/img]
+Fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-en.png[/img]
+Curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-en.png[/img]
+One unblocked hit and you die. Stack Block, then hit with it.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/glass-en.png[/img]
+Forget Block. Every card you play makes the next hit harder.
 
 [h2]Challenges[/h2]
 [list]
@@ -43,52 +56,5 @@ Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a f
 [/list]
 
 Daily Runs stay vanilla. Your regular save is never written.
-
-[h2]Français[/h2]
-[b]Version précoce, à peine testée.[/b] Attendez-vous à des bugs et à des plantages aléatoires, et sauvegardez vos parties. Je corrige quand je peux. Tous les joueurs en coop ont besoin de la même version du mod.
-
-[b]Un plantage ?[/b] Collez la partie erreur de votre [i]godot.log[/i] en commentaire (modes cochés, solo ou coop), ou joignez le log complet à une [url=https://github.com/Dratharias/slay-the-spoon/issues]issue GitHub[/url]. Log : [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
-
-[b]Nécessite [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 ou plus.[/b] Anglais et français.
-
-Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer. Choisissez une carte de mode à côté de Standard, ou cochez ce que vous voulez en partie personnalisée.
-
-[h2]Modes de jeu[/h2]
-[list]
-[*][b]Slay the Spoon[/b] : les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuillerée, festoyez aux feux de camp, buvez le jus de fruit du marchand. Si l'équipe cumule assez de PV max, quelque chose d'affamé attend après l'acte 3. Apportez vos couverts.
-[*][b]Folie à deux[/b] : chaque carte se dispute. Même les vôtres.
-[*][b]Matriochka[/b] : accumulez tout. Chaque étage apporte des cartes.
-[*][b]Roi Midas[/b] : départ fortuné. Aucune carte gratuite, chaque feu se paie.
-[*][b]La Forge[/b] : fusionnez les copies d’une carte au feu, jusqu’à +9. Le marchand duplique vos cartes.
-[*][b]Deck maudit[/b] : les malédictions sont vos munitions. Jouez-les, lancez-les sur l’ennemi, collectionnez les reliques qui les adorent.
-[*][b]Talon d’Achille[/b] : un seul coup non bloqué et vous mourez. Empilez l’Armure, puis frappez avec.
-[*][b]Canon de verre[/b] : oubliez l’Armure. Chaque carte jouée rend le prochain coup plus fort.
-[/list]
-
-[h2]Défis[/h2]
-[list]
-[*][b]Sang[/b] : pas d’or. Vous payez en PV.
-[*][b]Deck de 10[/b] : dix cartes, pas une de plus. Le reste devient des PV max.
-[*][b]Mutation[/b] : chaque nouvel acte réécrit votre deck.
-[*][b]Trophées[/b] : battez une élite, prenez une de ses attaques.
-[*][b]Reliques inutiles[/b] : une relique qui a fait son travail ? Lancez-la.
-[*][b]Échange forcé[/b] et [b]Chef d’orchestre[/b] (coop) : vos amis décident de ce que vous recevez.
-[/list]
-
-[h2]Slay the Spire 1[/h2]
-[list]
-[*][b]Cartes de StS1[/b] pour le Soldat de fer, la Silencieuse et le Défectueux, plus les cartes incolores ; ou le [b]Souvenir de la Tour[/b] pour mélanger les deux jeux.
-[*][b]La Gardienne[/b], jouable en partie Standard solo et dans toute partie personnalisée.
-[*][b]Acte 4[/b] : trois clés, puis le Cœur corrompu.
-[*]Événements, reliques de boss et bénédictions de Neow de StS1.
-[/list]
-
-[h2]Coop et réglages[/h2]
-[list]
-[*][b]Prêts au marchand[/b] et [b]ventes au feu de camp[/b] : prêtez, empruntez et vendez des cartes entre amis, intérêts compris.
-[*][b]PV et dégâts des monstres[/b] de 25 % à 500 %, [b]coffre de départ[/b], [b]couleur de personnage[/b].
-[/list]
-
-Les défis quotidiens restent intacts. Votre sauvegarde habituelle n'est jamais modifiée.
 
 [i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes come when time allows.[/i]

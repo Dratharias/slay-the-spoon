@@ -1,0 +1,60 @@
+[b]Version précoce, à peine testée.[/b] Attendez-vous à des bugs et à des plantages aléatoires, et sauvegardez vos parties. Je corrige quand je peux. Tous les joueurs en coop ont besoin de la même version du mod.
+
+[b]Un plantage ?[/b] Collez la partie erreur de votre [i]godot.log[/i] en commentaire (modes cochés, solo ou coop), ou joignez le log complet à une [url=https://github.com/Dratharias/slay-the-spoon/issues]issue GitHub[/url]. Log : [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
+
+[b]Nécessite [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 ou plus.[/b] Anglais et français.
+
+Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer. Choisissez une carte de mode à côté de Standard, ou cochez ce que vous voulez en partie personnalisée.
+
+[h2]Modes de jeu[/h2]
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/spoon-fr.png[/img]
+Les PV max sont votre monnaie. Nourrissez-vous de vos victimes avec la Cuillerée, festoyez aux feux de camp, buvez le jus de fruit du marchand. Si l'équipe cumule assez de PV max, quelque chose d'affamé attend après l'acte 3. Apportez vos couverts.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/folie-fr.png[/img]
+Chaque carte se dispute. Même les vôtres.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/matriochka-fr.png[/img]
+Accumulez tout. Chaque étage apporte des cartes.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-fr.png[/img]
+Départ fortuné. Aucune carte gratuite, chaque feu se paie.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-fr.png[/img]
+Fusionnez les copies d’une carte au feu, jusqu’à +9. Le marchand duplique vos cartes.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-fr.png[/img]
+Les malédictions sont vos munitions. Jouez-les, lancez-les sur l’ennemi, collectionnez les reliques qui les adorent.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-fr.png[/img]
+Un seul coup non bloqué et vous mourez. Empilez l’Armure, puis frappez avec.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/glass-fr.png[/img]
+Oubliez l’Armure. Chaque carte jouée rend le prochain coup plus fort.
+
+[h2]Défis[/h2]
+[list]
+[*][b]Sang[/b] : pas d’or. Vous payez en PV.
+[*][b]Deck de 10[/b] : dix cartes, pas une de plus. Le reste devient des PV max.
+[*][b]Mutation[/b] : chaque nouvel acte réécrit votre deck.
+[*][b]Trophées[/b] : battez une élite, prenez une de ses attaques.
+[*][b]Reliques inutiles[/b] : une relique qui a fait son travail ? Lancez-la.
+[*][b]Échange forcé[/b] et [b]Chef d’orchestre[/b] (coop) : vos amis décident de ce que vous recevez.
+[/list]
+
+[h2]Slay the Spire 1[/h2]
+[list]
+[*][b]Cartes de StS1[/b] pour le Soldat de fer, la Silencieuse et le Défectueux, plus les cartes incolores ; ou le [b]Souvenir de la Tour[/b] pour mélanger les deux jeux.
+[*][b]La Gardienne[/b], jouable en partie Standard solo et dans toute partie personnalisée.
+[*][b]Acte 4[/b] : trois clés, puis le Cœur corrompu.
+[*]Événements, reliques de boss et bénédictions de Neow de StS1.
+[/list]
+
+[h2]Coop et réglages[/h2]
+[list]
+[*][b]Prêts au marchand[/b] et [b]ventes au feu de camp[/b] : prêtez, empruntez et vendez des cartes entre amis, intérêts compris.
+[*][b]PV et dégâts des monstres[/b] de 25 % à 500 %, [b]coffre de départ[/b], [b]couleur de personnage[/b].
+[/list]
+
+Les défis quotidiens restent intacts. Votre sauvegarde habituelle n'est jamais modifiée.
+
+[i]Non officiel. Ni affilié à Mega Crit, ni approuvé ou parrainé par Mega Crit. Slay the Spire, Slay the Spire 2 et leurs ressources appartiennent à Mega Crit. Écrit avec des agents de programmation IA sous la direction de l’auteur. Les rapports de bugs sont les bienvenus ; les corrections viennent quand le temps le permet.[/i]

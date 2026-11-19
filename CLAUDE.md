@@ -74,6 +74,10 @@ Read `README.md` for the player view and the spec for every decision.
   BaseLib (Workshop 3737335127, ≥ 3.4.7) is a manifest dependency (`mod/SlaySpoon.json`) and a Steam required item:
   after an upload, `tools/workshop_dependency.py` maps `workshop/required-items` through the game's `libsteam_api.so`
   (Steam client running, logged in as the owner; fallback: "Add/Remove Required Items" on the item page).
+  The same script sets the Workshop tags (`workshop/tags`: categories plus English and French) and the French title and
+  description (`workshop/description-fr.txt`, Steam's per-language text; `description.txt` is English only, 8000 characters
+  max each). Party-mode banners: `tools/workshop_banners.py` → `workshop/images/` (the mod's own art or drawn symbols, no
+  Mega Crit art), shown through raw.githubusercontent.com, so push them before the upload.
 - **1.0.4 (2026-11-12)** is on `main`: merchant trade windows, campfire card sales, Act 4 by default once
   Ascension 5 is unlocked (`docs/testing/release-1.0.4.md`).
 - **1.0.5 (2026-11-12)** is on `main`: code-review fixes for loans and campfire sales (Escape only closes, Withdraw

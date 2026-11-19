@@ -1,0 +1,13 @@
+# Steam Workshop tags for the item, one per line; names as the game's Workshop lists them.
+# Set by tools/workshop_dependency.py --tags after each upload (SteamCMD cannot set tags).
+English
+French
+Cards
+Characters
+Relics
+Events
+Acts
+Monsters
+Potions
+Modifiers
+Expansion
