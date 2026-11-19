@@ -266,10 +266,10 @@ def main() -> None:
             for lang in ("en", "fr"):
                 showcase(args.cards, lang, names).save(OUT / f"{key}-{lang}.png", optimize=True)
         for key, card in GIFS.items():
-            for lang in ("en", "fr"):
-                climb_gif(args.cards, lang, card, OUT / f"{key}-{lang}.gif")
+            # English only: both descriptions show it (the French render was never worth a minute-long launch).
+            climb_gif(args.cards, "en", card, OUT / f"{key}-en.gif")
         preview(args.cards).save(OUT / "preview.png", optimize=True)
-        print(f"{len(SHOWCASES) * 2} showcases, {len(GIFS) * 2} GIFs and preview.png in {OUT.relative_to(REPO)}")
+        print(f"{len(SHOWCASES) * 2} showcases, {len(GIFS)} GIFs and preview.png in {OUT.relative_to(REPO)}")
 
 
 if __name__ == "__main__":

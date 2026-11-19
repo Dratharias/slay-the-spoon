@@ -533,7 +533,7 @@ Read `README.md` for the player view and the spec for every decision.
   throws, and inside the redraw that crashes the game; the path is built by hand.
 - `MaxPatch`: forged cards keep their "+N" title outside a Forge run.
 - `CardRenderer` `gif:Name`: the card's climb from +0 to +9 (1.5 s per level, upgrade pop and particles, 12 fps frames);
-  `workshop_banners.py` turns it into `workshop/images/forge-climb-{en,fr}.gif` (320 px, 128 colors), on the Workshop page.
+  `workshop_banners.py` turns it into `workshop/images/forge-climb-en.gif` (320 px, 128 colors), shown in both Workshop descriptions (English only).
   The GIF takes over a minute per language, so render it in its own launch.
 - Build 0 warnings; 867 xUnit + 110 pytest pass. Not tested in game: "Forged look" in `docs/testing/forge-checklist.md`.
 

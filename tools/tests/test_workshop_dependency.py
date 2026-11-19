@@ -60,8 +60,9 @@ def test_description_images_are_committed():
         assert urls, name
         for url in urls:
             assert url.startswith(prefix), url
-            # In-game screenshots are shared by both languages; every other image comes per language.
-            shared = url.startswith(prefix + "workshop/images/screenshots/")
+            # In-game screenshots and the English-only GIFs are shared by both languages; every other image comes per
+            # language.
+            shared = url.startswith(prefix + "workshop/images/screenshots/") or url.endswith("-en.gif")
             assert shared or url.endswith((f"-{lang}.png", f"-{lang}.gif")), url
             assert (REPO / url.removeprefix(prefix)).is_file(), url
     assert (REPO / "workshop/images/preview.png").is_file()
