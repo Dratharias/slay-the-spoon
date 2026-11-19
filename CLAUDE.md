@@ -78,8 +78,8 @@ Read `README.md` for the player view and the spec for every decision.
   Ascension 5 is unlocked (`docs/testing/release-1.0.4.md`).
 - **1.0.5 (2026-11-12)** is on `main`: code-review fixes for loans and campfire sales (Escape only closes, Withdraw
   cancels a request; Accept rejected only when a picked offer changed; sales always end and explain failures).
-  Not tested in game: "Review fixes" in `docs/testing/release-1.0.4.md`. **No git remote yet.** The public repo `Dratharias/slay-the-spoon` on GitHub (MIT) gets created and
-  pushed only when the owner says so. The same goes for the Steam Workshop upload.
+  Not tested in game: "Review fixes" in `docs/testing/release-1.0.4.md`. **Public GitHub repo** `Dratharias/slay-the-spoon` (MIT, remote `origin`, created 2026-11-18). Push only when the
+  owner asks; the Steam Workshop upload is the owner's too.
 
 ## Step 5 status (2026-10-29)
 
