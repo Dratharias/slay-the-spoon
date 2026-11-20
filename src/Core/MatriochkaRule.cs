@@ -17,6 +17,13 @@ public static class MatriochkaRule
 	/// <summary>0-based act index holding the forced Reflections row.</summary>
 	public const int ReflectionsAct = 2;
 
+	/// <summary>
+	/// Whether a non-combat room gets the floor's mandatory card reward: merchants, rest sites, treasure rooms and events,
+	/// except Ancients and the victory room (the Architect after the last boss: the run is over, no final card, owner 2026-11-20).
+	/// </summary>
+	public static bool OffersFloorCard(bool shopRestOrTreasure, bool eventRoom, bool ancient, bool victoryRoom) =>
+		!victoryRoom && (shopRestOrTreasure || (eventRoom && !ancient));
+
 	/// <summary>Copies added with every card that enters the deck (vanilla Hoarder).</summary>
 	public const int ExtraCopies = 2;
 

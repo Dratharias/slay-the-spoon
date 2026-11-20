@@ -107,7 +107,7 @@ public abstract class SpoonMatriochka : SpoonPercentModifier
 	public override Task AfterRoomEntered(AbstractRoom room)
 	{
 		bool ancient = RunState.CurrentMapPoint?.PointType == MapPointType.Ancient;
-		bool offers = room is MerchantRoom or RestSiteRoom or TreasureRoom || (room is EventRoom && !ancient);
+		bool offers = MatriochkaRule.OffersFloorCard(room is MerchantRoom or RestSiteRoom or TreasureRoom, room is EventRoom, ancient, room.IsVictoryRoom);
 		// Rule 3: Dolly's Mirror when the act 3 Reflections room opens, before its Shatter.
 		bool mirror = room is EventRoom && RunState.CurrentActIndex == MatriochkaRule.ReflectionsAct && OnReflectionsRow();
 		if (!offers && !mirror)

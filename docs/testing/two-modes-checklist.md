@@ -52,6 +52,7 @@ and awards of each chest, keyed `combat_<floor>`, `treasure_<floor>`, `floor_<fl
 - [ ] Act 3 Reflections row (1.8.2): Dolly's Mirror is given on entering, before Shatter, once; its duplicate pick
       works; a player who already holds it gets no second one. No mirror at the first merchant any more.
 - [ ] Act 2: the first event is the Doll Room with only the Bing Bong option.
+- [ ] 1.8.17: after the last boss of the run (no act 4 or Spoon act next), the Architect room offers no mandatory card; with an appended act, the act 3 boss still gives its card reward.
 - [ ] Act 3: the row before the final rest sites is all Reflections; only Shatter; in co-op everyone shatters.
 - [ ] Rerolls: the row's −/+ sets 0–10 (default 3); the reroll button shows the rerolls left, resets each act,
       survives save and reload. At 0 no reroll button.

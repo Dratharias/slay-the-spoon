@@ -7,6 +7,15 @@ public class MatriochkaRuleTests
 {
 	private static IReadOnlyList<IReadOnlyList<bool>> Rows(params bool[][] rows) => rows;
 
+	[Theory]
+	[InlineData(true, false, false, false, true)]
+	[InlineData(false, true, false, false, true)]
+	[InlineData(false, true, true, false, false)]
+	[InlineData(false, true, false, true, false)]
+	[InlineData(false, false, false, false, false)]
+	public void OffersFloorCard_SkipsAncientsAndVictoryRoom(bool shop, bool ev, bool ancient, bool victory, bool expected) =>
+		Assert.Equal(expected, MatriochkaRule.OffersFloorCard(shop, ev, ancient, victory));
+
 	[Fact]
 	public void ReflectionsRow_IsRowBeforeFinalRestRow() =>
 		Assert.Equal(3, MatriochkaRule.ReflectionsRow(Rows([false], [false], [true, true], [false], [true, true, true], [false])));

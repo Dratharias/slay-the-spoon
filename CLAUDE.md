@@ -672,3 +672,9 @@ Read `README.md` for the player view and the spec for every decision.
 - The 1.8.12 postfix filtering `GetChildSpineNodes` was bypassed in a co-op bot run: the Watcher's skeleton still
   received the donor's missing `overgrowth_loop`. The `_Ready` call site now routes the Watcher to no donor Spine
   animations, leaving her separate `idle_loop` running. The patch logs if the expected call was not rewritten.
+
+## 1.8.17 — Matriochka final card (2026-11-20, `main`)
+
+- Owner: no mandatory card after the run's last boss. The Architect's victory room is an `EventRoom` on the boss map point
+  (not an Ancient), so Matriochka's per-floor offer fired there; `MatriochkaRule.OffersFloorCard` now skips
+  `AbstractRoom.IsVictoryRoom`. 907 xUnit + 110 pytest pass. Not tested in game.
