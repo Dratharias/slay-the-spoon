@@ -74,11 +74,11 @@ public static class MidasMeltTravelPatch
 		{
 			await RunManager.Instance.FadeOut();
 			await RunManager.Instance.EnterMapCoord(destination);
-			TaskHelper.RunSafely(RunManager.Instance.FadeIn());
+			_ = TaskHelper.RunSafely(RunManager.Instance.FadeIn());
 		}
 		else
 		{
-			await NMapScreen.Instance.TravelToMapCoord(destination);
+			await NMapScreen.Instance!.TravelToMapCoord(destination);
 		}
 	}
 }
