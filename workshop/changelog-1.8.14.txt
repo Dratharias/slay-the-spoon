@@ -1,0 +1,7 @@
+1.8.14 — Watcher and Spoon fixes
+
+- Fixed a crash when the Watcher enters a rest site during a long co-op run. The game now reliably loads the donor rest site scene and shows the Watcher there.
+- Fixed Brilliance trying to load an attack effect that does not exist in Slay the Spire 2.
+- Fixed repeated missing-animation errors when the Watcher appears at a rest site.
+- Fixed the Digest rest site option trying to load a missing icon.
+- These fixes came from co-op run logs. The bot code is not included in the Workshop build.

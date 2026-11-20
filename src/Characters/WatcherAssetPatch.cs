@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Reflection.Emit;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Animation;
@@ -209,6 +210,29 @@ public static class WatcherAssetPatch
 	public static class RestSitePatch
 	{
 		internal const string BodyName = BodyNodeName;
+		private static readonly MethodInfo ScenePathGetter = Getter(nameof(CharacterModel.RestSiteAnimPath));
+		private static readonly MethodInfo StableScenePath = AccessTools.Method(typeof(RestSitePatch), nameof(RestSitePath));
+
+		private static string RestSitePath(CharacterModel character) => character is Sts1Watcher
+			? ModelDb.GetById<CharacterModel>(ModelDb.GetId(typeof(Silent))).RestSiteAnimPath
+			: character.RestSiteAnimPath;
+
+		/// <summary>Read the donor path inside Create, where a recompiled getter cannot bypass this patch.</summary>
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		{
+			int rewritten = 0;
+			foreach (CodeInstruction instruction in instructions)
+			{
+				if (instruction.operand is MethodInfo method && method.Equals(ScenePathGetter))
+				{
+					rewritten++;
+					instruction.opcode = OpCodes.Call;
+					instruction.operand = StableScenePath;
+				}
+				yield return instruction;
+			}
+			if (rewritten != 1) SpoonLog.Error($"Watcher rest site scene patch replaced {rewritten} path reads (expected 1)");
+		}
 
 		/// <summary>Feet at the bottom of the donor's hitbox, in the root's space; size close to the donor's.</summary>
 		private static readonly Vector2 Feet = new(-32f, 250f);

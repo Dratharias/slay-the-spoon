@@ -654,3 +654,9 @@ Read `README.md` for the player view and the spec for every decision.
 
 - Digest reused Feast's preloaded heal icon, but the icon getter patch only handled Feast. The rest site repeatedly
   tried to load the missing `option_spoon_digest.png`. Both icon path and texture patches now cover Digest too.
+
+## 1.8.14 — Watcher rest site scene (2026-11-20, `main`)
+
+- A long co-op Watcher run crashed on both peers at an act 3 rest site: the hot `RestSiteAnimPath` getter reverted to
+  the nonexistent Watcher scene after runtime recompilation. The `NRestSiteCharacter.Create` call now routes the
+  Watcher's scene lookup directly to the Silent donor, preserving the Watcher body swap and rest site controls.
