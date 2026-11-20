@@ -37,14 +37,21 @@ Alternatives dropped: a host card like Folie à deux (the owner wants it in Cust
    cannot afford is greyed out; the focused option shows its price.
 6. **Balance patch** (owner, 2026-11-20: "il faut forcer le joueur à flamber son argent"; the start is close to 4 000
    gold with discounted prices):
-   - **Melt.** Each travel to a map room costs every living player 10 % of their gold, at least 25
-     (`MidasRule.Melt`). A player the melt leaves with no gold dies (a forced kill: Lizard Tail does not save them).
+   - **Melt.** Each travel to a map room costs every living player 10 % of their gold, at least their
+     average gold gained per floor so far (never under 25; `MidasRule.MeltFloor`, 1.8.5, owner: "la somme fixe doit
+     scale avec le gold"). Combat gold stays flat across acts (vanilla 10–20 per fight, ×Midas relics), so the floor
+     follows the run's real income: ordinary income only just covers the melt, and a gold jackpot raises it. A player the melt leaves with no gold dies (a forced kill: Lizard Tail does not save them).
      It runs in the synced travel action, on the map before the fade. Act starts are not travels: no melt at the act's
      Ancient.
    - **Rising prices.** Each purchase at a merchant raises the price of everything left there by 10 % of its price
      (cards, relics, potions, removal), per player, back to normal at the next merchant.
-   - **No fatal spending.** The merchant refuses a purchase that would leave the buyer ruined by the next melt (25 gold
-     or less); the price shows red. Builder call: rest site actions follow the same rule.
+   - **No fatal spending.** The merchant refuses a purchase that would leave the buyer ruined by the next melt (gold at or
+     under the floor); the price shows red. Builder call: rest site actions follow the same rule.
+
+Rest site fix (1.8.5): King Midas returns false from `ShouldDisableRemainingRestSiteOptions` and the pay-and-repeat
+postfix gives the player's site a fresh completion source when vanilla had completed it. Without that, the options came
+back but every choice threw "rest site has already been completed", and leaving the fire completed it twice (crash on
+travel).
 
 The map, the "?" room odds and merchants stay vanilla (The Courier refills the shop anyway).
 

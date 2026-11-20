@@ -17,7 +17,7 @@ namespace SlaySpoon.Midas;
 
 /// <summary>
 /// King Midas gold melt: each time the team travels to a map room, every living player loses
-/// <see cref="MidasRule.Melt"/>; a player the melt leaves with no gold dies. It runs inside the synced travel action,
+/// <see cref="MidasRule.Melt"/> (10 %, at least their average gold gained per floor); a player the melt leaves with no gold dies. It runs inside the synced travel action,
 /// on the map before the fade, so every peer melts the same synced gold and a death shows over the map (a death while
 /// the screen is faded out would hide the game over screen). Act starts are not travels and do not melt.
 /// </summary>
@@ -30,9 +30,10 @@ public static class MidasMelt
 		{
 			if (player.Creature.IsDead) continue;
 			int gold = player.Gold;
-			int melt = MidasRule.Melt(gold);
+			int floor = FloorFor(player);
+			int melt = MidasRule.Melt(gold, floor);
 			if (melt > 0) await PlayerCmd.LoseGold(melt, player, GoldLossType.Lost);
-			if (MidasRule.Ruined(gold)) ruined.Add(player.Creature);
+			if (MidasRule.Ruined(gold, floor)) ruined.Add(player.Creature);
 		}
 		if (ruined.Count == 0) return;
 		SpoonLog.Info($"King Midas: {ruined.Count} player(s) ruined by the melt");
@@ -40,12 +41,32 @@ public static class MidasMelt
 		await CreatureCmd.Kill(ruined, force: true);
 	}
 
+	/// <summary>
+	/// The melt's fixed part for <paramref name="player"/> (<see cref="MidasRule.MeltFloor"/>), from the run's floor
+	/// history: the gold they gained on every floor so far, the floor being left included. Every peer records the same.
+	/// </summary>
+	public static int FloorFor(Player player)
+	{
+		int gained = 0, floors = 0;
+		foreach (var act in player.RunState.MapPointHistory)
+		{
+			foreach (var entry in act)
+			{
+				floors++;
+				gained += entry.PlayerStats.Where(p => p.PlayerId == player.NetId).Sum(p => p.GoldGained);
+			}
+		}
+		return MidasRule.MeltFloor(gained, floors);
+	}
+
+	public static bool CanSpend(Player player, int price) => MidasRule.CanSpend(player.Gold, price, FloorFor(player));
+
 	/// <summary>True when the run continues (someone is still alive).</summary>
 	public static bool AnyoneAlive(IRunState run) => run.Players.Any(p => !p.Creature.IsDead);
 
 	/// <summary>True when <paramref name="player"/> could pay <paramref name="price"/> but the next melt would kill them.</summary>
 	public static bool Fatal(Player player, int price) =>
-		SpoonRoiMidas.IsActive(player.RunState) && player.Gold >= price && !MidasRule.CanSpend(player.Gold, price);
+		SpoonRoiMidas.IsActive(player.RunState) && player.Gold >= price && !CanSpend(player, price);
 }
 
 [HarmonyPatch(typeof(MoveToMapCoordAction), "ExecuteAction")]

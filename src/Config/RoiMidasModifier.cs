@@ -97,6 +97,12 @@ public sealed class SpoonRoiMidas : ModifierModel
 		return Task.CompletedTask;
 	}
 
+	/// <summary>
+	/// A paid action does not close the fire: the options come back (<c>MidasRestChoosePatch</c>), so the vanilla
+	/// synchronizer must not mark the player's rest site completed.
+	/// </summary>
+	public override bool ShouldDisableRemainingRestSiteOptions(Player player) => false;
+
 	public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
 	{
 		if (player.GetRelic<MawBank>() is not { HasItemBeenBought: true }) return false;

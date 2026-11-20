@@ -570,3 +570,12 @@ Read `README.md` for the player view and the spec for every decision.
   empties dies (forced kill). Merchant prices rise 10 % per purchase at that merchant (`ModifyMerchantPrice` on
   `SpoonRoiMidas`); the merchant and the rest site refuse what would leave 25 or less (`MidasRule.CanSpend`).
 - 885 xUnit + 110 pytest pass. Not tested in game: "Balance (1.8.4)" in `docs/testing/roi-midas-checklist.md`.
+
+## 1.8.5 — King Midas melt floor, rest site crash (2026-11-20, `main`)
+
+- The melt's fixed part follows the run's income: the player's average gold gained per floor so far, at least 25
+  (`MidasRule.MeltFloor`, `MidasMelt.FloorFor` from `MapPointHistory`); merchant and rest site refusals use the same floor.
+- Rest site crash: vanilla completed the player's rest site after a paid action, so the returned options threw on use and
+  the room exit completed it twice. King Midas now keeps the options (`ShouldDisableRemainingRestSiteOptions` false) and
+  the pay-and-repeat postfix resets a completed source.
+- 893 xUnit + 110 pytest pass. Not tested in game: "Balance and rest site fix (1.8.5)" in `docs/testing/roi-midas-checklist.md`.

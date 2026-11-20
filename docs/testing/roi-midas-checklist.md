@@ -48,3 +48,11 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] King Midas: <event
 - [ ] At the merchant, each purchase raises the remaining prices by 10 %; the next merchant starts at normal prices.
 - [ ] A purchase that would leave 25 gold or less shows a red price and is refused; same for rest site actions.
 - [ ] Co-op (`make mp`): both clients show the same gold after travel; a ruined player dies on both.
+
+## Balance and rest site fix (1.8.5)
+
+- [ ] The melt is 10 % of the gold or the average gold gained per floor so far, whichever is larger (never under 25):
+      after a rich event (Mind Bloom 999) the melt jumps for the following floors.
+- [ ] Merchant and rest site refuse what would leave gold at or under that amount.
+- [ ] Rest site: after a paid action (Reopen included), the options come back and every one of them works; proceeding
+      and traveling does not crash.

@@ -59,20 +59,31 @@ public static class MidasRule
 	/// <summary>Share of a player's gold that melts each time the team travels to a map room, in percent.</summary>
 	public const int MeltPercent = 10;
 
-	/// <summary>The least gold that melts per floor, so a small purse still runs dry.</summary>
+	/// <summary>The least the fixed part of the melt can be.</summary>
 	public const int MeltMinimum = 25;
 
-	/// <summary>Gold lost on traveling to the next floor: 10 % of the purse, at least 25, never more than the purse.</summary>
-	public static int Melt(int gold) => Math.Min(Math.Max(gold, 0), Math.Max(gold * MeltPercent / 100, MeltMinimum));
+	/// <summary>The fixed part as a share of the player's average gold gained per floor, in percent.</summary>
+	public const int MeltIncomePercent = 100;
+
+	/// <summary>
+	/// The fixed part of the melt: the average gold the player gained per floor so far this run (combat, events, relics),
+	/// at least 25. Ordinary income only just covers it, so gold kept is gold slowly lost, and a run that earns more
+	/// (rich events, gold relics) must keep a bigger reserve to survive the next floor.
+	/// </summary>
+	public static int MeltFloor(int goldGained, int floors) =>
+		floors <= 0 ? MeltMinimum : Math.Max(MeltMinimum, Math.Max(goldGained, 0) / floors * MeltIncomePercent / 100);
+
+	/// <summary>Gold lost on traveling to the next floor: 10 % of the purse, at least <paramref name="floor"/>, never more than the purse.</summary>
+	public static int Melt(int gold, int floor) => Math.Min(Math.Max(gold, 0), Math.Max(gold * MeltPercent / 100, floor));
 
 	/// <summary>True when the next melt leaves no gold: the player dies on traveling.</summary>
-	public static bool Ruined(int gold) => gold - Melt(gold) <= 0;
+	public static bool Ruined(int gold, int floor) => gold - Melt(gold, floor) <= 0;
 
 	/// <summary>
 	/// True when the player may pay <paramref name="price"/>: they hold it and keep enough to survive the next melt.
 	/// The merchant and the rest site refuse what would kill.
 	/// </summary>
-	public static bool CanSpend(int gold, int price) => gold >= price && !Ruined(gold - price);
+	public static bool CanSpend(int gold, int price, int floor) => gold >= price && !Ruined(gold - price, floor);
 
 	/// <summary>Merchant price rise per item already bought at this merchant, in percent of the price.</summary>
 	public const int PriceRisePercent = 10;

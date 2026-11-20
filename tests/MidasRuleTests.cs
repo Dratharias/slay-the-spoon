@@ -65,27 +65,39 @@ public class MidasRuleTests
 	}
 
 	[Theory]
-	[InlineData(3900, 390)]
-	[InlineData(300, 30)]
-	[InlineData(250, 25)]
-	[InlineData(100, 25)]
-	[InlineData(20, 20)]
-	[InlineData(0, 0)]
-	public void MeltIsTenPercentAtLeastTwentyFive(int gold, int melt) => Assert.Equal(melt, MidasRule.Melt(gold));
+	[InlineData(3900, 25, 390)]
+	[InlineData(300, 25, 30)]
+	[InlineData(100, 25, 25)]
+	[InlineData(100, 60, 60)]
+	[InlineData(20, 25, 20)]
+	[InlineData(0, 25, 0)]
+	public void MeltIsTenPercentAtLeastTheFloor(int gold, int floor, int melt) => Assert.Equal(melt, MidasRule.Melt(gold, floor));
 
 	[Theory]
-	[InlineData(0, true)]
-	[InlineData(25, true)]
-	[InlineData(26, false)]
-	[InlineData(3900, false)]
-	public void RuinedWhenTheMeltEmptiesThePurse(int gold, bool ruined) => Assert.Equal(ruined, MidasRule.Ruined(gold));
+	[InlineData(0, 0, 25)]
+	[InlineData(15, 1, 25)]
+	[InlineData(330, 5, 66)]
+	[InlineData(1644, 7, 234)]
+	[InlineData(-10, 3, 25)]
+	public void FloorIsTheAverageIncome(int gained, int floors, int floor) => Assert.Equal(floor, MidasRule.MeltFloor(gained, floors));
 
 	[Theory]
-	[InlineData(100, 74, true)]
-	[InlineData(100, 75, false)]
-	[InlineData(100, 101, false)]
-	[InlineData(3900, 3000, true)]
-	public void SpendingMustLeaveEnoughToSurvive(int gold, int price, bool ok) => Assert.Equal(ok, MidasRule.CanSpend(gold, price));
+	[InlineData(0, 25, true)]
+	[InlineData(25, 25, true)]
+	[InlineData(26, 25, false)]
+	[InlineData(117, 117, true)]
+	[InlineData(118, 117, false)]
+	[InlineData(3900, 117, false)]
+	public void RuinedWhenTheMeltEmptiesThePurse(int gold, int floor, bool ruined) => Assert.Equal(ruined, MidasRule.Ruined(gold, floor));
+
+	[Theory]
+	[InlineData(100, 74, 25, true)]
+	[InlineData(100, 75, 25, false)]
+	[InlineData(100, 101, 25, false)]
+	[InlineData(200, 80, 117, true)]
+	[InlineData(200, 90, 117, false)]
+	public void SpendingMustLeaveEnoughToSurvive(int gold, int price, int floor, bool ok) =>
+		Assert.Equal(ok, MidasRule.CanSpend(gold, price, floor));
 
 	[Fact]
 	public void PricesRiseTenPercentPerPurchase()
