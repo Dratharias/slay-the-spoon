@@ -578,4 +578,6 @@ Read `README.md` for the player view and the spec for every decision.
 - Rest site crash: vanilla completed the player's rest site after a paid action, so the returned options threw on use and
   the room exit completed it twice. King Midas now keeps the options (`ShouldDisableRemainingRestSiteOptions` false) and
   the pay-and-repeat postfix resets a completed source.
-- 893 xUnit + 110 pytest pass. Not tested in game: "Balance and rest site fix (1.8.5)" in `docs/testing/roi-midas-checklist.md`.
+- Trophies: move titles drop the game's "_MOVE" suffix (`TrophyRule.MoveTitleKeys`); the card portrait is the elite's
+  bestiary pose (`images/cards/trophies/`), rendered by `CardRenderer`'s `elites` mode and framed by `tools/trophy_art.py`.
+- 896 xUnit + 110 pytest pass. Not tested in game: "Balance and rest site fix (1.8.5)" in `docs/testing/roi-midas-checklist.md`.
