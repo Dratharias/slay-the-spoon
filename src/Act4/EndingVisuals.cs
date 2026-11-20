@@ -54,6 +54,9 @@ public static class EndingVisuals
 		Add(root, new Marker2D { Name = "IntentPos", Position = new Vector2(center.X, hitbox.Position.Y - IntentGap) });
 		Add(root, new Marker2D { Name = "CenterPos", Position = center });
 		Add(root, new Marker2D { Name = "TalkPos", Position = new Vector2(center.X, hitbox.Position.Y) });
+		// Form powers (Demon Form...) add their VFX here, and every player death clears it: without the holder both throw
+		// (the Watcher's death broke `RunManager.WinRun`, no game over screen; bot tester, 2026-11-20).
+		Add(root, new Control { Name = "FormVfx", Position = center, MouseFilter = Control.MouseFilterEnum.Ignore });
 		return root;
 	}
 

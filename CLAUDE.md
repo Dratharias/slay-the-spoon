@@ -629,3 +629,13 @@ Read `README.md` for the player view and the spec for every decision.
   purchase it allowed left exactly the melt floor and the next travel ruined the buyer. The check now uses
   `BloodRule.PaidGold` (price rounded up to the 5 gold rate) when Blood is active. Found by the co-op bot tester.
 - 902 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.10 — Watcher death and victory (2026-11-20, `main`)
+
+- The Watcher's creature visuals (built by `EndingVisuals.Create`, like the Ending monsters) had no `%FormVfx` holder.
+  Every player death calls `NCreatureVisuals.RemoveFormVfx`, which throws without it: a dying Watcher broke
+  `CreatureCmd.Kill`, and at the Architect `RunManager.WinRun` stopped before the game over screen (co-op bot run,
+  Watcher host). `EndingVisuals.Create` now adds the holder (form powers such as Demon Form also need it).
+- Serialization guard: a patch Harmony cannot rebuild (BaseLib's `NRewardButton._Ready`, "invalid program") is tried
+  once instead of logging an error on every sweep.
+- Found by the co-op bot tester. Not tested in game.

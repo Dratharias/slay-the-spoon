@@ -146,11 +146,15 @@ public static class SerializationPatchGuard
 		GetPatchInfo == null || UpdateWrapper == null ? 0
 			: Reapply(Harmony.GetAllPatchedMethods().Where(m => m.DeclaringType == declaring).ToList());
 
+	/// <summary>Methods whose patches Harmony cannot rebuild (BaseLib's <c>NRewardButton._Ready</c>: "invalid program"); tried once.</summary>
+	private static readonly HashSet<MethodBase> Unrebuildable = [];
+
 	private static int Reapply(List<MethodBase> targets)
 	{
 		int count = 0;
 		foreach (MethodBase method in targets)
 		{
+			if (Unrebuildable.Contains(method)) continue;
 			try
 			{
 				object? info = GetPatchInfo!.Invoke(null, [method]);
@@ -160,7 +164,8 @@ public static class SerializationPatchGuard
 			}
 			catch (Exception e)
 			{
-				SpoonLog.Error($"serialization guard: re-applying {method.DeclaringType?.Name}.{method.Name} failed: {(e.InnerException ?? e).Message}");
+				Unrebuildable.Add(method);
+				SpoonLog.Error($"serialization guard: re-applying {method.DeclaringType?.Name}.{method.Name} failed, not retried: {(e.InnerException ?? e).Message}");
 			}
 		}
 		return count;
