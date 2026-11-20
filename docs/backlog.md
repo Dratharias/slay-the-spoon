@@ -611,3 +611,15 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
 - Open call: a co-op player revived with 0 gold dies again at the next travel unless the fight's gold reward lifts them
   above 25. Kept as is (the owner calls the mode very hard on purpose).
 - Not guarded: the Forge Duplicate button and Merchant Loans repayments can still take a Midas player to 25 gold or less.
+
+## Power icons shown as "NOPE" (2026-11-20, bot tester)
+
+- Every mod power has an icon on paper (58 power classes: 57 borrow a vanilla icon through `IBorrowedIcon`, all 43
+  sources exist in `power_atlas`; Block Return has its own). The NOPE comes at run time: the `PackedIconPath` postfix in
+  `BorrowedIconPatch` is skipped (the JIT inlines the small getter, or tiered compilation drops the detour, as with the
+  serializers in 1.8.6), so the game asks its atlas for `<mod id>.tres` and falls back to `missing_power.png`.
+- Seen in the bot logs (`AtlasResourceLoader: Missing sprite`): `spoon_appetite_power` (Spoon run), `spoon_heel_power`
+  (Achilles' Heel). Any other borrowed power can do the same; rare, more likely late in a long session.
+- Fix idea, no detour: the loader's fallback is `res://images/powers/<sprite>.png`, and the big icon reads the same path.
+  Ship one PNG per mod power at that path in the PCK (or add the sprites to `AtlasManager`'s sprite map at startup),
+  then the patch only matters for nothing. To grep after a play: `grep -a "Missing sprite" godot.log`.
