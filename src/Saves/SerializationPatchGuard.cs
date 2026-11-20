@@ -15,12 +15,16 @@ namespace SlaySpoon.Saves;
 /// state divergence, "ModelId entry ID ... is out of range" while syncing players).
 ///
 /// At startup the guard calls every patched serializer until the runtime promotes it to its final tier, re-applies the
-/// detours, then checks a test card every few seconds and re-applies everything when the card's bits come out wrong.
+/// detours, then checks a test card on every frame and re-applies everything when the card's bits come out wrong.
+/// BaseLib's <c>ToSerializable</c> postfix can be lost the same way (re-applying does not bring it back: the JIT inlines
+/// the method into its callers); <see cref="ExtendedSaveNormalizer"/> makes that loss harmless.
 /// </summary>
 public static class SerializationPatchGuard
 {
-	private const int WarmUpCalls = 200;
-	private const double WarmUpWait = 3, CheckEvery = 5;
+	// .NET 9 recompiles a hot method more than once (tier 0, instrumented tier, final tier), and each step drops the
+	// detour, so the warm-up runs several rounds, re-applying after each one.
+	private const int WarmUpCalls = 500, WarmUpRounds = 6;
+	private const double FirstWait = 0.25, RoundWait = 1;
 
 	private static readonly MethodInfo? GetPatchInfo =
 		AccessTools.Method(AccessTools.TypeByName("HarmonyLib.HarmonySharedState"), "GetPatchInfo");
@@ -38,25 +42,55 @@ public static class SerializationPatchGuard
 		Run();
 	}
 
+	private static int _lost;
+	private static bool _detours;
+
 	private static async void Run()
 	{
 		try
 		{
-			await Wait(2);
-			WarmUp();
-			await Wait(WarmUpWait);
-			int count = Reapply();
-			SpoonLog.Info($"serialization guard: {count} serializer patches re-applied, card check {(CardIsWhole() ? "ok" : "FAILED")}");
-			while (true)
+			// ModelDb.AllCards caches its first answer, so it must not be read before the model DB is built: the
+			// serialization cache is initialized right after it (OneTimeInitialization.ExecuteEssential).
+			while (ModelIdSerializationCache.EntryIdBitSize == 0) await Wait(FirstWait);
+			ExtendedSaveNormalizer.Apply();
+			// A recompile can drop the detour at any moment, and a co-op message written in between is shifted: check on
+			// every frame from now on (one card round trip, a few microseconds).
+			var tree = (SceneTree)Engine.GetMainLoop();
+			_detours = DetourGuard.Init();
+			tree.ProcessFrame += CheckFrame;
+			int count = 0;
+			for (int round = 0; round < WarmUpRounds; round++)
 			{
-				await Wait(CheckEvery);
-				if (CardIsWhole()) continue;
-				Reapply();
-				SpoonLog.Info($"serialization guard: a serializer lost its patch, re-applied (card check {(CardIsWhole() ? "ok" : "still failing")})");
+				WarmUp();
+				await Wait(RoundWait);
+				count = Reapply();
 			}
+			SpoonLog.Info($"serialization guard: {count} serializer patches re-applied, card check {(CardIsWhole() ? "ok" : "FAILED")}");
 		}
 		catch (Exception e)
 		{
+			SpoonLog.Error($"serialization guard stopped: {e}");
+		}
+	}
+
+	private static void CheckFrame()
+	{
+		try
+		{
+			if (_detours) DetourGuard.Tick(m => Reapply([m]) == 1);
+			if (!ForgeMaxIsPatched())
+			{
+				int count = ReapplyOn(typeof(CardModel));
+				SpoonLog.Info($"patch guard: CardModel lost its Forge patches, {count} re-applied (check {(ForgeMaxIsPatched() ? "ok" : "still failing")})");
+			}
+			if (CardIsWhole()) return;
+			Reapply();
+			_lost++;
+			SpoonLog.Info($"serialization guard: a serializer lost its patch ({_lost}), re-applied (card check {(CardIsWhole() ? "ok" : "still failing")})");
+		}
+		catch (Exception e)
+		{
+			((SceneTree)Engine.GetMainLoop()).ProcessFrame -= CheckFrame;
 			SpoonLog.Error($"serialization guard stopped: {e}");
 		}
 	}
@@ -102,10 +136,20 @@ public static class SerializationPatchGuard
 		}
 	}
 
-	private static int Reapply()
+	private static int Reapply() => Reapply(Targets());
+
+	/// <summary>
+	/// Re-applies every Harmony patch on methods declared by <paramref name="declaring"/>. Cheap enough to call before a
+	/// rare action that needs them (a Forge fusion), so the action never runs on a dropped detour.
+	/// </summary>
+	public static int ReapplyOn(Type declaring) =>
+		GetPatchInfo == null || UpdateWrapper == null ? 0
+			: Reapply(Harmony.GetAllPatchedMethods().Where(m => m.DeclaringType == declaring).ToList());
+
+	private static int Reapply(List<MethodBase> targets)
 	{
 		int count = 0;
-		foreach (MethodBase method in Targets())
+		foreach (MethodBase method in targets)
 		{
 			try
 			{
@@ -122,14 +166,31 @@ public static class SerializationPatchGuard
 		return count;
 	}
 
+	private static readonly MethodInfo MaxGetter = AccessTools.PropertyGetter(typeof(CardModel), nameof(CardModel.MaxUpgradeLevel));
+
+	private static CardModel? _forgeSample;
+
+	/// <summary>
+	/// The Forge's <c>MaxUpgradeLevel</c> postfix answers +9 inside an open fusion scope. The getter is among the game's
+	/// hottest, so its detour is the likeliest to be dropped: a fusion then threw "cannot be upgraded past its
+	/// MaxUpgradeLevel" on one peer only, which shifted every later player choice (co-op crash at the rest site).
+	/// </summary>
+	private static bool ForgeMaxIsPatched()
+	{
+		if (Harmony.GetPatchInfo(MaxGetter) == null) return true;
+		_forgeSample ??= ModelDb.AllCards.FirstOrDefault(SlaySpoon.Forge.ForgeLevels.Fusable);
+		if (_forgeSample == null) return true;
+		using (SlaySpoon.Forge.ForgeLevels.Open())
+			return _forgeSample.MaxUpgradeLevel == Core.ForgeRule.MaxLevel;
+	}
+
 	/// <summary>
 	/// A test card must write the vanilla fields plus whatever the patches add, and read back the same number of bits.
 	/// With no patch on the card serializer there is nothing to check.
 	/// </summary>
 	private static bool CardIsWhole()
 	{
-		var serialize = AccessTools.Method(typeof(SerializableCard), nameof(SerializableCard.Serialize));
-		if (Harmony.GetPatchInfo(serialize) == null) return true;
+		if (Harmony.GetPatchInfo(CardSerialize) == null) return true;
 		var card = new SerializableCard { Id = ModelDb.AllCards.First().Id, FloorAddedToDeck = 1 };
 		var writer = new PacketWriter { WarnOnGrow = false };
 		card.Serialize(writer);
@@ -142,11 +203,14 @@ public static class SerializationPatchGuard
 	}
 
 	/// <summary>What BaseLib's own card writer appends, measured by calling it directly (0 without BaseLib).</summary>
+	private static readonly MethodInfo? ExtraWrite = AccessTools.TypeByName("BaseLib.Patches.Saves.ExtendedSaveHandlers`2")
+		?.MakeGenericType(typeof(CardModel), typeof(SerializableCard)) is { } handlers ? AccessTools.Method(handlers, "Write") : null;
+
+	private static readonly MethodInfo CardSerialize = AccessTools.Method(typeof(SerializableCard), nameof(SerializableCard.Serialize));
+
 	private static int ExtraBits(SerializableCard card)
 	{
-		Type? handlers = AccessTools.TypeByName("BaseLib.Patches.Saves.ExtendedSaveHandlers`2")
-			?.MakeGenericType(typeof(CardModel), typeof(SerializableCard));
-		MethodInfo? write = handlers == null ? null : AccessTools.Method(handlers, "Write");
+		MethodInfo? write = ExtraWrite;
 		if (write == null) return 0;
 		var writer = new PacketWriter { WarnOnGrow = false };
 		write.Invoke(null, [card, writer]);

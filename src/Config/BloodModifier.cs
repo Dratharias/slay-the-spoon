@@ -20,17 +20,17 @@ public sealed class SpoonBlood : ModifierModel
 		var fang = ModelDb.Relic<SpoonBloodFang>();
 		foreach (Player player in runState.Players)
 		{
-			BloodGold.Clear(player);
+			BloodGold.Mirror(player);
 			player.RelicGrabBag.Remove(fang);
 			if (player.Relics.All(r => r.Id != fang.Id)) player.AddRelicInternal(fang.ToMutable());
 		}
 		runState.SharedRelicGrabBag.Remove(fang);
 	}
 
-	/// <summary>A save stores the gold the getter read (the spendable HP); the real field stays 0.</summary>
+	/// <summary>The real gold field follows the spendable HP (<see cref="BloodGold.Mirror"/>).</summary>
 	protected override void AfterRunLoaded(RunState runState)
 	{
-		foreach (Player player in runState.Players) BloodGold.Clear(player);
+		foreach (Player player in runState.Players) BloodGold.Mirror(player);
 	}
 
 	public override decimal ModifyGoldGained(Player player, decimal amount) => 0m;

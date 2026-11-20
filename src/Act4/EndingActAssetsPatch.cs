@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace SlaySpoon.Act4;
@@ -78,5 +79,25 @@ internal static class EndingActAssetsPatch
 	private static void CombatBackground(ref ActModel parentAct, Rng rng)
 	{
 		if (parentAct is IAppendedAct) parentAct = Canon;
+	}
+
+	private static HashSet<string>? _appendedTitles;
+
+	/// <summary>
+	/// Last line of defense, where the folder is read: the prefix above was skipped in a co-op bot run (1.8.6, the Spoon
+	/// boss room failed to load on one peer only) because the runtime inlined the small <c>GetBackgroundAssets</c> into
+	/// the patched <c>GetAssetPaths</c>. The constructor is too large to inline. Both peers draw the same layers from the
+	/// same rng, so the substitution stays deterministic.
+	/// </summary>
+	[HarmonyPatch(typeof(BackgroundAssets), MethodType.Constructor, typeof(string), typeof(Rng))]
+	[HarmonyPrefix]
+	private static void CombatLayers(ref string title)
+	{
+		_appendedTitles ??=
+		[
+			ModelDb.Act<SlaySpoon.Spoon.SpoonAct>().Id.Entry.ToLowerInvariant(),
+			ModelDb.Act<Sts1EndingAct>().Id.Entry.ToLowerInvariant(),
+		];
+		if (_appendedTitles.Contains(title)) title = Canon.Id.Entry.ToLowerInvariant();
 	}
 }

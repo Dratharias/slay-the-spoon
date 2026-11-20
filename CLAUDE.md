@@ -600,3 +600,24 @@ Read `README.md` for the player view and the spec for every decision.
   `AfterObtained` on every held relic: King Midas started with double gold (about 3 500 instead of about 1 770) and two
   Greeds, Spoon with +103 max HP twice. Found by the bot tester. The hand-applied effects are removed; vanilla's run once.
   The King Midas melt (1.8.4/1.8.5) was tuned on the doubled start. 897 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.8 — co-op desync fixes from the bot tester (2026-11-20, `main`)
+
+- `src/Saves/DetourGuard.cs`: in game the runtime sometimes installs new native code for a patched method without
+  its Harmony detour (seen on dozens of methods: serializers, `MutableClone`, `CardEnergyCost.GetWithModifiers`,
+  `MessageTypes.TryGetMessageType`, power icon paths...), so a patch stops running on one peer only. Each frame the guard
+  reads a slice of every patched method's native code through MonoMod's `PlatformTriple.GetNativeMethodBody`; a method
+  that no longer starts with a jump gets its patches re-applied (`PatchFunctions.UpdateWrapper`) and is logged
+  ("detour guard: X lost its detour"). x64 only; inlined copies are invisible to it (functional checks stay in
+  `SerializationPatchGuard`: card serializer, Forge `MaxUpgradeLevel`). Needs `AllowUnsafeBlocks`.
+- Cursed Deck: a playable curse cost 1 on one peer and stayed unplayable on the other (divergence on turn 1): the cost
+  postfix on `GetWithModifiers` had lost its detour. Covered by the guard.
+- Blood: each peer charged the other player's whole HP at combat start (`Player.SyncWithSerializedPlayer` wrote a stale
+  0 gold). The raw gold field now mirrors the HP-derived gold (`BloodGold.Mirror`) and the sync write is ignored.
+- Spoon act: the boss room failed to load on one peer ("could not find res://scenes/backgrounds/spoon_act/layers"): the
+  `GetBackgroundAssets` prefix was skipped (inlined). A prefix on the `BackgroundAssets` constructor maps the appended
+  acts' titles to Glory's.
+- Forge: a fusion re-applies the `CardModel` patches first (`SerializationPatchGuard.ReapplyOn`); the frame check
+  re-applies them when the Forge cap stops answering +9.
+- `src/Saves/ExtendedSaveNormalizer.cs`: makes a lost BaseLib `ToSerializable` postfix harmless.
+- 897 xUnit + 110 pytest pass. Validated by co-op bot runs on `bot-tester` (see its `docs/testing/bot-backlog.md`).

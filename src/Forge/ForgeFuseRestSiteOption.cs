@@ -36,6 +36,8 @@ public sealed class ForgeFuseRestSiteOption(Player owner) : RestSiteOption(owner
 
 	public override async Task<bool> OnSelect()
 	{
+		// A dropped detour on the Forge's CardModel patches made the build throw on one peer only (co-op crash).
+		SlaySpoon.Saves.SerializationPatchGuard.ReapplyOn(typeof(CardModel));
 		var deck = PileType.Deck.GetPile(Owner).Cards.ToList();
 		var kept = (await CardSelectCmd.FromDeckGeneric(Owner, Prefs("SPOON_FORGE_KEEP"), c => ForgeFusion.HasPartner(c, deck)))
 			.FirstOrDefault();

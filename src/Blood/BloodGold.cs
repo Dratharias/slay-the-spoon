@@ -10,6 +10,11 @@ namespace SlaySpoon.Blood;
 /// Blood's gold: the game reads a Blood player's gold as their spendable HP (<see cref="BloodRule.SpendableGold"/>), and
 /// any lower value written to it is paid in HP (<see cref="BloodRule.HpCost"/>). Gains are ignored. So every purchase
 /// check and payment (merchant, events, campfire gifts and sales, Forge duplicate) works unchanged.
+///
+/// The real <c>_gold</c> field mirrors the spendable HP: the runtime can inline the patched getter into a hot caller
+/// (tiered compilation), which then reads the raw field. With the field at 0, <c>Player.ToSerializable</c> sent 0 gold and
+/// the other peer's <see cref="Player.SyncWithSerializedPlayer"/> wrote it back as a purchase: each peer charged the other
+/// player all their HP at the first combat (co-op state divergence). A state sync is never a payment either.
 /// </summary>
 public static class BloodGold
 {
@@ -18,7 +23,13 @@ public static class BloodGold
 
 	private static bool Applies(Player player) => player.Creature != null && SpoonBlood.IsActive(player.RunState);
 
-	public static void Clear(Player player) => GoldRef(player) = 0;
+	[ThreadStatic] private static bool _syncing;
+
+	/// <summary>Sets the real gold field to the spendable HP, what the patched getter answers.</summary>
+	public static void Mirror(Player player)
+	{
+		if (player.Creature != null) GoldRef(player) = BloodRule.SpendableGold(player.Creature.CurrentHp);
+	}
 
 	[HarmonyPatch(typeof(Player), nameof(Player.Gold), MethodType.Getter)]
 	public static class ReadPatch
@@ -36,6 +47,11 @@ public static class BloodGold
 		{
 			if (!Applies(__instance)) return true;
 			var creature = __instance.Creature;
+			if (_syncing)
+			{
+				Mirror(__instance);
+				return false;
+			}
 			int hp = creature.CurrentHp;
 			int paid = BloodRule.SpendableGold(hp) - value;
 			int cost = paid > 0 ? BloodRule.HpCost(paid, hp) : 0;
@@ -44,7 +60,7 @@ public static class BloodGold
 				creature.SetCurrentHpInternal(hp - cost);
 				SpoonLog.Info($"blood: {__instance.NetId} paid {paid} gold with {cost} HP");
 			}
-			GoldRef(__instance) = 0;
+			Mirror(__instance);
 			return false;
 		}
 	}
@@ -55,7 +71,18 @@ public static class BloodGold
 	{
 		public static void Postfix(Creature __instance)
 		{
-			if (__instance.Player is { } player && Applies(player)) ChangedRef(player)?.Invoke();
+			if (__instance.Player is not { } player || !Applies(player)) return;
+			Mirror(player);
+			ChangedRef(player)?.Invoke();
 		}
+	}
+
+	/// <summary>Copying a peer's state (combat start) sets HP, then gold: never charge for it.</summary>
+	[HarmonyPatch(typeof(Player), nameof(Player.SyncWithSerializedPlayer))]
+	public static class SyncPatch
+	{
+		public static void Prefix() => _syncing = true;
+
+		public static void Finalizer() => _syncing = false;
 	}
 }
