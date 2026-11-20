@@ -29,26 +29,22 @@ public sealed class SpoonSpoon : ModifierModel
 			player.Deck.AddInternal(runState.CreateCard<SpoonSpoonful>(player));
 
 		// The 12 max HP relics from the start (owner, 2026-11-16), like King Midas's gold relics: taken out of every grab bag,
-		// pickup max HP applied by hand (AfterObtained does not run for relics added at creation), then full HP (Lee's Waffle).
+		// their pickup max HP comes from vanilla: RunManager.FinalizeStartingRelics runs AfterObtained on every relic held
+		// at the start, these included (Lee's Waffle heals to full).
 		var relics = SpoonRule.StartRelics
-			.Select(r => (Relic: ModelDb.AllRelics.FirstOrDefault(m => m.Id.Entry == r.Entry), r.PickupMaxHp))
-			.Where(r => r.Relic != null).ToList();
+			.Select(r => ModelDb.AllRelics.FirstOrDefault(m => m.Id.Entry == r.Entry))
+			.OfType<RelicModel>().ToList();
 		foreach (Player player in runState.Players)
 		{
-			int gain = 0;
-			foreach (var (canonical, pickup) in relics)
+			foreach (RelicModel canonical in relics)
 			{
-				player.RelicGrabBag.Remove(canonical!);
-				if (player.Relics.Any(r => r.Id == canonical!.Id)) continue;
-				player.AddRelicInternal(canonical!.ToMutable());
-				gain += pickup;
+				player.RelicGrabBag.Remove(canonical);
+				if (player.Relics.Any(r => r.Id == canonical.Id)) continue;
+				player.AddRelicInternal(canonical.ToMutable());
 			}
-			Creature creature = player.Creature;
-			creature.SetMaxHpInternal(creature.MaxHp + gain);
-			creature.SetCurrentHpInternal(creature.MaxHp);
 		}
-		foreach (var (canonical, _) in relics)
-			runState.SharedRelicGrabBag.Remove(canonical!);
+		foreach (RelicModel canonical in relics)
+			runState.SharedRelicGrabBag.Remove(canonical);
 	}
 
 	// Before vanilla sets the win time and saves the run, on every co-op peer at the same point.

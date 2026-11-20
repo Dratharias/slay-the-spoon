@@ -46,22 +46,16 @@ public sealed class SpoonRoiMidas : ModifierModel
 	// Rule 1.
 	protected override void AfterRunCreated(RunState runState)
 	{
+		// Pickup effects (gold, Cursed Pearl's Greed) come from vanilla: RunManager.FinalizeStartingRelics runs
+		// AfterObtained on every relic the players hold when the run starts, these included.
 		foreach (Player player in runState.Players)
 		{
-			int gold = 0;
 			foreach (RelicModel canonical in MidasStart.Relics())
 			{
 				player.RelicGrabBag.Remove(canonical);
 				if (player.Relics.Any(r => r.Id == canonical.Id)) continue;
-				RelicModel relic = canonical.ToMutable();
-				player.AddRelicInternal(relic);
-				// Pickup effects (AfterObtained does not run for relics added at creation).
-				if (relic is OldCoin or GoldenPearl or SignetRing or CursedPearl)
-					gold += (int)relic.DynamicVars.Gold.BaseValue;
-				if (relic is CursedPearl)
-					player.Deck.AddInternal(runState.CreateCard<Greed>(player));
+				player.AddRelicInternal(canonical.ToMutable());
 			}
-			player.Gold += gold;
 		}
 		foreach (RelicModel canonical in MidasStart.Relics())
 			runState.SharedRelicGrabBag.Remove(canonical);

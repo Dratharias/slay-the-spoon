@@ -592,3 +592,11 @@ Read `README.md` for the player view and the spec for every decision.
   `Serialize`/`Deserialize` patch through Harmony's `PatchFunctions.UpdateWrapper`, then checks a test card every 5 s.
   Any other patch on a hot method can be lost the same way.
 - King Midas texts (Custom Run, Workshop) mention the melt and the merchant's rising prices. Ruined players are logged.
+
+## 1.8.7 — doubled start relic pickups (2026-11-20, `main`)
+
+- King Midas and Spoon applied their start relics' pickup effects by hand in `AfterRunCreated`, but every new-run path
+  (`NGame.StartRun`, character select, `NMultiplayerTest`) then runs `RunManager.FinalizeStartingRelics`, which calls
+  `AfterObtained` on every held relic: King Midas started with double gold (about 3 500 instead of about 1 770) and two
+  Greeds, Spoon with +103 max HP twice. Found by the bot tester. The hand-applied effects are removed; vanilla's run once.
+  The King Midas melt (1.8.4/1.8.5) was tuned on the doubled start. 897 xUnit + 110 pytest pass. Not tested in game.
