@@ -2,6 +2,12 @@ using System.Threading.Tasks;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.addons.mega_text;
@@ -20,6 +26,8 @@ namespace SlaySpoon.DevConsole;
 /// <c>Name+9</c> for a Forge level, <c>relic:Name</c> for a relic's icon and tooltip) to
 /// <c>&lt;dir&gt;/&lt;lang&gt;/&lt;Name&gt;.png</c> (<c>+</c> written <c>Plus</c>, <c>relic:</c> dropped) in English and
 /// French, then quits. <c>gif:Name</c> writes the frames of the card's Forge climb instead (<see cref="RenderClimb"/>).
+/// <c>elites</c> writes every elite monster in its bestiary pose to <c>&lt;dir&gt;/elites/&lt;ID&gt;.png</c> (once, not per
+/// language), for the Trophy portraits (<c>tools/trophy_art.py</c>).
 /// </summary>
 [HarmonyPatch(typeof(NMainMenu), nameof(NMainMenu._Ready))]
 public static class CardRenderer
@@ -97,6 +105,11 @@ public static class CardRenderer
 
 	private static async Task Render(Node host, string dir, string name)
 	{
+		if (name == "elites")
+		{
+			if (System.IO.Path.GetFileName(dir) == "eng") await RenderElites(host, System.IO.Path.Combine(dir, "..", "elites"));
+			return;
+		}
 		if (name.StartsWith("gif:"))
 		{
 			await RenderClimb(host, dir, name["gif:".Length..]);
@@ -132,6 +145,49 @@ public static class CardRenderer
 		var root = new Control();
 		root.AddChild(node);
 		await Snapshot(host, file, root, size, () => node.UpdateVisuals(PileType.None, CardPreviewMode.Normal));
+	}
+
+	private static IEnumerable<MonsterModel> EliteMonsters()
+	{
+		var modEncounters = typeof(CardRenderer).Assembly.GetTypes()
+			.Where(t => typeof(EncounterModel).IsAssignableFrom(t) && !t.IsAbstract)
+			.Select(t => { try { return ModelDb.GetById<EncounterModel>(ModelDb.GetId(t)); } catch { return null; } })
+			.OfType<EncounterModel>();
+		return ModelDb.AllEncounters.Concat(modEncounters)
+			.Where(e => e.RoomType == RoomType.Elite)
+			.SelectMany(e => e.AllPossibleMonsters)
+			.DistinctBy(m => m.Id.Entry);
+	}
+
+	private static async Task RenderElites(Node host, string dir)
+	{
+		System.IO.Directory.CreateDirectory(dir);
+		foreach (MonsterModel canonical in EliteMonsters())
+		{
+			try
+			{
+				// As the bestiary does: a mutable copy on chaotic RNG, set up for combat, in a null combat state.
+				MonsterModel monster = canonical.ToMutable();
+				monster.Rng = Rng.Chaotic;
+				monster.RunRng = new RunRngSet(Rng.Chaotic);
+				monster.SetUpForCombat();
+				var creature = new Creature(monster, CombatSide.Enemy, null) { CombatState = NullCombatState.Instance };
+				NCreature node = NCreature.Create(creature)!;
+				var size = new Vector2(900, 900);
+				var root = new Control();
+				root.AddChild(node);
+				await Snapshot(host, System.IO.Path.Combine(dir, canonical.Id.Entry + ".png"), root, size, () =>
+				{
+					node.SetupForBestiary();
+					node.Position = new Vector2(size.X / 2, size.Y - 60);
+				});
+				SpoonLog.Info($"render: elite {canonical.Id.Entry}");
+			}
+			catch (Exception e)
+			{
+				SpoonLog.Error($"render: elite {canonical.Id.Entry} failed: {e}");
+			}
+		}
 	}
 
 	private static CardModel AtLevel(Type type, int level)

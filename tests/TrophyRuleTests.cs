@@ -19,4 +19,17 @@ public class TrophyRuleTests
 	[InlineData(1, 1)]
 	[InlineData(0, 1)]
 	public void UpgradeAddsAQuarterRoundedUp(int damage, int bonus) => Assert.Equal(bonus, TrophyRule.UpgradeBonus(damage));
+
+	[Fact]
+	public void MoveSuffixIsDroppedFirst() => Assert.Equal(
+		new[] { "TERROR_EEL.moves.THRASH.title", "TERROR_EEL.moves.THRASH_MOVE.title" },
+		TrophyRule.MoveTitleKeys("TERROR_EEL", "THRASH_MOVE"));
+
+	[Fact]
+	public void PlainMoveIsUsedAsIs() =>
+		Assert.Equal(new[] { "TERROR_EEL.moves.CRASH.title" }, TrophyRule.MoveTitleKeys("TERROR_EEL", "CRASH"));
+
+	[Fact]
+	public void PortraitIsLowerCase() =>
+		Assert.Equal("res://SlaySpoon/images/cards/trophies/terror_eel.png", TrophyRule.PortraitPath("TERROR_EEL"));
 }

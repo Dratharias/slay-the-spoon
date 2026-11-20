@@ -1,3 +1,4 @@
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -34,7 +35,11 @@ public sealed class SpoonTrophyCard : SpoonCard
 	{
 	}
 
-	public override string PortraitPath => ModelDb.Card<StrikeIronclad>().PortraitPath;
+	/// <summary>The elite's rendered portrait (<c>tools/trophy_art.py</c>), else the Strike's.</summary>
+	public override string PortraitPath =>
+		_monster.Length > 0 && ResourceLoader.Exists(TrophyRule.PortraitPath(_monster))
+			? TrophyRule.PortraitPath(_monster)
+			: ModelDb.Card<StrikeIronclad>().PortraitPath;
 
 	[SavedProperty]
 	public string TrophyMonster
@@ -89,8 +94,9 @@ public sealed class SpoonTrophyCard : SpoonCard
 			try
 			{
 				string monster = new LocString("monsters", _monster + ".name").GetFormattedText();
-				string move = _move.Length > 0
-					? new LocString("monsters", $"{_monster}.moves.{_move}.title").GetFormattedText()
+				LocString? title = TrophyRule.MoveTitleKeys(_monster, _move).Select(k => new LocString("monsters", k)).FirstOrDefault(l => l.Exists());
+				string move = _move.Length > 0 && title != null
+					? title.GetFormattedText()
 					: new LocString("cards", "SPOON_TROPHY_CARD.fallback").GetFormattedText();
 				name = _monster.Length > 0 ? $"{monster}: {move}" : base.Title;
 			}
