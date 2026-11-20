@@ -666,3 +666,9 @@ Read `README.md` for the player view and the spec for every decision.
 - Forge's Duplicate button checked only the card price against gold. In a King Midas run it could spend past the
   survival threshold enforced at merchants and rest sites. The button, selection filter, and final payment now use
   `MidasMelt.CanSpend` when Midas is active (including Blood's whole-HP payment rule).
+
+## 1.8.16 — Watcher rest site animation follow-up (2026-11-20, `main`)
+
+- The 1.8.12 postfix filtering `GetChildSpineNodes` was bypassed in a co-op bot run: the Watcher's skeleton still
+  received the donor's missing `overgrowth_loop`. The `_Ready` call site now routes the Watcher to no donor Spine
+  animations, leaving her separate `idle_loop` running. The patch logs if the expected call was not rewritten.

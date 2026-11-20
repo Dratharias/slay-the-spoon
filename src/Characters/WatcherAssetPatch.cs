@@ -270,6 +270,35 @@ public static class WatcherAssetPatch
 		}
 	}
 
+	/// <summary>Keep the Watcher's own idle loop when the donor rest site initializes its Spine children.</summary>
+	[HarmonyPatch(typeof(NRestSiteCharacter), nameof(NRestSiteCharacter._Ready))]
+	public static class RestSiteReadySpinePatch
+	{
+		private static readonly MethodInfo GetSpines = AccessTools.Method(typeof(NRestSiteCharacter), "GetChildSpineNodes");
+		private static readonly MethodInfo StableSpines = AccessTools.Method(typeof(RestSiteReadySpinePatch), nameof(SpinesForReady));
+
+		private static IEnumerable<Node2D> SpinesForReady(NRestSiteCharacter site) =>
+			site.Player?.Character is Sts1Watcher
+				? []
+				: (IEnumerable<Node2D>)GetSpines.Invoke(site, null)!;
+
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		{
+			int rewritten = 0;
+			foreach (CodeInstruction instruction in instructions)
+			{
+				if (instruction.operand is MethodInfo method && method.Equals(GetSpines))
+				{
+					rewritten++;
+					instruction.opcode = OpCodes.Call;
+					instruction.operand = StableSpines;
+				}
+				yield return instruction;
+			}
+			if (rewritten != 1) SpoonLog.Error($"Watcher rest site animation patch replaced {rewritten} Spine reads (expected 1)");
+		}
+	}
+
 	/// <summary>Rest site characters on the right half face left: mirror our sprite the way FlipX mirrors Spine bodies.</summary>
 	[HarmonyPatch(typeof(NRestSiteCharacter), nameof(NRestSiteCharacter.FlipX))]
 	public static class RestSiteFlipPatch

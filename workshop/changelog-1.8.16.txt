@@ -1,0 +1,7 @@
+1.8.16 — Watcher, Spoon and Forge fixes
+
+- Fixed a Watcher rest site animation error that persisted after the earlier fix. Her own idle animation remains active without the donor character's missing act animations.
+- Fixed a crash when the Watcher enters a rest site during a long co-op run.
+- King Midas now prevents Forge's Duplicate service from spending enough gold to ruin the buyer.
+- Fixed Brilliance trying to load a missing attack effect and Spoon Digest's missing icon.
+- These fixes came from co-op run logs and backlog review. The bot code is not included in the Workshop build.
