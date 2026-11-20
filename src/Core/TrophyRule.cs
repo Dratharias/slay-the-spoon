@@ -17,13 +17,14 @@ public static class TrophyRule
 	public static int UpgradeBonus(int damage) => Math.Max((Math.Max(damage, 0) + 3) / 4, 1);
 
 	/// <summary>
-	/// Text keys to try for a move's title, in order: the game drops a "_MOVE" suffix from move state ids in its
-	/// monster text (TERROR_EEL's THRASH_MOVE is titled by TERROR_EEL.moves.THRASH.title), then the raw id.
+	/// Text keys to try for a move's title, most trimmed first: the game's monster text drops a "_MOVE" suffix and a
+	/// variant number from move state ids (TERROR_EEL's THRASH_MOVE is THRASH, SKULKING_COLONY's ZOOM_MOVE_2 is ZOOM).
 	/// </summary>
 	public static IEnumerable<string> MoveTitleKeys(string monster, string move)
 	{
-		if (move.EndsWith("_MOVE", StringComparison.Ordinal)) yield return $"{monster}.moves.{move[..^5]}.title";
-		yield return $"{monster}.moves.{move}.title";
+		string numberless = System.Text.RegularExpressions.Regex.Replace(move, "_?[0-9]+$", "");
+		string bare = numberless.EndsWith("_MOVE", StringComparison.Ordinal) ? numberless[..^5] : numberless;
+		return new[] { bare, numberless, move }.Where(m => m.Length > 0).Distinct().Select(m => $"{monster}.moves.{m}.title");
 	}
 
 	/// <summary>The portrait the art tool renders for an elite (its bestiary pose).</summary>

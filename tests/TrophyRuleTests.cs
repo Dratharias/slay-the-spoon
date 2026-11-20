@@ -26,6 +26,11 @@ public class TrophyRuleTests
 		TrophyRule.MoveTitleKeys("TERROR_EEL", "THRASH_MOVE"));
 
 	[Fact]
+	public void VariantNumberIsDroppedToo() => Assert.Equal(
+		new[] { "SKULKING_COLONY.moves.ZOOM.title", "SKULKING_COLONY.moves.ZOOM_MOVE.title", "SKULKING_COLONY.moves.ZOOM_MOVE_2.title" },
+		TrophyRule.MoveTitleKeys("SKULKING_COLONY", "ZOOM_MOVE_2"));
+
+	[Fact]
 	public void PlainMoveIsUsedAsIs() =>
 		Assert.Equal(new[] { "TERROR_EEL.moves.CRASH.title" }, TrophyRule.MoveTitleKeys("TERROR_EEL", "CRASH"));
 
