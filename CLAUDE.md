@@ -644,3 +644,8 @@ Read `README.md` for the player view and the spec for every decision.
 
 - Brilliance referenced `vfx_attack_burn`, a scene absent from StS2; the bot run logged a failed resource load.
   It now uses the existing `vfx_attack_lightning` effect. In-game validation pending.
+
+## 1.8.12 — Watcher rest site animation (2026-11-20, `main`)
+
+- The Watcher's Spine body already plays `idle_loop`, but the vanilla rest site also tried its act-specific loops,
+  absent from her skeleton. Exclude only her body from that vanilla animation pass; keep the rest site scene and UI.

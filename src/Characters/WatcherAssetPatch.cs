@@ -233,6 +233,19 @@ public static class WatcherAssetPatch
 		}
 	}
 
+	/// <summary>The Watcher's Spine body has its own idle loop, not the donor's act-specific loops.</summary>
+	[HarmonyPatch(typeof(NRestSiteCharacter), "GetChildSpineNodes")]
+	public static class RestSiteSpinePatch
+	{
+		public static void Postfix(NRestSiteCharacter __instance, ref IEnumerable<Node2D> __result)
+		{
+			if (__instance.Player?.Character is Sts1Watcher)
+			{
+				__result = __result.Where(node => node.Name != RestSitePatch.BodyName);
+			}
+		}
+	}
+
 	/// <summary>Rest site characters on the right half face left: mirror our sprite the way FlipX mirrors Spine bodies.</summary>
 	[HarmonyPatch(typeof(NRestSiteCharacter), nameof(NRestSiteCharacter.FlipX))]
 	public static class RestSiteFlipPatch

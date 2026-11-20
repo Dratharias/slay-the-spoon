@@ -1,0 +1,5 @@
+1.8.12 — Watcher fixes
+
+- Fixed Brilliance trying to load an attack effect that does not exist in Slay the Spire 2.
+- Fixed repeated missing-animation errors when the Watcher appears at a rest site; her own idle animation now plays without the game's act-specific animations being applied to it.
+- Both fixes came from co-op bot run logs. The bot code is not included in the Workshop build.
