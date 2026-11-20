@@ -26,6 +26,7 @@ public static class ModEntry
 		Act4.Act4Routing.Register();
 		LinuxHarmonyFix.Apply();
 		PatchEach(new Harmony("slayspoon"));
+		Saves.SerializationPatchGuard.Start();
 		SpoonLog.Info($"Slay the Spoon {Version} loaded");
 	}
 

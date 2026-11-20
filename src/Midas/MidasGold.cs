@@ -33,7 +33,11 @@ public static class MidasMelt
 			int floor = FloorFor(player);
 			int melt = MidasRule.Melt(gold, floor);
 			if (melt > 0) await PlayerCmd.LoseGold(melt, player, GoldLossType.Lost);
-			if (MidasRule.Ruined(gold, floor)) ruined.Add(player.Creature);
+			if (MidasRule.Ruined(gold, floor))
+			{
+				SpoonLog.Info($"King Midas: player {player.NetId} ruined: {gold} gold, melt floor {floor}");
+				ruined.Add(player.Creature);
+			}
 		}
 		if (ruined.Count == 0) return;
 		SpoonLog.Info($"King Midas: {ruined.Count} player(s) ruined by the melt");
