@@ -24,4 +24,19 @@ public class BloodRuleTests
 	[InlineData(4, 0)]
 	[InlineData(-3, 0)]
 	public void FangHealsAFifth(int damage, int heal) => Assert.Equal(heal, BloodRule.Leech(damage));
+
+	[Theory]
+	[InlineData(33, 35)]
+	[InlineData(35, 35)]
+	[InlineData(1, 5)]
+	[InlineData(0, 0)]
+	public void PaidGoldIsWholeHp(int price, int paid) => Assert.Equal(paid, BloodRule.PaidGold(price));
+
+	/// <summary>Bot run 2026-11-20 (King Midas + Blood): 60 gold, a 33 gold card passed the check but cost 35, leaving 25: both players ruined.</summary>
+	[Fact]
+	public void MidasCheckUsesTheRealBloodCost()
+	{
+		Assert.True(MidasRule.CanSpend(60, 33, 25));
+		Assert.False(MidasRule.CanSpend(60, BloodRule.PaidGold(33), 25));
+	}
 }

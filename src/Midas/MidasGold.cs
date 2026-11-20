@@ -63,7 +63,9 @@ public static class MidasMelt
 		return MidasRule.MeltFloor(gained, floors);
 	}
 
-	public static bool CanSpend(Player player, int price) => MidasRule.CanSpend(player.Gold, price, FloorFor(player));
+	/// <summary>With Blood, a payment removes whole HP, so the check uses the rounded-up amount (<see cref="BloodRule.PaidGold"/>).</summary>
+	public static bool CanSpend(Player player, int price) => MidasRule.CanSpend(player.Gold,
+		SpoonBlood.IsActive(player.RunState) ? BloodRule.PaidGold(price) : price, FloorFor(player));
 
 	/// <summary>True when the run continues (someone is still alive).</summary>
 	public static bool AnyoneAlive(IRunState run) => run.Players.Any(p => !p.Creature.IsDead);

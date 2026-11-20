@@ -621,3 +621,11 @@ Read `README.md` for the player view and the spec for every decision.
   re-applies them when the Forge cap stops answering +9.
 - `src/Saves/ExtendedSaveNormalizer.cs`: makes a lost BaseLib `ToSerializable` postfix harmless.
 - 897 xUnit + 110 pytest pass. Validated by co-op bot runs on `bot-tester` (see its `docs/testing/bot-backlog.md`).
+
+## 1.8.9 — King Midas + Blood ruin (2026-11-20, `main`)
+
+- King Midas with Blood killed both players on the map after a shop: Blood pays in whole HP (a 33 gold card costs 7 HP,
+  35 gold), but the King Midas spend check (`MidasMelt.CanSpend`, merchant and rest site) used the listed price, so a
+  purchase it allowed left exactly the melt floor and the next travel ruined the buyer. The check now uses
+  `BloodRule.PaidGold` (price rounded up to the 5 gold rate) when Blood is active. Found by the co-op bot tester.
+- 902 xUnit + 110 pytest pass. Not tested in game.
