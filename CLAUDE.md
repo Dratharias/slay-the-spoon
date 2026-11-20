@@ -581,3 +581,14 @@ Read `README.md` for the player view and the spec for every decision.
 - Trophies: move titles drop the game's "_MOVE" suffix (`TrophyRule.MoveTitleKeys`); the card portrait is the elite's
   bestiary pose (`images/cards/trophies/`), rendered by `CardRenderer`'s `elites` mode and framed by `tools/trophy_art.py`.
 - 896 xUnit + 110 pytest pass. Not tested in game: "Balance and rest site fix (1.8.5)" in `docs/testing/roi-midas-checklist.md`.
+
+## 1.8.6 — co-op serializer fix (2026-11-20, `main`)
+
+- Co-op desync found by the bot tester (`bot-tester` branch): the .NET runtime recompiles hot methods (tiered
+  compilation) and the game's MonoMod does not carry Harmony detours over, so BaseLib's extended-data postfix on
+  `SerializableCard.Serialize` stopped running on one peer while the other still read it: every synced message after the
+  first card was shifted (state divergence, "ModelId entry ID ... is out of range"). `src/Saves/SerializationPatchGuard.cs`
+  warms the card/relic/potion serializers 2 s after load (valid samples only: a blank card froze the game), re-applies every
+  `Serialize`/`Deserialize` patch through Harmony's `PatchFunctions.UpdateWrapper`, then checks a test card every 5 s.
+  Any other patch on a hot method can be lost the same way.
+- King Midas texts (Custom Run, Workshop) mention the melt and the merchant's rising prices. Ruined players are logged.

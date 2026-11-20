@@ -33,7 +33,7 @@ Hoard everything. Every floor brings cards.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-deck.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-en.png[/img]
-Start rich. No free cards; every fire costs gold.
+Start rich, but gold melts on every floor: run dry and you die. No free cards; every fire costs gold, every purchase raises the merchant's prices.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-relic-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-en.png[/img]
