@@ -660,3 +660,9 @@ Read `README.md` for the player view and the spec for every decision.
 - A long co-op Watcher run crashed on both peers at an act 3 rest site: the hot `RestSiteAnimPath` getter reverted to
   the nonexistent Watcher scene after runtime recompilation. The `NRestSiteCharacter.Create` call now routes the
   Watcher's scene lookup directly to the Silent donor, preserving the Watcher body swap and rest site controls.
+
+## 1.8.15 — Forge Duplicate and King Midas (2026-11-20, `main`)
+
+- Forge's Duplicate button checked only the card price against gold. In a King Midas run it could spend past the
+  survival threshold enforced at merchants and rest sites. The button, selection filter, and final payment now use
+  `MidasMelt.CanSpend` when Midas is active (including Blood's whole-HP payment rule).

@@ -1,0 +1,6 @@
+1.8.15 — Forge, Watcher and Spoon fixes
+
+- King Midas now prevents Forge's Duplicate service from spending enough gold to ruin the buyer. The button, card choices and final payment follow the same survival check as merchant and rest site purchases.
+- Fixed a crash when the Watcher enters a rest site during a long co-op run.
+- Fixed Brilliance trying to load a missing attack effect, missing Watcher rest site animations, and Spoon Digest's missing icon.
+- These fixes came from co-op run logs and backlog review. The bot code is not included in the Workshop build.

@@ -44,6 +44,9 @@ Spec: `docs/superpowers/specs/2026-11-18-forge-design.md`. Tick only what was se
 - [ ] The copy is +0 and joins the deck; gold drops by the price; the button turns to "Duplicated" until the next merchant.
 - [ ] Curses and Statuses are not offered. Cancel spends nothing.
 - [ ] Co-op: the purchase and the new card show on both clients; the purchase count survives save/reload.
+- [ ] With King Midas: a Duplicate that would leave too little gold is disabled, excluded from the card picker and
+      refused if the balance changes before payment. A cheaper safe copy remains available. Repeat with Blood active
+      so the survival check uses the whole-HP payment; both clients agree on gold, HP and the deck.
 
 ## Other modes
 - [ ] With Spire Souvenir (Hybrid): the swap button does not appear on the fusion preview.

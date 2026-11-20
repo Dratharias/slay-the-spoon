@@ -610,7 +610,8 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   purchase and reset at the next merchant (a reload also resets the rise, like the rest site price).
 - Open call: a co-op player revived with 0 gold dies again at the next travel unless the fight's gold reward lifts them
   above 25. Kept as is (the owner calls the mode very hard on purpose).
-- Not guarded: the Forge Duplicate button and Merchant Loans repayments can still take a Midas player to 25 gold or less.
+- Forge Duplicate is guarded since 1.8.15; Merchant Loans repayments can still leave a Midas player below the
+  survival threshold and need an owner decision on whether debt repayment may be deferred.
 
 ## Power icons shown as "NOPE" (2026-11-20, bot tester)
 

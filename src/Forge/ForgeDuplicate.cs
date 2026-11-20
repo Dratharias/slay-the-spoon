@@ -18,6 +18,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 using SlaySpoon.Config;
 using SlaySpoon.Core;
+using SlaySpoon.Midas;
 using SlaySpoon.Ui;
 
 namespace SlaySpoon.Forge;
@@ -45,8 +46,11 @@ public static class ForgeDuplicate
 
 	public static bool Eligible(CardModel card) => card.Type is not (CardType.Curse or CardType.Status);
 
+	private static bool Affordable(Player player, int price) => price <= player.Gold
+		&& (!SpoonRoiMidas.IsActive(player.RunState) || MidasMelt.CanSpend(player, price));
+
 	public static bool CanBuy(SpoonForge forge, Player player) => !forge.UsedHere(player)
-		&& PileType.Deck.GetPile(player).Cards.Any(c => Eligible(c) && PriceOf(forge, player, c) <= player.Gold);
+		&& PileType.Deck.GetPile(player).Cards.Any(c => Eligible(c) && Affordable(player, PriceOf(forge, player, c)));
 
 	internal static async Task Run(Player player)
 	{
@@ -57,10 +61,10 @@ public static class ForgeDuplicate
 		prompt.Add("Rare", PriceOf(forge, player, ForgeRarity.Rare));
 		var prefs = new CardSelectorPrefs(prompt, 1) { Cancelable = true, RequireManualConfirmation = true };
 		var card = (await CardSelectCmd.FromDeckGeneric(player, prefs,
-			c => Eligible(c) && PriceOf(forge, player, c) <= player.Gold)).FirstOrDefault();
+			c => Eligible(c) && Affordable(player, PriceOf(forge, player, c)))).FirstOrDefault();
 		if (card == null) return;
 		int price = PriceOf(forge, player, card);
-		if (price > player.Gold) return;
+		if (!Affordable(player, price)) return;
 		await PlayerCmd.LoseGold(price, player, GoldLossType.Spent);
 		var copy = card.CardScope!.CreateCard(ModelDb.GetById<CardModel>(card.Id), player);
 		await CardPileCmd.Add(copy, PileType.Deck);
