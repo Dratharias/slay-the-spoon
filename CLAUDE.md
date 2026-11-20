@@ -639,3 +639,8 @@ Read `README.md` for the player view and the spec for every decision.
 - Serialization guard: a patch Harmony cannot rebuild (BaseLib's `NRewardButton._Ready`, "invalid program") is tried
   once instead of logging an error on every sweep.
 - Found by the co-op bot tester. Not tested in game.
+
+## 1.8.11 — Brilliance hit effect (2026-11-20, `main`)
+
+- Brilliance referenced `vfx_attack_burn`, a scene absent from StS2; the bot run logged a failed resource load.
+  It now uses the existing `vfx_attack_lightning` effect. In-game validation pending.

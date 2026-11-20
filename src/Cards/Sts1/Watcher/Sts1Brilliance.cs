@@ -34,7 +34,7 @@ public sealed class Sts1Brilliance : Sts1WatcherCard
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this, cardPlay).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_burn").Execute(choiceContext);
+			.WithHitFx("vfx/vfx_attack_lightning").Execute(choiceContext);
 	}
 
 	protected override void OnUpgrade()
