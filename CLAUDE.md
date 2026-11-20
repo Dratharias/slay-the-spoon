@@ -649,3 +649,8 @@ Read `README.md` for the player view and the spec for every decision.
 
 - The Watcher's Spine body already plays `idle_loop`, but the vanilla rest site also tried its act-specific loops,
   absent from her skeleton. Exclude only her body from that vanilla animation pass; keep the rest site scene and UI.
+
+## 1.8.13 — Spoon Digest rest site icon (2026-11-20, `main`)
+
+- Digest reused Feast's preloaded heal icon, but the icon getter patch only handled Feast. The rest site repeatedly
+  tried to load the missing `option_spoon_digest.png`. Both icon path and texture patches now cover Digest too.
