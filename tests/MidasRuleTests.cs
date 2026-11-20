@@ -63,4 +63,35 @@ public class MidasRuleTests
 		Assert.Equal(100, MidasRule.RestPrice(1));
 		Assert.Equal(150, MidasRule.RestPrice(2));
 	}
+
+	[Theory]
+	[InlineData(3900, 390)]
+	[InlineData(300, 30)]
+	[InlineData(250, 25)]
+	[InlineData(100, 25)]
+	[InlineData(20, 20)]
+	[InlineData(0, 0)]
+	public void MeltIsTenPercentAtLeastTwentyFive(int gold, int melt) => Assert.Equal(melt, MidasRule.Melt(gold));
+
+	[Theory]
+	[InlineData(0, true)]
+	[InlineData(25, true)]
+	[InlineData(26, false)]
+	[InlineData(3900, false)]
+	public void RuinedWhenTheMeltEmptiesThePurse(int gold, bool ruined) => Assert.Equal(ruined, MidasRule.Ruined(gold));
+
+	[Theory]
+	[InlineData(100, 74, true)]
+	[InlineData(100, 75, false)]
+	[InlineData(100, 101, false)]
+	[InlineData(3900, 3000, true)]
+	public void SpendingMustLeaveEnoughToSurvive(int gold, int price, bool ok) => Assert.Equal(ok, MidasRule.CanSpend(gold, price));
+
+	[Fact]
+	public void PricesRiseTenPercentPerPurchase()
+	{
+		Assert.Equal(1m, MidasRule.PriceFactor(0));
+		Assert.Equal(1.1m, MidasRule.PriceFactor(1));
+		Assert.Equal(1.5m, MidasRule.PriceFactor(5));
+	}
 }

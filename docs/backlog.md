@@ -602,3 +602,12 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   the game clock, so a paused screen keeps sweeping; the Ancient banner's small flame shows from about +3.
 - Check in game: `powerBonus` with a negative amount (Malaise's Strength loss), Wish's option cards counting as the
   card source, Time's Up's fractional `ExtraDamage` step (0.25) and Friendship's Strength loss crossing 0 at +2.
+
+## King Midas balance (1.8.4, 2026-11-20)
+
+- Check in game: the melt runs on every map travel (gold drops on the map before the fade); 25 gold or less at travel
+  kills; the merchant refuses (red price, "not enough gold" line) a purchase that leaves 25 or less; prices rise 10 % per
+  purchase and reset at the next merchant (a reload also resets the rise, like the rest site price).
+- Open call: a co-op player revived with 0 gold dies again at the next travel unless the fight's gold reward lifts them
+  above 25. Kept as is (the owner calls the mode very hard on purpose).
+- Not guarded: the Forge Duplicate button and Merchant Loans repayments can still take a Midas player to 25 gold or less.

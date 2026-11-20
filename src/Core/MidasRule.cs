@@ -55,4 +55,28 @@ public static class MidasRule
 	public const int RestPriceStep = 50;
 
 	public static int RestPrice(int paidHere) => RestPriceStep * (Math.Max(0, paidHere) + 1);
+
+	/// <summary>Share of a player's gold that melts each time the team travels to a map room, in percent.</summary>
+	public const int MeltPercent = 10;
+
+	/// <summary>The least gold that melts per floor, so a small purse still runs dry.</summary>
+	public const int MeltMinimum = 25;
+
+	/// <summary>Gold lost on traveling to the next floor: 10 % of the purse, at least 25, never more than the purse.</summary>
+	public static int Melt(int gold) => Math.Min(Math.Max(gold, 0), Math.Max(gold * MeltPercent / 100, MeltMinimum));
+
+	/// <summary>True when the next melt leaves no gold: the player dies on traveling.</summary>
+	public static bool Ruined(int gold) => gold - Melt(gold) <= 0;
+
+	/// <summary>
+	/// True when the player may pay <paramref name="price"/>: they hold it and keep enough to survive the next melt.
+	/// The merchant and the rest site refuse what would kill.
+	/// </summary>
+	public static bool CanSpend(int gold, int price) => gold >= price && !Ruined(gold - price);
+
+	/// <summary>Merchant price rise per item already bought at this merchant, in percent of the price.</summary>
+	public const int PriceRisePercent = 10;
+
+	/// <summary>Price multiplier after <paramref name="boughtHere"/> purchases at the current merchant.</summary>
+	public static decimal PriceFactor(int boughtHere) => 1m + PriceRisePercent * Math.Max(0, boughtHere) / 100m;
 }

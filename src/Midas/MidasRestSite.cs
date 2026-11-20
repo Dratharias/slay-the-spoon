@@ -21,7 +21,8 @@ namespace SlaySpoon.Midas;
 
 /// <summary>
 /// King Midas rest sites: every option costs gold (<see cref="MidasRule.RestPrice"/>, rising with each action this
-/// player paid for at this fire) and the options come back after each one, so a player may act again while they can pay.
+/// player paid for at this fire) and the options come back after each one, so a player may act again while they can pay
+/// and keep enough gold to survive the next melt (<see cref="MidasRule.CanSpend"/>).
 /// </summary>
 public static class MidasRestSite
 {
@@ -29,7 +30,7 @@ public static class MidasRestSite
 		SpoonRoiMidas.Of(player.RunState) is { } midas ? MidasRule.RestPrice(midas.PaidHere(player)) : null;
 
 	public static bool CannotAfford(RestSiteOption option) =>
-		OwnerOf(option) is { } owner && PriceFor(owner) is { } price && owner.Gold < price;
+		OwnerOf(option) is { } owner && PriceFor(owner) is { } price && !MidasRule.CanSpend(owner.Gold, price);
 
 	public static Player? OwnerOf(RestSiteOption option) => OptionOwner(option);
 
@@ -78,7 +79,7 @@ public static class MidasRestChoosePatch
 	public static bool Prefix(Player player, ref Task<bool> __result, out int __state)
 	{
 		__state = MidasRestSite.PriceFor(player) ?? -1;
-		if (__state < 0 || player.Gold >= __state) return true;
+		if (__state < 0 || MidasRule.CanSpend(player.Gold, __state)) return true;
 		__result = Task.FromResult(false);
 		__state = -1;
 		return false;

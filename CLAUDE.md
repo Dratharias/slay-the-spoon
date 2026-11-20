@@ -562,3 +562,11 @@ Read `README.md` for the player view and the spec for every decision.
   trim runs before `RunManager.Launch` sets `LocalContext.NetId` (`FinalizeStartingRelics`). Rule for every mod hook:
   never open a player choice from `AfterRoomEntered`.
 - 870 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.4 — King Midas balance (2026-11-20, `main`)
+
+- Owner: the ~4 000 gold start was too much. Gold melts on every map travel (10 %, at least 25; `MidasRule.Melt`), run in a
+  prefix on the synced `MoveToMapCoordAction.ExecuteAction` before the fade (`src/Midas/MidasGold.cs`); a player the melt
+  empties dies (forced kill). Merchant prices rise 10 % per purchase at that merchant (`ModifyMerchantPrice` on
+  `SpoonRoiMidas`); the merchant and the rest site refuse what would leave 25 or less (`MidasRule.CanSpend`).
+- 885 xUnit + 110 pytest pass. Not tested in game: "Balance (1.8.4)" in `docs/testing/roi-midas-checklist.md`.

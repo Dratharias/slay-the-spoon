@@ -40,3 +40,11 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] King Midas: <event
 - [ ] Maw Bank: after buying something (bank broken), "Reopen" appears with the Maw Bank icon; it costs the same price,
       the bank works again (gold on room entry), and Reopen disappears.
 - [ ] Co-op: each player's price and options are their own; the other player's choices show on their character.
+
+## Balance (1.8.4)
+
+- [ ] Each map travel costs 10 % of the gold, at least 25 (3 900 → 3 510; 100 → 75). No loss at the start of an act.
+- [ ] Traveling with 25 gold or less kills the player (solo: game over screen over the map).
+- [ ] At the merchant, each purchase raises the remaining prices by 10 %; the next merchant starts at normal prices.
+- [ ] A purchase that would leave 25 gold or less shows a red price and is refused; same for rest site actions.
+- [ ] Co-op (`make mp`): both clients show the same gold after travel; a ruined player dies on both.

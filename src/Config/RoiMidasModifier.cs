@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.Map;
@@ -7,6 +8,7 @@ using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
+using SlaySpoon.Core;
 using SlaySpoon.Midas;
 using SlaySpoon.Relics.Events;
 
@@ -15,6 +17,8 @@ namespace SlaySpoon.Config;
 /// <summary>
 /// King Midas (Custom Run, docs/superpowers/specs/2026-11-14-roi-midas-design.md): every gold relic from the start,
 /// no card rewards, gold events only, and rest site actions bought with gold (repeatable, the price rising at each fire).
+/// Balance (1.8.4): gold melts on every floor and a player left with none dies (<see cref="MidasMelt"/>); merchant
+/// prices rise with each purchase; the merchant and the rest site refuse what would ruin the buyer.
 /// </summary>
 public sealed class SpoonRoiMidas : ModifierModel
 {
@@ -29,11 +33,15 @@ public sealed class SpoonRoiMidas : ModifierModel
 	{
 		base.DeepCloneFields();
 		_paidHere = new Dictionary<ulong, int>();
+		_boughtHere = new Dictionary<ulong, int>();
 	}
 
 	public int PaidHere(Player player) => _paidHere.GetValueOrDefault(player.NetId);
 
 	public void Paid(Player player) => _paidHere[player.NetId] = PaidHere(player) + 1;
+
+	/// <summary>Items each player bought at the current merchant, by net id. Not saved: a reload resets the rise.</summary>
+	private Dictionary<ulong, int> _boughtHere = new();
 
 	// Rule 1.
 	protected override void AfterRunCreated(RunState runState)
@@ -75,6 +83,17 @@ public sealed class SpoonRoiMidas : ModifierModel
 	public override Task AfterRoomEntered(AbstractRoom room)
 	{
 		if (room is RestSiteRoom) _paidHere.Clear();
+		if (room is MerchantRoom) _boughtHere.Clear();
+		return Task.CompletedTask;
+	}
+
+	// Each purchase at this merchant raises the price of what is left.
+	public override decimal ModifyMerchantPrice(Player player, MerchantEntry entry, decimal cost) =>
+		cost * MidasRule.PriceFactor(_boughtHere.GetValueOrDefault(player.NetId));
+
+	public override Task AfterItemPurchased(Player player, MerchantEntry itemPurchased, int goldSpent)
+	{
+		if (goldSpent > 0) _boughtHere[player.NetId] = _boughtHere.GetValueOrDefault(player.NetId) + 1;
 		return Task.CompletedTask;
 	}
 

@@ -35,6 +35,16 @@ Alternatives dropped: a host card like Folie à deux (the owner wants it in Cust
    50 more for each further one at the same fire (50, 100, 150…), back to 50 at the next fire, counted per player.
    After each paid action the options come back, so a player acts again while they can pay. An option the player
    cannot afford is greyed out; the focused option shows its price.
+6. **Balance patch** (owner, 2026-11-20: "il faut forcer le joueur à flamber son argent"; the start is close to 4 000
+   gold with discounted prices):
+   - **Melt.** Each travel to a map room costs every living player 10 % of their gold, at least 25
+     (`MidasRule.Melt`). A player the melt leaves with no gold dies (a forced kill: Lizard Tail does not save them).
+     It runs in the synced travel action, on the map before the fade. Act starts are not travels: no melt at the act's
+     Ancient.
+   - **Rising prices.** Each purchase at a merchant raises the price of everything left there by 10 % of its price
+     (cards, relics, potions, removal), per player, back to normal at the next merchant.
+   - **No fatal spending.** The merchant refuses a purchase that would leave the buyer ruined by the next melt (25 gold
+     or less); the price shows red. Builder call: rest site actions follow the same rule.
 
 The map, the "?" room odds and merchants stay vanilla (The Courier refills the shop anyway).
 
