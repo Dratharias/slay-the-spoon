@@ -2,6 +2,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -59,11 +60,19 @@ public sealed class SpoonDeckOfTenRelic : RelicModel
 
 	public override Task AfterCombatEnd(CombatRoom room) => Trim();
 
-	public override Task AfterRoomEntered(AbstractRoom room) => room is CombatRoom ? Task.CompletedTask : Trim();
+	/// <summary>
+	/// The start-of-run trim (a starter deck over 10, or a curse from a starting relic). Not AfterRoomEntered: rooms
+	/// are entered while the screen is faded to black, so a selection screen opened there stays hidden and the fade
+	/// never lifts (black screen). AfterActEntered runs after the fade-in.
+	/// </summary>
+	public override Task AfterActEntered() => Trim();
 
 	private async Task Trim()
 	{
 		if (Owner == null || Owner.Creature.IsDead || _trimming) return;
+		// FinalizeStartingRelics runs before RunManager.Launch sets the local player: a selection then waits for a
+		// "remote" choice and throws. AfterActEntered trims once the run is on screen.
+		if (LocalContext.NetId == null) return;
 		_trimming = true;
 		try
 		{

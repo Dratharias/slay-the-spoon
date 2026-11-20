@@ -553,3 +553,12 @@ Read `README.md` for the player view and the spec for every decision.
   `WatcherRunRule.OfferedInLobby` (every lobby but Daily, solo or co-op). Her pool has no StS2 pair, so she keeps
   her StS1 cards whatever the shared card set; co-op ascension is the shared multiplayer one.
 - 868 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.3 — Deck of 10 black screen (2026-11-20, `main`)
+
+- Deck of 10 with a starting deck over 10 (Silent, or a King Midas curse) froze on a black screen at Neow: its trim
+  opened the selection inside `AfterRoomEntered`, which runs while the screen is faded out, so the fade never lifted.
+  The relic no longer trims on room entry; the start-of-run trim runs in `AfterActEntered` (after the fade-in), and no
+  trim runs before `RunManager.Launch` sets `LocalContext.NetId` (`FinalizeStartingRelics`). Rule for every mod hook:
+  never open a player choice from `AfterRoomEntered`.
+- 870 xUnit + 110 pytest pass. Not tested in game.
