@@ -56,3 +56,8 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] King Midas: <event
 - [ ] Merchant and rest site refuse what would leave gold at or under that amount.
 - [ ] Rest site: after a paid action (Reopen included), the options come back and every one of them works; proceeding
       and traveling does not crash.
+
+## Rest site with no affordable option (1.8.19)
+
+- [ ] Reach a rest site with too little gold for any option (every option greyed): Proceed is enabled at once and the map opens.
+- [ ] With enough gold for one option, Proceed stays disabled until an option is chosen (vanilla).

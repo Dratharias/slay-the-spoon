@@ -154,3 +154,29 @@ public static class MidasRestButtonTextPatch
 		room.SetText(option.Description.GetFormattedText() + "\n" + MidasRestSite.PriceLine(price));
 	}
 }
+
+/// <summary>
+/// Vanilla enables the rest site's Proceed button only after an option was chosen. With every option greyed out (the
+/// player cannot pay for any), nothing could be chosen and the room could not be left: Proceed opens at once then.
+/// </summary>
+[HarmonyPatch(typeof(NRestSiteRoom), "UpdateRestSiteOptions")]
+public static class MidasRestLeavePatch
+{
+	private static readonly Action<NRestSiteRoom> ShowProceed =
+		AccessTools.MethodDelegate<Action<NRestSiteRoom>>(AccessTools.Method(typeof(NRestSiteRoom), "ShowProceedButton"));
+
+	public static void Postfix(NRestSiteRoom __instance)
+	{
+		try
+		{
+			if (__instance.Options.Count == 0 || SpoonRoiMidas.Of(MidasRestSite.OwnerOf(__instance.Options[0])?.RunState) is null) return;
+			if (!MidasRule.LeaveOnly(__instance.Options.Select(o => !MidasRestSite.CannotAfford(o)))) return;
+			SpoonLog.Info("King Midas: no rest site option affordable, Proceed enabled");
+			ShowProceed(__instance);
+		}
+		catch (Exception e)
+		{
+			SpoonLog.Error($"King Midas: rest site leave check failed: {e.Message}");
+		}
+	}
+}

@@ -685,3 +685,10 @@ Read `README.md` for the player view and the spec for every decision.
   does nothing before the node is ready; the column was built detached, so only pooled (already ready) cards rendered.
   The view now updates its cards once in the tree and `Fit()` scales the content to the viewport (also after bids and
   the Continue button). 907 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.19 — King Midas rest site softlock (2026-11-20, `main`)
+
+- Co-op bot run (King Midas, Regent + Silent, act 2 rest site): both players could pay for no option, every option was
+  greyed, and vanilla enables Proceed only after a choice, so the room could not be left. `MidasRestLeavePatch`
+  (`NRestSiteRoom.UpdateRestSiteOptions` postfix) enables Proceed when `MidasRule.LeaveOnly`. 908 xUnit + 110 pytest
+  pass. Not tested in game: "Rest site with no affordable option" in `docs/testing/roi-midas-checklist.md`.

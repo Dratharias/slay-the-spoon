@@ -90,4 +90,7 @@ public static class MidasRule
 
 	/// <summary>Price multiplier after <paramref name="boughtHere"/> purchases at the current merchant.</summary>
 	public static decimal PriceFactor(int boughtHere) => 1m + PriceRisePercent * Math.Max(0, boughtHere) / 100m;
+
+	/// <summary>True when the player can pay for none of the rest site's options: they may only leave.</summary>
+	public static bool LeaveOnly(IEnumerable<bool> affordable) => !affordable.Any(a => a);
 }

@@ -106,4 +106,12 @@ public class MidasRuleTests
 		Assert.Equal(1.1m, MidasRule.PriceFactor(1));
 		Assert.Equal(1.5m, MidasRule.PriceFactor(5));
 	}
+
+	[Fact]
+	public void LeaveOnlyWhenNothingIsAffordable()
+	{
+		Assert.True(MidasRule.LeaveOnly(new[] { false, false, false }));
+		Assert.False(MidasRule.LeaveOnly(new[] { false, true }));
+		Assert.True(MidasRule.LeaveOnly(Array.Empty<bool>()));
+	}
 }
