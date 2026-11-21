@@ -1,3 +1,9 @@
-1.8.17 — Matriochka final card
+1.8.17 — Matriochka final card, Watcher, Spoon and Forge fixes (1.8.11 to 1.8.17)
 
-- Matriochka no longer forces a card pick in the victory room after the run's last boss (the Architect). The run is over, so there is nothing left to build a deck for. Card picks after earlier bosses, and after the act 3 boss when an act 4 or the Spoon act follows, are unchanged.
+- Matriochka no longer forces a card pick in the victory room after the run's last boss (the Architect). Card picks after earlier bosses, and after the act 3 boss when an act 4 or the Spoon act follows, are unchanged.
+- Fixed a crash when the Watcher enters a rest site during a long co-op run.
+- Fixed Watcher rest site animation errors: her own idle animation plays without the donor character's missing act animations.
+- Fixed Brilliance trying to load an attack effect that does not exist in Slay the Spire 2.
+- Fixed the Spoon's Digest rest site option trying to load a missing icon; it shows the same heal icon as Feast.
+- King Midas now prevents Forge's Duplicate service from spending enough gold to ruin the buyer, like merchant and rest site purchases.
+- These fixes came from co-op run logs, owner reports and backlog review. The bot code is not included in the Workshop build.
