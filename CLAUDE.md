@@ -678,3 +678,10 @@ Read `README.md` for the player view and the spec for every decision.
 - Owner: no mandatory card after the run's last boss. The Architect's victory room is an `EventRoom` on the boss map point
   (not an Ancient), so Matriochka's per-floor offer fired there; `MatriochkaRule.OffersFloorCard` now skips
   `AbstractRoom.IsVictoryRoom`. 907 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.18 — Folie à deux chest view (2026-11-20, `main`)
+
+- Owner report: the chest's Continue button was below the screen and cards showed "Broken Card". `NCard.UpdateVisuals`
+  does nothing before the node is ready; the column was built detached, so only pooled (already ready) cards rendered.
+  The view now updates its cards once in the tree and `Fit()` scales the content to the viewport (also after bids and
+  the Continue button). 907 xUnit + 110 pytest pass. Not tested in game.

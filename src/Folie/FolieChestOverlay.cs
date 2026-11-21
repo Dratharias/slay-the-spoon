@@ -31,6 +31,8 @@ public sealed class FolieChestOverlay
 	private readonly List<VBoxContainer> _markers = new();
 	private readonly List<Label> _results = new();
 	private readonly Label _status;
+	private readonly Control _root;
+	private readonly List<NCard> _cards = new();
 	private readonly Task _opening;
 	private TaskCompletionSource<int?>? _pick;
 
@@ -53,7 +55,7 @@ public sealed class FolieChestOverlay
 		layer.AddChild(dim);
 
 		var root = new VBoxContainer { Alignment = BoxContainer.AlignmentMode.Center };
-		root.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+		_root = root;
 		root.AddThemeConstantOverride("separation", 16);
 		root.Modulate = new Color(1, 1, 1, 0);
 		layer.AddChild(root);
@@ -72,6 +74,10 @@ public sealed class FolieChestOverlay
 		_status = new Label { Text = Text("choose"), HorizontalAlignment = HorizontalAlignment.Center };
 		_status.AddThemeFontSizeOverride("font_size", 22);
 		root.AddChild(_status);
+		// NCard.UpdateVisuals does nothing before the node is ready: a fresh card from the pool showed the scene's
+		// "Broken Card" placeholder. The cards are in the tree now.
+		foreach (NCard card in _cards) card.UpdateVisuals(PileType.Deck, CardPreviewMode.Normal);
+		Fit();
 		_opening = Open(run, root);
 	}
 
@@ -113,7 +119,7 @@ public sealed class FolieChestOverlay
 					holder.AddChild(visual);
 					visual.Position = holder.CustomMinimumSize / 2;
 					visual.Scale = new Vector2(0.5f, 0.5f);
-					visual.UpdateVisuals(PileType.Deck, CardPreviewMode.Normal);
+					_cards.Add(visual);
 				}
 			}
 		}
@@ -133,6 +139,7 @@ public sealed class FolieChestOverlay
 	{
 		await ChestOpeningOverlay.Play(run.Act);
 		if (!GodotObject.IsInstanceValid(root)) return;
+		Fit();
 		Tween fade = root.CreateTween();
 		fade.TweenProperty(root, "modulate:a", 1f, 0.25);
 	}
@@ -184,6 +191,7 @@ public sealed class FolieChestOverlay
 			marker.AddThemeFontSizeOverride("font_size", 16);
 			marker.AddThemeColorOverride("font_color", SpoonWidgets.Gold);
 			_markers[s].AddChild(marker);
+			Fit();
 		}
 		catch (Exception e)
 		{
@@ -219,6 +227,7 @@ public sealed class FolieChestOverlay
 			var button = SpoonWidgets.Button((Control)_status.GetParent(), Text("continue"), () => done.TrySetResult());
 			button.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
 			button.GrabFocus();
+			Fit();
 			await Task.WhenAny(done.Task, Wait(ResultSeconds));
 		}
 		catch (Exception e)
@@ -230,6 +239,23 @@ public sealed class FolieChestOverlay
 			if (GodotObject.IsInstanceValid(_layer)) _layer.QueueFree();
 		}
 	}
+
+	/// <summary>
+	/// Scales the view down until its content fits the screen. Three cards per column plus the heads, bidders and the
+	/// Continue button are taller than 1080 px; the button ended below the screen.
+	/// </summary>
+	private void Fit()
+	{
+		if (!GodotObject.IsInstanceValid(_root) || !_root.IsInsideTree()) return;
+		Vector2 view = _root.GetViewportRect().Size;
+		Vector2 need = _root.GetCombinedMinimumSize() + new Vector2(0, FitMargin);
+		float scale = Math.Min(1f, Math.Min(view.X / need.X, view.Y / need.Y));
+		_root.Position = Vector2.Zero;
+		_root.Scale = new Vector2(scale, scale);
+		_root.Size = view / scale;
+	}
+
+	private const float FitMargin = 40;
 
 	private async Task Wait(double seconds)
 	{
