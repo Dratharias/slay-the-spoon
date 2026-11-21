@@ -701,3 +701,11 @@ Read `README.md` for the player view and the spec for every decision.
   client dropped the next fight's host-confirmed plays (state divergence at the act 3 boss). `src/Combat/StaleCardCancelPatch.cs`
   (`ActionQueueSet.EnqueueWithoutSynchronizing` prefix) clears a marker whose action is no longer queued, and logs it.
   908 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.21 — co-op boss chest wait (2026-11-20, `main`)
+
+- Co-op bot run (StS1 Boss Relics, act 3 Ancient): a player who took the boss chest before the others got the "waiting"
+  page with no options, which vanilla treats as a finished event, so the room showed Proceed. The bot (a human could too)
+  left the Ancient; the choose-a-relic screen then opened over the map and the map vote stalled; the final
+  `SetEventFinished` would also have thrown. The waiting page now holds one locked option. 908 xUnit + 110 pytest pass.
+  Not tested in game.

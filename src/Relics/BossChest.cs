@@ -107,7 +107,10 @@ public static class BossChest
 		}
 		if (!room.AllDecided.Task.IsCompleted)
 		{
-			SetEventState(ancient, Text("waiting"), Array.Empty<EventOption>());
+			// An event with no options counts as finished: the room would show Proceed (leaving without the chest)
+			// and the final SetEventFinished would throw. A locked option keeps the page open while waiting.
+			SetEventState(ancient, Text("waiting"), [new EventOption(ancient, null, Text("option_title"), Text("waiting"),
+				TextKey, Array.Empty<IHoverTip>())]);
 			await room.AllDecided.Task;
 		}
 		List<RelicModel> relics = room.Relics();
