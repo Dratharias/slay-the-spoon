@@ -709,3 +709,11 @@ Read `README.md` for the player view and the spec for every decision.
   left the Ancient; the choose-a-relic screen then opened over the map and the map vote stalled; the final
   `SetEventFinished` would also have thrown. The waiting page now holds one locked option. 908 xUnit + 110 pytest pass.
   Not tested in game.
+
+## 1.8.22 — Watcher card trail (2026-11-20, `main`)
+
+- Co-op bot run (Blood + Cursed Deck, Silent + Watcher, act 1): the client crashed (SIGSEGV) right after failing to load
+  `res://scenes/vfx/card_trail_sts1_watcher.tscn` during a shuffle: the hot `TrailPath` getter had lost its Harmony detour
+  and returned the vanilla path. `src/Characters/WatcherTrailAlias.cs` makes a copy of Necrobinder's trail scene take
+  over that path in Godot's resource cache at startup (logs "load check ok"), so the vanilla path loads with no patch.
+  The same alias trick fits any borrowed scene path whose getter can revert.
