@@ -692,3 +692,12 @@ Read `README.md` for the player view and the spec for every decision.
   greyed, and vanilla enables Proceed only after a choice, so the room could not be left. `MidasRestLeavePatch`
   (`NRestSiteRoom.UpdateRestSiteOptions` postfix) enables Proceed when `MidasRule.LeaveOnly`. 908 xUnit + 110 pytest
   pass. Not tested in game: "Rest site with no affordable option" in `docs/testing/roi-midas-checklist.md`.
+
+## 1.8.20 — stale card-play cancel marker (2026-11-20, `main`)
+
+- Vanilla co-op race found by the bot tester (Deck of 10 + Mutation, Defect + Regent): a card paused for a choice with
+  `CancelPlayCardActions` (Photon Cut) when the combat ended in the same frame; the end-of-combat cancel removed it, then
+  the pause set `ActionQueue.actionCancellingPlayCardActions` on the removed action, so the marker never cleared and the
+  client dropped the next fight's host-confirmed plays (state divergence at the act 3 boss). `src/Combat/StaleCardCancelPatch.cs`
+  (`ActionQueueSet.EnqueueWithoutSynchronizing` prefix) clears a marker whose action is no longer queued, and logs it.
+  908 xUnit + 110 pytest pass. Not tested in game.
