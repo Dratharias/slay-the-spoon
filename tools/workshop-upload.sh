@@ -33,8 +33,9 @@ cp "$STAGE"/SlaySpoon.{json,dll,pck} "$OUT/content/SlaySpoon/"
 # 512x512 preview (owner, 2026-11-19): the Spoonful card in front of two others, drawn by tools/workshop_banners.py.
 cp "$REPO/workshop/images/preview.png" "$OUT/preview.png"
 
-# VDF strings: escape backslashes and double quotes.
-vdf_escape() { sed -e 's/\\/\\\\/g' -e 's/"/\\"/g'; }
+# VDF strings: SteamCMD's KeyValues parser reads no escape sequences, so a straight double quote ends the string
+# (an upload failed on '"Broken Card"': "key name too long"). Straight quotes become curly ones instead.
+vdf_escape() { sed -E -e 's/(^|[[:space:](])"/\1\xe2\x80\x9c/g' -e 's/"/\xe2\x80\x9d/g'; }
 DESCRIPTION="$(vdf_escape < "$REPO/workshop/description.txt")"
 CHANGENOTE="Version $VERSION"
 if [[ -f "$REPO/workshop/changelog-$VERSION.txt" ]]; then
