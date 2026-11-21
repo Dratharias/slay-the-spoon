@@ -717,3 +717,12 @@ Read `README.md` for the player view and the spec for every decision.
   and returned the vanilla path. `src/Characters/WatcherTrailAlias.cs` makes a copy of Necrobinder's trail scene take
   over that path in Godot's resource cache at startup (logs "load check ok"), so the vanilla path loads with no patch.
   The same alias trick fits any borrowed scene path whose getter can revert.
+
+## 1.8.23 — Watcher at Darv (2026-11-20, `main`)
+
+- Co-op bot run (King Midas + Forge, Watcher + Silent): both peers died by SIGSEGV entering Darv. Darv's Dusty Tome
+  (half of the visits) draws an Ancient card from the owner's pool; the Watcher's pool has none, so `NextItem` returned
+  null and `SetupForPlayer` read `.Id` on it (the older `DustyTomeBypass` only covered StS1 card set modes). The bypass
+  prefix now skips the setup when the pool has no Ancient card, and `DarvTomeFallbackPatch` (`Darv.GenerateInitialOptions`
+  postfix) replaces that Tome with one more Darv relic the owner may take, on the event's Rng (`DarvTomeRule`).
+  911 xUnit + 110 pytest pass. Not tested in game.
