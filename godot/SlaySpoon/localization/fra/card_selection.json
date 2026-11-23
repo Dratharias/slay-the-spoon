@@ -11,5 +11,6 @@
 	"SPOON_FORGE_DUPLICATE": "Choisissez une carte à [gold]dupliquer[/gold] : {Common} / {Uncommon} / {Rare} or selon la rareté.",
 	"SPOON_DECK_OF_TEN": "Votre deck tient 10 cartes : choisissez-en {Count} à [gold]jeter[/gold].",
 	"SPOON_FORCED_TRADE": "Choisissez une carte à [gold]donner[/gold] à un allié au hasard.",
-	"SPOON_DECK_OF_TEN_KEEP": "Votre deck tient 10 cartes : choisissez-en {Count} à [gold]garder[/gold]."
+	"SPOON_DECK_OF_TEN_KEEP": "Votre deck tient 10 cartes : choisissez-en {Count} à [gold]garder[/gold].",
+	"SPOON_FORGE_LADDER": "Forge : survolez un niveau pour le voir"
 }

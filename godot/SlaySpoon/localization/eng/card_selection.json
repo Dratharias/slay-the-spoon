@@ -11,5 +11,6 @@
 	"SPOON_FORGE_DUPLICATE": "Choose a card to [gold]duplicate[/gold]: {Common} / {Uncommon} / {Rare} gold by rarity.",
 	"SPOON_DECK_OF_TEN": "Your deck holds 10 cards: choose {Count} to [gold]drop[/gold].",
 	"SPOON_FORCED_TRADE": "Choose a card to [gold]give[/gold] to a random ally.",
-	"SPOON_DECK_OF_TEN_KEEP": "Your deck holds 10 cards: choose {Count} to [gold]keep[/gold]."
+	"SPOON_DECK_OF_TEN_KEEP": "Your deck holds 10 cards: choose {Count} to [gold]keep[/gold].",
+	"SPOON_FORGE_LADDER": "Forge: hover a level to preview it"
 }
