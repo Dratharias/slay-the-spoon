@@ -23,7 +23,7 @@ Slay the Spoon cards start Standard runs in those modes, and Neow's cursed optio
 
 ## Features
 
-Current version: **1.7.0**.
+Current version: **1.9.0**.
 
 - **Monster HP** and **Monster Damage** options in Custom Run, 25% to 500% in 25% steps (− / + buttons,
   or left/right on a gamepad), synced to every player in co-op and kept in saves. The top bar shows each one as its percent,
@@ -223,11 +223,27 @@ the Corrupt Heart. Without all keys the run ends after Act 3 as usual. A Custom 
 keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-game validation; see
 `docs/testing/step-6-checklist.md`.
 
-## Development status — 2026-11-19
+## Development status — 2026-11-23
 
-Version **1.8.2**: Forge fusions keep enchantments and Matriochka's Dolly's Mirror moves to act 3, after forged card looks (1.8.1), Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges (1.7.0), The Forge (1.4.0) and the port to
-game version 0.111.1 (1.3.8). Automated validation: 867 xUnit and 110 Python tests pass; the build has no warnings. Most
-features still need in-game checks; the [testing checklists](docs/testing/) record them.
+Version **1.9.0**: King Midas sells relics and reopens a broken Maw Bank at the merchant, after a long wave of fixes found
+by automated co-op runs (1.8.3–1.8.34), Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges
+(1.7.0), The Forge (1.4.0) and the port to game version 0.111.1 (1.3.8). The build has no warnings and every unit test
+passes. Most features still need in-game checks; the [testing checklists](docs/testing/) record them.
+
+### Coming next
+
+- **Forged curses** (The Forge + Cursed Deck): curses fuse up to +9, hit far harder on both sides and pick up defects on
+  the way (unplayable on odd turns, costs 2 more, bites its owner...).
+- **Forge upgrade preview**: see a card from +1 to +9 wherever upgrades are shown.
+- **Overcursed**: Matriochka for curses, each one in threes.
+
+### Recent fixes
+
+- Co-op desyncs: patches the game silently dropped on one player are restored before every action (1.8.6–1.8.31).
+- King Midas: doubled starting gold, rest site softlock and crash; ruined players come back in co-op (1.8.5–1.8.33).
+- The Watcher: crashes on her death, at the Architect, at rest sites and at Darv (1.8.10–1.8.23).
+- Deck of 10 black screen at Neow (1.8.3), Folie à deux chest off screen (1.8.18), co-op boss chest wait (1.8.21).
+- Matriochka: works with Vintage and Hoarder, no card after the final boss, 999 cards max (1.8.17–1.8.29).
 
 ## Languages
 

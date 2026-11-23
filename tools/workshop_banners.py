@@ -28,7 +28,7 @@ BG_TOP, BG_BOTTOM = (36, 32, 52), (20, 22, 33)
 GOLD, GREY = (242, 210, 122), (190, 190, 200)
 
 # key: (English title, French title, art: image path under godot/SlaySpoon/images, or "glyph:<char>", or "dolls").
-# Party modes, then the section banners (StS1 sits under Slay the Spoon, Custom Runs and Co-op close the page).
+# Party modes, then the section banners (StS1 sits under Slay the Spoon, Custom Runs and Co-op follow the modes).
 MODES = {
     "spoon": ("Slay the Spoon", "Slay the Spoon", "cards/spoon/spoon_spoonful.png"),
     "sts1": ("Slay the Spire 1", "Slay the Spire 1", "packed/character_select/char_select_sts1_watcher.png"),
@@ -41,6 +41,9 @@ MODES = {
     "glass": ("Glass Cannon", "Canon de verre", "relics/spoon/spoon_glass_heart_large.png"),
     "custom": ("Custom Runs", "Parties personnalisées", "glyph:⚙"),
     "coop": ("Co-op and tuning", "Coop et réglages", "glyph:⚖"),
+    # News banners at the bottom of the page: what is being built, what was fixed lately.
+    "upcoming": ("Coming next", "À venir", "glyph:⌛"),
+    "fixes": ("Recent fixes", "Correctifs récents", "glyph:✔"),
 }
 
 # Showcase rows: card classes (rendered) and creature sprites under godot/SlaySpoon/images ("img:<path>").

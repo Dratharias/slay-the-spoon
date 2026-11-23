@@ -73,6 +73,22 @@ Conductor, four players: one player hands out every reward of the fight.
 [*][b]Character Color[/b]: recolor your character from the pause menu. Your friends see it too.
 [/list]
 
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/upcoming-en.png[/img]
+[list]
+[*][b]Forged curses[/b] (Forge + Cursed Deck): curses fuse up to +9, hit far harder on both sides and pick up defects on the way (odd turns only, costs 2 more, bites its owner...).
+[*][b]Forge upgrade preview[/b]: see a card from +1 to +9 wherever upgrades are shown.
+[*][b]Overcursed[/b]: Matriochka for curses, each one in threes.
+[/list]
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/fixes-en.png[/img]
+[list]
+[*]Co-op desyncs: patches the game silently dropped on one player are restored before every action.
+[*]King Midas: doubled starting gold, rest site softlock and crash; ruined players come back in co-op.
+[*]The Watcher: crashes on her death, at the Architect, at rest sites and at Darv.
+[*]Deck of 10 black screen; Folie à deux chest off screen; co-op boss chest.
+[*]Matriochka: works with Vintage and Hoarder, no card after the final boss, 999 cards max.
+[/list]
+
 [b]Found a bug?[/b] Paste the error part of your [i]godot.log[/i] in a comment (modes ticked, solo or co-op), or attach the whole log to a [url=https://github.com/Dratharias/slay-the-spoon/issues]GitHub issue[/url]. Log: [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
 
 [i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes come when time allows.[/i]
