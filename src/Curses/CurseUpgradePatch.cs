@@ -214,7 +214,8 @@ public static class CurseUpgrade
 		{
 			if (UpgradedRow(__instance) is not { } row || __instance.Pile?.Type != PileType.Hand) return;
 			if (!participants.Contains(__instance.Owner.Creature)) return;
-			CardsInHand(__instance) = __instance.Pile.Cards.Count * ForgedCurseRule.AmountAt(row, __instance.CurrentUpgradeLevel);
+			CardsInHand(__instance) = __instance.Pile.Cards.Count * ForgedCurseRule.AmountAt(row, __instance.CurrentUpgradeLevel)
+				* ForgedCurseRule.SpitefulTimes(Forged.ForgedCurses.Applies(__instance) ? Forged.CurseDefects.Get(__instance) : CurseDefect.None);
 		}
 	}
 

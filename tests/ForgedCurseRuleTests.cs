@@ -174,4 +174,8 @@ public class ForgedCurseRuleTests
 	[Fact]
 	public void DefectStreamName() =>
 		Assert.Equal("forged_curse_defect_12_3_0", ForgedCurseRule.DefectStream(12, 3, 0));
+
+	[Fact]
+	public void PlayStreamName() =>
+		Assert.Equal("forged_curse_play_12_4_7", ForgedCurseRule.PlayStream(12, 4, 7));
 }

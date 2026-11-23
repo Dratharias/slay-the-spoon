@@ -110,4 +110,7 @@ public static class ForgedCurseRule
 	public static int LoadLevel(int saved, bool comboActive) => Math.Clamp(saved, 0, comboActive ? MaxLevel : 1);
 
 	public static string DefectStream(int floor, int deckIndex, int draw) => $"forged_curse_defect_{floor}_{deckIndex}_{draw}";
+
+	/// <summary>Stream for Contagious and Ravenous draws: floor, combat round and the play's index in the combat history.</summary>
+	public static string PlayStream(int floor, int round, int playIndex) => $"forged_curse_play_{floor}_{round}_{playIndex}";
 }
