@@ -60,3 +60,4 @@ and awards of each chest, keyed `combat_<floor>`, `treasure_<floor>`, `floor_<fl
 - [ ] With Folie à deux also ticked: the floor rewards go through a chest (`floor_<floor>`), the winner must take a card.
 - [ ] 1.8.24, Matriochka + vanilla Vintage: after a normal fight the rewards show a relic and an unskippable card;
       elites and bosses unchanged; with Folie à deux too, the card goes through the chest.
+- [ ] 1.8.25, Matriochka + vanilla Hoarder: a new card enters the deck in 3 copies, not 5.

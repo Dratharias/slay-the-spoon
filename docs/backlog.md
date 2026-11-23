@@ -645,8 +645,8 @@ tested in game or by the bots unless marked. Vanilla only makes Sealed Deck, Dra
   - Blood: gold rewards are paid out as HP, so ×2 doubles the healing from gold. Check balance.
   - Forge: Fuse stays (its own rest option), ordinary upgrades are gone, so cards climb only by fusion. Probably fun.
 - **Hoarder** (vanilla: 2 extra copies of each card added to the deck, no merchant removal)
-  - Matriochka already includes Hoarder's rule; both together give 1 + 2 + 2 = 5 copies (clones carry `clonedBy`, so no
-    cascade). Make them mutually exclusive, or have Matriochka skip its copies when Hoarder is ticked.
+  - Matriochka already includes Hoarder's rule; both together gave 1 + 2 + 2 = 5 copies. Fixed in 1.8.25: both stay
+    tickable, Hoarder's copies are skipped while Matriochka is active (`MatriochkaHoarderPatch`, owner 2026-11-23).
   - Deck of 10: every new card turns into 3, each forcing a trim. Likely exclusive.
 - **Sealed Deck, Draft, Insanity** (`ClearsPlayerDeck`: the starting deck is cleared in `OnRunCreated`, before each
   modifier's `AfterRunCreated`, in the run's modifier order)

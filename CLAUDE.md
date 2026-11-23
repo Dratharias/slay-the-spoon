@@ -734,3 +734,9 @@ Read `README.md` for the player view and the spec for every decision.
   order) puts each replaced card reward back, unskippable, next to the relic (`MatriochkaRule.CardsAfterVintage`).
 - `docs/backlog.md` "Vanilla Custom Run modifiers × mod modes" lists every vanilla modifier against the mod's modes.
 - 915 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.25 — Matriochka with vanilla Hoarder (2026-11-23, `main`)
+
+- Matriochka already applies Hoarder's rule, so both ticked gave 5 copies per card. Owner: keep them compatible and
+  ignore Hoarder. `src/Matriochka/MatriochkaHoarderPatch.cs` skips `Hoarder.AfterCardChangedPiles` while Matriochka is
+  active. Not tested in game.
