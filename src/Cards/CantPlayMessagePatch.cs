@@ -41,6 +41,10 @@ public static class CantPlayMessagePatch
 			{
 				__result = sts1.CantPlayMessage;
 			}
+			else if (reason == UnplayableReason.BlockedByCardLogic && card != null && Curses.Forged.CurseDefects.BlockedNow(card))
+			{
+				__result = new LocString("cards", "SPOON_CURSE_DEFECT.cantPlay");
+			}
 		}
 	}
 }

@@ -509,5 +509,16 @@
 	"SPOON_TROPHY_CARD.description": "Deal {Damage:diff()} damage {Repeat:diff()} {Repeat:plural:time|times}.",
 	"SPOON_TROPHY_CARD.fallback": "Trophy",
 	"SPOON_CURSED_REGRET_PLUS.description": "At the end of your turn, if this is in your [gold]Hand[/gold], lose {Amount} HP for each card in your [gold]Hand[/gold].",
-	"SPOON_CURSED_NORMALITY_PLUS.description": "You cannot play more than {Amount} cards this turn.{InCombat:\n({CalculatedCards:plural:{} card|{} cards} left)|}"
+	"SPOON_CURSED_NORMALITY_PLUS.description": "You cannot play more than {Amount} cards this turn.{InCombat:\n({CalculatedCards:plural:{} card|{} cards} left)|}",
+	"SPOON_CURSE_DEFECT.cantPlay": "A defect stops this curse right now.",
+	"SPOON_CURSE_DEFECT.Odd": "Odd: Unplayable on odd turns.",
+	"SPOON_CURSE_DEFECT.Even": "Even: Unplayable on even turns.",
+	"SPOON_CURSE_DEFECT.Late": "Late: Unplayable before turn 3.",
+	"SPOON_CURSE_DEFECT.Heavy": "Heavy: costs 2 more.",
+	"SPOON_CURSE_DEFECT.Demanding": "Demanding: playable only after 2 other cards this turn.",
+	"SPOON_CURSE_DEFECT.Bloody": "Bloody: playing it costs you HP equal to its level.",
+	"SPOON_CURSE_DEFECT.Spiteful": "Spiteful: left in hand at end of turn, it hits you twice.",
+	"SPOON_CURSE_DEFECT.Contagious": "Contagious: playing it shuffles a random curse into your draw pile.",
+	"SPOON_CURSE_DEFECT.Ravenous": "Ravenous: playing it exhausts a random card from your hand.",
+	"SPOON_CURSE_DEFECT.Echo": "Echo: playing it also hits you with half its effect."
 }

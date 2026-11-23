@@ -24,6 +24,7 @@ public static class ModEntry
 			SpoonLog.Error($"Sts1EndingAct self-check failed: {e.Message}");
 		}
 		Act4.Act4Routing.Register();
+		Curses.Forged.CurseDefects.Register();
 		LinuxHarmonyFix.Apply();
 		PatchEach(new Harmony("slayspoon"));
 		Saves.SerializationPatchGuard.Start();
