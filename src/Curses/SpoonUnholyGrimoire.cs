@@ -36,7 +36,7 @@ public sealed class SpoonUnholyGrimoire : RelicModel
 		var enemies = combat.HittableEnemies.ToList();
 		if (enemies.Count == 0) return;
 		Flash();
-		int damage = CurseRule.GrimoireDamageFor(CurseTable.For(card.Id.Entry), card.IsUpgraded);
+		int damage = CurseRule.GrimoireDamageFor(CurseTable.For(card.Id.Entry), card.CurrentUpgradeLevel);
 		await CreatureCmd.Damage(choiceContext, enemies, damage, ValueProp.Unpowered, Owner.Creature);
 	}
 
@@ -63,7 +63,7 @@ public sealed class SpoonUnholyGrimoire : RelicModel
 		int hand = Owner.PlayerCombatState?.Hand.Cards.Count ?? 0;
 		int played = CombatManager.Instance.History.CardPlaysStarted
 			.Count(e => e.HappenedThisTurn(combat) && e.CardPlay.Player == Owner);
-		int amount = CurseRule.PlayedAmount(row, card.IsUpgraded, hand, played);
+		int amount = CurseRule.PlayedAmount(row, card.CurrentUpgradeLevel, hand, played);
 		if (amount <= 0) return;
 		Flash();
 		switch (row.Played)
