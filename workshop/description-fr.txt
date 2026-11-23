@@ -35,7 +35,7 @@ Départ fortuné, mais l'or fond à chaque étage : à sec, on meurt ; en coop, 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-relic-fr.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-fr.png[/img]
-Fusionnez les copies d’une carte au feu, jusqu’à +9. Le marchand duplique vos cartes.
+Fusionnez les copies d’une carte au feu, jusqu’à +9. Le marchand duplique vos cartes. Cochez « Voir l'amélioration » pour voir chaque niveau jusqu’à +9.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-climb-en.gif[/img]
 Gourdin+9 : 344 dégâts.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/forge-bludgeon.jpg[/img]
@@ -46,6 +46,7 @@ Les malédictions sont vos munitions. Jouez-les, lancez-les sur l’ennemi, coll
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-fr.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-relic-fr.png[/img]
 Avec la Forge en plus, les malédictions fusionnent jusqu'à +9 : bien plus fortes des deux côtés, avec un défaut à +3, +6 et +9.
+[b]Surmaudit[/b] : chaque malédiction reçue arrive en trois exemplaires, et les événements proposent d’embrasser la malédiction (toujours de l’or avec le Roi Midas).
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-fr.png[/img]
 Un seul coup non bloqué et vous mourez. Empilez l’Armure, puis frappez avec.
@@ -72,12 +73,6 @@ Chef d’orchestre à quatre : un joueur distribue toutes les récompenses du co
 [*][b]Prêts au marchand[/b] et [b]ventes au feu de camp[/b] : prêtez, empruntez et vendez des cartes entre amis, intérêts compris.
 [*][b]PV et dégâts des monstres[/b] de 25 % à 500 %, [b]coffre de départ[/b].
 [*][b]Couleur du personnage[/b] : recolorez votre personnage depuis le menu pause. Vos amis la voient aussi.
-[/list]
-
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/upcoming-fr.png[/img]
-[list]
-[*][b]Aperçu de la Forge[/b] : une carte de +1 à +9.
-[*][b]Surmaudit[/b] : Matriochka pour les malédictions, chacune en triple.
 [/list]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/fixes-fr.png[/img]

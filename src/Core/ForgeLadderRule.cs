@@ -5,7 +5,7 @@ public static class ForgeLadderRule
 {
 	public const int Columns = 3;
 
-	/// <summary>Shown only with "View upgrades" ticked, in a Forge run, for a card fusion takes past +1, below its limit.</summary>
+	/// <summary>Shown only with "View Upgrade" ticked, in a Forge run, for a card fusion takes past +1, below its limit.</summary>
 	public static bool Shows(bool ticked, bool forgeRun, int limit, int level) =>
 		ticked && forgeRun && limit > 1 && level < limit;
 

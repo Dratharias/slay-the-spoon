@@ -90,5 +90,8 @@
   "SPOON_ACHILLES_HEEL_MODE.short": "Talon",
   "SPOON_GLASS_CANNON.title": "Canon de verre",
   "SPOON_GLASS_CANNON.description": "Tout le monde commence avec le Cœur de verre, le Vajra et le Girya.",
-  "SPOON_GLASS_CANNON.short": "Verre"
+  "SPOON_GLASS_CANNON.short": "Verre",
+  "SPOON_OVERCURSED.title": "Surmaudit",
+  "SPOON_OVERCURSED.description": "Chaque malédiction reçue arrive en trois exemplaires. Les événements proposent d'embrasser la malédiction.",
+  "SPOON_OVERCURSED.short": "Surm."
 }

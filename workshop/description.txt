@@ -35,7 +35,7 @@ Start rich, but gold melts on every floor: run dry and you die; in co-op you com
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-relic-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-en.png[/img]
-Fuse copies of a card at the fire, up to +9. The merchant duplicates cards.
+Fuse copies of a card at the fire, up to +9. The merchant duplicates cards. Tick "View Upgrade" to see every level up to +9.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-climb-en.gif[/img]
 Bludgeon+9: 344 damage.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/forge-bludgeon.jpg[/img]
@@ -46,6 +46,7 @@ Curses are your ammo. Play them, throw them at the enemy, collect the relics tha
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-en.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-relic-en.png[/img]
 With The Forge too, curses fuse up to +9: far stronger on both sides, with a defect at +3, +6 and +9.
+[b]Overcursed[/b]: every curse you receive comes in three, and events offer to embrace the curse (gold every time under King Midas).
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-en.png[/img]
 One unblocked hit and you die. Stack Block, then hit with it.
@@ -72,12 +73,6 @@ Conductor, four players: one player hands out every reward of the fight.
 [*][b]Merchant Loans[/b] and [b]Campfire Sales[/b]: lend, borrow and sell cards between friends, interest included.
 [*][b]Monster HP and Damage[/b] from 25% to 500%, [b]Starting Chest[/b].
 [*][b]Character Color[/b]: recolor your character from the pause menu. Your friends see it too.
-[/list]
-
-[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/upcoming-en.png[/img]
-[list]
-[*][b]Forge upgrade preview[/b]: see a card from +1 to +9 wherever upgrades are shown.
-[*][b]Overcursed[/b]: Matriochka for curses, each one in threes.
 [/list]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/fixes-en.png[/img]

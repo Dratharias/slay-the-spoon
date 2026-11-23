@@ -90,5 +90,8 @@
   "SPOON_ACHILLES_HEEL_MODE.short": "Heel",
   "SPOON_GLASS_CANNON.title": "Glass Cannon",
   "SPOON_GLASS_CANNON.description": "Everyone starts with Glass Heart, Vajra and Girya.",
-  "SPOON_GLASS_CANNON.short": "Glass"
+  "SPOON_GLASS_CANNON.short": "Glass",
+  "SPOON_OVERCURSED.title": "Overcursed",
+  "SPOON_OVERCURSED.description": "Every curse you receive comes in three. Events offer to embrace the curse.",
+  "SPOON_OVERCURSED.short": "Over."
 }

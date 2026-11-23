@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
+using SlaySpoon.Config;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Curses;
@@ -26,7 +27,11 @@ public sealed class SpoonCursedDeck : ModifierModel
 			player.RelicGrabBag.Remove(relic);
 			if (player.Relics.All(r => r.Id != relic.Id)) player.AddRelicInternal(relic.ToMutable());
 			Rng rng = new(runState.Rng.Seed, CurseRule.StartStream(slot));
-			player.Deck.AddInternal(CursedDeckCurses.Create(player, rng));
+			CardModel curse = CursedDeckCurses.Create(player, rng);
+			player.Deck.AddInternal(curse);
+			// Overcursed: the start curse comes in three too.
+			if (SpoonOvercursed.IsActive(runState))
+				for (int i = 0; i < OvercursedRule.ExtraCopies; i++) player.Deck.AddInternal(runState.CloneCard(curse));
 		}
 		runState.SharedRelicGrabBag.Remove(relic);
 	}

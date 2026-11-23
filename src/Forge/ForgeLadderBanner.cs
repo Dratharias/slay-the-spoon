@@ -14,7 +14,7 @@ namespace SlaySpoon.Forge;
 
 /// <summary>
 /// The Forge ladder on the card inspect screen (spec docs/superpowers/specs/2026-11-23-forge-ladder-banner-design.md):
-/// with "View upgrades" ticked in a Forge run, a panel left of the big card lists every level up to +9; hovering one
+/// with "View Upgrade" ticked in a Forge run, a panel left of the big card lists every level up to +9; hovering one
 /// shows it on the big card. View only.
 /// </summary>
 [HarmonyPatch(typeof(NInspectCardScreen), "UpdateCardDisplay")]

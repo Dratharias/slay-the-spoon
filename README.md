@@ -135,7 +135,8 @@ costs 1 less at +7 and becomes Innate at +9. Limit Break gains 1 Strength per le
 with its StS2 namesake and you pick which one comes out. Ordinary upgrades still stop at +1. Once per visit, the merchant
 sells a +0 copy of a deck card: 25 / 50 / 75 gold by rarity (+25 from Ascension 6), +25 per earlier purchase.
 Forged cards show their level: from +2 the title climbs a color ladder and the frame turns Ancient step by step; at +9
-the card is fully Ancient and its title shimmers like a diamond (1.8.1).
+the card is fully Ancient and its title shimmers like a diamond (1.8.1). With "View Upgrade" ticked on a card, a panel
+beside it lists every level up to +9; hover one to see it (1.11.0).
 
 *Tip (from the author):* upgrade your copies first, then fuse the upgraded ones. Each copy's +1 counts: +1 and +1 give
 +3, two +3 give +7, and +7 with one more +1 reaches +9, which takes five copies and four fusions.
@@ -159,6 +160,9 @@ in hand), and the curse picks up a defect at +3, +6 and +9: unplayable on odd or
 only after two other cards, costs 2 more, costs HP, hits its owner twice in hand, spreads a curse, eats a card from your
 hand, or echoes half its effect back at you. Eternal curses never fuse. Levels per curse: `docs/review/cursed-curses.md`.
 Not tested in game: `docs/testing/forged-curses-checklist.md`.
+
+**Overcursed** (Custom Run): every curse you receive comes in three (with Hoarder or Matriochka, still three), and every "?"
+event offers Cursed Deck's "Embrace the curse" (gold every time under King Midas). The merchant still removes curses.
 
 **Achilles' Heel** (Custom Run): every player starts with the Achilles' Heel relic plus Anchor, Oddly Smooth Stone and
 Gorget. In every combat, unblocked attack damage kills you (Poison and HP loss don't). You gain 1 Dexterity per act past
@@ -236,11 +240,6 @@ Version **1.10.0**: forged curses (The Forge and Cursed Deck together), after Ki
 by automated co-op runs (1.8.3–1.8.34), Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges
 (1.7.0), The Forge (1.4.0) and the port to game version 0.111.1 (1.3.8). The build has no warnings and every unit test
 passes. Most features still need in-game checks; the [testing checklists](docs/testing/) record them.
-
-### Coming next
-
-- **Forge upgrade preview**: see a card from +1 to +9 wherever upgrades are shown.
-- **Overcursed**: Matriochka for curses, each one in threes.
 
 ### Recent fixes
 

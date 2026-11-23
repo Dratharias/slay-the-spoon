@@ -3,12 +3,12 @@
 ## Intent
 
 Owner request (2026-11-23): in a Forge run, "a +1 → +9 upgrade preview banner for forged cards, shown when upgrades are
-displayed, in place of the vanilla one". Vanilla's "View upgrades" tickbox on the card inspect screen only shows the
+displayed, in place of the vanilla one". Vanilla's "View Upgrade" tickbox on the card inspect screen only shows the
 next level, and nothing once a card is at +1, so a player cannot see what fusing a card further would give.
 
 ## Design (builder calls, owner validated the idea)
 
-- Where: the card inspect screen (deck view, card grids, hand inspect), when "View upgrades" is ticked, in a Forge run,
+- Where: the card inspect screen (deck view, card grids, hand inspect), when "View Upgrade" is ticked, in a Forge run,
   for a card fusion can take to +9 that is below +9. Otherwise the screen is vanilla.
 - What: a panel on the left of the big card lists every level from the next one to +9 as small cards (3 columns,
   `ForgeLadderRule.Levels`). The big card shows the next level (as vanilla does for +1); hovering a small card shows

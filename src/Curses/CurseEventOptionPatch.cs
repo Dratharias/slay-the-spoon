@@ -15,7 +15,7 @@ using SlaySpoon.Core;
 namespace SlaySpoon.Curses;
 
 /// <summary>
-/// Cursed Deck: the first page of every event (Ancients excepted) gets "Embrace the curse". It adds a random curse,
+/// Cursed Deck and Overcursed: the first page of every event (Ancients excepted) gets "Embrace the curse". It adds a random curse,
 /// then one reward from <see cref="CurseRule.EventReward"/>, then ends the event as a vanilla "leave" does.
 /// </summary>
 [HarmonyPatch(typeof(EventModel), "SetEventState")]
@@ -32,7 +32,7 @@ public static class CurseEventOptionPatch
 
 	public static void Prefix(EventModel __instance, ref IEnumerable<EventOption> eventOptions)
 	{
-		if (__instance.Owner is not { } owner || __instance is AncientEventModel or TheArchitect || !SpoonCursedDeck.IsActive(owner.RunState)) return;
+		if (__instance.Owner is not { } owner || __instance is AncientEventModel or TheArchitect || !OvercursedRule.EmbraceOffered(SpoonCursedDeck.IsActive(owner.RunState), SpoonOvercursed.IsActive(owner.RunState))) return;
 		// Only events entered from a "?" map room (not the victory room, the Ending's events or a shrine elsewhere).
 		if (owner.RunState.CurrentMapPoint?.PointType != MapPointType.Unknown) return;
 		if (Seen.TryGetValue(__instance, out _)) return;
@@ -54,7 +54,8 @@ public static class CurseEventOptionPatch
 		List<RelicModel> left = CursedRelics.Pool.Where(r => !held.Contains(r.Id.Entry)).ToList();
 		int roll = rng.NextInt(int.MaxValue);
 		CurseEventReward reward = CurseRule.EventReward(roll, left.Count > 0);
-		if (reward == CurseEventReward.Gold && SpoonBlood.IsActive(run)) reward = CurseEventReward.Heal;
+		bool midas = run.Modifiers.Any(m => m is SpoonRoiMidas);
+		reward = OvercursedRule.EmbraceReward(reward, SpoonBlood.IsActive(run), midas);
 		switch (reward)
 		{
 			case CurseEventReward.CursedRelic:
@@ -62,7 +63,7 @@ public static class CurseEventOptionPatch
 				await RelicCmd.Obtain(left.First(r => r.Id.Entry == id).ToMutable(), player);
 				break;
 			case CurseEventReward.Gold:
-				await PlayerCmd.GainGold(CurseRule.EventGold, player);
+				await PlayerCmd.GainGold(OvercursedRule.EmbraceGold(midas), player);
 				break;
 			default:
 				await CreatureCmd.Heal(player.Creature, CurseRule.EventHeal(player.Creature.MaxHp));
