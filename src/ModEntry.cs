@@ -29,6 +29,7 @@ public static class ModEntry
 		PatchEach(new Harmony("slayspoon"));
 		Saves.SerializationPatchGuard.Start();
 		Characters.WatcherTrailAlias.Install();
+		Cards.Sts1.Powers.PowerIconAlias.Install();
 		SpoonLog.Info($"Slay the Spoon {Version} loaded");
 	}
 

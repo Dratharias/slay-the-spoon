@@ -627,6 +627,9 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
 - Fix idea, no detour: the loader's fallback is `res://images/powers/<sprite>.png`, and the big icon reads the same path.
   Ship one PNG per mod power at that path in the PCK (or add the sprites to `AtlasManager`'s sprite map at startup),
   then the patch only matters for nothing. To grep after a play: `grep -a "Missing sprite" godot.log`.
+- Done in 1.11.0 (`PowerIconAlias`, the Watcher trail trick): at startup a copy of each mod power's small and big icon
+  takes over its vanilla paths in Godot's resource cache; the log line "power icon alias: N small and M big icons
+  aliased" counts them. Check in game and in the bot logs: no more "Missing sprite" for `spoon_*` powers.
 
 ## Vanilla Custom Run modifiers × mod modes (2026-11-23)
 
