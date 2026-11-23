@@ -118,4 +118,34 @@ public static class MidasRule
 
 	/// <summary>True when the player can pay for none of the rest site's options: they may only leave.</summary>
 	public static bool LeaveOnly(IEnumerable<bool> affordable) => !affordable.Any(a => a);
+
+	/// <summary>The merchant pays this percent of a relic's merchant price (owner, 2026-11-23).</summary>
+	public const int SalePercent = 75;
+
+	/// <summary>
+	/// True when a relic may be sold to the merchant: not one of the King Midas starting relics, and a rarity the
+	/// merchant prices (Starter, Ancient, Event and None are not for sale).
+	/// </summary>
+	public static bool CanSell(MidasRelicRarity rarity, bool startPack) =>
+		!startPack && rarity is MidasRelicRarity.Common or MidasRelicRarity.Uncommon or MidasRelicRarity.Rare or MidasRelicRarity.Shop;
+
+	/// <summary>Gold paid for a relic whose merchant price is <paramref name="merchantCost"/>, rounded down.</summary>
+	public static int SalePrice(int merchantCost) => merchantCost * SalePercent / 100;
+
+	/// <summary>
+	/// The lowest price the merchant asks to buy a sold relic back, after every discount (Membership Card): a quarter
+	/// above the sale, rounded up, so selling and buying back always costs gold.
+	/// </summary>
+	public static int ResaleFloor(int salePrice) => (salePrice * 5 + 3) / 4;
+
+	/// <summary>Base price to reopen a broken Maw Bank at the merchant (owner, 2026-11-23).</summary>
+	public const int BankReopenPrice = 50;
+
+	/// <summary>The bank reopening price after <paramref name="boughtHere"/> purchases at this merchant.</summary>
+	public static int BankReopen(int boughtHere, int scale = 1) =>
+		(int)Math.Round(BankReopenPrice * PriceFactor(boughtHere, scale), MidpointRounding.AwayFromZero);
 }
+
+/// <summary>A relic rarity as the King Midas sale sees it (mirrors the game's <c>RelicRarity</c>).</summary>
+public enum MidasRelicRarity { Common, Uncommon, Rare, Shop, Starter, Ancient, Event, None }
+

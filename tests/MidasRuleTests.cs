@@ -139,4 +139,46 @@ public class MidasRuleTests
 		Assert.False(MidasRule.CanSpend(100, 50, 50, 2));
 		Assert.True(MidasRule.CanSpend(100, 50, 50, 1) == !MidasRule.Ruined(50, 50, 1));
 	}
+
+	[Theory]
+	[InlineData(175, 131)]
+	[InlineData(225, 168)]
+	[InlineData(275, 206)]
+	[InlineData(200, 150)]
+	public void SalePriceIsThreeQuartersRoundedDown(int cost, int sale) => Assert.Equal(sale, MidasRule.SalePrice(cost));
+
+	[Theory]
+	[InlineData(131, 164)]
+	[InlineData(168, 210)]
+	[InlineData(206, 258)]
+	[InlineData(150, 188)]
+	public void ResaleFloorIsSalePlusAQuarterRoundedUp(int sale, int floor) => Assert.Equal(floor, MidasRule.ResaleFloor(sale));
+
+	[Theory]
+	[InlineData(MidasRelicRarity.Common, false, true)]
+	[InlineData(MidasRelicRarity.Uncommon, false, true)]
+	[InlineData(MidasRelicRarity.Rare, false, true)]
+	[InlineData(MidasRelicRarity.Shop, false, true)]
+	[InlineData(MidasRelicRarity.Starter, false, false)]
+	[InlineData(MidasRelicRarity.Ancient, false, false)]
+	[InlineData(MidasRelicRarity.Event, false, false)]
+	[InlineData(MidasRelicRarity.None, false, false)]
+	[InlineData(MidasRelicRarity.Rare, true, false)]
+	public void CanSellExcludesStartPackAndUnpricedRarities(MidasRelicRarity rarity, bool startPack, bool expected) =>
+		Assert.Equal(expected, MidasRule.CanSell(rarity, startPack));
+
+	[Fact]
+	public void ResaleAlwaysCostsMoreThanTheSale()
+	{
+		foreach (int cost in new[] { 175, 200, 225, 275 })
+			Assert.True(MidasRule.ResaleFloor(MidasRule.SalePrice(cost)) > MidasRule.SalePrice(cost));
+	}
+
+	[Theory]
+	[InlineData(0, 1, 50)]
+	[InlineData(2, 1, 60)]
+	[InlineData(0, 2, 50)]
+	[InlineData(2, 2, 70)]
+	public void BankReopenFollowsTheMerchantRise(int boughtHere, int scale, int price) =>
+		Assert.Equal(price, MidasRule.BankReopen(boughtHere, scale));
 }
