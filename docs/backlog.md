@@ -422,8 +422,9 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     cuillère est OP"; the owner blames the deck). The test deck is now upgraded with seven combat relics; the Spoon's
     numbers stay a starting point until a real run reaches it. Second test (same day, upgraded deck): +3 Strength
     per turn reached 24 by turn 9 (Ladle at 74) with 1221/1500 HP left; replaced by the growth rule (spec, "Boss
-    numbers"), 2000 HP per fighter, Bouchée 40, Ladle 70. Open: nothing on the Spoon explains the growth (no power
-    tooltip); add one if players miss it. Third test (same day): the owner found three stacked scalings (team max HP ratio,
+    numbers"), 2000 HP per fighter, Bouchée 40, Ladle 70. ~~Open: nothing on the Spoon explains the growth (no power
+    tooltip); add one if players miss it.~~ Done in 1.11.0: the Spoon starts each fight with Gluttony (`SpoonGluttonyPower`,
+    no effect, its tooltip states the growth and Strength rule). Third test (same day): the owner found three stacked scalings (team max HP ratio,
     Strength from growth, heal from stolen max HP) too much; the ratio is gone and Appetite (Spoonful removes it) added.
     The Appetite tooltip uses "{Amount}0 %" for the total; fine while the step stays 10 %.
   - **Art sources:** the placeholder art comes from two Pixabay photos under the Pixabay Content License (free use, no

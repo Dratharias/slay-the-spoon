@@ -156,5 +156,8 @@
 	"SPOON_HEEL_POWER.smartDescription": "If you take unblocked attack damage, die.",
 	"SPOON_FRENZY_POWER.title": "Frenzy",
 	"SPOON_FRENZY_POWER.description": "Each card played adds 10% attack damage. Each turn without a Block Skill gives more [gold]Strength[/gold] (1, 2, 3...). Playing a Skill that gives [gold]Block[/gold] resets both.",
-	"SPOON_FRENZY_POWER.smartDescription": "Each card played adds 10% attack damage. Each turn without a Block Skill gives more [gold]Strength[/gold] (1, 2, 3...). Playing a Skill that gives [gold]Block[/gold] resets both."
+	"SPOON_FRENZY_POWER.smartDescription": "Each card played adds 10% attack damage. Each turn without a Block Skill gives more [gold]Strength[/gold] (1, 2, 3...). Playing a Skill that gives [gold]Block[/gold] resets both.",
+	"SPOON_GLUTTONY_POWER.title": "Gluttony",
+	"SPOON_GLUTTONY_POWER.description": "The HP its hits take past [gold]Block[/gold] becomes its Max HP. Gains [blue]1[/blue] [gold]Strength[/gold] per [blue]5[/blue] Max HP above its starting Max HP, loses [blue]1[/blue] per [blue]5[/blue] below.",
+	"SPOON_GLUTTONY_POWER.smartDescription": "The HP its hits take past [gold]Block[/gold] becomes its Max HP. Gains [blue]1[/blue] [gold]Strength[/gold] per [blue]5[/blue] Max HP above its starting Max HP, loses [blue]1[/blue] per [blue]5[/blue] below."
 }

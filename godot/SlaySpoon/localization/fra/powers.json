@@ -156,5 +156,8 @@
 	"SPOON_HEEL_POWER.smartDescription": "Si vous subissez des dégâts d’attaque non bloqués, vous mourez.",
 	"SPOON_FRENZY_POWER.title": "Frénésie",
 	"SPOON_FRENZY_POWER.description": "Chaque carte jouée ajoute 10 % de dégâts d’attaque. Chaque tour sans Compétence d’[gold]Armure[/gold] donne plus de [gold]Force[/gold] (1, 2, 3...). Jouer une Compétence qui donne de l’[gold]Armure[/gold] remet tout à zéro.",
-	"SPOON_FRENZY_POWER.smartDescription": "Chaque carte jouée ajoute 10 % de dégâts d’attaque. Chaque tour sans Compétence d’[gold]Armure[/gold] donne plus de [gold]Force[/gold] (1, 2, 3...). Jouer une Compétence qui donne de l’[gold]Armure[/gold] remet tout à zéro."
+	"SPOON_FRENZY_POWER.smartDescription": "Chaque carte jouée ajoute 10 % de dégâts d’attaque. Chaque tour sans Compétence d’[gold]Armure[/gold] donne plus de [gold]Force[/gold] (1, 2, 3...). Jouer une Compétence qui donne de l’[gold]Armure[/gold] remet tout à zéro.",
+	"SPOON_GLUTTONY_POWER.title": "Gloutonnerie",
+	"SPOON_GLUTTONY_POWER.description": "Les PV que ses coups prennent au-delà de l’[gold]Armure[/gold] deviennent ses PV max. Gagne [blue]1[/blue] de [gold]Force[/gold] par tranche de [blue]5[/blue] PV max au-dessus de ses PV max de départ, en perd [blue]1[/blue] par tranche de [blue]5[/blue] en dessous.",
+	"SPOON_GLUTTONY_POWER.smartDescription": "Les PV que ses coups prennent au-delà de l’[gold]Armure[/gold] deviennent ses PV max. Gagne [blue]1[/blue] de [gold]Force[/gold] par tranche de [blue]5[/blue] PV max au-dessus de ses PV max de départ, en perd [blue]1[/blue] par tranche de [blue]5[/blue] en dessous."
 }

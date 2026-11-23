@@ -118,6 +118,7 @@ public sealed class SpoonMonster : Sts1EndingMonster
 		await base.BeforeCombatStart();
 		_startMaxHp = Creature.MaxHp;
 		Animate(m => m.Idle());
+		await PowerCmd.Apply<SpoonGluttonyPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
 		await TransformSpoonfuls();
 	}
 
