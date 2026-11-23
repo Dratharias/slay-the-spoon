@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Runs;
+using SlaySpoon.Core;
 
 namespace SlaySpoon.Matriochka;
 
@@ -30,7 +31,7 @@ public static class MatriochkaRewards
 			return;
 		if (mirror && !player.Relics.Any(r => r is DollysMirror))
 			await RelicCmd.Obtain(ModelDb.Relic<DollysMirror>().ToMutable(), player);
-		if (!cards)
+		if (!cards || MatriochkaRule.DeckFull(player.Deck.Cards.Count))
 			return;
 		var options = CardCreationOptions.ForNonCombatWithDefaultOdds([player.Character.CardPool]);
 		var reward = new CardReward(options, 3, player) { CanSkip = false };

@@ -1,0 +1,4 @@
+1.8.29 — Matriochka: Shatter forbidden, deck limit of 999 cards
+
+- Matriochka: at the act 3 Reflections, "Shatter" is no longer offered; "Touch a Mirror" is the only option. With Matriochka's copies, Shatter multiplied the deck by four (a test run reached more than 3 000 cards, close to crashing the game). You still get Dolly's Mirror when entering the room.
+- Matriochka: the deck now stops at 999 cards. At that size a new card brings no extra copies, floors give no more mandatory card and fights no card reward. Cards from events and relics can still be added.

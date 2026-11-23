@@ -49,12 +49,14 @@ and awards of each chest, keyed `combat_<floor>`, `treasure_<floor>`, `floor_<fl
       ticking both does not give 5 copies.
 - [ ] Combat rewards: the card reward cannot be skipped and the screen cannot be left before taking a card.
 - [ ] Merchant, rest site, event and treasure rooms each give an unskippable card reward when the room ends.
-- [ ] Act 3 Reflections row (1.8.2): Dolly's Mirror is given on entering, before Shatter, once; its duplicate pick
+- [ ] Act 3 Reflections row (1.8.2): Dolly's Mirror is given on entering, before Reflections' option, once; its duplicate pick
       works; a player who already holds it gets no second one. No mirror at the first merchant any more.
 - [ ] Act 2: the first event is the Doll Room with only the Bing Bong option.
 - [ ] 1.8.17: after the last boss of the run (no act 4 or Spoon act next), the Architect room offers no mandatory card; with an appended act, the act 3 boss still gives its card reward.
 - [ ] 1.8.18: the Folie à deux chest view fits the screen with three or four cards per column (Continue button visible), and every card shows its title and text (no "Broken Card").
-- [ ] Act 3: the row before the final rest sites is all Reflections; only Shatter; in co-op everyone shatters.
+- [ ] Act 3: the row before the final rest sites is all Reflections; only Touch a Mirror (1.8.29: Shatter is forbidden).
+- [ ] 1.8.29: at 999 cards the deck stops growing: a new card brings no copies (998 → 999 with one copy), no floor card,
+      no combat card reward; the rewards screen can be left.
 - [ ] Rerolls: the row's −/+ sets 0–10 (default 3); the reroll button shows the rerolls left, resets each act,
       survives save and reload. At 0 no reroll button.
 - [ ] With Folie à deux also ticked: the floor rewards go through a chest (`floor_<floor>`), the winner must take a card.

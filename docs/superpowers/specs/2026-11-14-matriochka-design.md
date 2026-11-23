@@ -6,7 +6,7 @@ Status: design agreed with the owner (2026-11-14). Tracked in `docs/backlog.md`.
 
 A Custom Run modifier about deck bloat taken to the absurd: the run is vanilla Hoarder ("Collectionniste" in French),
 with a card reward the player cannot skip on every floor, a free Dolly's Mirror, a forced Bing Bong and a forced
-"Shatter" at Reflections in act 3. The name is **"Matriochka" in both English and French** (dolls that multiply).
+Reflections in act 3 (Touch a Mirror only since 1.8.29). The name is **"Matriochka" in both English and French** (dolls that multiply).
 
 ## Rules
 
@@ -16,17 +16,21 @@ with a card reward the player cannot skip on every floor, a free Dolly's Mirror,
    skipped. Other rooms (merchant, rest site, event, treasure): a card reward is added when the room ends, also
    unskippable. *(builder call on the non-combat rooms)*
 3. **Dolly's Mirror before Bad Luck.** Entering the act 3 Reflections room (rule 5) gives Dolly's Mirror for free (its
-   pickup effect duplicates a card), right before Shatter; a player already holding it gets none. *(Owner, 2026-11-19;
+   pickup effect duplicates a card), right before Reflections' option; a player already holding it gets none. *(Owner, 2026-11-19;
    until 1.8.1 it came from the run's first merchant.)*
 4. **Doll Room guaranteed, Bing Bong forced.** The first event of act 2 is replaced by the Doll Room *(builder call)*;
    its only option gives Bing Bong.
 5. **Reflections forced in act 3.** Every node on the map row just before the final rest-site row becomes the
-   Reflections event *(builder call: the whole row, so every path meets it)*; "Shatter" (duplicate the deck, gain Bad
-   Luck) is the only option. In co-op, every player shatters.
+   Reflections event *(builder call: the whole row, so every path meets it)*; "Touch a Mirror" is the only option:
+   "Shatter" (duplicate the deck, gain Bad Luck) is forbidden *(owner, 2026-11-23: with Hoarder's copies it multiplied
+   the deck by four; a co-op bot run reached 3 127 cards)*. Until 1.8.28 Shatter was the only option.
 6. **Rerolls.** Each player may reroll card rewards a number of times per act (owner, 2026-11-14: 3 by default, set
    with the row's −/+ from 0 to 10). The vanilla reroll button (Driftwood's) shows the rerolls left; the count resets
    each act and is saved with the run.
 7. **With Folie à deux** also ticked, the mandatory rewards are bid on; the winner must take a card.
+8. **Deck limit: 999 cards** *(owner, 2026-11-23)*. A deck at 999 cards gets no more Hoarder copies (copies stop at
+   exactly 999), no floor card and no combat card reward. Other card sources (events, relics, Dolly's Mirror) still
+   add cards.
 
 Custom Run only, solo and co-op. Daily and Standard untouched.
 

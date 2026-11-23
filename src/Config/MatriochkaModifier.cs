@@ -21,7 +21,8 @@ namespace SlaySpoon.Config;
 /// <summary>
 /// Matriochka (Custom Run, docs/superpowers/specs/2026-11-14-matriochka-design.md): vanilla Hoarder, an unskippable
 /// card reward on every floor, Dolly's Mirror on the act 3 Reflections row, right before Shatter's Bad Luck (owner, 2026-11-19), the Doll Room (Bing Bong only) as the first act 2
-/// event, and a whole act 3 row of Reflections (Shatter only) before the final rest sites. The row's −/+ value is the
+/// event, and a whole act 3 row of Reflections (Touch a Mirror only: Shatter is forbidden, owner 2026-11-23) before the final rest sites.
+/// The deck stops growing at <see cref="MatriochkaRule.DeckLimit"/> cards: no more copies, floor cards or combat card rewards. The row's −/+ value is the
 /// number of card reward rerolls each player gets per act (one sealed class per value, like the percent rows).
 /// </summary>
 public abstract class SpoonMatriochka : SpoonPercentModifier
@@ -82,7 +83,8 @@ public abstract class SpoonMatriochka : SpoonPercentModifier
 		CardPile? pile = card.Pile;
 		if (pile == null || pile.Type != PileType.Deck || clonedBy != null || _cardsToSkip.Remove(card))
 			return;
-		for (int i = 0; i < MatriochkaRule.ExtraCopies; i++)
+		int copies = MatriochkaRule.CopiesFor(card.Owner.Deck.Cards.Count);
+		for (int i = 0; i < copies; i++)
 		{
 			CardModel copy = card.Owner.RunState.CloneCard(card);
 			_cardsToSkip.Add(copy);
@@ -97,6 +99,9 @@ public abstract class SpoonMatriochka : SpoonPercentModifier
 	{
 		if (room is not CombatRoom)
 			return false;
+		// Rule 8: a full deck (999 cards) gets no card reward at all.
+		if (MatriochkaRule.DeckFull(player.Deck.Cards.Count))
+			return rewards.RemoveAll(r => r is CardReward) > 0;
 		bool changed = false;
 		foreach (CardReward reward in rewards.OfType<CardReward>())
 			changed |= MatriochkaRewards.MakeMandatory(reward);

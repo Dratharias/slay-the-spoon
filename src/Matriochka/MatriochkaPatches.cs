@@ -38,19 +38,20 @@ public static class DollRoomBingBongPatch
 	}
 }
 
-/// <summary>Matriochka's Reflections: Shatter is the only option.</summary>
+/// <summary>Matriochka's Reflections: Shatter is forbidden (owner, 2026-11-23): with Hoarder's copies it multiplied the
+/// deck by four. Touch a Mirror is the only option.</summary>
 [HarmonyPatch(typeof(Reflections), "GenerateInitialOptions")]
-public static class ReflectionsShatterPatch
+public static class ReflectionsTouchPatch
 {
 	public static void Postfix(Reflections __instance, ref IReadOnlyList<EventOption> __result)
 	{
 		if (SpoonMatriochka.Of(__instance.Owner?.RunState) == null)
 			return;
-		var shatter = __result.Where(o => o.TextKey.EndsWith(".SHATTER", StringComparison.Ordinal)).ToList();
-		if (shatter.Count == 1)
-			__result = shatter;
+		var touch = __result.Where(o => o.TextKey.EndsWith(".TOUCH_A_MIRROR", StringComparison.Ordinal)).ToList();
+		if (touch.Count == 1)
+			__result = touch;
 		else
-			SpoonLog.Error("matriochka: Shatter option not found in Reflections");
+			SpoonLog.Error("matriochka: Touch a Mirror option not found in Reflections");
 	}
 }
 

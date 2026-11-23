@@ -73,4 +73,20 @@ public class MatriochkaRuleTests
 	[InlineData(10, 1, 10)]
 	public void StepRerolls_ClampsToGrid(int value, int direction, int expected) =>
 		Assert.Equal(expected, MatriochkaRule.StepRerolls(value, direction));
+
+	[Theory]
+	[InlineData(10, 2)]
+	[InlineData(997, 2)]
+	[InlineData(998, 1)]
+	[InlineData(999, 0)]
+	[InlineData(1200, 0)]
+	public void CopiesStopAtTheDeckLimit(int deckCount, int copies) =>
+		Assert.Equal(copies, MatriochkaRule.CopiesFor(deckCount));
+
+	[Theory]
+	[InlineData(998, false)]
+	[InlineData(999, true)]
+	[InlineData(3127, true)]
+	public void DeckFullAt999(int deckCount, bool full) =>
+		Assert.Equal(full, MatriochkaRule.DeckFull(deckCount));
 }

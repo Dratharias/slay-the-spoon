@@ -106,7 +106,7 @@ public static class FolieRewards
 		}
 		if (!cards) return;
 		var sets = new List<RewardsSet>();
-		foreach (Player player in run.Players.Where(p => !p.Creature.IsDead))
+		foreach (Player player in run.Players.Where(p => !p.Creature.IsDead && !MatriochkaRule.DeckFull(p.Deck.Cards.Count)))
 		{
 			var options = CardCreationOptions.ForNonCombatWithDefaultOdds([player.Character.CardPool]);
 			var set = new RewardsSet(player).WithCustomRewards([new CardReward(options, 3, player) { CanSkip = false }])
@@ -114,6 +114,7 @@ public static class FolieRewards
 			await set.GenerateWithoutOffering();
 			sets.Add(set);
 		}
+		if (sets.Count == 0) return;
 		await RedistributeSafely(run, $"floor_{run.TotalFloor}", sets);
 		foreach (RewardsSet set in sets)
 			_ = TaskHelper.RunSafely(set.Offer());

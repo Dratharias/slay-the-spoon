@@ -34,6 +34,17 @@ public static class MatriochkaRule
 	/// <summary>Copies added with every card that enters the deck (vanilla Hoarder).</summary>
 	public const int ExtraCopies = 2;
 
+	/// <summary>Deck size where Matriochka stops adding cards (owner, 2026-11-23: a bot run reached 3 127 cards).</summary>
+	public const int DeckLimit = 999;
+
+	/// <summary>Whether a deck of <paramref name="deckCount"/> cards has reached the limit: no copies, no floor card,
+	/// no combat card reward.</summary>
+	public static bool DeckFull(int deckCount) => deckCount >= DeckLimit;
+
+	/// <summary>Hoarder copies for a card that just entered a deck now holding <paramref name="deckCount"/> cards (the
+	/// new card included): two, fewer near the limit, none past it.</summary>
+	public static int CopiesFor(int deckCount) => Math.Clamp(DeckLimit - deckCount, 0, ExtraCopies);
+
 	/// <summary>
 	/// The map row just before the last row made only of rest sites, or null when there is no such row or it is the
 	/// first row. <paramref name="restSiteRows"/> lists, row by row, whether each point of the row is a rest site.

@@ -22,7 +22,7 @@ public static class MatriochkaVintagePatch
 	public static void Postfix(Player player, List<Reward> rewards, AbstractRoom? room, int __state)
 	{
 		int count = MatriochkaRule.CardsAfterVintage(SpoonMatriochka.Of(player.RunState) != null, __state, rewards.OfType<CardReward>().Count());
-		if (count == 0 || room == null)
+		if (count == 0 || room == null || MatriochkaRule.DeckFull(player.Deck.Cards.Count))
 			return;
 		for (int i = 0; i < count; i++)
 		{

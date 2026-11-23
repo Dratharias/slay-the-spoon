@@ -767,3 +767,10 @@ Read `README.md` for the player view and the spec for every decision.
   which does not exist (the segments share `DECIMILLIPEDE_SEGMENT.name` through an overridden `Title`). `SpoonTrophyCard`
   now reads the monster model's `Title` (cached `ModelDb.Monsters` by id). Not tested in game.
 
+
+## 1.8.29 — Matriochka: Shatter forbidden, 999-card deck (2026-11-23, `main`)
+
+- Owner, after a co-op bot run reached 3 127 cards: Reflections offers only Touch a Mirror in Matriochka
+  (`ReflectionsTouchPatch`, was the Shatter-only patch); the deck stops at `MatriochkaRule.DeckLimit` (999):
+  `CopiesFor` trims Hoarder copies, a full deck gets no floor card (solo and Folie à deux) and no combat card reward
+  (Vintage's put-back included). Other card sources are not capped. 932 xUnit + 110 pytest pass. Not tested in game.
