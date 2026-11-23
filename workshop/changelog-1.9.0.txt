@@ -1,0 +1,5 @@
+1.9.0 — King Midas: sell your relics
+
+- King Midas: the merchant has a "Sell a relic" button. Pick one of your relics; the merchant pays 75 % of its price (Common 131, Uncommon 168, Rare 206, Shop 150 gold). The 11 starting gold relics, your character's starter relic, Ancient and Event relics cannot be sold.
+- The sold relic goes back on sale in your shop, always dearer than what you got for it (at least a quarter more, discounts included). Leave the merchant and it is gone.
+- A broken Maw Bank is now reopened at the merchant ("Reopen the bank", 50 gold plus the merchant's price rise), no longer at the rest site. The bank itself is unchanged: buy something after reopening it and it breaks again, so reopen it last.

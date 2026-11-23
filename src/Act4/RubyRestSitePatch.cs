@@ -22,8 +22,6 @@ internal static class RubyRestSiteIconPatch
 			__result = KeySprites.Path(Act4Key.Ruby, large: true);
 		else if (__instance is SpoonGiftRestSiteOption)
 			__result = SpoonGiftRestSiteOption.IconImage;
-		else if (__instance is Midas.MawBankRestSiteOption)
-			__result = Midas.MawBankRestSiteOption.IconImage;
 		else if (__instance is Spoon.SpoonFeastRestSiteOption or Spoon.SpoonDigestRestSiteOption)
 			__result = Spoon.SpoonFeastRestSiteOption.IconImage;
 		else if (__instance is Forge.ForgeFuseRestSiteOption)
@@ -40,7 +38,6 @@ internal static class RubyRestSiteTexturePatch
 		{
 			Sts1RubyRestSiteOption => KeySprites.Path(Act4Key.Ruby, large: true),
 			SpoonGiftRestSiteOption => SpoonGiftRestSiteOption.IconImage,
-			Midas.MawBankRestSiteOption => Midas.MawBankRestSiteOption.IconImage,
 			Spoon.SpoonFeastRestSiteOption or Spoon.SpoonDigestRestSiteOption => Spoon.SpoonFeastRestSiteOption.IconImage,
 			Forge.ForgeFuseRestSiteOption => Forge.ForgeFuseRestSiteOption.IconImage,
 			_ => null,

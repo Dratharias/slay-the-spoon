@@ -37,8 +37,7 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] King Midas: <event
 - [ ] After paying, the options come back; the next action costs 100, then 150. The next fire starts at 50 again.
 - [ ] An option you cannot afford is greyed out and cannot be clicked.
 - [ ] Proceed works at any time (the fire stays lit, since the options keep coming back).
-- [ ] Maw Bank: after buying something (bank broken), "Reopen" appears with the Maw Bank icon; it costs the same price,
-      the bank works again (gold on room entry), and Reopen disappears.
+- [ ] Maw Bank: the rest site no longer offers "Reopen" (moved to the merchant in 1.9.0, see below).
 - [ ] Co-op: each player's price and options are their own; the other player's choices show on their character.
 
 ## Balance (1.8.4)
@@ -79,3 +78,22 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] King Midas: <event
 
 - [ ] A ruined player sees "Broke" (French: "Fauché") over a greyed screen for about 3 s; the ally does not.
 - [ ] Input is not blocked; the caption is readable at 16:9 and 21:9, and also shows over a solo game over.
+
+## Relic sale and bank reopening (1.9.0)
+
+- [ ] Merchant: a "Sell a relic" button sits at the top right (below Duplicate in a Forge run); greyed when you hold
+      nothing sellable (the 11 King Midas relics, your starter relic, Ancient and Event relics are never offered).
+- [ ] Sell opens the "Choose a Relic" screen with your sellable relics; skipping it sells nothing and changes no gold.
+- [ ] Selling pays 75 % of the vanilla price (Common 131, Uncommon 168, Rare 206, Shop 150), removes the relic (its
+      removal effect runs, e.g. lost max HP), and logs "King Midas: player N sold X for Y gold".
+- [ ] The sold relic appears in a new slot below the buttons, dearer than the sale: never under sale + 25 %
+      (164 / 210 / 258 / 188), Membership Card included; buying it back gives it back, the slot empties, nothing restocks.
+- [ ] Several sales in one visit add several slots side by side; leaving the merchant loses the unsold ones.
+- [ ] Co-op (`make mp`): the ally sees the seller lose the relic and gain the gold; the resale slot shows only in the
+      seller's shop; buying it back updates the ally's view; no desync.
+- [ ] Maw Bank: "Reopen the bank (50 gold)" shows only while the bank is broken; the price follows the merchant rise
+      (55 after one purchase, 60 after two; ×2 rise with the base game's Midas); greyed when paying would ruin you.
+- [ ] Reopening takes the gold, the bank pays again on the next room, the button hides; it does not raise prices; a
+      later purchase breaks the bank again and the button comes back.
+- [ ] Run seed unchanged: the merchant's other prices and the next merchants' stock are the same with or without a sale.
+

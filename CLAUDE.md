@@ -373,7 +373,7 @@ Read `README.md` for the player view and the spec for every decision.
   `Priority.First` prefixes; Neow kept); "?" events drawn from the gold list on a seed+floor `Rng`
   (`src/Midas/MidasEvents.cs`), non-gold options dropped by a `SetEventState` prefix; rest site options cost
   50 + 50 per paid action at the same fire and come back after each one (`src/Midas/MidasRestSite.cs`, a
-  `RestSiteSynchronizer.ChooseOption` prefix/postfix), Maw Bank "Reopen" while the bank is broken. Rules in
+  `RestSiteSynchronizer.ChooseOption` prefix/postfix), Maw Bank "Reopen" while the bank is broken (at the merchant since 1.9.0). Rules in
   `src/Core/MidasRule.cs`. Mutually exclusive with Matriochka (every reroll value).
 - Build 0 warnings; 603 xUnit + 91 pytest pass. Not tested in game: `docs/testing/roi-midas-checklist.md`.
 
@@ -806,3 +806,15 @@ Read `README.md` for the player view and the spec for every decision.
 
 - Owner: a big "Broke" / "Fauché" caption over a greyed screen when the King Midas melt ruins the local player
   (`src/Midas/BrokeSplash.cs`, `SPOON_MIDAS.broke` in `rest_site_ui.json`), view only, about 3 s. Not tested in game.
+
+## 1.9.0 — King Midas relic sale (2026-11-23, `main`)
+
+- Owner request (spec `docs/superpowers/specs/2026-11-23-midas-relic-sale-design.md`, plan `docs/superpowers/plans/2026-11-23-midas-relic-sale.md`):
+  a "Sell a relic" merchant button (`src/Midas/MidasRelicSale.cs`, below Forge's Duplicate) runs a synced queued action:
+  vanilla "Choose a Relic" pick (skip sells nothing), `RelicCmd.Remove`, 75 % of `MerchantCost` (`MidasRule.SalePrice`;
+  not the King Midas start relics, Starter, Ancient, Event). The seller's shop gets a local resale slot (`MidasResale`):
+  priced at `MerchantCost` without the `PlayerRng.Shops` draw, no grab bag restock (it empties), floor sale + 25 % after
+  every discount (`MidasResaleFloorPatch`, `MidasRule.ResaleFloor`); purchases sync the vanilla way.
+- The Maw Bank reopen moved from the rest site to the merchant (`src/Midas/MidasBankReopen.cs`): 50 gold × the merchant
+  rise (`MidasRule.BankReopen`), refused by `MidasMelt.CanSpend`, not a purchase. The bank stays vanilla.
+- 965 xUnit + 110 pytest pass. Not tested in game: "Relic sale and bank reopening (1.9.0)" in `docs/testing/roi-midas-checklist.md`.

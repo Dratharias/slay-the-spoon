@@ -45,25 +45,6 @@ public static class MidasRestSite
 	}
 }
 
-/// <summary>Reopens a broken Maw Bank. Shown only while the bank is broken; it costs a rest site action's price.</summary>
-public sealed class MawBankRestSiteOption(Player owner) : RestSiteOption(owner)
-{
-	public static string IconImage => ImageHelper.GetImagePath("relics/maw_bank.png");
-
-	public override string OptionId => "SPOON_MIDAS_BANK";
-	public override IEnumerable<string> AssetPaths => [IconImage];
-
-	public override Task<bool> OnSelect()
-	{
-		if (Owner.GetRelic<MawBank>() is { } bank)
-		{
-			bank.HasItemBeenBought = false;
-			bank.Status = RelicStatus.Normal;
-		}
-		return Task.FromResult(true);
-	}
-}
-
 [HarmonyPatch(typeof(RestSiteSynchronizer), "ChooseOption")]
 public static class MidasRestChoosePatch
 {

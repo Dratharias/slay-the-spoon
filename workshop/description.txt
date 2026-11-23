@@ -31,7 +31,7 @@ Hoard everything. Every floor brings cards.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-deck.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-en.png[/img]
-Start rich, but gold melts on every floor: run dry and you die; in co-op you come back for the next room with 1 gold and 1 HP, and die again on the next travel unless that room pays. No free cards; every fire costs gold, every purchase raises the merchant's prices.
+Start rich, but gold melts on every floor: run dry and you die; in co-op you come back for the next room with 1 gold and 1 HP, and die again on the next travel unless that room pays. No free cards; every fire costs gold, every purchase raises the merchant's prices. Short on gold? Sell your relics to the merchant, and reopen a broken Maw Bank there.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-relic-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-en.png[/img]

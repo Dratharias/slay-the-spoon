@@ -93,6 +93,8 @@ public sealed class SpoonRoiMidas : ModifierModel
 	public override Task AfterItemPurchased(Player player, MerchantEntry itemPurchased, int goldSpent)
 	{
 		if (goldSpent > 0) _boughtHere[player.NetId] = _boughtHere.GetValueOrDefault(player.NetId) + 1;
+		// Deferred: the Maw Bank breaks in its own AfterItemPurchased, which may run after this one.
+		Godot.Callable.From(Midas.MidasBankReopen.NotifyChanged).CallDeferred();
 		return Task.CompletedTask;
 	}
 
@@ -102,12 +104,8 @@ public sealed class SpoonRoiMidas : ModifierModel
 	/// </summary>
 	public override bool ShouldDisableRemainingRestSiteOptions(Player player) => false;
 
-	public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
-	{
-		if (player.GetRelic<MawBank>() is not { HasItemBeenBought: true }) return false;
-		options.Add(new MawBankRestSiteOption(player));
-		return true;
-	}
+	/// <summary>Purchases made by <paramref name="player"/> at the current merchant (King Midas price rise).</summary>
+	public int BoughtHere(Player player) => _boughtHere.GetValueOrDefault(player.NetId);
 }
 
 /// <summary>The King Midas starting relics, in grant order.</summary>

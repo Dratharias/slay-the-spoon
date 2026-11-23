@@ -45,5 +45,7 @@
   "SLAY_SPOON_LOANS.loan_delivered": "Prêt accepté : {Amount} pièces d’or remises. À recevoir : {Debt}.",
   "SLAY_SPOON_LOANS.sending": "Transaction en cours…",
   "SPOON_FORGE_DUPLICATE": "Dupliquer",
-  "SPOON_FORGE_DUPLICATE_USED": "Dupliqué"
+  "SPOON_FORGE_DUPLICATE_USED": "Dupliqué",
+  "SPOON_MIDAS_SELL": "Vendre une relique",
+  "SPOON_MIDAS_BANK": "Rouvrir la tirelire ({Gold} or)"
 }
