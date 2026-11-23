@@ -782,3 +782,12 @@ Read `README.md` for the player view and the spec for every decision.
   removed); a second click clears it. One synced int per reward carries both (`ConductorRule.Encode`/`Decode`:
   slot + players × (card + 1)); `CardPicks` drops bad values. A hint line sits under the title. 938 xUnit + 110 pytest
   pass. Not tested in game.
+
+## 1.8.31 — full detour sweep before actions and checksums (2026-11-23, `main`)
+
+- Bot run Q5 line 22 (Conductor + Cursed Deck, Necrobinder + Regent): divergence at the turn 2 start checksum, only the
+  piles differed, a curse in each hand. About 30 detours (`CardEnergyCost.GetWithModifiers` among them) were lost on one
+  peer between two checksums; the frame guard (48 methods per frame, ~13 frames per sweep) put them back after the game
+  had hashed the curse's cost (−1 on one peer, 1 on the other). `DetourGuard.SweepAll` now checks every patched method
+  before each game action (`ActionExecutor.BeforeActionExecuted`, an event: no detour to lose) and before each checksum
+  (`ChecksumSweepPatch`, prefix on `ChecksumTracker.GenerateChecksum`). The first sweep logs its duration. Not tested in game.

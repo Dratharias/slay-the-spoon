@@ -74,6 +74,24 @@ internal static class DetourGuard
 		}
 	}
 
+	/// <summary>
+	/// Checks every watched method now. Called before each game action and each checksum: a detour lost between two
+	/// frame slices otherwise changes what one peer computes or hashes (Q5 line 22: a playable curse's cost read
+	/// through <c>CardEnergyCost.GetWithModifiers</c> was −1 on one peer in the turn start checksum, 1 on the other).
+	/// </summary>
+	public static void SweepAll(Func<MethodBase, bool> reapply)
+	{
+		if (_body == null) return;
+		foreach (MethodBase method in _methods)
+		{
+			if (Detoured(method)) continue;
+			bool ok = reapply(method) && Detoured(method);
+			Losses[method] = Losses.GetValueOrDefault(method) + 1;
+			if (Losses[method] <= 3)
+				SpoonLog.Info($"detour guard: {method.DeclaringType?.Name}.{method.Name} lost its detour ({Losses[method]}), re-applied before an action or checksum: {(ok ? "ok" : "STILL MISSING")}");
+		}
+	}
+
 	/// <summary>Whether the method's current native code starts with a jump (MonoMod's x64 detour encodings).</summary>
 	private static unsafe bool Detoured(MethodBase method)
 	{

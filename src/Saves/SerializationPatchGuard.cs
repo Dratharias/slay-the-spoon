@@ -1,8 +1,10 @@
 using System.Reflection;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Multiplayer.Serialization;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace SlaySpoon.Saves;
@@ -44,6 +46,35 @@ public static class SerializationPatchGuard
 
 	private static int _lost;
 	private static bool _detours;
+	private static ActionExecutor? _executor;
+	private static bool _timed;
+
+	/// <summary>Full detour sweep (see <see cref="DetourGuard.SweepAll"/>). The executor's event needs no patch, so it
+	/// cannot lose a detour itself; the checksum prefix is watched by the frame slices like any patch.</summary>
+	public static void SweepNow()
+	{
+		if (!_detours) return;
+		try
+		{
+			long start = System.Diagnostics.Stopwatch.GetTimestamp();
+			DetourGuard.SweepAll(m => Reapply([m]) == 1);
+			if (_timed) return;
+			_timed = true;
+			SpoonLog.Info($"detour guard: full sweep takes {System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalMilliseconds:0.00} ms");
+		}
+		catch (Exception e)
+		{
+			SpoonLog.Error($"detour guard sweep failed: {e.Message}");
+		}
+	}
+
+	private static void WatchExecutor()
+	{
+		ActionExecutor? executor = RunManager.Instance?.ActionExecutor;
+		if (ReferenceEquals(executor, _executor)) return;
+		_executor = executor;
+		if (executor != null) executor.BeforeActionExecuted += _ => SweepNow();
+	}
 
 	private static async void Run()
 	{
@@ -78,6 +109,7 @@ public static class SerializationPatchGuard
 		try
 		{
 			if (_detours) DetourGuard.Tick(m => Reapply([m]) == 1);
+			if (_detours) WatchExecutor();
 			if (!ForgeMaxIsPatched())
 			{
 				int count = ReapplyOn(typeof(CardModel));
