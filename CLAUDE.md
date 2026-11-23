@@ -832,3 +832,10 @@ Read `README.md` for the player view and the spec for every decision.
   Spiteful from `SpoonCursedDeck.BeforeSideTurnEnd`, a model hook, never a patch on the inlinable one-line
   `OnTurnEndInHandWrapper`; Regret doubled in `RegretPatch`). Levels per curse in `docs/review/cursed-curses.md`.
 - Not tested in game: `docs/testing/forged-curses-checklist.md`.
+
+## 1.10.1 — forged curse defect text (2026-11-23, `main`)
+
+- A Bad Luck+9 render with three defects showed the last defect line cut off. Defects are now one purple line of names
+  (`SPOON_CURSE_DEFECT.<X>.name`) and one hover tip each (`CurseDefectHoverTipPatch`, `CardModel.HoverTips` postfix).
+- `CardRenderer` renders a forged curse with defects: `BadLuck+9~Spiteful~Echo~Bloody` (holds `ForgedCurses.Loading`).
+  Images: `workshop/images/forged-curse-vs-limit-break-{en,fr}.png`. Not tested in a run.

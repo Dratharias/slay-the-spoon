@@ -1,0 +1,4 @@
+1.10.1 — Forged curses: readable defects
+
+- A forged curse now lists its defects on one short purple line (for example "Bloody · Spiteful · Echo") instead of one sentence each: at +9, with Innate, Retain, Eternal and three defects, the last line was cut off at the bottom of the card.
+- Hovering the curse shows one tooltip per defect with its full effect.

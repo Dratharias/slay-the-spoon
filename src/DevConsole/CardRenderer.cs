@@ -23,7 +23,7 @@ namespace SlaySpoon.DevConsole;
 /// <summary>
 /// Workshop art tool, off unless the game is launched with <c>SLAYSPOON_RENDER_DIR</c>: once the main menu is ready,
 /// renders what <c>SLAYSPOON_RENDER_CARDS</c> names (comma-separated card class names, <c>Name+</c> for the upgraded card,
-/// <c>Name+9</c> for a Forge level, <c>relic:Name</c> for a relic's icon and tooltip) to
+/// <c>Name+9</c> for a Forge level, <c>Curse+9~Spiteful~Echo</c> for a forged curse with its defects, <c>relic:Name</c> for a relic's icon and tooltip) to
 /// <c>&lt;dir&gt;/&lt;lang&gt;/&lt;Name&gt;.png</c> (<c>+</c> written <c>Plus</c>, <c>relic:</c> dropped) in English and
 /// French, then quits. <c>gif:Name</c> writes the frames of the card's Forge climb instead (<see cref="RenderClimb"/>).
 /// <c>elites</c> writes every elite monster in its bestiary pose to <c>&lt;dir&gt;/elites/&lt;ID&gt;.png</c> (once, not per
@@ -122,6 +122,9 @@ public static class CardRenderer
 			await RenderClimb(host, dir, name["gif:".Length..]);
 			return;
 		}
+		// "Curse+9~Spiteful~Echo": a forged curse (The Forge + Cursed Deck) with the named defects.
+		string[] defectNames = name.Split('~');
+		name = defectNames[0];
 		string file = System.IO.Path.Combine(dir, name.Replace("relic:", "").Replace("+", "Plus") + ".png");
 		if (name.StartsWith("relic:"))
 		{
@@ -143,7 +146,14 @@ public static class CardRenderer
 			SpoonLog.Error($"render: no card class {typeName}");
 			return;
 		}
+		bool curse = ((CardModel)ModelDb.GetById<CardModel>(ModelDb.GetId(type))).Type == MegaCrit.Sts2.Core.Entities.Cards.CardType.Curse;
+		// Forged curse numbers, levels and defects answer only in a Forge + Cursed Deck run or while a forged curse loads:
+		// the render holds that loading flag open (the game quits after the render).
+		if (curse) Curses.Forged.ForgedCurses.Loading++;
 		CardModel card = AtLevel(type, level);
+		if (curse && defectNames.Length > 1)
+			Curses.Forged.CurseDefects.Set(card, defectNames.Skip(1)
+				.Aggregate(Core.CurseDefect.None, (set, d) => set | Enum.Parse<Core.CurseDefect>(d)));
 
 		// Margin around the card: its frame and cost orb overflow defaultSize. The tool trims the transparent edge.
 		NCard node = NCard.Create(card)!;
