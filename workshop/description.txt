@@ -1,11 +1,9 @@
 [h2]Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a few strange ways to play it.[/h2]
 Pick a mode card next to Standard, or tick what you want in Custom Run.
 
-[b]Early, and not everything has been tested.[/b] Expect bugs and the odd random crash. If a save gets corrupted, remove the mod; you can reinstall it afterwards if you still want to play. I'll patch things when I can. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and we have played a few runs with it. Some things will be unbalanced, but to me that's part of the fun.
+[b]Tested, mostly by bots.[/b] Every mode has been through a long series of automated co-op runs, so it should hold together. Balance is another story, and I'll do that part by hand. The absurd stuff stays: that's the fun. What I will tone down is whatever removes all challenge and slowly turns a run into an autoclicker. If a mode feels like that, or you just liked one, a review or a comment helps me tell which is which. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and I'm happy with how it turned out.
 
 Some animations or backgrounds may be missing. Feel free to let me know.
-
-By random crashes I mostly mean mix-ups between cards that exist in both games. For example, with the Spire Souvenir among a player's relics, Corruption (StS1 and StS2) could crash the game because it did not know which of the two cards was meant.
 
 [b]Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737335127]BaseLib[/url] 3.4.7 or later.[/b] English and French.
 
@@ -73,6 +71,6 @@ Forget Block. Every card you play makes the next hit harder.
 [*][b]Character Color[/b]: recolor your character from the pause menu. Your friends see it too.
 [/list]
 
-[b]Crashed?[/b] Paste the error part of your [i]godot.log[/i] in a comment (modes ticked, solo or co-op), or attach the whole log to a [url=https://github.com/Dratharias/slay-the-spoon/issues]GitHub issue[/url]. Log: [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
+[b]Found a bug?[/b] Paste the error part of your [i]godot.log[/i] in a comment (modes ticked, solo or co-op), or attach the whole log to a [url=https://github.com/Dratharias/slay-the-spoon/issues]GitHub issue[/url]. Log: [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).
 
 [i]Unofficial. Not affiliated with, endorsed by or sponsored by Mega Crit. Slay the Spire, Slay the Spire 2 and their assets belong to Mega Crit. Written with AI coding agents under the author's direction. Bug reports are welcome; fixes come when time allows.[/i]

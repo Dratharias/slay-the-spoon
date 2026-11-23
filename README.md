@@ -14,7 +14,7 @@ Slay the Spoon cards start Standard runs in those modes, and Neow's cursed optio
 > **Vibe coded.** The code in this repository was written with AI coding agents (Claude and Codex) under
 > the direction of the author, who designed the mod and tests it in game.
 
-> **Found a bug or a crash?** Expect some: most features are barely tested in game. I patch them when I can. Tell me
+> **Found a bug?** Every mode has been through a long series of automated co-op runs; balance will be tuned by hand. Tell me
 > what you were doing (modes and options ticked, solo or co-op, character, last action) and attach your
 > `godot.log` (`%APPDATA%\SlayTheSpire2\logs\` on Windows, `~/.local/share/SlayTheSpire2/logs/` on Linux). The code is public.
 > You are entirely free to fork the mod and make your own version.
@@ -261,7 +261,7 @@ Slay the Spire 1 and its decompiled card classes (`STS1_DECOMP`, `STS1_JAR`; see
 
 MIT for the code in this repository (see `LICENSE`). Game assets are Mega Crit's.
 
-## Crashes
+## Bugs
 
 Paste the error part of your `godot.log` in a Workshop comment (modes ticked, solo or co-op), or attach the whole log
 to a [GitHub issue](https://github.com/Dratharias/slay-the-spoon/issues). Log: `%APPDATA%\SlayTheSpire2\logs`
