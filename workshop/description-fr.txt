@@ -31,7 +31,7 @@ Accumulez tout. Chaque étage apporte des cartes.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-deck.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-fr.png[/img]
-Départ fortuné, mais l'or fond à chaque étage : à sec, on meurt. Aucune carte gratuite, chaque feu se paie, chaque achat fait monter les prix du marchand.
+Départ fortuné, mais l'or fond à chaque étage : à sec, on meurt ; en coop, on revient avec 1 or pour la salle suivante et on remeurt en la quittant, sauf si elle rapporte. Aucune carte gratuite, chaque feu se paie, chaque achat fait monter les prix du marchand.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-relic-fr.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-fr.png[/img]

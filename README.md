@@ -121,7 +121,7 @@ Both modes still need in-game validation; see `docs/testing/two-modes-checklist.
 **King Midas** (Custom Run): every player starts with the gold relics (Bowler Hat, Maw Bank, Old Coin, Membership Card,
 The Courier and more). No card rewards anywhere: cards come from the merchant. Every "?" event is a gold event, and gold
 is its only way out. Rest site actions cost gold (50, then 50 more each time at the same fire) and can be repeated; a
-broken Maw Bank can be reopened there. Gold melts on every floor (10 %, at least the average gold earned per floor): a player left with no gold dies.
+broken Maw Bank can be reopened there. Gold melts on every floor (10 %, at least the average gold earned per floor): a player left with no gold dies; in co-op, on the next travel they pay nothing, gain 1 gold and come back with 1 HP for that room.
 Each purchase raises the merchant's other prices by 10 %, and nothing is sold that would leave you ruined. Not with Matriochka. Not tested in game: `docs/testing/roi-midas-checklist.md`.
 
 **The Forge** (Custom Run): two copies of a card fuse at a rest site's new Fuse option, past +1 and up to +9. Levels

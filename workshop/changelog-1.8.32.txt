@@ -1,0 +1,4 @@
+1.8.32 — King Midas: ruined players come back
+
+- King Midas (co-op): the gold melt still kills a player it leaves with nothing, but they no longer stay dead. On the next travel they pay no melt, gain 1 gold and come back to life with 1 HP for that room. Leaving it without enough gold for the melt kills them again, so any gold the room gives (a fight, an event) is their way back. Solo, running out of gold is still a game over.
+- Custom Run and Workshop descriptions updated (English and French).

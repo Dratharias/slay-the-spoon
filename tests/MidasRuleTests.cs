@@ -91,6 +91,15 @@ public class MidasRuleTests
 	public void RuinedWhenTheMeltEmptiesThePurse(int gold, int floor, bool ruined) => Assert.Equal(ruined, MidasRule.Ruined(gold, floor));
 
 	[Theory]
+	[InlineData(false, 3900, 117, MidasRule.Travel.Pay)]
+	[InlineData(false, 25, 25, MidasRule.Travel.PayAndDie)]
+	[InlineData(false, 1, 25, MidasRule.Travel.PayAndDie)]
+	[InlineData(true, 0, 25, MidasRule.Travel.Revive)]
+	[InlineData(true, 3900, 117, MidasRule.Travel.Revive)]
+	public void DeadPlayersComeBackInsteadOfPaying(bool dead, int gold, int floor, MidasRule.Travel travel) =>
+		Assert.Equal(travel, MidasRule.OnTravel(dead, gold, floor));
+
+	[Theory]
 	[InlineData(100, 74, 25, true)]
 	[InlineData(100, 75, 25, false)]
 	[InlineData(100, 101, 25, false)]

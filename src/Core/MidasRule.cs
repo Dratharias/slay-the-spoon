@@ -88,6 +88,20 @@ public static class MidasRule
 	/// <summary>True when the next melt leaves no gold: the player dies on traveling.</summary>
 	public static bool Ruined(int gold, int floor, int scale = 1) => gold - Melt(gold, floor, scale) <= 0;
 
+	/// <summary>Gold a player already dead on traveling (ruined by an earlier melt) gains instead of paying.</summary>
+	public const int RevivalGift = 1;
+
+	/// <summary>What a travel does to one player.</summary>
+	public enum Travel { Pay, PayAndDie, Revive }
+
+	/// <summary>
+	/// A dead player pays nothing, gains <see cref="RevivalGift"/> and comes back to life for the room (owner, 2026-11-23);
+	/// a living one pays the melt and dies if it empties the purse. So a broke player alternates: dead in one room, alive
+	/// with 1 gold in the next, and any gold that room gives can pull them out.
+	/// </summary>
+	public static Travel OnTravel(bool dead, int gold, int floor, int scale = 1) =>
+		dead ? Travel.Revive : Ruined(gold, floor, scale) ? Travel.PayAndDie : Travel.Pay;
+
 	/// <summary>
 	/// True when the player may pay <paramref name="price"/>: they hold it and keep enough to survive the next melt.
 	/// The merchant and the rest site refuse what would kill.

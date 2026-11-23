@@ -66,3 +66,12 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] King Midas: <event
 - [ ] King Midas + Midas: gold rewards doubled; the melt takes 20 % (at least 50, or the average gain per floor);
   merchant prices rise 20 % per purchase; rest site actions cost 100, 200, 300.
 - [ ] King Midas alone: unchanged (10 %, 25, +10 %, 50/100/150).
+
+## Ruined players come back (1.8.32)
+
+- [ ] Co-op (`make mp`): a player ruined by the melt is dead in the next room; on the travel after it they pay nothing,
+      gain 1 gold and are alive with 1 HP in that room (log: "King Midas: player N revived for the room").
+- [ ] Leaving that room with too little gold kills them again; gold earned in the room (fight, event) keeps them alive.
+- [ ] Both clients show the same gold and HP after the revival travel; no "generic event death message" error when the
+      revived player enters a "?" room.
+- [ ] Solo: a ruin is still a game over.

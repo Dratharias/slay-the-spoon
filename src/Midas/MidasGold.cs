@@ -19,7 +19,9 @@ namespace SlaySpoon.Midas;
 /// King Midas gold melt: each time the team travels to a map room, every living player loses
 /// <see cref="MidasRule.Melt"/> (10 %, at least their average gold gained per floor); a player the melt leaves with no gold dies. It runs inside the synced travel action,
 /// on the map before the fade, so every peer melts the same synced gold and a death shows over the map (a death while
-/// the screen is faded out would hide the game over screen). Act starts are not travels and do not melt.
+/// the screen is faded out would hide the game over screen). A player already dead on traveling (co-op: ruined earlier)
+/// pays nothing, gains 1 gold and is revived with 1 HP for the room (<see cref="MidasRule.OnTravel"/>). Act starts are not
+/// travels and do not melt.
 /// </summary>
 public static class MidasMelt
 {
@@ -28,13 +30,22 @@ public static class MidasMelt
 		var ruined = new List<Creature>();
 		foreach (Player player in run.Players)
 		{
-			if (player.Creature.IsDead) continue;
 			int gold = player.Gold;
 			int floor = FloorFor(player);
 			int scale = SpoonRoiMidas.Scale(run);
+			MidasRule.Travel travel = MidasRule.OnTravel(player.Creature.IsDead, gold, floor, scale);
+			if (travel == MidasRule.Travel.Revive)
+			{
+				SpoonLog.Info($"King Midas: player {player.NetId} revived for the room with {MidasRule.RevivalGift} gold");
+				// 1 HP, like vanilla's co-op revive at the end of a fight. No animation: the travel starts from the room
+				// being left, whose creature nodes may already be gone.
+				await CreatureCmd.Heal(player.Creature, 1m, playAnim: false);
+				await PlayerCmd.GainGold(MidasRule.RevivalGift, player);
+				continue;
+			}
 			int melt = MidasRule.Melt(gold, floor, scale);
 			if (melt > 0) await PlayerCmd.LoseGold(melt, player, GoldLossType.Lost);
-			if (MidasRule.Ruined(gold, floor, scale))
+			if (travel == MidasRule.Travel.PayAndDie)
 			{
 				SpoonLog.Info($"King Midas: player {player.NetId} ruined: {gold} gold, melt floor {floor}");
 				ruined.Add(player.Creature);
