@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using SlaySpoon.Cards;
 using SlaySpoon.Core;
+using SlaySpoon.Curses.Forged;
 using SlaySpoon.Forge;
 
 namespace SlaySpoon.Curses;
@@ -32,7 +33,7 @@ public static class CurseUpgrade
 
 	/// <summary>Cursed Deck run (or a saved +1 curse being loaded, which proves one), checked without needing an owner.</summary>
 	public static bool Active(CardModel card) =>
-		_loading > 0 || SpoonCursedDeck.IsActive(OwnerRef(card)?.RunState ?? ForgeLevels.CurrentRun);
+		_loading > 0 || ForgedCurses.Loading > 0 || SpoonCursedDeck.IsActive(OwnerRef(card)?.RunState ?? ForgeLevels.CurrentRun);
 
 	/// <summary>A mutable curse of the mode that is upgraded and has a table row.</summary>
 	public static CurseRow? UpgradedRow(CardModel card) =>
@@ -66,46 +67,74 @@ public static class CurseUpgrade
 	{
 		public static IEnumerable<MethodBase> TargetMethods() => OverridingGetters();
 
-		/// <summary>In the mode a curse goes to +1 (never fused: the Forge only touches classes that keep the base getter).</summary>
+		/// <summary>
+		/// In the mode a curse goes to +1. With The Forge too, fusion and reloads (an open Forge scope) reach +9, and a forged
+		/// curse's max follows its level so its title reads "+N" and ordinary upgrades still stop.
+		/// </summary>
 		public static void Postfix(CardModel __instance, ref int __result)
 		{
-			if (__result == 0 && IsCurse(__instance) && Active(__instance)) __result = 1;
+			if (__result != 0 || !IsCurse(__instance) || !Active(__instance)) return;
+			bool combo = ForgedCurses.Applies(__instance);
+			__result = Math.Max(ForgedCurseRule.MaxLevelFor(combo, ForgeLevels.InScope, __result), combo ? __instance.CurrentUpgradeLevel : 0);
 		}
 	}
 
-	/// <summary>A saved +1 curse replays its upgrade on load, before the run state exists: let it through.</summary>
+	/// <summary>
+	/// A saved upgraded curse replays its upgrades on load, before the run state exists: let it through. A level above +1
+	/// proves Forge + Cursed Deck (the Forge's own load patch opens the scope); it reloads to at most +9.
+	/// </summary>
 	[HarmonyPatch(typeof(CardModel), nameof(CardModel.FromSerializable))]
 	public static class LoadPatch
 	{
-		public static void Prefix(SerializableCard save, out bool __state)
+		public static void Prefix(SerializableCard save, out int __state)
 		{
-			__state = save.CurrentUpgradeLevel == 1 && CurseTable.For(save.Id!.Entry) != null;
-			if (__state) _loading++;
+			__state = 0;
+			if (save.CurrentUpgradeLevel < 1 || CurseTable.For(save.Id!.Entry) == null) return;
+			_loading++;
+			__state = 1;
+			if (save.CurrentUpgradeLevel <= 1) return;
+			save.CurrentUpgradeLevel = ForgedCurseRule.LoadLevel(save.CurrentUpgradeLevel, comboActive: true);
+			ForgedCurses.Loading++;
+			__state = 2;
 		}
 
-		public static Exception? Finalizer(Exception? __exception, bool __state)
+		public static Exception? Finalizer(Exception? __exception, int __state)
 		{
-			if (__state) _loading--;
+			if (__state >= 1) _loading--;
+			if (__state == 2) ForgedCurses.Loading--;
 			return __exception;
 		}
 	}
 
-	/// <summary>The row's card var goes from Amount to AmountPlus (Pain+ 2, Parasite+ 5, Bad Luck+ 20...), Normality's and Guilty's limits shift.</summary>
+	/// <summary>
+	/// The row's card var follows the level: each level repeats the +0 → +1 step (Pain+ 2, Parasite+ 5, Bad Luck+ 20, Bad
+	/// Luck+9 76...); Normality's and Guilty's limits shift. Set from the canonical value, so replaying it is harmless.
+	/// </summary>
 	[HarmonyPatch(typeof(CardModel), "OnUpgrade")]
 	public static class VarPatch
 	{
 		public static void Postfix(CardModel __instance)
 		{
 			if (UpgradedRow(__instance) is not { } row) return;
+			int level = __instance.CurrentUpgradeLevel;
 			if (VarFor(row) is { } name && __instance.DynamicVars.TryGetValue(name, out var v) && row.AmountPlus != row.Amount)
-				v.UpgradeValueBy(row.AmountPlus - row.Amount);
-			if (__instance is Normality n && row.Self is { } limits)
 			{
-				if (n.DynamicVars.TryGetValue("CalculationBase", out var b)) b.UpgradeValueBy(limits[1] - limits[0]);
-				NormalityPatch.SetMultiplier(n, limits[1]);
+				decimal start = __instance.CanonicalInstance.DynamicVars.TryGetValue(name, out var cv) ? cv.BaseValue : row.Amount;
+				SetTo(v, start + (row.AmountPlus - row.Amount) * level);
 			}
-			if (__instance is Guilty g && row.Self is { } gl && g.DynamicVars.TryGetValue("Combats", out var c))
-				c.BaseValue = gl[1] - g.CombatsSeen;
+			if (__instance is Normality n && row.Self != null)
+			{
+				int limit = ForgedCurseRule.NormalityLimitAt(level);
+				if (n.DynamicVars.TryGetValue("CalculationBase", out var b)) SetTo(b, limit);
+				NormalityPatch.SetMultiplier(n, limit);
+			}
+			if (__instance is Guilty g && row.Self != null && g.DynamicVars.TryGetValue("Combats", out var c))
+				c.BaseValue = ForgedCurseRule.GuiltyCombatsAt(level) - g.CombatsSeen;
+		}
+
+		private static void SetTo(DynamicVar v, decimal target)
+		{
+			if (target != v.BaseValue) v.UpgradeValueBy(target - v.BaseValue);
 		}
 	}
 
@@ -124,7 +153,7 @@ public static class CurseUpgrade
 				Calc.SetValue(calc, (Func<CardModel, Creature?, decimal>)((c, _) => Math.Min(limit, PlayedThisTurn((Normality)c))));
 		}
 
-		public static int Limit(Normality card) => UpgradedRow(card)?.Self is { } s ? s[1] : -1;
+		public static int Limit(Normality card) => UpgradedRow(card)?.Self != null ? ForgedCurseRule.NormalityLimitAt(card.CurrentUpgradeLevel) : -1;
 	}
 
 	/// <summary>Normality+ allows the table's upgraded number of cards (the private getter it replaces can be inlined, so the callers are patched).</summary>
@@ -155,8 +184,8 @@ public static class CurseUpgrade
 	{
 		public static void Postfix(Guilty __instance)
 		{
-			if (UpgradedRow(__instance)?.Self is { } s && __instance.DynamicVars.TryGetValue("Combats", out var v))
-				v.BaseValue = s[1] - __instance.CombatsSeen;
+			if (UpgradedRow(__instance)?.Self != null && __instance.DynamicVars.TryGetValue("Combats", out var v))
+				v.BaseValue = ForgedCurseRule.GuiltyCombatsAt(__instance.CurrentUpgradeLevel) - __instance.CombatsSeen;
 		}
 	}
 
@@ -169,14 +198,15 @@ public static class CurseUpgrade
 		private static async Task Finish(Task original, Guilty card)
 		{
 			await original;
-			if (UpgradedRow(card)?.Self is { } s && card.CombatsSeen >= s[1] && card.Pile?.Type == PileType.Deck)
+			if (UpgradedRow(card)?.Self != null && card.CombatsSeen >= ForgedCurseRule.GuiltyCombatsAt(card.CurrentUpgradeLevel)
+				&& card.Pile?.Type == PileType.Deck)
 				await MegaCrit.Sts2.Core.Commands.CardPileCmd.RemoveFromDeck(card);
 		}
 	}
 
 	private static readonly AccessTools.FieldRef<Regret, int> CardsInHand = AccessTools.FieldRefAccess<Regret, int>("_cardsInHand");
 
-	/// <summary>Regret+: the turn-end loss counts the table's upgraded HP per card in hand.</summary>
+	/// <summary>Regret+: the turn-end loss counts the level's HP per card in hand.</summary>
 	[HarmonyPatch(typeof(Regret), nameof(Regret.BeforeSideTurnEnd))]
 	public static class RegretPatch
 	{
@@ -184,7 +214,8 @@ public static class CurseUpgrade
 		{
 			if (UpgradedRow(__instance) is not { } row || __instance.Pile?.Type != PileType.Hand) return;
 			if (!participants.Contains(__instance.Owner.Creature)) return;
-			CardsInHand(__instance) = __instance.Pile.Cards.Count * row.AmountPlus;
+			CardsInHand(__instance) = __instance.Pile.Cards.Count * ForgedCurseRule.AmountAt(row, __instance.CurrentUpgradeLevel)
+				* ForgedCurseRule.SpitefulTimes(Forged.ForgedCurses.Applies(__instance) ? Forged.CurseDefects.Get(__instance) : CurseDefect.None);
 		}
 	}
 
@@ -196,7 +227,8 @@ public static class CurseUpgrade
 		{
 			if (__instance is not (Regret or Normality) || UpgradedRow(__instance) is not { } row) return;
 			var text = new LocString("cards", "SPOON_CURSED_" + row.Id + "_PLUS.description");
-			text.Add("Amount", __instance is Normality ? row.Self![1] : row.AmountPlus);
+			int level = __instance.CurrentUpgradeLevel;
+			text.Add("Amount", __instance is Normality ? ForgedCurseRule.NormalityLimitAt(level) : ForgedCurseRule.AmountAt(row, level));
 			__result = text;
 		}
 	}

@@ -45,6 +45,7 @@ Bludgeon+9: 344 damage.
 Curses are your ammo. Play them, throw them at the enemy, collect the relics that love them.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-en.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-relic-en.png[/img]
+With The Forge too, curses fuse up to +9: far stronger on both sides, with a defect at +3, +6 and +9.
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-en.png[/img]
 One unblocked hit and you die. Stack Block, then hit with it.
@@ -75,7 +76,6 @@ Conductor, four players: one player hands out every reward of the fight.
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/upcoming-en.png[/img]
 [list]
-[*][b]Forged curses[/b] (Forge + Cursed Deck): curses fuse up to +9, hit far harder on both sides and pick up defects on the way (odd turns only, costs 2 more, bites its owner...).
 [*][b]Forge upgrade preview[/b]: see a card from +1 to +9 wherever upgrades are shown.
 [*][b]Overcursed[/b]: Matriochka for curses, each one in threes.
 [/list]

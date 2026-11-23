@@ -9,7 +9,7 @@ namespace SlaySpoon;
 [ModInitializer(nameof(Initialize))]
 public static class ModEntry
 {
-	public const string Version = "1.9.0";
+	public const string Version = "1.10.0";
 
 	public static void Initialize()
 	{
@@ -24,6 +24,7 @@ public static class ModEntry
 			SpoonLog.Error($"Sts1EndingAct self-check failed: {e.Message}");
 		}
 		Act4.Act4Routing.Register();
+		Curses.Forged.CurseDefects.Register();
 		LinuxHarmonyFix.Apply();
 		PatchEach(new Harmony("slayspoon"));
 		Saves.SerializationPatchGuard.Start();

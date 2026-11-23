@@ -29,3 +29,34 @@ number goes up on both sides; a curse with no played effect gets the Grimoire at
 | STS1_NECRONOMICURSE | Eternal, Unplayable (StS1, Necronomicon) | When exhausted, comes back to your hand | same | - | - | 12 | 1 | Exhausted on play then back in hand: replayable all turn. Upgraded it keeps cost 1 (at 0 it would loop forever); Grimoire 12 per energy; its return to the hand is fuel too, so no nerf |
 | STS1_PARASITE | Unplayable (StS1, to port) | No effect; removed from the deck: lose 3 max HP | stronger, as Played | loses 3 max HP | loses 5 max HP | 5 | 0 | The parasite jumps to the targeted monster: it loses 3 max HP (current HP only drops if above the new max); upgraded, 5 on both sides (removing it costs you 5 max HP) |
 | STS1_PRIDE | Innate, Exhaust; playable for 1 (StS1, to port) | End of turn in hand: put a copy on top of your draw pile | same | - | - | 12 | 0 | Already playable and exhausting; its copies are Grimoire fuel, so no nerf. Cost 0 and Grimoire 12 upgraded; the copies are +0 |
+
+## Forged curses
+
+With The Forge and Cursed Deck, curses fuse up to +9 and every level repeats the +0 -> +1 step. Played curses list
+their amount (both sides); curses with no played effect list their Grimoire damage. Defects: 1 from +3, 2 from +6,
+3 at +9.
+
+| Curse | +0 | +1 | +2 | +3 | +4 | +5 | +6 | +7 | +8 | +9 |
+|-------|----|----|----|----|----|----|----|----|----|----|
+| BAD_LUCK | 13 | 20 | 27 | 34 | 41 | 48 | 55 | 62 | 69 | 76 |
+| DECAY | 2 | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 | 20 |
+| REGRET | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| DOUBT | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| SHAME | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| DEBT | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 |
+| STS1_PAIN | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| NORMALITY | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| ENTHRALLED | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| SPORE_MIND | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| CLUMSY | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| INJURY | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| WRITHE | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| GUILTY | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| FOLLY | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| GREED | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| CURSE_OF_THE_BELL | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| POOR_SLEEP | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| ASCENDERS_BANE | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| STS1_NECRONOMICURSE | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |
+| STS1_PARASITE | 3 | 5 | 7 | 9 | 11 | 13 | 15 | 17 | 19 | 21 |
+| STS1_PRIDE | 5 | 12 | 15 | 19 | 22 | 26 | 29 | 33 | 36 | 40 |

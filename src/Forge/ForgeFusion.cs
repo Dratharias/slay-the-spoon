@@ -6,6 +6,8 @@ using MegaCrit.Sts2.Core.Models;
 using SlaySpoon.Cards;
 using SlaySpoon.Core;
 
+using SlaySpoon.Curses.Forged;
+
 namespace SlaySpoon.Forge;
 
 /// <summary>
@@ -116,6 +118,9 @@ public static class ForgeFusion
 	public static async Task<CardModel> Apply(CardModel kept, CardModel sacrificed, CardModel version)
 	{
 		int keptLevel = kept.CurrentUpgradeLevel;
+		var keptDefects = CurseDefects.Get(kept);
+		var sacrificedDefects = CurseDefects.Get(sacrificed);
+		int deckIndex = kept.Owner is { } owner ? PileType.Deck.GetPile(owner).Cards.ToList().IndexOf(kept) : 0;
 		CardModel result;
 		if (version.Id == kept.Id)
 		{
@@ -130,6 +135,7 @@ public static class ForgeFusion
 			result = (await CardCmd.Transform(kept, result, CardPreviewStyle.None))?.cardAdded ?? result;
 		}
 		await CardPileCmd.RemoveFromDeck(sacrificed, showPreview: false);
+		CurseDefects.AfterFusion(result, keptDefects, sacrificedDefects, deckIndex);
 		SpoonLog.Info($"forge: {kept.Id.Entry}+{keptLevel} + {sacrificed.Id.Entry}+{sacrificed.CurrentUpgradeLevel} -> {result.Id.Entry}+{result.CurrentUpgradeLevel}{(result.Enchantment is { } e ? " " + e.Id.Entry : "")}");
 		return result;
 	}

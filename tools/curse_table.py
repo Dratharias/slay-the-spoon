@@ -50,6 +50,18 @@ def cost_plus(row: dict) -> int:
     return row.get("costPlus", 0)
 
 
+def amount_at(row: dict, level: int) -> int:
+    """Forged curses (ForgedCurseRule.AmountAt): each level repeats the +0 -> +1 step."""
+    return row["amount"] + (row["amountPlus"] - row["amount"]) * max(level, 0)
+
+
+def grimoire_at(row: dict, level: int) -> int:
+    """ForgedCurseRule.GrimoireAt: 5, or for a curse with no played effect 12 at +1 then +3.5 per level, rounded down."""
+    if row["played"] != "None" or level < 1:
+        return GRIMOIRE
+    return GRIMOIRE_NO_EFFECT_PLUS + 7 * (level - 1) // 2
+
+
 def validate(table: dict, scanned: list[str]) -> list[str]:
     errors = []
     curses = rows(table)
@@ -103,6 +115,21 @@ def review(table: dict) -> str:
         cells = [key, row["keywords"], row["inHand"], row.get("inHandPlus", "same" if row["played"] == "None" else "stronger, as Played"), played_text(row, False), played_text(row, True),
                  grimoire_plus(row), cost_plus(row), row["note"]]
         lines.append("| " + " | ".join(str(c).replace("|", "/") for c in cells) + " |")
+    levels = range(10)
+    lines += [
+        "",
+        "## Forged curses",
+        "",
+        "With The Forge and Cursed Deck, curses fuse up to +9 and every level repeats the +0 -> +1 step. Played curses list",
+        "their amount (both sides); curses with no played effect list their Grimoire damage. Defects: 1 from +3, 2 from +6,",
+        "3 at +9.",
+        "",
+        "| Curse | " + " | ".join(f"+{lv}" for lv in levels) + " |",
+        "|-------|" + "|".join("----" for _ in levels) + "|",
+    ]
+    for key, row in rows(table).items():
+        values = [amount_at(row, lv) if row["played"] != "None" else grimoire_at(row, lv) for lv in levels]
+        lines.append(f"| {key} | " + " | ".join(str(v) for v in values) + " |")
     return "\n".join(lines) + "\n"
 
 

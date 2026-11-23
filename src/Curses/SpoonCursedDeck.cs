@@ -1,4 +1,7 @@
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
@@ -27,4 +30,8 @@ public sealed class SpoonCursedDeck : ModifierModel
 		}
 		runState.SharedRelicGrabBag.Remove(relic);
 	}
+
+	/// <summary>Forged curses' Spiteful defect (with The Forge): one more in-hand run before the vanilla one.</summary>
+	public override Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants) =>
+		side == CombatSide.Player ? Forged.SpitefulTurnEnd.Run(choiceContext, participants) : Task.CompletedTask;
 }

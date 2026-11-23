@@ -32,7 +32,7 @@ public static class ForgeDuplicate
 {
 	public static ForgeRarity RarityOf(CardModel card) => card.Rarity switch
 	{
-		CardRarity.Basic or CardRarity.Common => ForgeRarity.Common,
+		CardRarity.Basic or CardRarity.Common or CardRarity.Curse => ForgeRarity.Common,
 		CardRarity.Uncommon => ForgeRarity.Uncommon,
 		_ => ForgeRarity.Rare,
 	};
@@ -44,7 +44,9 @@ public static class ForgeDuplicate
 
 	public static int PriceOf(SpoonForge forge, Player player, CardModel card) => PriceOf(forge, player, RarityOf(card));
 
-	public static bool Eligible(CardModel card) => card.Type is not (CardType.Curse or CardType.Status);
+	/// <summary>Curses only in Forge + Cursed Deck (priced like a Common card), never Status cards.</summary>
+	public static bool Eligible(CardModel card) => card.Type is not (CardType.Curse or CardType.Status)
+		|| SlaySpoon.Curses.Forged.ForgedCurses.Fusable(card);
 
 	private static bool Affordable(Player player, int price) => price <= player.Gold
 		&& (!SpoonRoiMidas.IsActive(player.RunState) || MidasMelt.CanSpend(player, price));

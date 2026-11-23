@@ -2,6 +2,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -36,7 +37,7 @@ public sealed class SpoonUnholyGrimoire : RelicModel
 		var enemies = combat.HittableEnemies.ToList();
 		if (enemies.Count == 0) return;
 		Flash();
-		int damage = CurseRule.GrimoireDamageFor(CurseTable.For(card.Id.Entry), card.IsUpgraded);
+		int damage = CurseRule.GrimoireDamageFor(CurseTable.For(card.Id.Entry), card.CurrentUpgradeLevel);
 		await CreatureCmd.Damage(choiceContext, enemies, damage, ValueProp.Unpowered, Owner.Creature);
 	}
 
@@ -57,15 +58,34 @@ public sealed class SpoonUnholyGrimoire : RelicModel
 	{
 		CardModel card = cardPlay.Card;
 		if (card.Owner != Owner || card.Type != CardType.Curse || !CursePlay.IsPlayableCurse(card)) return;
-		if (CursePlay.RowFor(card) is not { } row || row.Played == "None") return;
-		if (cardPlay.Target is not { IsAlive: true } target || target.Side == Owner.Creature.Side) return;
-		if (card.CombatState is not { } combat) return;
+		var defects = Forged.ForgedCurses.Applies(card) ? Forged.CurseDefects.Get(card) : CurseDefect.None;
+		if (defects.HasFlag(CurseDefect.Bloody)) await Forged.CurseDefectEffects.Bloody(choiceContext, card);
+		int dealt = await PlayedEffect(choiceContext, cardPlay, card);
+		if (defects == CurseDefect.None) return;
+		if (defects.HasFlag(CurseDefect.Echo) && dealt > 0 && CursePlay.RowFor(card) is { } row)
+			await Forged.CurseDefectEffects.Echo(choiceContext, card, row.Played, ForgedCurseRule.EchoAmount(dealt));
+		if (defects.HasFlag(CurseDefect.Contagious)) await Forged.CurseDefectEffects.Contagious(card);
+		if (defects.HasFlag(CurseDefect.Ravenous)) await Forged.CurseDefectEffects.Ravenous(choiceContext, card);
+	}
+
+	/// <summary>The curse's played effect on its target; returns the amount used (0 when nothing happened).</summary>
+	private async Task<int> PlayedEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay, CardModel card)
+	{
+		if (CursePlay.RowFor(card) is not { } row || row.Played == "None") return 0;
+		if (cardPlay.Target is not { IsAlive: true } target || target.Side == Owner.Creature.Side) return 0;
+		if (card.CombatState is not { } combat) return 0;
 		int hand = Owner.PlayerCombatState?.Hand.Cards.Count ?? 0;
 		int played = CombatManager.Instance.History.CardPlaysStarted
 			.Count(e => e.HappenedThisTurn(combat) && e.CardPlay.Player == Owner);
-		int amount = CurseRule.PlayedAmount(row, card.IsUpgraded, hand, played);
-		if (amount <= 0) return;
+		int amount = CurseRule.PlayedAmount(row, card.CurrentUpgradeLevel, hand, played);
+		if (amount <= 0) return 0;
 		Flash();
+		await ApplyPlayed(choiceContext, row, target, amount, card, cardPlay);
+		return amount;
+	}
+
+	private async Task ApplyPlayed(PlayerChoiceContext choiceContext, CurseRow row, Creature target, int amount, CardModel card, CardPlay cardPlay)
+	{
 		switch (row.Played)
 		{
 			case "HpLoss":

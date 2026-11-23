@@ -57,7 +57,7 @@ public static class PlayableCurseCostPatch
 		int canonical = __instance.Canonical;
 		int? cost = CurseRule.PlayedCost(CursePlay.RowFor(card), canonical, card.IsUpgraded, __result);
 		if (cost == null) return;
-		int value = cost.Value;
+		int value = ForgedCurseRule.CostWithDefects(Forged.CurseDefects.Get(card), cost.Value, playable: true);
 		if (canonical < 0 && modifiers.HasFlag(CostModifiers.Global) && card.CombatState is { } combat)
 			value = (int)Hook.ModifyEnergyCostInCombat(combat, card, value);
 		__result = Math.Max(0, value);

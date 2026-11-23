@@ -818,3 +818,17 @@ Read `README.md` for the player view and the spec for every decision.
 - The Maw Bank reopen moved from the rest site to the merchant (`src/Midas/MidasBankReopen.cs`): 50 gold × the merchant
   rise (`MidasRule.BankReopen`), refused by `MidasMelt.CanSpend`, not a purchase. The bank stays vanilla.
 - 965 xUnit + 110 pytest pass. Not tested in game: "Relic sale and bank reopening (1.9.0)" in `docs/testing/roi-midas-checklist.md`.
+
+## 1.10.0 — forged curses (2026-11-23, branch `forged-curses`)
+
+- The Forge + Cursed Deck (spec `docs/superpowers/specs/2026-11-23-forged-curses-design.md`, plan
+  `docs/superpowers/plans/2026-11-23-forged-curses.md`): curses fuse and duplicate (never Eternal ones) up to +9
+  (`src/Curses/Forged/ForgedCurses.cs`, the gates in `ForgeLevels`, `ForgeDuplicate`, `CurseUpgradePatch.MaxLevelPatch`);
+  each level repeats the +0 → +1 step on both sides (`ForgedCurseRule.AmountAt`, Grimoire, Normality, Guilty). Ordinary
+  upgrades still stop at +1. Defects at +3/+6/+9 (`CurseDefect` flags, drawn at fusion on `DefectStream`): stored in a
+  BaseLib `SavedSpireField<CardModel,string>` built by reflection (`CurseDefects`; the build has no BaseLib reference;
+  a string, null when none, because BaseLib saves every non-null value on every card), play
+  checks (`CurseDefectPlayPatch`, can't-play line), purple text (`CurseDefectTextPatch`), effects (`CurseDefectEffects`,
+  Spiteful from `SpoonCursedDeck.BeforeSideTurnEnd`, a model hook, never a patch on the inlinable one-line
+  `OnTurnEndInHandWrapper`; Regret doubled in `RegretPatch`). Levels per curse in `docs/review/cursed-curses.md`.
+- Not tested in game: `docs/testing/forged-curses-checklist.md`.

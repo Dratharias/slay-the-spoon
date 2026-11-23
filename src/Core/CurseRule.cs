@@ -64,13 +64,17 @@ public static class CurseRule
 	}
 
 	/// <summary>Damage to every enemy when the Grimoire exhausts the curse; a curse without a row counts as having no effect.</summary>
-	public static int GrimoireDamageFor(CurseRow? row, bool upgraded) =>
-		upgraded && (row == null || row.Played == "None") ? GrimoireNoEffectPlus : GrimoireDamage;
+	public static int GrimoireDamageFor(CurseRow? row, bool upgraded) => GrimoireDamageFor(row, upgraded ? 1 : 0);
+
+	/// <summary>Grimoire damage at any level (forged curses go past +1, <see cref="ForgedCurseRule.GrimoireAt"/>).</summary>
+	public static int GrimoireDamageFor(CurseRow? row, int level) => ForgedCurseRule.GrimoireAt(row, level);
 
 	public static int CostFor(CurseRow? row, int vanillaCost, bool upgraded) =>
 		upgraded ? row?.CostPlus ?? 0 : vanillaCost >= 0 ? vanillaCost : PlayCost;
 
-	public static int EnemyAmount(CurseRow row, bool upgraded) => upgraded ? row.AmountPlus : row.Amount;
+	public static int EnemyAmount(CurseRow row, bool upgraded) => EnemyAmount(row, upgraded ? 1 : 0);
+
+	public static int EnemyAmount(CurseRow row, int level) => ForgedCurseRule.AmountAt(row, level);
 
 	public static bool IsPlayable(bool modeActive, bool holdsGrimoire) => modeActive && holdsGrimoire;
 
@@ -90,12 +94,15 @@ public static class CurseRule
 	/// The amount of the row's played effect on the chosen enemy: per card left in the hand (Regret, counted after the
 	/// curse left it), per card played this turn (Pain, itself included), flat otherwise; 0 for "None".
 	/// </summary>
-	public static int PlayedAmount(CurseRow row, bool upgraded, int handCards, int cardsPlayedThisTurn) => row.Played switch
+	public static int PlayedAmount(CurseRow row, bool upgraded, int handCards, int cardsPlayedThisTurn) =>
+		PlayedAmount(row, upgraded ? 1 : 0, handCards, cardsPlayedThisTurn);
+
+	public static int PlayedAmount(CurseRow row, int level, int handCards, int cardsPlayedThisTurn) => row.Played switch
 	{
 		"None" => 0,
-		"HpLossPerHandCard" => EnemyAmount(row, upgraded) * Math.Max(0, handCards),
-		"HpLossPerCardPlayed" => EnemyAmount(row, upgraded) * Math.Max(0, cardsPlayedThisTurn),
-		_ => EnemyAmount(row, upgraded),
+		"HpLossPerHandCard" => EnemyAmount(row, level) * Math.Max(0, handCards),
+		"HpLossPerCardPlayed" => EnemyAmount(row, level) * Math.Max(0, cardsPlayedThisTurn),
+		_ => EnemyAmount(row, level),
 	};
 
 	/// <summary>2 rolls in 3 give a cursed relic.</summary>

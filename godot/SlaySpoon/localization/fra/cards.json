@@ -509,5 +509,16 @@
 	"SPOON_TROPHY_CARD.description": "Infligez {Damage:diff()} dégâts {Repeat:diff()} fois.",
 	"SPOON_TROPHY_CARD.fallback": "Trophée",
 	"SPOON_CURSED_REGRET_PLUS.description": "À la fin de votre tour, si cette carte est dans votre [gold]Main[/gold], perdez {Amount} PV pour chaque carte dans votre [gold]Main[/gold].",
-	"SPOON_CURSED_NORMALITY_PLUS.description": "Vous ne pouvez pas jouer plus de {Amount} cartes ce tour.{InCombat:\n({CalculatedCards:plural:{} carte restante|{} cartes restantes})|}"
+	"SPOON_CURSED_NORMALITY_PLUS.description": "Vous ne pouvez pas jouer plus de {Amount} cartes ce tour.{InCombat:\n({CalculatedCards:plural:{} carte restante|{} cartes restantes})|}",
+	"SPOON_CURSE_DEFECT.cantPlay": "Un défaut m'empêche de jouer cette malédiction pour l'instant.",
+	"SPOON_CURSE_DEFECT.Odd": "Impaire : injouable aux tours impairs.",
+	"SPOON_CURSE_DEFECT.Even": "Paire : injouable aux tours pairs.",
+	"SPOON_CURSE_DEFECT.Late": "Tardive : injouable avant le tour 3.",
+	"SPOON_CURSE_DEFECT.Heavy": "Lourde : coûte 2 de plus.",
+	"SPOON_CURSE_DEFECT.Demanding": "Exigeante : jouable seulement après 2 autres cartes ce tour-ci.",
+	"SPOON_CURSE_DEFECT.Bloody": "Sanglante : la jouer vous coûte autant de PV que son niveau.",
+	"SPOON_CURSE_DEFECT.Spiteful": "Rancunière : gardée en main en fin de tour, elle vous frappe deux fois.",
+	"SPOON_CURSE_DEFECT.Contagious": "Contagieuse : la jouer mélange une malédiction au hasard dans votre pioche.",
+	"SPOON_CURSE_DEFECT.Ravenous": "Vorace : la jouer épuise une carte au hasard de votre main.",
+	"SPOON_CURSE_DEFECT.Echo": "Écho : la jouer vous inflige aussi la moitié de son effet."
 }
