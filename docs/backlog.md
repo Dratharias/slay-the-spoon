@@ -582,9 +582,11 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
 - Minor: Trophies read the elites' moves at combat start; a move whose damage depends on state later in the fight shows
   its start-of-fight value.
 - Minor: Useless Relics uses a hand list (`UselessRelicRule.OncePerCombat`); mod relics and future vanilla relics are not
-  on it. A thrown relic's hover tip doesn't say it was thrown (only the grey tint shows it).
+  on it. ~~A thrown relic's hover tip doesn't say it was thrown (only the grey tint shows it).~~ Done in 1.11.0
+  (`UselessRelicHoverTipPatch`): "Thrown" on a thrown relic, "Throwable" on one that can be thrown now.
 - Minor: Useless Relics throws are not saved; the game restarts a fight on reload, so nothing is lost.
-- Minor: Blood shows the spendable gold equivalent in the top bar; no HP-cost text on merchant prices.
+- ~~Minor: Blood shows the spendable gold equivalent in the top bar; no HP-cost text on merchant prices.~~ Done in 1.11.0
+  (`BloodPriceLabel`): a red "N HP" line under every merchant price (`BloodRule.HpPrice`). Check in game: placement.
 
 ## The Forge (1.4.0, 2026-11-18)
 

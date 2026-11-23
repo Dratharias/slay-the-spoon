@@ -93,5 +93,10 @@
   "SPOON_GLASS_CANNON.short": "Verre",
   "SPOON_OVERCURSED.title": "Surmaudit",
   "SPOON_OVERCURSED.description": "Chaque malédiction reçue arrive en trois exemplaires. Les événements proposent d'embrasser la malédiction.",
-  "SPOON_OVERCURSED.short": "Surm."
+  "SPOON_OVERCURSED.short": "Surm.",
+  "SPOON_USELESS_RELICS.thrown.title": "Lancée",
+  "SPOON_USELESS_RELICS.thrown.description": "Cette relique a été lancée sur un ennemi. Elle ne fait rien jusqu'à la fin du combat, puis revient.",
+  "SPOON_USELESS_RELICS.throwable.title": "Lançable",
+  "SPOON_USELESS_RELICS.throwable.description": "Cette relique a fait son travail pour ce combat. Cliquez dessus pour la lancer sur un ennemi et infliger [blue]10[/blue] dégâts.",
+  "SPOON_BLOOD.hpPrice": "{Hp} PV"
 }

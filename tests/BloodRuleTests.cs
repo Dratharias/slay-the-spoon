@@ -39,4 +39,11 @@ public class BloodRuleTests
 		Assert.True(MidasRule.CanSpend(60, 33, 25));
 		Assert.False(MidasRule.CanSpend(60, BloodRule.PaidGold(33), 25));
 	}
+
+	[Theory]
+	[InlineData(0, 0)]
+	[InlineData(33, 7)]
+	[InlineData(35, 7)]
+	[InlineData(75, 15)]
+	public void MerchantPriceInHp(int price, int hp) => Assert.Equal(hp, BloodRule.HpPrice(price));
 }

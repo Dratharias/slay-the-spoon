@@ -93,5 +93,10 @@
   "SPOON_GLASS_CANNON.short": "Glass",
   "SPOON_OVERCURSED.title": "Overcursed",
   "SPOON_OVERCURSED.description": "Every curse you receive comes in three. Events offer to embrace the curse.",
-  "SPOON_OVERCURSED.short": "Over."
+  "SPOON_OVERCURSED.short": "Over.",
+  "SPOON_USELESS_RELICS.thrown.title": "Thrown",
+  "SPOON_USELESS_RELICS.thrown.description": "This relic was thrown at an enemy. It does nothing until the fight ends, then comes back.",
+  "SPOON_USELESS_RELICS.throwable.title": "Throwable",
+  "SPOON_USELESS_RELICS.throwable.description": "This relic has done its job this fight. Click it to throw it at an enemy for [blue]10[/blue] damage.",
+  "SPOON_BLOOD.hpPrice": "{Hp} HP"
 }

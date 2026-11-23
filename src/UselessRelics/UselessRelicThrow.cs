@@ -1,4 +1,6 @@
 using HarmonyLib;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
@@ -169,5 +171,29 @@ public static class UselessRelicRunHooksPatch
 	public static void Postfix(ref IEnumerable<AbstractModel> __result)
 	{
 		if (UselessRelicThrow.AnyThrown) __result = __result.Where(m => m is not RelicModel r || !UselessRelicThrow.IsThrown(r)).ToList();
+	}
+}
+
+/// <summary>A thrown relic's hover tip says it comes back after the fight; a relic that can be thrown says so.</summary>
+[HarmonyPatch(typeof(RelicModel), nameof(RelicModel.HoverTips), MethodType.Getter)]
+public static class UselessRelicHoverTipPatch
+{
+	public static void Postfix(RelicModel __instance, ref IEnumerable<IHoverTip> __result)
+	{
+		try
+		{
+			if (!SpoonUselessRelics.IsActive(ForgeLevels.CurrentRun)) return;
+			string? key = UselessRelicThrow.IsThrown(__instance) ? "thrown" : UselessRelicThrow.CanThrow(__instance) ? "throwable" : null;
+			if (key == null) return;
+			var tip = new HoverTip(new LocString("modifiers", $"SPOON_USELESS_RELICS.{key}.title"),
+				new LocString("modifiers", $"SPOON_USELESS_RELICS.{key}.description"));
+			var list = __result.ToList();
+			list.Insert(Math.Min(1, list.Count), tip);
+			__result = list;
+		}
+		catch (Exception e)
+		{
+			SpoonLog.Error($"useless relics: hover tip of {__instance.Id.Entry} failed: {e.Message}");
+		}
 	}
 }

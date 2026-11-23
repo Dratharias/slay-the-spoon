@@ -21,5 +21,8 @@ public static class BloodRule
 	/// </summary>
 	public static int PaidGold(int price) => Math.Max((price + Rate - 1) / Rate, 0) * Rate;
 
+	/// <summary>HP a merchant price costs, shown under the price (the price rounded up to whole HP).</summary>
+	public static int HpPrice(int price) => PaidGold(price) / Rate;
+
 	public static int Leech(int unblockedDamage) => Math.Max(unblockedDamage, 0) * LeechPercent / 100;
 }
