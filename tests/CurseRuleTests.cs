@@ -160,4 +160,12 @@ public class CurseRuleTests
 		Assert.NotEqual(CurseRule.RelicStream(5, 0, 0), CurseRule.RelicStream(5, -1, 0));
 		Assert.NotEqual(CurseRule.RelicStream(5, 0, 0), CurseRule.RelicStream(5, 0, 1));
 	}
+
+	[Fact]
+	public void OnlyCursesWithAPlayedEffectNeedATarget()
+	{
+		Assert.True(CurseRule.NeedsTarget(new CurseRow("BAD_LUCK", "HpLoss", 13, 20, "HpLoss", null, 0)));
+		Assert.False(CurseRule.NeedsTarget(new CurseRow("CLUMSY", "None", 0, 0, null, null, 0)));
+		Assert.False(CurseRule.NeedsTarget(null));
+	}
 }

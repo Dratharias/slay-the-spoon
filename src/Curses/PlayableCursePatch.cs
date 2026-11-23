@@ -27,14 +27,16 @@ public static class CursePlay
 	public static CurseRow? RowFor(CardModel card) => CurseTable.For(card.Id.Entry);
 }
 
-/// <summary>A playable curse targets one enemy (its played effect hits that enemy only).</summary>
+/// <summary>A playable curse targets one enemy (its played effect hits that enemy only); a curse with no played effect
+/// needs no target (the Grimoire's exhaust damage hits every enemy), so it shows no arrow.</summary>
 [HarmonyPatch(typeof(CardModel), nameof(CardModel.TargetType), MethodType.Getter)]
 public static class PlayableCurseTargetPatch
 {
 	public static void Postfix(CardModel __instance, ref TargetType __result)
 	{
 		if (__instance.Type != CardType.Curse) return;
-		if (CursePlay.IsPlayableCurse(__instance)) __result = TargetType.AnyEnemy;
+		if (CursePlay.IsPlayableCurse(__instance))
+			__result = CurseRule.NeedsTarget(CursePlay.RowFor(__instance)) ? TargetType.AnyEnemy : TargetType.AllEnemies;
 	}
 }
 

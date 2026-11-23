@@ -140,4 +140,7 @@ public static class CurseRule
 	public static string RelicStream(int floor, int draw) => RelicStream(floor, -1, draw);
 	public static string EventStream(int floor, int slot) => $"cursed_deck_event_{floor}_{slot}";
 	public static string StartStream(int slot) => $"cursed_deck_start_{slot}";
+
+	/// <summary>A playable curse picks an enemy only when it has a played effect.</summary>
+	public static bool NeedsTarget(CurseRow? row) => row != null && row.Played != "None";
 }

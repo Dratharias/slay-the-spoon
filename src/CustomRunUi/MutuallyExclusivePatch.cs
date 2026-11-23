@@ -1,11 +1,12 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Modifiers;
 using SlaySpoon.Config;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.CustomRunUi;
 
-/// <summary>Ticking "Slay the Spire 1 Cards" in Custom Run unticks "Spire Souvenir", and the other way round; King Midas and Matriochka likewise; Blood and either Merchant Loans or King Midas; Conductor and either Folie à deux or Matriochka.</summary>
+/// <summary>Ticking "Slay the Spire 1 Cards" in Custom Run unticks "Spire Souvenir", and the other way round; King Midas and Matriochka likewise; Blood and either Merchant Loans or King Midas; Conductor and either Folie à deux or Matriochka; Deck of 10 and the base game's Hoarder.</summary>
 [HarmonyPatch(typeof(ModelDb), nameof(ModelDb.MutuallyExclusiveModifiers), MethodType.Getter)]
 public static class MutuallyExclusivePatch
 {
@@ -28,7 +29,9 @@ public static class MutuallyExclusivePatch
 		HashSet<ModifierModel> conductorMatriochka = new() { ModelDb.Modifier<SpoonConductor>() };
 		for (int r = 0; r <= MatriochkaRule.MaxRerolls; r++)
 			conductorMatriochka.Add(PercentModifierTable.CanonicalFor(typeof(SpoonMatriochka), r));
+		// Hoarder makes every new card three, each forcing a Deck of 10 trim, and forbids the merchant removal.
+		HashSet<ModifierModel> deckHoarder = new() { ModelDb.Modifier<SpoonDeckOfTen>(), ModelDb.Modifier<Hoarder>() };
 		__result = __result.Append(cardSets).Append(midas).Append(bloodLoans).Append(bloodMidas)
-			.Append(conductorFolie).Append(conductorMatriochka).ToList();
+			.Append(conductorFolie).Append(conductorMatriochka).Append(deckHoarder).ToList();
 	}
 }

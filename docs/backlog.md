@@ -500,8 +500,9 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
   Kept as is for now; our modes could join the draw through a postfix if wanted.
 - ~~Double first-launch popup (ours and the game's save copy)~~: done in 1.3.8, the mod's progress copy and popup are
   removed; the game copies unmodded saves once (owner, 2026-11-18).
-- Minor: 0.111.1 lets most potions target another player. Ours stay `Self` (Watcher stance potions need the
-  Watcher); Bottled Miracle could become `AnyPlayer`.
+- ~~Minor: 0.111.1 lets most potions target another player. Ours stay `Self` (Watcher stance potions need the
+  Watcher); Bottled Miracle could become `AnyPlayer`.~~ Done in 1.11.0: Bottled Miracle targets any player and its
+  Miracles go to the target's hand (vanilla Power Potion's pattern; the text keeps "your hand", like vanilla's).
 - Testing: a Workshop copy with a greater version now wins over a local `mods/SlaySpoon`; keep the local
   version at least equal to the uploaded one when testing with `make up`.
 
@@ -546,7 +547,7 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   - Minor: a relic drawn but never obtained stays reserved until the floor changes. Kept.
   - Minor: an upgraded Normality loses its multiplier if downgraded; curses are never downgraded. Kept.
   - Minor: Parasite is charged even when Transform returns early on an ending. Kept.
-  - Minor: every playable curse shows the targeting arrow, also those with no played effect (one-line change in `PlayableCursePatch`).
+  - ~~Minor: every playable curse shows the targeting arrow, also those with no played effect.~~ Done in 1.11.0 (`CurseRule.NeedsTarget`): a curse with no played effect targets all enemies, like the Grimoire's exhaust damage.
   - Minor: the cursed relic draw state (counters, reservations) is not saved, so a mid-floor reload can change a pending roll. Kept, low impact.
   - Minor: the cursed merchant price postfix (`CursedMerchantPricePatch`) gates on `Owner`, which a shop relic lacks, so the gate is a no-op; harmless while pool relics only reach shops in the mode. Kept.
 - **Curse deck relics and art sources** (the original idea is now the 1.6.0 mode above):
@@ -648,7 +649,7 @@ tested in game or by the bots unless marked. Vanilla only makes Sealed Deck, Dra
 - **Hoarder** (vanilla: 2 extra copies of each card added to the deck, no merchant removal)
   - Matriochka already includes Hoarder's rule; both together gave 1 + 2 + 2 = 5 copies. Fixed in 1.8.25: both stay
     tickable, Hoarder's copies are skipped while Matriochka is active (`MatriochkaHoarderPatch`, owner 2026-11-23).
-  - Deck of 10: every new card turns into 3, each forcing a trim. Likely exclusive.
+  - Deck of 10: every new card turns into 3, each forcing a trim. Mutually exclusive since 1.11.0 (`MutuallyExclusivePatch`).
 - **Sealed Deck, Draft, Insanity** (`ClearsPlayerDeck`: the starting deck is cleared in `OnRunCreated`, before each
   modifier's `AfterRunCreated`, in the run's modifier order)
   - Spoon (Spoonful), Cursed Deck (starting curse), Watcher starter: a start card added by a mod modifier that runs
