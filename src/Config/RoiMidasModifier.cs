@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Modifiers;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
@@ -70,7 +71,11 @@ public sealed class SpoonRoiMidas : ModifierModel
 	public override bool TryModifyRewardsLate(Player player, List<Reward> rewards, AbstractRoom? room)
 	{
 		if (AtAncient(RunState)) return false;
-		return rewards.RemoveAll(r => r is CardReward or SpecialCardReward) > 0;
+		bool normalFight = room is CombatRoom { Encounter.RoomType: RoomType.Monster };
+		int relics = MidasRule.VintageRelics(RunState.Modifiers.OfType<Vintage>().Any(), normalFight, rewards.Count(r => r is CardReward));
+		bool changed = rewards.RemoveAll(r => r is CardReward or SpecialCardReward) > 0;
+		for (int i = 0; i < relics; i++) rewards.Add(new RelicReward(player));
+		return changed;
 	}
 
 	internal static bool AtAncient(IRunState run) => run.CurrentMapPoint?.PointType == MapPointType.Ancient;

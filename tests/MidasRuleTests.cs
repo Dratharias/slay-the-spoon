@@ -181,4 +181,13 @@ public class MidasRuleTests
 	[InlineData(2, 2, 70)]
 	public void BankReopenFollowsTheMerchantRise(int boughtHere, int scale, int price) =>
 		Assert.Equal(price, MidasRule.BankReopen(boughtHere, scale));
+
+	[Fact]
+	public void VintageRelicReplacesRemovedCardsInNormalFightsOnly()
+	{
+		Assert.Equal(1, MidasRule.VintageRelics(true, true, 1));
+		Assert.Equal(0, MidasRule.VintageRelics(true, false, 1));
+		Assert.Equal(0, MidasRule.VintageRelics(false, true, 1));
+		Assert.Equal(0, MidasRule.VintageRelics(true, true, 0));
+	}
 }

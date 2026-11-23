@@ -641,7 +641,9 @@ tested in game or by the bots unless marked. Vanilla only makes Sealed Deck, Dra
   - Matriochka: fixed in 1.8.24 (`MatriochkaVintagePatch`): each replaced card reward comes back, unskippable, next to
     its relic.
   - King Midas: both use the late reward hook; Midas removes card rewards, so the result depends on listener order (no
-    card either way, but a relic only if Vintage runs first). Decide: relic or not in Midas + Vintage.
+    card either way, but a relic only if Vintage runs first). ~~Decide: relic or not in Midas + Vintage.~~ Builder call
+    (1.11.0, `MidasRule.VintageRelics`): the relic always comes; King Midas puts Vintage's relic back for each card
+    reward it removes from a normal fight when Vintage ran after it.
   - Cursed Deck: a relic every normal fight, 2 in 3 cursed until the 11 are held: curses pile up much faster. Design
     check only.
   - Folie à deux: the chest bids on card rewards only; Vintage's relics stay with their owner. With Matriochka too, the

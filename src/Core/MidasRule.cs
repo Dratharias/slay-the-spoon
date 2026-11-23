@@ -6,6 +6,13 @@ namespace SlaySpoon.Core;
 /// </summary>
 public static class MidasRule
 {
+	/// <summary>
+	/// King Midas + vanilla Vintage (builder call, 2026-11-23): a normal fight's card reward becomes Vintage's relic, whatever
+	/// order the two late reward hooks run in. Relic rewards to add for the card rewards King Midas removes.
+	/// </summary>
+	public static int VintageRelics(bool vintage, bool normalFight, int cardRewardsRemoved) =>
+		vintage && normalFight ? Math.Max(cardRewardsRemoved, 0) : 0;
+
 	/// <summary>The gold events, vanilla then StS1, by id entry.</summary>
 	public static readonly IReadOnlyList<string> GoldEvents =
 	[
