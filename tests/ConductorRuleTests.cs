@@ -42,4 +42,21 @@ public class ConductorRuleTests
 		Assert.Equal(new[] { 2, 1, 2 }, ConductorRule.Recipients(new[] { 2 }, new[] { 0, 1, 2 }, 3));
 		Assert.Equal(new[] { 0, 1 }, ConductorRule.Recipients(new[] { -1, 3 }, new[] { 0, 1 }, 3));
 	}
+
+	[Fact]
+	public void TwoPlayersShareOneLineOfPortraitsThreeOrMoreASquare()
+	{
+		Assert.Equal(2, ConductorRule.HeadColumns(2));
+		Assert.Equal(2, ConductorRule.HeadColumns(3));
+		Assert.Equal(2, ConductorRule.HeadColumns(4));
+	}
+
+	[Theory]
+	[InlineData(2, 1920, 1080, 1)]   // two rows fit in one column
+	[InlineData(6, 1920, 1080, 2)]   // six rows are too tall for one column
+	[InlineData(12, 3440, 1440, 3)]  // ultrawide: three columns shrink least
+	[InlineData(8, 1920, 1080, 2)]   // 16:9: a third column costs more width than it saves
+	[InlineData(12, 1280, 800, 3)]   // Steam Deck: everything shrinks, three columns least
+	public void ColumnsShrinkThePageLeast(int rewards, float viewW, float viewH, int columns) =>
+		Assert.Equal(columns, ConductorRule.Columns(rewards, 800, 250, 150, 60, 14, viewW, viewH));
 }

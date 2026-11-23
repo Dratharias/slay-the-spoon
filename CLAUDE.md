@@ -752,3 +752,12 @@ Read `README.md` for the player view and the spec for every decision.
   merchant price rise and the rest site prices (`SpoonRoiMidas.Scale`).
 - 918 xUnit + 110 pytest pass. Not tested in game: the Conductor lines of `docs/testing/backlog-modes-checklist.md`,
   "With the base game's Midas" in `docs/testing/roi-midas-checklist.md`.
+
+## 1.8.27 — Conductor layout (2026-11-23, `main`)
+
+- Owner: four players looked cramped. From three players each reward's portraits are a 2 × 2 square
+  (`ConductorRule.HeadColumns`); the rewards take 1–3 columns, whichever shrinks the page least on the viewport
+  (`ConductorRule.Columns`, under 2 % better keeps fewer), redone on `SizeChanged`. `ConductorOverlay` builds from
+  `Head`/`Entry` records so `CardRenderer`'s `conductor` mode can show it with sample rewards (2–4 players, 16:9, 16:10, 21:9
+  SubViewports at the game's 1080 height). 924 xUnit + 110 pytest pass. Rendered, not tested in a run.
+

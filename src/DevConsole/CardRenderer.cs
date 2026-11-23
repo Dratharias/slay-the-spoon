@@ -27,7 +27,9 @@ namespace SlaySpoon.DevConsole;
 /// <c>&lt;dir&gt;/&lt;lang&gt;/&lt;Name&gt;.png</c> (<c>+</c> written <c>Plus</c>, <c>relic:</c> dropped) in English and
 /// French, then quits. <c>gif:Name</c> writes the frames of the card's Forge climb instead (<see cref="RenderClimb"/>).
 /// <c>elites</c> writes every elite monster in its bestiary pose to <c>&lt;dir&gt;/elites/&lt;ID&gt;.png</c> (once, not per
-/// language), for the Trophy portraits (<c>tools/trophy_art.py</c>).
+/// language), for the Trophy portraits (<c>tools/trophy_art.py</c>). <c>conductor</c> shows the Conductor screen with
+/// sample rewards for 2, 3 and 4 players on 16:9, 16:10 and 21:9 screens, saved to
+/// <c>&lt;dir&gt;/&lt;lang&gt;/conductor-&lt;players&gt;p-&lt;shape&gt;.png</c>.
 /// </summary>
 [HarmonyPatch(typeof(NMainMenu), nameof(NMainMenu._Ready))]
 public static class CardRenderer
@@ -110,6 +112,11 @@ public static class CardRenderer
 			if (System.IO.Path.GetFileName(dir) == "eng") await RenderElites(host, System.IO.Path.Combine(dir, "..", "elites"));
 			return;
 		}
+		if (name == "conductor")
+		{
+			await RenderConductor(host, dir);
+			return;
+		}
 		if (name.StartsWith("gif:"))
 		{
 			await RenderClimb(host, dir, name["gif:".Length..]);
@@ -186,6 +193,49 @@ public static class CardRenderer
 			catch (Exception e)
 			{
 				SpoonLog.Error($"render: elite {canonical.Id.Entry} failed: {e}");
+			}
+		}
+	}
+
+	/// <summary>Screen shapes the Conductor preview tries, as the game sees them (its height is always 1080): 16:9,
+	/// 16:10 (Steam Deck), 21:9 ultrawide.</summary>
+	private static readonly (string name, Vector2I size)[] PreviewSizes =
+		{ ("16x9", new(1920, 1080)), ("16x10", new(1728, 1080)), ("21x9", new(2580, 1080)) };
+
+	private static async Task RenderConductor(Node host, string dir)
+	{
+		var characters = ModelDb.AllCharacters.Take(4).ToList();
+		var cards = characters.SelectMany(c => c.CardPool.AllCards.Take(12)).ToList();
+		var relics = ModelDb.AllRelics.Take(4).ToList();
+		var potions = ModelDb.AllPotions.Take(4).ToList();
+		foreach (int players in new[] { 2, 3, 4 })
+		{
+			var heads = characters.Take(players)
+				.Select((c, i) => new Conductor.ConductorOverlay.Head(i == 0 ? "Test Host" : $"Player {i + 1}", c.IconTexture)).ToList();
+			// Per player: a card reward, a potion and a relic (an elite fight). Four players: 12 rewards, the worst case.
+			var entries = new List<Conductor.ConductorOverlay.Entry>();
+			for (int p = 0; p < players; p++)
+			{
+				entries.Add(new(p, cards.Skip(p * 12 + 3).Take(3).Select(c => c.ToMutable()).ToList(), null, "", ""));
+				PotionModel potion = potions[p];
+				entries.Add(new(p, null, potion.LargeImage, potion.Title.GetFormattedText(), potion.HoverTip.Description));
+				RelicModel relic = relics[p];
+				entries.Add(new(p, null, relic.BigIcon, relic.Title.GetFormattedText(), relic.HoverTip.Description));
+			}
+			foreach (var (name, size) in PreviewSizes)
+			{
+				var viewport = new SubViewport { Size = size, RenderTargetUpdateMode = SubViewport.UpdateMode.Always };
+				host.AddChild(viewport);
+				var backdrop = new ColorRect { Color = new Color(0.2f, 0.25f, 0.3f), Size = size };
+				viewport.AddChild(backdrop);
+				_ = Conductor.ConductorOverlay.Show(entries, heads, viewport);
+				for (int i = 0; i < 8; i++)
+					await host.ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+				string file = System.IO.Path.Combine(dir, $"conductor-{players}p-{name}.png");
+				viewport.GetTexture().GetImage().SavePng(file);
+				SpoonLog.Info($"render: {file}");
+				viewport.QueueFree();
+				await host.ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
 			}
 		}
 	}
