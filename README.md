@@ -153,6 +153,13 @@ relic, gold or a heal), and relic draws from chests, elites and the merchant are
 all, including four new ones: Blood Pact, Pin Doll, Black Censer and Reliquary. Not tested in game:
 `docs/testing/cursed-deck-checklist.md`.
 
+**Forged curses** (The Forge and Cursed Deck together): curses fuse at the fire and the merchant duplicates them, up to
++9. Each level repeats the +0 → +1 step on both sides (Bad Luck+9: 76 HP to the enemy when played, 76 to you if it stays
+in hand), and the curse picks up a defect at +3, +6 and +9: unplayable on odd or even turns or before turn 3, playable
+only after two other cards, costs 2 more, costs HP, hits its owner twice in hand, spreads a curse, eats a card from your
+hand, or echoes half its effect back at you. Eternal curses never fuse. Levels per curse: `docs/review/cursed-curses.md`.
+Not tested in game: `docs/testing/forged-curses-checklist.md`.
+
 **Achilles' Heel** (Custom Run): every player starts with the Achilles' Heel relic plus Anchor, Oddly Smooth Stone and
 Gorget. In every combat, unblocked attack damage kills you (Poison and HP loss don't). You gain 1 Dexterity per act past
 the first, your attacks deal 1 more damage per 5 Block you have, and card offers lean toward Block cards. HP stays vanilla,
@@ -225,15 +232,13 @@ keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-g
 
 ## Development status — 2026-11-23
 
-Version **1.9.0**: King Midas sells relics and reopens a broken Maw Bank at the merchant, after a long wave of fixes found
+Version **1.10.0**: forged curses (The Forge and Cursed Deck together), after King Midas's relic sale (1.9.0), a long wave of fixes found
 by automated co-op runs (1.8.3–1.8.34), Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges
 (1.7.0), The Forge (1.4.0) and the port to game version 0.111.1 (1.3.8). The build has no warnings and every unit test
 passes. Most features still need in-game checks; the [testing checklists](docs/testing/) record them.
 
 ### Coming next
 
-- **Forged curses** (The Forge + Cursed Deck): curses fuse up to +9, hit far harder on both sides and pick up defects on
-  the way (unplayable on odd turns, costs 2 more, bites its owner...).
 - **Forge upgrade preview**: see a card from +1 to +9 wherever upgrades are shown.
 - **Overcursed**: Matriochka for curses, each one in threes.
 

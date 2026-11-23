@@ -45,6 +45,7 @@ Gourdin+9 : 344 dégâts.
 Les malédictions sont vos munitions. Jouez-les, lancez-les sur l’ennemi, collectionnez les reliques qui les adorent.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-fr.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-relic-fr.png[/img]
+Avec la Forge en plus, les malédictions fusionnent jusqu'à +9 : bien plus fortes des deux côtés, avec un défaut à +3, +6 et +9.
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-fr.png[/img]
 Un seul coup non bloqué et vous mourez. Empilez l’Armure, puis frappez avec.
@@ -75,7 +76,6 @@ Chef d’orchestre à quatre : un joueur distribue toutes les récompenses du co
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/upcoming-fr.png[/img]
 [list]
-[*][b]Malédictions forgées[/b] (Forge + Deck maudit) : jusqu'à +9, bien plus fortes, avec des défauts.
 [*][b]Aperçu de la Forge[/b] : une carte de +1 à +9.
 [*][b]Surmaudit[/b] : Matriochka pour les malédictions, chacune en triple.
 [/list]

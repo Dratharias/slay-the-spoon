@@ -51,3 +51,16 @@ def test_every_sts1_curse_has_a_row():
     sts1 = {"ASCENDERS_BANE", "CLUMSY", "CURSE_OF_THE_BELL", "DECAY", "DOUBT", "INJURY", "STS1_NECRONOMICURSE",
             "NORMALITY", "STS1_PAIN", "STS1_PARASITE", "STS1_PRIDE", "REGRET", "SHAME", "WRITHE"}
     assert sts1 <= set(c.rows(TABLE))
+
+
+def test_forged_levels_mirror_the_csharp_rule():
+    assert [c.amount_at(TABLE["BAD_LUCK"], lv) for lv in range(10)] == [13, 20, 27, 34, 41, 48, 55, 62, 69, 76]
+    clumsy = TABLE["CLUMSY"]
+    assert [c.grimoire_at(clumsy, lv) for lv in range(10)] == [5, 12, 15, 19, 22, 26, 29, 33, 36, 40]
+    assert c.grimoire_at(TABLE["BAD_LUCK"], 9) == 5
+
+
+def test_review_has_the_forged_table():
+    page = c.review(TABLE)
+    assert "## Forged curses" in page
+    assert "| BAD_LUCK | 13 | 20 | 27 | 34 | 41 | 48 | 55 | 62 | 69 | 76 |" in page
