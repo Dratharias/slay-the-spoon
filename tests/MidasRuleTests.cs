@@ -190,4 +190,15 @@ public class MidasRuleTests
 		Assert.Equal(0, MidasRule.VintageRelics(false, true, 1));
 		Assert.Equal(0, MidasRule.VintageRelics(true, true, 0));
 	}
+
+	[Fact]
+	public void LoanRepaymentLeavesTheBorrowerAboveTheMelt()
+	{
+		int repay = MidasRule.Repayable(10, 100, 25);
+		Assert.InRange(repay, 1, 100);
+		Assert.False(MidasRule.Ruined(10 + 100 - repay, 25));
+		Assert.True(MidasRule.Ruined(10 + 100 - repay - 1, 25));
+		Assert.Equal(0, MidasRule.Repayable(0, 10, 25));
+		Assert.Equal(100, MidasRule.Repayable(10_000, 100, 25));
+	}
 }

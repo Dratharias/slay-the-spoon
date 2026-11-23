@@ -2,7 +2,9 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Runs;
+using SlaySpoon.Config;
 using SlaySpoon.Core;
+using SlaySpoon.Midas;
 
 namespace SlaySpoon.Loans;
 
@@ -27,7 +29,13 @@ public static class LoanRepaymentPatch
 			return;
 		}
 		int gained = (int)__result;
-		(int kept, IReadOnlyList<LoanPayment> payments) = ledger.Repay(borrower, gained);
+		// King Midas: repayments never leave the borrower ruined by the next melt; the rest of the debt waits.
+		int repayable = SpoonRoiMidas.IsActive(runState)
+			? MidasRule.Repayable(player.Gold, gained, MidasMelt.FloorFor(player), SpoonRoiMidas.Scale(runState))
+			: gained;
+		if (repayable <= 0) return;
+		(int kept, IReadOnlyList<LoanPayment> payments) = ledger.Repay(borrower, repayable);
+		kept += gained - repayable;
 		foreach (LoanPayment payment in payments)
 		{
 			if (MerchantLoans.PlayerAt(runState, payment.Lender) is { } lender)

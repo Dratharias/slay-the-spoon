@@ -614,8 +614,10 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   purchase and reset at the next merchant (a reload also resets the rise, like the rest site price).
 - Open call: a co-op player revived with 0 gold dies again at the next travel unless the fight's gold reward lifts them
   above 25. Kept as is (the owner calls the mode very hard on purpose).
-- Forge Duplicate is guarded since 1.8.15; Merchant Loans repayments can still leave a Midas player below the
-  survival threshold and need an owner decision on whether debt repayment may be deferred.
+- ~~Forge Duplicate is guarded since 1.8.15; Merchant Loans repayments can still leave a Midas player below the
+  survival threshold and need an owner decision on whether debt repayment may be deferred.~~ Builder call (1.11.0,
+  `MidasRule.Repayable`): under King Midas a gain repays only what leaves the borrower safe from the next melt; the rest
+  of the debt waits for later gains. Owner may overrule.
 
 ## Power icons shown as "NOPE" (2026-11-20, bot tester)
 

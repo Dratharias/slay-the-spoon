@@ -95,6 +95,18 @@ public static class MidasRule
 	/// <summary>True when the next melt leaves no gold: the player dies on traveling.</summary>
 	public static bool Ruined(int gold, int floor, int scale = 1) => gold - Melt(gold, floor, scale) <= 0;
 
+	/// <summary>
+	/// Merchant Loans under King Midas (builder call, 2026-11-23): of <paramref name="gained"/> gold, the most that may go
+	/// to lenders while what the borrower keeps (<paramref name="gold"/> + the rest) survives the next melt; the rest of
+	/// the debt waits for later gains.
+	/// </summary>
+	public static int Repayable(int gold, int gained, int floor, int scale = 1)
+	{
+		for (int repay = Math.Max(gained, 0); repay > 0; repay--)
+			if (!Ruined(gold + gained - repay, floor, scale)) return repay;
+		return 0;
+	}
+
 	/// <summary>Gold a ruined co-op player comes back with for the next room (also given to a player dead on traveling).</summary>
 	public const int RevivalGift = 1;
 
