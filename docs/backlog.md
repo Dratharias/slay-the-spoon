@@ -624,3 +624,56 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
 - Fix idea, no detour: the loader's fallback is `res://images/powers/<sprite>.png`, and the big icon reads the same path.
   Ship one PNG per mod power at that path in the PCK (or add the sprites to `AtlasManager`'s sprite map at startup),
   then the patch only matters for nothing. To grep after a play: `grep -a "Missing sprite" godot.log`.
+
+## Vanilla Custom Run modifiers × mod modes (2026-11-23)
+
+Owner request: list how the 17 vanilla modifiers combine with the mod's modes. Read from the 0.111.1 decompile, not
+tested in game or by the bots unless marked. Vanilla only makes Sealed Deck, Draft and Insanity mutually exclusive.
+
+- **Vintage** (normal fights: card reward → relic reward; elites and bosses keep their cards)
+  - Matriochka: fixed in 1.8.24 (`MatriochkaVintagePatch`): each replaced card reward comes back, unskippable, next to
+    its relic.
+  - King Midas: both use the late reward hook; Midas removes card rewards, so the result depends on listener order (no
+    card either way, but a relic only if Vintage runs first). Decide: relic or not in Midas + Vintage.
+  - Cursed Deck: a relic every normal fight, 2 in 3 cursed until the 11 are held: curses pile up much faster. Design
+    check only.
+  - Folie à deux: the chest bids on card rewards only; Vintage's relics stay with their owner. With Matriochka too, the
+    put-back card goes to the chest like any combat card. To check.
+- **Midas** (vanilla: gold rewards ×2, no Smith at rest sites)
+  - King Midas: two "Midas" in one list (owner may want them exclusive, or a different title for ours). Doubled gold
+    on top of the melt makes the melt mostly harmless.
+  - Blood: gold rewards are paid out as HP, so ×2 doubles the healing from gold. Check balance.
+  - Forge: Fuse stays (its own rest option), ordinary upgrades are gone, so cards climb only by fusion. Probably fun.
+- **Hoarder** (vanilla: 2 extra copies of each card added to the deck, no merchant removal)
+  - Matriochka already includes Hoarder's rule; both together give 1 + 2 + 2 = 5 copies (clones carry `clonedBy`, so no
+    cascade). Make them mutually exclusive, or have Matriochka skip its copies when Hoarder is ticked.
+  - Deck of 10: every new card turns into 3, each forcing a trim. Likely exclusive.
+- **Sealed Deck, Draft, Insanity** (`ClearsPlayerDeck`: the starting deck is cleared in `OnRunCreated`, before each
+  modifier's `AfterRunCreated`, in the run's modifier order)
+  - Spoon (Spoonful), Cursed Deck (starting curse), Watcher starter: a start card added by a mod modifier that runs
+    before the clearing modifier is wiped. Check the order (vanilla modifiers are probably listed first).
+  - Deck of 10: its first trim already uses the Sealed Deck keep grid; with Sealed Deck the player picks twice.
+  - Darv already refuses Pandora's Box with these (vanilla).
+- **Night Terrors** (rest heals to full, −5 max HP)
+  - Spoon: max HP is the run's currency and the act threshold; each rest costs 5. Digest (−15, heal to full) becomes
+    pointless. Balance only.
+  - King Midas: paid rest options; heal still costs gold. Fine.
+- **Terminal** (−1 max HP per room, 5 Plating each fight)
+  - Spoon: steady drain on the currency. Achilles' Heel: Plating gives Block each turn, which weakens the heel. Fine.
+- **Murderous** (+3 Strength to every monster)
+  - Spoon boss and Corrupt Heart: Strength stacks with their own scaling (the Spoon applies its Strength by delta, so
+    Murderous' 3 stays). Fine on paper.
+- **Cursed Run** (a curse each act, drawn on the shared Niche stream)
+  - Cursed Deck: synergy. The Niche draw is the same stream behind the Neow's Bones race seen in bot Q4 line 10.
+- **Flight** (free travel)
+  - Spoon act and The Ending: `SpoonMapTravelPatch` keeps free travel from softlocking the Spoon act's grid; the Ending
+    map with Flight is untested.
+- **Big Game Hunter** (×2.5 elites, elite cards Rare only)
+  - Trophies: many more elite attack cards. Act 4: the Emerald elite marker picks among more elites. Matriochka's
+    Reflections row is computed after the map is rebuilt. Appended acts' maps are left alone (vanilla returns them
+    unchanged). Fine on paper.
+- **Character Cards** (adds another character's pool)
+  - StS1-only / Spire Souvenir: the added pool follows the card set mode through the `GetUnlockedCards` postfix. The
+    Watcher has no "Watcher Cards" modifier (she is not in `ModelDb.AllCharacters`). To check.
+- **All Star, Specialized, Deadly Events**: Neow options or event odds; no conflict found. Starting Chest adds its own
+  Neow option next to theirs.

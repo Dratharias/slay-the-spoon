@@ -24,6 +24,13 @@ public static class MatriochkaRule
 	public static bool OffersFloorCard(bool shopRestOrTreasure, bool eventRoom, bool ancient, bool victoryRoom) =>
 		!victoryRoom && (shopRestOrTreasure || (eventRoom && !ancient));
 
+	/// <summary>
+	/// Card rewards Matriochka puts back after vanilla Vintage turned a combat's card rewards into relics: one per card
+	/// reward replaced, so the floor still has its card and the relic stays too (owner, 2026-11-23).
+	/// </summary>
+	public static int CardsAfterVintage(bool matriochka, int cardRewardsBefore, int cardRewardsAfter) =>
+		matriochka ? Math.Max(0, cardRewardsBefore - cardRewardsAfter) : 0;
+
 	/// <summary>Copies added with every card that enters the deck (vanilla Hoarder).</summary>
 	public const int ExtraCopies = 2;
 

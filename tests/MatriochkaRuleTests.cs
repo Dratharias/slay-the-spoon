@@ -16,6 +16,14 @@ public class MatriochkaRuleTests
 	public void OffersFloorCard_SkipsAncientsAndVictoryRoom(bool shop, bool ev, bool ancient, bool victory, bool expected) =>
 		Assert.Equal(expected, MatriochkaRule.OffersFloorCard(shop, ev, ancient, victory));
 
+	[Theory]
+	[InlineData(true, 1, 0, 1)]
+	[InlineData(true, 0, 0, 0)]
+	[InlineData(true, 2, 0, 2)]
+	[InlineData(false, 1, 0, 0)]
+	public void CardsAfterVintage_PutsBackEachReplacedCard(bool matriochka, int before, int after, int expected) =>
+		Assert.Equal(expected, MatriochkaRule.CardsAfterVintage(matriochka, before, after));
+
 	[Fact]
 	public void ReflectionsRow_IsRowBeforeFinalRestRow() =>
 		Assert.Equal(3, MatriochkaRule.ReflectionsRow(Rows([false], [false], [true, true], [false], [true, true, true], [false])));

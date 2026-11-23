@@ -58,3 +58,5 @@ and awards of each chest, keyed `combat_<floor>`, `treasure_<floor>`, `floor_<fl
 - [ ] Rerolls: the row's −/+ sets 0–10 (default 3); the reroll button shows the rerolls left, resets each act,
       survives save and reload. At 0 no reroll button.
 - [ ] With Folie à deux also ticked: the floor rewards go through a chest (`floor_<floor>`), the winner must take a card.
+- [ ] 1.8.24, Matriochka + vanilla Vintage: after a normal fight the rewards show a relic and an unskippable card;
+      elites and bosses unchanged; with Folie à deux too, the card goes through the chest.

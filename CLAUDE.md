@@ -726,3 +726,11 @@ Read `README.md` for the player view and the spec for every decision.
   prefix now skips the setup when the pool has no Ancient card, and `DarvTomeFallbackPatch` (`Darv.GenerateInitialOptions`
   postfix) replaces that Tome with one more Darv relic the owner may take, on the event's Rng (`DarvTomeRule`).
   911 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.24 — Matriochka with vanilla Vintage (2026-11-23, `main`)
+
+- Vintage turns normal fights' card rewards into relic rewards, which left Matriochka floors without their card.
+  `src/Matriochka/MatriochkaVintagePatch.cs` (prefix/postfix on `Vintage.TryModifyRewardsLate`, independent of listener
+  order) puts each replaced card reward back, unskippable, next to the relic (`MatriochkaRule.CardsAfterVintage`).
+- `docs/backlog.md` "Vanilla Custom Run modifiers × mod modes" lists every vanilla modifier against the mod's modes.
+- 915 xUnit + 110 pytest pass. Not tested in game.
