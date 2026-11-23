@@ -63,6 +63,8 @@ Forget Block. Every card you play makes the next hit harder.
 [*][b]Useless Relics[/b]: a relic that has done its job? Throw it.
 [*][b]Forced Trade[/b] and [b]Conductor[/b] (co-op): your friends decide what you get.
 [/list]
+Conductor, four players: one player hands out every reward of the fight.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/conductor-4p.jpg[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/coop-en.png[/img]
 [list]

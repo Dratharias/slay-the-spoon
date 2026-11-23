@@ -168,6 +168,8 @@ damage; it comes back after the fight), and in co-op **Forced Trade** (after eac
 random ally) and **Conductor** (one player hands out each reward). Not tested in game:
 `docs/testing/backlog-modes-checklist.md`.
 
+<p align="center"><img src="workshop/images/screenshots/conductor-4p.jpg" alt="The Conductor screen with four players and twelve rewards" width="800"></p>
+
 **Slay the Spoon** (a card on the solo and multiplayer host screens, or a Custom Run checkbox): max HP becomes the currency of the run. Everyone starts with a Spoonful, a Retain card that
 kills to feed: a fatal blow with it raises your max HP. Everyone also starts with the 12 max HP relics, every rest site offers a
 Feast (+5 max HP) and Digest (−15 max HP, heal to full), and every merchant sells Fruit Juice. When the team's max HP adds up to **300 solo, 550 for two, 750

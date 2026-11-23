@@ -63,6 +63,8 @@ Oubliez l’Armure. Chaque carte jouée rend le prochain coup plus fort.
 [*][b]Reliques inutiles[/b] : une relique qui a fait son travail ? Lancez-la.
 [*][b]Échange forcé[/b] et [b]Chef d’orchestre[/b] (coop) : vos amis décident de ce que vous recevez.
 [/list]
+Chef d’orchestre à quatre : un joueur distribue toutes les récompenses du combat.
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/conductor-4p.jpg[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/coop-fr.png[/img]
 [list]
