@@ -36,7 +36,10 @@ Spec: `docs/superpowers/specs/2026-11-18-backlog-modes-design.md`. Tick only wha
       upgrade and enchantment kept. Solo: nothing happens.
 
 ## Conductor (co-op)
-- [ ] After each victory one player (never the same twice in a row) gets a panel per reward and picks its recipient.
+- [ ] After each victory one player (never the same twice in a row) gets one screen with every movable reward: cards
+  shown as cards, relics and potions with their icon, name and text; one row of character portraits per reward, the
+  owner selected first; one Confirm button (1.8.26). Mouse, keyboard and controller can pick a portrait.
+- [ ] Twelve rewards (four players) fit the screen in two columns; Confirm is visible.
 - [ ] Other players wait, then each player's reward screen shows what they received; gold unchanged.
 - [ ] A relic given to a player who already holds it stays with its owner.
 

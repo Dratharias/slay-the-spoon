@@ -740,3 +740,15 @@ Read `README.md` for the player view and the spec for every decision.
 - Matriochka already applies Hoarder's rule, so both ticked gave 5 copies per card. Owner: keep them compatible and
   ignore Hoarder. `src/Matriochka/MatriochkaHoarderPatch.cs` skips `Hoarder.AfterCardChangedPiles` while Matriochka is
   active. Not tested in game.
+
+## 1.8.26 — Conductor screen, King Midas with vanilla Midas (2026-11-23, `main`)
+
+- Conductor (owner: the text popups were ugly): `src/Conductor/ConductorOverlay.cs` shows every movable reward of the
+  fight on one screen (cards as `NCard`, relics and potions with icon, name and text), a row of character portraits per
+  reward (owner preselected) and one Confirm. The picks travel as one synced index list (`SyncedChoice.ChooseMany`,
+  `PlayerChoiceResult.FromIndexes`); `ConductorRule.Recipients` falls back to the owner for a bad pick. `ConductorPopup`
+  is removed.
+- King Midas + the base game's Midas (gold rewards ×2): `MidasRule.Scale` doubles the melt percent and minimum, the
+  merchant price rise and the rest site prices (`SpoonRoiMidas.Scale`).
+- 918 xUnit + 110 pytest pass. Not tested in game: the Conductor lines of `docs/testing/backlog-modes-checklist.md`,
+  "With the base game's Midas" in `docs/testing/roi-midas-checklist.md`.

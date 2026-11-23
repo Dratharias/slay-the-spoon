@@ -21,5 +21,13 @@ public static class ConductorRule
 	public static int Rolls(int players, int previous) =>
 		players <= 1 ? 1 : previous < 0 || previous >= players ? players : players - 1;
 
+	/// <summary>
+	/// The recipient slot of each reward from the Conductor's synced picks: one per reward, in order. A missing or
+	/// out-of-range pick leaves that reward with its owner, so a short or corrupt list never moves anything by accident.
+	/// </summary>
+	public static int[] Recipients(IReadOnlyList<int>? picks, IReadOnlyList<int> owners, int players) =>
+		owners.Select((owner, i) => picks != null && i < picks.Count && picks[i] >= 0 && picks[i] < players ? picks[i] : owner)
+			.ToArray();
+
 	public static string Stream(int floor) => $"SlaySpoon.Conductor.{floor}";
 }

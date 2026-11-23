@@ -640,8 +640,9 @@ tested in game or by the bots unless marked. Vanilla only makes Sealed Deck, Dra
   - Folie à deux: the chest bids on card rewards only; Vintage's relics stay with their owner. With Matriochka too, the
     put-back card goes to the chest like any combat card. To check.
 - **Midas** (vanilla: gold rewards ×2, no Smith at rest sites)
-  - King Midas: two "Midas" in one list (owner may want them exclusive, or a different title for ours). Doubled gold
-    on top of the melt makes the melt mostly harmless.
+  - King Midas: compatible since 1.8.26 (owner, 2026-11-23): with Midas ticked, King Midas doubles its costs
+    (`MidasRule.Scale`: melt 20 % with a floor of 50, merchant rise 20 % per purchase, rest actions 100 + 100). The
+    income part of the melt floor already follows the doubled rewards. The two "Midas" titles stay (owner item).
   - Blood: gold rewards are paid out as HP, so ×2 doubles the healing from gold. Check balance.
   - Forge: Fuse stays (its own rest option), ordinary upgrades are gone, so cards climb only by fusion. Probably fun.
 - **Hoarder** (vanilla: 2 extra copies of each card added to the deck, no merchant removal)

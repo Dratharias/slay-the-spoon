@@ -26,6 +26,10 @@ public sealed class SpoonRoiMidas : ModifierModel
 
 	public static SpoonRoiMidas? Of(IRunState? run) => run?.Modifiers.OfType<SpoonRoiMidas>().FirstOrDefault();
 
+	/// <summary>2 when vanilla Midas is ticked too (<see cref="MidasRule.Scale"/>).</summary>
+	public static int Scale(IRunState? run) =>
+		MidasRule.Scale(run?.Modifiers.OfType<MegaCrit.Sts2.Core.Models.Modifiers.Midas>().Any() == true);
+
 	/// <summary>Actions each player paid for at the current rest site, by net id. Not saved: a reload resets the price.</summary>
 	private Dictionary<ulong, int> _paidHere = new();
 
@@ -83,7 +87,7 @@ public sealed class SpoonRoiMidas : ModifierModel
 
 	// Each purchase at this merchant raises the price of what is left.
 	public override decimal ModifyMerchantPrice(Player player, MerchantEntry entry, decimal cost) =>
-		cost * MidasRule.PriceFactor(_boughtHere.GetValueOrDefault(player.NetId));
+		cost * MidasRule.PriceFactor(_boughtHere.GetValueOrDefault(player.NetId), Scale(RunState));
 
 	public override Task AfterItemPurchased(Player player, MerchantEntry itemPurchased, int goldSpent)
 	{

@@ -114,4 +114,20 @@ public class MidasRuleTests
 		Assert.False(MidasRule.LeaveOnly(new[] { false, true }));
 		Assert.True(MidasRule.LeaveOnly(Array.Empty<bool>()));
 	}
+
+	[Fact]
+	public void VanillaMidasDoublesTheCosts()
+	{
+		Assert.Equal(1, MidasRule.Scale(false));
+		Assert.Equal(2, MidasRule.Scale(true));
+		Assert.Equal(100, MidasRule.RestPrice(0, 2));
+		Assert.Equal(200, MidasRule.RestPrice(1, 2));
+		Assert.Equal(200, MidasRule.Melt(1000, 50, 2));
+		Assert.Equal(50, MidasRule.MeltFloor(0, 0, 2));
+		Assert.Equal(50, MidasRule.MeltFloor(100, 10, 2));
+		Assert.Equal(80, MidasRule.MeltFloor(800, 10, 2));
+		Assert.Equal(1.2m, MidasRule.PriceFactor(1, 2));
+		Assert.False(MidasRule.CanSpend(100, 50, 50, 2));
+		Assert.True(MidasRule.CanSpend(100, 50, 50, 1) == !MidasRule.Ruined(50, 50, 1));
+	}
 }

@@ -61,3 +61,8 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] King Midas: <event
 
 - [ ] Reach a rest site with too little gold for any option (every option greyed): Proceed is enabled at once and the map opens.
 - [ ] With enough gold for one option, Proceed stays disabled until an option is chosen (vanilla).
+
+## With the base game's Midas (1.8.26)
+- [ ] King Midas + Midas: gold rewards doubled; the melt takes 20 % (at least 50, or the average gain per floor);
+  merchant prices rise 20 % per purchase; rest site actions cost 100, 200, 300.
+- [ ] King Midas alone: unchanged (10 %, 25, +10 %, 50/100/150).

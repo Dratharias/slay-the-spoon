@@ -1,0 +1,19 @@
+1.8.26 — new Conductor screen, King Midas with Midas, Matriochka with Vintage and Hoarder, Watcher crash at Darv, Watcher card trail crash, co-op boss chest, card play desync, King Midas rest site, Folie à deux chest view, Matriochka final card, Watcher, Spoon and Forge fixes (1.8.11 to 1.8.26)
+
+- Conductor: a new reward screen. Every reward of the fight is on one page: cards are shown as cards, relics and potions with their picture, name and text. Under each reward, click a character portrait to choose who receives it (its owner is selected first), then Confirm once.
+- King Midas now works with the base game's Midas modifier: when both are ticked, the doubled gold rewards meet doubled costs (the melt takes 20 % per floor, at least 50 gold; each purchase raises the merchant's prices by 20 %; rest site actions cost 100, 200, 300).
+- Matriochka with the base game's Hoarder modifier: a new card now comes in 3 copies, not 5 (Matriochka already includes Hoarder's copies, so Hoarder's are skipped).
+- Matriochka now works with the base game's Vintage modifier: after a normal fight you get Vintage's relic and Matriochka's card. Vintage used to turn that card into the relic, which left those floors without their card.
+- Fixed a crash for every player when Darv (the act 2 Ancient) offered the Watcher a Dusty Tome: she has no Ancient card to learn. Darv now offers her another of his relics in its place.
+- StS1 Boss Relics (co-op): a player who opens the boss chest at an Ancient before the other players have chosen now waits on the Ancient's page. A Proceed button used to appear there, and taking it left the Ancient without the chest and stalled the team on the map.
+- Co-op: fixed a desync where, after a fight ended while a player's card was waiting for a choice (Photon Cut, for example), that player's card plays in the next fight were dropped on their teammate's game only. This is a base game race; the mod now clears the leftover state.
+- King Midas: a rest site where you cannot pay for any option no longer traps you; Proceed is available right away.
+- Folie à deux: the chest view now fits the screen (the Continue button could end below it), and every card in it shows its real title and text instead of a "Broken Card" placeholder.
+- Matriochka no longer forces a card pick in the victory room after the run's last boss (the Architect). Card picks after earlier bosses, and after the act 3 boss when an act 4 or the Spoon act follows, are unchanged.
+- Fixed a crash when one of the Watcher's cards flies between piles (a shuffle, for example): after the game recompiled a hot method mid-run, it looked for a Watcher card trail that does not exist. Her cards now always find their purple trail.
+- Fixed a crash when the Watcher enters a rest site during a long co-op run.
+- Fixed Watcher rest site animation errors: her own idle animation plays without the donor character's missing act animations.
+- Fixed Brilliance trying to load an attack effect that does not exist in Slay the Spire 2.
+- Fixed the Spoon's Digest rest site option trying to load a missing icon; it shows the same heal icon as Feast.
+- King Midas now prevents Forge's Duplicate service from spending enough gold to ruin the buyer, like merchant and rest site purchases.
+- These fixes came from co-op run logs, owner reports and backlog review. The bot code is not included in the Workshop build.

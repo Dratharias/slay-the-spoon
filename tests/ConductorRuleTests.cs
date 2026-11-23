@@ -30,4 +30,16 @@ public class ConductorRuleTests
 
 	[Fact]
 	public void SoloIsAlwaysSlotZero() => Assert.Equal(0, ConductorRule.Pick(1, 0, 0));
+
+	[Fact]
+	public void RecipientsFollowThePicks() =>
+		Assert.Equal(new[] { 1, 0, 1 }, ConductorRule.Recipients(new[] { 1, 0, 1 }, new[] { 0, 0, 1 }, 2));
+
+	[Fact]
+	public void BadPicksLeaveTheRewardWithItsOwner()
+	{
+		Assert.Equal(new[] { 0, 1, 2 }, ConductorRule.Recipients(null, new[] { 0, 1, 2 }, 3));
+		Assert.Equal(new[] { 2, 1, 2 }, ConductorRule.Recipients(new[] { 2 }, new[] { 0, 1, 2 }, 3));
+		Assert.Equal(new[] { 0, 1 }, ConductorRule.Recipients(new[] { -1, 3 }, new[] { 0, 1 }, 3));
+	}
 }

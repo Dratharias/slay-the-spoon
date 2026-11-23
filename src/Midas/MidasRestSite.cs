@@ -27,7 +27,7 @@ namespace SlaySpoon.Midas;
 public static class MidasRestSite
 {
 	public static int? PriceFor(Player player) =>
-		SpoonRoiMidas.Of(player.RunState) is { } midas ? MidasRule.RestPrice(midas.PaidHere(player)) : null;
+		SpoonRoiMidas.Of(player.RunState) is { } midas ? MidasRule.RestPrice(midas.PaidHere(player), SpoonRoiMidas.Scale(player.RunState)) : null;
 
 	public static bool CannotAfford(RestSiteOption option) =>
 		OwnerOf(option) is { } owner && PriceFor(owner) is { } price && !MidasMelt.CanSpend(owner, price);

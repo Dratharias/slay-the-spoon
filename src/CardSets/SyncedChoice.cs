@@ -36,4 +36,25 @@ public static class SyncedChoice
 		await context.SignalPlayerChoiceEnded();
 		return index;
 	}
+
+	/// <summary>Several indexes in one synced choice (the game's own index list), for a screen that settles many
+	/// questions at once.</summary>
+	public static async Task<List<int>> ChooseMany(PlayerChoiceContext context, Player player, Func<Task<List<int>>> pickLocally)
+	{
+		PlayerChoiceSynchronizer sync = RunManager.Instance.PlayerChoiceSynchronizer;
+		uint choiceId = sync.ReserveChoiceId(player);
+		await context.SignalPlayerChoiceBegun(player, PlayerChoiceOptions.None);
+		List<int> indexes;
+		if (ShouldSelectLocalCard(player))
+		{
+			indexes = await pickLocally();
+			sync.SyncLocalChoice(player, choiceId, PlayerChoiceResult.FromIndexes(indexes));
+		}
+		else
+		{
+			indexes = (await sync.WaitForRemoteChoice(player, choiceId)).AsIndexes();
+		}
+		await context.SignalPlayerChoiceEnded();
+		return indexes;
+	}
 }

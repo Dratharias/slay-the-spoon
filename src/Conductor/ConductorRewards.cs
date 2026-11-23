@@ -63,16 +63,18 @@ public static class ConductorRewards
 		conductor.SpoonConductorPrevious = run.Players.ToList().IndexOf(chief);
 		SpoonLog.Info($"conductor: {chief.NetId} hands out the rewards");
 
-		var moves = new List<(RewardsSet from, Reward reward, Player to)>();
+		var offered = living.SelectMany(set => set.Rewards.Where(Movable).Select(reward => (set, reward))).ToList();
+		if (offered.Count == 0) return;
+		var owners = offered.Select(o => players.IndexOf(o.set.Player)).ToList();
 		var context = new BlockingPlayerChoiceContext();
-		foreach (var set in living)
+		List<int> picks = await SyncedChoice.ChooseMany(context, chief,
+			() => ConductorOverlay.Ask(offered.Select(o => (o.set.Player, o.reward)).ToList(), players));
+		int[] recipients = ConductorRule.Recipients(picks, owners, players.Count);
+		var moves = new List<(RewardsSet from, Reward reward, Player to)>();
+		for (int i = 0; i < offered.Count; i++)
 		{
-			foreach (var reward in set.Rewards.Where(Movable).ToList())
-			{
-				int pick = await SyncedChoice.Choose(context, chief, () => ConductorPopup.Ask(Describe(set.Player, reward), players, players.IndexOf(set.Player)));
-				Player to = players[Math.Clamp(pick, 0, players.Count - 1)];
-				if (to != set.Player) moves.Add((set, reward, to));
-			}
+			Player to = players[recipients[i]];
+			if (to != offered[i].set.Player) moves.Add((offered[i].set, offered[i].reward, to));
 		}
 		foreach (var (from, reward, to) in moves)
 		{
@@ -90,43 +92,6 @@ public static class ConductorRewards
 			target.Rewards.Sort((x, y) => x.RewardsSetIndex.CompareTo(y.RewardsSetIndex));
 			SpoonLog.Info($"conductor: {reward.GetType().Name} of {from.Player.NetId} goes to {to.NetId}");
 		}
-	}
-
-	private static string Describe(Player owner, Reward reward)
-	{
-		string what = reward is CardReward card
-			? string.Join(", ", card.Cards.Select(c => c.Title))
-			: reward.Description.GetFormattedText();
-		var text = new LocString("modifiers", "SPOON_CONDUCTOR.reward");
-		text.Add("Name", ConductorPopup.Name(owner));
-		text.Add("Reward", what);
-		return text.GetFormattedText();
-	}
-}
-
-/// <summary>The Conductor's recipient picker: one button per living player, not cancellable.</summary>
-public static class ConductorPopup
-{
-	public static string Name(Player player) =>
-		PlatformUtil.GetPlayerName(RunManager.Instance.NetService.Platform, player.NetId);
-
-	public static Task<int> Ask(string reward, IReadOnlyList<Player> players, int fallback)
-	{
-		var done = new TaskCompletionSource<int>();
-		var popup = NativeTradePopup.Open(new LocString("modifiers", "SPOON_CONDUCTOR.ask").GetFormattedText());
-		if (popup == null) return Task.FromResult(fallback);
-		NativeTradePopup.Label(popup.Rows, reward);
-		var row = NativeTradePopup.Actions(popup.Footer);
-		for (int i = 0; i < players.Count; i++)
-		{
-			int index = i;
-			NativeTradePopup.Button(row, Name(players[i]), () =>
-			{
-				if (done.TrySetResult(index)) popup.Close();
-			});
-		}
-		popup.Closed += () => done.TrySetResult(fallback);
-		return done.Task;
 	}
 }
 

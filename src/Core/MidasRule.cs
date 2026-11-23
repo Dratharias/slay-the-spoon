@@ -51,10 +51,17 @@ public static class MidasRule
 	/// <summary>Index into <paramref name="count"/> candidates for a random draw <paramref name="roll"/> ≥ 0; -1 when there are none.</summary>
 	public static int Pick(int count, int roll) => count <= 0 ? -1 : roll % count;
 
-	/// <summary>Gold a rest site action costs: 50, then 50 more for each action already paid at this fire.</summary>
+	/// <summary>
+	/// The price scale: 2 when vanilla Midas (gold rewards ×2) is ticked too, else 1. It doubles the melt's share and
+	/// minimum, the merchant's price rise and the rest site prices, so doubled income meets doubled costs (the melt's
+	/// income part already follows the doubled rewards). Owner request, 2026-11-23.
+	/// </summary>
+	public static int Scale(bool vanillaMidas) => vanillaMidas ? 2 : 1;
+
+	/// <summary>Gold a rest site action costs: 50, then 50 more for each action already paid at this fire (× scale).</summary>
 	public const int RestPriceStep = 50;
 
-	public static int RestPrice(int paidHere) => RestPriceStep * (Math.Max(0, paidHere) + 1);
+	public static int RestPrice(int paidHere, int scale = 1) => RestPriceStep * scale * (Math.Max(0, paidHere) + 1);
 
 	/// <summary>Share of a player's gold that melts each time the team travels to a map room, in percent.</summary>
 	public const int MeltPercent = 10;
@@ -70,26 +77,30 @@ public static class MidasRule
 	/// at least 25. Ordinary income only just covers it, so gold kept is gold slowly lost, and a run that earns more
 	/// (rich events, gold relics) must keep a bigger reserve to survive the next floor.
 	/// </summary>
-	public static int MeltFloor(int goldGained, int floors) =>
-		floors <= 0 ? MeltMinimum : Math.Max(MeltMinimum, Math.Max(goldGained, 0) / floors * MeltIncomePercent / 100);
+	public static int MeltFloor(int goldGained, int floors, int scale = 1) =>
+		floors <= 0 ? MeltMinimum * scale
+			: Math.Max(MeltMinimum * scale, Math.Max(goldGained, 0) / floors * MeltIncomePercent / 100);
 
 	/// <summary>Gold lost on traveling to the next floor: 10 % of the purse, at least <paramref name="floor"/>, never more than the purse.</summary>
-	public static int Melt(int gold, int floor) => Math.Min(Math.Max(gold, 0), Math.Max(gold * MeltPercent / 100, floor));
+	public static int Melt(int gold, int floor, int scale = 1) =>
+		Math.Min(Math.Max(gold, 0), Math.Max(gold * MeltPercent * scale / 100, floor));
 
 	/// <summary>True when the next melt leaves no gold: the player dies on traveling.</summary>
-	public static bool Ruined(int gold, int floor) => gold - Melt(gold, floor) <= 0;
+	public static bool Ruined(int gold, int floor, int scale = 1) => gold - Melt(gold, floor, scale) <= 0;
 
 	/// <summary>
 	/// True when the player may pay <paramref name="price"/>: they hold it and keep enough to survive the next melt.
 	/// The merchant and the rest site refuse what would kill.
 	/// </summary>
-	public static bool CanSpend(int gold, int price, int floor) => gold >= price && !Ruined(gold - price, floor);
+	public static bool CanSpend(int gold, int price, int floor, int scale = 1) =>
+		gold >= price && !Ruined(gold - price, floor, scale);
 
 	/// <summary>Merchant price rise per item already bought at this merchant, in percent of the price.</summary>
 	public const int PriceRisePercent = 10;
 
 	/// <summary>Price multiplier after <paramref name="boughtHere"/> purchases at the current merchant.</summary>
-	public static decimal PriceFactor(int boughtHere) => 1m + PriceRisePercent * Math.Max(0, boughtHere) / 100m;
+	public static decimal PriceFactor(int boughtHere, int scale = 1) =>
+		1m + PriceRisePercent * scale * Math.Max(0, boughtHere) / 100m;
 
 	/// <summary>True when the player can pay for none of the rest site's options: they may only leave.</summary>
 	public static bool LeaveOnly(IEnumerable<bool> affordable) => !affordable.Any(a => a);

@@ -31,9 +31,10 @@ public static class MidasMelt
 			if (player.Creature.IsDead) continue;
 			int gold = player.Gold;
 			int floor = FloorFor(player);
-			int melt = MidasRule.Melt(gold, floor);
+			int scale = SpoonRoiMidas.Scale(run);
+			int melt = MidasRule.Melt(gold, floor, scale);
 			if (melt > 0) await PlayerCmd.LoseGold(melt, player, GoldLossType.Lost);
-			if (MidasRule.Ruined(gold, floor))
+			if (MidasRule.Ruined(gold, floor, scale))
 			{
 				SpoonLog.Info($"King Midas: player {player.NetId} ruined: {gold} gold, melt floor {floor}");
 				ruined.Add(player.Creature);
@@ -60,12 +61,12 @@ public static class MidasMelt
 				gained += entry.PlayerStats.Where(p => p.PlayerId == player.NetId).Sum(p => p.GoldGained);
 			}
 		}
-		return MidasRule.MeltFloor(gained, floors);
+		return MidasRule.MeltFloor(gained, floors, SpoonRoiMidas.Scale(player.RunState));
 	}
 
 	/// <summary>With Blood, a payment removes whole HP, so the check uses the rounded-up amount (<see cref="BloodRule.PaidGold"/>).</summary>
 	public static bool CanSpend(Player player, int price) => MidasRule.CanSpend(player.Gold,
-		SpoonBlood.IsActive(player.RunState) ? BloodRule.PaidGold(price) : price, FloorFor(player));
+		SpoonBlood.IsActive(player.RunState) ? BloodRule.PaidGold(price) : price, FloorFor(player), SpoonRoiMidas.Scale(player.RunState));
 
 	/// <summary>True when the run continues (someone is still alive).</summary>
 	public static bool AnyoneAlive(IRunState run) => run.Players.Any(p => !p.Creature.IsDead);
