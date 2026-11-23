@@ -1,0 +1,6 @@
+1.11.2 — cursed relics in Overcursed
+
+New
+- Overcursed: the Cursed Deck's cursed relics (Blood Pact, Pin Doll, Black Censer, Reliquary and the game's six cursed relics) are now sold by merchants and given by the random relic rewards of "?" events, 5 times in 6 while one is left. Merchant prices follow the Uncommon price for the mod's own relics.
+- Overcursed: "Embrace the curse" gives a cursed relic 2 times in 3 while one is left (was 1 in 3).
+- With Cursed Deck too, merchants use the Overcursed odds; chests and elites keep Cursed Deck's 2 in 3. Ancients are never affected.

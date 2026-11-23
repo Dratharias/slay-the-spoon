@@ -1,5 +1,8 @@
 namespace SlaySpoon.Core;
 
+/// <summary>Where a relic pull happens, for the cursed relic draw.</summary>
+public enum CursedRelicSource { Chest, Elite, Merchant, Event }
+
 /// <summary>Rules of the Overcursed modifier (spec docs/superpowers/specs/2026-11-23-overcursed-design.md).</summary>
 public static class OvercursedRule
 {
@@ -25,4 +28,23 @@ public static class OvercursedRule
 		: drawn;
 
 	public static int EmbraceGold(bool midas) => midas ? 2 * CurseRule.EventGold : CurseRule.EventGold;
+
+	/// <summary>
+	/// Whether a relic pull may be cursed (owner, 2026-11-23): Cursed Deck curses chest, elite and merchant pulls; Overcursed
+	/// curses merchant and event pulls (Ancients excluded by the caller), with or without Cursed Deck.
+	/// </summary>
+	public static bool CursedSource(CursedRelicSource source, bool cursedDeck, bool overcursed) => source switch
+	{
+		CursedRelicSource.Chest or CursedRelicSource.Elite => cursedDeck,
+		CursedRelicSource.Merchant => cursedDeck || overcursed,
+		_ => overcursed,
+	};
+
+	/// <summary>The cursed draw's roll: 5 in 6 under Overcursed, else Cursed Deck's 2 in 3.</summary>
+	public static bool CursedRelicRoll(int roll, bool overcursed) =>
+		overcursed ? (uint)roll % 6u != 0 : CurseRule.CursedRelicRoll(roll);
+
+	/// <summary>Embrace the curse under Overcursed: a cursed relic 2 rolls in 3 while one is left, else Cursed Deck's draw.</summary>
+	public static CurseEventReward EmbraceDraw(int roll, bool cursedRelicLeft, bool overcursed) =>
+		overcursed && cursedRelicLeft && (uint)roll % 3u != 2 ? CurseEventReward.CursedRelic : CurseRule.EventReward(roll, cursedRelicLeft);
 }

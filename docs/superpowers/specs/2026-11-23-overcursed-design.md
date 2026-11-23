@@ -19,3 +19,14 @@ deck drowns in curses; with Cursed Deck (playable curses) and The Forge (fused c
   The Midas rule also applies to Cursed Deck alone.
 - Rejected: a separate set of curse events (too much text for a mode whose rule is one line); tripling Cursed Deck's
   cursed relic draws (they are relics, not curses).
+
+## Cursed relics (owner, 2026-11-23; 1.11.2)
+
+Owner request: in Overcursed, the regular Cursed Deck's cursed relics are available at merchants and in events, with higher odds.
+
+Builder calls:
+- Sources: Overcursed curses merchant relic slots and random relic pulls inside an ordinary "?" event room (Ancients and the
+  Architect excluded). Chests and elites stay Cursed Deck only, so Overcursed alone leaves them vanilla.
+- Odds: 5 pulls in 6 at merchants and events (Cursed Deck's 2 in 3 elsewhere); Embrace the curse gives a cursed relic
+  2 times in 3 while one is left (Cursed Deck: 1 in 3).
+- Same pool of ten, same seeded streams and reservation per floor as Cursed Deck; once all are held, pulls are vanilla.

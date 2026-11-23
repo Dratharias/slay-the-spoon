@@ -6,10 +6,12 @@ using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
+using SlaySpoon.Config;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Curses;
@@ -54,12 +56,15 @@ public static class CursedRelics
 	private static readonly ConditionalWeakTable<IRunState, DrawState> States = new();
 
 	/// <summary>
-	/// The cursed draw: in a Cursed Deck run, 2 pulls in 3 (own seeded stream, vanilla RNG untouched) give a cursed relic
-	/// nobody concerned holds. Returns null to let the vanilla pull go on.
+	/// The cursed draw: Cursed Deck curses chest, elite and merchant pulls 2 in 3; Overcursed curses merchant and event pulls
+	/// 5 in 6 (<see cref="OvercursedRule"/>). Own seeded stream, vanilla RNG untouched; the relic is one nobody concerned holds.
+	/// Returns null to let the vanilla pull go on.
 	/// </summary>
-	public static RelicModel? TryDraw(RelicGrabBag bag, Func<RelicModel, bool> filter, IRunState run)
+	public static RelicModel? TryDraw(RelicGrabBag bag, Func<RelicModel, bool> filter, IRunState run, CursedRelicSource source)
 	{
-		if (!SpoonCursedDeck.IsActive(run)) return null;
+		bool overcursed = SpoonOvercursed.IsActive(run);
+		if (!OvercursedRule.CursedSource(source, SpoonCursedDeck.IsActive(run), overcursed)) return null;
+		bool fiveInSix = overcursed && source is CursedRelicSource.Merchant or CursedRelicSource.Event;
 		var concerned = run.Players.Where(p => ReferenceEquals(p.RelicGrabBag, bag)).ToList();
 		int key = concerned.Count == 1 ? run.GetPlayerSlotIndex(concerned[0]) : -1;
 		if (concerned.Count == 0 && ReferenceEquals(run.SharedRelicGrabBag, bag)) concerned = run.Players.ToList();
@@ -82,7 +87,7 @@ public static class CursedRelics
 			if (key == -1 || k == key || k == -1) excluded.UnionWith(ids);
 		}
 		Rng rng = new(run.Rng.Seed, CurseRule.RelicStream(floor, key, draw));
-		if (!CurseRule.CursedRelicRoll(rng.NextInt(int.MaxValue))) return null;
+		if (!OvercursedRule.CursedRelicRoll(rng.NextInt(int.MaxValue), fiveInSix)) return null;
 		List<RelicModel> left = Pool.Where(r => !excluded.Contains(r.Id.Entry) && r.IsAllowed(run) && filter(r)).ToList();
 		string? id = CurseRule.PickCursedRelic(left.Select(r => r.Id.Entry).ToList(), new HashSet<string>(), rng.NextInt(int.MaxValue));
 		if (id == null) return null;
@@ -93,26 +98,44 @@ public static class CursedRelics
 }
 
 /// <summary>
-/// Cursed Deck: the cursed draw applies only inside the vanilla methods that generate a chest, elite or merchant relic.
-/// The scope is a thread-static depth counter (these methods are synchronous), so event grants, the rest-site Dig,
-/// Pael's Wing, Toy Box and Large Capsule stay vanilla.
+/// Cursed Deck: the cursed draw applies inside the vanilla methods that generate a chest, elite or merchant relic; Overcursed
+/// also curses random relic pulls in an ordinary "?" event room (<see cref="CursedScope.For"/>).
+/// The scope is a thread-static depth counter (these methods are synchronous), so the rest-site Dig, Pael's Wing, Toy Box,
+/// Large Capsule and (without Overcursed) event grants stay vanilla.
 /// </summary>
 public static class CursedScope
 {
 	[ThreadStatic] private static int _depth;
+	[ThreadStatic] private static CursedRelicSource _source;
 
 	public static bool Active => _depth > 0;
 
-	public static void Enter() => _depth++;
+	public static CursedRelicSource Source => _source;
+
+	public static void Enter(CursedRelicSource source)
+	{
+		if (_depth == 0) _source = source;
+		_depth++;
+	}
 
 	public static void Exit() { if (_depth > 0) _depth--; }
+
+	/// <summary>
+	/// The pull's source: the open scope's, else an ordinary "?" event (Overcursed: the event's random relics), else none.
+	/// Ancients and the Architect never count.
+	/// </summary>
+	public static CursedRelicSource? For(IRunState run)
+	{
+		if (Active) return _source;
+		return run.CurrentRoom is EventRoom { CanonicalEvent: not (AncientEventModel or TheArchitect) } ? CursedRelicSource.Event : null;
+	}
 }
 
 /// <summary>Chest: the treasure room's relic generation.</summary>
 [HarmonyPatch(typeof(TreasureRoomRelicSynchronizer), nameof(TreasureRoomRelicSynchronizer.BeginRelicPicking))]
 public static class CursedChestScopePatch
 {
-	public static void Prefix() => CursedScope.Enter();
+	public static void Prefix() => CursedScope.Enter(CursedRelicSource.Chest);
 
 	public static void Finalizer() => CursedScope.Exit();
 }
@@ -124,7 +147,7 @@ public static class CursedEliteScopePatch
 	public static void Prefix(RelicReward __instance, out bool __state)
 	{
 		__state = __instance.Player.RunState.CurrentRoom is { RoomType: RoomType.Elite };
-		if (__state) CursedScope.Enter();
+		if (__state) CursedScope.Enter(CursedRelicSource.Elite);
 	}
 
 	public static void Finalizer(bool __state)
@@ -137,30 +160,30 @@ public static class CursedEliteScopePatch
 [HarmonyPatch(typeof(MerchantRelicEntry), "FillSlot")]
 public static class CursedMerchantScopePatch
 {
-	public static void Prefix() => CursedScope.Enter();
+	public static void Prefix() => CursedScope.Enter(CursedRelicSource.Merchant);
 
 	public static void Finalizer() => CursedScope.Exit();
 }
 
-/// <summary>Cursed Deck: relic pulls from the front of a grab bag (chest, elite) are cursed 2 times in 3.</summary>
+/// <summary>Relic pulls from the front of a grab bag (chest, elite, event) may be cursed (<see cref="CursedRelics.TryDraw"/>).</summary>
 [HarmonyPatch(typeof(RelicGrabBag), nameof(RelicGrabBag.PullFromFront), typeof(RelicRarity), typeof(Func<RelicModel, bool>), typeof(IRunState))]
 public static class CursedRelicDrawPatch
 {
 	public static bool Prefix(RelicGrabBag __instance, Func<RelicModel, bool> filter, IRunState runState, ref RelicModel? __result)
 	{
-		if (!CursedScope.Active || CursedRelics.TryDraw(__instance, filter, runState) is not { } relic) return true;
+		if (CursedScope.For(runState) is not { } source || CursedRelics.TryDraw(__instance, filter, runState, source) is not { } relic) return true;
 		__result = relic;
 		return false;
 	}
 }
 
-/// <summary>Cursed Deck: the merchant's relic pulls (from the back of a grab bag) are cursed 2 times in 3 too.</summary>
+/// <summary>The merchant's relic pulls (from the back of a grab bag) may be cursed too.</summary>
 [HarmonyPatch(typeof(RelicGrabBag), nameof(RelicGrabBag.PullFromBack), typeof(RelicRarity), typeof(Func<RelicModel, bool>), typeof(IRunState))]
 public static class CursedRelicShopDrawPatch
 {
 	public static bool Prefix(RelicGrabBag __instance, Func<RelicModel, bool> filter, IRunState runState, ref RelicModel? __result)
 	{
-		if (!CursedScope.Active || CursedRelics.TryDraw(__instance, filter, runState) is not { } relic) return true;
+		if (CursedScope.For(runState) is not { } source || CursedRelics.TryDraw(__instance, filter, runState, source) is not { } relic) return true;
 		__result = relic;
 		return false;
 	}
@@ -176,7 +199,7 @@ public static class CursedMerchantPricePatch
 	{
 		if (__result < 999999999) return;
 		if (!CursedRelics.Pool.Any(r => r.Id == __instance.Id)) return;
-		if (__instance.Owner is { } owner && !SpoonCursedDeck.IsActive(owner.RunState)) return;
+		if (__instance.Owner is { } owner && !SpoonCursedDeck.IsActive(owner.RunState) && !SpoonOvercursed.IsActive(owner.RunState)) return;
 		__result = UncommonPrice;
 	}
 }

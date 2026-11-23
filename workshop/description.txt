@@ -46,7 +46,7 @@ Curses are your ammo. Play them, throw them at the enemy, collect the relics tha
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-en.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-relic-en.png[/img]
 With The Forge too, curses fuse up to +9: far stronger on both sides, with a defect at +3, +6 and +9.
-[b]Overcursed[/b]: every curse you receive comes in three, and events offer to embrace the curse (gold every time under King Midas). Ascender's Bane becomes the Witching Hour, a curse of the mod's own.
+[b]Overcursed[/b]: every curse you receive comes in three, and events offer to embrace the curse (gold every time under King Midas). Ascender's Bane becomes the Witching Hour. Cursed relics at merchants and in events.
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-en.png[/img]
 One unblocked hit and you die. Stack Block, then hit with it.

@@ -867,3 +867,12 @@ Read `README.md` for the player view and the spec for every decision.
 - Neow's Bones left `CursedRelics.Vanilla()`: mid-run, its nested reward set and Niche curse draw desynced co-op (bot queue 7 line 5).
 - 1030 xUnit + 112 pytest pass. Not tested in game: "Witching Hour (1.11.1)" in `docs/testing/release-1.11.0.md`.
 
+
+## 1.11.2 — Overcursed cursed relics (2026-11-23, `main`)
+
+- Owner: with Overcursed, the Cursed Deck's cursed relics are found at merchants and in events, more often.
+  `OvercursedRule.CursedSource` (Cursed Deck: chest, elite, merchant; Overcursed: merchant and event) and
+  `CursedRelicRoll(roll, overcursed)` (5 in 6 at merchants and events under Overcursed, else 2 in 3). The event source is any
+  relic pull while the current room is an ordinary `EventRoom` (not an Ancient or the Architect, `CursedScope.For`); merchant
+  prices use `CursedMerchantPricePatch` under either mode. Embrace the curse gives a cursed relic 2 in 3 (`EmbraceDraw`).
+- 1040 xUnit + 112 pytest pass. Not tested in game: "Overcursed cursed relics (1.11.2)" in `docs/testing/release-1.11.0.md`.

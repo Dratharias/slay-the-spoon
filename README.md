@@ -165,7 +165,9 @@ Not tested in game: `docs/testing/forged-curses-checklist.md`.
 event offers Cursed Deck's "Embrace the curse" (gold every time under King Midas). The merchant still removes curses.
 Ascender's Bane is replaced by the mod's own curse, the **Witching Hour** (Eternal, Innate): on odd turns it is unplayable,
 your other cards cost 1 more while it is in your hand, and it is drawn 80 % of the time; played through the Unholy
-Grimoire on an even turn, the chosen enemy skips its next turn.
+Grimoire on an even turn, the chosen enemy skips its next turn. The Cursed Deck's cursed relics turn up at merchants
+and from the random relics of "?" events (5 pulls in 6 there instead of 2 in 3), and Embrace gives a cursed relic 2 times
+in 3 while one is left; chests and elites follow Cursed Deck.
 
 **Achilles' Heel** (Custom Run): every player starts with the Achilles' Heel relic plus Anchor, Oddly Smooth Stone and
 Gorget. In every combat, unblocked attack damage kills you (Poison and HP loss don't). You gain 1 Dexterity per act past
@@ -239,7 +241,7 @@ keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-g
 
 ## Development status — 2026-11-23
 
-Version **1.11.1**: the Witching Hour curse; 1.11.0: the Overcursed mode and the Forge ladder, after forged curses (1.10.0), King Midas's relic sale (1.9.0), a long wave of fixes found
+Version **1.11.2**: Overcursed's cursed relics at merchants and events; 1.11.1: the Witching Hour curse; 1.11.0: the Overcursed mode and the Forge ladder, after forged curses (1.10.0), King Midas's relic sale (1.9.0), a long wave of fixes found
 by automated co-op runs (1.8.3–1.8.34), Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges
 (1.7.0), The Forge (1.4.0) and the port to game version 0.111.1 (1.3.8). The build has no warnings and every unit test
 passes. Most features still need in-game checks; the [testing checklists](docs/testing/) record them.

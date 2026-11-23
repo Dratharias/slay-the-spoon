@@ -26,3 +26,14 @@
 - [ ] Cursed Deck + Overcursed, even turn: the Grimoire plays it on an enemy, which skips its next turn (stun intent).
 - [ ] Portrait, EN/FR title, text and hover tip read well.
 - [ ] Cursed Deck: Neow's Bones never comes from a chest, elite or merchant.
+
+## Overcursed cursed relics (1.11.2)
+
+- [ ] Overcursed alone: a merchant's relic slots are mostly cursed relics (5 in 6 per slot), priced like Uncommons for the mod's four.
+- [ ] Overcursed alone: an event giving a random relic (Round Tea Party, Unrest Site, Luminous Choir...) usually gives a cursed relic.
+- [ ] Overcursed alone: chest and elite relics stay vanilla.
+- [ ] Overcursed alone: Embrace the curse gives a cursed relic about 2 times in 3, gold or heal otherwise.
+- [ ] Overcursed + Cursed Deck: chests and elites cursed about 2 in 3, merchants about 5 in 6.
+- [ ] Once all ten cursed relics are held, every pull is vanilla again.
+- [ ] Co-op: both players see the same merchant and event relics (no divergence).
+- [ ] Ancients (Neow, Darv, Orobas...) are unchanged.

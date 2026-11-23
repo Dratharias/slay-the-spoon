@@ -53,7 +53,7 @@ public static class CurseEventOptionPatch
 		HashSet<string> held = player.Relics.Select(r => r.Id.Entry).ToHashSet();
 		List<RelicModel> left = CursedRelics.Pool.Where(r => !held.Contains(r.Id.Entry)).ToList();
 		int roll = rng.NextInt(int.MaxValue);
-		CurseEventReward reward = CurseRule.EventReward(roll, left.Count > 0);
+		CurseEventReward reward = OvercursedRule.EmbraceDraw(roll, left.Count > 0, SpoonOvercursed.IsActive(run));
 		bool midas = run.Modifiers.Any(m => m is SpoonRoiMidas);
 		reward = OvercursedRule.EmbraceReward(reward, SpoonBlood.IsActive(run), midas);
 		switch (reward)
