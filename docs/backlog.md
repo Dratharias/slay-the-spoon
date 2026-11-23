@@ -661,7 +661,8 @@ tested in game or by the bots unless marked. Vanilla only makes Sealed Deck, Dra
 - **Sealed Deck, Draft, Insanity** (`ClearsPlayerDeck`: the starting deck is cleared in `OnRunCreated`, before each
   modifier's `AfterRunCreated`, in the run's modifier order)
   - Spoon (Spoonful), Cursed Deck (starting curse), Watcher starter: a start card added by a mod modifier that runs
-    before the clearing modifier is wiped. Check the order (vanilla modifiers are probably listed first).
+    before the clearing modifier is wiped. ~~Check the order~~ Fixed in 1.11.0 (`EarlyDeckClearPatch`): with a clearing
+    modifier the decks are cleared once before every modifier's `OnRunCreated`, and the clearing ones skip their own clear.
   - Deck of 10: its first trim already uses the Sealed Deck keep grid; with Sealed Deck the player picks twice.
   - Darv already refuses Pandora's Box with these (vanilla).
 - **Night Terrors** (rest heals to full, −5 max HP)
