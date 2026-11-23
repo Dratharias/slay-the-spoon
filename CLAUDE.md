@@ -839,3 +839,19 @@ Read `README.md` for the player view and the spec for every decision.
   (`SPOON_CURSE_DEFECT.<X>.name`) and one hover tip each (`CurseDefectHoverTipPatch`, `CardModel.HoverTips` postfix).
 - `CardRenderer` renders a forged curse with defects: `BadLuck+9~Spiteful~Echo~Bloody` (holds `ForgedCurses.Loading`).
   Images: `workshop/images/forged-curse-vs-limit-break-{en,fr}.png`. Not tested in a run.
+
+## 1.11.0 — Overcursed, Forge ladder, backlog close (2026-11-23, branch `backlog-features`)
+
+- **Overcursed** (`SpoonOvercursed`, Custom Run only, spec `docs/superpowers/specs/2026-11-23-overcursed-design.md`):
+  curses come in threes (no extra copies past Hoarder/Matriochka rules, 999 cap kept), Cursed Deck's start curse tripled,
+  "Embrace the curse" on every "?" event (King Midas: always 150 gold; Blood: the gold is a heal). Rules in `OvercursedRule`.
+- **Forge ladder** (`src/Forge/ForgeLadderBanner.cs`, spec `docs/superpowers/specs/2026-11-23-forge-ladder-banner-design.md`):
+  with "View Upgrade" ticked in a Forge run, the inspect screen lists every level up to +9; hover shows it on the big card.
+- Backlog: no-effect curses target all enemies (`CurseRule.NeedsTarget`); Bottled Miracle `AnyPlayer`; Deck of 10 ×
+  Hoarder mutually exclusive; Useless Relics "Thrown"/"Throwable" tips (`UselessRelicHoverTipPatch`); Blood "N HP" under
+  merchant prices (`BloodPriceLabel`, `BloodRule.HpPrice`); `PowerIconAlias` (mod power icons take over their vanilla
+  atlas/big paths in the resource cache, no NOPE when the getter detour is lost); Spoon `SpoonGluttonyPower` (tooltip
+  only); King Midas + Vintage relic always given (`MidasRule.VintageRelics`); `EarlyDeckClearPatch` (Sealed Deck, Draft,
+  Insanity clear decks before every modifier's `OnRunCreated`); loans under King Midas repay only what survives the
+  melt (`MidasRule.Repayable`, builder call). Still open: Randomize button (owner kept vanilla), restaurant ambience.
+- Build 0 warnings; 1021 xUnit + 112 pytest pass. Not tested in game: `docs/testing/release-1.11.0.md`.

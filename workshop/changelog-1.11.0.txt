@@ -1,0 +1,19 @@
+1.11.0 — Overcursed, the Forge ladder, backlog fixes
+
+New
+- Overcursed (Custom Run): every curse you get comes in threes, and every "?" event offers "Embrace the curse". Cursed Deck's start curse is tripled too. With King Midas, embracing always pays 150 gold; with Blood, the gold is a heal.
+- The Forge: in a Forge run, ticking "View Upgrade" on a card's inspect screen shows a ladder of every level up to +9; hover a level to see it on the big card.
+- The Spoon starts its fight with Gluttony, a tooltip that explains how it grows (Max HP from unblocked hits, Strength per 5 Max HP).
+- Useless Relics: a relic's tooltip says when it can be thrown, and that a thrown relic comes back after the fight.
+- Blood: every merchant price shows its HP cost in red underneath.
+- Bottled Miracle can be used on any player.
+
+Changes
+- Cursed Deck: curses with no effect when played (Clumsy, etc.) no longer ask for a target; their Grimoire damage still hits every enemy.
+- Deck of 10 and the base game's Hoarder can no longer be ticked together.
+- King Midas + Vintage: a normal fight always gives Vintage's relic (before, it depended on the modifier order).
+- King Midas + Merchant Loans: gold you gain repays only what leaves you safe from the next melt; the rest of the debt waits.
+
+Fixes
+- Sealed Deck, Draft and Insanity no longer wipe start cards added by the mod's modes (the Spoonful, Cursed Deck's curse).
+- Mod power icons no longer turn into "NOPE" late in a long session.
