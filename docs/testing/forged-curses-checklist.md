@@ -24,6 +24,7 @@ Custom Run with **The Forge** and **Cursed Deck** ticked unless a line says othe
 
 - [ ] Save and reload with a +7 curse that has defects: level and defect lines unchanged.
 - [ ] Co-op: the client sees the same level and defects on the host's forged curse, and plays stay in sync.
+- [ ] Co-op, long run: a Spiteful curse left in hand at end of turn hits twice on both clients (no desync).
 
 ## Modes alone
 

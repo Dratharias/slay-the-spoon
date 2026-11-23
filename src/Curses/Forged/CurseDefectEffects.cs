@@ -2,6 +2,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
@@ -82,23 +83,25 @@ public static class CurseDefectEffects
 	}
 }
 
-/// <summary>Spiteful: the curse's end-of-turn in-hand effect runs twice (Regret doubles its count instead: it resets it).</summary>
-[HarmonyPatch(typeof(CardModel), nameof(CardModel.OnTurnEndInHandWrapper))]
-public static class SpitefulTurnEndPatch
+/// <summary>
+/// Spiteful: the curse's end-of-turn in-hand effect runs once more, from the Cursed Deck modifier's
+/// <c>BeforeSideTurnEnd</c> (a model hook: a Harmony patch on the one-line <c>OnTurnEndInHandWrapper</c> could be
+/// inlined into its caller on one co-op peer only). Regret doubles its count in <c>RegretPatch</c> instead.
+/// </summary>
+public static class SpitefulTurnEnd
 {
-	private static readonly Func<CardModel, PlayerChoiceContext, Task> TurnEnd =
-		AccessTools.MethodDelegate<Func<CardModel, PlayerChoiceContext, Task>>(AccessTools.Method(typeof(CardModel), "OnTurnEndInHand"));
-
-	public static void Postfix(CardModel __instance, PlayerChoiceContext choiceContext, ref Task __result)
+	public static async Task Run(PlayerChoiceContext ctx, IEnumerable<Creature> participants)
 	{
-		if (__instance.Type != CardType.Curse || __instance is Regret || !ForgedCurses.Applies(__instance)) return;
-		int times = ForgedCurseRule.SpitefulTimes(CurseDefects.Get(__instance));
-		if (times > 1) __result = Again(__result, __instance, choiceContext, times - 1);
-	}
-
-	private static async Task Again(Task first, CardModel card, PlayerChoiceContext ctx, int more)
-	{
-		await first;
-		for (int i = 0; i < more; i++) await TurnEnd(card, ctx);
+		foreach (var creature in participants)
+		{
+			var hand = creature.Player?.PlayerCombatState?.Hand.Cards.ToList();
+			if (hand == null) continue;
+			foreach (var card in hand)
+			{
+				if (card.Type != CardType.Curse || !card.HasTurnEndInHandEffect || !ForgedCurses.Applies(card)) continue;
+				int extra = ForgedCurseRule.SpitefulExtraReplays(CurseDefects.Get(card), card is Regret);
+				for (int i = 0; i < extra; i++) await card.OnTurnEndInHandWrapper(ctx);
+			}
+		}
 	}
 }

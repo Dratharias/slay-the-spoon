@@ -826,7 +826,9 @@ Read `README.md` for the player view and the spec for every decision.
   (`src/Curses/Forged/ForgedCurses.cs`, the gates in `ForgeLevels`, `ForgeDuplicate`, `CurseUpgradePatch.MaxLevelPatch`);
   each level repeats the +0 → +1 step on both sides (`ForgedCurseRule.AmountAt`, Grimoire, Normality, Guilty). Ordinary
   upgrades still stop at +1. Defects at +3/+6/+9 (`CurseDefect` flags, drawn at fusion on `DefectStream`): stored in a
-  BaseLib `SavedSpireField<CardModel,int>` built by reflection (`CurseDefects`; the build has no BaseLib reference), play
+  BaseLib `SavedSpireField<CardModel,string>` built by reflection (`CurseDefects`; the build has no BaseLib reference;
+  a string, null when none, because BaseLib saves every non-null value on every card), play
   checks (`CurseDefectPlayPatch`, can't-play line), purple text (`CurseDefectTextPatch`), effects (`CurseDefectEffects`,
-  Spiteful on `OnTurnEndInHandWrapper`, Regret doubled in `RegretPatch`). Levels per curse in `docs/review/cursed-curses.md`.
+  Spiteful from `SpoonCursedDeck.BeforeSideTurnEnd`, a model hook, never a patch on the inlinable one-line
+  `OnTurnEndInHandWrapper`; Regret doubled in `RegretPatch`). Levels per curse in `docs/review/cursed-curses.md`.
 - Not tested in game: `docs/testing/forged-curses-checklist.md`.

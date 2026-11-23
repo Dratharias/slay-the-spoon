@@ -13,23 +13,23 @@ namespace SlaySpoon.Curses.Forged;
 public static class CurseDefects
 {
 	// BaseLib is a runtime dependency only (the build has no copy of it), so its field type is reached by reflection.
-	private static Func<CardModel, int>? _get;
-	private static Action<CardModel, int>? _set;
+	private static Func<CardModel, string?>? _get;
+	private static Action<CardModel, string?>? _set;
 
-	/// <summary>Called from the mod's initializer: builds a BaseLib <c>SavedSpireField&lt;CardModel, int&gt;</c> (it registers itself).</summary>
+	/// <summary>Called from the mod's initializer: builds a BaseLib <c>SavedSpireField&lt;CardModel, string&gt;</c> (it registers itself). A string, null by default, because BaseLib saves every non-null value: an int field put a 0 on every card of every run.</summary>
 	public static void Register()
 	{
 		try
 		{
 			var open = Type.GetType("BaseLib.Utils.SavedSpireField`2, BaseLib", throwOnError: true)!;
-			var type = open.MakeGenericType(typeof(CardModel), typeof(int));
-			var ctor = type.GetConstructor([typeof(Func<int>), typeof(string)])
-				?? throw new MissingMethodException(type.FullName, ".ctor(Func<int>, string)");
-			object field = ctor.Invoke([(Func<int>)(() => 0), "SpoonCurseDefects"]);
+			var type = open.MakeGenericType(typeof(CardModel), typeof(string));
+			var ctor = type.GetConstructor([typeof(Func<string>), typeof(string)])
+				?? throw new MissingMethodException(type.FullName, ".ctor(Func<string>, string)");
+			object field = ctor.Invoke([(Func<string?>)(() => null), "SpoonCurseDefects"]);
 			type.GetMethod("CopyOnClone")!.Invoke(field, [null]);
 			var get = type.GetMethod("Get", [typeof(CardModel)])!;
-			var set = type.GetMethod("Set", [typeof(CardModel), typeof(int)])!;
-			_get = card => get.Invoke(field, [card]) is int v ? v : 0;
+			var set = type.GetMethod("Set", [typeof(CardModel), typeof(string)])!;
+			_get = card => get.Invoke(field, [card]) as string;
 			_set = (card, v) => set.Invoke(field, [card, v]);
 			SpoonLog.Info("forged curses: defect field registered");
 		}
@@ -39,9 +39,9 @@ public static class CurseDefects
 		}
 	}
 
-	public static CurseDefect Get(CardModel card) => _get is { } g ? (CurseDefect)g(card) : CurseDefect.None;
+	public static CurseDefect Get(CardModel card) => _get is { } g ? ForgedCurseRule.DecodeDefects(g(card)) : CurseDefect.None;
 
-	public static void Set(CardModel card, CurseDefect defects) => _set?.Invoke(card, (int)defects);
+	public static void Set(CardModel card, CurseDefect defects) => _set?.Invoke(card, ForgedCurseRule.EncodeDefects(defects));
 
 	/// <summary>
 	/// After a fusion that left a forged curse: keep the kept copy's defects, add the sacrificed copy's, draw the rest on

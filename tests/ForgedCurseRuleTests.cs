@@ -178,4 +178,22 @@ public class ForgedCurseRuleTests
 	[Fact]
 	public void PlayStreamName() =>
 		Assert.Equal("forged_curse_play_12_4_7", ForgedCurseRule.PlayStream(12, 4, 7));
+
+	[Fact]
+	public void SpitefulExtraReplay()
+	{
+		Assert.Equal(1, ForgedCurseRule.SpitefulExtraReplays(CurseDefect.Spiteful | CurseDefect.Odd, false));
+		Assert.Equal(0, ForgedCurseRule.SpitefulExtraReplays(CurseDefect.Spiteful, true));
+		Assert.Equal(0, ForgedCurseRule.SpitefulExtraReplays(CurseDefect.Odd, false));
+	}
+
+	[Fact]
+	public void DefectsSaveNothingWhenNone()
+	{
+		Assert.Null(ForgedCurseRule.EncodeDefects(CurseDefect.None));
+		Assert.Equal(CurseDefect.None, ForgedCurseRule.DecodeDefects(null));
+		Assert.Equal(CurseDefect.None, ForgedCurseRule.DecodeDefects("junk"));
+		var set = CurseDefect.Odd | CurseDefect.Echo;
+		Assert.Equal(set, ForgedCurseRule.DecodeDefects(ForgedCurseRule.EncodeDefects(set)));
+	}
 }

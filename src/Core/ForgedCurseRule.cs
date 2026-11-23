@@ -102,12 +102,26 @@ public static class ForgedCurseRule
 
 	public static int SpitefulTimes(CurseDefect set) => set.HasFlag(CurseDefect.Spiteful) ? 2 : 1;
 
+	/// <summary>Extra end-of-turn in-hand runs for a Spiteful curse; a curse that resets its own count (Regret) is doubled elsewhere.</summary>
+	public static int SpitefulExtraReplays(CurseDefect set, bool resetsItself) =>
+		!resetsItself && set.HasFlag(CurseDefect.Spiteful) ? 1 : 0;
+
 	/// <summary>A curse's max level: 9 inside an open Forge scope (fusion, reload) in the combo, else 1 (Cursed Deck's +1).</summary>
 	public static int MaxLevelFor(bool combo, bool inScope, int vanillaMax) =>
 		combo && inScope ? MaxLevel : Math.Max(vanillaMax, 1);
 
 	/// <summary>Level a saved curse reloads to: up to 9 in the combo, else at most 1.</summary>
 	public static int LoadLevel(int saved, bool comboActive) => Math.Clamp(saved, 0, comboActive ? MaxLevel : 1);
+
+	/// <summary>Saved form of a defect set: null for none, so ordinary cards save nothing (BaseLib skips null values).</summary>
+	public static string? EncodeDefects(CurseDefect set) =>
+		set == CurseDefect.None ? null : ((int)set).ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+	public static CurseDefect DecodeDefects(string? saved) =>
+		int.TryParse(saved, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out int v)
+			? (CurseDefect)v & AllFlags : CurseDefect.None;
+
+	private static readonly CurseDefect AllFlags = All.Aggregate(CurseDefect.None, (a, d) => a | d);
 
 	public static string DefectStream(int floor, int deckIndex, int draw) => $"forged_curse_defect_{floor}_{deckIndex}_{draw}";
 
