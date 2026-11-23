@@ -29,6 +29,7 @@ Spec: `docs/superpowers/specs/2026-11-18-backlog-modes-design.md`. Tick only wha
 ## Trophies
 - [ ] Winning an elite fight adds one Trophy card per player, titled "<Monster>: <Move>" in EN and FR.
 - [ ] Its damage and hit count match the move; cost 1/2/3 by total damage; the upgrade adds 25 % rounded up.
+- [ ] A Decimillipede Trophy is titled "Decimillipede: <Move>" (EN) / "Dix-Mille-Pattes: <Move>" (FR), not a raw key (1.8.28).
 - [ ] An elite without attacks gives "<Monster>: Trophy" (10 damage, cost 1). Trophy cards survive save and reload.
 
 ## Forced Trade (co-op)

@@ -93,7 +93,7 @@ public sealed class SpoonTrophyCard : SpoonCard
 			string name;
 			try
 			{
-				string monster = new LocString("monsters", _monster + ".name").GetFormattedText();
+				string monster = MonsterTitle(_monster);
 				LocString? title = TrophyRule.MoveTitleKeys(_monster, _move).Select(k => new LocString("monsters", k)).FirstOrDefault(l => l.Exists());
 				string move = _move.Length > 0 && title != null
 					? title.GetFormattedText()
@@ -106,6 +106,17 @@ public sealed class SpoonTrophyCard : SpoonCard
 			}
 			return IsUpgraded && _monster.Length > 0 ? name + "+" : name;
 		}
+	}
+
+	/// <summary>The monster's own title: segmented monsters (the Decimillipede's front, middle and back) share one name
+	/// key, so "<c>&lt;id&gt;.name</c>" does not exist for them.</summary>
+	private static Dictionary<string, MonsterModel>? _monsterById;
+
+	private static string MonsterTitle(string id)
+	{
+		_monsterById ??= ModelDb.Monsters.GroupBy(m => m.Id.Entry).ToDictionary(g => g.Key, g => g.First());
+		MonsterModel? model = _monsterById.GetValueOrDefault(id);
+		return model != null ? model.Title.GetFormattedText() : new LocString("monsters", id + ".name").GetFormattedText();
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

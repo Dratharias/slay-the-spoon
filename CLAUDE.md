@@ -761,3 +761,9 @@ Read `README.md` for the player view and the spec for every decision.
   `Head`/`Entry` records so `CardRenderer`'s `conductor` mode can show it with sample rewards (2–4 players, 16:9, 16:10, 21:9
   SubViewports at the game's 1080 height). 924 xUnit + 110 pytest pass. Rendered, not tested in a run.
 
+## 1.8.28 — Decimillipede Trophy title (2026-11-23, `main`)
+
+- Bot run (Trophies + Useless Relics): a Trophy from the Decimillipede elite looked up `DECIMILLIPEDE_SEGMENT_BACK.name`,
+  which does not exist (the segments share `DECIMILLIPEDE_SEGMENT.name` through an overridden `Title`). `SpoonTrophyCard`
+  now reads the monster model's `Title` (cached `ModelDb.Monsters` by id). Not tested in game.
+
