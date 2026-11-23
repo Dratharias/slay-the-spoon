@@ -1,7 +1,7 @@
 [h2]Slay the Spoon ramène Slay the Spire 1 dans Slay the Spire 2, puis ajoute quelques façons étranges de jouer.[/h2]
 Choisissez une carte de mode à côté de Standard, ou cochez ce que vous voulez en partie personnalisée.
 
-[b]Testé, surtout par des bots.[/b] Chaque mode est passé par une longue série de parties coop automatisées, donc l'ensemble devrait tenir. L'équilibrage, c'est autre chose, et je le ferai à la main. Les trucs absurdes restent : c'est le but. Ce que je compte ajuster, c'est ce qui enlève tout défi et transforme peu à peu une partie en autoclicker. Si un mode vous fait cet effet, ou si vous en avez simplement aimé un, une évaluation ou un commentaire m'aide à faire le tri. Tous les joueurs en coop ont besoin de la même version du mod. Je l'ai fait pour varier nos parties entre amis, et je suis content du résultat.
+[b]Testé, surtout par des bots.[/b] Chaque mode est passé par une longue série de parties coop automatisées, donc l'ensemble devrait tenir. L'équilibrage, c'est autre chose, et je le ferai à la main. Les trucs absurdes restent : c'est le but. Ce que je compte ajuster, c'est ce qui enlève tout défi et transforme peu à peu une partie en autoclicker. Si un mode vous fait cet effet, ou si vous en avez simplement aimé un, une évaluation ou un commentaire m'aide à faire le tri. Une idée de mode farfelu pour les Custom Runs ? Laissez-la en commentaire, je les lis toutes. Tous les joueurs en coop ont besoin de la même version du mod. Je l'ai fait pour varier nos parties entre amis, et je suis content du résultat.
 
 Certaines animations ou certains décors peuvent manquer. N'hésitez pas à me le signaler.
 
@@ -31,7 +31,7 @@ Accumulez tout. Chaque étage apporte des cartes.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-deck.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-fr.png[/img]
-Départ fortuné, mais l'or fond à chaque étage : à sec, on meurt ; en coop, on revient avec 1 or pour la salle suivante et on remeurt en la quittant, sauf si elle rapporte. Aucune carte gratuite, chaque feu se paie, chaque achat fait monter les prix du marchand.
+Départ fortuné, mais l'or fond à chaque étage : à sec, on meurt ; en coop, on revient pour la salle suivante avec 1 or et 1 PV, et on remeurt au voyage suivant, sauf si la salle rapporte. Aucune carte gratuite, chaque feu se paie, chaque achat fait monter les prix du marchand.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-relic-fr.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-fr.png[/img]

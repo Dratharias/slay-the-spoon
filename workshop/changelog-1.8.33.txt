@@ -1,0 +1,5 @@
+1.8.33 — King Midas: ruined players come back (includes 1.8.32)
+
+- King Midas (co-op): the gold melt still kills a player it leaves with nothing, but they no longer stay dead. They come back for the next room with 1 HP and 1 gold. If that room does not pay enough for the next melt, they die and come back again on the next travel. If every player is ruined on the same travel, the run ends. Solo, running out of gold is still a game over.
+- Custom Run and Workshop descriptions updated (English and French).
+- Got an idea for a wacky Custom Run mode? Leave it in the comments.

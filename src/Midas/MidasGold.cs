@@ -19,15 +19,15 @@ namespace SlaySpoon.Midas;
 /// King Midas gold melt: each time the team travels to a map room, every living player loses
 /// <see cref="MidasRule.Melt"/> (10 %, at least their average gold gained per floor); a player the melt leaves with no gold dies. It runs inside the synced travel action,
 /// on the map before the fade, so every peer melts the same synced gold and a death shows over the map (a death while
-/// the screen is faded out would hide the game over screen). A player already dead on traveling (co-op: ruined earlier)
-/// pays nothing, gains 1 gold and is revived with 1 HP for the room (<see cref="MidasRule.OnTravel"/>). Act starts are not
-/// travels and do not melt.
+/// the screen is faded out would hide the game over screen). In co-op the ruined come straight back with 1 HP and 1 gold
+/// before the next room, unless every player was ruined; a player somehow dead on traveling gets the same instead of
+/// paying (<see cref="MidasRule.OnTravel"/>). Act starts are not travels and do not melt.
 /// </summary>
 public static class MidasMelt
 {
 	public static async Task Apply(IRunState run)
 	{
-		var ruined = new List<Creature>();
+		var ruined = new List<Player>();
 		foreach (Player player in run.Players)
 		{
 			int gold = player.Gold;
@@ -36,11 +36,7 @@ public static class MidasMelt
 			MidasRule.Travel travel = MidasRule.OnTravel(player.Creature.IsDead, gold, floor, scale);
 			if (travel == MidasRule.Travel.Revive)
 			{
-				SpoonLog.Info($"King Midas: player {player.NetId} revived for the room with {MidasRule.RevivalGift} gold");
-				// 1 HP, like vanilla's co-op revive at the end of a fight. No animation: the travel starts from the room
-				// being left, whose creature nodes may already be gone.
-				await CreatureCmd.Heal(player.Creature, 1m, playAnim: false);
-				await PlayerCmd.GainGold(MidasRule.RevivalGift, player);
+				await Revive(player);
 				continue;
 			}
 			int melt = MidasRule.Melt(gold, floor, scale);
@@ -48,13 +44,27 @@ public static class MidasMelt
 			if (travel == MidasRule.Travel.PayAndDie)
 			{
 				SpoonLog.Info($"King Midas: player {player.NetId} ruined: {gold} gold, melt floor {floor}");
-				ruined.Add(player.Creature);
+				ruined.Add(player);
 			}
 		}
 		if (ruined.Count == 0) return;
 		SpoonLog.Info($"King Midas: {ruined.Count} player(s) ruined by the melt");
 		// Forced: ruin is not damage, so Lizard Tail and Fairy in a Bottle do not save the player.
-		await CreatureCmd.Kill(ruined, force: true);
+		await CreatureCmd.Kill(ruined.Select(p => p.Creature).ToList(), force: true);
+		// Owner, 2026-11-23: the ruined come back before the next room, never dead inside one (the game has no dead
+		// players outside combat: a shared event waited forever for their vote). Everyone ruined at once: game over.
+		if (!AnyoneAlive(run)) return;
+		foreach (Player player in ruined) await Revive(player);
+	}
+
+	/// <summary>Brings a ruined player back with 1 HP and <see cref="MidasRule.RevivalGift"/> gold for the next room.</summary>
+	private static async Task Revive(Player player)
+	{
+		SpoonLog.Info($"King Midas: player {player.NetId} revived for the room with {MidasRule.RevivalGift} gold");
+		// 1 HP, like vanilla's co-op revive at the end of a fight. No animation: the travel starts from the room being
+		// left, whose creature nodes may already be gone.
+		await CreatureCmd.Heal(player.Creature, 1m, playAnim: false);
+		await PlayerCmd.GainGold(MidasRule.RevivalGift, player);
 	}
 
 	/// <summary>

@@ -1,7 +1,7 @@
 [h2]Slay the Spoon brings Slay the Spire 1 back into Slay the Spire 2, then adds a few strange ways to play it.[/h2]
 Pick a mode card next to Standard, or tick what you want in Custom Run.
 
-[b]Tested, mostly by bots.[/b] Every mode has been through a long series of automated co-op runs, so it should hold together. Balance is another story, and I'll do that part by hand. The absurd stuff stays: that's the fun. What I will tone down is whatever removes all challenge and slowly turns a run into an autoclicker. If a mode feels like that, or you just liked one, a review or a comment helps me tell which is which. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and I'm happy with how it turned out.
+[b]Tested, mostly by bots.[/b] Every mode has been through a long series of automated co-op runs, so it should hold together. Balance is another story, and I'll do that part by hand. The absurd stuff stays: that's the fun. What I will tone down is whatever removes all challenge and slowly turns a run into an autoclicker. If a mode feels like that, or you just liked one, a review or a comment helps me tell which is which. Got an idea for a wacky Custom Run mode? Leave it in the comments, I read them all. Every co-op player needs the same mod version. I made it to bring some variety to my friends' runs and mine, and I'm happy with how it turned out.
 
 Some animations or backgrounds may be missing. Feel free to let me know.
 
@@ -31,7 +31,7 @@ Hoard everything. Every floor brings cards.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/screenshots/matriochka-deck.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-en.png[/img]
-Start rich, but gold melts on every floor: run dry and you die; in co-op you come back with 1 gold for the next room, and die again on leaving it unless that room pays. No free cards; every fire costs gold, every purchase raises the merchant's prices.
+Start rich, but gold melts on every floor: run dry and you die; in co-op you come back for the next room with 1 gold and 1 HP, and die again on the next travel unless that room pays. No free cards; every fire costs gold, every purchase raises the merchant's prices.
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/midas-relic-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/forge-en.png[/img]

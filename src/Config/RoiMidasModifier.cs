@@ -18,7 +18,7 @@ namespace SlaySpoon.Config;
 /// King Midas (Custom Run, docs/superpowers/specs/2026-11-14-roi-midas-design.md): every gold relic from the start,
 /// no card rewards, gold events only, and rest site actions bought with gold (repeatable, the price rising at each fire).
 /// Balance (1.8.4): gold melts on every floor and a player left with none dies (<see cref="MidasMelt"/>; since 1.8.32 a
-/// dead player comes back with 1 gold and 1 HP for the next room); merchant
+/// ruined co-op player comes straight back with 1 gold and 1 HP for the next room); merchant
 /// prices rise with each purchase; the merchant and the rest site refuse what would ruin the buyer.
 /// </summary>
 public sealed class SpoonRoiMidas : ModifierModel

@@ -792,9 +792,12 @@ Read `README.md` for the player view and the spec for every decision.
   before each game action (`ActionExecutor.BeforeActionExecuted`, an event: no detour to lose) and before each checksum
   (`ChecksumSweepPatch`, prefix on `ChecksumTracker.GenerateChecksum`). The first sweep logs its duration. Not tested in game.
 
-## 1.8.32 — King Midas: ruined players come back (2026-11-23, `main`)
+## 1.8.32–1.8.33 — King Midas: ruined players come back (2026-11-23, `main`)
 
-- Owner: the melt still kills a player it empties; a player already dead on the next travel pays nothing, gains 1 gold
-  and is revived with 1 HP (`CreatureCmd.Heal`, like vanilla's end-of-fight co-op revive) for that room (`MidasRule.OnTravel`, `RevivalGift`), so a
-  broke co-op player alternates dead and alive rooms until a room pays. Bot run Q5 line 25 showed the dead player
-  stuck through a "?" room. Not tested in game: "Ruined players come back (1.8.32)" in `docs/testing/roi-midas-checklist.md`.
+- Owner: the melt still kills a player it empties; in co-op they come straight back (same travel, before the next room)
+  with 1 HP (`CreatureCmd.Heal`, like vanilla's end-of-fight co-op revive) and 1 gold (`MidasRule.RevivalGift`), unless
+  every player was ruined (game over). A dead player must never enter a room: vanilla has no dead players outside
+  combat, and a shared event waited forever for the dead player's vote (bot run on 1.8.32, which left them dead for one room; fixed in 1.8.33). A player somehow
+  dead on traveling gets the same revival instead of paying (`MidasRule.OnTravel`). Wacky-mode suggestion invite in
+  the Workshop descriptions and README. Not tested in game: "Ruined players come back (1.8.33)" in
+  `docs/testing/roi-midas-checklist.md`.
