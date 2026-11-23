@@ -45,10 +45,10 @@ def test_tags_file_uses_game_tags_and_both_languages():
 
 
 def test_descriptions_fit_steam_limit():
-    # Steam caps a Workshop description at 8000 characters, per language.
+    # Steam caps a Workshop description at 8000 bytes of UTF-8, per language (accents count twice).
     for name in ("description.txt", "description-fr.txt"):
         text = (REPO / "workshop" / name).read_text(encoding="utf-8")
-        assert 0 < len(text) <= 8000, name
+        assert 0 < len(text.encode("utf-8")) <= 8000, name
 
 
 def test_description_images_are_committed():

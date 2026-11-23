@@ -148,7 +148,7 @@ def _update_item(lib, ugc, utils, item: int, tags: list[str] | None, french: str
         if not (lib.SteamAPI_ISteamUGC_SetItemUpdateLanguage(ugc, handle, b"french")
                 and lib.SteamAPI_ISteamUGC_SetItemTitle(ugc, handle, TITLE.encode())
                 and lib.SteamAPI_ISteamUGC_SetItemDescription(ugc, handle, french.encode())):
-            print("Steam refused the French title or description (description limit: 8000 characters)",
+            print("Steam refused the French title or description (description limit: 8000 bytes of UTF-8)",
                   file=sys.stderr)
             return 1
     res = _wait(lib, utils, lib.SteamAPI_ISteamUGC_SubmitItemUpdate(ugc, handle, None),
