@@ -1,0 +1,3 @@
+1.8.30 — Conductor: give a chosen card
+
+- Conductor: on the reward screen you can now click one card of a card reward. A gold ring marks it, and that very card goes straight into the chosen player's deck. Click it again to clear the ring; the player then picks among the cards as before.

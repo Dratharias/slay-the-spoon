@@ -76,6 +76,7 @@
   "SPOON_FORCED_TRADE.description": "Co-op: after each victory, everyone gives a card to a random ally.",
   "SPOON_FORCED_TRADE.short": "Trade",
   "SPOON_CONDUCTOR.ask": "Conductor: hand out the rewards",
+  "SPOON_CONDUCTOR.hint": "Click a card to give that very card.",
   "SPOON_CONDUCTOR.from": "From {Name}",
   "SPOON_CONDUCTOR.confirm": "Confirm",
   "SPOON_CONDUCTOR.title": "Conductor",

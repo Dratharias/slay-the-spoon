@@ -21,13 +21,35 @@ public static class ConductorRule
 	public static int Rolls(int players, int previous) =>
 		players <= 1 ? 1 : previous < 0 || previous >= players ? players : players - 1;
 
+	/// <summary>Most cards one card reward can show; a card pick past it is dropped.</summary>
+	public const int MaxCards = 16;
+
+	/// <summary>
+	/// One synced pick: the recipient slot, plus the card the Conductor clicked in a card reward (−1 for none, the
+	/// recipient then chooses among the cards as usual). Owner request (2026-11-23): a clicked card goes straight to the deck.
+	/// </summary>
+	public static int Encode(int slot, int card, int players) => slot + Math.Max(1, players) * (Math.Clamp(card, -1, MaxCards - 1) + 1);
+
+	/// <summary>The recipient slot and card of a pick, or null when it is out of range.</summary>
+	public static (int slot, int card)? Decode(int pick, int players)
+	{
+		if (players <= 0 || pick < 0 || pick >= players * (MaxCards + 1)) return null;
+		return (pick % players, pick / players - 1);
+	}
+
 	/// <summary>
 	/// The recipient slot of each reward from the Conductor's synced picks: one per reward, in order. A missing or
 	/// out-of-range pick leaves that reward with its owner, so a short or corrupt list never moves anything by accident.
 	/// </summary>
 	public static int[] Recipients(IReadOnlyList<int>? picks, IReadOnlyList<int> owners, int players) =>
-		owners.Select((owner, i) => picks != null && i < picks.Count && picks[i] >= 0 && picks[i] < players ? picks[i] : owner)
+		owners.Select((owner, i) => picks != null && i < picks.Count && Decode(picks[i], players) is { } d ? d.slot : owner)
 			.ToArray();
+
+	/// <summary>The card clicked in each reward (−1 for none, or when the pick is missing, out of range or past
+	/// <paramref name="cardCounts"/>).</summary>
+	public static int[] CardPicks(IReadOnlyList<int>? picks, IReadOnlyList<int> cardCounts, int players) =>
+		cardCounts.Select((count, i) => picks != null && i < picks.Count && Decode(picks[i], players) is { } d && d.card < count
+			? d.card : -1).ToArray();
 
 	public static string Stream(int floor) => $"SlaySpoon.Conductor.{floor}";
 

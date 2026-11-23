@@ -38,10 +38,13 @@ public sealed class ConductorOverlay
 	private readonly CanvasLayer _layer;
 	private readonly Control _root;
 	private readonly Label _title;
+	private readonly Label? _hint;
 	private readonly GridContainer _grid;
 	private readonly Button _confirm;
 	private readonly List<Control> _rows = new();
 	private readonly int[] _picks;
+	private readonly int[] _cardPicks;
+	private readonly int _players;
 	private readonly List<NCard> _cards = new();
 	private readonly TaskCompletionSource<List<int>> _done = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
@@ -86,6 +89,8 @@ public sealed class ConductorOverlay
 	{
 		_layer = layer;
 		_picks = entries.Select(e => e.Owner).ToArray();
+		_cardPicks = entries.Select(_ => -1).ToArray();
+		_players = heads.Count;
 		var dim = new ColorRect { Color = new Color(0f, 0f, 0f, 0.8f), MouseFilter = Control.MouseFilterEnum.Stop };
 		dim.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 		layer.AddChild(dim);
@@ -98,6 +103,13 @@ public sealed class ConductorOverlay
 		_title.AddThemeFontSizeOverride("font_size", 34);
 		_title.AddThemeColorOverride("font_color", SpoonWidgets.Gold);
 		root.AddChild(_title);
+		if (entries.Any(e => e.Cards is { Count: > 0 }))
+		{
+			var hint = _hint = new Label { Text = Text("hint"), HorizontalAlignment = HorizontalAlignment.Center };
+			hint.AddThemeFontSizeOverride("font_size", 20);
+			hint.AddThemeColorOverride("font_color", new Color(0.75f, 0.78f, 0.85f));
+			root.AddChild(hint);
+		}
 
 		_grid = new GridContainer { Columns = 1, SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter };
 		_grid.AddThemeConstantOverride("h_separation", GapW);
@@ -112,7 +124,7 @@ public sealed class ConductorOverlay
 
 		_confirm = SpoonWidgets.Button(root, Text("confirm"), () =>
 		{
-			if (!_done.TrySetResult(_picks.ToList())) return;
+			if (!_done.TrySetResult(_picks.Select((p, i) => ConductorRule.Encode(p, _cardPicks[i], _players)).ToList())) return;
 			if (GodotObject.IsInstanceValid(_layer)) _layer.QueueFree();
 		});
 		_confirm.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
@@ -141,7 +153,7 @@ public sealed class ConductorOverlay
 		var row = new HBoxContainer();
 		row.AddThemeConstantOverride("separation", 24);
 		panel.AddChild(row);
-		row.AddChild(RewardView(entry));
+		row.AddChild(RewardView(index, entry));
 
 		bool compact = heads.Count >= 3;
 		var side = new VBoxContainer { Alignment = BoxContainer.AlignmentMode.Center };
@@ -198,20 +210,51 @@ public sealed class ConductorOverlay
 		}
 	}
 
-	private Control RewardView(Entry entry)
+	/// <summary>A card reward's cards. Clicking one rings it in gold: that card goes straight into the recipient's deck;
+	/// clicking it again lets the recipient choose as usual.</summary>
+	private Control RewardView(int index, Entry entry)
 	{
 		if (entry.Cards is not { } cards) return Item(entry.Icon, entry.Title, entry.Text);
 		var line = new HBoxContainer();
 		line.AddThemeConstantOverride("separation", 4);
-		foreach (CardModel card in cards)
+		var rings = new List<Panel>();
+		for (int c = 0; c < cards.Count && c < ConductorRule.MaxCards; c++)
 		{
-			var holder = new Control { CustomMinimumSize = CardSlot, TooltipText = card.Title };
+			int slot = c;
+			var holder = new Control { CustomMinimumSize = CardSlot };
 			line.AddChild(holder);
-			if (NCard.Create(card) is not { } visual) continue;
-			holder.AddChild(visual);
-			visual.Position = CardSlot / 2;
-			visual.Scale = new Vector2(CardScale, CardScale);
-			_cards.Add(visual);
+			if (NCard.Create(cards[c]) is { } visual)
+			{
+				holder.AddChild(visual);
+				visual.Position = CardSlot / 2;
+				visual.Scale = new Vector2(CardScale, CardScale);
+				_cards.Add(visual);
+			}
+			var ringStyle = new StyleBoxFlat { DrawCenter = false, BorderColor = SpoonWidgets.Gold };
+			ringStyle.SetBorderWidthAll(4);
+			ringStyle.SetCornerRadiusAll(14);
+			var ring = new Panel { MouseFilter = Control.MouseFilterEnum.Ignore, Visible = false };
+			ring.AddThemeStyleboxOverride("panel", ringStyle);
+			ring.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+			holder.AddChild(ring);
+			rings.Add(ring);
+			// Above the card, so the click never reaches NCard's own hover handling.
+			var click = new Control
+			{
+				MouseFilter = Control.MouseFilterEnum.Stop, FocusMode = Control.FocusModeEnum.All,
+				MouseDefaultCursorShape = Control.CursorShape.PointingHand, TooltipText = cards[c].Title,
+			};
+			click.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+			holder.AddChild(click);
+			click.GuiInput += input =>
+			{
+				bool pressed = input is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }
+					|| input.IsActionPressed(MegaCrit.Sts2.Core.ControllerInput.MegaInput.select);
+				if (!pressed) return;
+				click.AcceptEvent();
+				_cardPicks[index] = _cardPicks[index] == slot ? -1 : slot;
+				for (int r = 0; r < rings.Count; r++) rings[r].Visible = r == _cardPicks[index];
+			};
 		}
 		return line;
 	}
@@ -257,7 +300,8 @@ public sealed class ConductorOverlay
 			cellW = Math.Max(cellW, size.X);
 			cellH = Math.Max(cellH, size.Y);
 		}
-		float fixedH = _title.GetCombinedMinimumSize().Y + _confirm.GetCombinedMinimumSize().Y + 2 * Separation;
+		float fixedH = _title.GetCombinedMinimumSize().Y + _confirm.GetCombinedMinimumSize().Y + 2 * Separation
+			+ (_hint != null ? _hint.GetCombinedMinimumSize().Y + Separation : 0);
 		_grid.Columns = ConductorRule.Columns(_rows.Count, cellW, cellH, fixedH, GapW, GapH, view.X, view.Y);
 
 		Vector2 need = _root.GetCombinedMinimumSize() + new Vector2(40, 40);

@@ -774,3 +774,11 @@ Read `README.md` for the player view and the spec for every decision.
   (`ReflectionsTouchPatch`, was the Shatter-only patch); the deck stops at `MatriochkaRule.DeckLimit` (999):
   `CopiesFor` trims Hoarder copies, a full deck gets no floor card (solo and Folie à deux) and no combat card reward
   (Vintage's put-back included). Other card sources are not capped. 932 xUnit + 110 pytest pass. Not tested in game.
+
+## 1.8.30 — Conductor: give a chosen card (2026-11-23, `main`)
+
+- Owner request: on the Conductor screen a click on a card of a card reward rings it in gold (`ConductorOverlay.RewardView`,
+  a click layer above each `NCard`); that card goes straight into the recipient's deck (`CardPileCmd.Add`, the reward
+  removed); a second click clears it. One synced int per reward carries both (`ConductorRule.Encode`/`Decode`:
+  slot + players × (card + 1)); `CardPicks` drops bad values. A hint line sits under the title. 938 xUnit + 110 pytest
+  pass. Not tested in game.

@@ -76,6 +76,7 @@
   "SPOON_FORCED_TRADE.description": "Coop : après chaque victoire, chacun donne une carte à un allié au hasard.",
   "SPOON_FORCED_TRADE.short": "Éch.",
   "SPOON_CONDUCTOR.ask": "Chef d’orchestre : répartis les récompenses",
+  "SPOON_CONDUCTOR.hint": "Clique sur une carte pour donner celle-ci.",
   "SPOON_CONDUCTOR.from": "De {Name}",
   "SPOON_CONDUCTOR.confirm": "Confirmer",
   "SPOON_CONDUCTOR.title": "Chef d’orchestre",

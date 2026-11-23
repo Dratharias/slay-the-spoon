@@ -1,9 +1,11 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Platform;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rewards;
@@ -21,7 +23,8 @@ namespace SlaySpoon.Conductor;
 /// Conductor on combat rewards: every client generates every player's set as vanilla does, a seeded Conductor (never
 /// the previous one) picks a recipient for each card, potion and relic reward through a synced choice, and the rewards
 /// move to their recipients' sets before the sets are offered. Card rewards keep the cards their first owner was
-/// offered. Gold stays with each player: the game already gives every player the same amount.
+/// offered, unless the Conductor clicked one of them: that card goes straight into the recipient's deck (owner,
+/// 2026-11-23). Gold stays with each player: the game already gives every player the same amount.
 /// </summary>
 public static class ConductorRewards
 {
@@ -70,11 +73,28 @@ public static class ConductorRewards
 		List<int> picks = await SyncedChoice.ChooseMany(context, chief,
 			() => ConductorOverlay.Ask(offered.Select(o => (o.set.Player, o.reward)).ToList(), players));
 		int[] recipients = ConductorRule.Recipients(picks, owners, players.Count);
+		int[] cardPicks = ConductorRule.CardPicks(picks,
+			offered.Select(o => o.reward is CardReward c ? c.Cards.Count() : 0).ToList(), players.Count);
 		var moves = new List<(RewardsSet from, Reward reward, Player to)>();
+		var direct = new List<(RewardsSet from, CardReward reward, CardModel card, Player to)>();
 		for (int i = 0; i < offered.Count; i++)
 		{
 			Player to = players[recipients[i]];
-			if (to != offered[i].set.Player) moves.Add((offered[i].set, offered[i].reward, to));
+			if (offered[i].reward is CardReward cardReward && cardPicks[i] >= 0)
+				direct.Add((offered[i].set, cardReward, cardReward.Cards.ElementAt(cardPicks[i]), to));
+			else if (to != offered[i].set.Player)
+				moves.Add((offered[i].set, offered[i].reward, to));
+		}
+		foreach (var (from, reward, card, to) in direct)
+		{
+			from.Rewards.Remove(reward);
+			if (to != from.Player)
+			{
+				run.RemoveCard(card);
+				run.AddCard(card, to);
+			}
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(card, PileType.Deck));
+			SpoonLog.Info($"conductor: {card.Id.Entry} from {from.Player.NetId}'s card reward goes to {to.NetId}'s deck");
 		}
 		foreach (var (from, reward, to) in moves)
 		{

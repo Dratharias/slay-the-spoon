@@ -40,7 +40,30 @@ public class ConductorRuleTests
 	{
 		Assert.Equal(new[] { 0, 1, 2 }, ConductorRule.Recipients(null, new[] { 0, 1, 2 }, 3));
 		Assert.Equal(new[] { 2, 1, 2 }, ConductorRule.Recipients(new[] { 2 }, new[] { 0, 1, 2 }, 3));
-		Assert.Equal(new[] { 0, 1 }, ConductorRule.Recipients(new[] { -1, 3 }, new[] { 0, 1 }, 3));
+		Assert.Equal(new[] { 0, 1 }, ConductorRule.Recipients(new[] { -1, 51 }, new[] { 0, 1 }, 3));
+	}
+
+	[Theory]
+	[InlineData(0, -1, 2)]
+	[InlineData(1, 0, 2)]
+	[InlineData(3, 2, 4)]
+	[InlineData(2, 15, 3)]
+	public void PicksRoundTrip(int slot, int card, int players) =>
+		Assert.Equal((slot, card), ConductorRule.Decode(ConductorRule.Encode(slot, card, players), players));
+
+	[Fact]
+	public void ClickedCardsGoWithTheirReward()
+	{
+		int[] picks = { ConductorRule.Encode(1, 2, 2), ConductorRule.Encode(0, -1, 2), ConductorRule.Encode(1, -1, 2) };
+		Assert.Equal(new[] { 1, 0, 1 }, ConductorRule.Recipients(picks, new[] { 0, 0, 1 }, 2));
+		Assert.Equal(new[] { 2, -1, -1 }, ConductorRule.CardPicks(picks, new[] { 3, 3, 0 }, 2));
+	}
+
+	[Fact]
+	public void BadCardPicksAreDropped()
+	{
+		Assert.Equal(new[] { -1, -1 }, ConductorRule.CardPicks(null, new[] { 3, 3 }, 2));
+		Assert.Equal(new[] { -1, -1 }, ConductorRule.CardPicks(new[] { ConductorRule.Encode(0, 3, 2), 99 }, new[] { 3, 3 }, 2));
 	}
 
 	[Fact]

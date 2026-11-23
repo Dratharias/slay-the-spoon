@@ -45,6 +45,8 @@ Spec: `docs/superpowers/specs/2026-11-18-backlog-modes-design.md`. Tick only wha
   resizing the window or changing the resolution redoes it; twelve rewards (four players) fit and Confirm is visible.
 - [ ] Other players wait, then each player's reward screen shows what they received; gold unchanged.
 - [ ] A relic given to a player who already holds it stays with its owner.
+- [ ] 1.8.30: clicking a card rings it in gold (click again clears it); after Confirm that card is in the chosen player's
+      deck with no card choice for them, in both games; an unclicked card reward still lets the recipient choose.
 
 ## Useless Relics
 - [ ] Akabeko, after its Vigor at combat start: clicking it starts targeting; the enemy takes 10 damage through Block.
