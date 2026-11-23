@@ -74,3 +74,8 @@ Nothing here has been tested in game. Log lines: `[SlaySpoon] King Midas: <event
 - [ ] Leaving that room with too little gold kills and revives them again; gold earned in the room keeps them above the melt.
 - [ ] Both players ruined on the same travel: game over. Solo: a ruin is still a game over.
 - [ ] Both clients show the same gold and HP after the revival travel.
+
+## "Broke" caption (1.8.34)
+
+- [ ] A ruined player sees "Broke" (French: "Fauché") over a greyed screen for about 3 s; the ally does not.
+- [ ] Input is not blocked; the caption is readable at 16:9 and 21:9, and also shows over a solo game over.

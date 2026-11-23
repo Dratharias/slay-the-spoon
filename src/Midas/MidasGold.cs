@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Context;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -51,6 +52,7 @@ public static class MidasMelt
 		SpoonLog.Info($"King Midas: {ruined.Count} player(s) ruined by the melt");
 		// Forced: ruin is not damage, so Lizard Tail and Fairy in a Bottle do not save the player.
 		await CreatureCmd.Kill(ruined.Select(p => p.Creature).ToList(), force: true);
+		if (ruined.Any(LocalContext.IsMe)) BrokeSplash.Show();
 		// Owner, 2026-11-23: the ruined come back before the next room, never dead inside one (the game has no dead
 		// players outside combat: a shared event waited forever for their vote). Everyone ruined at once: game over.
 		if (!AnyoneAlive(run)) return;

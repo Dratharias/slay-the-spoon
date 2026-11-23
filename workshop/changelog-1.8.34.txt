@@ -1,0 +1,7 @@
+1.8.34 — Broke
+
+- King Midas: when the gold melt ruins you, a big "Broke" caption ("Fauché" in French) fills your screen.
+
+Includes 1.8.32–1.8.33 (if you missed them):
+- King Midas (co-op): a player the melt leaves with nothing dies, then comes back for the next room with 1 HP and 1 gold. If that room does not pay enough for the next melt, they die and come back again on the next travel. If every player is ruined on the same travel, the run ends. Solo, running out of gold is still a game over.
+- Got an idea for a wacky Custom Run mode? Leave it in the comments.

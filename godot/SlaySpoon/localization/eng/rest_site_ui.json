@@ -23,6 +23,7 @@
   "SPOON_SALE.ok": "OK",
   "OPTION_SPOON_MIDAS_BANK.name": "Reopen",
   "OPTION_SPOON_MIDAS_BANK.description": "Your [gold]Maw Bank[/gold] works again.",
+  "SPOON_MIDAS.broke": "Broke",
   "SPOON_MIDAS.price": "Costs [gold]{Gold} gold[/gold].",
   "OPTION_SPOON_FEAST.name": "Feast",
   "OPTION_SPOON_FEAST.description": "Gain [green]5[/green] Max HP.",

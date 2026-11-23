@@ -801,3 +801,8 @@ Read `README.md` for the player view and the spec for every decision.
   dead on traveling gets the same revival instead of paying (`MidasRule.OnTravel`). Wacky-mode suggestion invite in
   the Workshop descriptions and README. Not tested in game: "Ruined players come back (1.8.33)" in
   `docs/testing/roi-midas-checklist.md`.
+
+## 1.8.34 — "Broke" (2026-11-23, `main`)
+
+- Owner: a big "Broke" / "Fauché" caption over a greyed screen when the King Midas melt ruins the local player
+  (`src/Midas/BrokeSplash.cs`, `SPOON_MIDAS.broke` in `rest_site_ui.json`), view only, about 3 s. Not tested in game.

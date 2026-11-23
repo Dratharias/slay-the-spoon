@@ -23,6 +23,7 @@
   "SPOON_SALE.ok": "OK",
   "OPTION_SPOON_MIDAS_BANK.name": "Rouvrir",
   "OPTION_SPOON_MIDAS_BANK.description": "Votre [gold]Tirelire-gueule[/gold] fonctionne de nouveau.",
+  "SPOON_MIDAS.broke": "Fauché",
   "SPOON_MIDAS.price": "Coûte [gold]{Gold} pièces d’or[/gold].",
   "OPTION_SPOON_FEAST.name": "Festin",
   "OPTION_SPOON_FEAST.description": "Gagnez [green]5[/green] PV max.",
