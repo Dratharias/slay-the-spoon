@@ -16,7 +16,7 @@ public class CurseRuleTests
 	public void ParsesEveryRow()
 	{
 		var t = Table();
-		Assert.Equal(22, t.Count);
+		Assert.Equal(23, t.Count);
 		var b = t["BAD_LUCK"];
 		Assert.Equal("HpLoss", b.Played);
 		Assert.Equal(13, b.Amount);

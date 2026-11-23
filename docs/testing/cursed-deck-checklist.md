@@ -46,8 +46,8 @@ Curse table (owner page): `docs/review/cursed-curses.md`. Tick only what was see
 - [ ] Reload in the middle of an event: note whether Embrace comes back on a later page (known minor).
 
 ## Cursed relics
-- [ ] Chest, elite and merchant relic draws are cursed about 2 in 3 (restart runs and count), from the pool of 11:
-      Calling Bell, Distinguished Cape, Neow's Bones, Cursed Pearl, Blood-Soaked Rose, Preserved Fog, Darkstone Periapt,
+- [ ] Chest, elite and merchant relic draws are cursed about 2 in 3 (restart runs and count), from the pool of 10:
+      Calling Bell, Distinguished Cape, Cursed Pearl, Blood-Soaked Rose, Preserved Fog, Darkstone Periapt,
       Blood Pact, Pin Doll, Black Censer, Reliquary.
 - [ ] Pickup effects run (Calling Bell's curse and three relics, etc.). Never a relic the player already holds.
 - [ ] Once a player holds every cursed relic the draws are vanilla. Seeds for the other third stay vanilla.

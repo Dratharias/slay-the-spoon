@@ -14,7 +14,7 @@ from pathlib import Path
 
 GRIMOIRE = 5
 GRIMOIRE_NO_EFFECT_PLUS = 12
-PLAYED_KINDS = {"None", "HpLoss", "Damage", "HpLossPerHandCard", "HpLossPerCardPlayed", "Weak", "Vulnerable", "GainGold", "MaxHpLoss"}
+PLAYED_KINDS = {"None", "HpLoss", "Damage", "HpLossPerHandCard", "HpLossPerCardPlayed", "Weak", "Vulnerable", "GainGold", "MaxHpLoss", "Stun"}
 LABELS = {
     "HpLoss": "loses {} HP", "Damage": "takes {} damage", "HpLossPerHandCard": "loses {} HP per card in your hand",
     "HpLossPerCardPlayed": "loses {} HP per card you played this turn", "Weak": "gains {} Weak",
@@ -75,9 +75,9 @@ def validate(table: dict, scanned: list[str]) -> list[str]:
         if kind not in PLAYED_KINDS:
             errors.append(f"{key}: unknown played kind {kind}")
         has_amount = "amount" in row and "amountPlus" in row
-        if kind != "None" and not has_amount:
+        if kind not in ("None", "Stun") and not has_amount:
             errors.append(f"{key}: amount and amountPlus needed")
-        if kind == "None" and ("amount" in row or "amountPlus" in row):
+        if kind in ("None", "Stun") and ("amount" in row or "amountPlus" in row):
             errors.append(f"{key}: no amount without a played effect")
         if has_amount and row["amountPlus"] <= row["amount"]:
             errors.append(f"{key}: amountPlus must be above amount")
@@ -95,6 +95,8 @@ def validate(table: dict, scanned: list[str]) -> list[str]:
 def played_text(row: dict, plus: bool) -> str:
     if row["played"] == "None":
         return "-"
+    if row["played"] == "Stun":
+        return "skips its next turn"
     return LABELS[row["played"]].format(row["amountPlus" if plus else "amount"])
 
 
@@ -128,6 +130,8 @@ def review(table: dict) -> str:
         "|-------|" + "|".join("----" for _ in levels) + "|",
     ]
     for key, row in rows(table).items():
+        if row["played"] == "Stun":
+            continue  # Eternal: never fused
         values = [amount_at(row, lv) if row["played"] != "None" else grimoire_at(row, lv) for lv in levels]
         lines.append(f"| {key} | " + " | ".join(str(v) for v in values) + " |")
     return "\n".join(lines) + "\n"

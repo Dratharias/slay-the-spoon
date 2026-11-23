@@ -9,7 +9,7 @@ namespace SlaySpoon;
 [ModInitializer(nameof(Initialize))]
 public static class ModEntry
 {
-	public const string Version = "1.11.0";
+	public const string Version = "1.11.1";
 
 	public static void Initialize()
 	{

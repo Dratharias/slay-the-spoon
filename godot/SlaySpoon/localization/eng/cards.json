@@ -530,5 +530,8 @@
 	"SPOON_CURSE_DEFECT.Ravenous.name": "Ravenous",
 	"SPOON_CURSE_DEFECT.Ravenous": "Playing it exhausts a random card from your hand.",
 	"SPOON_CURSE_DEFECT.Echo.name": "Echo",
-	"SPOON_CURSE_DEFECT.Echo": "Playing it also hits you with half its effect."
+	"SPOON_CURSE_DEFECT.Echo": "Playing it also hits you with half its effect.",
+	"SPOON_WITCHING_HOUR.title": "Witching Hour",
+	"SPOON_WITCHING_HOUR.description": "On odd turns: [gold]Unplayable[/gold]; while in your [gold]Hand[/gold], your other cards cost 1 more; 80% chance to draw it.\nWith the Unholy Grimoire: the enemy skips its next turn.",
+	"SPOON_WITCHING_HOUR.cantPlay": "Not at this hour."
 }

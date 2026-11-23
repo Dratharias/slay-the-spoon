@@ -530,5 +530,8 @@
 	"SPOON_CURSE_DEFECT.Ravenous.name": "Vorace",
 	"SPOON_CURSE_DEFECT.Ravenous": "La jouer épuise une carte au hasard de votre main.",
 	"SPOON_CURSE_DEFECT.Echo.name": "Écho",
-	"SPOON_CURSE_DEFECT.Echo": "La jouer vous inflige aussi la moitié de son effet."
+	"SPOON_CURSE_DEFECT.Echo": "La jouer vous inflige aussi la moitié de son effet.",
+	"SPOON_WITCHING_HOUR.title": "L'Heure des sorcières",
+	"SPOON_WITCHING_HOUR.description": "Aux tours impairs : [gold]Injouable[/gold] ; si vous l'avez en [gold]Main[/gold], vos autres cartes coûtent 1 de plus ; 80 % de chances de la piocher.\nAvec le Grimoire profane : l'ennemi passe son prochain tour.",
+	"SPOON_WITCHING_HOUR.cantPlay": "Pas à cette heure-ci."
 }

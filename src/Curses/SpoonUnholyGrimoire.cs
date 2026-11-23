@@ -108,6 +108,9 @@ public sealed class SpoonUnholyGrimoire : RelicModel
 			case "MaxHpLoss":
 				await CreatureCmd.LoseMaxHp(choiceContext, target, amount, isFromCard: true);
 				break;
+			case "Stun":
+				await CreatureCmd.Stun(target);
+				break;
 			default:
 				SpoonLog.Error($"cursed deck: unknown played effect {row.Played} for {row.Id}");
 				break;

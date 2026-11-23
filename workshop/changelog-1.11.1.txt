@@ -1,0 +1,8 @@
+1.11.1 — the Witching Hour
+
+New
+- The Witching Hour, a curse of the mod's own (Eternal, Innate). On odd turns it can't be played, your other cards cost 1 more while it sits in your hand, and it is drawn 80% of the time. Played through the Unholy Grimoire on an even turn, the chosen enemy skips its next turn.
+- Overcursed: Ascender's Bane is replaced by the Witching Hour.
+
+Fixes
+- Cursed Deck: Neow's Bones is no longer one of the cursed relics a chest, elite or merchant can give. Picked up mid-run, its reward screen could leave co-op players out of sync.

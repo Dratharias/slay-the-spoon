@@ -14,7 +14,8 @@ def test_repo_table_is_valid_and_covers_the_mod_curses():
     curses = c.rows(TABLE)
     assert c.validate(TABLE, sorted(curses)) == []
     assert {"STS1_PAIN", "STS1_NECRONOMICURSE"} <= set(c.scan([REPO / "src/Cards"]))
-    assert len(curses) == 22
+    assert len(curses) == 23
+    assert "SPOON_WITCHING_HOUR" in c.scan([REPO / "src/Curses"])
 
 
 def test_owner_examples():

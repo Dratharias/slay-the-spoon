@@ -17,3 +17,12 @@
 - [ ] Every "?" event offers Embrace; with King Midas it always gives 150 gold.
 - [ ] The merchant can still remove a curse.
 - [ ] Co-op: both players see the same deck counts.
+
+## Witching Hour (1.11.1)
+- [ ] Overcursed at an ascension that adds Ascender's Bane: the deck holds one Witching Hour instead (floor 1), not three.
+- [ ] It starts in hand (Innate), cannot be removed or transformed (Eternal).
+- [ ] Odd turns: your other cards cost 1 more while it is in hand; it cannot be played, even with the Unholy Grimoire ("Not at this hour.").
+- [ ] Turns 3, 5...: from the draw pile it comes to hand about 80 % of the time; the same in both co-op clients.
+- [ ] Cursed Deck + Overcursed, even turn: the Grimoire plays it on an enemy, which skips its next turn (stun intent).
+- [ ] Portrait, EN/FR title, text and hover tip read well.
+- [ ] Cursed Deck: Neow's Bones never comes from a chest, elite or merchant.

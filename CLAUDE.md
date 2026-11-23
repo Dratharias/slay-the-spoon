@@ -855,3 +855,15 @@ Read `README.md` for the player view and the spec for every decision.
   Insanity clear decks before every modifier's `OnRunCreated`); loans under King Midas repay only what survives the
   melt (`MidasRule.Repayable`, builder call). Still open: Randomize button (owner kept vanilla), restaurant ambience.
 - Build 0 warnings; 1021 xUnit + 112 pytest pass. Not tested in game: `docs/testing/release-1.11.0.md`.
+
+## 1.11.1 — the Witching Hour (2026-11-23, `main`)
+
+- Owner design: `SpoonWitchingHour` (`src/Curses/SpoonWitchingHour.cs`, rules `src/Core/WitchingHourRule.cs`), a mod curse in
+  the hidden StS1 curse pool, outside `CursedDeckCurses.Pool`: Eternal, Innate, Unplayable; odd turns unplayable even with the
+  Grimoire (`IsPlayable`, can't-play line), the owner's other cards cost +1 while it is in hand (`TryModifyEnergyCostInCombat`),
+  pulled from the draw pile 80 % on later odd turns (`BeforeHandDraw`, seeded stream); Grimoire play = new `Stun` kind in
+  `data/curses/curses.json` (`CreatureCmd.Stun`). Overcursed swaps Ascender's Bane for it (`AscensionManager.ApplyEffectsTo`
+  postfix). Portrait from the owner's image (1:1, cropped to 250×190).
+- Neow's Bones left `CursedRelics.Vanilla()`: mid-run, its nested reward set and Niche curse draw desynced co-op (bot queue 7 line 5).
+- 1030 xUnit + 112 pytest pass. Not tested in game: "Witching Hour (1.11.1)" in `docs/testing/release-1.11.0.md`.
+

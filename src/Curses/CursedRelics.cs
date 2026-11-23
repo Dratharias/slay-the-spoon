@@ -14,15 +14,14 @@ using SlaySpoon.Core;
 
 namespace SlaySpoon.Curses;
 
-/// <summary>The cursed relics the Cursed Deck mode hands out: the game's 7 and the mod's 4.</summary>
+/// <summary>The cursed relics the Cursed Deck mode hands out: the game's 6 and the mod's 4.</summary>
 public static class CursedRelics
 {
-	/// <summary>The vanilla cursed relics named in the spec.</summary>
+	/// <summary>The vanilla cursed relics named in the spec, minus Neow's Bones: its nested reward set and its Niche curse draw desync co-op mid-run (bot queue 7 line 5, 1.11.1).</summary>
 	public static IReadOnlyList<RelicModel> Vanilla() => new RelicModel[]
 	{
 		ModelDb.Relic<CallingBell>(),
 		ModelDb.Relic<DistinguishedCape>(),
-		ModelDb.Relic<NeowsBones>(),
 		ModelDb.Relic<CursedPearl>(),
 		ModelDb.Relic<BloodSoakedRose>(),
 		ModelDb.Relic<PreservedFog>(),

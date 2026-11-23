@@ -100,6 +100,7 @@ public static class CurseRule
 	public static int PlayedAmount(CurseRow row, int level, int handCards, int cardsPlayedThisTurn) => row.Played switch
 	{
 		"None" => 0,
+		"Stun" => 1,
 		"HpLossPerHandCard" => EnemyAmount(row, level) * Math.Max(0, handCards),
 		"HpLossPerCardPlayed" => EnemyAmount(row, level) * Math.Max(0, cardsPlayedThisTurn),
 		_ => EnemyAmount(row, level),
