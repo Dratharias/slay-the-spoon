@@ -8,6 +8,8 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 using SlaySpoon.Config;
 using SlaySpoon.Core;
 
+using SlaySpoon.Curses.Forged;
+
 namespace SlaySpoon.Forge;
 
 /// <summary>
@@ -45,6 +47,9 @@ public static class ForgeLevels
 	/// <summary>Lets levels past the gate be set: fusion, and loading a saved card above +1.</summary>
 	public static IDisposable Open() => new Scope();
 
+	/// <summary>A fusion or a reload above +1 is in progress on this thread.</summary>
+	internal static bool InScope => _openScopes > 0;
+
 	private sealed class Scope : IDisposable
 	{
 		private bool _done;
@@ -81,6 +86,7 @@ public static class ForgeLevels
 	/// <summary>The growth cap: the table's cap, a cost-only card's cost cap, 1 when +1 changes no number, else 9.</summary>
 	public static int Cap(CardModel card)
 	{
+		if (ForgedCurses.Applies(card)) return ForgeRule.MaxLevel;
 		var row = ForgeCurves.For(card.Id.Entry);
 		if (row is { Fusable: false }) return 1;
 		if (row?.Cap is int cap) return cap;
@@ -91,7 +97,9 @@ public static class ForgeLevels
 		return probe.CostDelta < 0 ? ForgeRule.CostCap(probe.CostAfter, probe.CostDelta) : 1;
 	}
 
-	public static bool Fusable(CardModel card) => UsesBaseMax(card) && card.Type is not (CardType.Curse or CardType.Status)
+	/// <summary>Cards with the base max level (not curses or Status), plus curses in Forge + Cursed Deck.</summary>
+	public static bool Fusable(CardModel card) => ForgedCurses.Fusable(card)
+		|| UsesBaseMax(card) && card.Type is not (CardType.Curse or CardType.Status)
 		&& ForgeCurves.For(card.Id.Entry) is not { Fusable: false };
 
 	private static Probe ProbeOf(CardModel card)
@@ -241,6 +249,18 @@ public static class ForgeLevels
 			card.DynamicVars.RecalculateForUpgradeOrEnchant();
 			UpgradedRef(card)?.Invoke();
 			return false;
+		}
+
+		/// <summary>
+		/// Forged curses take the vanilla step (their numbers come from <c>CurseUpgrade.VarPatch</c>, their cost never moves)
+		/// and the ladder's keywords: Retain at +6, Innate at +9.
+		/// </summary>
+		public static void Postfix(CardModel __instance)
+		{
+			if (UsesBaseMax(__instance) || !ForgedCurses.Applies(__instance)) return;
+			var bonus = ForgeRule.BonusAt(__instance.CurrentUpgradeLevel);
+			if (bonus == ForgeBonus.Retain && !__instance.Keywords.Contains(CardKeyword.Retain)) __instance.AddKeyword(CardKeyword.Retain);
+			if (bonus == ForgeBonus.Innate && !__instance.Keywords.Contains(CardKeyword.Innate)) __instance.AddKeyword(CardKeyword.Innate);
 		}
 	}
 }

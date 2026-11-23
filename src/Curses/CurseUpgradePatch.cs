@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using SlaySpoon.Cards;
 using SlaySpoon.Core;
+using SlaySpoon.Curses.Forged;
 using SlaySpoon.Forge;
 
 namespace SlaySpoon.Curses;
@@ -32,7 +33,7 @@ public static class CurseUpgrade
 
 	/// <summary>Cursed Deck run (or a saved +1 curse being loaded, which proves one), checked without needing an owner.</summary>
 	public static bool Active(CardModel card) =>
-		_loading > 0 || SpoonCursedDeck.IsActive(OwnerRef(card)?.RunState ?? ForgeLevels.CurrentRun);
+		_loading > 0 || ForgedCurses.Loading > 0 || SpoonCursedDeck.IsActive(OwnerRef(card)?.RunState ?? ForgeLevels.CurrentRun);
 
 	/// <summary>A mutable curse of the mode that is upgraded and has a table row.</summary>
 	public static CurseRow? UpgradedRow(CardModel card) =>
@@ -66,26 +67,41 @@ public static class CurseUpgrade
 	{
 		public static IEnumerable<MethodBase> TargetMethods() => OverridingGetters();
 
-		/// <summary>In the mode a curse goes to +1 (never fused: the Forge only touches classes that keep the base getter).</summary>
+		/// <summary>
+		/// In the mode a curse goes to +1. With The Forge too, fusion and reloads (an open Forge scope) reach +9, and a forged
+		/// curse's max follows its level so its title reads "+N" and ordinary upgrades still stop.
+		/// </summary>
 		public static void Postfix(CardModel __instance, ref int __result)
 		{
-			if (__result == 0 && IsCurse(__instance) && Active(__instance)) __result = 1;
+			if (__result != 0 || !IsCurse(__instance) || !Active(__instance)) return;
+			bool combo = ForgedCurses.Applies(__instance);
+			__result = Math.Max(ForgedCurseRule.MaxLevelFor(combo, ForgeLevels.InScope, __result), combo ? __instance.CurrentUpgradeLevel : 0);
 		}
 	}
 
-	/// <summary>A saved +1 curse replays its upgrade on load, before the run state exists: let it through.</summary>
+	/// <summary>
+	/// A saved upgraded curse replays its upgrades on load, before the run state exists: let it through. A level above +1
+	/// proves Forge + Cursed Deck (the Forge's own load patch opens the scope); it reloads to at most +9.
+	/// </summary>
 	[HarmonyPatch(typeof(CardModel), nameof(CardModel.FromSerializable))]
 	public static class LoadPatch
 	{
-		public static void Prefix(SerializableCard save, out bool __state)
+		public static void Prefix(SerializableCard save, out int __state)
 		{
-			__state = save.CurrentUpgradeLevel == 1 && CurseTable.For(save.Id!.Entry) != null;
-			if (__state) _loading++;
+			__state = 0;
+			if (save.CurrentUpgradeLevel < 1 || CurseTable.For(save.Id!.Entry) == null) return;
+			_loading++;
+			__state = 1;
+			if (save.CurrentUpgradeLevel <= 1) return;
+			save.CurrentUpgradeLevel = ForgedCurseRule.LoadLevel(save.CurrentUpgradeLevel, comboActive: true);
+			ForgedCurses.Loading++;
+			__state = 2;
 		}
 
-		public static Exception? Finalizer(Exception? __exception, bool __state)
+		public static Exception? Finalizer(Exception? __exception, int __state)
 		{
-			if (__state) _loading--;
+			if (__state >= 1) _loading--;
+			if (__state == 2) ForgedCurses.Loading--;
 			return __exception;
 		}
 	}
