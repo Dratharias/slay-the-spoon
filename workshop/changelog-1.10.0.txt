@@ -1,0 +1,7 @@
+1.10.0 — Forged curses (The Forge + Cursed Deck)
+
+- With The Forge and Cursed Deck both ticked, curses fuse at the rest site like any card, up to +9, and the merchant's Duplicate button accepts them (never Eternal curses). Ordinary upgrades still stop at +1.
+- Each level hits harder on both sides: played on an enemy with the Unholy Grimoire, and on you if it stays in your hand. Bad Luck+9 deals about 76. Curses with no played effect make the Grimoire hit harder (40 at +9). Normality allows one more card per level; Guilty leaves sooner.
+- Forged curses pick up defects at +3, +6 and +9, shown in purple on the card: Odd, Even, Late (unplayable before turn 3), Heavy (+2 cost), Demanding (2 other cards first), Bloody, Spiteful (its in-hand effect hits twice), Contagious, Ravenous and Echo. Odd and Even never share a card.
+- The Forge ladder applies too: Retain at +6 (it keeps hurting you each turn it stays), Innate at +9.
+- Either mode alone is unchanged.
