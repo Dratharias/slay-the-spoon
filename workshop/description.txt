@@ -46,7 +46,10 @@ Curses are your ammo. Play them, throw them at the enemy, collect the relics tha
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-en.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-relic-en.png[/img]
 With The Forge too, curses fuse up to +9: far stronger on both sides, with a defect at +3, +6 and +9.
-[b]Overcursed[/b]: every curse you receive comes in three, and events offer to embrace the curse (gold every time under King Midas). Ascender's Bane becomes the Witching Hour. Cursed relics at merchants and in events.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/overcursed-en.png[/img]
+Every curse comes in three, events offer to embrace the curse, and cursed relics turn up at merchants and in events. Ascender's Bane becomes the Witching Hour:
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/overcursed-card-en.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-en.png[/img]
 One unblocked hit and you die. Stack Block, then hit with it.
@@ -80,8 +83,6 @@ Conductor, four players: one player hands out every reward of the fight.
 [*]Co-op desyncs: patches the game silently dropped on one player are restored before every action.
 [*]King Midas: doubled starting gold, rest site softlock and crash; ruined players come back in co-op.
 [*]The Watcher: crashes on her death, at the Architect, at rest sites and at Darv.
-[*]Deck of 10 black screen; Folie à deux chest off screen; co-op boss chest.
-[*]Matriochka: works with Vintage and Hoarder, no card after the final boss, 999 cards max.
 [/list]
 
 [b]Found a bug?[/b] Paste the error part of your [i]godot.log[/i] in a comment (modes ticked, solo or co-op), or attach the whole log to a [url=https://github.com/Dratharias/slay-the-spoon/issues]GitHub issue[/url]. Log: [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).

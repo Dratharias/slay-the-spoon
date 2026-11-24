@@ -46,7 +46,10 @@ Les malédictions sont vos munitions. Jouez-les, lancez-les sur l’ennemi, coll
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-cards-fr.png[/img]
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/cursed-relic-fr.png[/img]
 Avec la Forge en plus, les malédictions fusionnent jusqu'à +9 : bien plus fortes des deux côtés, avec un défaut à +3, +6 et +9.
-[b]Surmaudit[/b] : chaque malédiction reçue arrive en trois exemplaires, et les événements proposent d’embrasser la malédiction (toujours de l’or avec le Roi Midas). Le Fléau de l’ascendant devient l’Heure des sorcières.
+
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/overcursed-fr.png[/img]
+Chaque malédiction arrive en trois, les événements proposent de l’embrasser, et les reliques maudites s’invitent chez les marchands et aux événements. Le Fléau de l’ascendant devient l’Heure des sorcières :
+[img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/overcursed-card-fr.png[/img]
 
 [img]https://raw.githubusercontent.com/Dratharias/slay-the-spoon/main/workshop/images/achilles-fr.png[/img]
 Un seul coup non bloqué et vous mourez. Empilez l’Armure, puis frappez avec.
@@ -80,8 +83,6 @@ Chef d’orchestre à quatre : un joueur distribue toutes les récompenses du co
 [*]Désynchros en coop (patchs perdus chez un joueur).
 [*]Roi Midas : or de départ doublé, blocage et plantage au feu de camp ; les ruinés reviennent en coop.
 [*]La Gardienne : plantages à sa mort, chez l'Architecte, au feu de camp et chez Darv.
-[*]Écran noir de Deck de 10 ; coffre de Folie à deux hors écran ; coffre de boss en coop.
-[*]Matriochka : compatible Vintage et Collectionniste, pas de carte après le boss final, 999 cartes max.
 [/list]
 
 [b]Un bug ?[/b] Collez la partie erreur de votre [i]godot.log[/i] en commentaire (modes cochés, solo ou coop), ou joignez le log complet à une [url=https://github.com/Dratharias/slay-the-spoon/issues]issue GitHub[/url]. Log : [i]%APPDATA%\SlayTheSpire2\logs[/i] (Windows), [i]~/.local/share/SlayTheSpire2/logs[/i] (Linux).

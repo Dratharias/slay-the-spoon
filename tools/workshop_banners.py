@@ -37,6 +37,7 @@ MODES = {
     "midas": ("King Midas", "Roi Midas", "glyph:♛"),
     "forge": ("The Forge", "La Forge", "glyph:⚒"),
     "cursed": ("Cursed Deck", "Deck maudit", "relics/spoon/spoon_unholy_grimoire_large.png"),
+    "overcursed": ("Overcursed", "Surmaudit", "cards/curses/spoon_witching_hour.png"),
     "achilles": ("Achilles' Heel", "Talon d’Achille", "relics/spoon/spoon_achilles_heel_large.png"),
     "glass": ("Glass Cannon", "Canon de verre", "relics/spoon/spoon_glass_heart_large.png"),
     "custom": ("Custom Runs", "Parties personnalisées", "glyph:⚙"),
@@ -50,6 +51,7 @@ MODES = {
 SHOWCASES = {
     "spoon-cards": ["SpoonSpoonful", "SpoonTeaspoon", "SpoonStolenSpoonful", "img:spoon/spoon.png"],
     "cursed-cards": ["Sts1Parasite", "Sts1Necronomicurse", "Sts1Pride"],
+    "overcursed-card": ["SpoonWitchingHour"],
     "sts1-cards": ["img:creatures/sts1_watcher/body.png", "Sts1Ragnarok", "Sts1Wish", "img:ending/heart.png"],
     # One mode item each: The Forge's showpiece card at +9, the other modes' relic (icon and tooltip).
     "forge-card": ["Sts1LimitBreak+9"],
@@ -261,6 +263,8 @@ def preview(cards: Path) -> Image.Image:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--cards", type=Path, help="card renders from the game (DIR/{eng,fra}/<Class>.png)")
+    parser.add_argument("--only", nargs="+", metavar="KEY",
+                        help="with --cards: redraw only these showcases (no GIF, no preview), from a render of their cards")
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     for key, (en, fr, art) in MODES.items():
@@ -268,6 +272,12 @@ def main() -> None:
             banner(title, art).save(OUT / f"{key}-{lang}.png", optimize=True)
     print(f"{len(MODES) * 2} banners in {OUT.relative_to(REPO)}")
     if args.cards:
+        if args.only:
+            for key in args.only:
+                for lang in ("en", "fr"):
+                    showcase(args.cards, lang, SHOWCASES[key]).save(OUT / f"{key}-{lang}.png", optimize=True)
+            print(f"{len(args.only) * 2} showcases in {OUT.relative_to(REPO)}")
+            return
         for key, names in SHOWCASES.items():
             for lang in ("en", "fr"):
                 showcase(args.cards, lang, names).save(OUT / f"{key}-{lang}.png", optimize=True)
