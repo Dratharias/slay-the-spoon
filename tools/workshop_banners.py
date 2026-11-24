@@ -7,7 +7,7 @@ Without --cards only the banners are redrawn. The showcases and the preview need
 with the mod installed (make up) and the game closed, launch it from its folder with
   SLAYSPOON_RENDER_DIR=DIR SLAYSPOON_RENDER_CARDS="<CARDS below, comma-separated>" SteamAppId=2868840 ./SlayTheSpire2
 which writes DIR/{eng,fra}/<Class>.png and quits (src/DevConsole/CardRenderer.cs; "Name+9" renders a Forge level,
-"relic:Name" a relic's icon and tooltip, "gif:Name" the frames of a card's Forge climb from +0 to +9 in
+"relic:Name" a relic's icon and tooltip, "gif:Name[~Defect...]" the frames of a card's Forge climb from +0 to +9 in
 DIR/{eng,fra}/gif_<Name>/, which GIFS turns into an animated GIF).
 
 The descriptions show the images with [img] from the public GitHub repo (raw.githubusercontent.com), so commit the
@@ -61,12 +61,13 @@ SHOWCASES = {
     "achilles-relic": ["relic:SpoonAchillesHeel"],
     "glass-relic": ["relic:SpoonGlassHeart"],
 }
-# Animated GIFs: key -> card class whose "gif:<Class>" frames the game renders (12 fps).
-GIFS = {"forge-climb": "Sts1LimitBreak"}
+# Animated GIFs: key -> "gif:<spec>" climbs the game renders (12 fps), shown side by side in one GIF. A spec is a card
+# class, plus for a forged curse the defects it gains at +3, +6 and +9 ("Curse~Heavy~Spiteful~Contagious").
+GIFS = {"forge-climb": ["Sts1LimitBreak", "SpoonWitchingHour~Heavy~Spiteful~Contagious"]}
 GIF_FPS = 12
 GIF_W = 320  # the renders are 500 px wide; at full size the climb weighs about 4 MB
 CARDS = sorted({c for row in SHOWCASES.values() for c in row if not c.startswith("img:")} | {"Sts1Blasphemy"}
-               | {f"gif:{c}" for c in GIFS.values()})
+               | {f"gif:{c}" for specs in GIFS.values() for c in specs})
 ROW_W, ROW_H = 1280, 420
 LANG_DIR = {"en": "eng", "fr": "fra"}
 
@@ -205,22 +206,28 @@ def showcase(cards: Path, lang: str, names: list[str]) -> Image.Image:
     return row
 
 
-def climb_gif(cards: Path, lang: str, card: str, out: Path) -> int:
-    """The rendered climb frames over the banners' gradient (GIF has no soft transparency), looped forever."""
-    files = sorted((cards / LANG_DIR[lang] / f"gif_{card}").glob("*.png"))
-    if not files:
-        raise SystemExit(f"no gif:{card} frames in {cards / LANG_DIR[lang]}")
-    first = Image.open(files[0])
-    size = (GIF_W, round(first.height * GIF_W / first.width))
+def climb_gif(cards: Path, lang: str, specs: list[str], out: Path) -> int:
+    """The rendered climbs side by side over the banners' gradient (GIF has no soft transparency), looped forever."""
+    climbs = []
+    for spec in specs:
+        card = spec.split("~")[0]
+        files = sorted((cards / LANG_DIR[lang] / f"gif_{card}").glob("*.png"))
+        if not files:
+            raise SystemExit(f"no gif:{card} frames in {cards / LANG_DIR[lang]}")
+        climbs.append(files)
+    first = Image.open(climbs[0][0])
+    cell = (GIF_W, round(first.height * GIF_W / first.width))
+    size = (cell[0] * len(climbs), cell[1])
     bg = Image.new("RGBA", size)
     d = ImageDraw.Draw(bg)
     for y in range(size[1]):
         t = y / (size[1] - 1)
         d.line([(0, y), (size[0], y)], fill=tuple(round(a + (b - a) * t) for a, b in zip(BG_TOP, BG_BOTTOM)))
     frames = []
-    for f in files:
+    for i in range(min(len(files) for files in climbs)):
         frame = bg.copy()
-        frame.alpha_composite(Image.open(f).convert("RGBA").resize(size, Image.LANCZOS))
+        for k, files in enumerate(climbs):
+            frame.alpha_composite(Image.open(files[i]).convert("RGBA").resize(cell, Image.LANCZOS), (cell[0] * k, 0))
         frames.append(frame.convert("RGB").quantize(colors=128, method=Image.MEDIANCUT, dither=Image.Dither.NONE))
     frames[0].save(out, save_all=True, append_images=frames[1:], duration=round(1000 / GIF_FPS), loop=0, optimize=True,
                    disposal=1)
@@ -281,9 +288,9 @@ def main() -> None:
         for key, names in SHOWCASES.items():
             for lang in ("en", "fr"):
                 showcase(args.cards, lang, names).save(OUT / f"{key}-{lang}.png", optimize=True)
-        for key, card in GIFS.items():
+        for key, specs in GIFS.items():
             # English only: both descriptions show it (the French render was never worth a minute-long launch).
-            climb_gif(args.cards, "en", card, OUT / f"{key}-en.gif")
+            climb_gif(args.cards, "en", specs, OUT / f"{key}-en.gif")
         preview(args.cards).save(OUT / "preview.png", optimize=True)
         print(f"{len(SHOWCASES) * 2} showcases, {len(GIFS)} GIFs and preview.png in {OUT.relative_to(REPO)}")
 

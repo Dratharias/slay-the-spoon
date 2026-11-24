@@ -265,10 +265,14 @@ public static class CardRenderer
 	/// The card from +0 to +9, each level held <see cref="ClimbHold"/> seconds and brought in by the game's upgrade
 	/// animation (vfx_card_upgrade: the card scales in from nothing over 0.25 s while its particles burst; the vanilla
 	/// node itself reads the card's pile, which a card outside a run lacks). Frames are captured in real time at
-	/// <see cref="ClimbFps"/> to <c>&lt;dir&gt;/gif_&lt;Name&gt;/NNN.png</c>, at scale 1.
+	/// <see cref="ClimbFps"/> to <c>&lt;dir&gt;/gif_&lt;Name&gt;/NNN.png</c>, at scale 1. A forged curse
+	/// (<c>gif:Curse~Heavy~Spiteful~Contagious</c>) gains the named defects one by one at +3, +6 and +9.
 	/// </summary>
-	private static async Task RenderClimb(Node host, string dir, string typeName)
+	private static async Task RenderClimb(Node host, string dir, string spec)
 	{
+		string[] parts = spec.Split('~');
+		string typeName = parts[0];
+		var defects = parts.Skip(1).Select(Enum.Parse<Core.CurseDefect>).ToList();
 		Type? type = Find<CardModel>(typeName);
 		if (type == null)
 		{
@@ -289,10 +293,16 @@ public static class CardRenderer
 		viewport.AddChild(root);
 		var frames = new List<Image>();
 		NCard? shown = null;
+		bool curse = ((CardModel)ModelDb.GetById<CardModel>(ModelDb.GetId(type))).Type == MegaCrit.Sts2.Core.Entities.Cards.CardType.Curse;
+		if (curse) Curses.Forged.ForgedCurses.Loading++; // as in the still render: forged numbers need the combo or a load
 		for (int level = 0; level <= Core.ForgeRule.MaxLevel; level++)
 		{
 			shown?.QueueFree();
-			NCard node = NCard.Create(AtLevel(type, level))!;
+			CardModel card = AtLevel(type, level);
+			int count = Math.Min(Core.ForgedCurseRule.DefectCount(level), defects.Count);
+			if (curse && count > 0)
+				Curses.Forged.CurseDefects.Set(card, defects.Take(count).Aggregate(Core.CurseDefect.None, (set, d) => set | d));
+			NCard node = NCard.Create(card)!;
 			node.Position = size / 2;
 			root.AddChild(node);
 			node.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
