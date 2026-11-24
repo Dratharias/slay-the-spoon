@@ -151,7 +151,9 @@ Not tested in game: `docs/testing/forge-checklist.md`.
 cost 1 (0 upgraded), target an enemy and turn their own effect against it: Bad Luck makes the monster lose 13 HP, Doubt
 weakens it. Curses can be upgraded in this mode. Every "?" event gets an "Embrace the curse" option (a curse for a cursed
 relic, gold or a heal), and relic draws from chests, elites and the merchant are cursed 2 times in 3 until you hold them
-all, including four new ones: Blood Pact, Pin Doll, Black Censer and Reliquary. Not tested in game:
+all, including four new ones: Blood Pact, Pin Doll, Black Censer and Reliquary. Without Overcursed, Neow offers the
+**Witching Pact**: pick 1 of 3 boss relics, and the Witching Hour (below) replaces your Ascender's Bane, or joins your deck
+below Ascension 5; skip to refuse. Not tested in game:
 `docs/testing/cursed-deck-checklist.md`.
 
 **Forged curses** (The Forge and Cursed Deck together): curses fuse at the fire and the merchant duplicates them, up to
@@ -241,7 +243,7 @@ keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-g
 
 ## Development status — 2026-11-23
 
-Version **1.11.6**: the Witching Hour no longer shows "Unplayable" twice; 1.11.5: clearer Witching Hour text; 1.11.4: small fixes (Useless Relics throws the mod's combat-start relics); 1.11.3: restaurant ambience in the Spoon act; 1.11.2: Overcursed's cursed relics at merchants and events; 1.11.1: the Witching Hour curse; 1.11.0: the Overcursed mode and the Forge ladder, after forged curses (1.10.0), King Midas's relic sale (1.9.0), a long wave of fixes found
+Version **1.12.0**: Cursed Deck's Witching Pact at Neow; 1.11.6: the Witching Hour no longer shows "Unplayable" twice; 1.11.5: clearer Witching Hour text; 1.11.4: small fixes (Useless Relics throws the mod's combat-start relics); 1.11.3: restaurant ambience in the Spoon act; 1.11.2: Overcursed's cursed relics at merchants and events; 1.11.1: the Witching Hour curse; 1.11.0: the Overcursed mode and the Forge ladder, after forged curses (1.10.0), King Midas's relic sale (1.9.0), a long wave of fixes found
 by automated co-op runs (1.8.3–1.8.34), Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges
 (1.7.0), The Forge (1.4.0) and the port to game version 0.111.1 (1.3.8). The build has no warnings and every unit test
 passes. Most features still need in-game checks; the [testing checklists](docs/testing/) record them.

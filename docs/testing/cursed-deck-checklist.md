@@ -66,3 +66,12 @@ Curse table (owner page): `docs/review/cursed-curses.md`. Tick only what was see
 - [ ] Folie à deux: cursed relics replace relic draws before the chests; the bids still work.
 - [ ] The Forge: curses never fuse.
 - [ ] Any other mode ticked with it (Mutation, Trophies, Spoon, Matriochka...): nothing breaks.
+
+## Witching Pact (1.12.0, spec `docs/superpowers/specs/2026-11-24-witching-pact-design.md`)
+- [ ] Cursed Deck alone, Ascension 5+: Neow shows the "Witching Pact" page; the chest opens on 3 boss relics.
+- [ ] Taking a relic: the relic is held, Ascender's Bane is gone, the Witching Hour is in the deck.
+- [ ] Below Ascension 5: taking a relic adds the Witching Hour to the deck.
+- [ ] Skipping: no relic, no Witching Hour, the bane stays.
+- [ ] Cursed Deck + Overcursed: no pact page (the Witching Hour already replaced the bane).
+- [ ] With Neow's Blessings ticked: the pact page comes first, then the blessings.
+- [ ] Co-op: each player gets their own pact and their own 3 relics; skipping or taking on one side does not block the other.

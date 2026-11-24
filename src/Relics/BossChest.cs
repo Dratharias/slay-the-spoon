@@ -72,6 +72,23 @@ public static class BossChest
 
 	private static LocString Text(string key) => new(Table, $"SPOON_BOSS_RELICS.{key}");
 
+	/// <summary>
+	/// The boss relics a chest for these takers can hold, in a fixed order: the natives allowed in the current act, the
+	/// shared ports, the character relics the takers share, minus any relic a taker already owns. Also the Witching
+	/// Pact's pool.
+	/// </summary>
+	internal static List<RelicModel> Candidates(IRunState run, IReadOnlyList<Player> takers)
+	{
+		int act = run.CurrentActIndex;
+		bool clearsDeck = run.Modifiers.Any(m => m.ClearsPlayerDeck);
+		var characters = takers.Select(p => p.Character.Id).ToList();
+		return Natives.Where(r => BossChestRule.NativeAllowed(r.Id.Entry, act, clearsDeck)).Concat(SharedPorts)
+			.Concat(takers.Select(p => p.Character).DistinctBy(c => c.Id)
+				.Where(c => BossChestRule.CharacterRelicsShared(characters, c.Id)).SelectMany(CharacterRelics))
+			.Where(r => !takers.Any(p => p.Relics.Any(owned => owned.Id == r.Id)))
+			.ToList();
+	}
+
 	internal static EventOption Option(AncientEventModel ancient, Player player) =>
 		new(ancient, () => Open(ancient, player), Text("option_title"),
 			Text(player.RunState.Players.Count > 1 ? "option_description_coop" : "option_description"), TextKey,
@@ -182,13 +199,7 @@ public static class BossChest
 			if (_relics != null) return _relics;
 			List<Player> takers = Takers;
 			int act = _run.CurrentActIndex;
-			bool clearsDeck = _run.Modifiers.Any(m => m.ClearsPlayerDeck);
-			var characters = takers.Select(p => p.Character.Id).ToList();
-			var candidates = Natives.Where(r => BossChestRule.NativeAllowed(r.Id.Entry, act, clearsDeck)).Concat(SharedPorts)
-				.Concat(takers.Select(p => p.Character).DistinctBy(c => c.Id)
-					.Where(c => BossChestRule.CharacterRelicsShared(characters, c.Id)).SelectMany(CharacterRelics))
-				.Where(r => !takers.Any(p => p.Relics.Any(owned => owned.Id == r.Id)))
-				.ToList();
+			List<RelicModel> candidates = Candidates(_run, takers);
 			List<int> order = Enumerable.Range(0, candidates.Count).ToList().StableShuffle(_rng);
 			_relics = order.Take(BossChestRule.Size).Select(i => candidates[i]).ToList();
 			SpoonLog.Info($"boss chest: act {act + 1}, takers {string.Join(", ", takers.Select(p => p.NetId))}, "

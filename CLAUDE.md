@@ -1,7 +1,7 @@
 # Slay the Spoon — notes for Claude
 
 Slay the Spire 2 mod (StS2 Early Access v0.111.1, Godot 4.5.1 + C# .NET 9, Harmony, BaseLib dependency) that brings
-Slay the Spire 1 content into StS2 and adds Custom Run modes set by the lobby host. Version **1.11.6** (in both
+Slay the Spire 1 content into StS2 and adds Custom Run modes set by the lobby host. Version **1.12.0** (in both
 `mod/SlaySpoon.json` and `src/ModEntry.cs`). `README.md` is the player view; `docs/superpowers/specs/` holds the
 approved design of every feature.
 
@@ -106,7 +106,7 @@ with act 3's factors.
 | The Forge | `src/Forge/` | fuse copies up to +9 (`data/forge/curves.json`), Duplicate, forged looks, level ladder |
 | Mutation, Forced Trade | `src/Config/` | cards transform each act; co-op card trade |
 | Deck of 10, Blood, Trophies, Conductor, Useless Relics | `src/DeckOfTen/`, `src/Blood/`, `src/Trophies/`, `src/Conductor/`, `src/UselessRelics/` | small challenge modes |
-| Cursed Deck, Overcursed | `src/Curses/` | curses playable through the Unholy Grimoire, cursed relics; Overcursed triples curses and adds the Witching Hour |
+| Cursed Deck, Overcursed | `src/Curses/` | curses playable through the Unholy Grimoire, cursed relics, the Witching Pact at Neow (a boss relic for the Witching Hour); Overcursed triples curses and adds the Witching Hour |
 | Forged curses | `src/Curses/Forged/` | Forge + Cursed Deck: curses fuse to +9, defects at +3/+6/+9 |
 | Achilles' Heel | `src/Achilles/` | Block relics; any unblocked attack hit kills |
 | Glass Cannon | `src/GlassCannon/` | Frail, Frenzy stacks and a Strength streak |

@@ -19,7 +19,8 @@ namespace SlaySpoon.Curses;
 /// The Witching Hour (<see cref="WitchingHourRule"/>): the mod's own curse, Eternal, Innate, Unplayable. On odd turns it is
 /// unplayable even with the Unholy Grimoire, the owner's other cards cost 1 more while it is in hand, and from the draw pile
 /// it is drawn 80 % of the time. Its Grimoire play (even turns) stuns the chosen enemy (<c>"Stun"</c> in the curse table).
-/// It lives in the hidden StS1 curse pool for its pool and portrait; only Overcursed hands it out, in place of Ascender's Bane.
+/// It lives in the hidden StS1 curse pool for its pool and portrait; Overcursed hands it out in place of Ascender's Bane,
+/// and Cursed Deck's Witching Pact (<see cref="WitchingPact"/>) for a boss relic.
 /// </summary>
 public sealed class SpoonWitchingHour : Sts1CurseCard
 {

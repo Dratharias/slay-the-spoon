@@ -60,6 +60,7 @@ public static class NeowBlessingPatch
 
 	internal static bool HasNeowOption(ModifierModel modifier)
 	{
+		if (modifier is Curses.SpoonCursedDeck cursedDeck) return cursedDeck.OffersNeowOption;
 		return AccessTools.Method(modifier.GetType(), nameof(ModifierModel.GenerateNeowOption))?.DeclaringType
 			!= typeof(ModifierModel);
 	}

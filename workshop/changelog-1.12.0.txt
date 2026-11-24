@@ -1,0 +1,4 @@
+1.12.0 — the Witching Pact
+
+New
+- Cursed Deck (without Overcursed): Neow offers the Witching Pact. Pick 1 of 3 boss relics; the price is the Witching Hour, which replaces your Ascender's Bane (or joins your deck below Ascension 5). Skip the relics to refuse.
