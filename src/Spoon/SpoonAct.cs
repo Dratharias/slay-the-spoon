@@ -88,6 +88,10 @@ public sealed class SpoonAct : ActModel, IAppendedAct
 	}
 
 	public ActMap CreateFixedMap() => new SpoonActMap();
+
+	public Type FixedMapType => typeof(SpoonActMap);
+
+	public string LogName => "spoon act";
 }
 
 /// <summary>

@@ -41,9 +41,9 @@ internal static class EndingGeneratedMapPatch
 	private static void Postfix(IRunState runState, int actIndex, ref ActMap __result)
 	{
 		if (actIndex < 0 || actIndex >= runState.Acts.Count || runState.Acts[actIndex] is not IAppendedAct act) return;
+		if (__result.GetType() == act.FixedMapType) return;
 		ActMap map = act.CreateFixedMap();
-		if (__result.GetType() == map.GetType()) return;
-		SpoonLog.Info($"act4: {__result.GetType().Name} replaced by {map.GetType().Name}");
+		SpoonLog.Info($"{act.LogName}: {__result.GetType().Name} replaced by {map.GetType().Name}");
 		__result = map;
 	}
 }

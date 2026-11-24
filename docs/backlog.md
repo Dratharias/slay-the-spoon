@@ -414,10 +414,13 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     5. Spoonful card portrait: same (`images/cards/spoon/spoon_spoonful.png`; optional). Open.
     Animations: light tweens on the static sprite (`src/Spoon/SpoonMotion.cs`, owner request 2026-11-16: rotations,
     swoop and rise); a drawn replacement sprite keeps them if its ground point stays at the handle tip.
-  - **Restaurant ambience (owner request, 2026-11-16, open):** in the Spoon act, a light restaurant ambience (chatter,
+  - ~~**Restaurant ambience (owner request, 2026-11-16, open):** in the Spoon act, a light restaurant ambience (chatter,
     cutlery, glasses) under the music, with the boss music kept as the main track. Its level is set like a sound
     effect (follows the SFX volume, kept low in decibels so it never covers the music). Needs a free ambience recording
-    and an `AmbientSfx`-style loop for `SpoonAct` (today Glory's).
+    and an `AmbientSfx`-style loop for `SpoonAct` (today Glory's).~~ Done in 1.11.3 (`src/Spoon/SpoonAmbience.cs`): a looped
+    public-domain recording, "Restaurant Ambience" by stephan (PDSounds 274,
+    https://commons.wikimedia.org/wiki/File:Restaurant_ambience.ogg), crossfaded into a seamless 73 s loop, at the SFX
+    sliders × 0.35 (`SpoonAmbienceRule`, about −9 dB) with a 2 s fade-in; Glory's ambience stays under it. Check in game: level.
   - **Test start balance (owner, 2026-11-16):** the bare test deck lost to the Spoon ("soit mon deck est nul ou la
     cuillère est OP"; the owner blames the deck). The test deck is now upgraded with seven combat relics; the Spoon's
     numbers stay a starting point until a real run reaches it. Second test (same day, upgraded deck): +3 Strength
@@ -461,8 +464,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
       copy; kept, since more max HP fits the mode. A missing relic id is skipped silently at the start grant.
     - T4: the floor counter skips a number in the Spoon act (the empty grid row; cosmetic).
     - T4: `SpoonAct.BaseNumberOfRooms` is 1, which multiplayer reads as 0 (continue-run info only).
-    - T4: `EndingGeneratedMapPatch` builds a throwaway fixed map just to compare map types, and its log line says
-      "act4:" for the Spoon act too.
+    - ~~T4: `EndingGeneratedMapPatch` builds a throwaway fixed map just to compare map types, and its log line says
+      "act4:" for the Spoon act too.~~ Done in 1.11.3 (`IAppendedAct.FixedMapType`, `LogName`).
     - T4: free travel (Winged Boots, Flight) on the Spoon map is handled by `SpoonMapTravelPatch`; check it in game.
     - ~~T5: Pressure Points played by a supporter still fires the marks a fighter applied (dealer-less).~~ Done in the
       1.3.0 review fix wave: a supporter's Pressure Points skips the Spoon's mark; other enemies trigger as usual.
@@ -578,8 +581,9 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
 
 - Deck of 10 relic (1.5.1): Neow's cursed slot, 1 in 11, is a builder call (the owner chose "a Neow option"); also the
   keep grid only for the first trim. Both in the spec; the owner may change the odds or make it a fourth option.
-- Minor: Conductor assigns rewards through one panel per reward, then each player's own reward screen opens; the spec's
-  merged screen was not built (see the spec's builder calls). Gold is not split.
+- ~~Minor: Conductor assigns rewards through one panel per reward, then each player's own reward screen opens; the spec's
+  merged screen was not built (see the spec's builder calls).~~ Done in 1.8.26 (`ConductorOverlay`, one screen). Gold is
+  not split (kept: gold is not a movable reward).
 - Minor: Trophies read the elites' moves at combat start; a move whose damage depends on state later in the fight shows
   its start-of-fight value.
 - Minor: Useless Relics uses a hand list (`UselessRelicRule.OncePerCombat`); mod relics and future vanilla relics are not

@@ -1,0 +1,7 @@
+1.11.3 — restaurant ambience in the Spoon act
+
+New
+- The Spoon act has a quiet restaurant ambience (chatter, cutlery, glasses) under its music. It follows the sound effects volume and stays well below the music. Recording: "Restaurant Ambience" by stephan, public domain (PDSounds, via Wikimedia Commons).
+
+Fixes
+- Internal cleanup of the appended acts' map check (no gameplay change).

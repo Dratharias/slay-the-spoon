@@ -37,3 +37,10 @@
 - [ ] Once all ten cursed relics are held, every pull is vanilla again.
 - [ ] Co-op: both players see the same merchant and event relics (no divergence).
 - [ ] Ancients (Neow, Darv, Orobas...) are unchanged.
+
+## Spoon act restaurant ambience (1.11.3)
+
+- [ ] Spoon act rest site and boss fight: a quiet restaurant ambience (chatter, cutlery) plays under the music, fading in over 2 s.
+- [ ] The SFX slider (and Master) changes its level live; SFX at 0 silences it; the music stays the main track.
+- [ ] It stops when The Ending follows, at the game over / victory return to the menu, and never plays outside the Spoon act.
+- [ ] The loop point is not audible (73 s loop).

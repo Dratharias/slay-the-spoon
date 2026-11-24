@@ -17,4 +17,10 @@ internal interface IAppendedAct
 
 	/// <summary>The act's map; it draws from no Rng.</summary>
 	ActMap CreateFixedMap();
+
+	/// <summary>Type of <see cref="CreateFixedMap"/>'s map, to recognize it without building one.</summary>
+	Type FixedMapType { get; }
+
+	/// <summary>Short name for log lines ("act4", "spoon act").</summary>
+	string LogName { get; }
 }

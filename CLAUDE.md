@@ -876,3 +876,12 @@ Read `README.md` for the player view and the spec for every decision.
   relic pull while the current room is an ordinary `EventRoom` (not an Ancient or the Architect, `CursedScope.For`); merchant
   prices use `CursedMerchantPricePatch` under either mode. Embrace the curse gives a cursed relic 2 in 3 (`EmbraceDraw`).
 - 1040 xUnit + 112 pytest pass. Not tested in game: "Overcursed cursed relics (1.11.2)" in `docs/testing/release-1.11.0.md`.
+
+## 1.11.3 — Spoon act ambience (2026-11-23, `main`)
+
+- Owner request (2026-11-16): a restaurant ambience under the Spoon act's music (`src/Spoon/SpoonAmbience.cs`, postfix on
+  `NRunMusicController.UpdateMusic`/`UpdateTrack`): `audio/spoon/restaurant.ogg`, a public-domain recording (stephan, PDSounds 274,
+  Wikimedia Commons) crossfaded into a seamless loop, at the squared Master × SFX sliders × 0.35 (`SpoonAmbienceRule`), 2 s fade-in,
+  stopped outside the act and on the return to the menu. `IAppendedAct.FixedMapType` / `LogName`: the generated-map check no longer
+  builds a throwaway map. 1044 xUnit + 112 pytest pass. Not tested in game: "Spoon act restaurant ambience (1.11.3)" in
+  `docs/testing/release-1.11.0.md`.

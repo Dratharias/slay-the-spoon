@@ -89,6 +89,10 @@ public sealed class Sts1EndingAct : ActModel, IAppendedAct
 
 	public ActMap CreateFixedMap() => new EndingActMap();
 
+	public Type FixedMapType => typeof(EndingActMap);
+
+	public string LogName => "act4";
+
 	/// <summary>Logs at startup whether the act's id is the one its text and saves use.</summary>
 	public static void SelfCheck()
 	{
