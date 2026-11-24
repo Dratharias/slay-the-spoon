@@ -66,6 +66,8 @@
   "SPOON_CURSED_DECK.title": "Cursed Deck",
   "SPOON_CURSED_DECK.description": "Start with the Unholy Grimoire: curses are playable. Events and relics lean cursed.",
   "SPOON_CURSED_DECK.short": "Curse",
+  "SPOON_CURSED_DECK.neow_title": "Witching Pact",
+  "SPOON_CURSED_DECK.neow_description": "Choose [gold]1[/gold] of [blue]3[/blue] boss relics. The price: the [purple]Witching Hour[/purple] replaces your [red]Ascender's Bane[/red] (or joins your [gold]Deck[/gold]). Skip to refuse.",
   "SPOON_BLOOD.title": "Blood",
   "SPOON_BLOOD.description": "No gold: you pay in HP. Start with Blood Fang.",
   "SPOON_BLOOD.short": "Blood",

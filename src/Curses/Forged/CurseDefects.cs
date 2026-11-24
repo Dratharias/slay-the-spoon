@@ -51,7 +51,8 @@ public static class CurseDefects
 	{
 		if (!ForgedCurses.Applies(result) || result.Owner?.RunState is not { } run) return;
 		var rng = new Rng(run.Rng.Seed, ForgedCurseRule.DefectStream(run.TotalFloor, deckIndex, 0));
-		var merged = ForgedCurseRule.Merge(kept, sacrificed, result.CurrentUpgradeLevel, n => rng.NextInt(n));
+		var excluded = result is SpoonWitchingHour ? WitchingHourRule.ExcludedDefects : CurseDefect.None;
+		var merged = ForgedCurseRule.Merge(kept, sacrificed, result.CurrentUpgradeLevel, n => rng.NextInt(n), excluded);
 		Set(result, merged);
 		SpoonLog.Info($"forge: curse defects {kept} + {sacrificed} -> {merged} ({result.Id.Entry}+{result.CurrentUpgradeLevel})");
 	}

@@ -74,3 +74,11 @@ Rules:
 - Echo on effects that have no "half" (Weak 1 → 0 is fine, rounded down; Debt: its owner loses half the gold).
 - Pure rules (levels → numbers, defect count, draw, exclusions, play checks) in `src/Core/` with xUnit tests;
   `tools/curse_table.py` extended to write levels +1 to +9 in the review page.
+
+## Addendum: the Witching Hour forged (owner, 2026-11-24, version 1.12.0)
+
+- The Witching Hour fuses and can be Duplicated in this combo although it is Eternal (it stays Eternal).
+- It must end up worse than Bad Luck+9. Cost penalty on odd turns: +1, then +2 from +5 (capped: "+2 on every card in hand
+  is already savage"). Held in hand at the end of an odd turn: 15 HP at +1, then 9 more per level (87 at +9).
+- Reward: the Grimoire stun lasts 2 turns from +5 (1 before); the player builds the deck to play it on even turns.
+- It never draws Odd, Even (never playable) or Echo (a stun has no half). Numbers in `WitchingHourRule`.

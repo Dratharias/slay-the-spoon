@@ -66,6 +66,8 @@
   "SPOON_CURSED_DECK.title": "Deck maudit",
   "SPOON_CURSED_DECK.description": "Commencez avec le Grimoire profane : les malédictions se jouent. Événements et reliques penchent vers la malédiction.",
   "SPOON_CURSED_DECK.short": "Maudit",
+  "SPOON_CURSED_DECK.neow_title": "Pacte des sorcières",
+  "SPOON_CURSED_DECK.neow_description": "Choisissez [gold]1[/gold] relique de boss parmi [blue]3[/blue]. Le prix : [purple]L'Heure des sorcières[/purple] remplace votre [red]Fléau de l'ascendant[/red] (ou rejoint votre [gold]Deck[/gold]). Passez pour refuser.",
   "SPOON_BLOOD.title": "Sang",
   "SPOON_BLOOD.description": "Plus d’or : vous payez en PV. Vous commencez avec Croc de sang.",
   "SPOON_BLOOD.short": "Sang",

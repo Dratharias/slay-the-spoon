@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
@@ -12,11 +13,21 @@ namespace SlaySpoon.Curses;
 
 /// <summary>
 /// Cursed Deck (Custom Run, docs/superpowers/specs/2026-11-18-cursed-deck-design.md): every player starts with the
-/// Unholy Grimoire and one random curse, drawn on the mod's own stream so vanilla RNG stays untouched.
+/// Unholy Grimoire and one random curse, drawn on the mod's own stream so vanilla RNG stays untouched. Without Overcursed,
+/// Neow offers the Witching Pact (<see cref="WitchingPact"/>).
 /// </summary>
 public sealed class SpoonCursedDeck : ModifierModel
 {
 	public static bool IsActive(IRunState? run) => run != null && run.Modifiers.Any(m => m is SpoonCursedDeck);
+
+	public override LocString NeowOptionTitle => new("modifiers", Id.Entry + ".neow_title");
+	public override LocString NeowOptionDescription => new("modifiers", Id.Entry + ".neow_description");
+
+	/// <summary>Whether Neow shows the Witching Pact page (not with Overcursed, which already deals the Witching Hour).</summary>
+	internal bool OffersNeowOption => WitchingPactRule.Offered(true, SpoonOvercursed.IsActive(RunState));
+
+	public override Func<Task>? GenerateNeowOption(EventModel eventModel) =>
+		OffersNeowOption && eventModel.Owner is { } owner ? () => WitchingPact.Open(owner) : null;
 
 	protected override void AfterRunCreated(RunState runState)
 	{

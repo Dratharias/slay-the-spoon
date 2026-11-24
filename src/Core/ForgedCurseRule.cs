@@ -71,15 +71,16 @@ public static class ForgedCurseRule
 	/// The fused curse's defects: the kept copy's (never removed), then the sacrificed copy's in table order, then draws
 	/// among the compatible rest until <see cref="DefectCount"/> is reached. <paramref name="roll"/>(n) returns 0..n−1.
 	/// </summary>
-	public static CurseDefect Merge(CurseDefect kept, CurseDefect sacrificed, int level, Func<int, int> roll)
+	public static CurseDefect Merge(CurseDefect kept, CurseDefect sacrificed, int level, Func<int, int> roll,
+		CurseDefect excluded = CurseDefect.None)
 	{
 		int count = DefectCount(level);
-		var set = kept;
+		var set = kept & ~excluded;
 		foreach (var d in All)
-			if (CountOf(set) < count && sacrificed.HasFlag(d) && Compatible(set, d)) set |= d;
+			if (CountOf(set) < count && sacrificed.HasFlag(d) && (excluded & d) == 0 && Compatible(set, d)) set |= d;
 		while (CountOf(set) < count)
 		{
-			var left = All.Where(d => Compatible(set, d)).ToList();
+			var left = All.Where(d => (excluded & d) == 0 && Compatible(set, d)).ToList();
 			if (left.Count == 0) break;
 			set |= left[Math.Clamp(roll(left.Count), 0, left.Count - 1)];
 		}

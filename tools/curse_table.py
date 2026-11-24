@@ -131,7 +131,7 @@ def review(table: dict) -> str:
     ]
     for key, row in rows(table).items():
         if row["played"] == "Stun":
-            continue  # Eternal: never fused
+            continue  # the Witching Hour: its forged numbers live in WitchingHourRule
         values = [amount_at(row, lv) if row["played"] != "None" else grimoire_at(row, lv) for lv in levels]
         lines.append(f"| {key} | " + " | ".join(str(v) for v in values) + " |")
     return "\n".join(lines) + "\n"
