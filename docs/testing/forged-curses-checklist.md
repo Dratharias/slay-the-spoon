@@ -13,6 +13,7 @@ Custom Run with **The Forge** and **Cursed Deck** ticked unless a line says othe
 ## Defects
 
 - [ ] Odd / Even / Late / Demanding: the curse refuses to play while the condition holds, with the defect thought bubble.
+- [ ] Hovering a forged curse (hand, deck view, rest site): one tooltip per defect, its name and effect, in English and in French.
 - [ ] Heavy: the Grimoire cost shows 2 more.
 - [ ] Bloody: playing it at low HP costs HP equal to its level (can kill).
 - [ ] Echo on Debt: the owner loses half the gold the play gave.
