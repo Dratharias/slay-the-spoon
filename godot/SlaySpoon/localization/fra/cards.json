@@ -532,6 +532,6 @@
 	"SPOON_CURSE_DEFECT.Echo.name": "Écho",
 	"SPOON_CURSE_DEFECT.Echo": "La jouer vous inflige aussi la moitié de son effet.",
 	"SPOON_WITCHING_HOUR.title": "L'Heure des sorcières",
-	"SPOON_WITCHING_HOUR.description": "Aux tours impairs : [gold]Injouable[/gold] ; si vous l'avez en [gold]Main[/gold], vos autres cartes coûtent 1 de plus ; 80 % de chances de la piocher.\nAvec le Grimoire profane : l'ennemi passe son prochain tour.",
+	"SPOON_WITCHING_HOUR.description": "Aux [gold]tours impairs[/gold] : [gold]Injouable[/gold]. Tant qu'elle est dans votre [gold]Main[/gold], vos autres cartes coûtent 1 de plus. Depuis votre [gold]Pioche[/gold], 80 % de chances de sauter dans votre [gold]Main[/gold].\nAux [gold]tours pairs[/gold], avec le Grimoire profane : l'ennemi choisi passe son prochain tour.",
 	"SPOON_WITCHING_HOUR.cantPlay": "Pas à cette heure-ci."
 }

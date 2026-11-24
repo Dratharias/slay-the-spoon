@@ -1,7 +1,7 @@
 # Slay the Spoon — notes for Claude
 
 Slay the Spire 2 mod (StS2 Early Access v0.111.1, Godot 4.5.1 + C# .NET 9, Harmony, BaseLib dependency) that brings
-Slay the Spire 1 content into StS2 and adds Custom Run modes set by the lobby host. Version **1.11.4** (in both
+Slay the Spire 1 content into StS2 and adds Custom Run modes set by the lobby host. Version **1.11.5** (in both
 `mod/SlaySpoon.json` and `src/ModEntry.cs`). `README.md` is the player view; `docs/superpowers/specs/` holds the
 approved design of every feature.
 
