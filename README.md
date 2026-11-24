@@ -160,7 +160,8 @@ below Ascension 5; skip to refuse. Not tested in game:
 +9. Each level repeats the +0 → +1 step on both sides (Bad Luck+9: 76 HP to the enemy when played, 76 to you if it stays
 in hand), and the curse picks up a defect at +3, +6 and +9: unplayable on odd or even turns or before turn 3, playable
 only after two other cards, costs 2 more, costs HP, hits its owner twice in hand, spreads a curse, eats a card from your
-hand, or echoes half its effect back at you. Eternal curses never fuse. Levels per curse: `docs/review/cursed-curses.md`.
+hand, or echoes half its effect back at you. Eternal curses never fuse, except the Witching Hour: from +1 it costs you
+15 HP at the end of an odd turn in hand (87 at +9), and from +5 your other cards cost 2 more and its stun lasts 2 turns. Levels per curse: `docs/review/cursed-curses.md`.
 Not tested in game: `docs/testing/forged-curses-checklist.md`.
 
 **Overcursed** (Custom Run): every curse you receive comes in three (with Hoarder or Matriochka, still three), and every "?"
@@ -243,7 +244,7 @@ keys and Act 4 without the unlock. Daily runs are unchanged. It still needs in-g
 
 ## Development status — 2026-11-23
 
-Version **1.12.0**: Cursed Deck's Witching Pact at Neow; 1.11.6: the Witching Hour no longer shows "Unplayable" twice; 1.11.5: clearer Witching Hour text; 1.11.4: small fixes (Useless Relics throws the mod's combat-start relics); 1.11.3: restaurant ambience in the Spoon act; 1.11.2: Overcursed's cursed relics at merchants and events; 1.11.1: the Witching Hour curse; 1.11.0: the Overcursed mode and the Forge ladder, after forged curses (1.10.0), King Midas's relic sale (1.9.0), a long wave of fixes found
+Version **1.12.0**: Cursed Deck's Witching Pact at Neow, the Witching Hour forges to +9; 1.11.6: the Witching Hour no longer shows "Unplayable" twice; 1.11.5: clearer Witching Hour text; 1.11.4: small fixes (Useless Relics throws the mod's combat-start relics); 1.11.3: restaurant ambience in the Spoon act; 1.11.2: Overcursed's cursed relics at merchants and events; 1.11.1: the Witching Hour curse; 1.11.0: the Overcursed mode and the Forge ladder, after forged curses (1.10.0), King Midas's relic sale (1.9.0), a long wave of fixes found
 by automated co-op runs (1.8.3–1.8.34), Glass Cannon (1.8.0), Cursed Deck, Achilles' Heel and seven Custom Run challenges
 (1.7.0), The Forge (1.4.0) and the port to game version 0.111.1 (1.3.8). The build has no warnings and every unit test
 passes. Most features still need in-game checks; the [testing checklists](docs/testing/) record them.

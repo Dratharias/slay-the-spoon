@@ -30,3 +30,11 @@ Custom Run with **The Forge** and **Cursed Deck** ticked unless a line says othe
 
 - [ ] The Forge alone: curses never fuse, no Duplicate on curses.
 - [ ] Cursed Deck alone: curses stop at +1, no defects.
+
+## Witching Hour (1.12.0)
+
+- [ ] The Forge + Cursed Deck: the merchant's Duplicate accepts the Witching Hour; two copies fuse at the fire.
+- [ ] +1 or more: held in hand at the end of an odd turn, it costs the shown HP (15 at +1, 87 at +9); even turns cost nothing.
+- [ ] +5 or more: other cards cost 2 more on odd turns while it is in hand; the Grimoire play on an even turn stuns 2 turns, then the enemy resumes its pattern.
+- [ ] Spiteful doubles the HP loss; no Odd, Even or Echo defect ever shows.
+- [ ] Cursed Deck alone: Witching Hour+1 shows no HP loss and stuns 1 turn.

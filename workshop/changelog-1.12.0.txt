@@ -2,3 +2,4 @@
 
 New
 - Cursed Deck (without Overcursed): Neow offers the Witching Pact. Pick 1 of 3 boss relics; the price is the Witching Hour, which replaces your Ascender's Bane (or joins your deck below Ascension 5). Skip the relics to refuse.
+- The Forge + Cursed Deck: the Witching Hour now fuses and can be duplicated, up to +9, while staying Eternal. From +1, held in hand at the end of an odd turn it costs you 15 HP, 9 more per level (87 at +9). From +5, your other cards cost 2 more instead of 1, and its Unholy Grimoire stun lasts 2 turns. It never gets the Odd, Even or Echo defect.

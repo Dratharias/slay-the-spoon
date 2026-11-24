@@ -64,4 +64,43 @@ public class WitchingHourRuleTests
 
 	[Fact]
 	public void StreamName() => Assert.Equal("witching_hour_12_3_4", WitchingHourRule.PullStream(12, 3, 4));
+
+	[Fact]
+	public void ForgedCostPenaltyCapsAtTwo()
+	{
+		Assert.Equal(new[] { 1, 1, 1, 1, 1, 2, 2, 2, 2, 2 }, Enumerable.Range(0, 10).Select(WitchingHourRule.CostPenaltyAt));
+		Assert.Equal(4m, WitchingHourRule.CostWith(2, 3, curseInHand: true, level: 9));
+		Assert.Equal(2m, WitchingHourRule.CostWith(2, 4, curseInHand: true, level: 9));
+	}
+
+	[Fact]
+	public void ForgedHpLossBeatsBadLuck()
+	{
+		Assert.Equal(new[] { 0, 15, 24, 33, 42, 51, 60, 69, 78, 87 },
+			Enumerable.Range(0, 10).Select(lv => WitchingHourRule.HpLossAt(lv, forged: true)));
+		Assert.Equal(0, WitchingHourRule.HpLossAt(1, forged: false));
+		Assert.True(WitchingHourRule.HpLossAt(9, forged: true) > 76);
+	}
+
+	[Fact]
+	public void ForgedStunLastsTwoTurnsFromPlusFive()
+	{
+		Assert.Equal(new[] { 1, 1, 1, 1, 1, 2, 2, 2, 2, 2 }, Enumerable.Range(0, 10).Select(WitchingHourRule.StunTurnsAt));
+		var row = new CurseRow(WitchingHourRule.Id, "Stun", 0, 0, null, null, 0);
+		Assert.Equal(2, CurseRule.PlayedAmount(row, 9, 0, 0));
+		Assert.Equal(1, CurseRule.PlayedAmount(row, true, 0, 0));
+	}
+
+	[Fact]
+	public void ForgedDefectsSkipOddEvenAndEcho()
+	{
+		for (int seed = 0; seed < 50; seed++)
+		{
+			var rng = new Random(seed);
+			var set = ForgedCurseRule.Merge(CurseDefect.None, CurseDefect.Even | CurseDefect.Echo, 9, n => rng.Next(n),
+				WitchingHourRule.ExcludedDefects);
+			Assert.Equal(CurseDefect.None, set & WitchingHourRule.ExcludedDefects);
+			Assert.Equal(3, ForgedCurseRule.All.Count(d => set.HasFlag(d)));
+		}
+	}
 }

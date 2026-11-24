@@ -162,7 +162,7 @@
     "keywords": "Eternal, Innate, Unplayable (the mod's own, Overcursed's Ascender's Bane)",
     "inHand": "Odd turns: your other cards cost 1 more while in hand; drawn 80 % of the time from the draw pile; unplayable even with the Grimoire",
     "played": "Stun",
-    "note": "Owner design 2026-11-23. Grimoire play only on even turns: the chosen enemy skips its next turn; upgraded, it costs 0"
+    "note": "Owner design 2026-11-23. Grimoire play only on even turns: the chosen enemy skips its next turn; upgraded, it costs 0. Forged (2026-11-24): fuses despite Eternal; odd-turn end in hand 15 HP at +1, +9 per level; penalty and stun 2 from +5 (WitchingHourRule)"
   },
   "STS1_PRIDE": {
     "keywords": "Innate, Exhaust; playable for 1 (StS1, to port)",

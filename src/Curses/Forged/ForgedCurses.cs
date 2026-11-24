@@ -25,6 +25,9 @@ public static class ForgedCurses
 	public static bool Applies(CardModel card) => card.Type == CardType.Curse
 		&& (Loading > 0 || IsActive(OwnerRef(card)?.RunState ?? ForgeLevels.CurrentRun));
 
-	/// <summary>Fusion and Duplicate: a forged curse the game lets its owner lose (Eternal curses such as Ascender's Bane never fuse).</summary>
-	public static bool Fusable(CardModel card) => Applies(card) && card.IsRemovable;
+	/// <summary>
+	/// Fusion and Duplicate: a forged curse the game lets its owner lose (Eternal curses such as Ascender's Bane never fuse),
+	/// plus the Witching Hour, which climbs to +9 while staying Eternal (owner, 2026-11-24).
+	/// </summary>
+	public static bool Fusable(CardModel card) => Applies(card) && (card.IsRemovable || card is SpoonWitchingHour);
 }
