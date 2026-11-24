@@ -1,4 +1,4 @@
 1.11.5 — clearer Witching Hour
 
 Fixes
-- Overcursed: the Witching Hour card text now says plainly what happens on odd turns (unplayable, your other cards cost 1 more while it is in your hand, 80% chance to jump from your draw pile into your hand) and on even turns (with the Unholy Grimoire, the chosen enemy skips its next turn). The card works as before.
+- Overcursed: the Witching Hour card text now says plainly what happens on odd turns (unplayable, your other cards cost 1 more while it is in your hand, 80% chance to jump from your draw pile into your hand on an odd turn) and on even turns (with the Unholy Grimoire, the chosen enemy skips its next turn). The card works as before.

@@ -532,6 +532,6 @@
 	"SPOON_CURSE_DEFECT.Echo.name": "Echo",
 	"SPOON_CURSE_DEFECT.Echo": "Playing it also hits you with half its effect.",
 	"SPOON_WITCHING_HOUR.title": "Witching Hour",
-	"SPOON_WITCHING_HOUR.description": "On [gold]odd turns[/gold]: [gold]Unplayable[/gold]. While it is in your [gold]Hand[/gold], your other cards cost 1 more. From your [gold]Draw Pile[/gold], 80% chance to jump into your [gold]Hand[/gold].\nOn [gold]even turns[/gold], with the Unholy Grimoire: the chosen enemy skips its next turn.",
+	"SPOON_WITCHING_HOUR.description": "On [gold]odd turns[/gold]: [gold]Unplayable[/gold]. While it is in your [gold]Hand[/gold], your other cards cost 1 more. From your [gold]Draw Pile[/gold], 80% chance to jump into your [gold]Hand[/gold] on an odd turn.\nOn [gold]even turns[/gold], with the Unholy Grimoire: the chosen enemy skips its next turn.",
 	"SPOON_WITCHING_HOUR.cantPlay": "Not at this hour."
 }
