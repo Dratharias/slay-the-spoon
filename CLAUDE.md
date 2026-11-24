@@ -885,3 +885,11 @@ Read `README.md` for the player view and the spec for every decision.
   stopped outside the act and on the return to the menu. `IAppendedAct.FixedMapType` / `LogName`: the generated-map check no longer
   builds a throwaway map. 1044 xUnit + 112 pytest pass. Not tested in game: "Spoon act restaurant ambience (1.11.3)" in
   `docs/testing/release-1.11.0.md`.
+
+## 1.11.4 — backlog minors (2026-11-23, `main`)
+
+- Useless Relics: the mod's combat-start relics join `UselessRelicRule.OncePerCombat` (Pure Water, Holy Water, Teardrop Locket,
+  Mutagenic Strength, Nuclear Battery; energy relics stay off). `AppendedRoomCountPatch` (`ActModel.GetNumberOfRooms` postfix,
+  `IAppendedAct.RoomCount`): appended acts keep their room count in co-op. Feast/Digest texts read `{MaxHp}`; the Spoon's Rng
+  streams are `SlaySpoon.Spoon.*` (`Sts1EndingMonster.RngFamily`). Remaining minors carry a disposition in `docs/backlog.md`.
+  1049 xUnit + 112 pytest pass. Not tested in game: "Small fixes (1.11.4)" in `docs/testing/release-1.11.0.md`.

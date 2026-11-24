@@ -92,6 +92,7 @@ public sealed class Sts1EndingAct : ActModel, IAppendedAct
 	public Type FixedMapType => typeof(EndingActMap);
 
 	public string LogName => "act4";
+	public int RoomCount => BaseNumberOfRooms;
 
 	/// <summary>Logs at startup whether the act's id is the one its text and saves use.</summary>
 	public static void SelfCheck()

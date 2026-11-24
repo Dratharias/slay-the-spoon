@@ -44,3 +44,9 @@
 - [ ] The SFX slider (and Master) changes its level live; SFX at 0 silences it; the music stays the main track.
 - [ ] It stops when The Ending follows, at the game over / victory return to the menu, and never plays outside the Spoon act.
 - [ ] The loop point is not audible (73 s loop).
+
+## Small fixes (1.11.4)
+
+- [ ] Spoon rest site: Feast reads "Gain 5 Max HP", Digest "Lose 15 Max HP" (EN/FR), same numbers as before.
+- [ ] Co-op: the main menu's continue-run box counts the Spoon act and The Ending's floors like solo (3 and 4).
+- [ ] Useless Relics: Pure Water, Holy Water, Teardrop Locket, Mutagenic Strength and Nuclear Battery can be thrown after they trigger.

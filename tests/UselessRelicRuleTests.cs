@@ -18,5 +18,13 @@ public class UselessRelicRuleTests
 
 	[Fact]
 	public void IdsAreUpperSnakeCase() =>
-		Assert.All(UselessRelicRule.OncePerCombat, id => Assert.Matches("^[A-Z_]+$", id));
+		Assert.All(UselessRelicRule.OncePerCombat, id => Assert.Matches("^[A-Z0-9_]+$", id));
+
+	[Theory]
+	[InlineData("STS1_PURE_WATER")]
+	[InlineData("STS1_HOLY_WATER")]
+	[InlineData("STS1_TEARDROP_LOCKET")]
+	[InlineData("STS1_MUTAGENIC_STRENGTH")]
+	[InlineData("STS1_NUCLEAR_BATTERY")]
+	public void ModCombatStartRelicsCanBeThrown(string id) => Assert.True(UselessRelicRule.CanThrow(id, true, false, false));
 }

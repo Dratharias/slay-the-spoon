@@ -17,6 +17,8 @@ public static class UselessRelicRule
 		"ORANGE_DOUGH", "PANTOGRAPH", "PETRIFIED_TOAD", "POWER_CELL", "RADIANT_PEARL", "RED_MASK", "ROYAL_POISON",
 		"RUINED_HELMET", "SYMBIOTIC_VIRUS", "THROWING_AXE", "TOOLBOX", "UNSETTLING_LAMP", "VAMBRACE", "VERY_HOT_COCOA",
 		"VEXING_PUZZLEBOX",
+		// The mod's own combat-start relics.
+		"STS1_HOLY_WATER", "STS1_MUTAGENIC_STRENGTH", "STS1_NUCLEAR_BATTERY", "STS1_PURE_WATER", "STS1_TEARDROP_LOCKET",
 	};
 
 	/// <summary>Whether a relic can be thrown: on the list, flashed this combat, not melted and not thrown yet.</summary>

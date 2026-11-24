@@ -23,4 +23,10 @@ internal interface IAppendedAct
 
 	/// <summary>Short name for log lines ("act4", "spoon act").</summary>
 	string LogName { get; }
+
+	/// <summary>
+	/// Rooms between the start and the boss. Vanilla's <c>GetNumberOfRooms</c> drops one in multiplayer for its generated
+	/// maps; these maps are fixed, so the count is the same for every party (continue-run floor count).
+	/// </summary>
+	int RoomCount { get; }
 }

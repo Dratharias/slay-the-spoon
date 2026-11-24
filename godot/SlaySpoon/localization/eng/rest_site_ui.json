@@ -24,9 +24,9 @@
   "SPOON_MIDAS.broke": "Broke",
   "SPOON_MIDAS.price": "Costs [gold]{Gold} gold[/gold].",
   "OPTION_SPOON_FEAST.name": "Feast",
-  "OPTION_SPOON_FEAST.description": "Gain [green]5[/green] Max HP.",
+  "OPTION_SPOON_FEAST.description": "Gain [green]{MaxHp}[/green] Max HP.",
   "OPTION_SPOON_DIGEST.name": "Digest",
-  "OPTION_SPOON_DIGEST.description": "Lose [red]15[/red] Max HP. Heal to full HP.",
+  "OPTION_SPOON_DIGEST.description": "Lose [red]{MaxHp}[/red] Max HP. Heal to full HP.",
   "OPTION_SPOON_FORGE_FUSE.name": "Fuse",
   "OPTION_SPOON_FORGE_FUSE.description": "Fuse two copies of a card. Their levels add up, plus 1.",
   "OPTION_SPOON_FORGE_FUSE.descriptionDisabled": "You need two copies of a card that can still rise."

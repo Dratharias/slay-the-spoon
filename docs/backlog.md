@@ -462,8 +462,10 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     - 1.3.7 builder call: with the 12 relics from the start, Neow (Nutritious Oyster, Stone Humidifier) and vanilla
       events (Hungry for Mushrooms, Room Full of Cheese, Trash Heap, Fake Merchant, Nonupeipe) can still give a second
       copy; kept, since more max HP fits the mode. A missing relic id is skipped silently at the start grant.
-    - T4: the floor counter skips a number in the Spoon act (the empty grid row; cosmetic).
-    - T4: `SpoonAct.BaseNumberOfRooms` is 1, which multiplayer reads as 0 (continue-run info only).
+    - ~~T4: the floor counter skips a number in the Spoon act (the empty grid row; cosmetic).~~ Checked 1.11.4: the top
+      bar shows `TotalFloor` (rooms visited), which never skips; only the internal `ActFloor` (row + 1) jumps to 4 at the boss.
+    - ~~T4: `SpoonAct.BaseNumberOfRooms` is 1, which multiplayer reads as 0 (continue-run info only).~~ Done in 1.11.4
+      (`AppendedRoomCountPatch`, `IAppendedAct.RoomCount`): the Ending had the same off-by-one.
     - ~~T4: `EndingGeneratedMapPatch` builds a throwaway fixed map just to compare map types, and its log line says
       "act4:" for the Spoon act too.~~ Done in 1.11.3 (`IAppendedAct.FixedMapType`, `LogName`).
     - T4: free travel (Winged Boots, Flight) on the Spoon map is handled by `SpoonMapTravelPatch`; check it in game.
@@ -477,10 +479,12 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
       review fix wave: `SpoonJuiceCostPatch` prices the Juice from the mod's `SlaySpoon.Spoon.Juice_*` stream.
     - ~~T5: skipping `HauntPower.AfterCardPlayed` for a supporter also skips its `Rng.CombatTargets` draw (deterministic,
       but the vanilla stream use differs).~~ Gone with the supporters (1.3.7).
-    - T5: the Spoon's move-roll stream is named `SlaySpoon.Ending.SPOON_MONSTER` (naming only).
+    - ~~T5: the Spoon's move-roll stream is named `SlaySpoon.Ending.SPOON_MONSTER` (naming only).~~ Done in 1.11.4
+      (`Sts1EndingMonster.RngFamily`: `SlaySpoon.Spoon.*`).
     - ~~T5: the Spoon-Feed arrow can rest on a supporter or a summon; the play is refused silently (UX).~~ Gone with the supporters (1.3.7).
     - T5: `SpoonMonster`'s hooks are not gated on `SpoonSpoon.IsActive` (matters for a
-      console-spawned Spoon only).
+      console-spawned Spoon only). Kept (1.11.4): a console-spawned Spoon should fight like the real one, which is what
+      the console is for; gating would make it an inert test target.
     - ~~T5: the `GetPossibleTargets` postfix relies on the private method not being inlined; accepted, because the
       multiplicative hook zeroes a stray hit anyway.~~ Gone with the supporters (1.3.7).
     - Final review: `SpoonMonster`'s hooks gate on the monster, not on `SpoonSpoon.IsActive` (see T5 above; console
@@ -488,7 +492,8 @@ the co-op crash report's client log; Spine animations are done in 1.0.1). New bu
     - Final review: fighter pets (Osty) keep vanilla damage; the team-max-HP formula scales damage to players only.
     - Final review: `SpoonRule.DamageFactor` and the Monster Damage % modifier each truncate, so a hit can land ±1 HP
       off the exact product when both apply.
-    - Final review: the Feast text hardcodes 5 instead of reading `SpoonRule.FeastMaxHp` (Spoon-Feed is gone, 1.3.7).
+    - ~~Final review: the Feast text hardcodes 5 instead of reading `SpoonRule.FeastMaxHp` (Spoon-Feed is gone, 1.3.7).~~
+      Done in 1.11.4: Feast and Digest read `{MaxHp}` from `SpoonRule`.
     - Final review: the Spoon act has no entry heal like The Ending's; its row-0 rest site covers it.
     - 1.3.2: Stolen Spoonful's portrait is a copy of Spoonful's (drawing list); its Appetite texts hardcode 5 %, 2, 1
       and 3 like the other Spoon texts.
@@ -585,9 +590,11 @@ All seven are implemented in 1.5.0 (spec `docs/superpowers/specs/2026-11-18-back
   merged screen was not built (see the spec's builder calls).~~ Done in 1.8.26 (`ConductorOverlay`, one screen). Gold is
   not split (kept: gold is not a movable reward).
 - Minor: Trophies read the elites' moves at combat start; a move whose damage depends on state later in the fight shows
-  its start-of-fight value.
-- Minor: Useless Relics uses a hand list (`UselessRelicRule.OncePerCombat`); mod relics and future vanilla relics are not
-  on it. ~~A thrown relic's hover tip doesn't say it was thrown (only the grey tint shows it).~~ Done in 1.11.0
+  its start-of-fight value. Kept (1.11.4): the Trophy is a card made from the elite's move, so a fixed number is what a
+  card should carry; growing it with the fight's state would make the reward depend on how long the fight lasted.
+- Minor: Useless Relics uses a hand list (`UselessRelicRule.OncePerCombat`); future vanilla relics are not on it. Mod
+  relics added in 1.11.4: Pure Water, Holy Water, Teardrop Locket, Mutagenic Strength, Nuclear Battery (combat start
+  only; energy relics such as Mark of Pain stay off, since a thrown relic stops all its hooks, its energy too). ~~A thrown relic's hover tip doesn't say it was thrown (only the grey tint shows it).~~ Done in 1.11.0
   (`UselessRelicHoverTipPatch`): "Thrown" on a thrown relic, "Throwable" on one that can be thrown now.
 - Minor: Useless Relics throws are not saved; the game restarts a fight on reload, so nothing is lost.
 - ~~Minor: Blood shows the spendable gold equivalent in the top bar; no HP-cost text on merchant prices.~~ Done in 1.11.0

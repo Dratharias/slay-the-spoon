@@ -45,6 +45,9 @@ public sealed class SpoonMonster : Sts1EndingMonster
 
 	public override int MaxInitialHp => MinInitialHp;
 
+	/// <summary>The Spoon is no Ending monster: its streams are <c>SlaySpoon.Spoon.*</c>.</summary>
+	protected override string RngFamily => "SlaySpoon.Spoon.";
+
 	/// <summary>Max HP grown this fight, for the sprite's size. Not saved: StS2 restarts the combat when a save loads.</summary>
 	private int _grown;
 

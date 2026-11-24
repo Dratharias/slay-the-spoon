@@ -56,13 +56,16 @@ public abstract class Sts1EndingMonster : MonsterModel, IEndingMonster
 	protected static int Ascension => EndingAscension.Current;
 
 	/// <summary>Built once per combat from the run seed and the monster id, so every peer rolls the same values.</summary>
-	protected Rng EndingRng => _endingRng ??= new Rng(CombatState.RunState.Rng.Seed, "SlaySpoon.Ending." + Id.Entry);
+	protected Rng EndingRng => _endingRng ??= new Rng(CombatState.RunState.Rng.Seed, RngFamily + Id.Entry);
+
+	/// <summary>Prefix of the monster's Rng stream names.</summary>
+	protected virtual string RngFamily => "SlaySpoon.Ending.";
 
 	/// <summary>
 	/// Draw pile positions for shuffled-in statuses, on a stream of their own: the move roll on <see cref="EndingRng"/>
 	/// then never depends on the number of players or the size of their draw piles.
 	/// </summary>
-	protected Rng ShuffleRng => _shuffleRng ??= new Rng(CombatState.RunState.Rng.Seed, "SlaySpoon.Ending.Shuffle." + Id.Entry);
+	protected Rng ShuffleRng => _shuffleRng ??= new Rng(CombatState.RunState.Rng.Seed, RngFamily + "Shuffle." + Id.Entry);
 
 	public override async Task AfterAddedToRoom()
 	{

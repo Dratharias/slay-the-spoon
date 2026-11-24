@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using SlaySpoon.Core;
 
 namespace SlaySpoon.Spoon;
@@ -14,6 +15,16 @@ public sealed class SpoonDigestRestSiteOption(Player owner) : RestSiteOption(own
 {
 	public override string OptionId => "SPOON_DIGEST";
 	public override IEnumerable<string> AssetPaths => [SpoonFeastRestSiteOption.IconImage];
+
+	public override LocString Description
+	{
+		get
+		{
+			LocString description = base.Description;
+			description.Add("MaxHp", SpoonRule.DigestMaxHpLoss);
+			return description;
+		}
+	}
 	public override bool IsEnabled => SpoonRule.CanDigest(Owner.Creature.MaxHp);
 
 	public override async Task<bool> OnSelect()

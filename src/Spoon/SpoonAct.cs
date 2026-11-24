@@ -92,6 +92,7 @@ public sealed class SpoonAct : ActModel, IAppendedAct
 	public Type FixedMapType => typeof(SpoonActMap);
 
 	public string LogName => "spoon act";
+	public int RoomCount => BaseNumberOfRooms;
 }
 
 /// <summary>

@@ -1,0 +1,7 @@
+1.11.4 — small fixes
+
+Fixes
+- Useless Relics: the mod's combat-start relics (Pure Water, Holy Water, Teardrop Locket, Mutagenic Strength, Nuclear Battery) can now be thrown once they have triggered.
+- Co-op: the continue-run box counts The Ending's and the Spoon act's floors correctly (one was missing).
+- Spoon: the Feast and Digest texts read their numbers from the game rules (no visible change).
+- Spoon: the boss's random streams have their own name (no visible change).
