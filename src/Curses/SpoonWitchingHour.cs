@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Random;
@@ -65,4 +66,31 @@ public static class WitchingHourAscensionPatch
 		player.Deck.AddInternal(curse, index, silent: true);
 		SpoonLog.Info("overcursed: Ascender's Bane replaced by the Witching Hour");
 	}
+}
+
+/// <summary>
+/// The card's own text already says "On odd turns: Unplayable", so the engine's leading "Unplayable." keyword line is
+/// dropped from its description (owner, 2026-11-24). The keyword itself stays: it blocks the play without the Grimoire
+/// and keeps vanilla filters (enchantments, afflictions, "draw a playable card" effects) treating it as unplayable.
+/// </summary>
+[HarmonyPatch]
+public static class WitchingHourKeywordLinePatch
+{
+	public static System.Reflection.MethodBase TargetMethod() =>
+		AccessTools.GetDeclaredMethods(typeof(CardModel)).First(m => m.Name == "GetDescriptionForPile" && m.GetParameters().Length == 3);
+
+	public static void Postfix(CardModel __instance, ref string __result)
+	{
+		if (__instance is not SpoonWitchingHour) return;
+		var lines = __result.Split('\n').ToList();
+		int index = lines.IndexOf(UnplayableLine());
+		if (index < 0) return;
+		lines.RemoveAt(index);
+		__result = string.Join('\n', lines);
+	}
+
+	/// <summary>The engine's keyword line (<c>CardKeywordExtensions.GetCardText</c>, internal): gold title, then the period.</summary>
+	private static string UnplayableLine() =>
+		"[gold]" + new LocString("card_keywords", "UNPLAYABLE.title").GetFormattedText() + "[/gold]"
+		+ new LocString("card_keywords", "PERIOD").GetRawText();
 }

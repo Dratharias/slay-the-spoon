@@ -1,0 +1,4 @@
+1.11.6 — Witching Hour text
+
+Fixes
+- Overcursed: the Witching Hour no longer starts its text with a lone "Unplayable." line that contradicted its rule. The card is still unplayable on odd turns and, without the Unholy Grimoire, on every turn.
